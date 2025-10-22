@@ -25,20 +25,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Bước 2: Dùng một "Action" có sẵn để biên dịch LaTeX
-      # (Đây là Action chúng ta đã nói ở trên, nó đã cài sẵn TeX Live)
-      - name: Bien dich tai lieu LaTeX
-        uses: xu-cheng/latex-action@v3
-        with:
-          # Đổi "main.tex" thành tên file LaTeX chính của bạn
-          root_file: main.tex
+      # # Bước 2: Dùng một "Action" có sẵn để biên dịch LaTeX
+      # # (Đây là Action chúng ta đã nói ở trên, nó đã cài sẵn TeX Live)
+      # - name: Bien dich tai lieu LaTeX
+      #   uses: xu-cheng/latex-action@v3
+      #   with:
+      #     # Đổi "main.tex" thành tên file LaTeX chính của bạn
+      #     root_file: main.tex
 
-      # Bước 3: Lưu file PDF đã biên dịch làm "artifact"
-      # (Artifact là file kết quả bạn có thể tải về)
-      - name: Upload PDF file
-        uses: actions/upload-artifact@v4
-        with:
-          # Đặt tên cho file zip tải về
-          name: PDF-da-bien-dich
-          # Đường dẫn đến file PDF đã được tạo ra
-          path: main.pdf
+      # # Bước 3: Lưu file PDF đã biên dịch làm "artifact"
+      # # (Artifact là file kết quả bạn có thể tải về)
+      # - name: Upload PDF file
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     # Đặt tên cho file zip tải về
+      #     name: PDF-da-bien-dich
+      #     # Đường dẫn đến file PDF đã được tạo ra
+      #     path: main.pdf
