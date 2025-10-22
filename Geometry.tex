@@ -1,0 +1,73 @@
+\section{Geometry}
+\Algorithm{Primitive Geometry}
+{Templates for Points, Lines, and Circles}
+{$\mathcal{O}(1)$ for each type of operation}
+{cpp}{source/template/PrimitiveGeometry.cpp}
+
+\Algorithm{Manhattan MST}
+{MST for Mahattan distance, by choosing $\mathcal{O}$(n) candidates for edges}
+{$\mathcal{O}(n \ log \ n)$}
+{cpp}{source/template/ManhattanMST.cpp}
+
+\Algorithm{Convex Hull}
+{Convex Hull: The smallest polygon that has every point of the set inside it. Convex Hull is also a set of convex combinations between every points:
+$CH(S) = \{ p^* \ | \ \exists \alpha_i \ \text{such that } \ \sum_{i=1}^n\alpha_i=1,\sum_{i=1}^na_ip_i\},$}
+{$\mathcal{O}(n \ log \ n)$}
+{cpp}{source/template/ConvexHull.cpp}
+
+\Algorithm{Line Hull Intersection}
+{Split the convex hull into two halves, and check if the line intersects with the convex hull}
+{O(log n)}
+{cpp}{source/template/linehull.cpp}
+
+\subsection{Geometry Formula}
+\textbf{Euler Formula}: For any planar graph with v vertices, e edges, and f faces, we have v - e + f = 2
+
+\textbf{Pick Theorem}: $A = I + 1/2 B - 1$, A: Area, I: Internal lattic points, B: boarder lattic points.
+
+\textbf{In-circle determinant test}: a Point D is on the circumcircle of point A, B, C if A, B, C, D are coplanar when mapping as followed: $(x, y) \to (x, y, x^2 + y^2)$ (Code available in Delaunay Triangulation)
+
+\textbf{Geometrical Inversion:} When dealing with circles, one can use inverse technique to turn:
+\begin{itemize}
+    \item a line that doesn't pass through the center to a circle through the center.
+    \item a circle goes through the center to a line that doesn't go through the center.
+    \item a circle that doesn't go through the center to another circle.
+\end{itemize}
+
+\textbf{Descartes Theorem}: For every 4 mutually tangent circle, the following holds: $(\sum_{i=1}^4k_i)^2 = 2 \sum_{i=1}^4k_i^2$
+
+\textbf{Heron}: Area of a triangle of side a, b, c: $\sqrt{p(p-a)(p-b)(p-c)}$, where p is half the perimeter
+
+\textbf{Stewart Theorem}: Let a, b, c be the lengths of the sides of a triangle. Let d be the length of a cevian to the side of length a. If the cevian divides the side of length a into two segments of length m and n, with m adjacent to c and n adjacent to b, then $b^2m+c^2n=a(d^2+mn)$
+
+\textbf{Location of Important Points}:
+\begin{itemize}
+    \item centroid: $G = (A + B + C) / 3$
+    \item Incenter: $I = \frac{(aA + bB + cC)}{(a + b + c)}$ 
+    \item Circumcenter \\ 
+    $\frac{(x_B^2 + y_B^2 - x_A^2 - y_A^2)(y_C - y_A) - (x_C^2 + y_C^2 - x_A^2 - y_A^2)(y_B - y_A)}{D}$ \\
+    $\frac{(x_B - x_A)(x_C^2 + y_C^2 - x_A^2 - y_A^2) - (x_C - x_A)(x_B^2 + y_B^2 - x_A^2 - y_A^2)}{D}$ \\
+    $$ D = 2 \left[ (x_B - x_A)(y_C - y_A) - (x_C - x_A)(y_B - y_A) \right] $$
+    \item Orthocenter: $O(x_O, y_O) (\text{circumcenter)}$:$$x_H = x_A + x_B + x_C - 2x_O$$$$y_H = y_A + y_B + y_C - 2y_O
+$$
+\end{itemize}
+
+\Algorithm{AREA}
+{Area of Union of Rectangles}
+{$\mathcal{O}(n \ log \ n)$}
+{cpp}{source/template/Area.cpp}
+
+\subsection{Delaunay Triangulation}
+\textbf{USAGE}: Build the Delaunay triangulation configuration / Voronoi Diagram:
+\begin{itemize}
+\item The Euclidean MST is a subset of Delaunay Triangulation Edges.
+\item From Delaunay Triangulation, one can construct the Voronoi Diagram: The planar subdivision such that every point in a region is closest to that one point.
+\end{itemize}
+{O(n log n) with Divide-And-Conquer Algorithm}
+\inputminted[]{cpp}{source/template/Delaunay.cpp}
+
+
+\Algorithm{Half-plane Intersection}
+{Find the half-plane intersection of many lines: Find the solution of a so-called linear inequalities}
+{O(n log n)}
+{cpp}{source/template/halfplane.cpp}

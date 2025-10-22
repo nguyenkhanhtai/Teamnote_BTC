@@ -1,0 +1,27 @@
+\section{Tree}
+\subsection{Tree Isomorphism}
+\textbf{Usage} Tree hashing:
+ \begin{itemize}
+ \item To check if two rooted trees are the same, use a pseudo root
+ \item To check if two non-rooted are the same, use their centroids as roots
+ \end{itemize}
+\textbf{Complexity}$\mathcal{O}$(n log n)
+\inputminted[]{cpp}{source/template/Isomorphism.cpp}
+
+
+\Algorithm{Centroid}
+{Decompose trees into smaller trees for divide-and-conquer}
+{O(n log n)}
+{cpp}{source/template/Centroid.cpp}
+
+
+\subsection{Heavy-light Decomposition}
+\textbf{Usage}:Decompose trees into many chains for path/subtree queries/updates
+\textbf{Complexity}$O(n log^2 n)$
+\inputminted[]{cpp}{source/template/HLD.cpp}
+
+
+\subsection{Virtual Tree}
+\textbf{Usage}Focus on important nodes only.
+\textbf{Complexity}O(n log n)
+\inputminted[]{cpp}{source/template/VirtualTree.cpp}

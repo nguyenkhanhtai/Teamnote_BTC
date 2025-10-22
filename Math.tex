@@ -1,0 +1,283 @@
+\section{Math}
+\subsection{Primality}
+\subsubsection{RabinMiller}
+Rabin Miller for prime checking
+${O}(log \ t)$ for each operation
+\inputminted[]{cpp}{source/template/RabinMiller.cpp}
+
+\subsubsection{fast sieve}
+Fast Sieve when limits are strict
+\inputminted[]{cpp}{source/template/fastsieve.cpp}
+
+\Algorithm{Pollard Rho}
+{Factorize number}
+{$O(\sqrt[4]{n} \ log \ n$}
+{cpp}{source/template/Pollardrho.cpp}
+
+\Algorithm{Primitive Root}
+{Find the primitive root g, the number satisfy that $g^x$ is different for every x from 1 to mod - 1}
+{$\mathcal{O}(log \ t)$ for each operation}
+{cpp}{source/template/PrimitiveRoot.cpp}
+
+
+\subsection{Modular Arithmetic}
+The congruence relation satisfies all the conditions of an equivalence relation:
+
+If $a1 \equiv b1 (mod m)$ and $a2 \equiv b2 (mod m)$, or if $a \equiv b (mod m)$, then:
+\begin{itemize}
+    \item $ka \equiv kb (mod \ m)$ for any integer k (compatibility with scaling)
+    \item $k a \equiv k b (mod \ km)$ for any integer k
+    \item $a^k \equiv b^k (mod \ m)$ for any non-negative integer k (compatibility with exponentiation)
+    \item $p(a) \equiv p(b) (mod \ m)$, for any polynomial p(x) with integer coefficients (compatibility with polynomial evaluation)
+    \item If $a \equiv b (mod \ m)$, then it is generally false that $k^a \equiv k^b (mod \ m)$. However, the following is true:
+    \item If $c \equiv d (mod \ \phi(m))$, where $\phi(m)$ is Euler's totient function, then $a^c \equiv a^d (mod \ m)$—provided that a is coprime with m.
+    \item cancellation:
+        \begin{itemize}
+            \item If $a + k \equiv  b + k (mod \ m)$, where k is any integer, then $a \equiv b (mod m)$.
+            \item if $ka \equiv kb (mod \ m)$ and k is coprime with m, then $a \equiv b (mod m)$.
+            \item If $k a \equiv k b (mod \ km)$ and $k \neq 0$, then $a \equiv b (mod m)$.
+        \end{itemize}
+
+\end{itemize}
+
+\subsection{Baby-step Giant-Step}
+{Find x such that $a^x \equiv b (mod m)$.
+Similarly, $x^k = a (mod m)$ could be found using the same technique when using primitive root}
+{$O(\sqrt{m} \ log \ m)$}
+\inputminted[]{cpp}{source/template/DiscreteLog.cpp}
+
+\subsubsection{Sqrt Mod}
+{A special case of baby-step giant-step and can be solved in $O(log \ p)$}
+\inputminted[]{cpp}{source/template/sqrtmod.cpp}
+
+\subsection{Combinatorics}
+\begin{itemize}
+    \item $\binom{n}{k} = \binom{n}{n-k}$
+    \item $\sum_{k=0}^n\binom{n}{k} = 2^n$
+    \item $\sum_{r=0}^k \binom{n}{r} + \binom{m}{k - r} = \binom{n + m}{k}$
+    \item $\sum_{m = 0}^n\binom{k}{m} = \binom{k + 1}{n + 1}$
+    \item $\sum_{k = 0}^m  \binom {n + k}{k} = \binom {n + m + 1}{m}$
+    \item $\sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n}$
+    \item $\sum_{k=0}^n\binom{n - k}{k} = F_{n+1}$ 
+    \item $\sum_{k=0}^nk\binom{n}{k} = n2^{n-1}$ 
+\end{itemize}
+\subsubsection{Catalan Number}
+\textbf{Catalan Number}: $C_n = \frac{1}{n+1}\dbinom{2n}{n}$
+\\Applications:
+\begin{itemize}
+\item Number of correct bracket sequence consisting of $n$ opening and $n$ closing brackets.
+\item The number of rooted full binary trees with $n + 1$ leaves (vertices are not numbered). A rooted binary tree is full if every vertex has either two children or no children.
+\item The number of ways to completely parenthesize $n + 1$ factors.
+\item The number of triangulations of a convex polygon with $n + 2$ sides (i.e. the number of partitions of polygon into disjoint triangles by using the diagonals).
+\item The number of ways to connect the $2n$ points on a circle to form $n$ disjoint chords.
+\item The number of non-isomorphic full binary trees with $n$ internal nodes (i.e. nodes having at least one son).
+\item The number of monotonic lattice paths from point $(0, 0)$ to point $(n, n)$ in a square lattice of size $n \times n$, which do not pass above the main diagonal (i.e. connecting $(0, 0)$ to
+$(n, n)$).
+\item Number of permutations of length 
+$n$ that can be stack sorted (i.e. it can be shown that the rearrangement is stack sorted if and only if there is no such index $i < j < k$, such that $a_k < a_i < a_j$).
+\item The number of non-crossing partitions of a set of $n$ elements. (the objects are laid in a shape of regular n-gon)
+\item The number of ways to cover the ladder 
+$1 \ldots n$ using $n$ rectangles (The ladder consists of $n$ columns, where $i^{th}$ column has a height $i$).
+\end{itemize}
+
+\textbf{Narayana Number}:$\mathcal{N}(n, k) = \frac{1}{n}\binom{n}{k}\binom{n}{k-1}$ \\
+$C_n = \sum_{k=0}^n N(n, k)$
+\begin{itemize}
+    \item Number of unlabeled ordered rooted trees with ${\displaystyle n}$ edges and ${\displaystyle k}$ leaves.
+    \item Count the number of lattice paths from $(0,0)$ to $(2n,0)$, with steps only northeast and southeast, not straying below the x-axis with ⁠$k$⁠ peaks. %
+    \item number of words containing ⁠${\displaystyle n}$⁠ pairs of parentheses, which are correctly matched (known as Dyck words), contain ⁠${\displaystyle k}$⁠ distinct nestings.
+    \item To count the non-crossing partitions, set is partitioned in exactly $⁠{\displaystyle k}$⁠ blocks.
+\end{itemize}
+
+\textbf{Partition number}: Number of ways of writing n as a sum of positive integers, disregarding the order of the summands. \\ $p(x<0)=0, p(0)=1,p(n) = \sum_{k \in Z, k\ge1} (-1)^{k+1}p(n - k(3k-1)/2)$
+
+\textbf{Bell number}: Number of ways to partition n distinct objects into non-empty, unlabeled sets. \\ $B(x) = e^{e^x - 1}$
+
+\subsubsection{Stirling Numbers of the First Kind}
+\textbf{Usage}: Count the number of permutations of length n with exactly k cycles. \\
+\textbf{Formula}: $\frac{1}{k!} \sum_{c_1+...+ c_k = n}\binom{n}{c_1 ...c_k}c_1...c_k$, biểu thức này tương đương với hệ số của $x^n$ khi lấy $C^k$, với $C(x) =  \sum_{n=0}^\infty \frac{c(n)}{n!}x^n$, $c(n)$ là số lượng hoán vị n phần tử có chu trình. 
+
+
+\subsubsection{Stirling Numbers of the Second Kind}
+Count the number of ways to partition a set of n distinct objects into k non-empty, unlabeled subsets.
+\\ $\{^n_k\} = \{^{n-1}_{k-1}\} + k \{^{n-1}_{k}\}$
+\\ $x^n = \sum_{k=0}^n\{^n_k\}x_k$, where $x_k$ is the falling factorial of k coefficients from x.
+
+
+
+\subsubsection{PIE}
+Counting union of sets: 
+$|\bigcup A_{i=1}^n| = \sum_{J \subseteq \{1,...,n\}  } (-1)^{|J| - 1} |\bigcap A_{j \in J} |$  
+\\Counting number of elements present in exactly r sets: 
+$\left|\bigcup_{|B|=r}\left[\bigcap_{i \in B} A_i \cap \bigcap_{j \not\in B} \overline{A_j}\right]\right|=\sum_{m=r}^n (-1)^{m-r}\binom{m}{r} \sum_{|X|=m} \left|\bigcap_{i \in X} A_{i}\right|$
+
+\subsubsection{Lucas's Theorem}
+Let $n$ and $k$ be non-negative integers and let $p$ be a prime number.
+Suppose the base-$p$ expansions of $n$ and $k$ are:
+$$n = n_m p^m + n_{m-1} p^{m-1} + \dots + n_1 p + n_0$$
+$$k = k_m p^m + k_{m-1} p^{m-1} + \dots + k_1 p + k_0$$
+where $0 \le n_i, k_i < p$ for each $i$.
+
+Then the following congruence relation holds:
+$$ \binom{n}{k} \equiv \prod_{i=0}^{m} \binom{n_i}{k_i} \pmod{p} $$
+
+\subsubsection{Lucas Extended Theorem}
+Usage: Calculate $\binom{n}{k} \ (mod \ p^q)$
+\begin{lstlisting}
+int count_carry(int n,int k,int r,int t,int p){
+    int res = 0;
+    while(n >= t){
+        res += (n / t) - (k / t) - (r / t);
+        t *= p;
+    }
+    return res;
+}
+
+void prep(int p, int mod, int N = 2e6){
+    fact[0] = 1;
+    for(int i = 1; i < p; i++){
+        fact[i] = (fact[i - 1] * i) % mod;
+    }
+
+    int phi = mod * (p - 1) / p - 1;
+
+    ifact[p - 1] = binpow(fact[p - 1], phi, mod);
+
+    for(int i = p - 1; i >= 1; i--){
+        ifact[i - 1] = (ifact[i] * i) % mod;
+    }
+}
+int getres1MOD(int n, int k, int p, int mod){ //nCk mod p^q.
+      if (n < k or k < 0) return 0;
+      int r = n - k;
+      prep(p, mod);
+      int vp1 = count_carry(n, k, r, p, p);
+      int vpq = count_carry(n, k, r, mod, p);
+      
+      int res = 1;
+      while(n > 0){
+          res = ((res * fact[n % p]) % mod * (ifact[k % p] * ifact[r % p]) % mod) %mod;
+          n /= p; k /= p; r /= p;
+      }
+
+      res = (res * binpow(p, vp1, mod)) % mod;
+      if (vpq & 1 and (p != 2 or mod <= 4)){
+          res = ((mod - res) % mod + mod) % mod;
+      }
+
+      return res;
+}
+\end{lstlisting}
+
+\subsubsection{Formulas}
+\begin{itemize}
+    \item \texttt{Matrix Tree Theorem}: Create an N × N matrix mat, and for each edge a → b ∈ G, do mat[a][b]--, mat[b][b]++ (and mat[b][a]--, mat[a][a]++ if G is undirected). Remove the ith row and column and take the determinant; this yields the number of directed spanning trees rooted at i (if G is undirected, remove any row/column).
+    \item \texttt{Erd˝os–Gallai theorem} A simple graph with node degrees $d_1 \geq \cdots \geq d_n$ exists if $d_1 + · · · + d_n$ is even and for every k = 1 . . . n, $\sum^k_{i=1}d_i ≤ k(k − 1) + \sum_{i=k+1}^nmin(d_i, k)$
+\end{itemize}
+
+
+\Algorithm{Extended GCD}
+{Find x, y that satisfy the equation $ax + by = gcd(a, b)$}
+{$\mathcal{O}$(log max(a,b))}
+{cpp}{source/template/ExtendedEuclidean.cpp}
+
+
+\subsection{Chinese Remainder Theorem}
+{find the x that satisfy the congruent equations: $x\equiv a_i(mod \ m_i)$}, where ($m_1, m_2,...,m_k$) = 1
+\\ Formula: Let $n_i = \prod_{j\ne i}m_i \ (mod \ m_i), \ M_i = n_i^{-1}(mod \ m_i)$,then $x \equiv \sum_{i=1}^{k} a_i M_i n_i \ (mod \ M)$
+\\ In case, the modulus are not coprime, use the gcded to merge.
+
+\subsection{Fibonacci}
+\begin{itemize}
+\item Every number can be uniquely decoded into binary with fibonacci.
+\item GCD Property: $(F_m, F_n) = F_{(m, n)} $
+\item $F_{2n} = F_n (F_{n+1} + F_{n-1})$
+\item $F_{n+k} = F_k F_{n+1} + F_{k-1} F_n$
+\end{itemize}
+
+
+
+\subsection{Stern-Brocot Tree}
+\textbf{Usage}: A tree that could represents fractions in their most reduced forms:
+\begin{itemize}
+    \item \textbf{ENCODE\_PATH(p, q)}: get the path to the fraction p/q
+    \item \textbf{DECODE\_PATH(path)}: get the fraction from path
+    \item \textbf{LCA(p1, q1, p2, q2)}: get the fraction as the LCA of p1/q1 and p2/q2
+    \item \textbf{ANCESTOR(k, p, q)}: get the ancestor at depth k of the fraction p/q
+    \item \textbf{RANGE(p, q)}: Find the fractions in the range of subtree p/q.
+\end{itemize}
+\textbf{Complexity: }$\mathcal{O}(log n)$ per operation
+\inputminted[]{cpp}{source/template/SternBrocot.cpp}
+
+
+\Algorithm{FFT, NTT, and Polynomials}
+{MODINT, FFT, NTT, and Polynomials template with exp, log, inverse, power functions}
+{$\mathcal{O}(n log n)$ for each operation}
+{cpp}{source/template/Polynomial.cpp}
+
+
+\Algorithm{Linear Recurrences}
+{Berlekamp-Massey Algorithm for finding shortest recurrences from 2 * n first points of the sequence, and the code used for finding the kth term of linear recurrences}
+{\\ $\mathcal{O}(n^2)$ for finding the Linear recurrences
+ \\ $\mathcal{O}(n ^2 log k)$ for finding the kth term}
+{cpp}{source/template/Berlekamp.cpp}
+
+
+\subsection{Generating Function}
+\textbf{OGF}: $A(x) =\sum_{n=0}^\infty a_nx^n$ \\
+
+ \textbf{EGF}: $A(x) =\sum_{n=0}^\infty \frac{a_n}{n!} x^n$ \\ 
+ 
+ \textbf{FOR OGF: } \\
+$A(x)B(x) = \sum_{n=0}^\infty \sum_{i=0}^na_{i}b_{n-i}x^n$ \\
+$A(x)^k = \sum_{n=0}^\infty x^n\sum_{c_1+...+c_k =n}a_{c_1}...a_{c_k}$
+
+
+\textbf{FOR EGF: } \\
+$A(x)B(x) = \sum_{n=0}^\infty \sum_{i=0}^n\binom{n}{k}a_{i}b_{n-i}\frac{x^n}{n!}$ \\
+$A(x)^k = \\ \sum_{n=0}^\infty \frac{x^n}{n!}\sum_{c_1+...+c_k =n}\binom{n}{c_1...c_k}a_{c_1}...a_{c_k}$
+
+
+\Algorithm{FWHT}
+{Fast Xor Convolution}
+{$\mathcal{O}(n log n)$}
+{cpp}{source/template/FWHT.cpp}
+
+\Algorithm{Lagrange}
+{Suppose we have n points and we want to find a polynomial with degree n - 1 then we can use lagrange. \\
+$f(x)=\sum_{i=1}^n y_i \prod_{j=1,j\neq i}^n \frac{x-x_j}{x_i-x_j}$
+}
+{O(n log n)}
+{cpp}{source/template/Lagrange.cpp}
+
+\subsection{Linear Algebra}
+
+{\textbf{Usage}: Linear Algebra templates:
+\begin{itemize}
+    \item Determinant
+    \item Rank of a matrix
+    \item Matrix Multiplication
+    \item Matrix Power
+    \item System of Linear Equations
+\end{itemize}
+}
+{\textbf{Complexity}: $\mathcal{O}(n^3)$ or $\mathcal{O}(n^3 log k)$}
+\inputminted[]{cpp}{source/template/Linalg.cpp}
+
+\subsection{Game Theory}
+
+\textbf{Nim game}
+Consider a game state s, which there is a transition from $s$ to $r_1, r_2,..., r_n$, then
+grundy value of s is defined as followed: \\
+$g(s) = MEX(g(r_1), g(r_2),..., g(r_n))$
+
+Some examples of Nim Game:
+\begin{itemize}
+\item $n$ piles of stone, which one can take 1 or $\frac{x}{2}$ from a pile of x stones. From x, there are two reachable states (x - 1), (x/2), then we can recursively builds the grundy value of s.
+\item $n$ piles of stone, which we can only remove a number of stone only once from a pile. $(s_i <= 60)$, we can recursively builds the grundy as well.
+\end{itemize}
+
+\textbf{Minimax}:
+When we have a dynamic programming solution to a game problem, such as a game where the first player one to maximize the cost, it could be formulated as follow: \\
+$dp(firstPlayer) = max(dp(secondPlayer))$ \\
+$dp(secondPlayer) = min(dp(firstPlayer))$

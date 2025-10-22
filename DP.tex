@@ -1,0 +1,43 @@
+\section {Dynamic Programming}
+
+\Algorithm{Reroot DP}
+{Basic Template for Rerooting on Tree}
+{$\mathcal{O}$(n) for DFS traversal}
+{cpp}{source/template/Reroot.cpp}
+
+
+\Algorithm{Divide-And-Conquer DP}
+{Basic Template for Divide-And-Conquer DP. Typical examples:
+\begin{itemize}
+  \item Split the array into k parts that satisfy the quadratic conditions.
+\end{itemize}
+}
+{$\mathcal{O}$(n log n) for DnC \\
+ $\mathcal{O}$(n^2) for Knuth}
+{cpp}{source/template/DNC.cpp}
+
+
+\Algorithm{Alien DP}
+{Dynamic Programming on convex/concave functons:
+\begin{itemize}
+  \item Case 1: The Cost function is convex/concave --> Sum-constrained Optimization
+  \item Case 2: The Dp function is convex/concave --> Penalize the function.
+\end{itemize}
+}
+{$\mathcal{O}$(n log n)}
+{cpp}{source/template/Alien.cpp}
+
+
+\Algorithm{Convex Hull Trick}
+{Dynamic Programming with optimization for linear functions}
+{$\mathcal{O}$(n log n)}
+{cpp}{source/template/CHT.cpp}
+
+
+\Algorithm{Expected Value Trick}
+{Suppose we have an optimization problem, with n objects randomly shuffled, 
+ we can take k stuffs independently, then at a point i, 
+ we could consider only [(i * k) / n - \sqrt{n}, (i * k) / n + \sqrt{n}].
+ }
+{$\mathcal{O}$(n \sqrt{n})}
+{cpp}{source/template/EVDP.cpp}

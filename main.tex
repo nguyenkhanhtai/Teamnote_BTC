@@ -1,0 +1,134 @@
+\documentclass[portrait, 8pt, a4paper, oneside]{extarticle}
+\AtBeginDocument{\fontsize{8}{8}\selectfont}
+
+\usepackage{teamnote}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{pdflscape}
+
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true
+}
+\DeclareUnicodeCharacter{2060}{\nolinebreak}
+\DeclareUnicodeCharacter{2212}{\nolinebreak}
+
+\usepackage{minted}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese,english]{babel}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{geometry}
+\geometry{margin=0.2in}
+
+\ShowUsage
+\ShowComplexity
+\HideAuthor
+
+\begin{document}
+% \begin{landscape}
+
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[opacity=0.25,inner sep=0pt] at (current page.center)
+        {\includegraphics[width=0.8\paperwidth]{logo_uit.png}};
+    \end{tikzpicture}
+
+    \centering
+    \vspace*{5cm}
+    {\fontsize{25}{30} \bfseries ICPC Team Notebook \par}
+    \vspace{1cm}
+    {\fontsize{30}{36} \bfseries \teamname \par}
+    \vspace{0.5cm}
+    {\fontsize{20}{24} \bfseries \schoolname \par}
+    \vspace{1cm}
+    {\fontsize{12}{14} \bfseries \authorname \par}
+    \vfill
+    {\LARGE \today\par}
+\end{titlepage}
+
+\begin{multicols}{3}
+\maketitlepage
+
+
+
+\input{DataStructure.tex}
+
+\input{Graph.tex}
+
+\input{Tree.tex}
+
+\input{String.tex}
+
+\input{DP.tex}
+
+\input{Math.tex}
+
+\input{Geometry.tex}
+
+\section{Misc}
+
+
+\subsection{Approaches}
+\begin{itemize}
+    \item \textcolor{red}{\textbf{reading the problem once more?}}
+
+    \item Doubting ``obvious" things?
+    \item Writing obivous things?
+    \item What kind of assumptions are you having?
+
+    
+    \item Geometry?
+    \item Graphs?
+    \item Greedy?
+    \item Divide-And-Conquer?
+    \item Binary Search?
+    \item DP?
+    \item square root decomposition? (2 ways / batch update / property of sqrt root)
+    \item Random?
+    \item Flow? Matching?
+
+    
+    \item Try to make as many observations / understandings of the problems as you could?
+    \item Try to formulate clearly every term in the formula, to see if we can optimize anything?
+    \item Try to approach locally, then globally.
+    \item Try to think in reverse direction.
+    \item Try to read other problems as well.
+    \item Have faith in your teammates/
+    \item If the problem is so hard, at least give it one submission, to see if you're fortunate for weak testcases.
+    
+\end{itemize}
+
+\subsection{Checked}
+\begin{itemize}
+    \item \textcolor{red}{\textbf{you have read the statement correctly?}}
+    \item typo copying the team note?
+    \item initialization on multiple test case problem?
+    \item additional information from the problem?
+    \item undefined behavior?
+    \item overflow?
+    \item function without return value?
+    \item real number error?
+    \item implicit conversion?
+    \item comparison between signed and unsigned integer?
+    \item if got stuck for so long, leave the problem.
+\end{itemize}
+
+\subsection{Pragma}
+\begin{itemize}
+\item \#pragma GCC optimize ("Ofast") will make GCC
+auto-vectorize loops and optimizes floating points better.
+
+\item \#pragma GCC target ("avx2") can double performance of
+vectorized code, but causes crashes on old machines.
+
+\item \#pragma GCC optimize ("trapv") kills 
+\end{itemize}
+
+
+
+\end{multicols}
+% \end{landscape}
+\end{document}

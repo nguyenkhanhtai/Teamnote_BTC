@@ -1,0 +1,82 @@
+\section{Graph}
+\Algorithm{Minimum Cost Flow}
+{Min-cost K Flow: The minimum cost for transfering k packages through graphs with capacity and cost}
+{$\mathcal{O}$(Fmn) }
+{cpp}{source/template/MinCostFlow.cpp}
+
+
+\subsection{MinCut - MaxFlow}
+\textbf{Usage}:
+\begin{itemize}
+    \item Maximum number of paths from a source to a sink
+    \item Maximum number of vertex-disjoint path from source to a sink. ($u \to v$, $u_{in} \to u_{out} \to v_{in} \to v_{out}$)
+\end{itemize}
+\textbf{Complexity}$\mathcal{O}(EV^2)$
+\inputminted[]{cpp}{source/template/MaxFlow.cpp}
+
+
+\subsection{Bipartite Matching}
+\textbf{Usage}: Maximum Matching Algorithm can be used for following problems:
+\begin{itemize}
+\item Node Cover - Maximum Independent Set
+\item Node-disjoint path cover ($u \to v$, if u and v has an edge)
+\item General path cover |  ($u \to v$, if u and v has a path)
+\item Antichain (Maximum set of nodes can't reachable from other - General Path Cover)
+\end{itemize}
+\textbf{Complexity}$\mathcal{O}(E\sqrt{V})$
+\inputminted[]{cpp}{source/template/MaximumMatching.cpp}
+
+
+\subsection{Biconnected Component}
+{\textbf{Usage}: Property of Biconnected Component:
+  \begin{itemize}
+    \item Deletion of any vertices would not increase number of connected components
+  \end{itemize}
+}
+{\textbf{Complexity}:$\mathcal{O}$(n) for construction}
+\inputminted[]{cpp}{source/template/BCC.cpp}
+
+
+\subsection{Strongly Connected Components}
+\textbf{Usage}Property of SCC:
+  \begin{itemize}
+    \item One vertex can reach itself by traversing the path in a directed graph
+  \end{itemize}
+\textbf{Complexity}$\mathcal{O}$(n) for construction
+\inputminted[]{cpp}{source/template/SCC.cpp}
+
+
+\Algorithm{Offline Deletion}
+{Support the deletions of a data structure (DSU as a typical) }
+{$\mathcal{O}$(T(n) log n) if Data structure can rollback in O(T(n))}
+{cpp}{source/template/DSURB.cpp}
+
+
+\Algorithm{2-SAT}
+{Finding the assignment of binary variables that satisfy the conditions \\
+ \ \ Use Tarjan for finding strongly connected component.
+}
+{$\mathcal{O}$(n + m), n is the number of variables, m is the number of clauses}
+{cpp}{source/template/2SAT.cpp}
+
+
+\Algorithm{Eulerian Path}
+{Find the Eulerian Path of a undirected/directed graph. }
+{$\mathcal{O}$(m), n is the number of vertices, m is the number of edges}
+{cpp}{source/template/EulerPath.cpp}
+
+\Algorithm{Bipartite Online Checking}
+{Bipartite Checking upon adding edges}
+{$\mathcal{O}$(n + m)}
+{cpp}{source/template/OnlineBipartite.cpp}
+
+\Algorithm{Gomory-Hu Tree}
+{Find max flow between every pair of vertice in a directed Graph}
+{$O(n^2)$}
+{cpp}{source/template/GomoryHu.cpp}
+
+
+\Algorithm{Critical}
+{In dominator tree, if a node u always come through node v on its path from s to u, then v is the parent of u.}
+{O(n log n)}
+{cpp}{source/template/CriticalNode.cpp}

@@ -1,0 +1,43 @@
+\section{String}
+
+\Algorithm{KMP}
+{Find the longest prefix that is also a suffix of the string to the ith index}
+{$O(n)$}
+{cpp}{source/template/KMP.cpp}
+
+
+\Algorithm{Aho Corasick}
+{Similar to KMP, find the node with longest prefix that is also a suffix of the current node}
+{$O(n)$}
+{cpp}{source/template/Aho.cpp}
+% 
+
+\Algorithm{Suffix Array}
+{Sort the suffix of a string in alphabetical order. After sort, it's easier to search for occurence of a pattern P in O(log n). It's easy to build $lcp[i] = lcp(p_i, p_{i+1})$.}
+{$O(n log n)$}
+{cpp}{source/template/SuffixArray.cpp}
+
+
+\Algorithm{Suffix Automaton}
+{Minimal DAG where every path corresponds to a substring of S}
+{$O(nk)$, where k is the number of character in alphabet}
+{cpp}{source/template/SuffixAuto.cpp}
+
+
+\Algorithm{Lyndon Factorization}
+{Ways to factorize a string into multiple lyndon words with decreasing alphabetical orders}
+{$O(n)$}
+{cpp}{source/template/Lyndon.cpp}
+
+
+\Algorithm{Manacher}
+{Find the longest palindrome strings that start at every index}
+{O(n)}
+{cpp}{source/template/Manacher.cpp}
+
+
+\Algorithm{Palindrome Tree}
+{The representation tree for palindrome \\
+ Partition the string into min number of palindromes}
+{O(n)}
+{cpp}{source/template/PalindromeTree.cpp}

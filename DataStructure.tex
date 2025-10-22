@@ -1,0 +1,72 @@
+\section{Data Structure}
+
+\subsection{Lazy Segment Tree}
+
+\textbf{Usage} Custom segment tree with lazy update. Many basic tasks can be solved with segment tree:  
+\begin{itemize}
+\item Counting minimums
+\item Find the first element larger/smaller than a specific value 
+\item Find the sum of k smallest values
+\item Remember that the power of segment tree lying on its divide-and-conquer ability
+\end{itemize}
+\textbf{Complexity: }$O(log n)$ per query
+\inputminted[]{cpp}{source/template/customIT.cpp}
+
+\Algorithm{Sparse Segment Tree}
+{Dynamic Segment Tree, only initiate when necessary}
+{$\mathcal{O}(log n)$ per query}
+{cpp}{source/template/sparseIT.cpp}
+
+
+\subsection{Persistent Segment Tree}
+{\textbf{Usage: }Segment Tree allowing queries on previous versions}
+{\textbf{Complexity: }$\mathcal{O}(log n)$ per query}
+\inputminted[]{cpp}{source/template/PersistentSegtree.cpp}
+
+
+
+\Algorithm{Kd Tree}
+{Query on Closest Neighbors on 2D/3D}
+{$\mathcal{O}(\sqrt  n)$ per query}
+{cpp}{source/template/kdtree.cpp}
+
+
+\Algorithm{BIT2D}
+{BIT supports 2D operations}
+{$\mathcal{O}(log^2 n)$ per query}
+{cpp}{source/template/BIT2D.cpp}
+
+
+\Algorithm{Treap}
+{Most basic and easily-implemented BST}
+{$\mathcal{O}(log n)$ amortized per query}
+{cpp}{source/template/Treap.cpp}
+
+
+\Algorithm{Trie}
+{Very basic Trie}
+{$\mathcal{O}(log \ a_i)$ per query}
+{cpp}{source/template/BasicTrie.cpp}
+
+
+\Algorithm{Arpa Trick}
+{Fast Offline Algorithm for Max/Min Query}
+{$\mathcal{O}(log \ a_i)$ per query}
+{cpp}{source/template/Arpa.cpp}
+
+
+\subsection{Blocky Data Structure}
+{\textbf{Usage}: Data Structures on SQRT: 
+\begin{itemize}
+    \item \texttt{Block Array}
+    \item \texttt{Hilbert MO}
+\end{itemize}
+}
+{\textbf{Complexity}: $O(n\sqrt{n})$}
+\inputminted[]{cpp}{source/template/BlockyArray.cpp}
+
+
+\Algorithm{Ultimate Hashmap}
+{A faster hashmap}
+{$\mathcal{O}(log \ n)$}
+{cpp}{source/template/GrandHash.cpp}
