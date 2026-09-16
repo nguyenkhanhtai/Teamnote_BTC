@@ -1,0 +1,35 @@
+// Complexity: O(N log Sigma) build, O(log Sigma) query, O(N log Sigma) space
+// Wavelet Tree: Compact structure for range k-th, range count, and pred/succ
+
+1. Structure & Index Mapping:
+   - Node represents value range [L, R] with mid = (L + R) / 2.
+   - Sequence at node keeps original relative order:
+     Elements <= mid go to Left child, > mid go to Right child.
+   - b[i] = count of elements <= mid in prefix [0..i] (1-based: b[i] = b[i-1] + (A[i] <= mid)).
+   - Index transformation for range [l, r]:
+     Left child range:  [b[l - 1] + 1, b[r]]
+     Right child range: [l - b[l - 1], r - b[r]]
+
+2. Core Queries:
+   function kth_smallest(node, l, r, k):
+       if L == R: return L
+       c = b[r] - b[l - 1] // count going left
+       if k <= c:
+           return kth_smallest(Left, b[l - 1] + 1, b[r], k)
+       else:
+           return kth_smallest(Right, l - b[l - 1], r - b[r], k - c)
+
+   function count_le(node, l, r, k): // count elements <= k in [l, r]
+       if l > r or k < L: return 0
+       if R <= k: return r - l + 1
+       c = b[r] - b[l - 1]
+       return count_le(Left, b[l - 1] + 1, b[r], k) +
+              count_le(Right, l - b[l - 1], r - b[r], k)
+
+   function count_in_range(l, r, low, high):
+       return count_le(l, r, high) - count_le(l, r, low - 1)
+
+3. Implementation Tips:
+   - Coordinate Compression: Compress values to [1, distinct_N] so depth is O(log N).
+   - Bitvector Optimization: Store b[] as 64-bit integers; use __builtin_popcountll for O(1) rank.
+   - Swap Adjacent: Swapping A[i] and A[i+1] only updates 1 bit per level in O(log Sigma).

@@ -1,0 +1,28 @@
+// Complexity: O(N * 3^K + M * 2^K log M) time
+// Minimum weight connected subgraph containing a designated terminal set T of size K <= 12
+
+function steiner_tree(graph, terminals T):
+    K = len(T)
+    dp[1 << K][N] = INF
+    for i = 0 to K - 1:
+        dp[1 << i][T[i]] = 0
+        
+    for mask = 1 to (1 << K) - 1:
+        // Transition 1: Split mask into submasks
+        for sub = (mask - 1) & mask; sub > 0; sub = (sub - 1) & mask:
+            for u = 1 to N:
+                dp[mask][u] = min(dp[mask][u], dp[sub][u] + dp[mask ^ sub][u])
+                
+        // Transition 2: Dijkstra across the graph
+        priority_queue pq
+        for u = 1 to N:
+            if dp[mask][u] < INF: pq.push({dp[mask][u], u})
+        while not pq.empty():
+            d, u = pq.pop()
+            if d > dp[mask][u]: continue
+            for (v, w) in adj[u]:
+                if dp[mask][v] > dp[mask][u] + w:
+                    dp[mask][v] = dp[mask][u] + w
+                    pq.push({dp[mask][v], v})
+                    
+    return min_{u} dp[(1 << K) - 1][u]

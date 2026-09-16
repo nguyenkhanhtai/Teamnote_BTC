@@ -1,0 +1,28 @@
+// Complexity: O(N) preprocess, O(log^2 N) path query (O(log N) with Segment Tree)
+// Decompose tree into heavy chains where each vertex jumps at most O(log N) chains to root
+
+int parent[N], depth[N], sz[N], heavy[N], head[N], pos[N], cur_pos = 0
+
+function dfs_sz(u, p, d):
+    sz[u] = 1, parent[u] = p, depth[u] = d, heavy[u] = -1, max_child_sz = 0
+    for v in adj[u]:
+        if v == p: continue
+        dfs_sz(v, u, d + 1)
+        sz[u] += sz[v]
+        if sz[v] > max_child_sz: max_child_sz = sz[v], heavy[u] = v
+
+function dfs_hld(u, h):
+    head[u] = h, pos[u] = ++cur_pos
+    if heavy[u] != -1: dfs_hld(heavy[u], h)
+    for v in adj[u]:
+        if v != parent[u] and v != heavy[u]: dfs_hld(v, v)
+
+function query_path(u, v):
+    res = identity
+    while head[u] != head[v]:
+        if depth[head[u]] > depth[head[v]]: swap(u, v)
+        res = combine(res, segtree_query(pos[head[v]], pos[v]))
+        v = parent[head[v]]
+    if depth[u] > depth[v]: swap(u, v)
+    res = combine(res, segtree_query(pos[u], pos[v]))
+    return res

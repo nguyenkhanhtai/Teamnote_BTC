@@ -1,0 +1,16 @@
+// Complexity: O(V * MaxFlow) time
+// Builds equivalent tree where min capacity on tree path between u and v equals Min-Cut in G
+
+function build_gomory_hu_tree(vertices V):
+    parent[1..N] = 1, weight[1..N] = INF
+    for u = 2 to N:
+        p = parent[u]
+        // Compute s-t min cut between u and p in original graph
+        cut_val, reachable_nodes = dinic_min_cut(u, p)
+        weight[u] = cut_val
+        
+        for v = u + 1 to N:
+            if v in reachable_nodes and parent[v] == p:
+                parent[v] = u
+                
+    // Tree edges are (u, parent[u]) with weight[u] for all u in [2..N]

@@ -1,0 +1,19 @@
+// Complexity: O(N) for linear, O(K log N) for large N, small K
+// Josephus Problem: 0-indexed survivor among N people eliminating every K-th person
+
+function josephus_linear(N, K):
+    ans = 0
+    for i = 2 to N:
+        ans = (ans + K) % i
+    return ans
+
+function josephus_fast(N, K):
+    if N == 1: return 0
+    if K == 1: return N - 1
+    if K > N: return (josephus_fast(N - 1, K) + K) % N
+    cnt = N / K
+    res = josephus_fast(N - cnt, K)
+    res -= N % K
+    if res < 0: res += N
+    else: res += res / (K - 1)
+    return res

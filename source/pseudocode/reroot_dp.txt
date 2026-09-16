@@ -1,0 +1,30 @@
+// Complexity: O(N) time, O(N) space
+// Compute subtree values first (DFS1), then reroot to compute all roots (DFS2)
+
+Data dp_down[N], dp_all[N]
+
+function dfs_down(u, parent):
+    dp_down[u] = base_state(u)
+    for v in adj[u]:
+        if v == parent: continue
+        dfs_down(v, u)
+        dp_down[u] = merge(dp_down[u], transition(dp_down[v], u, v))
+
+function dfs_reroot(u, parent, from_parent_val):
+    // Prefix & Suffix merge of children transitions for O(1) exclusion
+    children = [v for v in adj[u] if v != parent]
+    deg = len(children)
+    pref[0..deg+1] = identity, suff[0..deg+1] = identity
+    
+    for i = 1 to deg:
+        pref[i] = merge(pref[i-1], transition(dp_down[children[i-1]], u, children[i-1]))
+    for i = deg down to 1:
+        suff[i] = merge(suff[i+1], transition(dp_down[children[i-1]], u, children[i-1]))
+        
+    dp_all[u] = merge(pref[deg], from_parent_val)
+    
+    for i = 1 to deg:
+        v = children[i-1]
+        without_v = merge(pref[i-1], suff[i+1])
+        up_to_v = merge(without_v, from_parent_val)
+        dfs_reroot(v, u, transition(up_to_v, v, u))

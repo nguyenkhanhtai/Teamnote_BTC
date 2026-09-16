@@ -1,0 +1,24 @@
+// Complexity: O(1) per primitive operation
+// Core 2D Geometry: Points, Vectors, Lines, Circles
+
+struct Point:
+    x, y
+    operator + (p) => Point(x + p.x, y + p.y)
+    operator - (p) => Point(x - p.x, y - p.y)
+    operator * (k) => Point(x * k, y * k)
+    dot(p)   => x * p.x + y * p.y
+    cross(p) => x * p.y - y * p.x // > 0 if p is counter-clockwise (left turn)
+    dist2()  => x * x + y * y
+    dist()   => sqrt(dist2())
+
+function orientation(a, b, c):
+    val = (b - a).cross(c - a)
+    if abs(val) < EPS: return 0 // Collinear
+    return 1 if val > 0 else -1 // 1: CCW (Left), -1: CW (Right)
+
+function line_intersection(p1, p2, q1, q2):
+    // Line 1 through p1, p2; Line 2 through q1, q2
+    cross_val = (p2 - p1).cross(q2 - q1)
+    if abs(cross_val) < EPS: return NULL // Parallel or coincident
+    t = (q1 - p1).cross(q2 - q1) / cross_val
+    return p1 + (p2 - p1) * t

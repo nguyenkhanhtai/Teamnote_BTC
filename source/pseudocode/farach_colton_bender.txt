@@ -1,0 +1,34 @@
+// Complexity: O(N) preprocessing, O(1) query, O(N) space
+// Lowest Common Ancestor (LCA) via +/- 1 RMQ & Four Russians Speedup
+
+1. Reduction (Tree LCA -> +/- 1 RMQ):
+   - Run Euler Tour DFS: record traversal order E[] and depth D[] of length M = 2N - 1.
+   - first[u] = index of first occurrence of node u in E[].
+   - LCA(u, v) = E[ argmin_{i in [first[u], first[v]]} D[i] ].
+   - Property: |D[i] - D[i - 1]| = 1 for all adjacent steps (+/- 1 RMQ).
+
+2. Block Partitioning & Sparse Table:
+   - Block size B = max(1, floor(log2(M) / 2)), number of blocks K = ceil(M / B).
+   - Compute minimum index of each block: block_min[0..K-1].
+   - Build Sparse Table over block_min[] in O(K log K) = O(N) time and space.
+
+3. In-Block Precomputation via Bitmasks (Four Russians):
+   - For block b, bit (j - 1) = 1 if D[b*B + j] > D[b*B + j - 1] else 0.
+   - Only 2^(B - 1) <= sqrt(M) unique block profiles exist.
+   - Precompute all-pairs RMQ table of size B x B for each unique mask in O(B^2).
+   - Total table precomputation: O(2^B * B^2) = O(sqrt(N) log^2 N) = o(N).
+
+4. Query LCA / RMQ in O(1):
+   function query_rmq(L, R):
+       bL = L / B, bR = R / B
+       if bL == bR:
+           return in_block_rmq(bL, L % B, R % B)
+       ans = min_by_depth(in_block_rmq(bL, L % B, B - 1),
+                          in_block_rmq(bR, 0, R % B))
+       if bL + 1 < bR:
+           ans = min_by_depth(ans, sparse_table_query(bL + 1, bR - 1))
+       return ans
+
+   function query_lca(u, v):
+       L = min(first[u], first[v]), R = max(first[u], first[v])
+       return E[query_rmq(L, R)]

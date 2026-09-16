@@ -1,0 +1,158 @@
+\documentclass[landscape, 8pt, a4paper, oneside]{extarticle}
+\AtBeginDocument{\fontsize{8}{8}\selectfont}
+
+\usepackage{teamnote}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{pdflscape}
+\usepackage{iftex}
+
+
+\ifPDFTeX
+  \DeclareUnicodeCharacter{2060}{\nolinebreak}
+  \DeclareUnicodeCharacter{2212}{\nolinebreak}
+  \usepackage[utf8]{inputenc}
+  \usepackage[T5]{fontenc}
+  \usepackage[vietnamese,english]{babel}
+\else
+  \usepackage{fontspec}
+  \usepackage[vietnamese,english]{babel}
+  \setmainfont{DejaVu Serif}
+  \setsansfont{DejaVu Sans}
+  \setmonofont{DejaVu Sans Mono}
+\fi
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{geometry}
+\geometry{landscape, a4paper, left=0.25in, right=0.25in, top=0.35in, bottom=0.25in, headheight=14pt}
+
+\ShowUsage
+\ShowComplexity
+\HideAuthor
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[opacity=0.20,inner sep=0pt] at (current page.center)
+        {\includegraphics[height=0.7\paperheight]{logo_uit.png}};
+    \end{tikzpicture}
+
+    \centering
+    \vspace*{1.5cm}
+    {\fontsize{24}{28} \bfseries ICPC Team Notebook \par}
+    \vspace{0.6cm}
+    {\fontsize{28}{34} \bfseries \teamname \par}
+    \vspace{0.4cm}
+    {\fontsize{18}{22} \bfseries \schoolname \par}
+    \vspace{0.6cm}
+    {\fontsize{12}{15} \bfseries \authorname \par}
+    \vfill
+    {\Large \today\par}
+\end{titlepage}
+
+\begin{multicols}{3}
+\maketitlepage
+
+
+
+
+\input{DataStructure.tex}
+
+\input{Graph.tex}
+
+\input{Tree.tex}
+
+\input{String.tex}
+
+\input{DP.tex}
+
+\input{Math.tex}
+
+\input{Geometry.tex}
+
+\section{Misc}
+
+\subsection{Template}
+\inputminted[]{cpp}{source/template/template.cpp}
+
+\subsection{Debugging Magic}
+\inputminted[]{cpp}{source/template/debug.cpp}
+
+\subsection{Expression Parsing}
+\inputminted[]{}{source/pseudocode/expression_parsing.txt}
+
+\subsection{Johnson Scheduling}
+Scheduling on two machines
+\inputminted[]{}{source/pseudocode/johnson_scheduling.txt}
+
+\subsection{Matrix Multiplication Check}
+Check if C = AB:
+\begin{itemize}
+    \item Generate a N x 1 vector v.
+    \item Calculate P = ABv - Cv.
+    \item if (P != 0) return false, else the error is $1/2^k$ 
+\end{itemize}
+
+\subsection{Calendar}
+\inputminted[]{}{source/pseudocode/calendar.txt}
+
+\subsection{Josephus}
+\inputminted[]{}{source/pseudocode/josephus.txt}
+
+\subsection{Interactive Tricks}
+\inputminted[]{}{source/pseudocode/interactive.txt}
+
+\subsection{Random, Bit Tricks, Bitset}
+\inputminted[]{}{source/pseudocode/bit_tricks.txt}
+
+\subsection{Transformations}
+\begin{itemize}
+    \item \textcolor{red}{\textbf{When Stuck}}: Re-read statement! Formulate small cases ($N \le 6$) to find patterns/invariants; deduce complexity ($N \le 20 \to 2^N, 500 \to N^3, 5000 \to N^2, 2\cdot 10^5 \to N \log N$).
+    \item \textbf{Opt $\to$ Decision (Binary Search)}: If predicate $P(X)$ is monotonic, binary search over $X$ to solve feasibility.
+    \item \textbf{Global Permutation $\to$ Local Swap}: Greedy exchange argument: swapping $(i, j) \to (j, i)$ improves objective $\iff f(i, j) < f(j, i)$.
+    \item \textbf{Constraints $\to$ Graph / Flow / Cut}: 2-SAT, difference constraints ($x_j - x_i \le w$), Project Selection (Min-Cut), Hall's Marriage, Dilworth (DAG path cover $=$ $|V| - \text{MaxMatching}$).
+    \item \textbf{Algebraic $\to$ Geometry / Convexity}: Upper/lower envelopes, Convex Hull, Slope Trick, Minkowski sum, CHT.
+    \item \textbf{Global Range $\to$ Divide \& Conquer}: Split $[l, r] \to [l, m]$ and $[m+1, r]$ + cross contributions (CDQ D\&C, D\&C DP).
+    \item \textbf{Offline Deletions $\to$ Additions (Time Reversal)}: Invert query timeline $Q \to 1$ to turn deletions into DSU additions. Game DP: work backward from terminal state.
+    \item \textbf{Search Space Split (Meet-in-Middle)}: Split $N = N/2 + N/2$, reducing $2^N \to 2^{N/2}$ via hash table / two pointers.
+    \item \textbf{Exact $(= k) \to$ Lagrange Penalty $(\ge k)$}: Alien's Trick (WQS) relaxes exact $k$ on convex DP; Binomial Inversion / PIE converts exact $k$ to $\ge k$.
+    \item \textbf{Total Evaluation $\to$ Element Contribution}: Invert perspective: sum contribution of each element/edge/pair $(u, v)$ over all valid states (Fubini).
+    \item \textbf{Threshold Partitioning ($\sqrt{N}$ Heavy/Light)}: Elements $\le B$ updated statically/cached; elements $> B$ (at most $N/B$) processed dynamically (Mo's algorithm).
+    \item \textbf{State Compression}: In DP, step count $i = \text{popcount}(mask) \implies dp[i][mask] \to dp[mask]$, preserving topological order.
+    \item \textbf{Exact Count $\to$ Complementary / PIE}: Count valid states via $\text{Total} - \text{Invalid}$, Stars \& Bars, PIE.
+    \item \textbf{Impartial Game $\to$ Nim Sum}: Transform games on DAG into XOR sum of Sprague-Grundy values ($SG(u) = \text{mex}\{SG(v)\}$).
+    \item \textbf{General Case $\to$ Simplified Special Case}: Solve easier restrictions first ($A_i \in \{0, 1\}$, tree, $N \le 6$) to reveal pattern before generalizing.
+    \item \textbf{Exhaustive Search $\to$ Branch \& Bound}: Prune DFS subtrees with admissible bounding heuristics.
+    \item \textbf{Manhattan $\leftrightarrow$ Chebyshev ($45^\circ$ Rotation)}: $(x, y) \mapsto (x + y, x - y) \implies |x_1 - x_2| + |y_1 - y_2| = \max(|x'_1 - x'_2|, |y'_1 - y'_2|)$. Decouples 2D dimensions into independent 1D axes!
+    \item \textbf{Max/Min \& Absolute Value Decomp}: $\max(A, B) = \frac{A+B+|A-B|}{2}$, $\min(A, B) = \frac{A+B-|A-B|}{2}$; $|x - a| = \max(x - a, a - x)$. To minimize $\sum |x - a_i| + |y - b_i|$, split by 4 sign pairs $(\pm x \pm y)$.
+    \item \textbf{Threshold / Layer Counting (Fubini)}: $\sum_{i=1}^n A_i = \sum_{v=1}^{\max A} \text{count}(A_i \ge v)$ (Summing values $\longleftrightarrow$ Counting elements $\ge v$).
+    \item \textbf{Range Add $\to$ Difference Array / Prefix Sums}: $A_i = \sum_{j=1}^i D_j$ ($D_i = A_i - A_{i-1}$); Range add $[l, r] \to 2$ point updates on $D$. Static sums $\to S_r - S_{l-1}$.
+    \item \textbf{Range / All-Pairs $\to$ Adjacent Condition}: $\min_{i \ne j} |A_i - A_j| = \min_i (A_{i+1} - A_i)$ after sort; $A_j - A_i \ge (j-i)D \iff A'_{i+1} \ge A'_i$ ($A'_i = A_i - iD$); Majority ($> 50\%$) subsegment $\ge 2$ always contains length 2 ($x, x$) or 3 ($x, y, x$) witness.
+    \item \textbf{Product to Sum}: $ab = \binom{a+b}{2} - \binom{a}{2} - \binom{b}{2}$; $\prod A_i \to \sum \log A_i$ (or log-probabilities).
+    \item \textbf{Bitwise Identities}: $A + B = (A \oplus B) + 2(A \text{ AND } B) = (A \text{ OR } B) + (A \text{ AND } B)$; $A \oplus B = (A \text{ OR } B) - (A \text{ AND } B)$; Adjacent bit flips: $\sum_{i=1}^n \text{popcount}((i-1) \oplus i) = 2n - \text{popcount}(n)$.
+    \item \textbf{Set / Unique-Permutation $\to$ XOR Hashing}: Assign random 64-bit $r_v$ to value $v$. XOR is mergeable under symmetric difference; for general multisets use additive random signatures (XOR only keeps multiplicity modulo $2$).
+    \item \textbf{Equivalence $\to$ Signature}: Sequence $\to$ rolling hash; tree $\to$ sorted child hashes; cyclic object $\to$ canonicalize first. For multiset $M$: assign random $64$-bit $r_x$, $H(M)=\sum_x cnt_M(x)r_x$; insert/delete $x$: $H \mathrel{+}= r_x$ / $H \mathrel{-}=r_x$, merge: add hashes. XOR loses even multiplicities; use 2 random sums (and $|M|$) if collision matters.
+    \item \textbf{Grid Path Blocking $\longleftrightarrow$ Dual Cut}: Blocking 4-dir path $(1, 1) \to (n, n)$ on grid is dual to finding an 8-dir connected barrier from left/bottom to top/right (or Min-Cut).
+    \item \textbf{Color Coding ($k \le 5$)}: Randomly color $N$ vertices with $k$ colors. Prob optimal $k$ items get $k$ distinct colors is $k! / k^k$. Repeat $O(k^k / k!) \approx 300$ times for error $< \epsilon$.
+    \item \textbf{Dirichlet / Pigeonhole (4-Sum $a_x + a_y = a_z + a_w$)}: When $N > \sqrt{2 \max A}$, 2 pairs with equal sums always exist since $\binom{N}{2} > 2\max A$. Find in $O(N^2)$ by hashing pairs.
+    \item \textbf{Boyer-Moore Majority Vote}: Find majority element ($> n/2$ occurrences) in $O(n)$ time and $O(1)$ space with a single counter. Sperner's antichain max size: $\binom{n}{\lfloor n/2 \rfloor}$.
+\end{itemize}
+
+\subsection{Checked}
+\begin{itemize}
+    \item \textcolor{red}{\textbf{Read constraints and edge cases ($N=0, 1$, negative, disconnected)?}}
+    \item Multiple test cases reset / clear global state properly?
+    \item Array / 1-based vs 0-based indexing bounds?
+    \item Integer overflow (use \texttt{long long} / \texttt{\_\_int128})?
+    \item Functions missing \texttt{return} statements (Undefined Behavior)?
+    \item Floating point precision / epsilon comparisons (\texttt{eps = 1e-9})?
+    \item Fast I/O included (\texttt{cin.tie(NULL)}, \texttt{'\\n'} instead of \texttt{endl})?
+\end{itemize}
+
+
+
+\end{multicols}
+
+% \end{landscape}
+\end{document}

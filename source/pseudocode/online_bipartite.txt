@@ -1,0 +1,20 @@
+// Complexity: O(alpha(N)) per edge addition
+// Maintain 2-coloring and bipartite validity online using parity-weighted DSU
+
+int parent[N], parity[N], is_bipartite = True
+
+function find_root(u):
+    if parent[u] == u: return {root: u, par: 0}
+    res = find_root(parent[u])
+    parent[u] = res.root
+    parity[u] = parity[u] ^ res.par
+    return {root: parent[u], par: parity[u]}
+
+function add_edge(u, v):
+    ru = find_root(u), rv = find_root(v)
+    if ru.root == rv.root:
+        if ru.par == rv.par: // Same color connected by an edge => Odd cycle!
+            is_bipartite = False
+    else:
+        parent[ru.root] = rv.root
+        parity[ru.root] = ru.par ^ rv.par ^ 1

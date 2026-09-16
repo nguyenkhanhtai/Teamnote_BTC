@@ -1,0 +1,24 @@
+// Complexity: O(N log N) time, O(N) space
+// Computes convex polygon formed by intersection of halfplanes (directed lines with valid side on left)
+
+struct Halfplane:
+    p, pq // point p and direction vector pq
+
+function halfplane_intersection(halfplanes H):
+    sort(H, by polar_angle)
+    deque<Halfplane> dq; deque<Point> pts
+    
+    for h in H:
+        while len(pts) > 0 and not h.contains(pts.back()):
+            pts.pop_back(); dq.pop_back()
+        while len(pts) > 0 and not h.contains(pts.front()):
+            pts.pop_front(); dq.pop_front()
+        if len(dq) > 0:
+            pts.push_back(line_intersection(dq.back(), h))
+        dq.push_back(h)
+        
+    while len(pts) > 0 and not dq.front().contains(pts.back()):
+        pts.pop_back(); dq.pop_back()
+    if len(dq) < 3: return [] // Empty intersection
+    pts.push_back(line_intersection(dq.back(), dq.front()))
+    return pts // Vertices of convex polygon

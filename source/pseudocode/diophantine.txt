@@ -1,0 +1,12 @@
+// Complexity: O(log(min(a, b)))
+// Solves a*x + b*y = c. General solutions: x = x0 + k*(b/g), y = y0 - k*(a/g)
+
+function solve_diophantine(a, b, c):
+    res = extgcd(abs(a), abs(b))
+    g = res.g
+    if c % g != 0: return (has_sol = False, 0, 0)
+    x0 = res.x * (c / g)
+    y0 = res.y * (c / g)
+    if a < 0: x0 = -x0
+    if b < 0: y0 = -y0
+    return (has_sol = True, x0, y0, g)

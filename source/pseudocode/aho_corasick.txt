@@ -1,0 +1,32 @@
+// Complexity: O(\sum |P_i| * |\Sigma|) build, O(|T|) search
+// Multi-pattern string matching on Trie with failure & dictionary suffix links
+
+struct Node:
+    next[ALPHABET], link = 0, exit_link = 0, match_ids = []
+
+function build_aho_corasick(patterns):
+    root = 0, new_node(root)
+    for id, p in enumerate(patterns):
+        u = root
+        for c in p:
+            if not tree[u].next[c]: tree[u].next[c] = new_node()
+            u = tree[u].next[c]
+        tree[u].match_ids.append(id)
+        
+    // BFS to build failure links
+    queue Q
+    for c in ALPHABET:
+        v = tree[root].next[c]
+        if v: Q.push(v); tree[v].link = root
+    while not Q.empty():
+        u = Q.pop()
+        for c in ALPHABET:
+            v = tree[u].next[c]
+            if v:
+                f = tree[u].link
+                while f != root and not tree[f].next[c]: f = tree[f].link
+                tree[v].link = tree[f].next[c] if tree[f].next[c] and tree[f].next[c] != v else root
+                tree[v].exit_link = tree[v].link if tree[tree[v].link].match_ids else tree[tree[v].link].exit_link
+                Q.push(v)
+            else:
+                tree[u].next[c] = tree[tree[u].link].next[c] // Trie transition shortcut

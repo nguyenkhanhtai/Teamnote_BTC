@@ -1,0 +1,21 @@
+// Complexity: O(N) on convex hull in CCW order
+// Recognition: Maximum pairwise distance (diameter), Minimum bounding box, Max triangle area
+
+function convex_diameter(poly CH):
+    n = len(CH)
+    if n <= 1: return 0
+    if n == 2: return dist(CH[0], CH[1])
+    
+    max_d2 = 0, k = 1
+    // Find initial farthest point k from edge (CH[0], CH[1])
+    while triangle_area(CH[n-1], CH[0], CH[(k + 1) % n]) > triangle_area(CH[n-1], CH[0], CH[k]):
+        k = (k + 1) % n
+        
+    for i = 0 to n - 1:
+        // Advance caliper pointer k while distance to edge (CH[i], CH[i+1]) increases
+        next_i = (i + 1) % n
+        while triangle_area(CH[i], CH[next_i], CH[(k + 1) % n]) >= triangle_area(CH[i], CH[next_i], CH[k]):
+            k = (k + 1) % n
+        max_d2 = max(max_d2, dist2(CH[i], CH[k]))
+        max_d2 = max(max_d2, dist2(CH[next_i], CH[k]))
+    return sqrt(max_d2)

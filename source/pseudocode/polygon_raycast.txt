@@ -1,0 +1,14 @@
+// Complexity: O(N) time for point in polygon, O(log N) for convex polygon
+// Ray-Casting algorithm: Cast horizontal ray from P to +infinity, count edge crossings
+
+function point_in_polygon(poly P, Point pt):
+    crossings = 0, n = len(P)
+    for i = 0 to n - 1:
+        a = P[i], b = P[(i + 1) % n]
+        if on_segment(a, b, pt): return ON_BOUNDARY
+        if (a.y > pt.y) != (b.y > pt.y):
+            // Calculate x-coordinate of intersection with horizontal line y = pt.y
+            x_cross = a.x + (pt.y - a.y) * (b.x - a.x) / (b.y - a.y)
+            if pt.x < x_cross:
+                crossings += 1
+    return INSIDE if (crossings % 2 == 1) else OUTSIDE

@@ -1,0 +1,10 @@
+// Complexity: O(1) time
+// Zeller's Congruence: Computes day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+
+function day_of_week(year, month, day):
+    if month < 3:
+        month += 12; year -= 1
+    K = year % 100, J = year / 100
+    // Zeller's formula for Gregorian calendar
+    h = (day + (13 * (month + 1)) / 5 + K + K / 4 + J / 4 + 5 * J) % 7
+    return (h + 6) % 7 // Shift so 0 = Sunday

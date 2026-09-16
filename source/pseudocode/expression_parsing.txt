@@ -1,0 +1,25 @@
+// Complexity: O(N) time and space
+// Shunting-Yard algorithm: Parses infix arithmetic expressions with operator precedence
+
+function parse_expression(string expr):
+    stack<double> values; stack<char> ops
+    
+    function apply_op():
+        op = ops.pop(); b = values.pop(); a = values.pop()
+        values.push(eval_op(a, b, op))
+        
+    for token in tokenize(expr):
+        if is_number(token):
+            values.push(token)
+        else if token == '(':
+            ops.push('(')
+        else if token == ')':
+            while ops.top() != '(': apply_op()
+            ops.pop() // remove '('
+        else: // Operator +, -, *, /, ^
+            while not ops.empty() and precedence(ops.top()) >= precedence(token):
+                apply_op()
+            ops.push(token)
+            
+    while not ops.empty(): apply_op()
+    return values.top()

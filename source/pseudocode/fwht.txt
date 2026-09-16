@@ -1,0 +1,16 @@
+// Complexity: O(N log N) where N = 2^k
+// Fast Walsh-Hadamard Transform for bitwise XOR convolution (C[k] = \sum_{i ^ j = k} A[i] * B[j])
+
+function fwht_xor(a, invert):
+    n = len(a)
+    len_step = 1
+    while len_step < n:
+        for i = 0 to n - 1 step 2 * len_step:
+            for j = 0 to len_step - 1:
+                u = a[i + j], v = a[i + len_step + j]
+                a[i + j] = (u + v) % MOD
+                a[i + len_step + j] = (u - v + MOD) % MOD
+        len_step *= 2
+    if invert:
+        inv_n = power_mod(n, MOD - 2, MOD)
+        for i = 0 to n - 1: a[i] = (a[i] * inv_n) % MOD

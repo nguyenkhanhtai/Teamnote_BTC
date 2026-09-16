@@ -1,0 +1,19 @@
+// Complexity: O(N^(3/4)) or O(N^(2/3)) with Lucy Hedgehog algorithm
+// Counts number of primes <= N without generating all primes
+
+function count_primes(N):
+    sq = sqrt(N)
+    V = [N / i for i in 1..N] // All distinct values of floor(N / i)
+    // S[v] stores number of integers <= v with prime factors >= p
+    S = map()
+    for v in V: S[v] = v - 1
+    
+    for p = 2 to sq:
+        if S[p] > S[p - 1]: // p is prime
+            sp = S[p - 1]
+            p2 = p * p
+            for v in V:
+                if v < p2: break
+                S[v] -= S[v / p] - sp
+                
+    return S[N]

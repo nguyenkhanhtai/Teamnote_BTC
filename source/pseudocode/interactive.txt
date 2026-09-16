@@ -1,0 +1,55 @@
+// INTERACTIVE CHECKLIST
+// 1. Read the protocol literally: query format, answer format, query limit,
+//    indexing, whether the hidden object may change, and all special replies.
+// 2. Print a query, then flush immediately: cout << "? ..." << endl;
+//    (or cout << "? ...\n" << flush). Never print debug output to stdout.
+// 3. If judge returns -1 / an invalid reply: terminate immediately.
+// 4. Keep a local query counter and assert it does not exceed the budget.
+// 5. Print the final answer with the required prefix, flush, then return.
+
+// MONOTONE PREDICATE -> BINARY SEARCH
+// If ask(x) changes only once (false,false,...,true,true,...), find first true:
+lo = L, hi = R + 1
+while lo + 1 < hi:
+    mid = (lo + hi) / 2
+    if ask(mid): hi = mid
+    else:        lo = mid
+// Invariants: ask(lo) = false, ask(hi) = true (use sentinels if necessary).
+// Variants: find boundary/maximum feasible/minimum feasible; exponential search
+// first if R is unknown.  Prove monotonicity before applying this.
+
+// COMPARE / MAXIMUM / SECOND MAXIMUM
+// A tournament needs n-1 comparisons to find max.  Store, for each winner,
+// every opponent it beat.  The second maximum is max among max's opponents:
+// additional ceil(log2 n)-1 comparisons for a balanced tournament.
+// If query compares ranges, first use it to identify the range containing the
+// answer, then recurse only there; do not repeatedly query overlapping ranges.
+
+// BITWISE RECONSTRUCTION
+// If a query reveals whether bit b of the answer is 1, test all bits directly.
+// If a query returns AND/OR/XOR of chosen indices, derive missing information:
+//   x + y = (x AND y) + (x OR y)
+//   x XOR y = (x OR y) - (x AND y)
+// Query a few anchors, solve their values algebraically, then recover every
+// other value relative to an anchor.  Count equations vs unknown values first.
+
+// SPLIT / GROUP TEST
+// A yes/no query on a set often gives a group-testing decision tree:
+// split candidates into halves; query one half; keep the half consistent with
+// the reply.  Target O(log N) depth.  For "one lie" / noisy replies, repeat
+// independently or maintain all candidates consistent with <= k lies.
+
+// PERMUTATION / PARTNER RECONSTRUCTION
+// Treat each answer as a constraint, not a value.  Maintain feasible positions
+// or a bipartite graph of possible pairs; use queries that eliminate about half
+// the remaining possibilities.  Once only matching ambiguity remains, solve it
+// offline (matching/2-SAT), then query only to disambiguate if protocol allows.
+
+// RANDOMIZED SAMPLING
+// When a query samples/checks a random location, calculate success probability.
+// Missing a bad set of size k after t uniform samples from n is <= (1-k/n)^t.
+// Fix an RNG seed only for local reproducibility; never rely on luck when the
+// remaining failure probability is not far below the judge's tolerance.
+
+// FINAL SANITY: query is legal, indices distinct if required, no empty set,
+// correct 0/1-indexing, exactly one final answer, and every output is flushed.

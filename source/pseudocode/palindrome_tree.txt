@@ -1,0 +1,28 @@
+// Complexity: O(N) time and space
+// EERTREE stores all distinct palindromic substrings. Root 1: len -1, Root 2: len 0.
+
+struct Node:
+    len, link, next[ALPHABET]
+
+Node tree[MAXN]; sz, last, S = ""
+
+function eertree_init():
+    tree[1].len = -1; tree[1].link = 1 // Imaginary root for odd length
+    tree[2].len = 0;  tree[2].link = 1 // Real root for even length
+    sz = 2, last = 2, S = ""
+
+function get_link(p):
+    n = length(S)
+    while n - tree[p].len - 2 < 0 or S[n - tree[p].len - 2] != S[n - 1]:
+        p = tree[p].link
+    return p
+
+function eertree_add_char(char c):
+    S += c
+    cur = get_link(last)
+    if not tree[cur].next[c]:
+        now = ++sz
+        tree[now].len = tree[cur].len + 2
+        tree[now].link = 2 if tree[cur].len == -1 else tree[get_link(tree[cur].link)].next[c]
+        tree[cur].next[c] = now
+    last = tree[cur].next[c]

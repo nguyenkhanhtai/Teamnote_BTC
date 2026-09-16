@@ -1,0 +1,15 @@
+// Complexity: O(N log N) time
+// Minimum Spanning Tree under Manhattan distance: generates O(N) candidate edges via 8 octants
+
+function manhattan_mst_edges(points P):
+    candidate_edges = []
+    for dir1 = 0 to 1:
+        for dir2 = 0 to 1:
+            for dir3 = 0 to 1:
+                sort(P, by x + y)
+                // Use Fenwick tree / map to find best point minimizing (x_j - y_j) with y_j <= y_i
+                BIT_sweep_closest(P, candidate_edges)
+                for p in P: swap(p.x, p.y)
+            for p in P: p.x = -p.x
+        for p in P: p.y = -p.y
+    return kruskal_mst(P, candidate_edges)

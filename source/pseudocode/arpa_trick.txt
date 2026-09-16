@@ -1,0 +1,10 @@
+Offline RMQ in $O(N \alpha(N))$ using DSU and Monotonic Stack.
+
+Idea:
+1. Group queries by their right endpoint $R$.
+2. Iterate $R$ from $1$ to $N$, maintaining a monotonic stack of indices of strictly decreasing elements.
+3. When the current element $a[R]$ pops an index $u$ from the stack (because $a[u] \le a[R]$), we merge $u$ into $R$ in a DSU by setting $parent[u] = R$.
+4. After updating the stack and DSU for $R$, to answer a query $[L, R]$:
+   - The index of the maximum element in $[L, R]$ is exactly `find_root(L)`.
+
+Why it works: `find_root(L)` follows the chain of "next greater elements" and stops at the largest element $\le R$ (since elements $> R$ haven't been processed yet).

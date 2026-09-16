@@ -1,0 +1,26 @@
+// Complexity: O(N) time, O(N) space
+// Finds longest palindrome radius P[i] centered at i for transformed string T = "^#a#b#a#$"
+
+function manacher(string S):
+    // Insert '#' between characters and '^', '$' as boundary markers
+    T = "^"
+    for c in S: T += "#" + c
+    T += "#$"
+    
+    n = length(T), P[0..n-1] = 0
+    C = 0, R = 0 // Center and Right boundary of rightmost palindrome
+    
+    for i = 1 to n - 2:
+        i_mirror = 2 * C - i
+        if R > i:
+            P[i] = min(R - i, P[i_mirror])
+        // Expand palindrome around i
+        while T[i + 1 + P[i]] == T[i - 1 - P[i]]:
+            P[i] = P[i] + 1
+        // Update center and right boundary
+        if i + P[i] > R:
+            C = i
+            R = i + P[i]
+            
+    // Palindrome of max length centered at S[idx]: length is P[i], start in S is (i - P[i]) / 2
+    return P

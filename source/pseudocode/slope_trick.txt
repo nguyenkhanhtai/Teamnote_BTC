@@ -1,0 +1,29 @@
+// Complexity: O(N log N) time
+// Recognition: DP with convex piecewise linear function, f(x) += |x - a|, prefix min
+
+struct SlopeTrick:
+    max_pq L; min_pq R // Multiset of inflection points
+    min_f = 0, l_add = 0, r_add = 0
+    
+    // Add |x - a| to function f(x)
+    function add_abs(a):
+        l_max = L.empty() ? -INF : L.top() + l_add
+        r_min = R.empty() ? INF : R.top() + r_add
+        if a < l_max:
+            min_f += l_max - a
+            L.pop(); L.push(a - l_add); L.push(a - l_add)
+            R.push(l_max - r_add)
+        else if a > r_min:
+            min_f += a - r_min
+            R.pop(); R.push(a - r_add); R.push(a - r_add)
+            L.push(r_min - l_add)
+        else:
+            L.push(a - l_add); R.push(a - r_add)
+
+    // Prefix minimum: g(x) = min_{y <= x} f(y) (clears right slopes)
+    function prefix_min():
+        R.clear()
+        
+    // Shift function domain [x - b, x + a]: g(x) = min_{x - b <= y <= x + a} f(y)
+    function shift(a, b):
+        l_add -= b; r_add += a

@@ -1,0 +1,19 @@
+// Complexity: O(N log N) time, O(N) space
+// Monotone Chain algorithm: Constructs convex hull in counter-clockwise order
+
+function convex_hull(points P):
+    sort(P) // Lexicographically by x, then y
+    lower = [], upper = []
+    
+    for p in P:
+        while len(lower) >= 2 and orientation(lower[len-2], lower[len-1], p) <= 0:
+            lower.pop()
+        lower.append(p)
+        
+    for p in reversed(P):
+        while len(upper) >= 2 and orientation(upper[len-2], upper[len-1], p) <= 0:
+            upper.pop()
+        upper.append(p)
+        
+    lower.pop(); upper.pop()
+    return lower + upper

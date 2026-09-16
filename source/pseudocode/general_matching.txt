@@ -1,0 +1,41 @@
+// TUTTE MATRIX & RABIN-VAZIRANI MATCHING - O(V^3)
+// -------------------------------------------------
+// p is a large prime (1e9 + 7). All operations mod p.
+
+function build_tutte_matrix(G):
+    T = zeros(N, N)
+    for each edge (u, v) in G with u < v:
+        r = random(1, p - 1)
+        T[u][v] = r,  T[v][u] = p - r
+    return T
+
+// Symmetric Gaussian Elimination -> Basis S (|S| = 2K)
+function find_basis(T):
+    M = copy(T), S = empty_list
+    for i = 0 to N - 1:
+        if i in S: continue
+        find pivot j > i (j not in S and M[i][j] != 0)
+        if not found: continue
+        add i, j to S
+        inv = (M[i][j])^(-1) mod p
+        for r = 0 to N - 1 not in S:
+            for c = 0 to N - 1 not in S:
+                delta = (M[i][c]*M[r][j] - M[j][c]*M[r][i])
+                M[r][c] = (M[r][c] - delta * inv) mod p
+    return S // |S| = 2K, Max Matching Size = K
+
+// Reconstruct K matched pairs from full-rank submatrix
+function rabin_vazirani(G, T, S):
+    A = invert_matrix(T[S][S]) // O(|S|^3) Gauss-Jordan
+    matching = []
+    while S has unmatched vertices:
+        pick unmatched u in S
+        find unmatched v in S (adj(u, v) and A[u][v] != 0)
+        matching.append((u, v))
+        // Schur complement update in O(|S|^2)
+        inv = (A[u][v])^(-1) mod p
+        for each unmatched x in S:
+            for each unmatched y in S:
+                delta = A[x][u]*A[y][v] - A[x][v]*A[y][u]
+                A[x][y] = (A[x][y] + delta * inv) mod p
+    return matching

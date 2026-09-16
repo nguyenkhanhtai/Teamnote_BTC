@@ -1,0 +1,16 @@
+// Complexity: O(|P| + |Q|) time
+// Computes Minkowski Sum P + Q = {p + q | p in P, q in Q} for convex polygons in CCW order
+
+function minkowski_sum(poly P, poly Q):
+    // Reorder vertices starting at bottom-left
+    rotate_to_min_vertex(P); rotate_to_min_vertex(Q)
+    P.append(P[0]); P.append(P[1])
+    Q.append(Q[0]); Q.append(Q[1])
+    
+    i = 0, j = 0, result = []
+    while i < len(P) - 2 or j < len(Q) - 2:
+        result.append(P[i] + Q[j])
+        cross_val = (P[i+1] - P[i]).cross(Q[j+1] - Q[j])
+        if cross_val >= 0 and i < len(P) - 2: i += 1
+        if cross_val <= 0 and j < len(Q) - 2: j += 1
+    return result

@@ -1,0 +1,19 @@
+// Complexity: O(V + E) time and space
+// Hierholzer's algorithm for finding Eulerian Path / Circuit
+
+function find_eulerian_path(start_node):
+    path = [], stack st
+    st.push(start_node)
+    
+    while not st.empty():
+        u = st.top()
+        if out_degree[u] > 0:
+            // Take an unused edge (u, v), mark edge used
+            v = get_next_unused_edge(u)
+            st.push(v)
+        else:
+            path.append(u)
+            st.pop()
+            
+    return reverse(path)
+

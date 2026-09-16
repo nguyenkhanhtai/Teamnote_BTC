@@ -1,0 +1,22 @@
+// Complexity: O(log N) amortized per operation
+// Maintains disjoint intervals with range assignment and adjacent merging based on predicate can_merge
+
+struct IntervalSet : set<Node>:
+    function can_merge(a, b): return a == b
+    
+    function assign(l, r, c):
+        rem = [], add = []
+        it = upper_bound(l); if prev(it).r >= l: --it
+        while it != end and it.l <= r:
+            L, R, C = *it; rem.append(*it); it = erase(it)
+            if L < l: add.append(insert([L, l - 1, C]))
+            if R > r: add.append(insert([r + 1, R, C]))
+            
+        // Merge with left / right neighbors
+        if prev(it).r == l - 1 and can_merge(prev(it).c, c):
+            l = prev(it).l; rem.append(*prev(it)); erase(prev(it))
+        if next(it).l == r + 1 and can_merge(next(it).c, c):
+            r = next(it).r; rem.append(*next(it)); erase(next(it))
+            
+        add.append(insert([l, r, c]))
+        return {rem, add}

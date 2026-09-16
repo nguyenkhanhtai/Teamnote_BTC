@@ -1,0 +1,23 @@
+// Complexity: O(log N) time per query on convex polygon in CCW order
+// Recognition: Fast point inclusion testing in convex polygon
+
+function point_in_convex_polygon(poly P, Point pt):
+    n = len(P)
+    // Check if pt is within the sector between P[0]->P[1] and P[0]->P[n-1]
+    if orientation(P[0], P[1], pt) < 0 or orientation(P[0], P[n - 1], pt) > 0:
+        return OUTSIDE
+        
+    // Binary search to find triangle P[0] - P[mid] - P[mid+1] containing pt
+    low = 1, high = n - 2
+    while low <= high:
+        mid = (low + high) / 2
+        if orientation(P[0], P[mid], pt) >= 0:
+            pos = mid; low = mid + 1
+        else:
+            high = mid - 1
+            
+    // Check if pt is inside triangle P[0] - P[pos] - P[pos+1]
+    val = orientation(P[pos], P[pos + 1], pt)
+    if val > 0: return INSIDE
+    if val == 0: return ON_BOUNDARY
+    return OUTSIDE

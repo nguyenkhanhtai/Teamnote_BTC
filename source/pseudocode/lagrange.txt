@@ -1,0 +1,18 @@
+// Complexity: O(N) evaluation at point X for consecutive points y_0 = f(0), y_1 = f(1), ..., y_n = f(n)
+// Formula: f(X) = \sum_{i=0}^n y_i \prod_{j \ne i} \frac{X - j}{i - j}
+
+function lagrange_eval_consecutive(y[0..n], X):
+    if X <= n: return y[X]
+    pref[0..n], suff[0..n]
+    pref[0] = X, suff[n] = (X - n) % MOD
+    for i = 1 to n: pref[i] = (pref[i-1] * (X - i)) % MOD
+    for i = n - 1 down to 0: suff[i] = (suff[i+1] * (X - i)) % MOD
+    
+    ans = 0
+    for i = 0 to n:
+        num = (1 if i == 0 else pref[i-1]) * (1 if i == n else suff[i+1]) % MOD
+        den = (fact[i] * fact[n - i]) % MOD
+        term = (y[i] * num % MOD) * inv(den) % MOD
+        if (n - i) % 2 == 1: ans = (ans - term + MOD) % MOD
+        else: ans = (ans + term) % MOD
+    return ans

@@ -1,0 +1,21 @@
+// Complexity: O(N^3) or O(N^3 / 64) with Bitset
+// Gaussian Elimination: Determinant, Matrix Inversion, System of Linear Equations Ax = b
+
+function gauss(A[N][M], b[N]):
+    // Augmented matrix [A | b]
+    rank = 0, det = 1
+    for col = 0 to M - 1:
+        pivot = find_row_with_max_abs(col, from_row = rank)
+        if abs(A[pivot][col]) < EPS:
+            det = 0; continue
+        swap(row[rank], row[pivot])
+        if rank != pivot: det = -det
+        det *= A[rank][col]
+        
+        // Eliminate column entries below and above pivot
+        for r = 0 to N - 1:
+            if r != rank and abs(A[r][col]) > EPS:
+                factor = A[r][col] / A[rank][col]
+                row[r] -= factor * row[rank]
+        rank += 1
+    return (rank, det, solution = [b[i] / A[i][i] for i in 0..rank-1])

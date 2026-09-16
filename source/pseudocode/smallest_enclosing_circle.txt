@@ -1,0 +1,20 @@
+// Complexity: O(N) expected time
+// Welzl's Algorithm: Smallest enclosing disk containing all points P
+
+function circle_from_1_or_2_or_3_points(R):
+    if len(R) == 0: return Circle(origin, 0)
+    if len(R) == 1: return Circle(R[0], 0)
+    if len(R) == 2: return Circle((R[0] + R[1]) / 2, dist(R[0], R[1]) / 2)
+    return circumcircle(R[0], R[1], R[2])
+
+function welzl(points P, boundary R, n):
+    if n == 0 or len(R) == 3:
+        return circle_from_1_or_2_or_3_points(R)
+    p = P[n - 1]
+    c = welzl(P, R, n - 1)
+    if c.contains(p): return c
+    return welzl(P, R + [p], n - 1)
+
+function smallest_enclosing_circle(points P):
+    shuffle(P)
+    return welzl(P, [], len(P))

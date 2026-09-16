@@ -1,0 +1,24 @@
+// Complexity: O(length * state_space * 10)
+// Recognition: Count numbers in range [L, R] satisfying digit/sum properties -> solve(R) - solve(L - 1)
+
+function count_valid(string S): // Digits of upper bound N
+    memo[len][tight][leading_zero][sum_digits][remainder] = -1
+    
+    function dp(idx, tight, lz, sum_d, rem):
+        if idx == len(S):
+            return is_valid(sum_d, rem) ? 1 : 0
+        if memo[idx][tight][lz][sum_d][rem] != -1:
+            return memo[idx][tight][lz][sum_d][rem]
+            
+        limit = tight ? (S[idx] - '0') : 9
+        res = 0
+        for d = 0 to limit:
+            next_tight = tight and (d == limit)
+            next_lz = lz and (d == 0)
+            next_sum = sum_d + d
+            next_rem = (rem * 10 + d) % MOD
+            res += dp(idx + 1, next_tight, next_lz, next_sum, next_rem)
+            
+        return memo[idx][tight][lz][sum_d][rem] = res
+        
+    return dp(0, 1, 1, 0, 0)

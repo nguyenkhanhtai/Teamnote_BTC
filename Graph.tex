@@ -1,0 +1,150 @@
+\section{Graph}
+
+
+
+\Algorithm{Minimum Cost Flow}
+{Min-cost K Flow: Transfer $k$ packages through graph with capacities and costs}
+{$\mathcal{O}(F \cdot m \log n)$}
+{}{source/pseudocode/min_cost_flow.txt}
+
+\Algorithm{MinCut - MaxFlow}
+{Dinic: Max number of paths / vertex-disjoint paths from source to sink.
+\begin{itemize}
+    \item \textbf{Grid 2-Coloring}: Partition cells by $(r + c) \bmod 2 \implies$ Bipartite graph. Used for domino tiling, non-attacking pieces, laser grid beam shooting.
+    \item \textbf{Vertex Splitting ($u_{in} \to u_{out}$)}: Restricts vertex capacity or forces vertex visit (capacity $c_u$, cost $w_u$).
+    \item \textbf{Max-Weight Closure (Project Selection)}:
+    \begin{itemize}
+        \item Rule: If choosing item $u$, must also choose item $v$ (directed edge $u \to v$ with $\text{cap} = \infty$).
+        \item For positive weight $W_u > 0$: Add edge $S \to u$ with $\text{cap} = W_u$.
+        \item For negative weight $W_v < 0$: Add edge $v \to T$ with $\text{cap} = -W_v$.
+        \item $\text{Max Profit} = \sum_{W_u > 0} W_u - \text{MinCut}(S, T)$.
+    \end{itemize}
+    \item \textbf{Two-Choice Binary Partitioning}: Each item $i$ assigned to set $S$ (cost $A_i$) or $T$ (cost $B_i$). If $i \in S, j \in T$, penalty $C_{i, j}$. Add $S \to i$ ($B_i$), $i \to T$ ($A_i$), $i \to j$ ($C_{i, j}$). Total cost $=$ Min-Cut.
+    \item \textbf{Circulation with Demands $[L_e, R_e]$}: Replace edge $e = (u, v)$ with cap $R_e - L_e$. Let $d(u) = \sum_{in} L - \sum_{out} L$. Add super-source $S^*$, super-sink $T^*$. For $d(u) > 0$, add $S^* \to u$ with cap $d(u)$; for $d(u) < 0$, add $u \to T^*$ with cap $-d(u)$. Feasible $\iff$ all $S^*$ edges saturated.
+\end{itemize}
+}
+{$\mathcal{O}(EV^2)$}
+{}{source/pseudocode/max_flow_dinic.txt}
+
+\Algorithm{Bipartite Matching}
+{Hopcroft-Karp: Node Cover, Node-disjoint path cover, General path cover, Antichain (Dilworth).
+\begin{itemize}
+    \item \textbf{K\H{o}nig's Theorem}: $\text{Max Matching} = \text{Min Vertex Cover}$.
+    \item \textbf{Max Independent Set}: $|V| - \text{Min Vertex Cover} = |V| - \text{Max Matching}$.
+    \item \textbf{Min Edge Cover} (no isolated vertices): $|V| - \text{Max Matching}$.
+    \item \textbf{Min Path Cover on DAG}:
+    \begin{itemize}
+        \item \textit{Vertex-disjoint}: Split $u \to u_{out}, u_{in}$; build bipartite matching $u_{out} \to v_{in}$ for edge $u \to v$. Result: $|V| - \text{Max Matching}$.
+        \item \textit{General (paths can share vertices)}: Compute transitive closure (Floyd-Warshall / reachability), then solve vertex-disjoint path cover.
+    \end{itemize}
+    \item \textbf{Dilworth's Theorem}: In any finite poset (DAG reachability), the length of the \textbf{Maximum Antichain} (largest subset of mutually unreachable vertices) equals the \textbf{Minimum Path Cover}.
+    \item \textbf{Hall's Marriage Theorem}: Bipartite $(X, Y)$ has a matching saturating $X \iff \forall S \subseteq X, |N(S)| \ge |S|$.
+    \item \textbf{Max Matching Size via Hall}: $|X| - \max_{S \subseteq X} (|S| - |N(S)|)$.
+\end{itemize}
+}
+{$\mathcal{O}(E\sqrt{V})$}
+{}{source/pseudocode/hopcroft_karp.txt}
+
+\Algorithm{Hungarian Matching}
+{Min-cost perfect assignment on bipartite graph}
+{$\mathcal{O}(V^3)$}
+{}{source/pseudocode/hungarian.txt}
+
+\Algorithm{General Matching}
+{Edmonds Blossom: Maximum Matching on general graphs.
+\begin{itemize}
+    \item \textbf{Tutte Matrix \& Rabin-Vazirani ($O(V^3)$)}: For $(u, v) \in E$ ($u < v$), set $T_{u, v} = r \in [1, p-1]$, $T_{v, u} = -r \pmod p$. Size $= \frac{1}{2}\text{rank}(T)$ (Gauss mod $p$).
+    \begin{itemize}
+        \item \textit{Rabin-Vazirani Reconstruction}: Compute $A = T^{-1} \pmod p$ (on $2K \times 2K$ basis). Edge $(u, v)$ is in matching $\iff A_{u, v} \ne 0$. Pick $(u, v)$ with $A_{u, v} \ne 0$, match them, then update $A$ in $O(V^2)$ via Schur complement: $A'_{x, y} = A_{x, y} + \frac{A_{x, u}A_{y, v} - A_{x, v}A_{y, u}}{A_{u, v}} \pmod p$. Repeat for all $K$ pairs $\implies O(V^3)$ total.
+    \end{itemize}
+    \item \textbf{Max $b$-Matching Reduction} ($\deg(i) \le a_i$): Đỉnh $i \to a_i$ slot ($a_i \leftarrow \min(a_i, \deg(i))$). Cạnh $e=(u,v) \to L_e, R_e$, nối $L_e - R_e$, $L_e - \text{slot}(u)$, $R_e - \text{slot}(v)$. Bỏ $e$: match $L_e-R_e$ ($+1$). Chọn $e$: match $L_e, R_e$ với slot ($+2$, gain $+1$). Aux $|V'| \le 4M \implies$ Blossom.
+\end{itemize}
+}
+{$\mathcal{O}(V^3)$}
+{}{source/pseudocode/general_matching.txt}
+
+\Algorithm{Biconnected Component}
+{BCC: Cut vertices, bridges, and 2-connected components}
+{$\mathcal{O}(V + E)$}
+{}{source/pseudocode/bcc.txt}
+
+\Algorithm{Functional Cycle}
+{Floyd Tortoise and Hare: Find cycle in functional graph $f(x)$}
+{$O(\text{dist} + \text{len})$}
+{}{source/pseudocode/functional_cycle.txt}
+
+\Algorithm{Strongly Connected Components}
+{Tarjan SCC on directed graphs}
+{$\mathcal{O}(V + E)$}
+{}{source/pseudocode/scc_tarjan.txt}
+
+\Algorithm{Offline Deletion}
+{DSU Rollback with segment tree divide \& conquer}
+{$\mathcal{O}(T(n) \log n)$}
+{}{source/pseudocode/dsu_rollback.txt}
+
+\Algorithm{2-SAT}
+{Boolean 2-Satisfiability via implication graph and SCC.
+\begin{itemize}
+    \item \textbf{At least one is true ($X \lor Y$)}: Add edges $\neg X \to Y$ and $\neg Y \to X$.
+    \item \textbf{If $X$ then $Y$ ($X \implies Y$)}: Add edges $X \to Y$ and $\neg Y \to \neg X$.
+    \item \textbf{Exactly one is true ($X \text{ XOR } Y = 1$)}: $(X \lor Y) \land (\neg X \lor \neg Y)$. Edges: $X \leftrightarrow \neg Y$ and $\neg X \leftrightarrow Y$.
+    \item \textbf{$X$ and $Y$ must be the same ($X \text{ XOR } Y = 0$)}: $(X \lor \neg Y) \land (\neg X \lor Y)$. Edges: $X \leftrightarrow Y$ and $\neg X \leftrightarrow \neg Y$.
+    \item \textbf{$X$ MUST be true / MUST be false}: Add edge $\neg X \to X$ (forces true), or $X \to \neg X$ (forces false).
+    \item \textbf{At most one of $\{X_1, X_2, \dots, X_k\}$ is true}: Add prefix variables $P_i = P_{i-1} \lor X_i$. Edges: $X_i \to P_i$, $P_{i-1} \to P_i$, and $X_i \to \neg P_{i-1}$ (if $X_i$ is true, previous must all be false).
+\end{itemize}
+}
+{$\mathcal{O}(n + m)$}
+{}{source/pseudocode/two_sat.txt}
+
+\Algorithm{Floyd}
+{All-pair Shortest-path / transitive closure / min-max path}
+{$O(n^3)$}
+{}{source/pseudocode/floyd_warshall.txt}
+
+\Algorithm{Eulerian Path}
+{Hierholzer algorithm: Find Eulerian Path/Circuit.
+\begin{itemize}
+    \item \textbf{Words/Strings Chaining (De Bruijn / Dominoes)}: Chaining words where the end of one matches the start of the next. Model \textit{states} (e.g., prefix/suffix of length $L-1$, or domino halves) as vertices, and the \textit{items} themselves as directed edges. Eulerian path = sequence covering all items exactly once.
+    \item \textbf{Assigning Directions to Undirected Edges}: Goal is to orient edges to balance in-degrees and out-degrees (e.g., $|in - out| \le 1$). Add dummy edges (or connect odd degree vertices to a dummy node) to make all degrees even, find an Eulerian circuit, and orient edges according to the traversal direction.
+    \item \textbf{Edge-Disjoint Cycle Decomposition}: Decompose graph into edge-disjoint cycles. Possible $\iff$ graph is connected and all vertices have even degrees. Finding an Eulerian circuit directly yields the cycles.
+    \item \textbf{Bipartite Grid Traversal (Row-Col Graphs)}: Matrix problems where you alternate moving along rows and columns. Create a bipartite graph of Rows and Columns. A cell $(r, c)$ is an edge between row $r$ and column $c$. An Eulerian path traverses cells alternating row-col-row.
+\end{itemize}
+}
+{$\mathcal{O}(m)$}
+{}{source/pseudocode/euler_path.txt}
+
+\Algorithm{Vizing Theorem}
+{Color graph edges with at most $(\Delta + 1)$ colors}
+{$\mathcal{O}(n^2)$}
+{}{source/pseudocode/vizing.txt}
+
+\Algorithm{Bipartite Online Checking}
+{Online bipartite checking upon adding edges via parity DSU}
+{$\mathcal{O}(\alpha(n))$}
+{}{source/pseudocode/online_bipartite.txt}
+
+\Algorithm{Gomory-Hu Tree}
+{Equivalent cut tree for all-pairs max flow / min cut}
+{$O(n \cdot \text{MaxFlow})$}
+{}{source/pseudocode/gomory_hu.txt}
+
+\Algorithm{Critical (Dominator Tree)}
+{Lengauer-Tarjan: Immediate dominators from source $s$}
+{$O(m \log n)$}
+{}{source/pseudocode/dominator_tree.txt}
+
+\Algorithm{Prufer}
+{Encode and decode labeled trees of size $n$}
+{$O(n \log n)$}
+{}{source/pseudocode/prufer.txt}
+
+\Algorithm{Steiner Tree}
+{Minimum Steiner Tree connecting $k$ terminal vertices}
+{$O(n \cdot 3^k + m \cdot 2^k \log m)$}
+{}{source/pseudocode/steiner_tree.txt}
+
+\Algorithm{Stable Marriage}
+{Gale-Shapley Stable Marriage Problem}
+{$O(n^2)$}
+{}{source/pseudocode/stable_marriage.txt}

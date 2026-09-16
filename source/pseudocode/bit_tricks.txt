@@ -1,0 +1,27 @@
+// Complexity: O(1) or O(3^N) for submask iteration
+// Useful Bit Hacks, Bitset, and Submask Iterations
+
+// 1. Iterate all submasks of a given mask:
+for sub = mask; sub > 0; sub = (sub - 1) & mask:
+    process(sub)
+process(0)
+
+// 2. Gosper's Hack: Iterate all subsets of size K from N elements
+function gospers_hack(K, N):
+    mask = (1 << K) - 1
+    while mask < (1 << N):
+        process(mask)
+        c = mask & -mask, r = mask + c
+        mask = (((r ^ mask) >> 2) / c) | r
+
+// 3. Bit Tricks:
+// Lowest set bit: x & -x
+// Clear lowest set bit: x & (x - 1)
+// Builtin fast operations:
+// __builtin_clz(x) (leading zeros), __builtin_ctz(x) (trailing zeros), __builtin_popcountll(x)
+
+// 4. Bitmask DP State Reduction (Eliminate step/size loop):
+// In matching/permutations: step i is implicitly __builtin_popcount(mask).
+// dp[i][mask] -> dp[mask], reducing space from O(N * 2^N) to O(2^N).
+// Iterating mask = 0..(1<<N)-1 guarantees topological DAG order without outer loop for i.
+

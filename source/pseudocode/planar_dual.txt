@@ -1,0 +1,35 @@
+// Complexity: O(E log E) time, O(V + E) space
+// Constructs planar dual: extracts faces (including outer face) and dual edges
+
+struct PlanarDual:
+    face_count = 0, dual_edges = []
+    
+    function build(points P, edges E):
+        // 1. Build directed half-edges (darts)
+        for i, (u, v) in enumerate(E):
+            darts[u].push(2 * i)      // u -> v
+            darts[v].push(2 * i + 1)  // v -> u
+            
+        // 2. Sort outgoing darts CCW by angle around each vertex
+        for u in 0..V-1:
+            sort(darts[u], by CCW_angle_around(u))
+            for idx, d in enumerate(darts[u]): pos[d] = idx
+            
+        // 3. For each dart d = (u -> v), next dart along face boundary is:
+        //    the dart immediately clockwise from reverse dart (v -> u)
+        for d in 0..2*E-1:
+            v = to[d], rev_pos = pos[d ^ 1], deg = len(darts[v])
+            next_dart[d] = darts[v][(rev_pos - 1 + deg) % deg]
+            
+        // 4. Trace faces along next_dart cycles
+        for start in 0..2*E-1:
+            if face_of[start] != -1: continue
+            cur = start; face_id = face_count++
+            do:
+                face_of[cur] = face_id
+                cur = next_dart[cur]
+            while cur != start
+            
+        // 5. Dual edge for original edge i is (face_of[2*i], face_of[2*i+1])
+        for i in 0..E-1:
+            dual_edges.push({face_of[2 * i], face_of[2 * i + 1]})

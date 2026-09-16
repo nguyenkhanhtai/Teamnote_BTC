@@ -1,0 +1,26 @@
+// Complexity: O(N) prep, O(1) substring hash query
+// Modulo: Mersenne prime 2^61 - 1 (fast bitwise modulo, immune to hacking)
+
+typedef unsigned __int128 uint128;
+const uint64_t MOD = (1ULL << 61) - 1;
+uint64_t BASE; // Pick random odd in [256, 10^9] using mt19937_64
+
+function mul_mod(uint64_t a, uint64_t b):
+    uint128 p = (uint128)a * b;
+    uint64_t res = (p >> 61) + (p & MOD);
+    if (res >= MOD) res -= MOD;
+    return res;
+
+struct StringHash:
+    vector<uint64_t> H, P; // Prefix hashes and powers of BASE
+    
+    function init(string s):
+        n = len(s); H.resize(n + 1, 0); P.resize(n + 1, 1);
+        for i = 0 to n - 1:
+            P[i + 1] = mul_mod(P[i], BASE);
+            H[i + 1] = (mul_mod(H[i], BASE) + s[i]) % MOD;
+            
+    // Query hash of substring s[l..r] (0-indexed)
+    function query(l, r):
+        uint64_t sub = mul_mod(H[l], P[r - l + 1]);
+        return (H[r + 1] + MOD - sub) % MOD;

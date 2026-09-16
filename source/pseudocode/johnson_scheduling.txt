@@ -1,0 +1,15 @@
+// Complexity: O(N log N) time
+// Johnson's Rule: Optimal scheduling of N jobs on 2 machines in sequence (Machine 1 then Machine 2)
+
+struct Job:
+    id, a (time on M1), b (time on M2)
+
+function johnson_scheduling(jobs):
+    // Partition jobs into Group 1 (a_i <= b_i) and Group 2 (a_i > b_i)
+    G1 = [j for j in jobs if j.a <= j.b]
+    G2 = [j for j in jobs if j.a > j.b]
+    
+    sort(G1, ascending by a)
+    sort(G2, descending by b)
+    
+    return G1 + G2 // Optimal processing order

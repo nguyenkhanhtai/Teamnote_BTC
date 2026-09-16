@@ -1,0 +1,232 @@
+\section{Math}
+
+\Algorithm{Number Theory Formulas}
+{Modular arithmetic, Extended Euler Power Reduction, Legendre, Wilson, Frobenius Coin, Floor Trick, CRT, Fibonacci}
+{}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Extended Euler Totient Power Reduction} ($\forall a, m$):
+    $$ a^b \equiv a^{(b \bmod \phi(m)) + \phi(m)} \pmod m \quad (b \ge \phi(m)) $$
+    \item \textbf{Legendre's Formula ($v_p(n!)$)}: $v_p(n!) = \sum_{k=1}^\infty \lfloor \frac{n}{p^k} \rfloor = \frac{n - S_p(n)}{p - 1}$.
+    \item \textbf{Wilson's Theorem}: $(p - 1)! \equiv -1 \pmod p \iff p$ prime $\implies (p - 2)! \equiv 1 \pmod p$.
+    \item \textbf{Frobenius Coin (Chicken McNugget)}: For $\gcd(a, b) = 1$, max non-representable $ax + by$ ($x, y \ge 0$) is $ab - a - b$; total non-representable count is $\frac{(a-1)(b-1)}{2}$.
+    \item \textbf{Floor Trick ($O(\sqrt{n})$ Blocks)}:
+\begin{lstlisting}
+for (int l = 1, r; l <= n; l = r + 1) {
+    int v = n / l; r = n / v;
+}
+\end{lstlisting}
+    \item \textbf{Chinese Remainder Theorem (CRT)}: $x \equiv a_i \pmod{m_i}$.
+    $$ x \equiv \sum_{i=1}^k a_i M_i (M_i^{-1} \bmod m_i) \pmod M \quad (M = \prod m_i, M_i = M/m_i) $$
+    \item \textbf{Fibonacci}: $\gcd(F_m, F_n) = F_{\gcd(m, n)}$, $F_{2n} = F_n(2F_{n+1} - F_n)$.
+\end{itemize}
+
+\Algorithm{Like-Euclid Floor Sum}
+{Compute $\sum_{i=0}^{n-1} \lfloor \frac{ai+b}{m} \rfloor$ via coordinate transformation}
+{$O(\log m)$}
+{}{source/pseudocode/floor_sum.txt}
+
+\Algorithm{Rabin-Miller}
+{Deterministic Miller-Rabin prime checking for $n < 2^{64}$}
+{${O}(k \log n)$}
+{}{source/pseudocode/rabin_miller.txt}
+
+\Algorithm{Fast Sieve}
+{Linear Euler Sieve computing primes and smallest prime factors up to $N$}
+{$O(N)$}
+{}{source/pseudocode/fast_sieve.txt}
+
+\Algorithm{Prime Counting}
+{Lucy Hedgehog / Meissel-Lehmer: Count primes $\le N$}
+{$O(N^{2/3})$ or $O(N^{3/4})$}
+{}{source/pseudocode/prime_counter.txt}
+
+\Algorithm{Pollard Rho}
+{Find non-trivial factors of composite numbers with Brent's cycle detection}
+{$O(\sqrt[4]{n} \log n)$}
+{}{source/pseudocode/pollard_rho.txt}
+
+\Algorithm{Primitive Root}
+{Find smallest primitive root $g$ modulo prime $p$}
+{$\mathcal{O}(\text{ans} \cdot \log p)$}
+{}{source/pseudocode/primitive_root.txt}
+
+\Algorithm{Baby-step Giant-Step}
+{Find smallest $x$ such that $a^x \equiv b \pmod m$ (Discrete Log)}
+{$O(\sqrt{m} \log m)$}
+{}{source/pseudocode/discrete_log_bsgs.txt}
+
+\Algorithm{Sqrt Mod}
+{Tonelli-Shanks: Solve $x^2 \equiv a \pmod p$}
+{$O(\log^2 p)$}
+{}{source/pseudocode/sqrt_mod.txt}
+
+\Algorithm{Extended GCD}
+{Find $x, y$ that satisfy the equation $ax + by = \gcd(a, b)$}
+{$\mathcal{O}(\log \min(a,b))$}
+{}{source/pseudocode/extended_gcd.txt}
+
+\Algorithm{Diophantine}
+{General solutions to linear Diophantine equation $ax + by = c$}
+{$O(\log \min(a, b))$}
+{}{source/pseudocode/diophantine.txt}
+
+\Algorithm{Stern-Brocot Tree}
+{Fractions in reduced forms, tree encoding/decoding, LCA}
+{$\mathcal{O}(\log(p + q))$}
+{}{source/pseudocode/stern_brocot.txt}
+
+\Algorithm{Multiplicative Functions \& M\"obius Inversion}
+{Dirichlet Convolution, M\"obius Inversion, GCD/LCM summations}
+{}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Euler Phi \& M\"obius}: $\phi(n) = n \prod_{p \mid n} (1 - 1/p)$, $\sum_{d \mid n} \phi(d) = n$, $\sum_{d \mid n} \mu(d) = [n = 1]$.
+    \item \textbf{Dirichlet \& Inversion}: $(f * g)(n) = \sum_{d \mid n} f(d) g(n / d)$.
+    $$ f(n) = \sum_{d \mid n} g(d) \iff g(n) = \sum_{d \mid n} \mu(d) f(n / d) $$
+    \item \textbf{Count coprime pairs}:
+    $$ \sum_{i=1}^n \sum_{j=1}^m [\gcd(i, j) = 1] = \sum_{d=1}^{\min(n, m)} \mu(d) \left\lfloor \frac{n}{d} \right\rfloor \left\lfloor \frac{m}{d} \right\rfloor $$
+    \item \textbf{Sum of GCD over all pairs}:
+    $$ \sum_{i=1}^n \sum_{j=1}^m \gcd(i, j) = \sum_{g=1}^{\min(n, m)} \phi(g) \left\lfloor \frac{n}{g} \right\rfloor \left\lfloor \frac{m}{g} \right\rfloor $$
+    \item \textbf{Sum of LCM over all pairs} ($S(x) = \frac{x(x+1)}{2}$):
+    $$ \sum_{i \le n, j \le m} \text{lcm}(i, j) = \sum_{g} g \sum_{d} d^2 \mu(d) S\left(\left\lfloor \frac{n}{gd} \right\rfloor\right) S\left(\left\lfloor \frac{m}{gd} \right\rfloor\right) $$
+\end{itemize}
+
+\Algorithm{Combinatorics Formulas}
+{Binomial identities, Hockey-stick, Vandermonde, Inversion, Stars and bars, Catalan, Stirling, Cayley, LGV}
+{}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Binomial Identities}: $\binom{n}{k} = \binom{n}{n-k} = \binom{n-1}{k-1} + \binom{n-1}{k}$; $k \binom{n}{k} = n \binom{n-1}{k-1}$; $\frac{1}{k+1}\binom{n}{k} = \frac{1}{n+1}\binom{n+1}{k+1}$; $\binom{n}{k} \binom{k}{m} = \binom{n}{m} \binom{n-m}{k-m}$; Upper negation: $\binom{-n}{k} = (-1)^k \binom{n+k-1}{k}$.
+    \item \textbf{Binomial Summations}: $\sum_{k=0}^n \binom{n}{k} = 2^n$; $\sum_{k=0}^n (-1)^k \binom{n}{k} = [n = 0]$; $\sum_{k \text{ even}} \binom{n}{k} = \sum_{k \text{ odd}} \binom{n}{k} = 2^{n-1}$; $\sum_{k=0}^n k \binom{n}{k} = n 2^{n-1}$; $\sum_{k=0}^n k^2 \binom{n}{k} = n(n+1) 2^{n-2}$; $\sum_{k=0}^n \frac{1}{k+1}\binom{n}{k} = \frac{2^{n+1}-1}{n+1}$.
+    \item \textbf{Hockey-Stick \& Vandermonde}: $\sum_{i=r}^n \binom{i}{r} = \binom{n+1}{r+1}$; $\sum_{i=0}^k \binom{n+i}{i} = \binom{n+k+1}{k}$; $\sum_{k=0}^r \binom{m}{k} \binom{n}{r-k} = \binom{m+n}{r} \implies \sum_{k=0}^n \binom{n}{k}^2 = \binom{2n}{n}$.
+    \item \textbf{Binomial Inversion \& Differences}: $f(n) = \sum_{k=0}^n \binom{n}{k} g(k) \iff g(n) = \sum_{k=0}^n (-1)^{n-k} \binom{n}{k} f(k)$; Upper: $f(n) = \sum_{k=n}^N \binom{k}{n} g(k) \iff g(n) = \sum_{k=n}^N (-1)^{k-n} \binom{k}{n} f(k)$; $\sum_{k=0}^n (-1)^{n-k} \binom{n}{k} k^m = n! \left\{ \begin{matrix} m \\ n \end{matrix} \right\}$ ($0$ if $m < n$, $n!$ if $m=n$).
+    \item \textbf{Stars and Bars}: $x_i \ge 0 \implies \binom{n + k - 1}{k - 1}$; $x_i \ge 1 \implies \binom{n - 1}{k - 1}$; $x_i \ge c_i \implies n' = n - \sum c_i$.
+    \item \textbf{Derangements}: $D_0 = 1, D_1 = 0, D_n = (n - 1)(D_{n-1} + D_{n-2}) = n D_{n-1} + (-1)^n \approx [n! / e]$.
+    \item \textbf{Catalan Numbers $C_n = \frac{1}{n+1}\binom{2n}{n}$}: Valid bracketings, Full binary trees with $n+1$ leaves, Triangulations of convex $(n+2)$-gon, Dyck paths not crossing $y=x$, 1-Stack permutations.
+    \item \textbf{Reflection Principle}: Paths $(0, 0) \to (n, m)$ not touching $y = x + k$ ($k > 0$): $\binom{n + m}{m} - \binom{n + m}{m - k}$.
+    \item \textbf{Balloting Theorem}: A has $a$ votes, B has $b$ ($a > b$). Prob A strictly leads throughout: $\frac{a - b}{a + b}$.
+    \item \textbf{Stirling Numbers of 1st \& 2nd Kind}: $\left[ \begin{matrix} n \\ k \end{matrix} \right] = \left[ \begin{matrix} n-1 \\ k-1 \end{matrix} \right] + (n-1) \left[ \begin{matrix} n-1 \\ k \end{matrix} \right]$, $\left\{ \begin{matrix} n \\ k \end{matrix} \right\} = \left\{ \begin{matrix} n-1 \\ k-1 \end{matrix} \right\} + k \left\{ \begin{matrix} n-1 \\ k \end{matrix} \right\}$.
+    $x^n = \sum_{k=0}^n \left\{ \begin{matrix} n \\ k \end{matrix} \right\} x^{\underline{k}} \implies \sum_{i=1}^n i^k = \sum_{j=0}^k \left\{ \begin{matrix} k \\ j \end{matrix} \right\} j! \binom{n + 1}{j + 1}$.
+    \item \textbf{PIE}: $|\bigcup_{i=1}^n A_i| = \sum_{\emptyset \ne J} (-1)^{|J|-1} |\bigcap_{j \in J} A_j|$; Exactly $r$ sets: $\sum_{m=r}^n (-1)^{m-r} \binom{m}{r} \sum_{|X|=m} |\bigcap_{i \in X} A_i|$.
+    \item \textbf{Lucas' Theorem}: $\binom{n}{k} \equiv \prod_{i} \binom{n_i}{k_i} \pmod p$ (base-$p$ digits).
+    \item \textbf{Tree Counting \& Cayley}: $n^{n-2}$ labeled trees, Forest of $k$ rooted trees $k n^{n-k-1}$, Matrix Tree Theorem ($\det(L_i)$), LGV Lemma ($\det(M)$).
+\end{itemize}
+
+\Algorithm{Generating Functions \& Taylor Series}
+{OGF, EGF, Taylor expansions, Simpson numerical integration}
+{}
+{}{}
+
+\begin{itemize}
+    \item OGF: $A(x) = \sum a_n x^n$; EGF: $A(x) = \sum a_n \frac{x^n}{n!}$.
+    \item $\frac{1}{1-x} = \sum_{n \ge 0} x^n$, $\frac{1}{(1-x)^k} = \sum_{n \ge 0} \binom{n+k-1}{k-1} x^n$.
+    \item $e^x = \sum_{n \ge 0} \frac{x^n}{n!}$, $\ln(1 - x) = -\sum_{n \ge 1} \frac{x^n}{n}$, $(1+x)^\alpha = \sum_{n \ge 0} \binom{\alpha}{n} x^n$.
+    \item \textbf{Simpson's Rule}: $\int_a^{a+2h} f(x)dx \approx \frac{h}{3}(f(a) + 4f(a+h) + f(a + 2h))$.
+\end{itemize}
+
+\Algorithm{Linear Recurrences (Berlekamp-Massey)}
+{Find minimal linear recurrence from first $2N$ terms and compute $K$-th term via $x^K \bmod P(x)$}
+{${O}(N^2)$ find recurrence, $\mathcal{O}(N^2 \log K)$ compute $k$-th term}
+{}{source/pseudocode/berlekamp_massey.txt}
+
+\Algorithm{FWHT}
+{Fast Walsh-Hadamard Transform (XOR, AND, OR Convolution)}
+{$\mathcal{O}(n \log n)$}
+{}{source/pseudocode/fwht.txt}
+
+\Algorithm{Lagrange}
+{Lagrange polynomial interpolation at point $X$ on $n+1$ equidistant points $y_0, \dots, y_n$}
+{$O(n)$ evaluation}
+{}{source/pseudocode/lagrange.txt}
+
+\Algorithm{FFT, NTT, and Polynomials}
+{Compact NTT / formal power series template for $998244353$: convolution, inverse, log, exp, power, division and modulo}
+{$\mathcal{O}(n \log n)$ for each operation}
+{cpp}{source/template/Polynomial.cpp}
+
+\Algorithm{Linear Algebra (Gauss)}
+{Gaussian Elimination: Matrix Determinant, Matrix Rank, System of Linear Equations}
+{$\mathcal{O}(n^3)$}
+{}{source/pseudocode/linalg_gauss.txt}
+
+\Algorithm{XOR Linear Basis}
+{XOR Linear Basis: Find Max/Min/k-th XOR subset, span of $2^{\text{size}}$ distinct values}
+{$O(B)$ insert/query ($B \le 60$)}
+{}{source/pseudocode/xor_basis.txt}
+
+\Algorithm{Burnside Lemma \& P\'olya Theorem}
+{Count distinct equivalence classes under group actions, Necklaces, Bracelets}
+{}
+{}{}
+
+\begin{itemize}
+    \item $|Classes| = \frac{1}{|G|} \sum_{g \in G} |Fix(g)| = \frac{1}{|G|} \sum_{g \in G} k^{c(g)}$.
+    \item \textbf{Necklace ($n$ rotations only)}: $N(n, k) = \frac{1}{n} \sum_{d \mid n} \phi(d) k^{n / d}$.
+    \item \textbf{Bracelet (Rotations + Reflections)}:
+    \begin{itemize}
+        \item $n$ odd: $B(n, k) = \frac{1}{2} N(n, k) + \frac{1}{2} k^{(n+1)/2}$.
+        \item $n$ even: $B(n, k) = \frac{1}{2} N(n, k) + \frac{1}{4} (k^{n/2} + k^{n/2 + 1})$.
+    \end{itemize}
+\end{itemize}
+
+\Algorithm{Game Strategy \& State Reasoning}
+{Winning/Losing state axioms, Retrograde analysis, Symmetry, Parity, Sprague-Grundy MEX, Nim variants}
+{$O(V + E)$}
+{}{source/pseudocode/game_strategy.txt}
+
+\begin{itemize}
+    \item \textbf{Winning ($\mathcal{W}$ / N-pos) vs Losing ($\mathcal{L}$ / P-pos) State Axioms}:
+    \begin{itemize}
+        \item \textbf{Terminal State}: Normal play (no moves $\implies \mathcal{L}$); Mis\`ere play (no moves $\implies \mathcal{W}$).
+        \item \textbf{Winning State $\mathcal{W}$}: $\exists v \in \text{next}(u)$ such that $v \in \mathcal{L}$ (at least ONE move leads to an $\mathcal{L}$-state).
+        \item \textbf{Losing State $\mathcal{L}$}: $\forall v \in \text{next}(u)$, $v \in \mathcal{W}$ (ALL moves lead to $\mathcal{W}$-states; or no moves exist).
+        \item \textbf{Optimal Play}: From $\mathcal{W}$, always choose a move to $\mathcal{L}$. Opponent from $\mathcal{L}$ is forced to move back to $\mathcal{W}$.
+    \end{itemize}
+    \item \textbf{Problem-Solving Deduction Workflow}:
+    \begin{itemize}
+        \item \textbf{Retrograde BFS ($O(V + E)$)}: Propagate outcomes backward from terminal states using out-degree counters; unvisited states in cycles are \textbf{DRAW}.
+        \item \textbf{Symmetry / Mirroring}: If P2 can mirror P1's moves across center/axes, P2 wins. If P1 can make a central move leaving symmetric halves, P1 wins.
+        \item \textbf{Invariants \& Parity}: Track $I(S) \bmod 2$ (sum, components, inversions). Control parity to force terminal state on opponent.
+        \item \textbf{Pairing Strategy}: Partition board into disjoint matched pairs $(a_i, b_i)$. When P1 takes $a_i$, P2 immediately takes $b_i$.
+        \item \textbf{Small-case Pattern Finding}: Simulate for $N \le 20$, compute SG values $g(n)$, find periodicity $g(n) = g(n \bmod T)$ or bit conditions.
+    \end{itemize}
+    \item \textbf{Sprague-Grundy Theorem (Independent Subgames)}:
+    \begin{itemize}
+        \item $g(G) = \bigoplus g(G_i)$, where $g(u) = \text{mex}(\{g(v) \mid u \to v\})$. Win $\iff g(G) \ne 0$.
+        \item \textbf{Tree Hackenbush (Colon Principle)}: Branch node $g(u) = \bigoplus_{v \in \text{children}} (g(v) + 1)$.
+    \end{itemize}
+    \item \textbf{Classic Nim Variations}:
+    \begin{itemize}
+        \item \textbf{Standard Nim}: XOR sum $S = \bigoplus a_i$. Win $\iff S \ne 0$.
+        \item \textbf{Bounded Subtraction Nim} (take $1..k$): $g(a) = a \bmod (k + 1) \implies$ Win $\iff \bigoplus (a_i \bmod (k+1)) \ne 0$.
+        \item \textbf{Moore's $\text{Nim}_k$} (take from $\le k$ piles): Lose $\iff \forall \text{ bit position } b, \sum_i \text{bit}_b(a_i) \equiv 0 \pmod{k + 1}$.
+        \item \textbf{Staircase Nim}: Equivalent to standard Nim on odd-indexed stairs ($1, 3, 5, \dots$).
+        \item \textbf{Mis\`ere Nim} (last move LOSES):
+        \begin{itemize}
+            \item All piles $\le 1$: Win $\iff$ count of size-1 piles is EVEN ($S = 0$).
+            \item At least one pile $> 1$: Identical to standard Nim (Win $\iff S \ne 0$).
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\Algorithm{Probability \& Expected Value}
+{Linearity of expectation, Indicator variables, Coupon collector, Inequalities}
+{}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Linearity of Expectation}: $E[X_1 + \dots + X_n] = E[X_1] + \dots + E[X_n]$ ($\forall X_i$).
+    \item \textbf{Indicator Variables}: $E[X] = \sum P(A_i)$.
+    \item \textbf{Geometric Distribution}: $E[X] = 1/p$, $\text{Var}(X) = (1-p)/p^2$.
+    \item \textbf{Coupon Collector}: $E[T] = n \sum_{i=1}^n \frac{1}{i} = n H_n \approx n(\ln n + \gamma)$ ($\gamma \approx 0.5772$).
+    \item \textbf{Markov}: $P(X \ge a) \le \frac{E[X]}{a}$; \textbf{Chebyshev}: $P(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}$.
+\end{itemize}
+
+\Algorithm{Bignum}
+{Extreme Bignum Template}
+{$O(n^2)$}
+{cpp}{source/template/bigint.cpp}

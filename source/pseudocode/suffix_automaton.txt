@@ -1,0 +1,34 @@
+// Complexity: O(N * |\Sigma|) time, O(N * |\Sigma|) space
+// Directed Acyclic Word Graph (DAWG) representing all substrings of S
+
+struct State:
+    len = 0, link = -1, next[ALPHABET] = {0}
+
+State st[2 * MAXN]; sz = 1, last = 0
+
+function sam_init():
+    st[0].len = 0, st[0].link = -1; sz = 1, last = 0
+
+function sam_extend(char c):
+    cur = sz++; st[cur].len = st[last].len + 1
+    p = last
+    while p != -1 and not st[p].next[c]:
+        st[p].next[c] = cur
+        p = st[p].link
+        
+    if p == -1:
+        st[cur].link = 0
+    else:
+        q = st[p].next[c]
+        if st[p].len + 1 == st[q].len:
+            st[cur].link = q
+        else:
+            clone = sz++
+            st[clone].len = st[p].len + 1
+            st[clone].next = st[q].next
+            st[clone].link = st[q].link
+            while p != -1 and st[p].next[c] == q:
+                st[p].next[c] = clone
+                p = st[p].link
+            st[q].link = st[cur].link = clone
+    last = cur

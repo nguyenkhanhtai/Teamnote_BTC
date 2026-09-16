@@ -1,0 +1,35 @@
+// Complexity: O(V + E) time
+// Finds Bridges, Articulation Points, and 2-Connected Components (Biconnected Components)
+
+int num[N], low[N], timer = 0
+stack<pair<int, int>> edge_stack
+
+function dfs_bcc(u, p):
+    num[u] = low[u] = ++timer
+    children = 0
+    for v in adj[u]:
+        if v == p: continue
+        if num[v]:
+            low[u] = min(low[u], num[v])
+            if num[v] < num[u]: edge_stack.push({u, v})
+        else:
+            children += 1
+            edge_stack.push({u, v})
+            dfs_bcc(v, u)
+            low[u] = min(low[u], low[v])
+            
+            // Bridge condition: low[v] > num[u]
+            if low[v] > num[u]: mark_bridge(u, v)
+            
+            // Articulation point condition:
+            if (p == -1 and children > 1) or (p != -1 and low[v] >= num[u]):
+                mark_articulation_point(u)
+                
+            // Extract Biconnected Component:
+            if low[v] >= num[u]:
+                component = []
+                while True:
+                    edge = edge_stack.pop()
+                    component.append(edge)
+                    if edge == {u, v}: break
+                process_bcc(component)

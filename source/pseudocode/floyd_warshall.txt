@@ -1,0 +1,12 @@
+// Complexity: O(V^3) time, O(V^2) space
+// All-Pairs Shortest Path and Transitive Closure / Min-Max Path
+
+function floyd_warshall(dist[N][N]):
+    // dist[i][j] initialized to edge weight or INF, dist[i][i] = 0
+    for k = 1 to N:
+        for i = 1 to N:
+            for j = 1 to N:
+                if dist[i][k] < INF and dist[k][j] < INF:
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+                    
+    // Negative cycle detection: if dist[i][i] < 0 for any i

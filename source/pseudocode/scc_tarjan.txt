@@ -1,0 +1,29 @@
+// Complexity: O(V + E) time, O(V) space
+// Tarjan's Strongly Connected Components algorithm for directed graphs
+
+int dfn[N], low[N], scc_id[N], timer = 0, scc_cnt = 0
+stack<int> st; bool in_st[N]
+
+function dfs_scc(u):
+    dfn[u] = low[u] = ++timer
+    st.push(u); in_st[u] = True
+    for v in adj[u]:
+        if not dfn[v]:
+            dfs_scc(v)
+            low[u] = min(low[u], low[v])
+        else if in_st[v]:
+            low[u] = min(low[u], dfn[v])
+            
+    if low[u] == dfn[u]:
+        scc_cnt += 1
+        repeat:
+            v = st.pop(); in_st[v] = False
+            scc_id[v] = scc_cnt
+        until v == u
+
+function find_all_sccs():
+    fill(dfn, 0); fill(in_st, False)
+    timer = 0; scc_cnt = 0
+    for u = 1 to N:
+        if not dfn[u]: dfs_scc(u)
+    return scc_id

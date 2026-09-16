@@ -1,0 +1,27 @@
+// Complexity: O(N log(C))
+// Problem: Optimize f(K) = min cost choosing exactly K items, where f is convex/concave.
+// Trick: Introduce penalty lambda for each item chosen: g(lambda) = min_x (cost(x) - lambda * cnt(x))
+
+function solve_with_penalty(lambda):
+    // dp[i] stores pair (optimal_cost, count_of_items_chosen)
+    dp[0] = (0, 0)
+    for i = 1 to N:
+        dp[i] = dp[i-1] // case: don't choose item i
+        take_cost = dp[i-1].cost + value[i] - lambda
+        take_cnt = dp[i-1].cnt + 1
+        if take_cost < dp[i].cost: // or <= depending on tie-breaking
+            dp[i] = (take_cost, take_cnt)
+    return dp[N]
+
+function aliens_trick(target_K):
+    low = -MAX_VAL, high = MAX_VAL, best_lambda = 0
+    while low <= high:
+        mid = (low + high) / 2
+        res = solve_with_penalty(mid)
+        if res.cnt >= target_K:
+            best_lambda = mid
+            high = mid - 1 // or low = mid + 1 for max problem
+        else:
+            low = mid + 1
+    ans = solve_with_penalty(best_lambda)
+    return ans.cost + target_K * best_lambda

@@ -1,0 +1,27 @@
+// Complexity: O(N log N) with priority queue or O(N) linear time
+// Prufer Code: Bijective encoding between labeled trees of size N and sequences of length N - 2
+
+
+function encode_prufer(tree, N):
+    deg = [len(adj[i]) for i in 1..N]
+    leaves = min_priority_queue([i for i in 1..N if deg[i] == 1])
+    code = []
+    for step = 1 to N - 2:
+        leaf = leaves.pop()
+        neighbor = get_only_neighbor(leaf)
+        code.append(neighbor)
+        deg[neighbor] -= 1
+        if deg[neighbor] == 1: leaves.push(neighbor)
+    return code
+
+function decode_prufer(code, N):
+    deg = count_frequencies(code) + 1 for each node
+    leaves = min_priority_queue([i for i in 1..N if deg[i] == 1])
+    edges = []
+    for c in code:
+        leaf = leaves.pop()
+        edges.append({leaf, c})
+        deg[c] -= 1
+        if deg[c] == 1: leaves.push(c)
+    edges.append({leaves.pop(), leaves.pop()})
+    return edges

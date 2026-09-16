@@ -1,0 +1,25 @@
+// Complexity: O(K * N log N) for DnC, O(N^2) for Knuth Optimization
+// Condition: opt[i][j-1] <= opt[i][j] <= opt[i+1][j] (Quadrangle Inequality)
+// Recurrence: dp[k][i] = min_{j < i} (dp[k-1][j] + cost(j+1, i))
+
+function compute(k, L, R, optL, optR):
+    if L > R: return
+    mid = (L + R) / 2
+    best_opt = -1
+    dp[k][mid] = INFINITY
+    
+    // Search best transition j in [optL, min(mid-1, optR)]
+    for j = optL to min(mid - 1, optR):
+        val = dp[k-1][j] + cost(j + 1, mid)
+        if val < dp[k][mid]:
+            dp[k][mid] = val
+            best_opt = j
+            
+    // Divide and Conquer to subproblems
+    compute(k, L, mid - 1, optL, best_opt)
+    compute(k, mid + 1, R, best_opt, optR)
+
+// Knuth's Optimization (O(N^2)):
+// For len = 2 to N:
+//   For i = 1 to N - len + 1, j = i + len - 1:
+//     dp[i][j] = min_{k in [opt[i][j-1], opt[i+1][j]]} (dp[i][k] + dp[k+1][j] + cost(i, j))

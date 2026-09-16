@@ -1,0 +1,27 @@
+// Complexity: O(sqrt(M) log M) time and O(sqrt(M)) space
+// Finds smallest non-negative integer x such that a^x = b (mod M)
+
+function baby_step_giant_step(a, b, M):
+    a %= M; b %= M
+    k = 1, add = 0, g = gcd(a, M)
+    while g > 1:
+        if b == k: return add
+        if b % g != 0: return -1 // No solution
+        b /= g; M /= g; add += 1
+        k = (k * (a / g)) % M
+        g = gcd(a, M)
+        
+    m = ceil(sqrt(M))
+    table = hash_map() // Stores a^(j * m) * k mod M -> j
+    cur = 1
+    for i = 0 to m - 1:
+        if cur not in table: table[(cur * b) % M] = i
+        cur = (cur * a) % M
+        
+    base = cur // a^m mod M
+    cur = k
+    for j = 1 to m:
+        cur = (cur * base) % M
+        if cur in table:
+            return j * m - table[cur] + add
+    return -1

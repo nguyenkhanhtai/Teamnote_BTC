@@ -1,0 +1,14 @@
+// Complexity: O(N) time and O(N) space (Linear Euler Sieve)
+// Finds all primes up to N and smallest prime factor min_prime[i]
+
+int min_prime[N], primes[]
+
+function linear_sieve(N):
+    for i = 2 to N:
+        if min_prime[i] == 0:
+            min_prime[i] = i
+            primes.append(i)
+        for p in primes:
+            if p > min_prime[i] or i * p > N: break
+            min_prime[i * p] = p
+    return primes

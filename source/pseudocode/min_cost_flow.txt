@@ -1,0 +1,46 @@
+// Complexity: O(F * M log N) using SPFA / Dijkstra with node potentials
+// Finds min cost to send F units of flow from source s to sink t
+
+struct Edge:
+    to, rev, cap, flow = 0, cost
+
+function min_cost_flow(s, t, max_flow_target):
+    pot[N] = 0, total_flow = 0, total_cost = 0
+    // Compute initial potential with SPFA if negative costs exist
+    
+    while total_flow < max_flow_target:
+        priority_queue pq // (dist, u)
+        dist[0..N-1] = INF, parent_edge[0..N-1] = -1
+        dist[s] = 0, pq.push({0, s})
+        
+        while not pq.empty():
+            d, u = pq.pop()
+            if d > dist[u]: continue
+            for e in adj[u]:
+                if e.cap - e.flow > 0:
+                    reduced_cost = e.cost + pot[u] - pot[e.to]
+                    if dist[e.to] > dist[u] + reduced_cost:
+                        dist[e.to] = dist[u] + reduced_cost
+                        parent_edge[e.to] = e
+                        pq.push({dist[e.to], e.to})
+                        
+        if dist[t] == INF: break // No more augmenting path
+        for i = 0 to N - 1: pot[i] += dist[i]
+        
+        push_flow = max_flow_target - total_flow
+        v = t
+        while v != s:
+            e = parent_edge[v]
+            push_flow = min(push_flow, e.cap - e.flow)
+            v = adj[e.to][e.rev].to
+            
+        v = t
+        while v != s:
+            e = parent_edge[v]
+            e.flow += push_flow
+            adj[e.to][e.rev].flow -= push_flow
+            total_cost += push_flow * e.cost
+            v = adj[e.to][e.rev].to
+        total_flow += push_flow
+        
+    return (total_flow, total_cost)

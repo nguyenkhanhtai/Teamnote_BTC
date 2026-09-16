@@ -1,0 +1,16 @@
+// Complexity: O(N) time and space
+// Computes Z-array: z[i] = LCP(S, S[i..N-1])
+// Recognition: Longest common prefix with entire string, Pattern matching via S = P + '#' + T
+
+function compute_z(string s):
+    n = len(s), z = array of size n (all 0)
+    z[0] = n
+    l = 0, r = 0
+    for i = 1 to n - 1:
+        if i <= r:
+            z[i] = min(r - i + 1, z[i - l])
+        while i + z[i] < n and s[z[i]] == s[i + z[i]]:
+            z[i] += 1
+        if i + z[i] - 1 > r:
+            l = i; r = i + z[i] - 1
+    return z

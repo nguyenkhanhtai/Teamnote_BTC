@@ -1,0 +1,23 @@
+// Complexity: O(log^2 P) expected time
+// Tonelli-Shanks Algorithm: Solves x^2 = a (mod P) for odd prime P
+
+function tonelli_shanks(a, P):
+    if a == 0: return 0
+    if power_mod(a, (P - 1) / 2, P) != 1: return -1 // No quadratic residue
+    if P % 4 == 3: return power_mod(a, (P + 1) / 4, P)
+    
+    // P - 1 = Q * 2^S with Q odd
+    S = 0, Q = P - 1
+    while Q % 2 == 0: S += 1; Q /= 2
+    
+    // Find quadratic non-residue z
+    z = 2
+    while power_mod(z, (P - 1) / 2, P) == 1: z += 1
+    
+    M = S, c = power_mod(z, Q, P), t = power_mod(a, Q, P), R = power_mod(a, (Q + 1) / 2, P)
+    while t != 1:
+        i = 1, cur = (t * t) % P
+        while cur != 1: cur = (cur * cur) % P; i += 1
+        b = power_mod(c, 1 << (M - i - 1), P)
+        M = i; c = (b * b) % P; t = (t * c) % P; R = (R * b) % P
+    return R

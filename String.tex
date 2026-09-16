@@ -1,0 +1,93 @@
+\section{String}
+
+\Algorithm{String Problem Solving Strategies}
+{String problem taxonomy, periodicity, LCP, distinct substrings, palindromes \& key theorems}
+{}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Problem Taxonomy \& Core Approches}:
+    \begin{itemize}
+        \item \textbf{Longest Common Prefix with Whole String / Single Pattern Match}: Use \textbf{Z-Algorithm} or \textbf{KMP}.
+        \item \textbf{Multiple Dictionary Matching / DP on String Sets}: Use \textbf{Aho-Corasick Automaton}.
+        \item \textbf{Distinct Substrings}: Suffix Array ($\frac{n(n+1)}{2} - \sum LCP_i$) or SAM ($\sum len[u] - len[link[u]]$).
+        \item \textbf{$k$-th Substring / LCS of Multiple Strings}: Use \textbf{Suffix Automaton (SAM)} or \textbf{Suffix Array + LCP}.
+        \item \textbf{Palindromic Substrings}: Use \textbf{Manacher} (radius centered at every index) or \textbf{EERTREE / PAM} (palindromic tree).
+        \item \textbf{Lexicographically Minimal String Rotation}: Run \textbf{Lyndon Factorization (Duval)} on $S + S$.
+        \item \textbf{Fast Substring Equivalence $O(1)$ / 2D Strings}: Use \textbf{Rolling Hash} ($2^{61}-1$ Mersenne prime).
+    \end{itemize}
+    \item \textbf{Periodicity \& Border Properties}:
+    \begin{itemize}
+        \item Minimal period of length-$n$ string is $p = n - \pi[n - 1]$ (if $n \bmod p == 0 \implies S = (S[0..p-1])^{n/p}$).
+        \item \textbf{Fine-Wilf (Periodicity Lemma)}: If $S$ has periods $p, q$ and $|S| \ge p + q - \gcd(p, q) \implies S$ has period $\gcd(p, q)$.
+        \item \textbf{Border Series}: All borders of a string partition into $\le O(\log n)$ arithmetic progressions $\implies$ Optimize border DP to $O(n \log n)$.
+    \end{itemize}
+    \item \textbf{Theoretical Bounds}:
+    \begin{itemize}
+        \item Distinct palindromic substrings in length-$n$ string is always $\le n$.
+        \item Suffix Automaton of length-$n$ string has $\le 2n - 1$ states and $\le 3n - 4$ transition edges.
+    \end{itemize}
+\end{itemize}
+
+\Algorithm{Rolling Hash (61-bit Mersenne)}
+{Double/61-bit Mersenne prime Hash ($2^{61}-1$) with randomized base}
+{$O(n)$ build, $O(1)$ substring query}
+{}{source/pseudocode/rolling_hash.txt}
+
+\Algorithm{KMP}
+{Prefix function $\pi$ and linear string matching}
+{$O(n + m)$}
+{}{source/pseudocode/kmp.txt}
+
+\Algorithm{Z-Algorithm}
+{Z-array: $z[i] = \text{LCP}(S, S[i..n-1])$ and pattern matching via $S = P + \# + T$}
+{$O(n + m)$}
+{}{source/pseudocode/z_algorithm.txt}
+
+\Algorithm{Aho Corasick}
+{Multi-pattern dictionary matching on Trie with BFS failure/exit links}
+{$O(\sum |P_i| + |T|)$}
+{}{source/pseudocode/aho_corasick.txt}
+
+\Algorithm{Suffix Array}
+{Suffix Array doubling construction and Kasai LCP algorithm}
+{$O(n \log n)$ construction, $O(n)$ LCP}
+{}{source/pseudocode/suffix_array.txt}
+
+\begin{itemize}
+    \item \textbf{LCP Applications \& Core CP Recipes}:
+    \begin{itemize}
+        \item \textbf{Arbitrary Suffix LCP}: $\text{LCP}(S[i..], S[j..]) = \min_{k=\min(pos[i], pos[j])+1}^{\max(pos[i], pos[j])} LCP[k]$ via RMQ / Sparse Table in $O(1)$ query.
+        \item \textbf{Distinct Substrings}: Total distinct substrings is $\frac{n(n+1)}{2} - \sum_{i=1}^{n-1} LCP[i]$.
+        \item \textbf{$k$-th Lexicographical Substring}: Suffix $SA[i]$ contributes $n - SA[i] - LCP[i]$ new strings of lengths $LCP[i]+1 \dots n - SA[i]$.
+        \item \textbf{LCS of 2 Strings}: Build SA on $S_1 + \# + S_2$; ans is $\max LCP[i]$ where $SA[i], SA[i-1]$ belong to different strings.
+        \item \textbf{LCS of $K$ Strings}: Build SA on $S_1 + \#_1 + \dots + S_K + \#_K$; two pointers / sliding window $[L, R]$ covering all $K$ strings $\implies \min_{k=L+1}^R LCP[k]$.
+        \item \textbf{Pattern Occurrences Range}: Suffixes with prefix $P$ form continuous range $[L, R]$ in SA; find via 2 binary searches in $O(|P| \log n)$, count $= R - L + 1$.
+        \item \textbf{Longest Substring Occurring $\ge K$ Times}: $\max_i (\min_{j=i+1}^{i+K-1} LCP[j])$ via monotonic queue / sliding RMQ in $O(n)$.
+    \end{itemize}
+\end{itemize}
+
+\Algorithm{Suffix Automaton}
+{Minimal DAWG where every path from root corresponds to a substring of $S$}
+{$O(n |\Sigma|)$}
+{}{source/pseudocode/suffix_automaton.txt}
+
+\Algorithm{Lyndon Factorization}
+{Duval algorithm: factorize string into Lyndon words $s_1 \ge s_2 \ge \dots \ge s_k$ \& Minimal string rotation}
+{$O(n)$ time, $O(1)$ space}
+{}{source/pseudocode/lyndon.txt}
+
+\Algorithm{Manacher}
+{Find the longest palindrome radius centered at every index}
+{$O(n)$}
+{}{source/pseudocode/manacher.txt}
+
+\Algorithm{Palindrome Tree}
+{EERTREE: Represent all distinct palindromes in string and transition links}
+{$O(n)$}
+{}{source/pseudocode/palindrome_tree.txt}
+
+\Algorithm{De Bruijn}
+{Generate cyclic sequence of length $k^n$ containing all $k$-ary words of length $n$}
+{$O(k^n)$}
+{}{source/pseudocode/debruijn.txt}

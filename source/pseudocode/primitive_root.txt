@@ -1,0 +1,15 @@
+// Complexity: O(Ans * log(P) * num_factors) time
+// Finds smallest primitive root modulo P (prime)
+
+function find_primitive_root(P):
+    phi = P - 1
+    factors = unique_prime_factors(phi)
+    
+    for g = 2 to P - 1:
+        is_primitive = True
+        for p in factors:
+            if power_mod(g, phi / p, P) == 1:
+                is_primitive = False
+                break
+        if is_primitive: return g
+    return -1

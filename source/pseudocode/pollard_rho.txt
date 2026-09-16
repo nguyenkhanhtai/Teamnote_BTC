@@ -1,0 +1,23 @@
+// Complexity: O(N^(1/4) log N) expected time
+// Finds a non-trivial factor of composite number N using Brent's cycle detection
+
+function pollard_rho(N):
+    if N % 2 == 0: return 2
+    x = rand() % (N - 2) + 2, y = x
+    c = rand() % (N - 1) + 1, d = 1
+    
+    f = (v) -> (mul_mod(v, v, N) + c) % N
+    
+    while d == 1:
+        x = f(x)
+        y = f(f(y))
+        d = gcd(abs(x - y), N)
+        if d == N: return pollard_rho(N) // Retry with different random c
+    return d
+
+function factorize(N, factors_list):
+    if N == 1: return
+    if is_prime(N): factors_list.append(N); return
+    d = pollard_rho(N)
+    factorize(d, factors_list)
+    factorize(N / d, factors_list)

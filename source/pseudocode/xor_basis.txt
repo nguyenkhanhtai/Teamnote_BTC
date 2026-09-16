@@ -1,0 +1,30 @@
+// Complexity: O(B) per insert, B = 60 bits
+// Recognition: Subset XOR max/min/k-th, distinct subset XOR sums, cycle XOR in graphs
+
+struct XORBasis:
+    basis[B] = {0}, sz = 0
+    
+    function insert(mask):
+        for i = B - 1 down to 0:
+            if not (mask & (1 << i)): continue
+            if not basis[i]:
+                basis[i] = mask; sz += 1
+                return True
+            mask ^= basis[i]
+        return False // mask is linearly dependent
+
+    function query_max():
+        res = 0
+        for i = B - 1 down to 0:
+            res = max(res, res ^ basis[i])
+        return res
+
+    function query_kth(k):
+        // Rebuild reduced row echelon form first:
+        // for each basis[i], eliminate 1-bits in basis[j] (j > i)
+        // If 0 is in span (insert failed at least once), decrement k if k >= 1
+        res = 0, total_distinct = 1 << sz
+        if k > total_distinct: return -1
+        for i = 0 to sz - 1:
+            if k & (1 << i): res ^= reduced_basis[i]
+        return res

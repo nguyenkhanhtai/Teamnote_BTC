@@ -1,0 +1,17 @@
+// Complexity: O(N * 2^N) time, O(2^N) space (N <= 24)
+// Recognition: Sum over subsets/supersets, counting pairs with (A[i] AND A[j] == 0)
+
+function sos_dp(int N, array F):
+    // F[mask] initialized with base values
+    // Sum over all submasks: F[mask] = \sum_{sub \subseteq mask} A[sub]
+    for i = 0 to N - 1:
+        for mask = 0 to (1 << N) - 1:
+            if mask & (1 << i):
+                F[mask] += F[mask ^ (1 << i)]
+
+    // Sum over all supermasks: G[mask] = \sum_{mask \subseteq sup} A[sup]
+    // for i = 0 to N - 1:
+    //     for mask = (1 << N) - 1 down to 0:
+    //         if not (mask & (1 << i)):
+    //             G[mask] += G[mask | (1 << i)]
+    return F

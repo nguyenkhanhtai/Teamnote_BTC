@@ -1,0 +1,17 @@
+// Complexity: O(1) amortized per push/pop/get_min
+// Two-stack Min Queue or Monotonic Deque for Sliding Window
+
+struct MinQueue:
+    deque<pair<value, index>> dq
+    
+    function push(val, idx):
+        while not dq.empty() and dq.back().value >= val:
+            dq.pop_back()
+        dq.push_back({val, idx})
+        
+    function pop(min_valid_idx):
+        while not dq.empty() and dq.front().index < min_valid_idx:
+            dq.pop_front()
+            
+    function get_min():
+        return dq.front().value

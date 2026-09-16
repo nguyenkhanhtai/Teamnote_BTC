@@ -1,0 +1,25 @@
+// Complexity: O(N log N) or O(N) if slopes are monotonic
+// Form: dp[i] = min_{j < i} (m[j] * x[i] + c[j])
+
+struct Line:
+    m, c // y = m * x + c
+
+// Intersection x-coordinate between line 1 and line 2
+function intersect_x(l1, l2):
+    return (l2.c - l1.c) / (l1.m - l2.m)
+
+// Monotonic Slope Deque / Stack (O(N)):
+deque<Line> hull
+
+function add_line(new_line):
+    // If slopes decreasing and finding min:
+    while size(hull) >= 2 and intersect_x(hull[last], new_line) <= intersect_x(hull[last-1], hull[last]):
+        hull.pop_back()
+    hull.push_back(new_line)
+
+function query_min(x):
+    // Two pointers (if query x is increasing):
+    while size(hull) >= 2 and hull[0].eval(x) >= hull[1].eval(x):
+        hull.pop_front()
+    return hull[0].eval(x)
+    // Or binary search on hull if x is arbitrary (O(log N))

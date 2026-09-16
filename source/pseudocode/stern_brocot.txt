@@ -1,0 +1,20 @@
+// Complexity: O(log(p + q))
+// Binary search on Stern-Brocot tree to encode/decode positive reduced fractions p / q
+
+function encode_path(p, q):
+    path = []
+    L_num = 0, L_den = 1; R_num = 1, R_den = 0
+    while True:
+        M_num = L_num + R_num, M_den = L_den + R_den
+        if p * M_den == q * M_num: break
+        if p * M_den < q * M_num: // Go Left
+            k = (q * L_num - p * L_den) / (p * R_den - q * R_num) // accelerate steps
+            k = max(1, k)
+            path.append({'L', k})
+            R_num += k * L_num; R_den += k * L_den
+        else: // Go Right
+            k = (p * R_den - q * R_num) / (q * L_num - p * L_den)
+            k = max(1, k)
+            path.append({'R', k})
+            L_num += k * R_num; L_den += k * R_den
+    return path

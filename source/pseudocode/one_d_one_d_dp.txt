@@ -1,0 +1,38 @@
+// Complexity: O(N log N) time
+// Recognition: 1D DP dp[i] = min_{j < i} (dp[j] + cost(j, i)) satisfying Quadrangle Inequality
+
+struct Interval:
+    j, l, r // Candidate j is optimal for all indices in [l, r]
+
+function optimize_1d1d(int N):
+    deque<Interval> dq
+    dq.push_back(Interval(0, 1, N))
+    dp[0] = 0
+    
+    function eval(j, i): return dp[j] + cost(j, i)
+    
+    for i = 1 to N:
+        while not dq.empty() and dq.front().r < i:
+            dq.pop_front()
+        dq.front().l = i
+        dp[i] = eval(dq.front().j, i)
+        if i == N: break
+        
+        // Binary search where candidate i beats existing candidates from back
+        while not dq.empty() and eval(i, dq.back().l) <= eval(dq.back().j, dq.back().l):
+            dq.pop_back()
+            
+        if dq.empty():
+            dq.push_back(Interval(i, i + 1, N))
+        else:
+            // Binary search intersection point in dq.back()
+            low = dq.back().l, high = dq.back().r, split = high + 1
+            while low <= high:
+                mid = (low + high) / 2
+                if eval(i, mid) <= eval(dq.back().j, mid):
+                    split = mid; high = mid - 1
+                else: low = mid + 1
+            dq.back().r = split - 1
+            if split <= N:
+                dq.push_back(Interval(i, split, N))
+    return dp[N]

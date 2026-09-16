@@ -1,0 +1,23 @@
+// Complexity: O(N^2) time
+// Gale-Shapley Algorithm: Finds stable matching between N men and N women
+
+function gale_shapley(men_pref, women_pref):
+    husband_of[1..N] = 0, wife_of[1..N] = 0
+    next_proposal_idx[1..N] = 1
+    free_men_queue = [1..N]
+    
+    while not free_men_queue.empty():
+        m = free_men_queue.pop()
+        w = men_pref[m][next_proposal_idx[m]++]
+        
+        if husband_of[w] == 0:
+            husband_of[w] = m; wife_of[m] = w
+        else:
+            m_current = husband_of[w]
+            if rank[w][m] < rank[w][m_current]: // w prefers m over m_current
+                husband_of[w] = m; wife_of[m] = w
+                free_men_queue.push(m_current)
+            else:
+                free_men_queue.push(m)
+                
+    return (wife_of, husband_of)

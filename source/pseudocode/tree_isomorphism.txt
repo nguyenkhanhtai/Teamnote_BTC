@@ -1,0 +1,23 @@
+// Complexity: O(N log N) or O(N) with randomized hash mapping
+// Assigns a unique hash to rooted trees. For unrooted trees, run on tree centroid(s).
+
+map<vector<int>, int> subtree_hash_map
+
+function get_tree_hash(u, parent):
+    child_hashes = []
+    for v in adj[u]:
+        if v == parent: continue
+        child_hashes.append(get_tree_hash(v, u))
+    sort(child_hashes)
+    if child_hashes not in subtree_hash_map:
+        subtree_hash_map[child_hashes] = size(subtree_hash_map) + 1
+    return subtree_hash_map[child_hashes]
+
+// For unrooted tree comparison:
+function check_isomorphic(T1, T2):
+    c1 = find_centroids(T1), c2 = find_centroids(T2)
+    if len(c1) != len(c2): return False
+    h1 = get_tree_hash(c1[0], -1)
+    for c in c2:
+        if get_tree_hash(c, -1) == h1: return True
+    return False

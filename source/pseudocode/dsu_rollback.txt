@@ -1,0 +1,29 @@
+// Complexity: O(log N) per union / rollback (No path compression, rank by size)
+// Supports offline dynamic connectivity & edge deletions via segment tree divide & conquer
+
+struct Operation:
+    u, v, united (bool)
+
+stack<Operation> history
+int parent[N], sz[N], components_cnt = N
+
+function find(u):
+    while u != parent[u]: u = parent[u]
+    return u
+
+function unite(u, v):
+    u = find(u); v = find(v)
+    if u == v:
+        history.push({u, v, False})
+        return False
+    if sz[u] < sz[v]: swap(u, v)
+    parent[v] = u; sz[u] += sz[v]; components_cnt -= 1
+    history.push({u, v, True})
+    return True
+
+function rollback():
+    op = history.pop()
+    if op.united:
+        sz[op.u] -= sz[op.v]
+        parent[op.v] = op.v
+        components_cnt += 1

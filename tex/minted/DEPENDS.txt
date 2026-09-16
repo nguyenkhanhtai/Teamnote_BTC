@@ -1,0 +1,11 @@
+catchfile
+etoolbox
+float
+fvextra
+latex2pydata
+newfloat
+pdftexcmds
+pgfkeys
+pgfopts
+shellesc
+xcolor

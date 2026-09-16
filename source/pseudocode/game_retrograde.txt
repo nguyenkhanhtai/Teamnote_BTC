@@ -1,0 +1,62 @@
+// ==========================================
+// GAME THEORY: RETROGRADE ANALYSIS (WIN/LOSE/DRAW)
+// Graph G = (V, E). Finds outcome for all states in O(V + E).
+// Rule: Normal play (no valid moves -> LOSE).
+// WIN (N-pos): exists move to LOSE.
+// LOSE (P-pos): all moves lead to WIN (or out_deg == 0).
+// DRAW: loop states where neither player can force outcome.
+// ==========================================
+const int DRAW = 0, WIN = 1, LOSE = -1;
+
+vector<int> state_outcome(int n, const vector<vector<int>>& adj) {
+    vector<int> out_deg(n), res(n, DRAW);
+    vector<vector<int>> radj(n); // reverse graph
+    queue<int> q;
+
+    for (int u = 0; u < n; ++u) {
+        out_deg[u] = adj[u].size();
+        for (int v : adj[u]) radj[v].push_back(u);
+        if (out_deg[u] == 0) {
+            res[u] = LOSE; // Terminal state is LOSE
+            q.push(u);
+        }
+    }
+
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        for (int p : radj[u]) {
+            if (res[p] != DRAW) continue;
+            if (res[u] == LOSE) {
+                // p can transition to a LOSE state -> p is WIN
+                res[p] = WIN;
+                q.push(p);
+            } else if (res[u] == WIN) {
+                // One winning branch exhausted; if all branches lead to WIN -> p is LOSE
+                if (--out_deg[p] == 0) {
+                    res[p] = LOSE;
+                    q.push(p);
+                }
+            }
+        }
+    }
+    return res;
+}
+
+// ==========================================
+// SPRAGUE-GRUNDY MEX (DAG GAME)
+// g(u) = mex({g(v) : u -> v}). Win iff XOR sum != 0.
+// ==========================================
+int get_mex(const vector<int>& vals) {
+    int m = vals.size();
+    vector<bool> seen(m + 1, false);
+    for (int x : vals) if (x <= m) seen[x] = true;
+    for (int i = 0; i <= m; ++i) if (!seen[i]) return i;
+    return m + 1;
+}
+
+int calc_grundy(int u, vector<int>& g, const vector<vector<int>>& adj) {
+    if (g[u] != -1) return g[u];
+    vector<int> nxt;
+    for (int v : adj[u]) nxt.push_back(calc_grundy(v, g, adj));
+    return g[u] = get_mex(nxt);
+}

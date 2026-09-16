@@ -1,0 +1,27 @@
+// Complexity: O(N^2) to find recurrence, O(N^2 log K) or O(N log N log K) for K-th term
+// Finds minimal linear recurrence C for sequence S: S[i] = \sum_{j=1}^m C[j] * S[i - j]
+
+function berlekamp_massey(sequence S):
+    C = [1], B = [1] // current and backup polynomial
+    L = 0, m = 1, b = 1
+    
+    for i = 0 to len(S) - 1:
+        d = S[i] // discrepancy
+        for j = 1 to L: d = (d + C[j] * S[i - j]) % MOD
+        if d == 0:
+            m += 1
+        else:
+            T = C
+            coef = (d * inv(b)) % MOD
+            pad_B = [0] * m + [(-coef * x) % MOD for x in B]
+            C = poly_add(C, pad_B)
+            if 2 * L <= i:
+                L = i + 1 - L; B = T; b = d; m = 1
+            else:
+                m += 1
+    return [-c for c in C[1..L]] // recurrence coefficients
+
+function linear_recurrence_kth(C, S, K):
+    // Polynomial modulus: compute x^K mod (x^L - \sum C[j] x^(L-j)) with binary exponentiation
+    P = poly_pow_mod([0, 1], K, char_poly(C))
+    return \sum_{i=0}^{L-1} P[i] * S[i]

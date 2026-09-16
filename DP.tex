@@ -1,0 +1,65 @@
+\section{Dynamic Programming}
+
+\Algorithm{Reroot DP}
+{Template for Rerooting on Tree (2-pass DFS with Prefix/Suffix transitions)}
+{$\mathcal{O}(n)$ for DFS traversal}
+{}{source/pseudocode/reroot_dp.txt}
+
+\Algorithm{Divide-And-Conquer DP \& Quadrangle Inequality}
+{\textbf{Quadrangle Inequality (Monge)}: $\forall a \le b \le c \le d \implies C(a, c) + C(b, d) \le C(a, d) + C(b, c)$ ($\text{Cross} \le \text{Nest}$).
+\begin{itemize}
+  \item \textbf{Sufficient \& Necessary Local Test}: Checking adjacent $2 \times 2$ cells is sufficient (telescoping sum):
+  $$ C(i, j+1) - C(i, j) \ge C(i+1, j+1) - C(i+1, j) \quad (\forall i < j) $$
+  (Equivalently, cost increase $\Delta_j(i) = C(i, j+1) - C(i, j)$ is non-increasing in $i$; or continuous $\frac{\partial^2 C}{\partial x \partial y} \le 0$).
+  \item \textbf{Common Cost Functions Satisfying QI}:
+  \begin{itemize}
+    \item $C(l, r) = f(S_r - S_{l-1})$ for any convex $f$ ($f'' \ge 0$), e.g. $(S_r - S_{l-1})^2$, $(S_r - S_{l-1})^k$ ($k \ge 1$).
+    \item $C(l, r) = \sum_{k=l}^r w_k = W_r - W_{l-1}$ ($w_k \ge 0$, exact equality $=$ in Knuth Optimal BST).
+    \item $C(l, r) = \text{inv}(l, r)$ (inversion count in subarray $[l, r]$, or any cross-pair property).
+    \item $C(l, r) = |x_r - x_l|^p$ ($p \ge 1$ on sorted $x$), or variance / sum of squared differences.
+  \end{itemize}
+  \item \textbf{Monotonicity}: Monge property $\implies opt(i_1) \le opt(i_2)$ for $i_1 \le i_2$ (DnC: $O(k n \log n)$) and $opt[i][j-1] \le opt[i][j] \le opt[i+1][j]$ (Knuth: $O(n^2)$).
+\end{itemize}
+}
+{$\mathcal{O}(k n \log n)$ for DnC / $\mathcal{O}(n^2)$ for Knuth}
+{}{source/pseudocode/dnc_dp.txt}
+
+\Algorithm{1D/1D DP Optimization}
+{Optimize $dp[i] = \min_{j < i} (dp[j] + cost(j, i))$ satisfying quadrangle inequality via Deque of optimal intervals}
+{$\mathcal{O}(n \log n)$}
+{}{source/pseudocode/one_d_one_d_dp.txt}
+
+\Algorithm{Alien DP}
+{Dynamic Programming on convex/concave functions (WQS Binary Search):
+\begin{itemize}
+  \item Cost is convex/concave $\to$ Greedy selection.
+  \item DP is convex/concave $\to$ Binary search penalty $\lambda$.
+\end{itemize}
+}
+{$\mathcal{O}(n \log (\text{max\_val}))$}
+{}{source/pseudocode/alien_dp.txt}
+
+\Algorithm{Convex Hull Trick}
+{Dynamic Programming optimization for linear functions $y = mx + c$}
+{$\mathcal{O}(n \log n)$ or $\mathcal{O}(n)$ with monotonic slopes}
+{}{source/pseudocode/convex_hull_trick.txt}
+
+\Algorithm{Slope Trick}
+{Maintain continuous piecewise linear convex function $f(x)$ with $+ |x - a|$, prefix min, domain shift via 2 Heaps}
+{$\mathcal{O}(n \log n)$}
+{}{source/pseudocode/slope_trick.txt}
+
+\Algorithm{SOS DP}
+{Sum Over Subsets / Fast Zeta Transform: Compute sum over submasks / supermasks in $O(N \cdot 2^N)$ ($N \le 24$)}
+{$\mathcal{O}(N \cdot 2^N)$}
+{}{source/pseudocode/sos_dp.txt}
+
+\Algorithm{Monotonic Queue Optimization}
+{Deque / Two-Stack Sliding Window minimum/maximum}
+{$O(1)$ amortized per push/pop}
+{}{source/pseudocode/monotonic_queue.txt}
+
+\Algorithm{Expected Value Trick}
+{Suppose we optimize picking $k$ objects from $n$ randomly shuffled items: at step $i$, only consider state range $\left[\frac{i \cdot k}{n} - C\sqrt{n}, \frac{i \cdot k}{n} + C\sqrt{n}\right]$.}
+{$\mathcal{O}(n \sqrt{n})$}
+{}{source/pseudocode/expected_value_dp.txt}

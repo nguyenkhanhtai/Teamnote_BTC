@@ -1,0 +1,20 @@
+// Complexity: O(log N) time per line query
+// Finds intersection of line L with convex hull CH using binary search
+
+function extreme_vertex(poly CH, direction_vector V):
+    // Binary search on ternary search of dot product (P[i] . V)
+    low = 0, high = len(CH) - 1
+    while high - low > 2:
+        m1 = low + (high - low) / 3
+        m2 = high - (high - low) / 3
+        if CH[m1].dot(V) < CH[m2].dot(V): low = m1
+        else: high = m2
+    return argmax_{i in [low..high]} (CH[i].dot(V))
+
+function line_hull_intersect(poly CH, Line L):
+    n1 = extreme_vertex(CH, L.normal)
+    n2 = extreme_vertex(CH, -L.normal)
+    if L.side(CH[n1]) * L.side(CH[n2]) > 0:
+        return (intersects = False, [])
+    // Binary search on both chains between n1 and n2 to find exact crossing edges
+    return (intersects = True, [binary_search_cross(CH, n1, n2, L), binary_search_cross(CH, n2, n1, L)])

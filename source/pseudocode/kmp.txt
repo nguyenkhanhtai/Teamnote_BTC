@@ -1,0 +1,24 @@
+// Complexity: O(|P|) preprocess, O(|T|) search
+// pi[i] = length of longest proper prefix of P[0..i] that is also a suffix of P[0..i]
+
+function compute_pi(pattern P):
+    m = length(P), pi[0] = 0, j = 0
+    for i = 1 to m - 1:
+        while j > 0 and P[i] != P[j]:
+            j = pi[j - 1]
+        if P[i] == P[j]:
+            j = j + 1
+        pi[i] = j
+    return pi
+
+function kmp_search(text T, pattern P):
+    pi = compute_pi(P)
+    n = length(T), m = length(P), j = 0
+    for i = 0 to n - 1:
+        while j > 0 and T[i] != P[j]:
+            j = pi[j - 1]
+        if T[i] == P[j]:
+            j = j + 1
+        if j == m:
+            report_match_at(i - m + 1)
+            j = pi[j - 1]

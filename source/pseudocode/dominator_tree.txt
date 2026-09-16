@@ -1,0 +1,20 @@
+// Complexity: O(M log N) or O(M * alpha(N)) time (Lengauer-Tarjan algorithm)
+// Immediate Dominator idom[u]: vertex d such that every path from source s to u must pass through d
+
+function lengauer_tarjan(source s):
+    dfs_order(s) // compute dfn[u], parent[u], sdom[u]
+    for i = N down to 2:
+        u = vertex_at_dfn[i]
+        for v in pred[u]:
+            sdom[u] = min(sdom[u], sdom[eval(v)])
+        bucket[vertex_at_dfn[sdom[u]]].append(u)
+        link(parent[u], u)
+        for v in bucket[parent[u]]:
+            u_min = eval(v)
+            idom[v] = parent[u] if sdom[u_min] == sdom[v] else u_min
+        bucket[parent[u]].clear()
+        
+    for i = 2 to N:
+        u = vertex_at_dfn[i]
+        if idom[u] != vertex_at_dfn[sdom[u]]:
+            idom[u] = idom[idom[u]]

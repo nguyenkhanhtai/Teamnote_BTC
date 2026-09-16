@@ -1,0 +1,21 @@
+// Complexity: O(1) time
+// Common tangents between two circles c1(O1, r1) and c2(O2, r2)
+
+struct Line:
+    a, b, c // ax + by + c = 0
+
+function common_tangents(Circle c1, Circle c2):
+    d = dist(c1.O, c2.O), lines = []
+    if d < EPS and abs(c1.r - c2.r) < EPS: return INF // Infinite tangents
+    
+    // External tangents (r1 - r2)
+    for sign1 in [1, -1]:
+        // Angle alpha between O1->O2 and tangent
+        cos_val = (c1.r - c2.r * sign1) / d
+        if abs(cos_val) <= 1:
+            sin_val = sqrt(max(0.0, 1 - cos_val * cos_val))
+            for sign2 in [1, -1]:
+                // Construct tangent lines
+                tangent = build_tangent_line(c1, c2, cos_val, sin_val * sign2)
+                lines.append(tangent)
+    return lines

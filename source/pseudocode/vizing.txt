@@ -1,0 +1,19 @@
+// Complexity: O(V * E) or O(V^2) time
+// Colors the edges of a simple graph using at most (Delta + 1) colors (Vizing's theorem)
+
+function color_edge(u, v0):
+    // Construct fan F = [v0, v1, ..., vk] around u
+    fan = [v0]
+    while can_extend_fan(fan):
+        extend_fan(fan)
+    c = first_color_free_at(u)
+    d = first_color_free_at(last_fan_node)
+    invert_kempe_chain(u, c, d)
+    shift_fan_colors(fan)
+    assign_color(u, v0, d)
+
+function vizing_edge_coloring():
+    max_deg = max_degree(G)
+    for (u, v) in edges:
+        color_edge(u, v)
+    return edge_colors

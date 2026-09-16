@@ -1,0 +1,20 @@
+// Complexity: O(V^3 log K) time
+// Recognition: Shortest/longest walk with exactly K edges (K <= 10^18), (min, +) tropical semiring
+
+function multiply(Matrix A, Matrix B):
+    Matrix C initialized with INF
+    for i = 0 to V - 1:
+        for k = 0 to V - 1:
+            if A[i][k] == INF: continue
+            for j = 0 to V - 1:
+                C[i][j] = min(C[i][j], A[i][k] + B[k][j])
+    return C
+
+function matrix_power(Matrix A, int64 K):
+    // Identity matrix in (min, +) semiring: 0 on diagonal, INF elsewhere
+    Matrix res = identity_matrix()
+    while K > 0:
+        if K & 1: res = multiply(res, A)
+        A = multiply(A, A)
+        K >>= 1
+    return res

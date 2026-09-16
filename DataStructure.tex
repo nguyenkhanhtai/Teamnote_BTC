@@ -1,0 +1,136 @@
+\section{Data Structure}
+
+\Algorithm{Iterative Segment Tree}
+{Fast non-recursive segment tree with point update, range query, and Dual SegTree (Range update + Point query)}
+{$\mathcal{O}(\log n)$ per query/update, $\mathcal{O}(n)$ build}
+{cpp}{source/template/IterativeSegtree.cpp}
+
+
+\Algorithm{Lazy Segment Tree (Implementation Tips)}
+{Lazy propagation discipline, tag compositions (Affine, Range Set), and $O(\log n)$ Tree Walk}
+{}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Push/Pull Discipline}: Call \texttt{push(id, l, r)} at the start of \texttt{update} / \texttt{query}; call \texttt{pull(id)} (\texttt{st[id] = merge(st[2*id], st[2*id+1])}) after updating children.
+    \item \textbf{Multiple Lazy Tags}:
+    \begin{itemize}
+        \item \textbf{Affine ($x \mapsto a \cdot x + b$)}: Composing new $(c, d)$ on $(a, b) \implies c(ax+b)+d = (ca)x + (cb+d)$. \\ Tag: \texttt{laz\_a = laz\_a * c; laz\_b = laz\_b * c + d;} \\ Node: \texttt{val = val * c + (r - l + 1) * d;}
+        \item \textbf{Range Set vs Range Add}: Range Set ($x \leftarrow v$) overrides previous Range Add $\implies$ reset \texttt{add = 0}.
+    \end{itemize}
+    \item \textbf{Tree Walk ($O(\log n)$)}: If left child satisfies condition ($\max \ge X$ or sum $\ge S$), push lazy and recurse left; else adjust target and recurse right.
+    \item \textbf{Bounds}: Allocate $4N$ for 1-based indexing (\texttt{id << 1} and \texttt{id << 1 | 1}).
+\end{itemize}
+
+
+
+\Algorithm{Sparse Segment Tree}
+{Dynamic Segment Tree allocating nodes on demand}
+{$\mathcal{O}(\log n)$ per query}
+{cpp}{source/template/sparseIT.cpp}
+
+\Algorithm{Cartesian Tree}
+{Binary tree combining heap-order on values and BST-order on indices}
+{$\mathcal{O}(n)$ build via Monotonic Stack}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Properties}: Min-Heap on values ($val[\text{parent}] \le val[\text{child}]$) + In-order yields original array indices ($1..n$). Root is global minimum. Subtree of $u$ corresponds to the maximal subarray $[L_u, R_u]$ where $A[u]$ is the minimum ($size(u) = R_u - L_u + 1$).
+    \item \textbf{$\mathcal{O}(n)$ Stack Build}: Maintain the right spine in a stack. For $i = 1..n$: pop $u$ with $A[u] > A[i]$; last popped becomes $left[i] = u$; remaining top gets $right[\text{top}] = i$. Push $i$.
+    \item \textbf{Key Applications}:
+    \begin{itemize}
+        \item \textbf{RMQ $\iff$ LCA}: Range minimum $\min_{l \le k \le r} A[k] = A[\text{LCA}(l, r)]$.
+        \item \textbf{Max Rectangle in Histogram}: $\max_u (A[u] \cdot size(u))$.
+        \item \textbf{D\&C to Tree DP}: Transforms array D\&C splitting at minimum into subtree DP.
+    \end{itemize}
+\end{itemize}
+
+\Algorithm{Persistent Segment Tree}
+{Persistent Segment Tree supporting point updates and historic version queries}
+{$\mathcal{O}(\log n)$ per query/update}
+{cpp}{source/template/PersistentSegtree.cpp}
+
+\Algorithm{Parallel Binary Search}
+{Offline simultaneous binary search over multiple monotonic queries}
+{$\mathcal{O}((N + Q) \log (\text{range}) \log N)$}
+{cpp}{source/template/PBS.cpp}
+
+\Algorithm{Wavelet Tree}
+{Wavelet Tree for range $k$-th element, range frequency, and range counting in $[L, R]$}
+{$\mathcal{O}(\log (\text{alphabet}))$ per query}
+{}{source/pseudocode/wavelet_tree.txt}
+
+\Algorithm{Segment Tree Beat}
+{Segment Tree Beats: Range Chmin/Chmax, historical min/max, and range sum queries}
+{$\mathcal{O}(n \log n)$ amortized}
+{}{source/pseudocode/segment_tree_beats.txt}
+
+\Algorithm{Kd Tree}
+{K-Dimensional Tree for $k$-NN nearest neighbor and orthogonal range queries in 2D/3D}
+{$\mathcal{O}(\sqrt{n})$ per query}
+{cpp}{source/template/kdtree.cpp}
+
+\Algorithm{BIT2D}
+{2D Binary Indexed Tree (Fenwick) for 2D range sum queries and point updates}
+{$\mathcal{O}(\log^2 n)$ per query}
+{cpp}{source/template/BIT2D.cpp}
+
+\Algorithm{Treap}
+{Randomized Binary Search Tree supporting array split/merge and implicit key operations}
+{$\mathcal{O}(\log n)$ expected per operation}
+{cpp}{source/template/Treap.cpp}
+
+\Algorithm{Splay Tree / Link - cut Tree}
+{Link-Cut Tree supporting dynamic path queries, link, cut, and reroot on forests}
+{$\mathcal{O}(\log n)$ amortized per operation}
+{cpp}{source/template/LCT.cpp}
+
+\Algorithm{Farach - Colton - Bender}
+{$\langle \mathcal{O}(n), \mathcal{O}(1) \rangle$ LCA via Euler Tour $\pm 1$ RMQ and Four Russians speedup}
+{$\mathcal{O}(n)$ build, $\mathcal{O}(1)$ query}
+{}{source/pseudocode/farach_colton_bender.txt}
+
+\Algorithm{Trie}
+{Binary/Alphabet Prefix Tree for dictionary lookup and XOR max queries}
+{$\mathcal{O}(\text{length})$ per query}
+{cpp}{source/template/BasicTrie.cpp}
+
+\Algorithm{Lichao Tree}
+{Li Chao Segment Tree for online dynamic line insertions and minimum/maximum evaluation}
+{$\mathcal{O}(\log n)$ per query/insertion}
+{cpp}{source/template/Lichao.cpp}
+
+\Algorithm{Line Container}
+{Convex Hull of dynamic lines with arbitrary slopes queried at arbitrary $x$}
+{$\mathcal{O}(\log n)$ amortized per operation}
+{cpp}{source/template/LineContainer.cpp}
+
+\Algorithm{Arpa Trick}
+{Fast offline range maximum/minimum query via DSU}
+{$\mathcal{O}(n \alpha(n))$}
+{}{source/pseudocode/arpa_trick.txt}
+
+\Algorithm{Blocky Data Structure}
+{Square root decomposition: Block Array and Hilbert-ordered Mo's algorithm}
+{$\mathcal{O}(n \sqrt{n})$}
+{cpp}{source/template/BlockyArray.cpp}
+
+\Algorithm{Ultimate Hashmap}
+{Fast custom hash map with custom splitmix64 hash function}
+{$\mathcal{O}(1)$ expected per lookup}
+{cpp}{source/template/GrandHash.cpp}
+
+\Algorithm{Erasable Priority Queue}
+{Max/Min Priority Queue with lazy removal of arbitrary elements}
+{$\mathcal{O}(\log n)$ per operation}
+{cpp}{source/template/ErasablePQ.cpp}
+
+\Algorithm{Expandable Data Structure}
+{Binary doubling technique: converts static data structures (e.g. Aho, CHT) to support online insertions}
+{$\mathcal{O}(A \log n)$ amortized insertion, for static structure buildable in $O(A)$}
+{cpp}{source/template/Expandable.cpp}
+
+\Algorithm{Interval Set}
+{Disjoint interval set (ODT style): maintains non-overlapping intervals, range assignment, and adjacent merging based on predicate.}
+{$\mathcal{O}(\log n)$ amortized per operation}
+{cpp}{source/template/IntervalSet.cpp}

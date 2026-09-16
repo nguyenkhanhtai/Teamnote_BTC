@@ -1,0 +1,24 @@
+// Complexity: O(N log N) time
+// Sweep-line with Segment Tree to compute Area of Union of Axis-Aligned Rectangles
+
+struct Event:
+    x, y1, y2, type (+1 for start, -1 for end)
+
+function union_area_rectangles(rectangles):
+    events = [], Y_coords = []
+    for r in rectangles:
+        events.append(Event(r.x1, r.y1, r.y2, +1))
+        events.append(Event(r.x2, r.y1, r.y2, -1))
+        Y_coords.append(r.y1); Y_coords.append(r.y2)
+    sort(events, by x)
+    unique_sorted(Y_coords)
+    
+    // Segment tree maintains covered length on Y intervals
+    segtree_init(Y_coords)
+    total_area = 0, last_x = events[0].x
+    
+    for e in events:
+        total_area += segtree.total_covered_length() * (e.x - last_x)
+        segtree.update_range(e.y1, e.y2, e.type)
+        last_x = e.x
+    return total_area

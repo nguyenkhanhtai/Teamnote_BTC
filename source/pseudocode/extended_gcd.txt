@@ -1,0 +1,12 @@
+// Complexity: O(log(min(a, b)))
+// Finds x, y such that a*x + b*y = gcd(a, b)
+
+function extgcd(a, b):
+    if b == 0: return (g = a, x = 1, y = 0)
+    res = extgcd(b, a % b)
+    return (g = res.g, x = res.y, y = res.x - (a / b) * res.y)
+
+function mod_inverse(a, m):
+    res = extgcd(a, m)
+    if res.g != 1: return -1 // Inverse does not exist
+    return (res.x % m + m) % m

@@ -1,0 +1,38 @@
+// Complexity: O(V^2 * E) general, O(E * sqrt(V)) for unit networks / bipartite matching
+// Dinic's Algorithm: Repeated BFS level graph construction and DFS blocking flow
+
+struct Edge:
+    to, rev, cap, flow = 0
+
+int level[N], ptr[N]
+
+function bfs_level(s, t):
+    fill(level, -1); level[s] = 0
+    queue Q; Q.push(s)
+    while not Q.empty():
+        u = Q.pop()
+        for e in adj[u]:
+            if e.cap - e.flow > 0 and level[e.to] == -1:
+                level[e.to] = level[u] + 1
+                Q.push(e.to)
+    return level[t] != -1
+
+function dfs_blocking(u, t, pushed):
+    if pushed == 0 or u == t: return pushed
+    for cid = ptr[u] to len(adj[u]) - 1:
+        ptr[u] = cid; e = adj[u][cid]
+        if level[e.to] == level[u] + 1 and e.cap - e.flow > 0:
+            tr = dfs_blocking(e.to, t, min(pushed, e.cap - e.flow))
+            if tr == 0: continue
+            e.flow += tr; adj[e.to][e.rev].flow -= tr
+            return tr
+    return 0
+
+function dinic_max_flow(s, t):
+    flow = 0
+    while bfs_level(s, t):
+        fill(ptr, 0)
+        while pushed = dfs_blocking(s, t, INF):
+            flow += pushed
+    return flow
+

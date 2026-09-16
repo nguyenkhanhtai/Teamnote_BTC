@@ -1,0 +1,30 @@
+// Complexity: O(N log N) time, O(N) space
+// Recursively decompose tree at centroid (size of each component <= N / 2)
+
+bool removed[MAXN]; sz[MAXN]
+
+function get_sizes(u, p):
+    sz[u] = 1
+    for v in adj[u]:
+        if v != p and not removed[v]:
+            sz[u] += get_sizes(v, u)
+    return sz[u]
+
+function get_centroid(u, p, total_sz):
+    for v in adj[u]:
+        if v != p and not removed[v] and sz[v] > total_sz / 2:
+            return get_centroid(v, u, total_sz)
+    return u
+
+function decompose(entry_u, parent_centroid):
+    total_sz = get_sizes(entry_u, -1)
+    c = get_centroid(entry_u, -1, total_sz)
+    removed[c] = True
+    centroid_parent[c] = parent_centroid
+    
+    // Process paths passing through centroid c
+    solve_for_centroid(c)
+    
+    for v in adj[c]:
+        if not removed[v]:
+            decompose(v, c)

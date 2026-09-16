@@ -1,0 +1,25 @@
+// Complexity: O(N * sqrt(N))
+// Problem: Pick K items from N shuffled items optimizing cost.
+// Key Insight: The number of items chosen after prefix i concentrates around E[X] = (i * K) / N.
+// With high probability, optimal count at step i lies in [ (i*K)/N - C*sqrt(N), (i*K)/N + C*sqrt(N) ].
+
+function solve_ev_dp(N, K):
+    dp[0..1][0..K] = -INFINITY
+    dp[0][0] = 0
+    
+    for i = 1 to N:
+        cur = i % 2, prev = 1 - cur
+        fill(dp[cur], -INFINITY)
+        
+        expected_cnt = (i * K) / N
+        low_cnt = max(0, expected_cnt - C * sqrt(N))
+        high_cnt = min(min(i, K), expected_cnt + C * sqrt(N))
+        
+        for j = low_cnt to high_cnt:
+            // Transition 1: don't take item i
+            dp[cur][j] = max(dp[cur][j], dp[prev][j])
+            // Transition 2: take item i
+            if j > 0 and dp[prev][j-1] != -INFINITY:
+                dp[cur][j] = max(dp[cur][j], dp[prev][j-1] + val[i])
+                
+    return dp[N % 2][K]

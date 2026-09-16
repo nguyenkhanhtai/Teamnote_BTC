@@ -1,0 +1,18 @@
+// Complexity: O(N + M) time
+// 2-SAT: Variable xi is mapped to 2*i (True) and 2*i + 1 (False). Negation of u is u ^ 1.
+
+function add_clause_or(u, v):
+    // (u OR v) <=> (NOT u => v) AND (NOT v => u)
+    adj[u ^ 1].append(v)
+    adj[v ^ 1].append(u)
+
+function solve_2sat(num_vars):
+    find_all_sccs() // on 2 * num_vars nodes
+    assignment[1..num_vars]
+    for i = 1 to num_vars:
+        if scc_id[2 * i] == scc_id[2 * i + 1]:
+            return (satisfiable = False, {}) // Contradiction
+        // In topological order of DAG of SCCs, later SCC gets chosen:
+        assignment[i] = (scc_id[2 * i] < scc_id[2 * i + 1])
+    return (satisfiable = True, assignment)
+
