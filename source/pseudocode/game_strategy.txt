@@ -1,40 +1,3 @@
-// GAME REASONING & PLAYBOOK (W/L, MEX, STRATEGIES)
-// -------------------------------------------------
-
-// 1. STATE CLASSIFICATION (N-pos / P-pos)
-// - Terminal: Normal play (no move -> LOSE);
-//             Misere play (no move -> WIN).
-// - WIN (W / N-pos): EXISTS >= 1 move to LOSE state.
-//   -> Move to LOSE state to force opponent's loss.
-// - LOSE (L / P-pos): ALL valid moves lead to WIN.
-//   -> Any move leaves opponent in a WIN state.
-// - DRAW (D): Cycle/loop where neither can force win.
-
-// 2. DEDUCTION METHODOLOGY (Mental Checklist)
-// 1. Formalize state: coords, piles, parity, mask.
-// 2. Small-case brute-force (N <= 20) with DP / MEX.
-// 3. Print W/L table or Grundy sequence g(0), g(1)...
-// 4. Check patterns: Periodicity g(n) = g(n % T),
-//    bit parity, trailing zeros, or reduction to Nim.
-// 5. If independent subgames -> Sprague-Grundy XOR.
-
-// 3. CORE PROBLEM-SOLVING TACTICS
-// A. SYMMETRY / MIRRORING:
-//    - P2 mirrors P1 across center/axis -> P2 wins.
-//    - P1 makes initial central move leaving symmetric
-//      halves, then mirrors P2 -> P1 wins.
-//    - Invariant: After your turn, state is symmetric.
-// B. INVARIANTS & PARITY:
-//    - Track I(S) % 2 (sum, components, inversions).
-//    - If each move flips parity, enforce winning parity.
-// C. PAIRING STRATEGY:
-//    - Partition board into pairs (a_i, b_i).
-//    - Opponent plays a_i -> you immediately play b_i.
-//    - Perfect matching on moves -> P2 always wins.
-// D. STRATEGY STEALING:
-//    - If extra move is never bad, P1 cannot lose.
-
-// 4. RETROGRADE ANALYSIS (GRAPH WITH CYCLES) - O(V+E)
 const int DRAW = 0, WIN = 1, LOSE = -1;
 
 vector<int> retrograde_analysis(int n, const vector<vector<int>>& adj) {
@@ -46,7 +9,7 @@ vector<int> retrograde_analysis(int n, const vector<vector<int>>& adj) {
         out_deg[u] = adj[u].size();
         for (int v : adj[u]) radj[v].push_back(u);
         if (out_deg[u] == 0) {
-            res[u] = LOSE; // Normal play: terminal LOSE
+            res[u] = LOSE;
             q.push(u);
         }
     }
@@ -64,13 +27,8 @@ vector<int> retrograde_analysis(int n, const vector<vector<int>>& adj) {
             }
         }
     }
-    return res; // WIN, LOSE, or DRAW (loop)
+    return res;
 }
-
-// 5. SPRAGUE-GRUNDY & SUBGAMES
-// - Independent sum: g(G) = g(G_1) ^ ... ^ g(G_k).
-// - g(u) = mex({g(v) : u -> v}). Win <=> g(G) != 0.
-// - Tree Hackenbush: g(u) = XOR_{v in child(u)} (g(v)+1).
 
 int calc_mex(const vector<int>& vals) {
     int m = vals.size();
@@ -86,11 +44,3 @@ int get_grundy(int u, vector<int>& g, const vector<vector<int>>& adj) {
     for (int v : adj[u]) nxt.push_back(get_grundy(v, g, adj));
     return g[u] = calc_mex(nxt);
 }
-
-// 6. CLASSIC NIM VARIANTS
-// - Nim: S = XOR(a_i). Win <=> S != 0.
-// - Subtraction(1..k): g(a) = a % (k+1).
-// - Moore's Nim_k: Lose <=> sum_i bit_b(a_i) % (k+1) == 0.
-// - Staircase Nim: Standard Nim on odd stairs (1,3,5..).
-// - Misere: all a_i <= 1 -> Win <=> (count of 1s)%2 == 0;
-//           exists a_i > 1 -> Win <=> XOR(a_i) != 0.

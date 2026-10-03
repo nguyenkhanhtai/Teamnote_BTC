@@ -113,6 +113,9 @@ Check if C = AB:
     \item \textbf{Global Permutation $\to$ Local Swap}: Greedy exchange argument: swapping $(i, j) \to (j, i)$ improves objective $\iff f(i, j) < f(j, i)$.
     \item \textbf{Constraints $\to$ Graph / Flow / Cut}: 2-SAT, difference constraints ($x_j - x_i \le w$), Project Selection (Min-Cut), Hall's Marriage, Dilworth (DAG path cover $=$ $|V| - \text{MaxMatching}$).
     \item \textbf{Algebraic $\to$ Geometry / Convexity}: Upper/lower envelopes, Convex Hull, Slope Trick, Minkowski sum, CHT.
+    \item \textbf{Weighted Average $\to$ Convex Hull}: Think of $\lambda_i$ as mixing ratios ($\lambda_i\ge0$, $\sum_i\lambda_i=1$). Then $x=\sum_i\lambda_ix_i$ stays between the inputs: two points give segment $AB$, three points give the filled triangle, and many points give their convex hull. Conversely, every point in the convex hull has such a representation. In 1D, $x\in[\min x_i,\max x_i]$. Normalize positive weights by $\lambda_i=w_i/\sum_jw_j$.
+    \item \textbf{Ratio of (Weighted) Totals $\to$ Average of Ratios}: For $w_i\ge0$, $b_i>0$, $\frac{\sum_iw_ia_i}{\sum_iw_ib_i}$ is a weighted average of $a_i/b_i$ with new weight $w_ib_i$. Hence it lies in $[\min_i(a_i/b_i),\max_i(a_i/b_i)]$. The unweighted case is $w_i=1$.
+    \item \textbf{Mix First $\to$ Jensen}: For convex $f$ (bowl-shaped), evaluating after mixing is cheaper: $f(\sum_i\lambda_ix_i)\le\sum_i\lambda_if(x_i)$. Read it as $f(\text{average})\le\text{average of }f$.
     \item \textbf{Global Range $\to$ Divide \& Conquer}: Split $[l, r] \to [l, m]$ and $[m+1, r]$ + cross contributions (CDQ D\&C, D\&C DP).
     \item \textbf{Offline Deletions $\to$ Additions (Time Reversal)}: Invert query timeline $Q \to 1$ to turn deletions into DSU additions. Game DP: work backward from terminal state.
     \item \textbf{Search Space Split (Meet-in-Middle)}: Split $N = N/2 + N/2$, reducing $2^N \to 2^{N/2}$ via hash table / two pointers.
@@ -122,11 +125,15 @@ Check if C = AB:
     \item \textbf{State Compression}: In DP, step count $i = \text{popcount}(mask) \implies dp[i][mask] \to dp[mask]$, preserving topological order.
     \item \textbf{Exact Count $\to$ Complementary / PIE}: Count valid states via $\text{Total} - \text{Invalid}$, Stars \& Bars, PIE.
     \item \textbf{Impartial Game $\to$ Nim Sum}: Transform games on DAG into XOR sum of Sprague-Grundy values ($SG(u) = \text{mex}\{SG(v)\}$).
+    \item \textbf{Undirected Vertex Geography $\to$ Matching}: A token starts at $s$; players alternately move it to an unvisited neighbor, and the vertex just left is deleted. The first player wins iff $s$ belongs to every maximum matching of $G$, equivalently $\nu(G) > \nu(G-s)$.
     \item \textbf{General Case $\to$ Simplified Special Case}: Solve easier restrictions first ($A_i \in \{0, 1\}$, tree, $N \le 6$) to reveal pattern before generalizing.
     \item \textbf{Exhaustive Search $\to$ Branch \& Bound}: Prune DFS subtrees with admissible bounding heuristics.
     \item \textbf{Manhattan $\leftrightarrow$ Chebyshev ($45^\circ$ Rotation)}: $(x, y) \mapsto (x + y, x - y) \implies |x_1 - x_2| + |y_1 - y_2| = \max(|x'_1 - x'_2|, |y'_1 - y'_2|)$. Decouples 2D dimensions into independent 1D axes!
     \item \textbf{Max/Min \& Absolute Value Decomp}: $\max(A, B) = \frac{A+B+|A-B|}{2}$, $\min(A, B) = \frac{A+B-|A-B|}{2}$; $|x - a| = \max(x - a, a - x)$. To minimize $\sum |x - a_i| + |y - b_i|$, split by 4 sign pairs $(\pm x \pm y)$.
     \item \textbf{Threshold / Layer Counting (Fubini)}: $\sum_{i=1}^n A_i = \sum_{v=1}^{\max A} \text{count}(A_i \ge v)$ (Summing values $\longleftrightarrow$ Counting elements $\ge v$).
+    \item \textbf{Square $\to$ Sum of Odd Numbers}: $x^2 = 1 + 3 + 5 + \cdots + (2x - 1) = \sum_{i=1}^{x}(2i-1)$.
+    \item \textbf{Repeated Ones $\to$ Geometric Sum}: $\underbrace{11\ldots1}_{i\text{ digits}} = 1 + 10 + \cdots + 10^{i-1} = \frac{10^i-1}{9}$.
+    \item \textbf{Increasing / Decreasing Sequence $\to$ Nonnegative Variables}: To remove coupled order constraints, encode adjacent gaps. If $A_1\le\cdots\le A_n$, set $D_i=A_i-A_{i-1}\ge0$; if $A_1\ge\cdots\ge A_n$, set $D_i=A_{i-1}-A_i\ge0$ ($i\ge2$). Strict order means $D_i\ge1$. Recover by $A_i=A_1+\sum_{j=2}^iD_j$ (increasing) or $A_i=A_1-\sum_{j=2}^iD_j$ (decreasing).
     \item \textbf{Range Add $\to$ Difference Array / Prefix Sums}: $A_i = \sum_{j=1}^i D_j$ ($D_i = A_i - A_{i-1}$); Range add $[l, r] \to 2$ point updates on $D$. Static sums $\to S_r - S_{l-1}$.
     \item \textbf{Range / All-Pairs $\to$ Adjacent Condition}: $\min_{i \ne j} |A_i - A_j| = \min_i (A_{i+1} - A_i)$ after sort; $A_j - A_i \ge (j-i)D \iff A'_{i+1} \ge A'_i$ ($A'_i = A_i - iD$); Majority ($> 50\%$) subsegment $\ge 2$ always contains length 2 ($x, x$) or 3 ($x, y, x$) witness.
     \item \textbf{Product to Sum}: $ab = \binom{a+b}{2} - \binom{a}{2} - \binom{b}{2}$; $\prod A_i \to \sum \log A_i$ (or log-probabilities).

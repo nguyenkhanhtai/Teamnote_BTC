@@ -56,6 +56,14 @@
 {}{}
 
 \begin{itemize}
+    \item \textbf{Linear Transformation $\leftrightarrow$ Matrix}: Every linear map $T:\mathbb{R}^n\to\mathbb{R}^m$ has $A=[T(e_1)\;\cdots\;T(e_n)]$ such that $T(x)=Ax$. Common 2D forms:
+    \begin{itemize}
+        \item Rotation by $\theta$: $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$; scaling: $\begin{pmatrix}s_x&0\\0&s_y\end{pmatrix}$.
+        \item Reflect across $Ox$, $Oy$, $y=x$: $\begin{pmatrix}1&0\\0&-1\end{pmatrix}$, $\begin{pmatrix}-1&0\\0&1\end{pmatrix}$, $\begin{pmatrix}0&1\\1&0\end{pmatrix}$.
+        \item Shear: $\begin{pmatrix}1&k\\0&1\end{pmatrix}$ or $\begin{pmatrix}1&0\\k&1\end{pmatrix}$; projection onto unit vector $u$: $P=uu^T$.
+        \item Translation is affine, not linear: $x'=Ax+b$. In homogeneous coordinates, $\begin{pmatrix}x'\\y'\\1\end{pmatrix}=\begin{pmatrix}a&b&t_x\\c&d&t_y\\0&0&1\end{pmatrix}\begin{pmatrix}x\\y\\1\end{pmatrix}$.
+        \item Composition $T_2\circ T_1$ corresponds to $A_2A_1$; repeating one transform $k$ times corresponds to $A^k$.
+    \end{itemize}
     \item \textbf{Pick's Theorem}: $S = I + \frac{B}{2} - 1 \implies I = S - \frac{B}{2} + 1$, where $B = \sum \gcd(|x_{i+1} - x_i|, |y_{i+1} - y_i|)$.
     \item \textbf{Euler's Planar Formula}: $V - E + F = 1 + C$ ($V - E + F = 2$ for connected planar graphs).
     \item \textbf{Ptolemy's Theorem}: Cyclic quad $ABCD \iff AC \cdot BD = AB \cdot CD + BC \cdot AD$.

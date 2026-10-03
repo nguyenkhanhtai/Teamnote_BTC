@@ -98,26 +98,26 @@
 \contentsline {subsection}{\numberline {7.1}Primitive Geometry}{20}{}%
 \contentsline {subsection}{\numberline {7.2}Convex Hull}{20}{}%
 \contentsline {subsection}{\numberline {7.3}Rotating Calipers}{20}{}%
-\contentsline {subsection}{\numberline {7.4}Minkowski Sum}{21}{}%
-\contentsline {subsection}{\numberline {7.5}Point in Convex Polygon}{21}{}%
+\contentsline {subsection}{\numberline {7.4}Minkowski Sum}{20}{}%
+\contentsline {subsection}{\numberline {7.5}Point in Convex Polygon}{20}{}%
 \contentsline {subsection}{\numberline {7.6}Line Hull Intersection}{21}{}%
 \contentsline {subsection}{\numberline {7.7}Polygon Raycast}{21}{}%
 \contentsline {subsection}{\numberline {7.8}Half-plane Intersection}{21}{}%
 \contentsline {subsection}{\numberline {7.9}Smallest Enclosing Circle}{21}{}%
 \contentsline {subsection}{\numberline {7.10}Circle Tangents}{21}{}%
-\contentsline {subsection}{\numberline {7.11}Geometry Formulas}{22}{}%
+\contentsline {subsection}{\numberline {7.11}Geometry Formulas}{21}{}%
 \contentsline {subsection}{\numberline {7.12}AREA}{22}{}%
 \contentsline {subsection}{\numberline {7.13}Manhattan MST}{22}{}%
 \contentsline {subsection}{\numberline {7.14}Planar Dual Graph}{22}{}%
 \contentsline {section}{\numberline {8}Misc}{22}{}%
 \contentsline {subsection}{\numberline {8.1}Template}{22}{}%
-\contentsline {subsection}{\numberline {8.2}Debugging Magic}{23}{}%
+\contentsline {subsection}{\numberline {8.2}Debugging Magic}{22}{}%
 \contentsline {subsection}{\numberline {8.3}Expression Parsing}{23}{}%
 \contentsline {subsection}{\numberline {8.4}Johnson Scheduling}{23}{}%
 \contentsline {subsection}{\numberline {8.5}Matrix Multiplication Check}{23}{}%
 \contentsline {subsection}{\numberline {8.6}Calendar}{23}{}%
 \contentsline {subsection}{\numberline {8.7}Josephus}{23}{}%
 \contentsline {subsection}{\numberline {8.8}Interactive Tricks}{23}{}%
-\contentsline {subsection}{\numberline {8.9}Random, Bit Tricks, Bitset}{24}{}%
+\contentsline {subsection}{\numberline {8.9}Random, Bit Tricks, Bitset}{23}{}%
 \contentsline {subsection}{\numberline {8.10}Transformations}{24}{}%
 \contentsline {subsection}{\numberline {8.11}Checked}{24}{}%

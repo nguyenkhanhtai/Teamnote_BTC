@@ -1,55 +1,70 @@
-// INTERACTIVE CHECKLIST
-// 1. Read the protocol literally: query format, answer format, query limit,
-//    indexing, whether the hidden object may change, and all special replies.
-// 2. Print a query, then flush immediately: cout << "? ..." << endl;
-//    (or cout << "? ...\n" << flush). Never print debug output to stdout.
-// 3. If judge returns -1 / an invalid reply: terminate immediately.
-// 4. Keep a local query counter and assert it does not exceed the budget.
-// 5. Print the final answer with the required prefix, flush, then return.
+// QUERY WRAPPER
+ask(args):
+    print("?", args); flush()
+    reply = read(); queries++
+    if reply is invalid or -1: exit()
+    return reply
 
-// MONOTONE PREDICATE -> BINARY SEARCH
-// If ask(x) changes only once (false,false,...,true,true,...), find first true:
-lo = L, hi = R + 1
+// BINARY SEARCH: invariant ask(lo)=false, ask(hi)=true
 while lo + 1 < hi:
     mid = (lo + hi) / 2
     if ask(mid): hi = mid
     else:        lo = mid
-// Invariants: ask(lo) = false, ask(hi) = true (use sentinels if necessary).
-// Variants: find boundary/maximum feasible/minimum feasible; exponential search
-// first if R is unknown.  Prove monotonicity before applying this.
 
-// COMPARE / MAXIMUM / SECOND MAXIMUM
-// A tournament needs n-1 comparisons to find max.  Store, for each winner,
-// every opponent it beat.  The second maximum is max among max's opponents:
-// additional ceil(log2 n)-1 comparisons for a balanced tournament.
-// If query compares ranges, first use it to identify the range containing the
-// answer, then recurse only there; do not repeatedly query overlapping ranges.
+// THREE OUTCOMES -> ceil(log_3 N)
+while |candidate| > 1:
+    split candidate evenly into A, B, C
+    res = compare(A, B)
+    candidate = (res favors A ? A : res favors B ? B : C)
+// Valid only if one target and equal known baselines for A, B.
 
-// BITWISE RECONSTRUCTION
-// If a query reveals whether bit b of the answer is 1, test all bits directly.
-// If a query returns AND/OR/XOR of chosen indices, derive missing information:
-//   x + y = (x AND y) + (x OR y)
-//   x XOR y = (x OR y) - (x AND y)
-// Query a few anchors, solve their values algebraically, then recover every
-// other value relative to an anchor.  Count equations vs unknown values first.
+// DISCRETE INTERMEDIATE VALUE (array need not be monotone)
+// Given |a[i]-a[i-1]|=1 and a[L] <= x <= a[R]:
+mid = (L + R) / 2
+if ask(mid) < x: L = mid       // x must occur on the right
+if ask(mid) > x: R = mid       // x must occur on the left
 
-// SPLIT / GROUP TEST
-// A yes/no query on a set often gives a group-testing decision tree:
-// split candidates into halves; query one half; keep the half consistent with
-// the reply.  Target O(log N) depth.  For "one lie" / noisy replies, repeat
-// independently or maintain all candidates consistent with <= k lies.
+// TOURNAMENT: MAXIMUM + SECOND MAXIMUM
+for each match (u, v):
+    winner beats loser; defeated[winner].push(loser)
+maximum = tournament winner
+secondMaximum = max(defeated[maximum])
+// n-1 + ceil(log2 n)-1 comparisons with a balanced bracket.
 
-// PERMUTATION / PARTNER RECONSTRUCTION
-// Treat each answer as a constraint, not a value.  Maintain feasible positions
-// or a bipartite graph of possible pairs; use queries that eliminate about half
-// the remaining possibilities.  Once only matching ambiguity remains, solve it
-// offline (matching/2-SAT), then query only to disambiguate if protocol allows.
+// PACK MANY TESTS INTO ONE QUERY
+Y = product(selected prime powers)
+g = gcd_query(X, Y)            // reveals all selected factors in X
+// General recipe: recover counts/factors first, then order/exponents.
+// If total is known, query/build cheap categories and infer the last one.
 
-// RANDOMIZED SAMPLING
-// When a query samples/checks a random location, calculate success probability.
-// Missing a bad set of size k after t uniform samples from n is <= (1-k/n)^t.
-// Fix an RNG seed only for local reproducibility; never rely on luck when the
-// remaining failure probability is not far below the judge's tolerance.
+// CANONICALIZE UNKNOWN STATE
+// Prefer forcing every possible x to known y over identifying x.
+mul(10^d - 1); digit()         // S(x(10^d-1)) = 9d, 1 <= x <= 10^d
+add(target - 9d)
 
-// FINAL SANITY: query is legal, indices distinct if required, no empty set,
-// correct 0/1-indexing, exactly one final answer, and every output is flushed.
+// COST-AWARE MAXIMUM: charge counts only when true max is queried
+(best, second) = first two items in decreasing order
+for u in random_permutation(remaining):
+    if compare(u, second) == u:
+        if compare(u, best) == u: second = best, best = u
+        else:                     second = u
+
+// PEAK SEARCH / QUERY REUSE
+cache every ask(position)
+maintain a witness that some peak remains in [L, R]
+query reusable interior points (golden section) or a separator row/column
+move toward a larger neighbor; large budget: random starts -> best -> hill climb
+
+// LOCAL CONSTRAINT PROPAGATION (Minesweeper-like)
+repeat until no change:
+    rem = clue - knownMines; unk = unknownNeighbors
+    if rem == 0:     mark all unk safe
+    if rem == |unk|: mark all unk mines
+// Then subtract overlapping equations or enumerate only a small frontier.
+
+// ALGEBRA / RANDOMIZATION
+x + y = (x AND y) + (x OR y)
+x XOR y = (x OR y) - (x AND y)
+Pr[miss bad set after t samples] <= (1-k/n)^t
+
+// FINAL: legal/distinct indices, query budget, one flushed final answer.
