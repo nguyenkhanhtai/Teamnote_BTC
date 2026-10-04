@@ -220,7 +220,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 - `Debugging Magic`: Macro printer for competitive debugging (`debug.cpp`).
 - `Expression Parsing`: Arithmetic expression evaluation AST parser.
 - `Johnson Scheduling`: Johnson's rule for optimal 2-machine scheduling.
-- `Monte Carlo & Las Vegas Framework`: Randomized duality, Freivalds' check ($AB=C$), Schwartz-Zippel PIT lemma, Fingerprinting.
+- `Monte Carlo & Las Vegas Frameworks`: Problem classifications into Monte Carlo (Freivalds, Schwartz-Zippel PIT, Fingerprinting, Color Coding) vs Las Vegas (Dense Witness Search, Majority, QuickSelect, Pollard's Rho, Treap).
 - `Calendar`, `Josephus Problem`, `Bit Tricks & Bitset`, `Enum & Bitmask Flags`.
 
 ### Transformations (Approaches as Problem-Solving Transforms)

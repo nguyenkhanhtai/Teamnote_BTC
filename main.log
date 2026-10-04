@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  4 OCT 2026 16:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  4 OCT 2026 16:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1069,8 +1069,8 @@ m/n/8 = []$\T5/cmr/m/n/8 ;
 (./source/pseudocode/expression_parsing.txt [22])
 (./source/pseudocode/johnson_scheduling.txt) (./source/pseudocode/calendar.txt)
 (./source/pseudocode/josephus.txt) (./source/pseudocode/interactive.txt)
-(./source/pseudocode/bit_tricks.txt) [23]
-Underfull \hbox (badness 6575) in paragraph at lines 133--134
+(./source/pseudocode/bit_tricks.txt [23])
+Underfull \hbox (badness 6575) in paragraph at lines 141--142
 []\T5/cmr/bx/n/8 Threshold / Layer Count-ing (Fu-bini)\T5/cmr/m/n/8 : $[][] \OM
 L/cmm/m/it/8 A[] \OT1/cmr/m/n/8 =
  []
@@ -1084,13 +1084,13 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 23042 strings out of 474222
- 425877 string characters out of 5748733
+ 23043 strings out of 474222
+ 425891 string characters out of 5748733
  3275975 words of memory out of 5000000
- 44588 multiletter control sequences out of 15000+600000
+ 44589 multiletter control sequences out of 15000+600000
  579339 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,13n,95p,507b,2155s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,13n,95p,495b,2155s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/sha
@@ -1111,7 +1111,7 @@ x/vnr/vnbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr10.pfb>
 ve/texmf-dist/fonts/type1/vntex/vnr/vnr6.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/vntex/vnr/vnr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vn
 r/vnti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
-Output written on main.pdf (25 pages, 754585 bytes).
+Output written on main.pdf (25 pages, 755168 bytes).
 PDF statistics:
  206 PDF objects out of 1000 (max. 8388607)
  130 compressed objects within 2 object streams

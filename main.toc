@@ -116,10 +116,10 @@
 \contentsline {subsection}{\numberline {8.2}Debugging Magic}{22}{}%
 \contentsline {subsection}{\numberline {8.3}Expression Parsing}{22}{}%
 \contentsline {subsection}{\numberline {8.4}Johnson Scheduling}{23}{}%
-\contentsline {subsection}{\numberline {8.5}Monte Carlo \& Las Vegas Framework}{23}{}%
+\contentsline {subsection}{\numberline {8.5}Monte Carlo \& Las Vegas Frameworks}{23}{}%
 \contentsline {subsection}{\numberline {8.6}Calendar}{23}{}%
 \contentsline {subsection}{\numberline {8.7}Josephus}{23}{}%
 \contentsline {subsection}{\numberline {8.8}Interactive Tricks}{23}{}%
 \contentsline {subsection}{\numberline {8.9}Random, Bit Tricks, Bitset}{23}{}%
-\contentsline {subsection}{\numberline {8.10}Transformations}{23}{}%
+\contentsline {subsection}{\numberline {8.10}Transformations}{24}{}%
 \contentsline {subsection}{\numberline {8.11}Checked}{24}{}%
