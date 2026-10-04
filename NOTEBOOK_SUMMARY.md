@@ -161,7 +161,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 - **Generating Functions (OGF/EGF)**, **Taylor Expansions**, **Simpson's Rule**.
 - **Linear Recurrences (Berlekamp-Massey + Bostan-Mori / Kitamasa)** ($O(N^2 \log K)$).
 - **Fast Walsh-Hadamard Transform (FWHT)** ($O(n \log n)$ for XOR, AND, OR convolutions).
-- **Lagrange Interpolation** ($O(n)$ on equidistant points), **FFT / NTT / Polynomial Operations** (Inverse, Log, Exp, Sqrt, Pow).
+- **Lagrange Interpolation** ($O(n)$ on equidistant points), **NTT & FFT** ($O(n \log n)$), **Formal Power Series (FPS) Formulas** (Inverse, Log, Exp, Sqrt, Pow, Division, Taylor Shift, MTT).
 
 ### Linear Algebra, Groups & Games
 - **Gaussian Elimination** ($O(n^3)$ det, rank, linear solver), **XOR Linear Basis** ($O(B)$).

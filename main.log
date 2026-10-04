@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  4 OCT 2026 16:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  4 OCT 2026 16:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1048,16 +1048,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 105--106
 m/n/8 = []$\T5/cmr/m/n/8 ;
  []
 
-(./source/pseudocode/berlekamp_massey.txt) (./source/pseudocode/fwht.txt
-[17]) (./source/pseudocode/lagrange.txt) (./source/template/Polynomial.cpp)
-[18] (./source/pseudocode/linalg_gauss.txt) (./source/pseudocode/xor_basis.txt)
-(./source/pseudocode/game_strategy.txt) [19] (./source/template/bigint.cpp))
-(./Geometry.tex (./source/pseudocode/primitive_geometry.txt)
+(./source/template/Berlekamp.cpp [17]) (./source/pseudocode/fwht.txt)
+(./source/pseudocode/lagrange.txt) (./source/template/NTT.cpp)
+(./source/template/FFT.cpp) (./source/pseudocode/linalg_gauss.txt [18])
+(./source/pseudocode/xor_basis.txt) (./source/pseudocode/game_strategy.txt)
+(./source/template/bigint.cpp [19])) (./Geometry.tex
+(./source/pseudocode/primitive_geometry.txt)
 (./source/pseudocode/convex_hull.txt)
 (./source/pseudocode/rotating_calipers.txt)
 (./source/pseudocode/minkowski_sum.txt)
-(./source/pseudocode/point_in_convex.txt) [20]
-(./source/pseudocode/line_hull_intersection.txt)
+(./source/pseudocode/point_in_convex.txt)
+(./source/pseudocode/line_hull_intersection.txt [20])
 (./source/pseudocode/polygon_raycast.txt)
 (./source/pseudocode/halfplane_intersection.txt)
 (./source/pseudocode/smallest_enclosing_circle.txt)
@@ -1083,10 +1084,10 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 23037 strings out of 474222
- 425939 string characters out of 5748733
- 3632975 words of memory out of 5000000
- 44586 multiletter control sequences out of 15000+600000
+ 23042 strings out of 474222
+ 425877 string characters out of 5748733
+ 3275975 words of memory out of 5000000
+ 44588 multiletter control sequences out of 15000+600000
  579339 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,13n,95p,495b,2155s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1099,21 +1100,21 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/m
-sbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/vntex/vnr/vnbx10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/vntex/vnr/vnbx12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/vntex/vnr/vnbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr5.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr6.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/vntex/vnr/vnr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/v
-ntex/vnr/vnti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt8.p
-fb>
-Output written on main.pdf (25 pages, 741200 bytes).
+onts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/vntex/vnr/vnbx10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/vntex/vnr/vnbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vnte
+x/vnr/vnbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr5.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/vntex/vnr/vnr6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/vntex/vnr/vnr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vn
+r/vnti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
+Output written on main.pdf (25 pages, 752122 bytes).
 PDF statistics:
- 201 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
+ 206 PDF objects out of 1000 (max. 8388607)
+ 130 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -131,7 +131,7 @@ for (int l = 1, r; l <= n; l = r + 1) {
 \Algorithm{Linear Recurrences (Berlekamp-Massey)}
 {Find minimal linear recurrence from first $2N$ terms and compute $K$-th term via $x^K \bmod P(x)$}
 {${O}(N^2)$ find recurrence, $\mathcal{O}(N^2 \log K)$ compute $k$-th term}
-{}{source/pseudocode/berlekamp_massey.txt}
+{cpp}{source/template/Berlekamp.cpp}
 
 \Algorithm{FWHT}
 {Fast Walsh-Hadamard Transform (XOR, AND, OR Convolution)}
@@ -143,10 +143,33 @@ for (int l = 1, r; l <= n; l = r + 1) {
 {$O(n)$ evaluation}
 {}{source/pseudocode/lagrange.txt}
 
-\Algorithm{FFT, NTT, and Polynomials}
-{Compact NTT / formal power series template for $998244353$: convolution, inverse, log, exp, power, division and modulo}
-{$\mathcal{O}(n \log n)$ for each operation}
-{cpp}{source/template/Polynomial.cpp}
+\Algorithm{NTT (Number Theoretic Transform)}
+{Iterative NTT with bit-reversal under MOD = $998244353$ ($G=3$)}
+{$\mathcal{O}(n \log n)$}
+{cpp}{source/template/NTT.cpp}
+
+\Algorithm{FFT (Fast Fourier Transform)}
+{Cooley-Tukey FFT with complex numbers for real/arbitrary convolution}
+{$\mathcal{O}(n \log n)$}
+{cpp}{source/template/FFT.cpp}
+
+\Algorithm{Formal Power Series (FPS) Formulas}
+{Key formulas for polynomial operations via Newton's method \& convolution}
+{}
+{}{}
+
+\begin{itemize}
+    \item \textbf{Inverse ($Q = P^{-1}$)}: $Q_k \equiv Q_{k-1}(2 - P Q_{k-1}) \pmod{x^{2^k}}$, base $Q_0 = P(0)^{-1}$.
+    \item \textbf{Derivative \& Integral}: $P'(x) = \sum i a_i x^{i-1}$, $\int P(x) = \sum \frac{a_i}{i+1} x^{i+1}$.
+    \item \textbf{Logarithm}: $\ln P(x) = \int \frac{P'(x)}{P(x)} dx \pmod{x^n}$ (requires $P(0) = 1$).
+    \item \textbf{Exponential}: $Q_k \equiv Q_{k-1}(1 - \ln Q_{k-1} + P) \pmod{x^{2^k}}$ (requires $P(0) = 0$).
+    \item \textbf{Square Root}: $Q_k \equiv \frac{1}{2}(Q_{k-1} + P Q_{k-1}^{-1}) \pmod{x^{2^k}}$ ($P(0)$ is quadratic residue).
+    \item \textbf{Power}: $P(x)^k = \exp(k \ln P(x))$. If $P(x) = c x^d (1 + Q(x))$, $P(x)^k = c^k x^{k d} \exp(k \ln(1 + Q(x)))$.
+    \item \textbf{Division with Remainder ($A = BQ + R$)}: With $\text{rev}_k(P) = x^k P(1/x)$:
+    $$\text{rev}_{n-m}(Q) \equiv \text{rev}_n(A) \cdot (\text{rev}_m(B))^{-1} \pmod{x^{n-m+1}}, \quad R = A - BQ$$
+    \item \textbf{Taylor Shift $P(x + c)$}: $P(x + c) = \sum_{k=0}^n \frac{x^k}{k!} \sum_{i=k}^n (i! a_i) \frac{c^{i-k}}{(i-k)!}$. Convolute reversed $A_i = i! a_i$ with $B_j = \frac{c^j}{j!}$.
+    \item \textbf{Any-Mod Convolution (MTT)}: Split $A = A_1 B + A_0$, $B = \lceil\sqrt{M}\rceil \approx 32000$. Compute $(A_1 B_1), (A_1 B_0 + A_0 B_1), (A_0 B_0)$ with 4 FFTs.
+\end{itemize}
 
 \Algorithm{Linear Algebra (Gauss)}
 {Gaussian Elimination: Matrix Determinant, Matrix Rank, System of Linear Equations}
