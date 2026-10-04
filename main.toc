@@ -116,7 +116,7 @@
 \contentsline {subsection}{\numberline {8.2}Debugging Magic}{22}{}%
 \contentsline {subsection}{\numberline {8.3}Expression Parsing}{22}{}%
 \contentsline {subsection}{\numberline {8.4}Johnson Scheduling}{23}{}%
-\contentsline {subsection}{\numberline {8.5}Matrix Multiplication Check}{23}{}%
+\contentsline {subsection}{\numberline {8.5}Monte Carlo \& Las Vegas Framework}{23}{}%
 \contentsline {subsection}{\numberline {8.6}Calendar}{23}{}%
 \contentsline {subsection}{\numberline {8.7}Josephus}{23}{}%
 \contentsline {subsection}{\numberline {8.8}Interactive Tricks}{23}{}%

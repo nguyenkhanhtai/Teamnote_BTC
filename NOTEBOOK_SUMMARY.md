@@ -220,7 +220,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 - `Debugging Magic`: Macro printer for competitive debugging (`debug.cpp`).
 - `Expression Parsing`: Arithmetic expression evaluation AST parser.
 - `Johnson Scheduling`: Johnson's rule for optimal 2-machine scheduling.
-- `Matrix Multiplication Check`: Freivalds' randomized algorithm for checking $AB = C$.
+- `Monte Carlo & Las Vegas Framework`: Randomized duality, Freivalds' check ($AB=C$), Schwartz-Zippel PIT lemma, Fingerprinting.
 - `Calendar`, `Josephus Problem`, `Bit Tricks & Bitset`, `Enum & Bitmask Flags`.
 
 ### Transformations (Approaches as Problem-Solving Transforms)

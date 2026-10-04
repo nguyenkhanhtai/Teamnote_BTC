@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1791105250.75625 "main.tex" "main.pdf" "main" 1791105261.94075 0
+["pdflatex"] 1791105561.74304 "main.tex" "main.pdf" "main" 1791105569.92708 0
   "/etc/texmf/web2c/texmf.cnf" 1787829648.77291 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm" 1136768653 3584 49064b465390a8e316a3c8417a050403 ""
@@ -191,13 +191,13 @@
   "DataStructure.tex" 1789402679.58852 6136 21798b3aab4cede2a043d3f40a263342 ""
   "Geometry.tex" 1791104870.56021 5778 16286dc5d87945a4e928d3eea70c78ba ""
   "Graph.tex" 1791104870.56121 8594 636f3e42303768ab87580ae83aad9551 ""
-  "Math.tex" 1791105225.0664 15378 3cb0fa0db3972336005c79d93efcca7a ""
+  "Math.tex" 1791105292.29508 15378 3cb0fa0db3972336005c79d93efcca7a ""
   "String.tex" 1789356351.3623 4844 0086a5f3e44305bc931dc00c7fee6609 ""
   "Tree.tex" 1787846004.69835 606 d77395da121da155f509ca677ea63211 ""
   "logo_uit.png" 1787845462 317027 85a659d78fdfed85e44d3075e6e799cb ""
-  "main.aux" 1791105261.04523 26366 3f4a724ed87124fda7ed03e5d131fd0b "pdflatex"
-  "main.tex" 1791104870.56921 10661 a98b9c10f08aa058c7f68c8ac30c9816 ""
-  "main.toc" 1791105261.05523 8673 91d670c9979668083d294002e2a9f3ef "pdflatex"
+  "main.aux" 1791105569.38545 26373 90d74d7e03cf41376ab0fa61dfbcfb52 "pdflatex"
+  "main.tex" 1791105537.78164 11467 50c89913c1d5636f9618cbdef5d8004a ""
+  "main.toc" 1791105569.39145 8680 2084538a45d14a0833fd438aa98740f8 "pdflatex"
   "source/pseudocode/aho_corasick.txt" 1787845946.81677 1225 a6c0d76f48a6ed8fc7c9ace2e2c4152a ""
   "source/pseudocode/alien_dp.txt" 1787845916.19044 1060 4b2fb480b3a2d79b5a48342f44faa65d ""
   "source/pseudocode/area_union_rectangles.txt" 1787846246.06452 805 45ed3fd4cd01d4a100f83370f39df29b ""
@@ -280,7 +280,7 @@
   "source/pseudocode/z_algorithm.txt" 1787849389.67867 523 1a2b7b6ca833d1dcfc04981ad034b278 ""
   "source/template/BIT2D.cpp" 1787845454 393 30b7a6e14064af92bc7dc8ce7cd025f3 ""
   "source/template/BasicTrie.cpp" 1787845454 2359 0e88055b43d8737345274ceb3a39ae6e ""
-  "source/template/Berlekamp.cpp" 1791105195.67354 1811 049280f8eb5940c7d5f7199858fca755 ""
+  "source/template/Berlekamp.cpp" 1791105292.36008 1811 049280f8eb5940c7d5f7199858fca755 ""
   "source/template/BlockyArray.cpp" 1787845454 2064 bfbca0d247139ff855de2a56c27fbdf0 ""
   "source/template/ErasablePQ.cpp" 1787845454 437 d9eb6dce3e708702f3398d436a742333 ""
   "source/template/Expandable.cpp" 1787845454 269 0a08d6fb29fe1f649f3c737853ad204e ""

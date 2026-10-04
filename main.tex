@@ -86,12 +86,12 @@
 Scheduling on two machines
 \inputminted[]{}{source/pseudocode/johnson_scheduling.txt}
 
-\subsection{Matrix Multiplication Check}
-Check if C = AB:
+\subsection{Monte Carlo \& Las Vegas Framework}
 \begin{itemize}
-    \item Generate a N x 1 vector v.
-    \item Calculate P = ABv - Cv.
-    \item if (P != 0) return false, else the error is $1/2^k$ 
+    \item \textbf{Monte Carlo}: Fixed runtime, bounded error $\le \epsilon$. Amplified by $k$ independent trials $\implies$ error drops exponentially $\le (1-p)^k$ (e.g. $2^{-k}$).
+    \item \textbf{Las Vegas}: Guaranteed 100\% correct, randomized runtime. Expected iterations $= 1/p$ with verification cost $O(T_{\text{check}})$.
+    \item \textbf{Freivalds' Verification ($AB \stackrel{?}{=} C$)}: Compute $P = A(Bv) - Cv$ for random $v \in \{0, 1\}^N$ in $O(N^2)$. If $AB \ne C$, $\Pr(P = 0) \le 1/2$. Running $k$ trials $\implies$ error $\le 2^{-k}$.
+    \item \textbf{Schwartz-Zippel Lemma (PIT)}: For non-zero poly $P(x_1, \dots, x_n)$ of degree $d$, evaluating at random $r_i \in S$ gives $\Pr(P(r) = 0) \le d / |S|$. Basis of Tutte matching \& polynomial identity testing.
 \end{itemize}
 
 \subsection{Calendar}
@@ -138,10 +138,10 @@ Check if C = AB:
     \item \textbf{Range / All-Pairs $\to$ Adjacent Condition}: $\min_{i \ne j} |A_i - A_j| = \min_i (A_{i+1} - A_i)$ after sort; $A_j - A_i \ge (j-i)D \iff A'_{i+1} \ge A'_i$ ($A'_i = A_i - iD$); Majority ($> 50\%$) subsegment $\ge 2$ always contains length 2 ($x, x$) or 3 ($x, y, x$) witness.
     \item \textbf{Product to Sum}: $ab = \binom{a+b}{2} - \binom{a}{2} - \binom{b}{2}$; $\prod A_i \to \sum \log A_i$ (or log-probabilities).
     \item \textbf{Bitwise Identities}: $A + B = (A \oplus B) + 2(A \text{ AND } B) = (A \text{ OR } B) + (A \text{ AND } B)$; $A \oplus B = (A \text{ OR } B) - (A \text{ AND } B)$; Adjacent bit flips: $\sum_{i=1}^n \text{popcount}((i-1) \oplus i) = 2n - \text{popcount}(n)$.
-    \item \textbf{Set / Unique-Permutation $\to$ XOR Hashing}: Assign random 64-bit $r_v$ to value $v$. XOR is mergeable under symmetric difference; for general multisets use additive random signatures (XOR only keeps multiplicity modulo $2$).
-    \item \textbf{Equivalence $\to$ Signature}: Sequence $\to$ rolling hash; tree $\to$ sorted child hashes; cyclic object $\to$ canonicalize first. For multiset $M$: assign random $64$-bit $r_x$, $H(M)=\sum_x cnt_M(x)r_x$; insert/delete $x$: $H \mathrel{+}= r_x$ / $H \mathrel{-}=r_x$, merge: add hashes. XOR loses even multiplicities; use 2 random sums (and $|M|$) if collision matters.
-    \item \textbf{Grid Path Blocking $\longleftrightarrow$ Dual Cut}: Blocking 4-dir path $(1, 1) \to (n, n)$ on grid is dual to finding an 8-dir connected barrier from left/bottom to top/right (or Min-Cut).
-    \item \textbf{Color Coding ($k \le 5$)}: Randomly color $N$ vertices with $k$ colors. Prob optimal $k$ items get $k$ distinct colors is $k! / k^k$. Repeat $O(k^k / k!) \approx 300$ times for error $< \epsilon$.
+    \item \textbf{Random Witness Search (Monte Carlo $\leftrightarrow$ Las Vegas)}: When valid solutions occupy density $\ge p$: (1) \textbf{Monte Carlo}: $k$ random samples miss all with prob $\le (1-p)^k$ ($p=1/2, k=40 \implies \text{error} < 10^{-12}$). (2) \textbf{Las Vegas}: If verifiable in $O(T)$, sample and verify $\implies$ expected $1/p$ trials, 100\% correct in expected $O(T/p)$ time (e.g. $> n/2$ majority in expected $O(n)$, quickselect, random pivot).
+    \item \textbf{Set / Multiset $\to$ Monte Carlo Fingerprinting}: Map $v \mapsto r_v \in [0, 2^{64}-1]$. Sets via $\bigoplus r_v$, multisets via $\sum cnt(v) r_v \pmod{2^{64}}$ or polynomial hash (Schwartz-Zippel). Collision prob $\le 2^{-64}$.
+    \item \textbf{Algebraic Existence $\to$ Schwartz-Zippel (Monte Carlo)}: Matching (Tutte Matrix), spanning trees (Kirchhoff). Replace symbolic edges by random $r \in \mathbb{F}_p$ ($p \approx 10^9+7$); compute $\det$ in $O(V^3)$. $\Pr(\text{false zero}) \le V/p$.
+    \item \textbf{Color Coding ($k \le 5$) [Monte Carlo]}: Randomly color $N$ vertices with $k$ colors. Prob target $k$-subgraph is colorful is $k! / k^k \ge e^{-k}$. Repeat $O(e^k \ln(1/\epsilon)) \approx 300$ trials for error $< \epsilon$.
     \item \textbf{Dirichlet / Pigeonhole (4-Sum $a_x + a_y = a_z + a_w$)}: When $N > \sqrt{2 \max A}$, 2 pairs with equal sums always exist since $\binom{N}{2} > 2\max A$. Find in $O(N^2)$ by hashing pairs.
     \item \textbf{Boyer-Moore Majority Vote}: Find majority element ($> n/2$ occurrences) in $O(n)$ time and $O(1)$ space with a single counter. Sperner's antichain max size: $\binom{n}{\lfloor n/2 \rfloor}$.
 \end{itemize}
