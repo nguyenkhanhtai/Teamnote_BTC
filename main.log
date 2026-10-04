@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  4 OCT 2026 16:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  4 OCT 2026 23:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -997,8 +997,8 @@ File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ) (./source/pseudocode/hungarian.txt) (./source/pseudocode/general_matching.txt
 [8]) (./source/pseudocode/bcc.txt) (./source/pseudocode/functional_cycle.txt)
 (./source/pseudocode/scc_tarjan.txt) (./source/pseudocode/dsu_rollback.txt)
-(./source/pseudocode/two_sat.txt) (./source/pseudocode/floyd_warshall.txt
-[9]) (./source/pseudocode/euler_path.txt) (./source/pseudocode/vizing.txt)
+(./source/pseudocode/two_sat.txt) [9] (./source/pseudocode/floyd_warshall.txt)
+(./source/pseudocode/euler_path.txt) (./source/pseudocode/vizing.txt)
 (./source/pseudocode/online_bipartite.txt) (./source/pseudocode/gomory_hu.txt)
 (./source/pseudocode/dominator_tree.txt) (./source/pseudocode/prufer.txt)
 (./source/pseudocode/steiner_tree.txt [10])
@@ -1025,8 +1025,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--67
 (./source/pseudocode/debruijn.txt)) (./DP.tex
 (./source/pseudocode/reroot_dp.txt [13]) (./source/pseudocode/dnc_dp.txt)
 (./source/pseudocode/one_d_one_d_dp.txt) (./source/pseudocode/alien_dp.txt)
-(./source/pseudocode/convex_hull_trick.txt)
-(./source/pseudocode/slope_trick.txt [14]) (./source/pseudocode/sos_dp.txt)
+(./source/pseudocode/convex_hull_trick.txt) [14]
+(./source/pseudocode/slope_trick.txt) (./source/pseudocode/sos_dp.txt)
 (./source/pseudocode/monotonic_queue.txt)
 (./source/pseudocode/expected_value_dp.txt)) (./Math.tex
 Overfull \hbox (0.75891pt too wide) detected at line 21
@@ -1041,7 +1041,7 @@ Overfull \hbox (0.75891pt too wide) detected at line 21
 (./source/pseudocode/prime_counter.txt) (./source/pseudocode/pollard_rho.txt)
 (./source/pseudocode/primitive_root.txt)
 (./source/pseudocode/discrete_log_bsgs.txt) (./source/pseudocode/sqrt_mod.txt)
-(./source/pseudocode/extended_gcd.txt) [16]
+(./source/pseudocode/extended_gcd.txt [16])
 (./source/pseudocode/diophantine.txt) (./source/pseudocode/stern_brocot.txt)
 Underfull \hbox (badness 10000) in paragraph at lines 105--106
 []\T5/cmr/bx/n/8 Hockey-Stick & Van-der-monde\T5/cmr/m/n/8 : $[][] [] \OT1/cmr/
@@ -1050,9 +1050,9 @@ m/n/8 = []$\T5/cmr/m/n/8 ;
 
 (./source/template/Berlekamp.cpp [17]) (./source/pseudocode/fwht.txt)
 (./source/pseudocode/lagrange.txt) (./source/template/NTT.cpp)
-(./source/template/FFT.cpp) (./source/pseudocode/linalg_gauss.txt [18])
+(./source/template/FFT.cpp) [18] (./source/pseudocode/linalg_gauss.txt)
 (./source/pseudocode/xor_basis.txt) (./source/pseudocode/game_strategy.txt)
-(./source/template/bigint.cpp [19])) (./Geometry.tex
+[19] (./source/template/bigint.cpp)) (./Geometry.tex
 (./source/pseudocode/primitive_geometry.txt)
 (./source/pseudocode/convex_hull.txt)
 (./source/pseudocode/rotating_calipers.txt)
@@ -1066,11 +1066,12 @@ m/n/8 = []$\T5/cmr/m/n/8 ;
 (./source/pseudocode/area_union_rectangles.txt)
 (./source/pseudocode/manhattan_mst.txt) (./source/pseudocode/planar_dual.txt))
 (./source/template/template.cpp) (./source/template/debug.cpp)
+(./source/pseudocode/compile_scripts.txt)
 (./source/pseudocode/expression_parsing.txt [22])
 (./source/pseudocode/johnson_scheduling.txt) (./source/pseudocode/calendar.txt)
 (./source/pseudocode/josephus.txt) (./source/pseudocode/interactive.txt)
-(./source/pseudocode/bit_tricks.txt [23])
-Underfull \hbox (badness 6575) in paragraph at lines 141--142
+[23] (./source/pseudocode/bit_tricks.txt)
+Underfull \hbox (badness 6575) in paragraph at lines 146--147
 []\T5/cmr/bx/n/8 Threshold / Layer Count-ing (Fu-bini)\T5/cmr/m/n/8 : $[][] \OM
 L/cmm/m/it/8 A[] \OT1/cmr/m/n/8 =
  []
@@ -1084,10 +1085,10 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 23043 strings out of 474222
- 425891 string characters out of 5748733
- 3275975 words of memory out of 5000000
- 44589 multiletter control sequences out of 15000+600000
+ 23119 strings out of 474222
+ 426732 string characters out of 5748733
+ 3417975 words of memory out of 5000000
+ 44662 multiletter control sequences out of 15000+600000
  579339 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,13n,95p,495b,2155s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1111,7 +1112,7 @@ x/vnr/vnbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr10.pfb>
 ve/texmf-dist/fonts/type1/vntex/vnr/vnr6.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/vntex/vnr/vnr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vn
 r/vnti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
-Output written on main.pdf (25 pages, 755168 bytes).
+Output written on main.pdf (25 pages, 757985 bytes).
 PDF statistics:
  206 PDF objects out of 1000 (max. 8388607)
  130 compressed objects within 2 object streams

@@ -49,6 +49,12 @@
 {$\mathcal{O}(n \log n)$}
 {}{source/pseudocode/slope_trick.txt}
 
+\subsection{Bitmask DP}
+\begin{itemize}
+  \item \textbf{Matching}: Unordered set of pairs $\to$ fix one endpoint, choose its partner. $O(n2^n)$ time, $O(2^n)$ space.
+  \item \textbf{State Compression}: $i=\operatorname{popcount}(mask)$ $\to$ $dp[i][mask]\to dp[mask]$.
+\end{itemize}
+
 \Algorithm{SOS DP}
 {Sum Over Subsets / Fast Zeta Transform: Compute sum over submasks / supermasks in $O(N \cdot 2^N)$ ($N \le 24$)}
 {$\mathcal{O}(N \cdot 2^N)$}

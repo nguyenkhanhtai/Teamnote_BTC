@@ -57,7 +57,7 @@
 \contentsline {subsection}{\numberline {4.8}Lyndon Factorization}{13}{}%
 \contentsline {subsection}{\numberline {4.9}Manacher}{13}{}%
 \contentsline {subsection}{\numberline {4.10}Palindrome Tree}{13}{}%
-\contentsline {subsection}{\numberline {4.11}De Bruijn}{13}{}%
+\contentsline {subsection}{\numberline {4.11}De Bruijn (FKM)}{13}{}%
 \contentsline {section}{\numberline {5}Dynamic Programming}{13}{}%
 \contentsline {subsection}{\numberline {5.1}Reroot DP}{13}{}%
 \contentsline {subsection}{\numberline {5.2}Divide-And-Conquer DP \& Quadrangle Inequality}{14}{}%
@@ -65,20 +65,21 @@
 \contentsline {subsection}{\numberline {5.4}Alien DP}{14}{}%
 \contentsline {subsection}{\numberline {5.5}Convex Hull Trick}{14}{}%
 \contentsline {subsection}{\numberline {5.6}Slope Trick}{15}{}%
-\contentsline {subsection}{\numberline {5.7}SOS DP}{15}{}%
-\contentsline {subsection}{\numberline {5.8}Monotonic Queue Optimization}{15}{}%
-\contentsline {subsection}{\numberline {5.9}Expected Value Trick}{15}{}%
+\contentsline {subsection}{\numberline {5.7}Bitmask DP}{15}{}%
+\contentsline {subsection}{\numberline {5.8}SOS DP}{15}{}%
+\contentsline {subsection}{\numberline {5.9}Monotonic Queue Optimization}{15}{}%
+\contentsline {subsection}{\numberline {5.10}Expected Value Trick}{15}{}%
 \contentsline {section}{\numberline {6}Math}{15}{}%
 \contentsline {subsection}{\numberline {6.1}Number Theory Formulas}{15}{}%
 \contentsline {subsection}{\numberline {6.2}Like-Euclid Floor Sum}{15}{}%
-\contentsline {subsection}{\numberline {6.3}Rabin-Miller}{15}{}%
+\contentsline {subsection}{\numberline {6.3}Rabin-Miller}{16}{}%
 \contentsline {subsection}{\numberline {6.4}Fast Sieve}{16}{}%
 \contentsline {subsection}{\numberline {6.5}Prime Counting}{16}{}%
 \contentsline {subsection}{\numberline {6.6}Pollard Rho}{16}{}%
 \contentsline {subsection}{\numberline {6.7}Primitive Root}{16}{}%
 \contentsline {subsection}{\numberline {6.8}Baby-step Giant-Step}{16}{}%
 \contentsline {subsection}{\numberline {6.9}Sqrt Mod}{16}{}%
-\contentsline {subsection}{\numberline {6.10}Extended GCD}{16}{}%
+\contentsline {subsection}{\numberline {6.10}Extended GCD}{17}{}%
 \contentsline {subsection}{\numberline {6.11}Diophantine}{17}{}%
 \contentsline {subsection}{\numberline {6.12}Stern-Brocot Tree}{17}{}%
 \contentsline {subsection}{\numberline {6.13}Multiplicative Functions \& M\"obius Inversion}{17}{}%
@@ -94,7 +95,7 @@
 \contentsline {subsection}{\numberline {6.23}XOR Linear Basis}{19}{}%
 \contentsline {subsection}{\numberline {6.24}Burnside Lemma \& P\'olya Theorem}{19}{}%
 \contentsline {subsection}{\numberline {6.25}Game Strategy \& State Reasoning}{19}{}%
-\contentsline {subsection}{\numberline {6.26}Probability \& Expected Value}{19}{}%
+\contentsline {subsection}{\numberline {6.26}Probability \& Expected Value}{20}{}%
 \contentsline {subsection}{\numberline {6.27}Bignum}{20}{}%
 \contentsline {section}{\numberline {7}Geometry}{20}{}%
 \contentsline {subsection}{\numberline {7.1}Primitive Geometry}{20}{}%
@@ -114,12 +115,13 @@
 \contentsline {section}{\numberline {8}Misc}{22}{}%
 \contentsline {subsection}{\numberline {8.1}Template}{22}{}%
 \contentsline {subsection}{\numberline {8.2}Debugging Magic}{22}{}%
-\contentsline {subsection}{\numberline {8.3}Expression Parsing}{22}{}%
-\contentsline {subsection}{\numberline {8.4}Johnson Scheduling}{23}{}%
-\contentsline {subsection}{\numberline {8.5}Monte Carlo \& Las Vegas Frameworks}{23}{}%
-\contentsline {subsection}{\numberline {8.6}Calendar}{23}{}%
-\contentsline {subsection}{\numberline {8.7}Josephus}{23}{}%
-\contentsline {subsection}{\numberline {8.8}Interactive Tricks}{23}{}%
-\contentsline {subsection}{\numberline {8.9}Random, Bit Tricks, Bitset}{23}{}%
-\contentsline {subsection}{\numberline {8.10}Transformations}{24}{}%
-\contentsline {subsection}{\numberline {8.11}Checked}{24}{}%
+\contentsline {subsection}{\numberline {8.3}Compile \& Run Scripts}{22}{}%
+\contentsline {subsection}{\numberline {8.4}Expression Parsing}{23}{}%
+\contentsline {subsection}{\numberline {8.5}Johnson Scheduling}{23}{}%
+\contentsline {subsection}{\numberline {8.6}Monte Carlo \& Las Vegas Frameworks}{23}{}%
+\contentsline {subsection}{\numberline {8.7}Calendar}{23}{}%
+\contentsline {subsection}{\numberline {8.8}Josephus}{23}{}%
+\contentsline {subsection}{\numberline {8.9}Interactive Tricks}{23}{}%
+\contentsline {subsection}{\numberline {8.10}Random, Bit Tricks, Bitset}{24}{}%
+\contentsline {subsection}{\numberline {8.11}Transformations}{24}{}%
+\contentsline {subsection}{\numberline {8.12}Checked}{24}{}%

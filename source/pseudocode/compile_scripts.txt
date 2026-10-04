@@ -1,0 +1,19 @@
+# Linux / macOS: save as run.sh
+#!/bin/sh
+[ "$#" -eq 1 ] || { echo 'Usage: sh run.sh file.cpp' >&2; exit 1; }
+src="$1"
+exe="${src%.*}.exe"
+g++ -std=c++17 -O2 -Wall "$src" -o "$exe" || exit 1
+case "$exe" in /*) ;; *) exe="./$exe" ;; esac
+"$exe"
+# Run: sh run.sh "my solution.cpp"
+# Files: sh run.sh main.cpp < input.txt > output.txt
+
+:: Windows: save as run.bat (omit the .sh part)
+@echo off
+if "%~1"=="" (echo Usage: run.bat file.cpp & exit /b 1)
+g++ -std=c++17 -O2 -Wall "%~1" -o "%~dpn1.exe"
+if errorlevel 1 exit /b 1
+"%~dpn1.exe"
+:: Run in cmd: run.bat "my solution.cpp"
+:: Files: run.bat main.cpp < input.txt > output.txt

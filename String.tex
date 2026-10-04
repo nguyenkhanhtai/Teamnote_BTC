@@ -87,7 +87,7 @@
 {$O(n)$}
 {}{source/pseudocode/palindrome_tree.txt}
 
-\Algorithm{De Bruijn}
-{Generate cyclic sequence of length $k^n$ containing all $k$-ary words of length $n$}
-{$O(k^n)$}
+\Algorithm{De Bruijn (FKM)}
+{Stream a cyclic sequence containing every length-$n$ word once: concatenate Lyndon words whose lengths divide $n$, in lexicographic order. For a linear form, append $n-1$ cyclic prefix symbols.}
+{$O(k^n)$ time, $O(n)$ auxiliary space; amortized $O(1)$ per emitted symbol}
 {}{source/pseudocode/debruijn.txt}

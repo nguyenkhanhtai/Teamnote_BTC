@@ -97,7 +97,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 - **Lyndon Factorization (Duval)** ($O(n)$): Factorization into Lyndon words and minimal cyclic shift.
 - **Manacher Algorithm** ($O(n)$): Palindromic radius centered at every index.
 - **Palindrome Tree (EERTREE)** ($O(n)$): Explicit tree of all distinct palindromes in $S$.
-- **De Bruijn Sequence** ($O(k^n)$): Cyclic sequence containing all $k$-ary words of length $n$.
+- **De Bruijn Sequence (FKM)** ($O(k^n)$ time, $O(n)$ auxiliary space): Streams symbols via a callback by concatenating Lyndon words whose lengths divide $n$; no graph or visited set.
 
 ---
 
@@ -119,8 +119,8 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 - **Alien's Trick (WQS Binary Search)** ($O(n \log n)$): Binary search Lagrange penalty $\lambda$ to relax exact $k$-item constraint on convex objective functions.
 - **Convex Hull Trick (CHT)** ($O(n \log n)$ or $O(n)$): Linear transition optimization $dp[i] = \min(a_j \cdot x_i + b_j)$.
 - **Slope Trick** ($O(n \log n)$): Maintain continuous piecewise linear convex function $f(x)$ via 2 Priority Queues for $+ |x - a|$, prefix minimum, and domain shifts.
+- **Bitmask DP**: Matching: unordered pairs, fix one endpoint ($O(n2^n)$ time, $O(2^n)$ space). State compression: $i=\text{popcount}(mask)$, so $dp[i][mask]\to dp[mask]$.
 - **SOS DP (Sum Over Subsets / Fast Zeta Transform)** ($O(N \cdot 2^N)$): Subset/superset sums and bitwise AND/OR pair counting.
-- **Bitmask DP State Reduction** ($O(2^N)$): In matching/permutation DP, step/count $i = \text{popcount}(mask)$ is uniquely determined by $mask$. Dimension $i$ and outer loop over bit counts can be completely omitted ($dp[i][mask] \to dp[mask]$), preserving topological order via natural loop `mask = 0..(1<<N)-1`.
 - **Monotonic Queue Optimization** ($O(n)$): Sliding window minimum/maximum using monotonic deque or 2 stacks.
 - **Expected Value Trick** ($O(n\sqrt{n})$): Limit DP state space to $[\frac{i \cdot k}{n} - \sqrt{n}, \frac{i \cdot k}{n} + \sqrt{n}]$ when picking $k$ items randomly.
 
@@ -171,7 +171,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
   - *Problem Solving Tactics*: Retrograde Analysis BFS on general graph with cycles/draws ($O(V + E)$), Symmetry / Mirroring strategy, Invariants & Parity arguments, Pairing / Matching strategy, Small-case brute-force & pattern discovery.
   - *Sprague-Grundy & Nim Variants*: SG-value $g(u) = \text{mex}(\{g(v)\})$ on independent subgames, Tree Hackenbush (Colon Principle), Standard Nim, Bounded Subtraction Nim, Moore's $\text{Nim}_k$, Staircase Nim, Misère Nim.
 - **Probability & Expected Value**: Linearity of Expectation, Indicator Variables, Coupon Collector ($nH_n \approx n(\ln n + \gamma)$), Markov & Chebyshev inequalities.
-- **Extreme Bignum**: Arbitrary precision arithmetic.
+- **Bignum**: Nonnegative base-$10^9$ block representation and decimal printing with 9-digit padding.
 
 ---
 
@@ -185,7 +185,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 
 ### Polygons, Convex Hulls & Sweeps
 - **Convex Hull** ($O(n \log n)$): Monotone Chain / Graham Scan.
-- **Rotating Calipers** ($O(n)$): Convex polygon diameter, minimum bounding rectangle.
+- **Rotating Calipers** ($O(n)$ on hull without collinear vertices): `antipodal_pairs(CH)` returns a list of vertex-index pairs (duplicates possible) using a cross-product sweep with parallel-edge tie handling; diameter is an application.
 - **Minkowski Sum** ($O(|P| + |Q|)$): Distance between convex polygons $\text{dist}(P, Q) = \text{dist}(O, P - Q)$.
 - **Point in Convex Polygon** ($O(\log n)$): Binary search polar angle from $P_0$.
 - **Line - Convex Hull Intersection** ($O(\log n)$): Binary search extreme vertices along normal vector.
@@ -218,6 +218,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 ### Templates & Utilities
 - `Template`: Base competitive programming setup (`template.cpp` / `templates.cpp`) with fast I/O, modular addition/subtraction, bitmask utilities, and `maximize`/`minimize`.
 - `Debugging Magic`: Macro printer for competitive debugging (`debug.cpp`).
+- `Compile & Run Scripts`: `.sh` and Windows `.bat` take a source filename, compile/run it, stop on compilation failure, and support file redirection.
 - `Expression Parsing`: Arithmetic expression evaluation AST parser.
 - `Johnson Scheduling`: Johnson's rule for optimal 2-machine scheduling.
 - `Monte Carlo & Las Vegas Frameworks`: Problem classifications into Monte Carlo (Freivalds, Schwartz-Zippel PIT, Fingerprinting, Color Coding) vs Las Vegas (Dense Witness Search, Majority, QuickSelect, Pollard's Rho, Treap).
@@ -235,7 +236,8 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 8. **Exact $(= k) \to$ Lagrange Penalty $(\ge k)$**: Alien's Trick (WQS Binary Search) relaxes exact $k$-item constraint on convex DP; Binomial Inversion / PIE converts exact $k$ to $\ge k$.
 9. **Total Evaluation $\to$ Element Contribution (Fubini)**: Invert perspective: instead of evaluating $f(S)$ per subset/permutation, sum the contribution of each element/edge/pair $(u, v)$ over all valid states.
 10. **Threshold Partitioning ($\sqrt{N}$ Heavy/Light)**: Elements $\le B$ updated statically/cached; elements $> B$ (at most $N/B$) processed dynamically (Mo's algorithm, heavy/light trees).
-11. **State Compression**: In matching/permutation DP, step count $i = \text{popcount}(mask)$ is determined by $mask \implies dp[i][mask] \to dp[mask]$, preserving topological order.
+11. **Last Upgrade $\to$ State Bound**: Remove the last upgrade and replan the tail if replacement cost is at most its price. For $L\le N$, $k>\lceil\sqrt N\rceil$, reducing capacity from $k$ to $k-1$ adds at most one unit-cost stop; upgrades costing at least one can be discarded.
+    **Quotient Grouping**: $\lfloor N/k\rfloor$ has $O(\sqrt N)$ values; equal-quotient range starting at $l\le N$ ends at $r=\lfloor N/\lfloor N/l\rfloor\rfloor$, then continue at $r+1$.
 12. **Exact Count $\to$ Complementary / PIE**: Count valid states via $\text{Total} - \text{Invalid}$, Stars \& Bars, PIE, or Generating Functions.
 13. **Impartial Game $\to$ Nim Sum**: Transform impartial games on DAGs into XOR sum of Sprague-Grundy values ($SG(u) = \text{mex}\{SG(v)\}$).
 14. **General Complex Case $\to$ Simplified Special Case**: Solve easier restrictions first ($A_i \in \{0, 1\}$, trees, small $N \le 6$) to reveal invariants before generalizing.

@@ -624,6 +624,9 @@ INPUT source/template/template.cpp
 INPUT ./source/template/debug.cpp
 INPUT ./source/template/debug.cpp
 INPUT source/template/debug.cpp
+INPUT ./source/pseudocode/compile_scripts.txt
+INPUT ./source/pseudocode/compile_scripts.txt
+INPUT source/pseudocode/compile_scripts.txt
 INPUT ./source/pseudocode/expression_parsing.txt
 INPUT ./source/pseudocode/expression_parsing.txt
 INPUT source/pseudocode/expression_parsing.txt

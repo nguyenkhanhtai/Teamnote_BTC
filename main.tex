@@ -79,6 +79,10 @@
 \subsection{Debugging Magic}
 \inputminted[]{cpp}{source/template/debug.cpp}
 
+\subsection{Compile \& Run Scripts}
+Requires \texttt{g++} in PATH (Windows: MinGW-w64). Pass the source filename; compile failure stops execution.
+\inputminted[]{}{source/pseudocode/compile_scripts.txt}
+
 \subsection{Expression Parsing}
 \inputminted[]{}{source/pseudocode/expression_parsing.txt}
 
@@ -130,7 +134,8 @@ Scheduling on two machines
     \item \textbf{Exact $(= k) \to$ Lagrange Penalty $(\ge k)$}: Alien's Trick (WQS) relaxes exact $k$ on convex DP; Binomial Inversion / PIE converts exact $k$ to $\ge k$.
     \item \textbf{Total Evaluation $\to$ Element Contribution}: Invert perspective: sum contribution of each element/edge/pair $(u, v)$ over all valid states (Fubini).
     \item \textbf{Threshold Partitioning ($\sqrt{N}$ Heavy/Light)}: Elements $\le B$ updated statically/cached; elements $> B$ (at most $N/B$) processed dynamically (Mo's algorithm).
-    \item \textbf{State Compression}: In DP, step count $i = \text{popcount}(mask) \implies dp[i][mask] \to dp[mask]$, preserving topological order.
+    \item \textbf{Last Upgrade $\to$ State Bound}: Undo the last upgrade and replan the remaining work; if added cost $\le$ upgrade price, discard it. For $L\le N$, $k>\lceil\sqrt N\rceil$: $\lceil L/(k-1)\rceil-\lceil L/k\rceil\le1$. Upgrade cost $\ge1$ and unit-cost stops $\implies$ cap resource at $\lceil\sqrt N\rceil$.
+    \item \textbf{Quotient Grouping}: $\lfloor N/k\rfloor$ has $O(\sqrt N)$ distinct values. For $1\le l\le N$, equal-quotient block ends at $r=\lfloor N/\lfloor N/l\rfloor\rfloor$; next $l=r+1$.
     \item \textbf{Exact Count $\to$ Complementary / PIE}: Count valid states via $\text{Total} - \text{Invalid}$, Stars \& Bars, PIE.
     \item \textbf{Impartial Game $\to$ Nim Sum}: Transform games on DAG into XOR sum of Sprague-Grundy values ($SG(u) = \text{mex}\{SG(v)\}$).
     \item \textbf{Undirected Vertex Geography $\to$ Matching}: A token starts at $s$; players alternately move it to an unvisited neighbor, and the vertex just left is deleted. The first player wins iff $s$ belongs to every maximum matching of $G$, equivalently $\nu(G) > \nu(G-s)$.

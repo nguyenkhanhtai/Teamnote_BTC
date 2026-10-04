@@ -250,6 +250,6 @@ for (int l = 1, r; l <= n; l = r + 1) {
 \end{itemize}
 
 \Algorithm{Bignum}
-{Extreme Bignum Template}
-{$O(n^2)$}
+{Base $10^9$ blocks; use 64-bit intermediates for arithmetic. Print highest block normally, remaining blocks padded to 9 digits.}
+{$O(n)$ printing ($n$ blocks)}
 {cpp}{source/template/bigint.cpp}

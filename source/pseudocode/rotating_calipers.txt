@@ -1,21 +1,25 @@
-// Complexity: O(N) on convex hull in CCW order
-// Recognition: Maximum pairwise distance (diameter), Minimum bounding box, Max triangle area
-
-function convex_diameter(poly CH):
+// CH: CCW convex hull, no duplicate/collinear boundary vertices.
+// Returns antipodal index pairs; duplicates may occur. O(n).
+function antipodal_pairs(CH):
     n = len(CH)
-    if n <= 1: return 0
-    if n == 2: return dist(CH[0], CH[1])
-    
-    max_d2 = 0, k = 1
-    // Find initial farthest point k from edge (CH[0], CH[1])
-    while triangle_area(CH[n-1], CH[0], CH[(k + 1) % n]) > triangle_area(CH[n-1], CH[0], CH[k]):
-        k = (k + 1) % n
-        
+    if n < 2: return []
+    if n == 2: return [(0, 1)]
+
+    function area2(i, k):
+        edge = CH[(i + 1) % n] - CH[i]
+        return cross(edge, CH[k] - CH[i])
+
+    pairs = []
+    j = 1
     for i = 0 to n - 1:
-        // Advance caliper pointer k while distance to edge (CH[i], CH[i+1]) increases
-        next_i = (i + 1) % n
-        while triangle_area(CH[i], CH[next_i], CH[(k + 1) % n]) >= triangle_area(CH[i], CH[next_i], CH[k]):
-            k = (k + 1) % n
-        max_d2 = max(max_d2, dist2(CH[i], CH[k]))
-        max_d2 = max(max_d2, dist2(CH[next_i], CH[k]))
-    return sqrt(max_d2)
+        ni = (i + 1) % n
+        while area2(i, (j + 1) % n) > area2(i, j):
+            j = (j + 1) % n
+
+        pairs.append((i, j))
+        pairs.append((ni, j))
+        nj = (j + 1) % n
+        if area2(i, nj) == area2(i, j):
+            pairs.append((i, nj))
+            pairs.append((ni, nj))
+    return pairs
