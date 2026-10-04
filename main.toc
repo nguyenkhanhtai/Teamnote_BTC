@@ -33,7 +33,7 @@
 \contentsline {subsection}{\numberline {2.8}Strongly Connected Components}{9}{}%
 \contentsline {subsection}{\numberline {2.9}Offline Deletion}{9}{}%
 \contentsline {subsection}{\numberline {2.10}2-SAT}{9}{}%
-\contentsline {subsection}{\numberline {2.11}Floyd}{9}{}%
+\contentsline {subsection}{\numberline {2.11}Floyd}{10}{}%
 \contentsline {subsection}{\numberline {2.12}Eulerian Path}{10}{}%
 \contentsline {subsection}{\numberline {2.13}Vizing Theorem}{10}{}%
 \contentsline {subsection}{\numberline {2.14}Bipartite Online Checking}{10}{}%
