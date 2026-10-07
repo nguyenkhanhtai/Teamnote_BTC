@@ -2,6 +2,8 @@
 
 Comprehensive documentation of algorithms, data structures, mathematics, geometry, string algorithms, dynamic programming, and competition checklists for team **UIT.BTC**.
 
+LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](material/LFAC2_TRANSFORMATIONS.md), [independent small-case checks](material/lfac2_checks.py). The Transformations section now includes 21 additional LFAC2 recognition cues beyond the existing Arithmetic Rectangle entry.
+
 ---
 
 ## 📌 Team Information
@@ -216,7 +218,7 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 ## 8. Misc & Strategy — `main.tex`
 
 ### Templates & Utilities
-- `Template`: Base competitive programming setup (`template.cpp` / `templates.cpp`) with fast I/O, modular addition/subtraction, bitmask utilities, and `maximize`/`minimize`.
+- `Template`: Base competitive programming setup (`template.cpp` / `templates.cpp`) with fast I/O, modular addition/subtraction, bitmask utilities, `maximize`/`minimize`, and a `VERBOSE` flag that gates `cerr` and skips log expressions when disabled.
 - `Debugging Magic`: Macro printer for competitive debugging (`debug.cpp`).
 - `Compile & Run Scripts`: `.sh` and Windows `.bat` take a source filename, compile/run it, stop on compilation failure, and support file redirection.
 - `Expression Parsing`: Arithmetic expression evaluation AST parser.
@@ -225,6 +227,10 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 - `Calendar`, `Josephus Problem`, `Bit Tricks & Bitset`, `Enum & Bitmask Flags`.
 
 ### Transformations (Approaches as Problem-Solving Transforms)
+
+- **Target Equation → Two Pointers**: Fix other variables. For `f(i,j)` increasing in `i` and decreasing in `j`, advance `i` when below the target and `j` when above it; moving the other pointer would only worsen the mismatch. Example: extending a numerator product versus a denominator product.
+
+- **Random Process → Linear System**: Expected cost to reach a goal; condition on the first move. DAG → DP; cycles → `(I-Q)E=b` on nonterminal states, solve by Gauss when expectation is finite.
 - **When Stuck**: Re-read statement! Formulate small cases ($N \le 6$) to find patterns/invariants; deduce complexity ($N \le 20 \to 2^N, 500 \to N^3, 5000 \to N^2, 2\cdot 10^5 \to N \log N$).
 1. **Optimization $\to$ Decision (Binary Search)**: If predicate $P(X)$ is monotonic, binary search over $X$ to solve decision/feasibility instead of directly finding the optimum.
 2. **Global Permutation $\to$ Local Swap (Greedy Exchange Argument)**: Invert global sorting: swapping $(i, j) \to (j, i)$ strictly improves the objective $\iff f(i, j) < f(j, i)$.
@@ -263,3 +269,29 @@ Comprehensive documentation of algorithms, data structures, mathematics, geometr
 - Missing `return` statements in non-void functions (UB)?
 - Floating point precision / epsilon comparisons (`eps = 1e-9`)?
 - Fast I/O included (`cin.tie(NULL)`, `'\n'` instead of `endl`)?
+
+Utility listings before Transformations now use standalone C++17 in `source/cpp/utility/`: expression evaluation, Johnson scheduling, weekday calculation, Josephus, interactive callbacks, and bit enumeration. Interface/edge-case and differential tests: `tests/utility_cpp.cpp`. Task-specific interactive strategies remain concise notes.
+
+Parts 1–7: all 74 former pseudocode listings and 20 legacy C++ listings now point to 94 self-contained C++17 implementations under `source/cpp/{data_structure,graph,tree,string,dp,math,geometry}/`. API conventions, dependencies, and preconditions are documented in `source/cpp/README.md`; combined compilation and differential checks are in `tests/notebook_cpp.cpp`.
+
+Validation for Parts 1–7: 94/94 independent C++17 compilations; 1,058,532 differential/certificate assertions passed with AddressSanitizer and UBSan (LeakSanitizer disabled because this environment uses ptrace). Rebuilt `main.pdf`: 31 pages. Reproduce with `python3 tests/check_notebook_cpp.py --standalone` or `ASAN_OPTIONS=detect_leaks=0 python3 tests/check_notebook_cpp.py --sanitizers`.
+
+Compact C++ layout: 31 -> 24 PDF pages, with the same font size and all 94 Part 1–7 listings/interfaces retained. `tests/compact_notebook.py` reduced source lines from 4,483 to 3,513 without changing C++ tokens. Printed listings omit repeated headers and namespace wrappers using stable source markers.
+
+Compact layout verification: all 94 implementations appear in the final 24-page PDF; strict combined compilation and all 1,058,532 assertions still pass.
+
+Readable spacing: `tests/space_notebook.py` expands short code lines within the printed column budget, preserving C++ tokens, interfaces, source line counts, and the 24-page layout.
+
+Plain structs: converted 36 algorithm classes in Parts 1–7 to `struct`, removed access labels, and used `typename` for template parameters. The combined C++17 suite still passes all 1,058,532 checks; the PDF remains 24 pages.
+
+Vietnamese edition: translated the explanatory text, transformation cues, checklist, section labels, contents, and document metadata. Familiar algorithm names and technical terms remain in English. All listing paths, inline C++ blocks, and bullet items were preserved; code implementations were not edited. The rebuilt PDF has 25 pages at the same font size.
+
+Transformation context: moved the section into `Transformations.tex`, retained all 68 items, and added explicit problem context before the reduction in 67 entries (the remaining item is the general “when stuck” reminder). LFAC2 contexts follow the local survey/details; general entries use compact examples and clarify assumptions and notation. Corrected the pigeonhole sufficient condition, separated WQS optimization from PIE counting, and clarified heavy/light grouping and median-based absolute-distance minimization. Rebuilt PDF: 26 pages at the same font size; all original listing paths retained.
+
+Page-budget refinement: shortened overlapping problem/reduction wording and tightened only transformation-list spacing. All 68 transformation items and 67 problem contexts remain; code and font sizes are unchanged. Rebuilt PDF verified at 25 pages.
+
+CRRC selection: replaced the C/D notebook entries with I (Agronomist: reachability lattice via GCD/parity) and K (Factorials: consecutive products and Legendre valuations), using the local 2025 editorial, pages 3–5. The notebook now includes only CRRC I and K; K's gap-20 cutoff is explicitly marked as the editorial's empirical cutoff. Rebuilt PDF remains 25 pages.
+
+Transformation curation: reduced 68 entries to 22 non-obvious observations. Removed generic contest techniques and repeated implementation details; each retained entry gives brief problem context and the decisive structural observation. CRRC remains I/K only. Code and font sizes are unchanged; rebuilt PDF: 24 pages.
+
+Transformation ownership correction: restored all 34 entries from the original repository transformation section, using their Vietnamese versions and retaining previous mathematical corrections. Only new additions are curated: 20 LFAC2/CRRC observations, with CRRC I/K only. Original notes and selected additions are labeled separately in `Transformations.tex`; the PDF has 25 pages at unchanged font sizes.

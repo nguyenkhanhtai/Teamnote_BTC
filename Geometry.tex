@@ -1,106 +1,106 @@
-\section{Geometry}
+\section{Hình học}
 
 \Algorithm{Primitive Geometry}
-{Core 2D primitives: Points, Vectors, Orientation, Line Intersections, Projections}
-{$\mathcal{O}(1)$ per operation}
-{}{source/pseudocode/primitive_geometry.txt}
+{Phép toán 2D cơ bản: điểm, vector, orientation, giao đường thẳng, hình chiếu}
+{$\mathcal{O}(1)$ mỗi thao tác}
+{compactcpp}{source/cpp/geometry/primitive_geometry.cpp}
 
 \Algorithm{Convex Hull}
-{Monotone Chain / Graham Scan: Smallest convex polygon enclosing point set}
+{Monotone Chain/Graham Scan: đa giác lồi nhỏ nhất chứa tập điểm}
 {$\mathcal{O}(n \log n)$}
-{}{source/pseudocode/convex_hull.txt}
+{compactcpp}{source/cpp/geometry/convex_hull.cpp}
 
 \Algorithm{Rotating Calipers}
-{\textbf{Antipodal pairs}: Vertices on parallel supporting lines enclosing the hull. Edge/cross-product sweep below returns index pairs; diameter is an application.}
-{$\mathcal{O}(n)$ on a convex hull without collinear vertices}
-{}{source/pseudocode/rotating_calipers.txt}
+{\textbf{Antipodal pairs}: Cặp đỉnh nằm trên hai đường đỡ song song bao quanh hull. Quét cạnh/cross product trả về cặp chỉ số; có thể dùng tìm đường kính.}
+{$\mathcal{O}(n)$ trên convex hull không có ba đỉnh thẳng hàng}
+{compactcpp}{source/cpp/geometry/rotating_calipers.cpp}
 
 \Algorithm{Minkowski Sum}
-{Minkowski Sum of two convex polygons. Min polygon distance: $\text{dist}(P, Q) = \text{dist}(O, P - Q)$}
+{Minkowski sum của hai đa giác lồi. Khoảng cách nhỏ nhất: $\text{dist}(P, Q) = \text{dist}(O, P - Q)$}
 {$\mathcal{O}(|P| + |Q|)$}
-{}{source/pseudocode/minkowski_sum.txt}
+{compactcpp}{source/cpp/geometry/minkowski_sum.cpp}
 
 \Algorithm{Point in Convex Polygon}
-{Test if point lies inside convex polygon via polar angle binary search from $P_0$}
+{Kiểm tra điểm trong đa giác lồi bằng binary search góc cực từ $P_0$}
 {$\mathcal{O}(\log n)$}
-{}{source/pseudocode/point_in_convex.txt}
+{compactcpp}{source/cpp/geometry/point_in_convex.cpp}
 
 \Algorithm{Line Hull Intersection}
-{Binary search extreme vertices along normal vector to find intersection points}
-{$O(\log n)$}
-{}{source/pseudocode/line_hull_intersection.txt}
+{Tiền xử lý pháp tuyến cạnh; binary search đỉnh cực trị và cạnh bị cắt}
+{$O(n)$ tiền xử lý, $O(\log n)$ truy vấn}
+{compactcpp}{source/cpp/geometry/line_hull_intersection.cpp}
 
 \Algorithm{Polygon Raycast}
-{Horizontal raycasting point-in-polygon test for arbitrary simple polygons}
+{Raycasting ngang kiểm tra điểm trong đa giác đơn bất kỳ}
 {$O(n)$}
-{}{source/pseudocode/polygon_raycast.txt}
+{compactcpp}{source/cpp/geometry/polygon_raycast.cpp}
 
 \Algorithm{Half-plane Intersection}
-{Intersection of half-planes forming convex polygon via Deque}
+{Giao các nửa mặt phẳng trái bằng deque, cắt trong hình vuông giới hạn do người gọi chọn}
 {$O(n \log n)$}
-{}{source/pseudocode/halfplane_intersection.txt}
+{compactcpp}{source/cpp/geometry/halfplane_intersection.cpp}
 
 \Algorithm{Smallest Enclosing Circle}
-{Welzl's randomized algorithm for minimum bounding circle}
-{$\mathcal{O}(n)$}
-{}{source/pseudocode/smallest_enclosing_circle.txt}
+{Thuật toán ngẫu nhiên Welzl tìm đường tròn bao nhỏ nhất}
+{$O(n)$ kỳ vọng}
+{compactcpp}{source/cpp/geometry/smallest_enclosing_circle.cpp}
 
 \Algorithm{Circle Tangents}
-{Determine up to 4 common tangent lines between 2 circles}
+{Tìm tối đa bốn tiếp tuyến chung của hai đường tròn}
 {$\mathcal{O}(1)$}
-{}{source/pseudocode/circle_tangents.txt}
+{compactcpp}{source/cpp/geometry/circle_tangents.cpp}
 
-\Algorithm{Geometry Formulas}
-{Planar theorems, circles, triangle centers, circle inversion \& 3D primitives}
+\Algorithm{Công thức hình học}
+{Định lý phẳng, đường tròn, tâm tam giác, phép nghịch đảo và phép toán 3D}
 {}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Linear Transformation $\leftrightarrow$ Matrix}: Every linear map $T:\mathbb{R}^n\to\mathbb{R}^m$ has $A=[T(e_1)\;\cdots\;T(e_n)]$ such that $T(x)=Ax$. Common 2D forms:
+    \item \textbf{Biến đổi tuyến tính $\leftrightarrow$ ma trận}: Mỗi ánh xạ tuyến tính $T:\mathbb{R}^n\to\mathbb{R}^m$ có $A=[T(e_1)\;\cdots\;T(e_n)]$ sao cho $T(x)=Ax$. Các dạng 2D thường dùng:
     \begin{itemize}
-        \item Rotation by $\theta$: $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$; scaling: $\begin{pmatrix}s_x&0\\0&s_y\end{pmatrix}$.
-        \item Reflect across $Ox$, $Oy$, $y=x$: $\begin{pmatrix}1&0\\0&-1\end{pmatrix}$, $\begin{pmatrix}-1&0\\0&1\end{pmatrix}$, $\begin{pmatrix}0&1\\1&0\end{pmatrix}$.
-        \item Shear: $\begin{pmatrix}1&k\\0&1\end{pmatrix}$ or $\begin{pmatrix}1&0\\k&1\end{pmatrix}$; projection onto unit vector $u$: $P=uu^T$.
-        \item Translation is affine, not linear: $x'=Ax+b$. In homogeneous coordinates, $\begin{pmatrix}x'\\y'\\1\end{pmatrix}=\begin{pmatrix}a&b&t_x\\c&d&t_y\\0&0&1\end{pmatrix}\begin{pmatrix}x\\y\\1\end{pmatrix}$.
-        \item Composition $T_2\circ T_1$ corresponds to $A_2A_1$; repeating one transform $k$ times corresponds to $A^k$.
+        \item Quay góc $\theta$: $\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$; co giãn: $\begin{pmatrix}s_x&0\\0&s_y\end{pmatrix}$.
+        \item Đối xứng qua $Ox$, $Oy$, $y=x$: $\begin{pmatrix}1&0\\0&-1\end{pmatrix}$, $\begin{pmatrix}-1&0\\0&1\end{pmatrix}$, $\begin{pmatrix}0&1\\1&0\end{pmatrix}$.
+        \item Shear (trượt): $\begin{pmatrix}1&k\\0&1\end{pmatrix}$ hoặc $\begin{pmatrix}1&0\\k&1\end{pmatrix}$; chiếu lên vector đơn vị $u$: $P=uu^T$.
+        \item Tịnh tiến là affine, không tuyến tính: $x'=Ax+b$. Trong tọa độ thuần nhất, $\begin{pmatrix}x'\\y'\\1\end{pmatrix}=\begin{pmatrix}a&b&t_x\\c&d&t_y\\0&0&1\end{pmatrix}\begin{pmatrix}x\\y\\1\end{pmatrix}$.
+        \item Hợp thành $T_2\circ T_1$ ứng với $A_2A_1$; lặp một biến đổi $k$ lần ứng với $A^k$.
     \end{itemize}
-    \item \textbf{Pick's Theorem}: $S = I + \frac{B}{2} - 1 \implies I = S - \frac{B}{2} + 1$, where $B = \sum \gcd(|x_{i+1} - x_i|, |y_{i+1} - y_i|)$.
-    \item \textbf{Euler's Planar Formula}: $V - E + F = 1 + C$ ($V - E + F = 2$ for connected planar graphs).
-    \item \textbf{Ptolemy's Theorem}: Cyclic quad $ABCD \iff AC \cdot BD = AB \cdot CD + BC \cdot AD$.
-    \item \textbf{Stewart's Theorem}: $b^2m + c^2n = a(d^2 + mn)$ (cevian $d$ divides side $a$ into $m, n$).
-    \item \textbf{Bretschneider's Formula} (General quadrilateral area):
+    \item \textbf{Định lý Pick}: $S = I + \frac{B}{2} - 1 \implies I = S - \frac{B}{2} + 1$, với $B = \sum \gcd(|x_{i+1} - x_i|, |y_{i+1} - y_i|)$.
+    \item \textbf{Công thức Euler cho đồ thị phẳng}: $V - E + F = 1 + C$ ($V - E + F = 2$ với đồ thị phẳng liên thông).
+    \item \textbf{Định lý Ptolemy}: Tứ giác nội tiếp $ABCD \iff AC \cdot BD = AB \cdot CD + BC \cdot AD$.
+    \item \textbf{Định lý Stewart}: $b^2m + c^2n = a(d^2 + mn)$ (cevian $d$ chia cạnh $a$ thành $m, n$).
+    \item \textbf{Công thức Bretschneider} (Diện tích tứ giác bất kỳ):
     $$ S = \sqrt{(p-a)(p-b)(p-c)(p-d) - abcd \cos^2\left(\tfrac{A+C}{2}\right)} $$
-    \textit{(Cyclic quad $\implies \cos(\frac{A+C}{2}) = 0$, reduces to Brahmagupta's formula)}.
-    \item \textbf{Descartes' Theorem} (4 mutually tangent circles):
+    \textit{(Tứ giác nội tiếp $\implies \cos(\frac{A+C}{2}) = 0$, trở thành công thức Brahmagupta)}.
+    \item \textbf{Định lý Descartes} (bốn đường tròn tiếp xúc từng đôi):
     $$ \left(\sum_{i=1}^4 k_i\right)^2 = 2 \sum_{i=1}^4 k_i^2 \quad \left(k_i = \pm \frac{1}{R_i}\right) $$
-    \item \textbf{Circle Inversion}: Center $O$, radius $R$. $P \mapsto P'$ satisfies $OP \cdot OP' = R^2$. Maps lines not through $O \longleftrightarrow$ circles through $O$; preserves angles and tangencies.
-    \item \textbf{Circle-Circle Intersection}: Let $d = |O_1 - O_2|$. Intersects when $|R_1 - R_2| \le d \le R_1 + R_2$, angle $\alpha = \text{acos}\left(\frac{R_1^2 + d^2 - R_2^2}{2 R_1 d}\right)$.
-    \item \textbf{Apollonius Circle}: Locus $\frac{PA}{PB} = k$ ($k \ne 1$) is a circle with diameter connecting the internal and external division points of $AB$ with ratio $k$.
-    \item \textbf{Circumcenter $O$ \& Orthocenter $H$}: Let $d_B = x_B^2+y_B^2-x_A^2-y_A^2$, $d_C = x_C^2+y_C^2-x_A^2-y_A^2$:
+    \item \textbf{Nghịch đảo đường tròn (Circle Inversion)}: Tâm $O$, bán kính $R$. $P \mapsto P'$ thỏa $OP \cdot OP' = R^2$. Đổi đường thẳng không qua $O \longleftrightarrow$ đường tròn qua $O$; bảo toàn góc và tiếp xúc.
+    \item \textbf{Giao hai đường tròn}: Đặt $d = |O_1 - O_2|$. Có giao khi $|R_1 - R_2| \le d \le R_1 + R_2$, góc $\alpha = \text{acos}\left(\frac{R_1^2 + d^2 - R_2^2}{2 R_1 d}\right)$.
+    \item \textbf{Đường tròn Apollonius}: Quỹ tích $\frac{PA}{PB} = k$ ($k \ne 1$) là đường tròn có đường kính nối hai điểm chia trong và ngoài $AB$ theo tỉ số $k$.
+    \item \textbf{Tâm ngoại tiếp $O$ và trực tâm $H$}: Đặt $d_B = x_B^2+y_B^2-x_A^2-y_A^2$, $d_C = x_C^2+y_C^2-x_A^2-y_A^2$:
     $$x_O = \frac{d_B (y_C - y_A) - d_C (y_B - y_A)}{D}$$
     $$y_O = \frac{(x_B - x_A) d_C - (x_C - x_A) d_B}{D}$$
     $$D = 2 \left[ (x_B - x_A)(y_C - y_A) - (x_C - x_A)(y_B - y_A) \right]$$
     $$H = A + B + C - 2O$$
 
-    \item \textbf{3D Primitives}:
+    \item \textbf{Phép toán 3D}:
     \begin{itemize}
-        \item 3D Cross Product: $\vec{A} \times \vec{B} = (A_y B_z - A_z B_y, \; A_z B_x - A_x B_z, \; A_x B_y - A_y B_x)$.
-        \item Tetrahedron Volume: $V = \frac{1}{6} \left| ((B - A) \times (C - A)) \cdot (D - A) \right|$.
-        \item Plane through $P_0$ with normal $\vec{n}$: $\vec{n} \cdot (P - P_0) = 0$; Point-plane distance: $\frac{|\vec{n} \cdot (P - P_0)|}{|\vec{n}|}$.
+        \item Cross product 3D: $\vec{A} \times \vec{B} = (A_y B_z - A_z B_y, \; A_z B_x - A_x B_z, \; A_x B_y - A_y B_x)$.
+        \item Thể tích tứ diện: $V = \frac{1}{6} \left| ((B - A) \times (C - A)) \cdot (D - A) \right|$.
+        \item Mặt phẳng qua $P_0$ có pháp tuyến $\vec{n}$: $\vec{n} \cdot (P - P_0) = 0$; Khoảng cách điểm đến mặt phẳng: $\frac{|\vec{n} \cdot (P - P_0)|}{|\vec{n}|}$.
     \end{itemize}
 \end{itemize}
 
 \Algorithm{AREA}
-{Area of Union of Rectangles with Sweep-line and Segment Tree}
+{Diện tích hợp các hình chữ nhật bằng sweep line và segment tree}
 {$\mathcal{O}(n \log n)$}
-{}{source/pseudocode/area_union_rectangles.txt}
+{compactcpp}{source/cpp/geometry/area_union_rectangles.cpp}
 
 \Algorithm{Manhattan MST}
-{Manhattan Minimum Spanning Tree via 8-octant sweep}
+{Manhattan MST bằng quét tám miền góc}
 {$\mathcal{O}(n \log n)$}
-{}{source/pseudocode/manhattan_mst.txt}
+{compactcpp}{source/cpp/geometry/manhattan_mst.cpp}
 
 \Algorithm{Planar Dual Graph}
-{Planar embedding to dual graph: extracts faces (including outer face) and dual edges via angular sorting on half-edges (darts).}
+{Từ embedding phẳng liên thông với cạnh thẳng sang đồ thị đối ngẫu: tách mặt (kể cả mặt ngoài) và cạnh dual bằng sắp góc các half-edge (dart).}
 {$\mathcal{O}(E \log E)$}
-{}{source/pseudocode/planar_dual.txt}
+{compactcpp}{source/cpp/geometry/planar_dual.cpp}

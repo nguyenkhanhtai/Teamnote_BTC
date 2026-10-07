@@ -1,93 +1,93 @@
-\section{String}
+\section{Chuỗi}
 
-\Algorithm{String Problem Solving Strategies}
-{String problem taxonomy, periodicity, LCP, distinct substrings, palindromes \& key theorems}
+\Algorithm{Chiến lược giải bài chuỗi}
+{Phân loại bài chuỗi, chu kỳ, LCP, substring phân biệt, palindrome và định lý chính}
 {}
 {}{}
 
 \begin{itemize}
     \item \textbf{Problem Taxonomy \& Core Approches}:
     \begin{itemize}
-        \item \textbf{Longest Common Prefix with Whole String / Single Pattern Match}: Use \textbf{Z-Algorithm} or \textbf{KMP}.
-        \item \textbf{Multiple Dictionary Matching / DP on String Sets}: Use \textbf{Aho-Corasick Automaton}.
-        \item \textbf{Distinct Substrings}: Suffix Array ($\frac{n(n+1)}{2} - \sum LCP_i$) or SAM ($\sum len[u] - len[link[u]]$).
-        \item \textbf{$k$-th Substring / LCS of Multiple Strings}: Use \textbf{Suffix Automaton (SAM)} or \textbf{Suffix Array + LCP}.
-        \item \textbf{Palindromic Substrings}: Use \textbf{Manacher} (radius centered at every index) or \textbf{EERTREE / PAM} (palindromic tree).
-        \item \textbf{Lexicographically Minimal String Rotation}: Run \textbf{Lyndon Factorization (Duval)} on $S + S$.
-        \item \textbf{Fast Substring Equivalence $O(1)$ / 2D Strings}: Use \textbf{Rolling Hash} ($2^{61}-1$ Mersenne prime).
+        \item \textbf{LCP với toàn chuỗi/tìm một mẫu}: Dùng \textbf{Z-Algorithm} hoặc \textbf{KMP}.
+        \item \textbf{Tìm nhiều mẫu/DP trên tập chuỗi}: Dùng \textbf{Aho-Corasick Automaton}.
+        \item \textbf{Substring phân biệt}: Suffix Array ($\frac{n(n+1)}{2} - \sum LCP_i$) hoặc SAM ($\sum len[u] - len[link[u]]$).
+        \item \textbf{Substring thứ $k$/LCS của nhiều chuỗi}: Dùng \textbf{Suffix Automaton (SAM)} hoặc \textbf{Suffix Array + LCP}.
+        \item \textbf{Substring đối xứng (palindrome)}: Dùng \textbf{Manacher} (bán kính tại mỗi vị trí) hoặc \textbf{EERTREE / PAM} (cây palindrome).
+        \item \textbf{Phép xoay chuỗi nhỏ nhất theo thứ tự từ điển}: Chạy \textbf{Lyndon Factorization (Duval)} trên $S + S$.
+        \item \textbf{So sánh substring $O(1)$/chuỗi 2D}: Dùng \textbf{Rolling Hash} ($2^{61}-1$ số nguyên tố Mersenne).
     \end{itemize}
-    \item \textbf{Periodicity \& Border Properties}:
+    \item \textbf{Chu kỳ và tính chất border}:
     \begin{itemize}
-        \item Minimal period of length-$n$ string is $p = n - \pi[n - 1]$ (if $n \bmod p == 0 \implies S = (S[0..p-1])^{n/p}$).
-        \item \textbf{Fine-Wilf (Periodicity Lemma)}: If $S$ has periods $p, q$ and $|S| \ge p + q - \gcd(p, q) \implies S$ has period $\gcd(p, q)$.
-        \item \textbf{Border Series}: All borders of a string partition into $\le O(\log n)$ arithmetic progressions $\implies$ Optimize border DP to $O(n \log n)$.
+        \item Chu kỳ nhỏ nhất của chuỗi dài $n$ là $p = n - \pi[n - 1]$ (nếu $n \bmod p == 0 \implies S = (S[0..p-1])^{n/p}$).
+        \item \textbf{Fine-Wilf (bổ đề chu kỳ)}: Nếu $S$ có chu kỳ $p, q$ và $|S| \ge p + q - \gcd(p, q) \implies S$ có chu kỳ $\gcd(p, q)$.
+        \item \textbf{Dãy border}: Mọi border chia thành $\le O(\log n)$ cấp số cộng $\implies$ Tối ưu DP border xuống $O(n \log n)$.
     \end{itemize}
-    \item \textbf{Theoretical Bounds}:
+    \item \textbf{Cận lý thuyết}:
     \begin{itemize}
-        \item Distinct palindromic substrings in length-$n$ string is always $\le n$.
-        \item Suffix Automaton of length-$n$ string has $\le 2n - 1$ states and $\le 3n - 4$ transition edges.
+        \item Số palindrome phân biệt trong chuỗi dài $n$ luôn $\le n$.
+        \item Suffix Automaton của chuỗi dài $n$ có $\le 2n - 1$ trạng thái và $\le 3n - 4$ cạnh chuyển.
     \end{itemize}
 \end{itemize}
 
 \Algorithm{Rolling Hash (61-bit Mersenne)}
-{Double/61-bit Mersenne prime Hash ($2^{61}-1$) with randomized base}
-{$O(n)$ build, $O(1)$ substring query}
-{}{source/pseudocode/rolling_hash.txt}
+{Hash kép/Mersenne 61-bit ($2^{61}-1$), base chung do người gọi chọn (so sánh có xác suất lỗi)}
+{$O(n)$ dựng, $O(1)$ truy vấn substring}
+{compactcpp}{source/cpp/string/rolling_hash.cpp}
 
 \Algorithm{KMP}
-{Prefix function $\pi$ and linear string matching}
+{Prefix function $\pi$ và tìm mẫu tuyến tính}
 {$O(n + m)$}
-{}{source/pseudocode/kmp.txt}
+{compactcpp}{source/cpp/string/kmp.cpp}
 
 \Algorithm{Z-Algorithm}
-{Z-array: $z[i] = \text{LCP}(S, S[i..n-1])$ and pattern matching via $S = P + \# + T$}
+{Z-array: $z[i] = \text{LCP}(S, S[i..n-1])$ và tìm mẫu qua $S = P + \# + T$}
 {$O(n + m)$}
-{}{source/pseudocode/z_algorithm.txt}
+{compactcpp}{source/cpp/string/z_algorithm.cpp}
 
 \Algorithm{Aho Corasick}
-{Multi-pattern dictionary matching on Trie with BFS failure/exit links}
-{$O(\sum |P_i| + |T|)$}
-{}{source/pseudocode/aho_corasick.txt}
+{Tìm nhiều mẫu trên trie, dựng failure/exit link bằng BFS}
+{$O(26\sum |P_i| + |T| + \text{matches})$}
+{compactcpp}{source/cpp/string/aho_corasick.cpp}
 
 \Algorithm{Suffix Array}
-{Suffix Array doubling construction and Kasai LCP algorithm}
-{$O(n \log n)$ construction, $O(n)$ LCP}
-{}{source/pseudocode/suffix_array.txt}
+{Dựng suffix array bằng doubling, tính LCP bằng Kasai}
+{$O(n \log n)$ dựng, $O(n)$ LCP}
+{compactcpp}{source/cpp/string/suffix_array.cpp}
 
 \begin{itemize}
-    \item \textbf{LCP Applications \& Core CP Recipes}:
+    \item \textbf{Ứng dụng LCP trong thi đấu}:
     \begin{itemize}
-        \item \textbf{Arbitrary Suffix LCP}: $\text{LCP}(S[i..], S[j..]) = \min_{k=\min(pos[i], pos[j])+1}^{\max(pos[i], pos[j])} LCP[k]$ via RMQ / Sparse Table in $O(1)$ query.
-        \item \textbf{Distinct Substrings}: Total distinct substrings is $\frac{n(n+1)}{2} - \sum_{i=1}^{n-1} LCP[i]$.
-        \item \textbf{$k$-th Lexicographical Substring}: Suffix $SA[i]$ contributes $n - SA[i] - LCP[i]$ new strings of lengths $LCP[i]+1 \dots n - SA[i]$.
-        \item \textbf{LCS of 2 Strings}: Build SA on $S_1 + \# + S_2$; ans is $\max LCP[i]$ where $SA[i], SA[i-1]$ belong to different strings.
-        \item \textbf{LCS of $K$ Strings}: Build SA on $S_1 + \#_1 + \dots + S_K + \#_K$; two pointers / sliding window $[L, R]$ covering all $K$ strings $\implies \min_{k=L+1}^R LCP[k]$.
-        \item \textbf{Pattern Occurrences Range}: Suffixes with prefix $P$ form continuous range $[L, R]$ in SA; find via 2 binary searches in $O(|P| \log n)$, count $= R - L + 1$.
-        \item \textbf{Longest Substring Occurring $\ge K$ Times}: $\max_i (\min_{j=i+1}^{i+K-1} LCP[j])$ via monotonic queue / sliding RMQ in $O(n)$.
+        \item \textbf{LCP của hai suffix bất kỳ}: $\text{LCP}(S[i..], S[j..]) = \min_{k=\min(pos[i], pos[j])+1}^{\max(pos[i], pos[j])} LCP[k]$ qua RMQ/Sparse Table, truy vấn $O(1)$.
+        \item \textbf{Substring phân biệt}: Tổng substring phân biệt là $\frac{n(n+1)}{2} - \sum_{i=1}^{n-1} LCP[i]$.
+        \item \textbf{Substring thứ $k$ theo thứ tự từ điển}: Suffix $SA[i]$ đóng góp $n - SA[i] - LCP[i]$ chuỗi mới, có độ dài $LCP[i]+1 \dots n - SA[i]$.
+        \item \textbf{LCS của hai chuỗi}: Dựng SA trên $S_1 + \# + S_2$; đáp án là $\max LCP[i]$ với $SA[i], SA[i-1]$ thuộc hai chuỗi khác nhau.
+        \item \textbf{LCS của $K$ chuỗi}: Dựng SA trên $S_1 + \#_1 + \dots + S_K + \#_K$; two pointers/sliding window $[L, R]$ chứa đủ $K$ chuỗi $\implies \min_{k=L+1}^R LCP[k]$.
+        \item \textbf{Khoảng xuất hiện mẫu}: Các suffix có prefix $P$ tạo đoạn liên tiếp $[L, R]$ trong SA; tìm bằng hai binary search trong $O(|P| \log n)$, số lần $= R - L + 1$.
+        \item \textbf{Substring dài nhất xuất hiện $\ge K$ lần}: $\max_i (\min_{j=i+1}^{i+K-1} LCP[j])$ bằng monotonic queue/sliding RMQ trong $O(n)$.
     \end{itemize}
 \end{itemize}
 
 \Algorithm{Suffix Automaton}
-{Minimal DAWG where every path from root corresponds to a substring of $S$}
-{$O(n |\Sigma|)$}
-{}{source/pseudocode/suffix_automaton.txt}
+{DAWG tối tiểu, mỗi đường đi từ gốc ứng với một substring của $S$}
+{$O(n\log |\Sigma|)$ dựng}
+{compactcpp}{source/cpp/string/suffix_automaton.cpp}
 
 \Algorithm{Lyndon Factorization}
-{Duval algorithm: factorize string into Lyndon words $s_1 \ge s_2 \ge \dots \ge s_k$ \& Minimal string rotation}
-{$O(n)$ time, $O(1)$ space}
-{}{source/pseudocode/lyndon.txt}
+{Duval: phân tích chuỗi thành từ Lyndon $s_1 \ge s_2 \ge \dots \ge s_k$ và tìm phép xoay nhỏ nhất}
+{$O(n)$ thời gian; các đoạn trả về/chuỗi nhân đôi dùng $O(n)$ bộ nhớ}
+{compactcpp}{source/cpp/string/lyndon.cpp}
 
 \Algorithm{Manacher}
-{Find the longest palindrome radius centered at every index}
+{Tìm bán kính palindrome lớn nhất tại mỗi vị trí}
 {$O(n)$}
-{}{source/pseudocode/manacher.txt}
+{compactcpp}{source/cpp/string/manacher.cpp}
 
 \Algorithm{Palindrome Tree}
-{EERTREE: Represent all distinct palindromes in string and transition links}
+{EERTREE: biểu diễn mọi palindrome phân biệt và các link chuyển}
 {$O(n)$}
-{}{source/pseudocode/palindrome_tree.txt}
+{compactcpp}{source/cpp/string/palindrome_tree.cpp}
 
 \Algorithm{De Bruijn (FKM)}
-{Stream a cyclic sequence containing every length-$n$ word once: concatenate Lyndon words whose lengths divide $n$, in lexicographic order. For a linear form, append $n-1$ cyclic prefix symbols.}
-{$O(k^n)$ time, $O(n)$ auxiliary space; amortized $O(1)$ per emitted symbol}
-{}{source/pseudocode/debruijn.txt}
+{Sinh dãy vòng chứa mỗi từ dài $n$ đúng một lần: nối các từ Lyndon có độ dài là ước của $n$ theo thứ tự từ điển. Dạng tuyến tính: thêm $n-1$ ký tự đầu của dãy vòng.}
+{$O(k^n)$ thời gian, $O(n)$ bộ nhớ phụ; $O(1)$ khấu hao mỗi ký tự sinh ra}
+{compactcpp}{source/cpp/string/debruijn.cpp}

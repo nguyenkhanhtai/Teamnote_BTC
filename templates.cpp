@@ -1,4 +1,7 @@
 #include<bits/stdc++.h>
+bool VERBOSE = false;
+// Use cerr (not std::cerr); false skips log expressions too.
+#define cerr if (!VERBOSE) {} else std::cerr
 #define FOR(i, a, b) for (int i = a; i <= b; i++)
 #define FORD(i, a, b) for(int i = a; i >= b; i--)
 #define endl '\n'
@@ -16,10 +19,8 @@
 #define LSB(x) (x & (-x))
 #define ON(x, i) ((x >> i)&1)
 #define OFF(x, i) !ON(x, i)
-#define SET(x, i) (x | (1LL << i))
-#define UNSET(x, i) (SET(x, i) ^ (1LL << i))
-
-#define TASKNAME "test"
+#define SET(x, i) ((x) |= (1LL << (i)))
+#define UNSET(x, i) ((x) &= ~(1LL << (i)))
 
 template<typename T> bool maximize(T &a, T b){    if (a < b){ a = b;  return true; }  return false; }
 template<typename T> bool minimize(T &a, T b){    if (a > b){ a = b;  return true; }  return false; }
@@ -38,15 +39,4 @@ void sub(int &a, int b){
 void solve(){
     
 }
-main(){
-    fastio;
-    if (fopen(TASKNAME".inp","r")){
-        freopen(TASKNAME".inp","r",stdin);
-        freopen(TASKNAME".out","w",stdout);
-    }
-    int t = 1;
-    //cin >> t;
-    while(t--){
-        solve();
-    }
-}
+// Remember: return 0; at the end of main.

@@ -1,0 +1,14 @@
+\section*{C++: template và typename}
+\addcontentsline{toc}{section}{C++: template và typename}
+\textbf{Kiểu dữ liệu thay đổi}: viết \texttt{template<typename T>} trước hàm hoặc \texttt{struct}; thay \texttt{T} bằng kiểu cụ thể khi dùng. \texttt{typename} và \texttt{class} tương đương trong khai báo tham số kiểu.
+
+\textbf{Cách gọi}: hàm thường suy ra \texttt{T} từ đối số; ghi \texttt{<long long>} để chọn kiểu tính toán. Với \texttt{struct}, ghi rõ kiểu như \texttt{Sum<long long>}. Mỗi kiểu được biên dịch thành phiên bản riêng, không mất thêm chi phí gọi lúc chạy.
+
+\inputminted[]{cpp}{source/cpp/utility/typename_guide.cpp}
+
+\textbf{Phân biệt tham số}: \texttt{typename T} là kiểu; \texttt{int N} là giá trị hằng lúc biên dịch. \texttt{typename Merge} cũng là kiểu, dùng để nhận một phép gộp (\texttt{struct} có \texttt{operator()} hoặc lambda).
+
+\textbf{Tên phụ thuộc}: trong C++17, thêm \texttt{typename} trước kiểu lồng phụ thuộc tham số, như \texttt{typename C::value\_type}; không thêm trước giá trị như \texttt{C::size}. Khi gọi hàm template thành viên qua đối tượng có kiểu phụ thuộc, viết \texttt{obj.template get<T>()}.
+
+\textbf{Lỗi hay gặp}: \texttt{bigger(1, 2LL)} không suy ra cùng một \texttt{T}; dùng \texttt{bigger<long long>(1, 2LL)}. Template chỉ dùng được khi kiểu đáp ứng các phép trong thân hàm (ví dụ \texttt{>} hoặc \texttt{+=}). Đặt cả định nghĩa trong file được include, trước chỗ sử dụng.
+

@@ -1,136 +1,137 @@
-\section{Data Structure}
+\section{Cấu trúc dữ liệu}
+\noindent\textbf{Quy ước C++17}: Chỉ số từ 0, đoạn $[l,r)$. File nguồn có sẵn header chuẩn và namespace; phần bọc lặp lại được ẩn khi in.
 
 \Algorithm{Iterative Segment Tree}
-{Fast non-recursive segment tree with point update, range query, and Dual SegTree (Range update + Point query)}
-{$\mathcal{O}(\log n)$ per query/update, $\mathcal{O}(n)$ build}
-{cpp}{source/template/IterativeSegtree.cpp}
+{Segment tree trên monoid có thứ tự: gán điểm, gộp đoạn, tìm biên; bản dual cộng đoạn/truy vấn điểm}
+{$\mathcal{O}(\log n)$ mỗi truy vấn/cập nhật, $\mathcal{O}(n)$ dựng}
+{compactcpp}{source/cpp/data_structure/iterative_segment_tree.cpp}
 
 
-\Algorithm{Lazy Segment Tree (Implementation Tips)}
-{Lazy propagation discipline, tag compositions (Affine, Range Set), and $O(\log n)$ Tree Walk}
+\Algorithm{Lazy Segment Tree (lưu ý cài đặt)}
+{Quy tắc lazy propagation, hợp thành tag (Affine, Range Set) và Tree Walk $O(\log n)$}
 {}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Push/Pull Discipline}: Call \texttt{push(id, l, r)} at the start of \texttt{update} / \texttt{query}; call \texttt{pull(id)} (\texttt{st[id] = merge(st[2*id], st[2*id+1])}) after updating children.
-    \item \textbf{Multiple Lazy Tags}:
+    \item \textbf{Quy tắc push/pull}: Gọi \texttt{push(id, l, r)} đầu \texttt{update}/\texttt{query}; gọi \texttt{pull(id)} (\texttt{st[id] = merge(st[2*id], st[2*id+1])}) sau khi cập nhật các con.
+    \item \textbf{Nhiều lazy tag}:
     \begin{itemize}
-        \item \textbf{Affine ($x \mapsto a \cdot x + b$)}: Composing new $(c, d)$ on $(a, b) \implies c(ax+b)+d = (ca)x + (cb+d)$. \\ Tag: \texttt{laz\_a = laz\_a * c; laz\_b = laz\_b * c + d;} \\ Node: \texttt{val = val * c + (r - l + 1) * d;}
-        \item \textbf{Range Set vs Range Add}: Range Set ($x \leftarrow v$) overrides previous Range Add $\implies$ reset \texttt{add = 0}.
+        \item \textbf{Affine ($x \mapsto a \cdot x + b$)}: Áp dụng tag mới $(c,d)$ sau $(a,b) \implies c(ax+b)+d = (ca)x + (cb+d)$. \\ Tag: \texttt{laz\_a = laz\_a * c; laz\_b = laz\_b * c + d;} \\ Node: \texttt{val = val * c + (r - l + 1) * d;}
+        \item \textbf{Range Set và Range Add}: Range Set ($x \leftarrow v$) ghi đè Range Add trước đó $\implies$ đặt lại \texttt{add = 0}.
     \end{itemize}
-    \item \textbf{Tree Walk ($O(\log n)$)}: If left child satisfies condition ($\max \ge X$ or sum $\ge S$), push lazy and recurse left; else adjust target and recurse right.
-    \item \textbf{Bounds}: Allocate $4N$ for 1-based indexing (\texttt{id << 1} and \texttt{id << 1 | 1}).
+    \item \textbf{Tree Walk ($O(\log n)$)}: Nếu con trái thỏa ($\max \ge X$ hoặc tổng $\ge S$), đẩy lazy và đi trái; nếu không, điều chỉnh mục tiêu rồi đi phải.
+    \item \textbf{Giới hạn}: Cấp phát $4N$ khi đánh số từ 1 (\texttt{id << 1} và \texttt{id << 1 | 1}).
 \end{itemize}
 
 
 
 \Algorithm{Sparse Segment Tree}
-{Dynamic Segment Tree allocating nodes on demand}
-{$\mathcal{O}(\log n)$ per query}
-{cpp}{source/template/sparseIT.cpp}
+{Segment tree động, chỉ cấp phát node khi cần}
+{$\mathcal{O}(\log n)$ mỗi truy vấn}
+{compactcpp}{source/cpp/data_structure/sparse_segment_tree.cpp}
 
 \Algorithm{Cartesian Tree}
-{Binary tree combining heap-order on values and BST-order on indices}
-{$\mathcal{O}(n)$ build via Monotonic Stack}
+{Cây nhị phân có thứ tự heap theo giá trị và thứ tự BST theo chỉ số}
+{$\mathcal{O}(n)$ dựng bằng monotonic stack}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Properties}: Min-Heap on values ($val[\text{parent}] \le val[\text{child}]$) + In-order yields original array indices ($1..n$). Root is global minimum. Subtree of $u$ corresponds to the maximal subarray $[L_u, R_u]$ where $A[u]$ is the minimum ($size(u) = R_u - L_u + 1$).
-    \item \textbf{$\mathcal{O}(n)$ Stack Build}: Maintain the right spine in a stack. For $i = 1..n$: pop $u$ with $A[u] > A[i]$; last popped becomes $left[i] = u$; remaining top gets $right[\text{top}] = i$. Push $i$.
-    \item \textbf{Key Applications}:
+    \item \textbf{Tính chất}: Min-heap theo giá trị ($val[\text{parent}] \le val[\text{child}]$) + duyệt in-order cho chỉ số mảng gốc ($1..n$). Gốc là giá trị nhỏ nhất. Cây con $u$ ứng với đoạn cực đại $[L_u, R_u]$ mà $A[u]$ là nhỏ nhất ($size(u) = R_u - L_u + 1$).
+    \item \textbf{$\mathcal{O}(n)$ Dựng bằng stack}: Giữ nhánh phải trong stack. Với $i = 1..n$: pop $u$ có $A[u] > A[i]$; node pop cuối thành $left[i] = u$; đỉnh còn lại có $right[\text{top}] = i$. Push $i$.
+    \item \textbf{Ứng dụng chính}:
     \begin{itemize}
-        \item \textbf{RMQ $\iff$ LCA}: Range minimum $\min_{l \le k \le r} A[k] = A[\text{LCA}(l, r)]$.
-        \item \textbf{Max Rectangle in Histogram}: $\max_u (A[u] \cdot size(u))$.
-        \item \textbf{D\&C to Tree DP}: Transforms array D\&C splitting at minimum into subtree DP.
+        \item \textbf{RMQ $\iff$ LCA}: Giá trị nhỏ nhất trên đoạn $\min_{l \le k \le r} A[k] = A[\text{LCA}(l, r)]$.
+        \item \textbf{Hình chữ nhật lớn nhất trong histogram}: $\max_u (A[u] \cdot size(u))$.
+        \item \textbf{D\&C $\to$ Tree DP}: Chuyển D\&C trên mảng, chia tại phần tử nhỏ nhất, thành DP trên cây con.
     \end{itemize}
 \end{itemize}
 
 \Algorithm{Persistent Segment Tree}
-{Persistent Segment Tree supporting point updates and historic version queries}
-{$\mathcal{O}(\log n)$ per query/update}
-{cpp}{source/template/PersistentSegtree.cpp}
+{Persistent segment tree: cập nhật điểm, truy vấn các phiên bản cũ}
+{$\mathcal{O}(\log n)$ mỗi truy vấn/cập nhật}
+{compactcpp}{source/cpp/data_structure/persistent_segment_tree.cpp}
 
 \Algorithm{Parallel Binary Search}
-{Offline simultaneous binary search over multiple monotonic queries}
+{Binary search song song offline cho nhiều truy vấn đơn điệu}
 {$\mathcal{O}((N + Q) \log (\text{range}) \log N)$}
-{cpp}{source/template/PBS.cpp}
+{compactcpp}{source/cpp/data_structure/parallel_binary_search.cpp}
 
 \Algorithm{Wavelet Tree}
-{Wavelet Tree for range $k$-th element, range frequency, and range counting in $[L, R]$}
-{$\mathcal{O}(\log (\text{alphabet}))$ per query}
-{}{source/pseudocode/wavelet_tree.txt}
+{Wavelet tree: phần tử thứ $k$, tần suất và đếm giá trị trong $[L, R]$ trên đoạn}
+{$\mathcal{O}(\log (\text{alphabet}))$ mỗi truy vấn}
+{compactcpp}{source/cpp/data_structure/wavelet_tree.cpp}
 
 \Algorithm{Segment Tree Beat}
-{Segment Tree Beats: Range Chmin/Chmax, historical min/max, and range sum queries}
-{$\mathcal{O}(n \log n)$ amortized}
-{}{source/pseudocode/segment_tree_beats.txt}
+{Segment Tree Beats: chmin/chmax, cộng và truy vấn tổng trên đoạn}
+{$\mathcal{O}((n+q)\log^2 n)$ khấu hao}
+{compactcpp}{source/cpp/data_structure/segment_tree_beats.cpp}
 
 \Algorithm{Kd Tree}
-{K-Dimensional Tree for $k$-NN nearest neighbor and orthogonal range queries in 2D/3D}
-{$\mathcal{O}(\sqrt{n})$ per query}
-{cpp}{source/template/kdtree.cpp}
+{Cây $k$ chiều tĩnh: điểm gần nhất và truy vấn hộp đóng song song trục}
+{$O(n)$ mỗi truy vấn trong trường hợp xấu nhất; cắt tỉa không gian trên cây cân bằng}
+{compactcpp}{source/cpp/data_structure/kd_tree.cpp}
 
 \Algorithm{BIT2D}
-{2D Binary Indexed Tree (Fenwick) for 2D range sum queries and point updates}
-{$\mathcal{O}(\log^2 n)$ per query}
-{cpp}{source/template/BIT2D.cpp}
+{Fenwick 2D: tổng hình chữ nhật và cập nhật điểm}
+{$\mathcal{O}(\log^2 n)$ mỗi truy vấn}
+{compactcpp}{source/cpp/data_structure/fenwick_2d.cpp}
 
 \Algorithm{Treap}
-{Randomized Binary Search Tree supporting array split/merge and implicit key operations}
-{$\mathcal{O}(\log n)$ expected per operation}
-{cpp}{source/template/Treap.cpp}
+{BST ngẫu nhiên: split/merge mảng và thao tác theo khóa ẩn}
+{$\mathcal{O}(\log n)$ kỳ vọng mỗi thao tác}
+{compactcpp}{source/cpp/data_structure/implicit_treap.cpp}
 
 \Algorithm{Splay Tree / Link - cut Tree}
-{Link-Cut Tree supporting dynamic path queries, link, cut, and reroot on forests}
-{$\mathcal{O}(\log n)$ amortized per operation}
-{cpp}{source/template/LCT.cpp}
+{Link-Cut Tree: truy vấn đường đi động, link, cut và đổi gốc trên rừng}
+{$\mathcal{O}(\log n)$ khấu hao mỗi thao tác}
+{compactcpp}{source/cpp/data_structure/link_cut_tree.cpp}
 
 \Algorithm{Farach - Colton - Bender}
-{$\langle \mathcal{O}(n), \mathcal{O}(1) \rangle$ LCA via Euler Tour $\pm 1$ RMQ and Four Russians speedup}
-{$\mathcal{O}(n)$ build, $\mathcal{O}(1)$ query}
-{}{source/pseudocode/farach_colton_bender.txt}
+{$\langle \mathcal{O}(n), \mathcal{O}(1) \rangle$ LCA qua Euler Tour, RMQ $\pm 1$ và kỹ thuật Four Russians}
+{$\mathcal{O}(n)$ dựng, $\mathcal{O}(1)$ truy vấn}
+{compactcpp}{source/cpp/data_structure/farach_colton_bender.cpp}
 
 \Algorithm{Trie}
-{Binary/Alphabet Prefix Tree for dictionary lookup and XOR max queries}
-{$\mathcal{O}(\text{length})$ per query}
-{cpp}{source/template/BasicTrie.cpp}
+{Trie nhị phân multiset 64-bit: thêm, xóa, đếm, XOR lớn nhất}
+{$\mathcal{O}(\text{length})$ mỗi truy vấn}
+{compactcpp}{source/cpp/data_structure/binary_trie.cpp}
 
 \Algorithm{Lichao Tree}
-{Li Chao Segment Tree for online dynamic line insertions and minimum/maximum evaluation}
-{$\mathcal{O}(\log n)$ per query/insertion}
-{cpp}{source/template/Lichao.cpp}
+{Li Chao Tree: thêm đường thẳng online, truy vấn min/max}
+{$\mathcal{O}(\log n)$ mỗi truy vấn/thêm}
+{compactcpp}{source/cpp/data_structure/li_chao.cpp}
 
 \Algorithm{Line Container}
-{Convex Hull of dynamic lines with arbitrary slopes queried at arbitrary $x$}
-{$\mathcal{O}(\log n)$ amortized per operation}
-{cpp}{source/template/LineContainer.cpp}
+{Convex hull của các đường thẳng động, hệ số góc và điểm truy vấn $x$ tùy ý}
+{$\mathcal{O}(\log n)$ khấu hao mỗi thao tác}
+{compactcpp}{source/cpp/data_structure/line_container.cpp}
 
 \Algorithm{Arpa Trick}
-{Fast offline range maximum/minimum query via DSU}
+{Truy vấn min/max đoạn offline bằng DSU}
 {$\mathcal{O}(n \alpha(n))$}
-{}{source/pseudocode/arpa_trick.txt}
+{compactcpp}{source/cpp/data_structure/arpa_trick.cpp}
 
-\Algorithm{Blocky Data Structure}
-{Square root decomposition: Block Array and Hilbert-ordered Mo's algorithm}
+\Algorithm{Chia căn (Square Root Decomposition)}
+{Chia căn: mảng chia block và thuật toán Mo theo thứ tự Hilbert}
 {$\mathcal{O}(n \sqrt{n})$}
-{cpp}{source/template/BlockyArray.cpp}
+{compactcpp}{source/cpp/data_structure/block_array_mo.cpp}
 
-\Algorithm{Ultimate Hashmap}
-{Fast custom hash map with custom splitmix64 hash function}
-{$\mathcal{O}(1)$ expected per lookup}
-{cpp}{source/template/GrandHash.cpp}
+\Algorithm{Hash Map (SplitMix64)}
+{Hash map khóa không dấu, hash SplitMix64 với seed do người gọi chọn}
+{$\mathcal{O}(1)$ kỳ vọng mỗi lần tra cứu}
+{compactcpp}{source/cpp/data_structure/hash_map.cpp}
 
 \Algorithm{Erasable Priority Queue}
-{Max/Min Priority Queue with lazy removal of arbitrary elements}
-{$\mathcal{O}(\log n)$ per operation}
-{cpp}{source/template/ErasablePQ.cpp}
+{Priority queue max/min, xóa lazy phần tử tùy ý}
+{$\mathcal{O}(\log n)$ mỗi thao tác}
+{compactcpp}{source/cpp/data_structure/erasable_priority_queue.cpp}
 
-\Algorithm{Expandable Data Structure}
-{Binary doubling technique: converts static data structures (e.g. Aho, CHT) to support online insertions}
-{$\mathcal{O}(A \log n)$ amortized insertion, for static structure buildable in $O(A)$}
-{cpp}{source/template/Expandable.cpp}
+\Algorithm{Cấu trúc mở rộng (Binary Doubling)}
+{Kỹ thuật gộp block theo lũy thừa 2: thêm online cho cấu trúc tĩnh (Aho, CHT)}
+{$\mathcal{O}(A \log n)$ thêm khấu hao, với cấu trúc tĩnh dựng được trong $O(A)$}
+{compactcpp}{source/cpp/data_structure/expandable.cpp}
 
 \Algorithm{Interval Set}
-{Disjoint interval set (ODT style): maintains non-overlapping intervals, range assignment, and adjacent merging based on predicate.}
-{$\mathcal{O}(\log n)$ amortized per operation}
-{cpp}{source/template/IntervalSet.cpp}
+{Phân hoạch đoạn: gán đoạn, gộp các đoạn kề nhau cùng giá trị.}
+{$O((k+1)\log s)$ mỗi lần gán, $k$ đoạn bị xóa, $s$ đoạn đang lưu}
+{compactcpp}{source/cpp/data_structure/interval_set.cpp}

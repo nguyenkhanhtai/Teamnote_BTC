@@ -31,6 +31,7 @@
 \HideAuthor
 
 \begin{document}
+\selectlanguage{vietnamese}
 
 \begin{titlepage}
     \begin{tikzpicture}[remember picture,overlay]
@@ -39,21 +40,20 @@
     \end{tikzpicture}
 
     \centering
-    \vspace*{1.5cm}
-    {\fontsize{24}{28} \bfseries ICPC Team Notebook \par}
-    \vspace{0.6cm}
-    {\fontsize{28}{34} \bfseries \teamname \par}
-    \vspace{0.4cm}
-    {\fontsize{18}{22} \bfseries \schoolname \par}
-    \vspace{0.6cm}
-    {\fontsize{12}{15} \bfseries \authorname \par}
-    \vfill
-    {\Large \today\par}
+    {\fontsize{16}{19} \bfseries ICPC Notebook -- \teamname \par}
+    \vspace{0.15cm}
+    {\fontsize{10}{12} \bfseries \schoolname \par}
+    {\fontsize{9}{11} \authorname \quad | \quad \today\par}
+    \vspace{0.2cm}
+    \begin{multicols}{3}
+        \raggedright
+        \tableofcontents
+    \end{multicols}
 \end{titlepage}
 
 \begin{multicols}{3}
-\maketitlepage
 
+\input{CppTemplates.tex}
 
 
 
@@ -71,105 +71,73 @@
 
 \input{Geometry.tex}
 
-\section{Misc}
+\section{Tiện ích và kỹ thuật}
 
 \subsection{Template}
 \inputminted[]{cpp}{source/template/template.cpp}
 
-\subsection{Debugging Magic}
+\subsection{Debugging}
 \inputminted[]{cpp}{source/template/debug.cpp}
 
-\subsection{Compile \& Run Scripts}
-Requires \texttt{g++} in PATH (Windows: MinGW-w64). Pass the source filename; compile failure stops execution.
+\subsection{Script biên dịch và chạy}
+Cần \texttt{g++} trong PATH (Windows: MinGW-w64). Truyền tên file nguồn; dừng nếu biên dịch lỗi.
 \inputminted[]{}{source/pseudocode/compile_scripts.txt}
 
-\subsection{Expression Parsing}
-\inputminted[]{}{source/pseudocode/expression_parsing.txt}
+\subsection{Phân tích biểu thức (Expression Parsing)}
+\inputminted[]{cpp}{source/cpp/utility/expression.cpp}
 
-\subsection{Johnson Scheduling}
-Scheduling on two machines
-\inputminted[]{}{source/pseudocode/johnson_scheduling.txt}
+\subsection{Lập lịch Johnson}
+Lập lịch trên hai máy.
+\inputminted[]{cpp}{source/cpp/utility/johnson.cpp}
 
-\subsection{Monte Carlo \& Las Vegas Frameworks}
+\subsection{Monte Carlo và Las Vegas}
+\label{subsec:randomized}
 \begin{itemize}
-    \item \textcolor{blue}{\textbf{Monte Carlo}} (\textit{Fixed runtime, bounded error $\le \epsilon$, amplified via $k$ trials $\to (1-p)^k$}):
+    \item \textcolor{blue}{\textbf{Monte Carlo}} (\textit{Thời gian cố định, xác suất lỗi $\le\epsilon$; lặp $k$ lần để giảm lỗi xuống $(1-p)^k$}):
     \begin{itemize}
-        \item \textbf{Freivalds ($AB \stackrel{?}{=} C$)}: Check $P = A(Bv) - Cv$ for random $v \in \{0, 1\}^N$ in $O(N^2)$. If $AB \ne C$, $\Pr(P=0) \le 1/2$. $k$ trials $\implies$ error $\le 2^{-k}$.
-        \item \textbf{Identity Testing / PIT (Schwartz-Zippel)}: Non-zero degree-$d$ poly $P(x_1..x_n)$ at random $r \in S^n$ has $\Pr(P(r)=0) \le d/|S|$. General matching: $\det(\text{Tutte Matrix}) \ne 0$ in $O(V^3)$.
-        \item \textbf{Fingerprinting / Hashing}: Map $v \mapsto r_v \in [0, 2^{64}-1]$. Sets via $\bigoplus r_v$, multisets via $\sum cnt(v)r_v \pmod{2^{64}}$, sequences via 61-bit rolling hash. Collision $\le 2^{-64}$.
-        \item \textbf{Color Coding ($k \le 8$)}: Find $k$-vertex subgraph/path by random $k$-coloring. Target is colorful with prob $k!/k^k \ge e^{-k}$. Colorful DP takes $O(2^k(V+E))$. Repeat $O(e^k \ln(1/\epsilon)) \approx 300$ trials for error $< 10^{-6}$.
+        \item \textbf{Freivalds ($AB\stackrel{?}{=}C$)}: Kiểm tra $P=A(Bv)-Cv$ với $v\in\{0,1\}^N$ ngẫu nhiên trong $O(N^2)$. Nếu $AB\ne C$, $\Pr(P=0)\le1/2$. Lặp $k$ lần $\implies$ lỗi $\le2^{-k}$.
+        \item \textbf{Identity Testing / PIT (Schwartz-Zippel)}: Đa thức khác 0 bậc $d$, $P(x_1..x_n)$, tại $r\in S^n$ ngẫu nhiên có $\Pr(P(r)=0)\le d/|S|$. General matching: kiểm tra $\det(\text{Tutte Matrix})\ne0$ trong $O(V^3)$.
+        \item \textbf{Fingerprinting / Hashing}: Ánh xạ $v\mapsto r_v\in[0,2^{64}-1]$. Hash tập bằng $\bigoplus r_v$, multiset bằng $\sum cnt(v)r_v\pmod{2^{64}}$, dãy bằng rolling hash 61-bit. Xác suất va chạm $\le2^{-64}$.
+        \item \textbf{Color Coding ($k\le8$)}: Tìm đồ thị con/đường đi $k$ đỉnh bằng tô ngẫu nhiên $k$ màu. Xác suất mục tiêu đủ màu là $k!/k^k\ge e^{-k}$. DP trên màu mất $O(2^k(V+E))$. Lặp $O(e^k\ln(1/\epsilon))\approx300$ lần để lỗi $<10^{-6}$.
     \end{itemize}
-    \item \textcolor{blue}{\textbf{Las Vegas}} (\textit{Guaranteed 100\% correct, randomized runtime, expected $1/p$ trials}):
+    \item \textcolor{blue}{\textbf{Las Vegas}} (\textit{Luôn đúng, thời gian ngẫu nhiên, kỳ vọng $1/p$ lần thử}):
     \begin{itemize}
-        \item \textbf{Dense Witness Search \& Verify}: If valid solutions occupy density $\ge p$, pick random candidate and verify in $O(T) \implies$ expected $O(T/p)$ time. E.g. pick random item to find $> n/2$ majority in expected $O(n)$ ($p > 1/2 \implies \le 2$ trials); pick random pair for common divisor.
-        \item \textbf{Randomized Structures \& Selection}: QuickSelect pivot (expected $O(n)$), Treap random priority (expected $O(\log n)$ height), Pollard's Rho factor walk (expected $O(n^{1/4})$).
+        \item \textbf{Tìm và kiểm chứng witness}: Nếu nghiệm có mật độ $\ge p$, chọn ứng viên ngẫu nhiên rồi kiểm tra trong $O(T)$ $\implies$ thời gian kỳ vọng $O(T/p)$. Ví dụ: chọn phần tử ngẫu nhiên để tìm majority $>n/2$ trong kỳ vọng $O(n)$ ($p>1/2\implies\le2$ lần thử); chọn cặp ngẫu nhiên tìm ước chung.
+        \item \textbf{Cấu trúc và chọn ngẫu nhiên}: Pivot QuickSelect (kỳ vọng $O(n)$), priority Treap ngẫu nhiên (chiều cao kỳ vọng $O(\log n)$), Pollard Rho (kỳ vọng $O(n^{1/4})$).
     \end{itemize}
 \end{itemize}
 
-\subsection{Calendar}
-\inputminted[]{}{source/pseudocode/calendar.txt}
+\subsection{Lịch (Calendar)}
+\inputminted[]{cpp}{source/cpp/utility/calendar.cpp}
 
 \subsection{Josephus}
-\inputminted[]{}{source/pseudocode/josephus.txt}
+\inputminted[]{cpp}{source/cpp/utility/josephus.cpp}
 
-\subsection{Interactive Tricks}
-\inputminted[]{}{source/pseudocode/interactive.txt}
+\subsection{Kỹ thuật interactive}
+\inputminted[]{cpp}{source/cpp/utility/interactive.cpp}
+\begin{itemize}
+    \item \textbf{Kiểm tra ba phía}: So sánh hai nhóm $A,B$ cùng kích thước; khi có một mục tiêu và baseline bằng nhau đã biết, trả lời xác định mục tiêu ở $A$, $B$ hoặc nhóm còn lại $C$.
+    \item \textbf{Gộp truy vấn}: Hỏi $\gcd(X,\prod p_i^{e_i})$ để khôi phục số mũ các nguyên tố đã chọn; tránh tràn tích. Suy ra nhóm cuối khi biết tổng.
+    \item \textbf{Chuẩn hóa}: Với $1\le x\le10^d$, tổng chữ số $S(x(10^d-1))=9d$; đưa trạng thái về $9d$, rồi cộng mục tiêu$-9d$.
+    \item \textbf{Top hai theo chi phí}: Xáo trộn phần tử còn lại; so với phần tử nhì trước phần tử nhất để ít truy vấn cực đại thật.
+    \item \textbf{Đỉnh cực đại/lan truyền}: Cache giá trị đã hỏi, giữ witness cho đỉnh còn khả thi. Dò mìn: số mìn còn lại $=0$ thì các ô chưa biết an toàn; bằng số ô chưa biết thì tất cả là mìn. Tiếp tục trừ các phương trình chồng nhau.
+\end{itemize}
 
 \subsection{Random, Bit Tricks, Bitset}
-\inputminted[]{}{source/pseudocode/bit_tricks.txt}
+\inputminted[]{cpp}{source/cpp/utility/bit_tricks.cpp}
 
-\subsection{Transformations}
+\input{Transformations.tex}
+
+\subsection{Checklist trước khi nộp}
 \begin{itemize}
-    \item \textcolor{red}{\textbf{When Stuck}}: Re-read statement! Formulate small cases ($N \le 6$) to find patterns/invariants; deduce complexity ($N \le 20 \to 2^N, 500 \to N^3, 5000 \to N^2, 2\cdot 10^5 \to N \log N$).
-    \item \textbf{Opt $\to$ Decision (Binary Search)}: If predicate $P(X)$ is monotonic, binary search over $X$ to solve feasibility.
-    \item \textbf{Global Permutation $\to$ Local Swap}: Greedy exchange argument: swapping $(i, j) \to (j, i)$ improves objective $\iff f(i, j) < f(j, i)$.
-    \item \textbf{Constraints $\to$ Graph / Flow / Cut}: 2-SAT, difference constraints ($x_j - x_i \le w$), Project Selection (Min-Cut), Hall's Marriage, Dilworth (DAG path cover $=$ $|V| - \text{MaxMatching}$).
-    \item \textbf{Algebraic $\to$ Geometry / Convexity}: Upper/lower envelopes, Convex Hull, Slope Trick, Minkowski sum, CHT.
-    \item \textbf{Weighted Average $\to$ Convex Hull}: Think of $\lambda_i$ as mixing ratios ($\lambda_i\ge0$, $\sum_i\lambda_i=1$). Then $x=\sum_i\lambda_ix_i$ stays between the inputs: two points give segment $AB$, three points give the filled triangle, and many points give their convex hull. Conversely, every point in the convex hull has such a representation. In 1D, $x\in[\min x_i,\max x_i]$. Normalize positive weights by $\lambda_i=w_i/\sum_jw_j$.
-    \item \textbf{Ratio of (Weighted) Totals $\to$ Average of Ratios}: For $w_i\ge0$, $b_i>0$, $\frac{\sum_iw_ia_i}{\sum_iw_ib_i}$ is a weighted average of $a_i/b_i$ with new weight $w_ib_i$. Hence it lies in $[\min_i(a_i/b_i),\max_i(a_i/b_i)]$. The unweighted case is $w_i=1$.
-    \item \textbf{Mix First $\to$ Jensen}: For convex $f$ (bowl-shaped), evaluating after mixing is cheaper: $f(\sum_i\lambda_ix_i)\le\sum_i\lambda_if(x_i)$. Read it as $f(\text{average})\le\text{average of }f$.
-    \item \textbf{Global Range $\to$ Divide \& Conquer}: Split $[l, r] \to [l, m]$ and $[m+1, r]$ + cross contributions (CDQ D\&C, D\&C DP).
-    \item \textbf{Offline Deletions $\to$ Additions (Time Reversal)}: Invert query timeline $Q \to 1$ to turn deletions into DSU additions. Game DP: work backward from terminal state.
-    \item \textbf{Search Space Split (Meet-in-Middle)}: Split $N = N/2 + N/2$, reducing $2^N \to 2^{N/2}$ via hash table / two pointers.
-    \item \textbf{Exact $(= k) \to$ Lagrange Penalty $(\ge k)$}: Alien's Trick (WQS) relaxes exact $k$ on convex DP; Binomial Inversion / PIE converts exact $k$ to $\ge k$.
-    \item \textbf{Total Evaluation $\to$ Element Contribution}: Invert perspective: sum contribution of each element/edge/pair $(u, v)$ over all valid states (Fubini).
-    \item \textbf{Threshold Partitioning ($\sqrt{N}$ Heavy/Light)}: Elements $\le B$ updated statically/cached; elements $> B$ (at most $N/B$) processed dynamically (Mo's algorithm).
-    \item \textbf{Last Upgrade $\to$ State Bound}: Undo the last upgrade and replan the remaining work; if added cost $\le$ upgrade price, discard it. For $L\le N$, $k>\lceil\sqrt N\rceil$: $\lceil L/(k-1)\rceil-\lceil L/k\rceil\le1$. Upgrade cost $\ge1$ and unit-cost stops $\implies$ cap resource at $\lceil\sqrt N\rceil$.
-    \item \textbf{Quotient Grouping}: $\lfloor N/k\rfloor$ has $O(\sqrt N)$ distinct values. For $1\le l\le N$, equal-quotient block ends at $r=\lfloor N/\lfloor N/l\rfloor\rfloor$; next $l=r+1$.
-    \item \textbf{Exact Count $\to$ Complementary / PIE}: Count valid states via $\text{Total} - \text{Invalid}$, Stars \& Bars, PIE.
-    \item \textbf{Impartial Game $\to$ Nim Sum}: Transform games on DAG into XOR sum of Sprague-Grundy values ($SG(u) = \text{mex}\{SG(v)\}$).
-    \item \textbf{Undirected Vertex Geography $\to$ Matching}: A token starts at $s$; players alternately move it to an unvisited neighbor, and the vertex just left is deleted. The first player wins iff $s$ belongs to every maximum matching of $G$, equivalently $\nu(G) > \nu(G-s)$.
-    \item \textbf{General Case $\to$ Simplified Special Case}: Solve easier restrictions first ($A_i \in \{0, 1\}$, tree, $N \le 6$) to reveal pattern before generalizing.
-    \item \textbf{Exhaustive Search $\to$ Branch \& Bound}: Prune DFS subtrees with admissible bounding heuristics.
-    \item \textbf{Manhattan $\leftrightarrow$ Chebyshev ($45^\circ$ Rotation)}: $(x, y) \mapsto (x + y, x - y) \implies |x_1 - x_2| + |y_1 - y_2| = \max(|x'_1 - x'_2|, |y'_1 - y'_2|)$. Decouples 2D dimensions into independent 1D axes!
-    \item \textbf{Max/Min \& Absolute Value Decomp}: $\max(A, B) = \frac{A+B+|A-B|}{2}$, $\min(A, B) = \frac{A+B-|A-B|}{2}$; $|x - a| = \max(x - a, a - x)$. To minimize $\sum |x - a_i| + |y - b_i|$, split by 4 sign pairs $(\pm x \pm y)$.
-    \item \textbf{Threshold / Layer Counting (Fubini)}: $\sum_{i=1}^n A_i = \sum_{v=1}^{\max A} \text{count}(A_i \ge v)$ (Summing values $\longleftrightarrow$ Counting elements $\ge v$).
-    \item \textbf{Square $\to$ Sum of Odd Numbers}: $x^2 = 1 + 3 + 5 + \cdots + (2x - 1) = \sum_{i=1}^{x}(2i-1)$.
-    \item \textbf{Repeated Ones $\to$ Geometric Sum}: $\underbrace{11\ldots1}_{i\text{ digits}} = 1 + 10 + \cdots + 10^{i-1} = \frac{10^i-1}{9}$.
-    \item \textbf{Increasing / Decreasing Sequence $\to$ Nonnegative Variables}: To remove coupled order constraints, encode adjacent gaps. If $A_1\le\cdots\le A_n$, set $D_i=A_i-A_{i-1}\ge0$; if $A_1\ge\cdots\ge A_n$, set $D_i=A_{i-1}-A_i\ge0$ ($i\ge2$). Strict order means $D_i\ge1$. Recover by $A_i=A_1+\sum_{j=2}^iD_j$ (increasing) or $A_i=A_1-\sum_{j=2}^iD_j$ (decreasing).
-    \item \textbf{Range Add $\to$ Difference Array / Prefix Sums}: $A_i = \sum_{j=1}^i D_j$ ($D_i = A_i - A_{i-1}$); Range add $[l, r] \to 2$ point updates on $D$. Static sums $\to S_r - S_{l-1}$.
-    \item \textbf{Range / All-Pairs $\to$ Adjacent Condition}: $\min_{i \ne j} |A_i - A_j| = \min_i (A_{i+1} - A_i)$ after sort; $A_j - A_i \ge (j-i)D \iff A'_{i+1} \ge A'_i$ ($A'_i = A_i - iD$); Majority ($> 50\%$) subsegment $\ge 2$ always contains length 2 ($x, x$) or 3 ($x, y, x$) witness.
-    \item \textbf{Product to Sum}: $ab = \binom{a+b}{2} - \binom{a}{2} - \binom{b}{2}$; $\prod A_i \to \sum \log A_i$ (or log-probabilities).
-    \item \textbf{Bitwise Identities}: $A + B = (A \oplus B) + 2(A \text{ AND } B) = (A \text{ OR } B) + (A \text{ AND } B)$; $A \oplus B = (A \text{ OR } B) - (A \text{ AND } B)$; Adjacent bit flips: $\sum_{i=1}^n \text{popcount}((i-1) \oplus i) = 2n - \text{popcount}(n)$.
-    \item \textbf{Randomized Frameworks (Monte Carlo \& Las Vegas)}: See \S8.5. Dense solutions ($p$) $\to$ Monte Carlo $k$ trials error $\le (1-p)^k$; Las Vegas verifies in expected $O(T/p)$ time. Fingerprinting ($\bigoplus r_v, \sum r_v$) checks sets/multisets; Color Coding isolates subgraphs; Schwartz-Zippel checks algebraic existence (Tutte).
-    \item \textbf{Dirichlet / Pigeonhole (4-Sum $a_x + a_y = a_z + a_w$)}: When $N > \sqrt{2 \max A}$, 2 pairs with equal sums always exist since $\binom{N}{2} > 2\max A$. Find in $O(N^2)$ by hashing pairs.
-    \item \textbf{Boyer-Moore Majority Vote}: Find majority element ($> n/2$ occurrences) in $O(n)$ time and $O(1)$ space with a single counter. Sperner's antichain max size: $\binom{n}{\lfloor n/2 \rfloor}$.
+    \item \textcolor{red}{\textbf{Đã đọc giới hạn và edge case ($N=0,1$, âm, mất liên thông)?}}
+    \item Đã reset/xóa trạng thái toàn cục giữa các test case?
+    \item Đúng giới hạn mảng, chỉ số từ 0 hay 1?
+    \item Có tràn số nguyên (dùng \texttt{long long}/\texttt{\_\_int128})?
+    \item Hàm thiếu \texttt{return} (Undefined Behavior)?
+    \item Độ chính xác số thực/so sánh epsilon (\texttt{eps = 1e-9})?
+    \item Có fast I/O (\texttt{cin.tie(NULL)}, \texttt{'\textbackslash n'} thay \texttt{endl})?
 \end{itemize}
-
-\subsection{Checked}
-\begin{itemize}
-    \item \textcolor{red}{\textbf{Read constraints and edge cases ($N=0, 1$, negative, disconnected)?}}
-    \item Multiple test cases reset / clear global state properly?
-    \item Array / 1-based vs 0-based indexing bounds?
-    \item Integer overflow (use \texttt{long long} / \texttt{\_\_int128})?
-    \item Functions missing \texttt{return} statements (Undefined Behavior)?
-    \item Floating point precision / epsilon comparisons (\texttt{eps = 1e-9})?
-    \item Fast I/O included (\texttt{cin.tie(NULL)}, \texttt{'\\n'} instead of \texttt{endl})?
-\end{itemize}
-
-
 
 \end{multicols}
-
-% \end{landscape}
 \end{document}

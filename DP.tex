@@ -1,71 +1,71 @@
-\section{Dynamic Programming}
+\section{Quy hoạch động (DP)}
 
 \Algorithm{Reroot DP}
-{Template for Rerooting on Tree (2-pass DFS with Prefix/Suffix transitions)}
-{$\mathcal{O}(n)$ for DFS traversal}
-{}{source/pseudocode/reroot_dp.txt}
+{Template reroot trên cây: DFS hai lượt, chuyển trạng thái bằng prefix/suffix}
+{$\mathcal{O}(n)$ cho lượt DFS}
+{compactcpp}{source/cpp/dp/reroot_dp.cpp}
 
-\Algorithm{Divide-And-Conquer DP \& Quadrangle Inequality}
-{\textbf{Quadrangle Inequality (Monge)}: $\forall a \le b \le c \le d \implies C(a, c) + C(b, d) \le C(a, d) + C(b, c)$ ($\text{Cross} \le \text{Nest}$).
+\Algorithm{Divide-and-Conquer DP và bất đẳng thức tứ giác}
+{\textbf{Bất đẳng thức tứ giác (Monge)}: $\forall a \le b \le c \le d \implies C(a, c) + C(b, d) \le C(a, d) + C(b, c)$ ($\text{Cross} \le \text{Nest}$).
 \begin{itemize}
-  \item \textbf{Sufficient \& Necessary Local Test}: Checking adjacent $2 \times 2$ cells is sufficient (telescoping sum):
+  \item \textbf{Kiểm tra cục bộ cần và đủ}: Chỉ cần kiểm tra các ô $2 \times 2$ kề nhau (tổng rút gọn):
   $$ C(i, j+1) - C(i, j) \ge C(i+1, j+1) - C(i+1, j) \quad (\forall i < j) $$
-  (Equivalently, cost increase $\Delta_j(i) = C(i, j+1) - C(i, j)$ is non-increasing in $i$; or continuous $\frac{\partial^2 C}{\partial x \partial y} \le 0$).
-  \item \textbf{Common Cost Functions Satisfying QI}:
+  (Tương đương, độ tăng chi phí $\Delta_j(i) = C(i, j+1) - C(i, j)$ không tăng theo $i$; trong trường hợp liên tục $\frac{\partial^2 C}{\partial x \partial y} \le 0$).
+  \item \textbf{Các hàm chi phí thường thỏa QI}:
   \begin{itemize}
-    \item $C(l, r) = f(S_r - S_{l-1})$ for any convex $f$ ($f'' \ge 0$), e.g. $(S_r - S_{l-1})^2$, $(S_r - S_{l-1})^k$ ($k \ge 1$).
-    \item $C(l, r) = \sum_{k=l}^r w_k = W_r - W_{l-1}$ ($w_k \ge 0$, exact equality $=$ in Knuth Optimal BST).
-    \item $C(l, r) = \text{inv}(l, r)$ (inversion count in subarray $[l, r]$, or any cross-pair property).
-    \item $C(l, r) = |x_r - x_l|^p$ ($p \ge 1$ on sorted $x$), or variance / sum of squared differences.
+    \item $C(l, r) = f(S_r - S_{l-1})$ với $f$ lồi ($f'' \ge 0$), ví dụ $(S_r - S_{l-1})^2$, $(S_r - S_{l-1})^k$ ($k \ge 1$).
+    \item $C(l, r) = \sum_{k=l}^r w_k = W_r - W_{l-1}$ ($w_k \ge 0$, dấu bằng trong Knuth Optimal BST).
+    \item $C(l, r) = \text{inv}(l, r)$ (số nghịch thế trong đoạn $[l, r]$, hoặc tính chất trên cặp chéo).
+    \item $C(l, r) = |x_r - x_l|^p$ ($p \ge 1$ với $x$ đã sắp xếp), hoặc phương sai/tổng bình phương chênh lệch.
   \end{itemize}
-  \item \textbf{Monotonicity}: Monge property $\implies opt(i_1) \le opt(i_2)$ for $i_1 \le i_2$ (DnC: $O(k n \log n)$) and $opt[i][j-1] \le opt[i][j] \le opt[i+1][j]$ (Knuth: $O(n^2)$).
+  \item \textbf{Đơn điệu}: Tính chất Monge $\implies opt(i_1) \le opt(i_2)$ với $i_1 \le i_2$ (DnC: $O(k n \log n)$) và $opt[i][j-1] \le opt[i][j] \le opt[i+1][j]$ (Knuth: $O(n^2)$).
 \end{itemize}
 }
-{$\mathcal{O}(k n \log n)$ for DnC / $\mathcal{O}(n^2)$ for Knuth}
-{}{source/pseudocode/dnc_dp.txt}
+{$\mathcal{O}(k n \log n)$ với DnC / $\mathcal{O}(n^2)$ với Knuth}
+{compactcpp}{source/cpp/dp/dnc_dp.cpp}
 
-\Algorithm{1D/1D DP Optimization}
-{Optimize $dp[i] = \min_{j < i} (dp[j] + cost(j, i))$ satisfying quadrangle inequality via Deque of optimal intervals}
+\Algorithm{Tối ưu DP 1D/1D}
+{Tối ưu $dp[i] = \min_{j < i} (dp[j] + cost(j, i))$ thỏa bất đẳng thức tứ giác bằng deque các khoảng tối ưu}
 {$\mathcal{O}(n \log n)$}
-{}{source/pseudocode/one_d_one_d_dp.txt}
+{compactcpp}{source/cpp/dp/one_d_one_d_dp.cpp}
 
 \Algorithm{Alien DP}
-{Dynamic Programming on convex/concave functions (WQS Binary Search):
+{DP trên hàm lồi/lõm (WQS Binary Search):
 \begin{itemize}
-  \item Cost is convex/concave $\to$ Greedy selection.
-  \item DP is convex/concave $\to$ Binary search penalty $\lambda$.
+  \item Chi phí lồi/lõm $\to$ Chọn greedy.
+  \item DP lồi/lõm $\to$ Binary search hệ số phạt $\lambda$.
 \end{itemize}
 }
 {$\mathcal{O}(n \log (\text{max\_val}))$}
-{}{source/pseudocode/alien_dp.txt}
+{compactcpp}{source/cpp/dp/alien_dp.cpp}
 
 \Algorithm{Convex Hull Trick}
-{Dynamic Programming optimization for linear functions $y = mx + c$}
-{$\mathcal{O}(n \log n)$ or $\mathcal{O}(n)$ with monotonic slopes}
-{}{source/pseudocode/convex_hull_trick.txt}
+{Tối ưu DP với hàm tuyến tính $y = mx + c$}
+{$\mathcal{O}(n \log n)$ hoặc $\mathcal{O}(n)$ khi hệ số góc đơn điệu}
+{compactcpp}{source/cpp/dp/convex_hull_trick.cpp}
 
 \Algorithm{Slope Trick}
-{Maintain continuous piecewise linear convex function $f(x)$ with $+ |x - a|$, prefix min, domain shift via 2 Heaps}
+{Duy trì hàm lồi tuyến tính từng đoạn liên tục $f(x)$: cộng $|x-a|$, prefix min, dịch miền bằng hai heap}
 {$\mathcal{O}(n \log n)$}
-{}{source/pseudocode/slope_trick.txt}
+{compactcpp}{source/cpp/dp/slope_trick.cpp}
 
 \subsection{Bitmask DP}
 \begin{itemize}
-  \item \textbf{Matching}: Unordered set of pairs $\to$ fix one endpoint, choose its partner. $O(n2^n)$ time, $O(2^n)$ space.
-  \item \textbf{State Compression}: $i=\operatorname{popcount}(mask)$ $\to$ $dp[i][mask]\to dp[mask]$.
+  \item \textbf{Matching}: Tập cặp không có thứ tự $\to$ cố định một đầu, chọn đầu còn lại. $O(n2^n)$ thời gian, $O(2^n)$ bộ nhớ.
+  \item \textbf{Nén trạng thái}: $i=\operatorname{popcount}(mask)$ $\to$ $dp[i][mask]\to dp[mask]$.
 \end{itemize}
 
 \Algorithm{SOS DP}
-{Sum Over Subsets / Fast Zeta Transform: Compute sum over submasks / supermasks in $O(N \cdot 2^N)$ ($N \le 24$)}
+{Sum Over Subsets / Fast Zeta Transform: tính tổng trên submask/supermask trong $O(N \cdot 2^N)$ ($N \le 24$)}
 {$\mathcal{O}(N \cdot 2^N)$}
-{}{source/pseudocode/sos_dp.txt}
+{compactcpp}{source/cpp/dp/sos_dp.cpp}
 
-\Algorithm{Monotonic Queue Optimization}
-{Deque / Two-Stack Sliding Window minimum/maximum}
-{$O(1)$ amortized per push/pop}
-{}{source/pseudocode/monotonic_queue.txt}
+\Algorithm{Tối ưu bằng monotonic queue}
+{Deque chỉ số tăng dần, tìm min trong sliding window}
+{$O(1)$ khấu hao mỗi push/pop}
+{compactcpp}{source/cpp/dp/monotonic_queue.cpp}
 
 \Algorithm{Expected Value Trick}
-{Suppose we optimize picking $k$ objects from $n$ randomly shuffled items: at step $i$, only consider state range $\left[\frac{i \cdot k}{n} - C\sqrt{n}, \frac{i \cdot k}{n} + C\sqrt{n}\right]$.}
+{Chọn tối ưu $k$ trong $n$ phần tử đã xáo trộn: bước $i$ dùng heuristic dải ngẫu nhiên (có thể bỏ lỡ tối ưu), chỉ xét trạng thái trong $\left[\frac{i \cdot k}{n} - C\sqrt{n}, \frac{i \cdot k}{n} + C\sqrt{n}\right]$.}
 {$\mathcal{O}(n \sqrt{n})$}
-{}{source/pseudocode/expected_value_dp.txt}
+{compactcpp}{source/cpp/dp/expected_value_dp.cpp}

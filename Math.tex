@@ -1,84 +1,84 @@
-\section{Math}
+\section{Toán học}
 
-\Algorithm{Number Theory Formulas}
-{Modular arithmetic, Extended Euler Power Reduction, Legendre, Wilson, Frobenius Coin, Floor Trick, CRT, Fibonacci}
+\Algorithm{Công thức số học}
+{Số học modulo, rút gọn số mũ Euler mở rộng, Legendre, Wilson, Frobenius Coin, Floor Trick, CRT, Fibonacci}
 {}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Extended Euler Totient Power Reduction} ($\forall a, m$):
+    \item \textbf{Rút gọn số mũ Euler mở rộng} ($\forall a, m$):
     $$ a^b \equiv a^{(b \bmod \phi(m)) + \phi(m)} \pmod m \quad (b \ge \phi(m)) $$
-    \item \textbf{Legendre's Formula ($v_p(n!)$)}: $v_p(n!) = \sum_{k=1}^\infty \lfloor \frac{n}{p^k} \rfloor = \frac{n - S_p(n)}{p - 1}$.
-    \item \textbf{Wilson's Theorem}: $(p - 1)! \equiv -1 \pmod p \iff p$ prime $\implies (p - 2)! \equiv 1 \pmod p$.
-    \item \textbf{Frobenius Coin (Chicken McNugget)}: For $\gcd(a, b) = 1$, max non-representable $ax + by$ ($x, y \ge 0$) is $ab - a - b$; total non-representable count is $\frac{(a-1)(b-1)}{2}$.
-    \item \textbf{Floor Trick ($O(\sqrt{n})$ Blocks)}:
+    \item \textbf{Công thức Legendre ($v_p(n!)$)}: $v_p(n!) = \sum_{k=1}^\infty \lfloor \frac{n}{p^k} \rfloor = \frac{n - S_p(n)}{p - 1}$.
+    \item \textbf{Định lý Wilson}: $(p - 1)! \equiv -1 \pmod p \iff p$ nguyên tố $\implies (p - 2)! \equiv 1 \pmod p$.
+    \item \textbf{Frobenius Coin (Chicken McNugget)}: Với $\gcd(a,b)=1$, số lớn nhất không biểu diễn được dạng $ax+by$ ($x,y\ge0$) là $ab-a-b$; số lượng không biểu diễn được là $\frac{(a-1)(b-1)}{2}$.
+    \item \textbf{Floor Trick ($O(\sqrt{n})$ nhóm)}:
 \begin{lstlisting}
 for (int l = 1, r; l <= n; l = r + 1) {
     int v = n / l; r = n / v;
 }
 \end{lstlisting}
-    \item \textbf{Chinese Remainder Theorem (CRT)}: $x \equiv a_i \pmod{m_i}$.
+    \item \textbf{Định lý số dư Trung Hoa (CRT)}: $x \equiv a_i \pmod{m_i}$.
     $$ x \equiv \sum_{i=1}^k a_i M_i (M_i^{-1} \bmod m_i) \pmod M \quad (M = \prod m_i, M_i = M/m_i) $$
     \item \textbf{Fibonacci}: $\gcd(F_m, F_n) = F_{\gcd(m, n)}$, $F_{2n} = F_n(2F_{n+1} - F_n)$.
 \end{itemize}
 
 \Algorithm{Like-Euclid Floor Sum}
-{Compute $\sum_{i=0}^{n-1} \lfloor \frac{ai+b}{m} \rfloor$ via coordinate transformation}
+{Tính $\sum_{i=0}^{n-1} \lfloor \frac{ai+b}{m} \rfloor$ bằng đổi tọa độ}
 {$O(\log m)$}
-{}{source/pseudocode/floor_sum.txt}
+{compactcpp}{source/cpp/math/floor_sum.cpp}
 
 \Algorithm{Rabin-Miller}
-{Deterministic Miller-Rabin prime checking for $n < 2^{64}$}
+{Miller-Rabin kiểm tra nguyên tố tất định với $n<2^{64}$}
 {${O}(k \log n)$}
-{}{source/pseudocode/rabin_miller.txt}
+{compactcpp}{source/cpp/math/rabin_miller.cpp}
 
-\Algorithm{Fast Sieve}
-{Linear Euler Sieve computing primes and smallest prime factors up to $N$}
+\Algorithm{Sàng nhanh (Linear Sieve)}
+{Sàng Euler tuyến tính: nguyên tố và ước nguyên tố nhỏ nhất tới $N$}
 {$O(N)$}
-{}{source/pseudocode/fast_sieve.txt}
+{compactcpp}{source/cpp/math/fast_sieve.cpp}
 
-\Algorithm{Prime Counting}
-{Lucy Hedgehog / Meissel-Lehmer: Count primes $\le N$}
-{$O(N^{2/3})$ or $O(N^{3/4})$}
-{}{source/pseudocode/prime_counter.txt}
+\Algorithm{Đếm nguyên tố (Prime Counting)}
+{Sàng theo các giá trị thương: đếm nguyên tố $\le N$}
+{$O(N^{3/4})$ thời gian, $O(\sqrt N)$ bộ nhớ}
+{compactcpp}{source/cpp/math/prime_counter.cpp}
 
 \Algorithm{Pollard Rho}
-{Find non-trivial factors of composite numbers with Brent's cycle detection}
+{Tìm ước không tầm thường của hợp số bằng phát hiện chu trình Brent}
 {$O(\sqrt[4]{n} \log n)$}
-{}{source/pseudocode/pollard_rho.txt}
+{compactcpp}{source/cpp/math/pollard_rho.cpp}
 
 \Algorithm{Primitive Root}
-{Find smallest primitive root $g$ modulo prime $p$}
+{Tìm căn nguyên thủy $g$ nhỏ nhất modulo nguyên tố $p$}
 {$\mathcal{O}(\text{ans} \cdot \log p)$}
-{}{source/pseudocode/primitive_root.txt}
+{compactcpp}{source/cpp/math/primitive_root.cpp}
 
 \Algorithm{Baby-step Giant-Step}
-{Find smallest $x$ such that $a^x \equiv b \pmod m$ (Discrete Log)}
+{Tìm $x$ nhỏ nhất thỏa $a^x \equiv b \pmod m$ (Discrete Log)}
 {$O(\sqrt{m} \log m)$}
-{}{source/pseudocode/discrete_log_bsgs.txt}
+{compactcpp}{source/cpp/math/discrete_log_bsgs.cpp}
 
-\Algorithm{Sqrt Mod}
-{Tonelli-Shanks: Solve $x^2 \equiv a \pmod p$}
+\Algorithm{Căn modulo (Tonelli-Shanks)}
+{Tonelli-Shanks: giải $x^2 \equiv a \pmod p$}
 {$O(\log^2 p)$}
-{}{source/pseudocode/sqrt_mod.txt}
+{compactcpp}{source/cpp/math/sqrt_mod.cpp}
 
 \Algorithm{Extended GCD}
-{Find $x, y$ that satisfy the equation $ax + by = \gcd(a, b)$}
+{Tìm $x,y$ thỏa phương trình $ax + by = \gcd(a, b)$}
 {$\mathcal{O}(\log \min(a,b))$}
-{}{source/pseudocode/extended_gcd.txt}
+{compactcpp}{source/cpp/math/extended_gcd.cpp}
 
 \Algorithm{Diophantine}
-{General solutions to linear Diophantine equation $ax + by = c$}
+{Nghiệm tổng quát của phương trình Diophantine tuyến tính $ax + by = c$}
 {$O(\log \min(a, b))$}
-{}{source/pseudocode/diophantine.txt}
+{compactcpp}{source/cpp/math/diophantine.cpp}
 
 \Algorithm{Stern-Brocot Tree}
-{Fractions in reduced forms, tree encoding/decoding, LCA}
+{Phân số tối giản, mã hóa/giải mã cây, LCA}
 {$\mathcal{O}(\log(p + q))$}
-{}{source/pseudocode/stern_brocot.txt}
+{compactcpp}{source/cpp/math/stern_brocot.cpp}
 
-\Algorithm{Multiplicative Functions \& M\"obius Inversion}
-{Dirichlet Convolution, M\"obius Inversion, GCD/LCM summations}
+\Algorithm{Hàm nhân tính và M\"obius Inversion}
+{Tích chập Dirichlet, nghịch đảo M\"obius, tổng GCD/LCM}
 {}
 {}{}
 
@@ -86,38 +86,38 @@ for (int l = 1, r; l <= n; l = r + 1) {
     \item \textbf{Euler Phi \& M\"obius}: $\phi(n) = n \prod_{p \mid n} (1 - 1/p)$, $\sum_{d \mid n} \phi(d) = n$, $\sum_{d \mid n} \mu(d) = [n = 1]$.
     \item \textbf{Dirichlet \& Inversion}: $(f * g)(n) = \sum_{d \mid n} f(d) g(n / d)$.
     $$ f(n) = \sum_{d \mid n} g(d) \iff g(n) = \sum_{d \mid n} \mu(d) f(n / d) $$
-    \item \textbf{Count coprime pairs}:
+    \item \textbf{Đếm cặp nguyên tố cùng nhau}:
     $$ \sum_{i=1}^n \sum_{j=1}^m [\gcd(i, j) = 1] = \sum_{d=1}^{\min(n, m)} \mu(d) \left\lfloor \frac{n}{d} \right\rfloor \left\lfloor \frac{m}{d} \right\rfloor $$
-    \item \textbf{Sum of GCD over all pairs}:
+    \item \textbf{Tổng GCD trên mọi cặp}:
     $$ \sum_{i=1}^n \sum_{j=1}^m \gcd(i, j) = \sum_{g=1}^{\min(n, m)} \phi(g) \left\lfloor \frac{n}{g} \right\rfloor \left\lfloor \frac{m}{g} \right\rfloor $$
-    \item \textbf{Sum of LCM over all pairs} ($S(x) = \frac{x(x+1)}{2}$):
+    \item \textbf{Tổng LCM trên mọi cặp} ($S(x) = \frac{x(x+1)}{2}$):
     $$ \sum_{i \le n, j \le m} \text{lcm}(i, j) = \sum_{g} g \sum_{d} d^2 \mu(d) S\left(\left\lfloor \frac{n}{gd} \right\rfloor\right) S\left(\left\lfloor \frac{m}{gd} \right\rfloor\right) $$
 \end{itemize}
 
-\Algorithm{Combinatorics Formulas}
-{Binomial identities, Hockey-stick, Vandermonde, Inversion, Stars and bars, Catalan, Stirling, Cayley, LGV}
+\Algorithm{Công thức tổ hợp}
+{Đẳng thức nhị thức, Hockey-stick, Vandermonde, Inversion, Stars and Bars, Catalan, Stirling, Cayley, LGV}
 {}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Binomial Identities}: $\binom{n}{k} = \binom{n}{n-k} = \binom{n-1}{k-1} + \binom{n-1}{k}$; $k \binom{n}{k} = n \binom{n-1}{k-1}$; $\frac{1}{k+1}\binom{n}{k} = \frac{1}{n+1}\binom{n+1}{k+1}$; $\binom{n}{k} \binom{k}{m} = \binom{n}{m} \binom{n-m}{k-m}$; Upper negation: $\binom{-n}{k} = (-1)^k \binom{n+k-1}{k}$.
-    \item \textbf{Binomial Summations}: $\sum_{k=0}^n \binom{n}{k} = 2^n$; $\sum_{k=0}^n (-1)^k \binom{n}{k} = [n = 0]$; $\sum_{k \text{ even}} \binom{n}{k} = \sum_{k \text{ odd}} \binom{n}{k} = 2^{n-1}$; $\sum_{k=0}^n k \binom{n}{k} = n 2^{n-1}$; $\sum_{k=0}^n k^2 \binom{n}{k} = n(n+1) 2^{n-2}$; $\sum_{k=0}^n \frac{1}{k+1}\binom{n}{k} = \frac{2^{n+1}-1}{n+1}$.
+    \item \textbf{Đẳng thức nhị thức}: $\binom{n}{k} = \binom{n}{n-k} = \binom{n-1}{k-1} + \binom{n-1}{k}$; $k \binom{n}{k} = n \binom{n-1}{k-1}$; $\frac{1}{k+1}\binom{n}{k} = \frac{1}{n+1}\binom{n+1}{k+1}$; $\binom{n}{k} \binom{k}{m} = \binom{n}{m} \binom{n-m}{k-m}$; Đối số trên âm: $\binom{-n}{k} = (-1)^k \binom{n+k-1}{k}$.
+    \item \textbf{Tổng nhị thức}: $\sum_{k=0}^n \binom{n}{k} = 2^n$; $\sum_{k=0}^n (-1)^k \binom{n}{k} = [n = 0]$; $\sum_{k \text{ chẵn}} \binom{n}{k} = \sum_{k \text{ lẻ}} \binom{n}{k} = 2^{n-1}$; $\sum_{k=0}^n k \binom{n}{k} = n 2^{n-1}$; $\sum_{k=0}^n k^2 \binom{n}{k} = n(n+1) 2^{n-2}$; $\sum_{k=0}^n \frac{1}{k+1}\binom{n}{k} = \frac{2^{n+1}-1}{n+1}$.
     \item \textbf{Hockey-Stick \& Vandermonde}: $\sum_{i=r}^n \binom{i}{r} = \binom{n+1}{r+1}$; $\sum_{i=0}^k \binom{n+i}{i} = \binom{n+k+1}{k}$; $\sum_{k=0}^r \binom{m}{k} \binom{n}{r-k} = \binom{m+n}{r} \implies \sum_{k=0}^n \binom{n}{k}^2 = \binom{2n}{n}$.
-    \item \textbf{Binomial Inversion \& Differences}: $f(n) = \sum_{k=0}^n \binom{n}{k} g(k) \iff g(n) = \sum_{k=0}^n (-1)^{n-k} \binom{n}{k} f(k)$; Upper: $f(n) = \sum_{k=n}^N \binom{k}{n} g(k) \iff g(n) = \sum_{k=n}^N (-1)^{k-n} \binom{k}{n} f(k)$; $\sum_{k=0}^n (-1)^{n-k} \binom{n}{k} k^m = n! \left\{ \begin{matrix} m \\ n \end{matrix} \right\}$ ($0$ if $m < n$, $n!$ if $m=n$).
+    \item \textbf{Binomial Inversion và sai phân}: $f(n) = \sum_{k=0}^n \binom{n}{k} g(k) \iff g(n) = \sum_{k=0}^n (-1)^{n-k} \binom{n}{k} f(k)$; Dạng tổng phía trên: $f(n) = \sum_{k=n}^N \binom{k}{n} g(k) \iff g(n) = \sum_{k=n}^N (-1)^{k-n} \binom{k}{n} f(k)$; $\sum_{k=0}^n (-1)^{n-k} \binom{n}{k} k^m = n! \left\{ \begin{matrix} m \\ n \end{matrix} \right\}$ ($0$ nếu $m<n$, $n!$ nếu $m=n$).
     \item \textbf{Stars and Bars}: $x_i \ge 0 \implies \binom{n + k - 1}{k - 1}$; $x_i \ge 1 \implies \binom{n - 1}{k - 1}$; $x_i \ge c_i \implies n' = n - \sum c_i$.
     \item \textbf{Derangements}: $D_0 = 1, D_1 = 0, D_n = (n - 1)(D_{n-1} + D_{n-2}) = n D_{n-1} + (-1)^n \approx [n! / e]$.
-    \item \textbf{Catalan Numbers $C_n = \frac{1}{n+1}\binom{2n}{n}$}: Valid bracketings, Full binary trees with $n+1$ leaves, Triangulations of convex $(n+2)$-gon, Dyck paths not crossing $y=x$, 1-Stack permutations.
-    \item \textbf{Reflection Principle}: Paths $(0, 0) \to (n, m)$ not touching $y = x + k$ ($k > 0$): $\binom{n + m}{m} - \binom{n + m}{m - k}$.
-    \item \textbf{Balloting Theorem}: A has $a$ votes, B has $b$ ($a > b$). Prob A strictly leads throughout: $\frac{a - b}{a + b}$.
-    \item \textbf{Stirling Numbers of 1st \& 2nd Kind}: $\left[ \begin{matrix} n \\ k \end{matrix} \right] = \left[ \begin{matrix} n-1 \\ k-1 \end{matrix} \right] + (n-1) \left[ \begin{matrix} n-1 \\ k \end{matrix} \right]$, $\left\{ \begin{matrix} n \\ k \end{matrix} \right\} = \left\{ \begin{matrix} n-1 \\ k-1 \end{matrix} \right\} + k \left\{ \begin{matrix} n-1 \\ k \end{matrix} \right\}$.
+    \item \textbf{Số Catalan $C_n = \frac{1}{n+1}\binom{2n}{n}$}: Dãy ngoặc đúng, cây nhị phân đầy đủ có $n+1$ lá, chia tam giác đa giác lồi $(n+2)$ đỉnh, đường Dyck không vượt $y=x$, hoán vị sinh bằng một stack.
+    \item \textbf{Nguyên lý phản xạ (Reflection Principle)}: Đường đi $(0,0)\to(n,m)$ không chạm $y = x + k$ ($k > 0$): $\binom{n + m}{m} - \binom{n + m}{m - k}$.
+    \item \textbf{Định lý Ballot}: A có $a$ phiếu, B có $b$ ($a>b$). Xác suất A luôn dẫn trước nghiêm ngặt: $\frac{a - b}{a + b}$.
+    \item \textbf{Số Stirling loại 1 và 2}: $\left[ \begin{matrix} n \\ k \end{matrix} \right] = \left[ \begin{matrix} n-1 \\ k-1 \end{matrix} \right] + (n-1) \left[ \begin{matrix} n-1 \\ k \end{matrix} \right]$, $\left\{ \begin{matrix} n \\ k \end{matrix} \right\} = \left\{ \begin{matrix} n-1 \\ k-1 \end{matrix} \right\} + k \left\{ \begin{matrix} n-1 \\ k \end{matrix} \right\}$.
     $x^n = \sum_{k=0}^n \left\{ \begin{matrix} n \\ k \end{matrix} \right\} x^{\underline{k}} \implies \sum_{i=1}^n i^k = \sum_{j=0}^k \left\{ \begin{matrix} k \\ j \end{matrix} \right\} j! \binom{n + 1}{j + 1}$.
-    \item \textbf{PIE}: $|\bigcup_{i=1}^n A_i| = \sum_{\emptyset \ne J} (-1)^{|J|-1} |\bigcap_{j \in J} A_j|$; Exactly $r$ sets: $\sum_{m=r}^n (-1)^{m-r} \binom{m}{r} \sum_{|X|=m} |\bigcap_{i \in X} A_i|$.
-    \item \textbf{Lucas' Theorem}: $\binom{n}{k} \equiv \prod_{i} \binom{n_i}{k_i} \pmod p$ (base-$p$ digits).
-    \item \textbf{Tree Counting \& Cayley}: $n^{n-2}$ labeled trees, Forest of $k$ rooted trees $k n^{n-k-1}$, Matrix Tree Theorem ($\det(L_i)$), LGV Lemma ($\det(M)$).
+    \item \textbf{PIE}: $|\bigcup_{i=1}^n A_i| = \sum_{\emptyset \ne J} (-1)^{|J|-1} |\bigcap_{j \in J} A_j|$; Thuộc đúng $r$ tập: $\sum_{m=r}^n (-1)^{m-r} \binom{m}{r} \sum_{|X|=m} |\bigcap_{i \in X} A_i|$.
+    \item \textbf{Định lý Lucas}: $\binom{n}{k} \equiv \prod_{i} \binom{n_i}{k_i} \pmod p$ (chữ số cơ số $p$).
+    \item \textbf{Đếm cây và Cayley}: $n^{n-2}$ cây có nhãn, rừng gồm $k$ cây có gốc: $k n^{n-k-1}$, Matrix Tree Theorem ($\det(L_i)$), bổ đề LGV ($\det(M)$).
 \end{itemize}
 
-\Algorithm{Generating Functions \& Taylor Series}
-{OGF, EGF, Taylor expansions, Simpson numerical integration}
+\Algorithm{Hàm sinh (Generating Functions) và chuỗi Taylor}
+{OGF, EGF, khai triển Taylor, tích phân số Simpson}
 {}
 {}{}
 
@@ -125,131 +125,131 @@ for (int l = 1, r; l <= n; l = r + 1) {
     \item OGF: $A(x) = \sum a_n x^n$; EGF: $A(x) = \sum a_n \frac{x^n}{n!}$.
     \item $\frac{1}{1-x} = \sum_{n \ge 0} x^n$, $\frac{1}{(1-x)^k} = \sum_{n \ge 0} \binom{n+k-1}{k-1} x^n$.
     \item $e^x = \sum_{n \ge 0} \frac{x^n}{n!}$, $\ln(1 - x) = -\sum_{n \ge 1} \frac{x^n}{n}$, $(1+x)^\alpha = \sum_{n \ge 0} \binom{\alpha}{n} x^n$.
-    \item \textbf{Simpson's Rule}: $\int_a^{a+2h} f(x)dx \approx \frac{h}{3}(f(a) + 4f(a+h) + f(a + 2h))$.
+    \item \textbf{Công thức Simpson}: $\int_a^{a+2h} f(x)dx \approx \frac{h}{3}(f(a) + 4f(a+h) + f(a + 2h))$.
 \end{itemize}
 
-\Algorithm{Linear Recurrences (Berlekamp-Massey)}
-{Find minimal linear recurrence from first $2N$ terms and compute $K$-th term via $x^K \bmod P(x)$}
-{${O}(N^2)$ find recurrence, $\mathcal{O}(N^2 \log K)$ compute $k$-th term}
-{cpp}{source/template/Berlekamp.cpp}
+\Algorithm{Truy hồi tuyến tính (Berlekamp-Massey)}
+{Tìm truy hồi tuyến tính tối tiểu từ $2N$ số hạng đầu, tính số hạng thứ $K$ qua $x^K\bmod P(x)$}
+{${O}(N^2)$ tìm truy hồi, $\mathcal{O}(N^2 \log K)$ tính số hạng thứ $k$}
+{compactcpp}{source/cpp/math/berlekamp_massey.cpp}
 
 \Algorithm{FWHT}
 {Fast Walsh-Hadamard Transform (XOR, AND, OR Convolution)}
 {$\mathcal{O}(n \log n)$}
-{}{source/pseudocode/fwht.txt}
+{compactcpp}{source/cpp/math/fwht.cpp}
 
 \Algorithm{Lagrange}
-{Lagrange polynomial interpolation at point $X$ on $n+1$ equidistant points $y_0, \dots, y_n$}
-{$O(n)$ evaluation}
-{}{source/pseudocode/lagrange.txt}
+{Nội suy Lagrange tại $X$ từ $n+1$ điểm cách đều có giá trị $y_0,\dots,y_n$}
+{$O(n)$ tính giá trị}
+{compactcpp}{source/cpp/math/lagrange.cpp}
 
 \Algorithm{NTT (Number Theoretic Transform)}
-{Iterative NTT with bit-reversal under MOD = $998244353$ ($G=3$)}
+{NTT lặp với bit-reversal, MOD = $998244353$ ($G=3$)}
 {$\mathcal{O}(n \log n)$}
-{cpp}{source/template/NTT.cpp}
+{compactcpp}{source/cpp/math/ntt.cpp}
 
 \Algorithm{FFT (Fast Fourier Transform)}
-{Cooley-Tukey FFT with complex numbers for real/arbitrary convolution}
+{FFT Cooley-Tukey trên số phức cho tích chập số thực/tổng quát}
 {$\mathcal{O}(n \log n)$}
-{cpp}{source/template/FFT.cpp}
+{compactcpp}{source/cpp/math/fft.cpp}
 
-\Algorithm{Formal Power Series (FPS) Formulas}
-{Key formulas for polynomial operations via Newton's method \& convolution}
+\Algorithm{Công thức Formal Power Series (FPS)}
+{Công thức thao tác đa thức bằng phương pháp Newton và convolution}
 {}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Inverse ($Q = P^{-1}$)}: $Q_k \equiv Q_{k-1}(2 - P Q_{k-1}) \pmod{x^{2^k}}$, base $Q_0 = P(0)^{-1}$.
-    \item \textbf{Derivative \& Integral}: $P'(x) = \sum i a_i x^{i-1}$, $\int P(x) = \sum \frac{a_i}{i+1} x^{i+1}$.
-    \item \textbf{Logarithm}: $\ln P(x) = \int \frac{P'(x)}{P(x)} dx \pmod{x^n}$ (requires $P(0) = 1$).
-    \item \textbf{Exponential}: $Q_k \equiv Q_{k-1}(1 - \ln Q_{k-1} + P) \pmod{x^{2^k}}$ (requires $P(0) = 0$).
-    \item \textbf{Square Root}: $Q_k \equiv \frac{1}{2}(Q_{k-1} + P Q_{k-1}^{-1}) \pmod{x^{2^k}}$ ($P(0)$ is quadratic residue).
-    \item \textbf{Power}: $P(x)^k = \exp(k \ln P(x))$. If $P(x) = c x^d (1 + Q(x))$, $P(x)^k = c^k x^{k d} \exp(k \ln(1 + Q(x)))$.
-    \item \textbf{Division with Remainder ($A = BQ + R$)}: With $\text{rev}_k(P) = x^k P(1/x)$:
+    \item \textbf{Nghịch đảo ($Q=P^{-1}$)}: $Q_k \equiv Q_{k-1}(2 - P Q_{k-1}) \pmod{x^{2^k}}$, khởi đầu $Q_0 = P(0)^{-1}$.
+    \item \textbf{Đạo hàm và tích phân}: $P'(x) = \sum i a_i x^{i-1}$, $\int P(x) = \sum \frac{a_i}{i+1} x^{i+1}$.
+    \item \textbf{Logarithm}: $\ln P(x) = \int \frac{P'(x)}{P(x)} dx \pmod{x^n}$ (cần $P(0) = 1$).
+    \item \textbf{Hàm mũ}: $Q_k \equiv Q_{k-1}(1 - \ln Q_{k-1} + P) \pmod{x^{2^k}}$ (cần $P(0) = 0$).
+    \item \textbf{Căn bậc hai}: $Q_k \equiv \frac{1}{2}(Q_{k-1} + P Q_{k-1}^{-1}) \pmod{x^{2^k}}$ ($P(0)$ là thặng dư bậc hai).
+    \item \textbf{Lũy thừa}: $P(x)^k = \exp(k \ln P(x))$. Nếu $P(x) = c x^d (1 + Q(x))$, $P(x)^k = c^k x^{k d} \exp(k \ln(1 + Q(x)))$.
+    \item \textbf{Chia lấy thương và dư ($A = BQ + R$)}: Với $\text{rev}_k(P) = x^k P(1/x)$:
     $$\text{rev}_{n-m}(Q) \equiv \text{rev}_n(A) \cdot (\text{rev}_m(B))^{-1} \pmod{x^{n-m+1}}, \quad R = A - BQ$$
-    \item \textbf{Taylor Shift $P(x + c)$}: $P(x + c) = \sum_{k=0}^n \frac{x^k}{k!} \sum_{i=k}^n (i! a_i) \frac{c^{i-k}}{(i-k)!}$. Convolute reversed $A_i = i! a_i$ with $B_j = \frac{c^j}{j!}$.
-    \item \textbf{Any-Mod Convolution (MTT)}: Split $A = A_1 B + A_0$, $B = \lceil\sqrt{M}\rceil \approx 32000$. Compute $(A_1 B_1), (A_1 B_0 + A_0 B_1), (A_0 B_0)$ with 4 FFTs.
+    \item \textbf{Taylor Shift $P(x + c)$}: $P(x + c) = \sum_{k=0}^n \frac{x^k}{k!} \sum_{i=k}^n (i! a_i) \frac{c^{i-k}}{(i-k)!}$. Convolution dãy $A_i=i!a_i$ đảo ngược với $B_j = \frac{c^j}{j!}$.
+    \item \textbf{Convolution modulo tùy ý (MTT)}: Tách $A=A_1B+A_0$, $B= \lceil\sqrt{M}\rceil \approx 32000$. Tính $(A_1B_1),(A_1B_0+A_0B_1),(A_0B_0)$ bằng bốn FFT.
 \end{itemize}
 
-\Algorithm{Linear Algebra (Gauss)}
-{Gaussian Elimination: Matrix Determinant, Matrix Rank, System of Linear Equations}
+\Algorithm{Đại số tuyến tính (Gauss)}
+{Khử Gauss: định thức, hạng ma trận, hệ phương trình tuyến tính}
 {$\mathcal{O}(n^3)$}
-{}{source/pseudocode/linalg_gauss.txt}
+{compactcpp}{source/cpp/math/linalg_gauss.cpp}
 
 \Algorithm{XOR Linear Basis}
-{XOR Linear Basis: Find Max/Min/k-th XOR subset, span of $2^{\text{size}}$ distinct values}
-{$O(B)$ insert/query ($B \le 60$)}
-{}{source/pseudocode/xor_basis.txt}
+{XOR basis: XOR max/min/thứ $k$ của tập con, sinh $2^{\text{size}}$ giá trị phân biệt}
+{$O(B)$ thêm/truy vấn ($B \le 60$)}
+{compactcpp}{source/cpp/math/xor_basis.cpp}
 
 \Algorithm{Burnside Lemma \& P\'olya Theorem}
-{Count distinct equivalence classes under group actions, Necklaces, Bracelets}
+{Đếm lớp tương đương dưới tác động nhóm: necklace, bracelet}
 {}
 {}{}
 
 \begin{itemize}
     \item $|Classes| = \frac{1}{|G|} \sum_{g \in G} |Fix(g)| = \frac{1}{|G|} \sum_{g \in G} k^{c(g)}$.
-    \item \textbf{Necklace ($n$ rotations only)}: $N(n, k) = \frac{1}{n} \sum_{d \mid n} \phi(d) k^{n / d}$.
-    \item \textbf{Bracelet (Rotations + Reflections)}:
+    \item \textbf{Necklace (chỉ $n$ phép xoay)}: $N(n, k) = \frac{1}{n} \sum_{d \mid n} \phi(d) k^{n / d}$.
+    \item \textbf{Bracelet (xoay và đối xứng)}:
     \begin{itemize}
-        \item $n$ odd: $B(n, k) = \frac{1}{2} N(n, k) + \frac{1}{2} k^{(n+1)/2}$.
-        \item $n$ even: $B(n, k) = \frac{1}{2} N(n, k) + \frac{1}{4} (k^{n/2} + k^{n/2 + 1})$.
+        \item $n$ lẻ: $B(n, k) = \frac{1}{2} N(n, k) + \frac{1}{2} k^{(n+1)/2}$.
+        \item $n$ chẵn: $B(n, k) = \frac{1}{2} N(n, k) + \frac{1}{4} (k^{n/2} + k^{n/2 + 1})$.
     \end{itemize}
 \end{itemize}
 
-\Algorithm{Game Strategy \& State Reasoning}
-{Winning/Losing state axioms, Retrograde analysis, Symmetry, Parity, Sprague-Grundy MEX, Nim variants}
+\Algorithm{Chiến lược và suy luận trạng thái game}
+{Trạng thái thắng/thua, retrograde analysis, đối xứng, chẵn lẻ, Sprague-Grundy MEX, biến thể Nim}
 {$O(V + E)$}
-{}{source/pseudocode/game_strategy.txt}
+{compactcpp}{source/cpp/math/game_strategy.cpp}
 
 \begin{itemize}
-    \item \textbf{Winning ($\mathcal{W}$ / N-pos) vs Losing ($\mathcal{L}$ / P-pos) State Axioms}:
+    \item \textbf{Quy tắc trạng thái thắng ($\mathcal{W}$/N-pos) và thua ($\mathcal{L}$/P-pos)}:
     \begin{itemize}
-        \item \textbf{Terminal State}: Normal play (no moves $\implies \mathcal{L}$); Mis\`ere play (no moves $\implies \mathcal{W}$).
-        \item \textbf{Winning State $\mathcal{W}$}: $\exists v \in \text{next}(u)$ such that $v \in \mathcal{L}$ (at least ONE move leads to an $\mathcal{L}$-state).
-        \item \textbf{Losing State $\mathcal{L}$}: $\forall v \in \text{next}(u)$, $v \in \mathcal{W}$ (ALL moves lead to $\mathcal{W}$-states; or no moves exist).
-        \item \textbf{Optimal Play}: From $\mathcal{W}$, always choose a move to $\mathcal{L}$. Opponent from $\mathcal{L}$ is forced to move back to $\mathcal{W}$.
+        \item \textbf{Trạng thái kết thúc}: Normal play (hết nước đi $\implies \mathcal{L}$); Mis\`ere play (hết nước đi $\implies \mathcal{W}$).
+        \item \textbf{Trạng thái thắng $\mathcal{W}$}: $\exists v \in \text{next}(u)$ sao cho $v \in \mathcal{L}$ (có ít nhất một nước tới trạng thái $\mathcal{L}$).
+        \item \textbf{Trạng thái thua $\mathcal{L}$}: $\forall v \in \text{next}(u)$, $v \in \mathcal{W}$ (mọi nước tới $\mathcal{W}$, hoặc hết nước đi).
+        \item \textbf{Chơi tối ưu}: Từ $\mathcal{W}$, chọn nước tới $\mathcal{L}$. Đối thủ từ $\mathcal{L}$ buộc phải trở lại $\mathcal{W}$.
     \end{itemize}
-    \item \textbf{Problem-Solving Deduction Workflow}:
+    \item \textbf{Cách suy luận lời giải}:
     \begin{itemize}
-        \item \textbf{Retrograde BFS ($O(V + E)$)}: Propagate outcomes backward from terminal states using out-degree counters; unvisited states in cycles are \textbf{DRAW}.
-        \item \textbf{Symmetry / Mirroring}: If P2 can mirror P1's moves across center/axes, P2 wins. If P1 can make a central move leaving symmetric halves, P1 wins.
-        \item \textbf{Invariants \& Parity}: Track $I(S) \bmod 2$ (sum, components, inversions). Control parity to force terminal state on opponent.
-        \item \textbf{Pairing Strategy}: Partition board into disjoint matched pairs $(a_i, b_i)$. When P1 takes $a_i$, P2 immediately takes $b_i$.
-        \item \textbf{Small-case Pattern Finding}: Simulate for $N \le 20$, compute SG values $g(n)$, find periodicity $g(n) = g(n \bmod T)$ or bit conditions.
+        \item \textbf{Retrograde BFS ($O(V + E)$)}: Lan truyền kết quả ngược từ trạng thái kết thúc bằng bộ đếm bậc ra; trạng thái chu trình chưa xác định là \textbf{hòa}.
+        \item \textbf{Đối xứng/phản chiếu}: Nếu P2 phản chiếu được nước P1 qua tâm/trục, P2 thắng. Nếu P1 đi ở tâm để tạo hai nửa đối xứng, P1 thắng.
+        \item \textbf{Bất biến và chẵn lẻ}: Theo dõi $I(S)\bmod2$ (tổng, thành phần, nghịch thế). Điều khiển chẵn lẻ để đối thủ gặp trạng thái kết thúc.
+        \item \textbf{Chiến lược ghép cặp}: Chia bàn thành các cặp rời $(a_i,b_i)$. P1 lấy $a_i$ thì P2 lấy ngay $b_i$.
+        \item \textbf{Tìm quy luật từ trường hợp nhỏ}: Mô phỏng $N\le20$, tính SG $g(n)$, tìm chu kỳ $g(n)=g(n\bmod T)$ hoặc điều kiện bit.
     \end{itemize}
-    \item \textbf{Sprague-Grundy Theorem (Independent Subgames)}:
+    \item \textbf{Định lý Sprague-Grundy (game con độc lập)}:
     \begin{itemize}
-        \item $g(G) = \bigoplus g(G_i)$, where $g(u) = \text{mex}(\{g(v) \mid u \to v\})$. Win $\iff g(G) \ne 0$.
-        \item \textbf{Tree Hackenbush (Colon Principle)}: Branch node $g(u) = \bigoplus_{v \in \text{children}} (g(v) + 1)$.
+        \item $g(G) = \bigoplus g(G_i)$, với $g(u) = \text{mex}(\{g(v) \mid u \to v\})$. Thắng $\iff g(G) \ne 0$.
+        \item \textbf{Tree Hackenbush (Colon Principle)}: Node nhánh $g(u) = \bigoplus_{v \in \text{children}} (g(v) + 1)$.
     \end{itemize}
-    \item \textbf{Classic Nim Variations}:
+    \item \textbf{Các biến thể Nim quen thuộc}:
     \begin{itemize}
-        \item \textbf{Standard Nim}: XOR sum $S = \bigoplus a_i$. Win $\iff S \ne 0$.
-        \item \textbf{Bounded Subtraction Nim} (take $1..k$): $g(a) = a \bmod (k + 1) \implies$ Win $\iff \bigoplus (a_i \bmod (k+1)) \ne 0$.
-        \item \textbf{Moore's $\text{Nim}_k$} (take from $\le k$ piles): Lose $\iff \forall \text{ bit position } b, \sum_i \text{bit}_b(a_i) \equiv 0 \pmod{k + 1}$.
-        \item \textbf{Staircase Nim}: Equivalent to standard Nim on odd-indexed stairs ($1, 3, 5, \dots$).
-        \item \textbf{Mis\`ere Nim} (last move LOSES):
+        \item \textbf{Standard Nim}: Tổng XOR $S = \bigoplus a_i$. Thắng $\iff S \ne 0$.
+        \item \textbf{Bounded Subtraction Nim} (lấy $1..k$): $g(a) = a \bmod (k + 1) \implies$ Thắng $\iff \bigoplus (a_i \bmod (k+1)) \ne 0$.
+        \item \textbf{Moore's $\text{Nim}_k$} (lấy từ $\le k$ đống): Thua $\iff \forall \text{ vị trí bit } b, \sum_i \text{bit}_b(a_i) \equiv 0 \pmod{k + 1}$.
+        \item \textbf{Staircase Nim}: Tương đương Nim thường trên bậc có chỉ số lẻ ($1, 3, 5, \dots$).
+        \item \textbf{Mis\`ere Nim} (người đi cuối thua):
         \begin{itemize}
-            \item All piles $\le 1$: Win $\iff$ count of size-1 piles is EVEN ($S = 0$).
-            \item At least one pile $> 1$: Identical to standard Nim (Win $\iff S \ne 0$).
+            \item Mọi đống $\le1$: Thắng $\iff$ số đống có một viên là chẵn ($S = 0$).
+            \item Có đống $>1$: giống Nim thường (Thắng $\iff S \ne 0$).
         \end{itemize}
     \end{itemize}
 \end{itemize}
 
-\Algorithm{Probability \& Expected Value}
-{Linearity of expectation, Indicator variables, Coupon collector, Inequalities}
+\Algorithm{Xác suất và kỳ vọng}
+{Tính tuyến tính của kỳ vọng, biến chỉ báo, Coupon Collector, bất đẳng thức}
 {}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Linearity of Expectation}: $E[X_1 + \dots + X_n] = E[X_1] + \dots + E[X_n]$ ($\forall X_i$).
-    \item \textbf{Indicator Variables}: $E[X] = \sum P(A_i)$.
-    \item \textbf{Geometric Distribution}: $E[X] = 1/p$, $\text{Var}(X) = (1-p)/p^2$.
+    \item \textbf{Tính tuyến tính của kỳ vọng}: $E[X_1 + \dots + X_n] = E[X_1] + \dots + E[X_n]$ ($\forall X_i$).
+    \item \textbf{Biến chỉ báo}: $E[X] = \sum P(A_i)$.
+    \item \textbf{Phân phối hình học}: $E[X] = 1/p$, $\text{Var}(X) = (1-p)/p^2$.
     \item \textbf{Coupon Collector}: $E[T] = n \sum_{i=1}^n \frac{1}{i} = n H_n \approx n(\ln n + \gamma)$ ($\gamma \approx 0.5772$).
     \item \textbf{Markov}: $P(X \ge a) \le \frac{E[X]}{a}$; \textbf{Chebyshev}: $P(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}$.
 \end{itemize}
 
 \Algorithm{Bignum}
-{Base $10^9$ blocks; use 64-bit intermediates for arithmetic. Print highest block normally, remaining blocks padded to 9 digits.}
-{$O(n)$ printing ($n$ blocks)}
-{cpp}{source/template/bigint.cpp}
+{Các block cơ số $10^9$; tính trung gian bằng 64-bit. In block cao nhất bình thường, các block còn lại đủ 9 chữ số.}
+{$O(n)$ in ($n$ block)}
+{compactcpp}{source/cpp/math/big_integer.cpp}

@@ -42,7 +42,7 @@
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
 \lstset{
-basicstyle=\fontsize{7}{8}\ttfamily,
+basicstyle=\fontsize{6}{7}\ttfamily,
 columns=fullflexible,
 breaklines=true,
 keepspaces=true,
@@ -58,14 +58,18 @@ xleftmargin=11pt,
 framexleftmargin=0pt
 }
 \lstdefinelanguage{cpp}[]{C++}{}
-\newcommand{\inputminted}[3][]{\lstinputlisting[language=#2,#1]{#3}}
+\newcommand{\inputminted}[3][]{%
+\ifthenelse{\equal{#2}{compactcpp}}%
+{\lstinputlisting[language=cpp,linerange={NOTEBOOK_BEGIN-NOTEBOOK_END},rangeprefix={//},includerangemarker=false,gobble=2,firstnumber=0,#1]{#3}}%
+{\lstinputlisting[language=#2,#1]{#3}}}
 
-\newcommand{\revised}{Should be \textcolor{red}{\textbf{revised}}.}
-\newcommand{\tested}{Should be \textcolor{red}{\textbf{tested}}.}
-\newcommand{\added}{Should be \textcolor{red}{\textbf{added}}.}
-\newcommand{\WIP}{\textcolor{red}{\textbf{Working in progress.}}}
 
-\newcommand{\schoolname}{University of Information Technology, VNU-HCM}
+\newcommand{\revised}{Cần \textcolor{red}{\textbf{rà soát}}.}
+\newcommand{\tested}{Cần \textcolor{red}{\textbf{kiểm tra}}.}
+\newcommand{\added}{Cần \textcolor{red}{\textbf{bổ sung}}.}
+\newcommand{\WIP}{\textcolor{red}{\textbf{Đang hoàn thiện.}}}
+
+\newcommand{\schoolname}{Trường Đại học Công nghệ Thông tin, ĐHQG-HCM}
 \newcommand{\teamname}{UIT.BTC}
 \newcommand{\authorname}{Vu Gia Bao, Nguyen Khanh Tai, Huynh Trung Cuong}
 
@@ -83,13 +87,13 @@ framexleftmargin=0pt
 }
 \pagestyle{fancy}
 \lhead{\schoolname{} -- \teamname}
-\rhead{Page \thepage{} of
+\rhead{Trang \thepage{} / 
 \ifthenelse{\getpagerefnumber{LastPage} < 26}{\pageref{LastPage}}{\textcolor{red}{\textbf{\pageref{LastPage}}}}}
 \fancyfoot{}
 
-\title{Team Note of \teamname}
+\title{Notebook của đội \teamname}
 \author{\authorname}
-\date{Compiled on \today}
+\date{Biên dịch ngày \today}
 
 \newboolean{BangShowUsage}
 \setboolean{BangShowUsage}{false} 
@@ -118,7 +122,7 @@ framexleftmargin=0pt
 \long\def\Algorithm#1#2#3#4#5{
 	\subsection{#1}
 	
-	\ifthenelse{\boolean{BangShowComplexity}}{}{\IfEmptyTF{#3}{}{\textbf{Complexity:} #3\par}}
+	\ifthenelse{\boolean{BangShowComplexity}}{}{\IfEmptyTF{#3}{}{\textbf{Độ phức tạp:} #3\par}}
 	
 	\ifthenelse{\boolean{BangShowUsage}}{}{\IfEmptyTF{#2}{}{#2\par}}
 	
