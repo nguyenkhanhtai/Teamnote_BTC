@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto sol = gauss({{1.,2.,3.},{2.,1.,3.}},2);
   struct LinearSolution {
     int rank; bool consistent; vector<double>particular; vector<vector<double>>nullspace;
   };

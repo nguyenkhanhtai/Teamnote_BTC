@@ -1,0 +1,68 @@
+Sequence
+Subtask1
+• We can use a simple brute force algorithm.
+
+• For example, enumerate over every possible (𝑙𝑙, 𝑟𝑟) and
+ sort(or nth_element) the sequence to find the median.
+ Then count the occurrence.
+• Time complexity: 𝑂𝑂 𝑛𝑛3   − 𝑂𝑂(𝑛𝑛3 log 𝑛𝑛) .
+Subtask2
+• Here we need to find medians of a sequence quickly.
+
+• A simple way is to use two heaps to maintain the bigger
+ part and the smaller part of the sequence. Or just use a
+ balanced tree.
+• Time complexity 𝑂𝑂 𝑛𝑛2 log 𝑛𝑛 .
+
+• There’s also another way, reverse the operations, then we
+ just need to delete an existing value and find the medians.
+ This can be done with a linked list in 𝑂𝑂 𝑛𝑛2 .
+Subtask3
+• For every value 𝑥𝑥, occurrences of 𝑥𝑥 form two continuous
+ subsequence.
+• If we choose 𝑥𝑥 as the final median. We either choose one
+ of the subsequence or choose both if possible.
+• It’s easy to determine whether it’s possible to choose both.
+Subtask4
+• If the median of the whole sequence is not 2, then it
+ appears in the sequence more than 𝑛𝑛/2, and that’s of
+ course the answer. For the rest of the cases, choosing 𝑙𝑙 =
+ 0, 𝑟𝑟 = 𝑛𝑛 − 1, 𝑥𝑥 = 2 is the best choice if 𝑥𝑥 = 2.
+• Then just consider 𝑥𝑥 = 1,3. If we choose 𝑥𝑥 = 1, we can see
+ every 1 as 1, and every 2,3 as -1. Then we want to find a
+ continuous subsequence with non-negative sum and with
+ the most 1.
+• Do a prefix sum, then for every 𝑟𝑟 find the smallest 𝑙𝑙
+ satisfying 𝑠𝑠𝑠𝑠𝑚𝑚𝑟𝑟 ≥ 𝑠𝑠𝑠𝑠𝑚𝑚𝑙𝑙 .
+Subtask5
+• We just need to determine whether the answer is 1 or 2.
+
+• For every value 𝑥𝑥 that appeared twice at 𝑥𝑥1 , 𝑥𝑥2 :
+
+• Construct a sequence 𝐵𝐵𝑖𝑖 = max(−1, min 𝐴𝐴𝑖𝑖 − 𝑥𝑥, 1 ).
+
+• If we can find 𝑙𝑙 ≤ 𝑥𝑥1 ≤ 𝑥𝑥2 ≤ 𝑟𝑟 with sum   −2,2 , then 𝑥𝑥 is a
+ median of such 𝑙𝑙, 𝑟𝑟 .
+• Find 𝑙𝑙 ≤ 𝑥𝑥1 ≤ 𝑥𝑥2 ≤ 𝑟𝑟 with the biggest sum and smallest
+ sum, call these sums 𝑣𝑣1 , 𝑣𝑣2 . Since moving 𝑙𝑙 or 𝑟𝑟 by one
+ step only affect the sum by at most 1, so every integer
+ sum in [𝑣𝑣2 , 𝑣𝑣1 ] is achievable.
+Subtask 6&7
+• From the solution of Subtask5, we can actually determine
+ if there is (𝑙𝑙, 𝑟𝑟) satisfying 𝑙𝑙 ≤ 𝑥𝑥1 ≤ 𝑥𝑥2 ≤ 𝑟𝑟 and has median
+ 𝑥𝑥.
+• View every 𝑧𝑧 ≥ 𝑥𝑥 as 1, others as -1, find (𝑙𝑙, 𝑟𝑟) with
+ maximum sum, call this 𝑣𝑣1 .
+• View every 𝑧𝑧 > 𝑥𝑥 as 1, others as -1, find (𝑙𝑙, 𝑟𝑟) with
+ minimum sum, call this 𝑣𝑣2 .
+• If 𝑣𝑣1 ∗ 𝑣𝑣2 ≤ 0, then there exist such (𝑙𝑙, 𝑟𝑟).
+Subtask 6&7
+• Enumerate 𝑥𝑥 from small to big.
+
+• For the occurrences of 𝑥𝑥. Run two pointers to see if there
+ is a sequence with median 𝑥𝑥 and contains every 𝑥𝑥 from 𝑙𝑙
+ to 𝑟𝑟. The checking is described before.
+
+
+• Time complexity: 𝑂𝑂 𝑛𝑛 log 𝑛𝑛 .
+

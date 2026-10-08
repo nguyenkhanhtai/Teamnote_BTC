@@ -3,12 +3,15 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto mate = general_matching({{1},{0,2},{1}});
   // Edmonds blossom; simple undirected adjacency. Returns mate[u] or -1.
-  vector<int> general_matching(const vector<vector<int>>& adjacency) {
-    int n=adjacency.size(); std::mt19937 rng(712367); vector<int>match(n,-1);
-    vector<int> aux(n, -1); vector<int> label(n); vector<int> orig(n);
-    vector<int> parent(n, -1); queue<int> q; int aux_time = -1;
-    auto lca = [&](int v, int u) {
+  struct BlossomMatching {
+    const vector<vector<int>>& adjacency;
+    int n; mt19937 rng{712367};
+    vector<int> match,aux,label,orig,parent; queue<int> q; int aux_time=-1;
+    BlossomMatching(const vector<vector<int>>& g):adjacency(g),n(g.size()),
+        match(n,-1),aux(n,-1),label(n),orig(n),parent(n,-1) {}
+    int lca(int v, int u) {
       aux_time++;
       while (true) {
         if (v != -1) {
@@ -18,24 +21,24 @@ namespace notebook::graph {
         }
         swap(v, u);
       }
-    };
+    }
     // lca
-    auto blossom = [&](int v, int u, int a) {
+    void blossom(int v, int u, int a) {
       while (orig[v] != a) {
         parent[v] = u; u = match[v];
         if (label[u] == 1) { label[u] = 0; q.push(u); }
         orig[v] = orig[u] = a; v = parent[u];
       }
-    };
+    }
     // blossom
-    auto augment = [&](int v) {
+    void augment(int v) {
       while (v != -1) {
         int pv=parent[v]; int next_v=match[pv]; match[v]=pv; match[pv]=v;
         v = next_v;
       }
-    };
+    }
     // augment
-    auto bfs = [&](int root) {
+    bool bfs(int root) {
       fill(label.begin(),label.end(),-1); iota(orig.begin(),orig.end(),0);
       while (!q.empty()) { q.pop(); }
       q.push(root); label[root] = 0;
@@ -52,9 +55,9 @@ namespace notebook::graph {
         }
       }
       return false;
-    };
+    }
     // bfs
-    auto greedy = [&]() {
+    void greedy() {
       vector<int> order(n); iota(order.begin(), order.end(), 0);
       shuffle(order.begin(), order.end(), rng);
       for (int i : order) {
@@ -64,9 +67,15 @@ namespace notebook::graph {
           }
         }
       }
-    }; greedy();
-    for (int i = 0; i < n; i++) { if (match[i] == -1) { bfs(i); } }
-    return match;
+    }
+    vector<int> solve() {
+      greedy();
+      for (int i=0;i<n;++i) if (match[i]==-1) bfs(i);
+      return match;
+    }
+  };
+  vector<int> general_matching(const vector<vector<int>>& adjacency) {
+    BlossomMatching solver(adjacency); return solver.solve();
   }
 //NOTEBOOK_END
 }

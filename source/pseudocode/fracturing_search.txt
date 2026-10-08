@@ -1,0 +1,22 @@
+kBest(initialDomain, k):
+    heap = priority_queue()  // best solution first
+
+    push(domain):
+        best = oracle(domain)
+        if best exists:
+            heap.push({domain, best})
+
+    push(initialDomain)
+    answers = []
+    while heap not empty and answers.size < k:
+        {domain, S} = heap.pop()
+        answers.append(S)
+
+        prefix = copy(domain)
+        for i in unfixed decisions of domain:
+            child = copy(prefix)
+            child.fix(i, opposite(S[i]))
+            push(child)
+            prefix.fix(i, S[i])
+
+    return answers

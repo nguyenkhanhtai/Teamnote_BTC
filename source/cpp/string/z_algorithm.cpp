@@ -3,6 +3,7 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto z = z_function("ababa");
   vector<int> z_function(string_view s) {
     int n = s.size(); vector<int> z(n);
     for (int i = 1, l = 0, r = 0; i < n; ++i) {

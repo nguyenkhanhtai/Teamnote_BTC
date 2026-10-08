@@ -4,6 +4,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto root = sqrt_mod(4,17);
   optional<U64> sqrt_mod(U64 a, U64 p) {
     assert(is_prime(p)); a %= p;
     if (p == 2 || a == 0) return a;

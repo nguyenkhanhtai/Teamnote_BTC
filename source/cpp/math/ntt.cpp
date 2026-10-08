@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto c = convolution_ntt({1,2},{3,4});
   const int MOD = 998244353, G = 3;
   long long power(long long a, long long b) {
     long long res = 1;

@@ -1,0 +1,329 @@
+Croatian Open Competition in Informatics
+                Round 4, February 11th 2023
+
+
+
+
+                         Tasks
+       Task         Time limit   Memory limit   Score
+
+       7Krokods      1 second      512 MiB        50
+       Zrinka        1 second      512 MiB        70
+       Bojanje       1 second      512 MiB       110
+       Mreža         5 seconds     512 MiB       110
+       Vrsta         1 second      512 MiB       110
+
+       Total                                     450
+       Croatian Open Competition in Informatics                                              Task 7Krokods
+       Round 4, February 11th 2023                                            1 second / 512 MiB / 50 points
+
+
+Task 7Krokods
+When he is not making videos for his YouTube channel, the famous programmer
+influencer Krokod likes to play boardgames with his friend Paula. He wants to
+play the game 7Krokods, but Paula doesn’t like complex games, so Krokod decided
+that they will play only with green and crocodile cards.
+Paula has n green cards, and each of them has one of the following letters written on
+it: d, k, o, or r. Her total score is defined as the sum of the following components:
+
+   • For each letter, she gets as much points as is the number of cards with that
+     letter written on them, squared. For example, if she has 6 cards with the letter k, she gets 36 points.
+
+   • For each word krokod she can make from her cards, she gets an extra 7
+     points.
+
+                                       Illustration of the first example.
+
+
+
+
+Paula has 2 letters d (2 · 2 = 4 points), 6 letters k (6 · 6 = 36 points), 4 letters o (4 · 4 = 16 points) and 3
+letters r (3 · 3 = 9 points). The word krokod can be spelled 2 times (7 · 2 = 14 points). Her total score is
+                                      79 . (4 + 36 + 16 + 9 + 14 = 79)
+
+Paula also has m crocodile cards. She can replace each of the crocodile cards with a green card having a
+letter of her choice. She will do it in a way that maximizes her score.
+Help her determine the maximum score she can get with her cards.
+
+Input
+The first line contains integers n and m (0 ≤ n ≤ 100, 0 ≤ m ≤ 10), the number of green cards and the
+number of crocodile’s cards.
+The second line contains a sequence of n characters, where the i-th characters represents the letter on the
+i-th green card. The sequence consists only of characters d, k, o and r.
+
+Output
+In the first and only line output Paula’s maximum possible score.
+
+
+
+
+                                                    1 of 7
+          Croatian Open Competition in Informatics                                        Task 7Krokods
+          Round 4, February 11th 2023                                      1 second / 512 MiB / 50 points
+
+
+Scoring
+
+ Subtask       Points   Constraints
+
+      1          17     m=0
+      2          26     m=1
+      3           7     No additional constraints.
+
+Examples
+ input                                  input                         input
+ 15 0                                   5 1                           8 2
+ krokodkrokodkrk                        rokod                         ddkkoorr
+
+ output                                 output                        output
+ 79                                     17                            35
+
+
+Clarification of the first example:
+Look at the illustation in the task statement.
+Clarification of the second example:
+For the maximum possible score, Paula can replace her crocodile card with a green card having the letter
+k.
+
+
+
+
+                                                     2 of 7
+         Croatian Open Competition in Informatics                                                 Task Zrinka
+         Round 4, February 11th 2023                                            1 second / 512 MiB / 70 points
+
+
+Task Zrinka
+You are given two arrays of length n and m respectively, which consist only of 0’s
+and 1’s.
+Your task is to replace every zero with an even positive integer and every one with
+an odd positive integer. After replacements both arrays should be increasing and
+you can use each postive integers at most once.
+As this would be to easy, you are asked to do it such that the largest number you
+use is as small as possible.
+Given two arrays, output the minimum possible largest number that needs to be used.
+
+Input
+The first array is of length n (0 ≤ n ≤ 5 000), the second is of length m (1 ≤ m ≤ 5 000).
+The first line consists of n + 1 integers, first being n, and others describing the first array.
+The second line consists of m + 1 integers, first being m, and others describing the second array.
+
+Output
+The first and only line should contain a positive integer, the answer to the question above.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n=0
+     2          20     The first array consists only of 0’s.
+     3          15     n, m ≤ 500
+     4          20     No additional constraints.
+
+Examples
+ input                                  input                              input
+
+ 0                                      4 0 1 0 1                          5 0 1 0 0 1
+ 4 1 0 1 1                              4 1 0 0 1                          4 0 0 0 1
+
+ output                                 output                             output
+ 5                                      9                                  13
+
+
+Clarification of the second example:
+One of the possible solutions is (2, 3, 4, 5) and (1, 6, 8, 9).
+Clarification of the third example:
+One of the possible solutions is (2, 3, 6, 8, 9) and (4, 10, 12, 13).
+
+
+
+
+                                                      3 of 7
+         Croatian Open Competition in Informatics                                             Task Bojanje
+         Round 4, February 11th 2023                                        1 second / 512 MiB / 110 points
+
+
+Task Bojanje
+Oliver is a rubber duck that, not only finds bugs, but also likes to paint. His latest
+painting has n parts, each coloured with a unique colour. After he got a lot of
+critiques his painting is too predictable, he decided to modify his painting in t
+iterations. In every iteration he will do the following steps:
+
+  1. Oliver will select uniformly at random an index i (1 ≤ i ≤ n), and memorize
+     the colour on the i-th part od the painting.
+  2. Again, Oliver will select uniformly at random an index j (1 ≤ j ≤ n). He
+     will repaint the j-th part of the painting with the colour of the i-th part od the painting. If the j-th
+     part is already painted in that colour, there is no change. Note that i can be equal to j.
+
+Now, Oliver is afraid his painting will become monotonous or boring. He considers a painting good if
+there are at least k differents colours on it. Help him calculate the probability that his painting will be
+good at the end.
+
+Input
+The first line contains the numbers from the task statement n, t and k (2 ≤ k ≤ n ≤ 10, 1 ≤ t ≤ 1018 ).
+
+Output
+In the first and only line output the answer modulo 109 + 7.
+Formally, let m = 109 + 7. It can be shown that the answer can be expressed as an irreducible fraction pq ,
+where p and q are integers and q ̸≡ 0 (mod m). Output the integer equal to p · q −1 mod m. In other
+words, output such an integer x that 0 ≤ x < m and x · q ≡ p (mod m).
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          30     k=n
+     2          40     t ≤ 1 000
+     3          40     No additional constraints.
+
+Examples
+ input                                 input                               input
+ 2 1 2                                 10 2 5                              3 141592653589793 2
+
+ output                                output                              output
+
+ 500000004                             1                                   468261332
+
+
+Clarification of the first example:
+On the painting there are two colours, so the probability that it remains the same after one iteration is 12 .
+Clarification of the second example:
+After two iterations, the number of different colours can’t go from 10 to less than 5, so in every case the
+painting will have at least 5 different colours.
+
+
+                                                    4 of 7
+         Croatian Open Competition in Informatics                                                   Task Mreža
+         Round 4, February 11th 2023                                            5 seconds / 512 MiB / 110 points
+
+
+Task Mreža
+The city mayor Mirko lives in a city with n neighborhoods connected with n − 1
+bidirectional roads such that from any neighborhood it is possible to reach every
+other neighborhood.
+Mirko wants to upgrade some roads to reduce traffic. For every road, we know the
+current speed vi vehicles drive on it, the price of upgrading ci and the speed of
+driving after upgrading si .
+There are q unsatisfied citizens that come to visit Mirko. Each one has their
+suggestion for an upgrade. The suggestion of the i-th citizen is: “We should invest ei euros in upgrading
+roads between neighborhoods ai and bi ”
+For each suggestion, Mirko is interested in what is the minimum driving speed between neighborhoods
+ai and bi if he spends at most ei euros on upgrading the roads, given thathis goal is to maximize the
+minimum driving speed between the neighborhoods ai and bi .
+Mirko soon realized that calculating this is not an easy task and hired you to help him!
+
+Input
+The first line contains the integer n (2 ≤ n ≤ 100, 000), the number of neighborhoods.
+In each of the next n − 1 lines there are five integers xi , yi , vi , ci , si (1 ≤ xi , yi ≤ n, 1 ≤ vi < si ≤
+109 , 1 ≤ ci ≤ 109 ), denoting that neighborhood xi and yi are connected, current driving speed is vi , cost
+of upgrading the road is ci , and the speed on the road would be si .
+The next line contains the integer q (1 ≤ q ≤ 100 000), the number of unsatisfied citizens.
+In each of the next q lines there are three integers ai , bi , ei (1 ≤ ai , bi ≤ n, ai ̸= bi , 1 ≤ ei ≤ 1018 ), which
+describe the suggestion of the i-th citizen.
+
+Output
+In the i-th of the q lines print the answer to the request of the i-th citizen.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          21     n, q ≤ 1 000
+     2          29     Each of the neighborhoods will be connected with at most 2 other neighborhoods.
+     3          60     No additional constraints.
+
+
+
+
+                                                       5 of 7
+      Croatian Open Competition in Informatics                                             Task Mreža
+      Round 4, February 11th 2023                                      5 seconds / 512 MiB / 110 points
+
+
+Examples
+ input                                               input
+ 6                                                   4
+ 1 2 5 7 10                                          1 2 5 5 8
+ 1 3 4 8 9                                           2 3 4 6 9
+ 3 4 7 1 15                                          3 4 6 10 7
+ 3 5 6 3 11                                          4
+ 3 6 5 6 8                                           1 4 16
+ 3                                                   2 4 16
+ 2 4 15                                              1 4 10
+ 6 4 5                                               3 4 10
+ 3 5 10
+                                                     output
+ output
+                                                     6
+ 7                                                   7
+ 5                                                   5
+ 11                                                  7
+
+
+Clarification of the first example:
+The illustration represents the city and its neighborhoods. On the edges are written the current driving
+speed, the cost of upgrading, and the speed after upgrading, respectively.
+If we upgrade the roads between 1 and 2, and between 1 and 3, the driving speeds from 2 to 4 will be 10,
+9, and 7 m/s. The minimum is 7 m/s.
+If we upgrade the roads between 4 and 3, the driving speeds from 6 to 4 will be 5 an 15 m/s. The
+minimum is 5 m/s.
+If we upgrade the road between 3 and 5, the driving speed from 5 to 3 will be 11 m/s.
+
+
+
+
+                                                 6 of 7
+         Croatian Open Competition in Informatics                                               Task Vrsta
+         Round 4, February 11th 2023                                        1 second / 512 MiB / 110 points
+
+
+Task Vrsta
+Domagoj’s favorite school subject is P.E. Every P.E. class starts with warm-up
+exercises. The teacher has an interesting way of choosing the student who will lead
+the warm-up. The students stand in a line sorted by their height. The teacher will
+choose the student that is standing in the middle of the line. If two students are
+in the middle, he will choose the shorter one. For example: if the students have
+heights 1 3 5 7 11, the student with height 5 will lead the warm-up exercises.
+Domagoj does not remember how tall his classmates are. Luckily, next to him
+stands Lovro who is very good at estimating people’s heights. He gives Domagoj n statements: “There are
+ai students entering the gym with height vi ”. After every statement said by Lovro, Domagoj is interested
+in the height of the student who will lead the warm-up, if only the students who entered the gym come to
+P.E. class. Help him answer his questions!
+
+Input
+The first line contains the integer n (1 ≤ n ≤ 200, 000), the number of Lovro’s statements.
+The following n lines contain two integers vi , ai (1 ≤ vi , ai ≤ 109 ), the height and the number of students
+in Lovro’s statement.
+
+Output
+In the i-th of n lines output the answer to Domagoj’s question after i of Lovro’s statements.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          19     n, vi ≤ 1 000
+     2          26     a1 = a2 = . . . = an = 1
+     3          29     v1 < v2 < . . . < vn
+     4          36     No additional constraints.
+
+Examples
+ input                                 input                              input
+ 3                                     4                                  3
+ 2 1                                   17 2                               10 20
+ 3 1                                   23 5                               100 5
+ 1 1                                   11 4                               1000 5
+                                       9 5
+ output                                                                   output
+                                       output
+ 2                                                                        10
+ 2                                     17                                 10
+ 2                                     23                                 10
+                                       17
+                                       11
+
+
+
+
+                                                    7 of 7
+

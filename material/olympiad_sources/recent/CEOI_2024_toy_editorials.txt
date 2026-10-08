@@ -1,0 +1,105 @@
+                                                                                                 toyedit
+                                                                                                Day 2 Tasks
+                                                                                               English (ISC)
+
+
+
+
+Toy Editorial
+Subtask 1
+
+For the first subtask, we can do a state-based search with our state being positions of the
+horizontal and vertical part. For state transitions, we need to check if new state is valid:
+
+      Squares occupied by the parts are empty.
+      Both parts overlap.
+      Both parts are entirely inside the maze.
+
+There are O(H 2​ W 2​ ) states and transitions from a single state can be constructed in O(K + L)
+time. The total time is O(H 2​ W 2​ (K + L)).
+
+
+Subtask 2
+
+First, we wrap the maze in an outer layer of walls. This makes computing transitions simpler. As an
+extra bonus, we will not have to worry about the toy sticking out of the maze.
+
+Now we make the transitions faster using prefix sums. For each square, we compute the number
+of free squares to the right:
+
+
+                                 ​ = {​
+                                      0          (x, y) is obstacle
+                                rx,y             ​
+                                        ​
+                                      rx+1,y + 1 otherwise
+
+We can the compute number of squares down similarly. Using this we can check for empty squares
+in O(1), bringing total time down to O(W 2​ H 2​ ).
+
+
+Subtask 3
+
+We can do a small improvement – we represent a state as intersection of the parts and their
+offsets from the intersection. This brings number of states down to O(W HKL) with time
+complexity being the same.
+
+
+Subtask 4
+
+We can notice that only the position of the intersection matters, as all valid states with the same
+intersection can be reached from each other. (For the transformation we only need to use squares
+
+
+
+                                                                                           toyedit (1 of 2)
+occupied in at least one of the positions.)
+
+The transitions are now bit more complicated as two valid intersections next to each other don't
+have to be reachable:
+
+
+   ...
+   ..X
+   X+-
+   .|.‎
+
+
+If we do vertical transition we can try all the K paths which can the horizontal part take. (Each one
+is defined by its offset from the intersection.) We do not have to worry about the vertical part, as
+the new intersection must be occupied by the horizontal part, too.
+
+We have now O(W H) states and transitions in O(K + L): O(W H(K + L)) total.
+
+
+Subtask 5
+
+The only remaining part is improving the transitions. Let us consider moving the intersection from
+A‎to ‎
+     B‎:
+
+
+   ...X<-A--->X.
+   X<----B->X...‎
+
+
+(And suppose that we precompute space in each direction as described in Subtask 2.)
+
+How much space does the horizontal part have? To the rightmost obstacle left from A and B and to
+the leftmost obstacle right:
+
+                                    min(lA
+                                         ​ , lB
+                                              ​ ) + min(rA​ , rB
+                                                               ​ )−1
+
+If this space is at least K , we can do the transition, otherwise not. Similarly for the vertical
+transition.
+
+As we can now do the transitions in O(1), our final time complexity is therefore O(W H).
+
+
+
+
+                                                                                        toyedit (2 of 2)
+

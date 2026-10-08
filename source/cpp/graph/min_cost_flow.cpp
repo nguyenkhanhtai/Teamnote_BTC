@@ -3,12 +3,14 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: MinCostFlow flow(3); flow.add_edge(0,1,5,2);
+  //      auto ans = flow.send(0,1,3); // ans.flow, ans.cost
   // Capacities nonnegative; no reachable negative-cost cycle in residual graph.
   // Bellman-Ford initializes potentials; Dijkstra for each augmentation.
   struct MinCostFlow {
     struct Edge { int to,rev; long long cap,cost; }; vector<vector<Edge>>g;
     struct Result { long long flow, cost; };
-    explicit MinCostFlow(int n) : g(n) {}
+    MinCostFlow(int n) : g(n) {}
     void add_edge(int u, int v, long long cap, long long cost) {
       assert(cap >= 0); int a = g[u].size(), b = g[v].size();
       g[u].push_back( {v,b+(u==v),cap,cost}); g[v].push_back( {u,a,0,-cost});

@@ -3,6 +3,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: bool ok = floyd_warshall(dist); // vector<vector<long long>>
   // Matrix includes diagonal 0, inf for absent edges. Reports whether a negative cycle exists.
   // Distances involving a negative cycle require separate -infinity propagation.
   bool floyd_warshall(vector<vector<long long>>&d,long long inf=1LL<<60){

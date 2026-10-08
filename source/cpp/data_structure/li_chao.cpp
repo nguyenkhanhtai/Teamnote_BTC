@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: LiChao lc(-100,101); lc.add(2,3); auto y = lc.minimum(5);
   // Integer-domain minimum envelope [lo,hi); query nullopt before first insertion.
   struct LiChao {
     struct Line {

@@ -4,6 +4,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto tree = gomory_hu(3,{{0,1,5},{1,2,7}});
   struct CutTreeEdge { int u, v; long long capacity; };
   // Undirected nonnegative capacities; min edge on tree path gives pairwise min-cut.
   vector<CutTreeEdge> gomory_hu(int n, const vector<CutTreeEdge>& edges){

@@ -4,6 +4,7 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: int where = point_in_polygon({{0,0},{2,0},{0,2}},{1,0});
   int point_in_polygon(const vector<Point>& p, Point q) {
     bool inside = false;
     for (int i = 0, n = p.size(); i < n; ++i) {

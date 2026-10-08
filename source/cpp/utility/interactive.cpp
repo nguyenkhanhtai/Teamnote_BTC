@@ -1,17 +1,17 @@
 #include <bits/stdc++.h>
+  // Use: InteractiveSession judge(cin,cout,100);
 
 // Protocol adapter: supply serialization and invalid-reply rules for the task.
-template<class Reply>
-class InteractiveSession {
+struct InteractiveSession {
+    using Reply = int; // Change reply type to match the protocol.
     std::istream& input;
     std::ostream& output;
     size_t limit, used = 0;
-public:
     InteractiveSession(std::istream& in, std::ostream& out, size_t budget)
         : input(in), output(out), limit(budget) {}
     size_t queries() const { return used; }
-    template<class Write, class Valid>
-    Reply ask(Write write, Valid valid) {
+    Reply ask(std::function<void(std::ostream&)> write,
+              std::function<bool(Reply)> valid) {
         if (used == limit) throw std::runtime_error("query budget exhausted");
         write(output); output << '\n' << std::flush; ++used;
         Reply reply;
@@ -19,13 +19,11 @@ public:
             throw std::runtime_error("invalid judge reply");
         return reply;
     }
-    template<class Write>
-    void answer(Write write) { write(output); output << '\n' << std::flush; }
+    void answer(std::function<void(std::ostream&)> write) { write(output); output << '\n' << std::flush; }
 };
 
 // Monotone predicate: test(lo)=false, test(hi)=true; known endpoints not queried.
-template<class Test>
-long long first_true(long long lo, long long hi, Test test) {
+long long first_true(long long lo,long long hi,std::function<bool(long long)> test) {
     assert(lo < hi);
     while (__int128(hi) - lo > 1) {
         long long mid = static_cast<long long>(__int128(lo) + (__int128(hi) - lo) / 2);
@@ -35,8 +33,8 @@ long long first_true(long long lo, long long hi, Test test) {
 }
 
 // Adjacent values differ by 1; read(lo)<=target<=read(hi), lo<hi.
-template<class Read>
-long long find_unit_step_value(long long lo, long long hi, long long target, Read read) {
+long long find_unit_step_value(long long lo,long long hi,long long target,
+                               std::function<long long(long long)> read) {
     while (__int128(hi) - lo > 1) {
         long long mid = static_cast<long long>(__int128(lo) + (__int128(hi) - lo) / 2);
         auto value = read(mid);
@@ -48,8 +46,7 @@ long long find_unit_step_value(long long lo, long long hi, long long target, Rea
 
 // Distinct values, n>=2; better(i,j) returns true iff value[i]>value[j].
 // Returns {maximum index, second-maximum index}; balanced tournament.
-template<class Better>
-std::pair<int, int> top_two(int n, Better better) {
+std::pair<int,int> top_two(int n,std::function<bool(int,int)> better) {
     assert(n >= 2);
     std::vector<std::vector<int>> defeated(n);
     std::vector<int> round(n);

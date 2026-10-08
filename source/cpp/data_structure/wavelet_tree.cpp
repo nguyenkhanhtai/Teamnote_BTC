@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: WaveletTree wt({3,1,2}); auto x = wt.kth(0,3,0);
   // Immutable array; ranges [l,r), k is zero-based. O(log sigma) queries.
   struct WaveletTree {
     struct Node { int lo,hi,left=-1,right=-1; vector<int>pref; }; vector<Node>nodes;
@@ -25,7 +26,7 @@ namespace notebook::data_structure {
       int a = t.pref[l], b = t.pref[r];
       return less(t.left, a, b, rank) + less(t.right, l - a, r - b, rank);
     }
-    explicit WaveletTree(const vector<long long>&a):values(a),n(a.size()){
+    WaveletTree(const vector<long long>&a):values(a),n(a.size()){
       sort(values.begin(), values.end());
       values.erase(unique(values.begin(),values.end()),values.end()); vector<int>ranks;
       for(auto x:a)ranks.push_back(lower_bound(values.begin(),values.end(),x)-values.begin());

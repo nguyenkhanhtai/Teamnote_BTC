@@ -3,6 +3,8 @@
 namespace notebook::tree {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: TreeIsomorphism iso; bool same = iso.isomorphic({{1},{0}},
+  //                                                                  {{1},{0}});
   // Shared interning dictionary gives exact rooted IDs (not randomized hashes).
   struct TreeIsomorphism {
     map<vector<int>, int> ids;

@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: LinkCutTree lct({1,2,3}); lct.link(0,1);
   // Dynamic forest, vertex values, path sum. 0-based IDs; -1 is no node.
   struct LinkCutTree {
     struct Node {
@@ -48,7 +49,7 @@ namespace notebook::data_structure {
       while (push(u), t[u].child[0] >= 0) u = t[u].child[0];
       splay(u); return u;
     }
-    explicit LinkCutTree(const vector<long long>&values):t(values.size()){
+    LinkCutTree(const vector<long long>&values):t(values.size()){
       for(int i=0; i<(int)t.size(); ++i)t[i].value=t[i].sum=values[i];
     }
     void make_root(int u) { access(u); flip(u); }

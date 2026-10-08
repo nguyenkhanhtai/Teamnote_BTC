@@ -1,0 +1,900 @@
+Asia-Pacific Informatics Olympiad 2026
+                Editorial
+
+
+                      Task Authors
+
+    Task                  Author
+    APIOBike              Yuki Tanaka and Tomohisa Hachiya
+    Navigation            Kibeom Kim
+    Scallion Pancake Party Yuki Tanaka and Tomohisa Hachiya
+
+
+
+
+               Host Scientific Committee
+
+                       Shang-En Huang
+                        Hsin-Wei Hou
+                          Yu-Jie Lin
+                          Brian Tsai
+                          Chi Wang
+                          Bo-Ye Wu
+Asia-Pacific Informatics Olympiad 2026 Editorial                                         APIO 2026 HSC
+
+
+1     APIOBike
+1.1     Subtask 1
+In this subtask, the road network is a path with stations numbered 0, 1, …, 𝑁 − 1 in sequential order.
+Every station 𝑖 satisfies 𝐴[𝑖] ≠ 𝐵[𝑖], and there is exactly one station 𝑠 that initially contains all bikes.
+
+Our goal is to redistribute bikes from station 𝑠 to all other stations. The rebalancing truck starts at
+𝑠 and loads 𝐴[𝑠] − 𝐵[𝑠] bikes. The number of bikes on the truck then equals ∑𝑖≠𝑠 𝐵[𝑖]. As the truck
+visits each station 𝑖 ≠ 𝑠, the driver unloads exactly 𝐵[𝑖] bikes. To complete the rebalancing, the truck
+must visit every station at least once.
+
+To minimize the travelling distance while visiting all stations, we consider two candidate walks:
+• 𝑋 = [𝑠, 𝑠 + 1, …, 𝑁 − 2, 𝑁 − 1, 𝑁 − 2, …, 0].
+• 𝑋 = [𝑠, 𝑠 − 1, …, 1, 0, 1, …, 𝑁 − 1].
+
+The optimal answer is the shorter of these two sequences.
+
+1.2     Subtask 2
+We observe that there always exists a rebalancing strategy with a distance ≤ 2𝑁 − 2. In this subtask,
+the tree is a path and 𝑁 is small, allowing us to enumerate all possible walks. There are at most 𝑁 ×
+22𝑁−2 such walks.
+
+To check if a station sequence 𝑋 is valid, we greedily construct 𝑌 as follows: For each station 𝑖, let
+its visited steps be 𝑡1 , 𝑡2 , …, 𝑡𝑘 in chronological order.
+• At 𝑡1 , set 𝑌 [𝑡1 ] = −𝐴[𝑖] (load all initial bikes onto the truck).
+• At 𝑡𝑘 , set 𝑌 [𝑡𝑘 ] = 𝐵[𝑖] (unload the target number of bikes at the station).
+• If 𝑡1 = 𝑡𝑘 , then 𝑌 [𝑡1 ] = 𝐵[𝑖] − 𝐴[𝑖].
+• For all other steps 𝑡𝑗 , set 𝑌 [𝑡𝑗 ] = 0.
+
+This construction ensures that the number of bikes at station 𝑖 never drops below zero. We then
+verify if the truck always maintains a non-negative bike count, which is equivalent to checking if every
+prefix sum of 𝑌 is non-positive. It takes 𝑂(𝑁 ) time to check if the sequence 𝑌 is valid.
+
+By finding the valid strategy with the minimum travelling distance, the overall time complexity
+is 𝑂(𝑁 2 22𝑁 ).
+
+1.2.1    Correctness proof
+
+    Observation 1.1. If the input tree is a path with stations 0, 1, …, 𝑁 − 1 in sequential order,
+    there exists a rebalancing strategy with travelling distance 2𝑁 − 2.
+
+
+Proof. Consider the strategy: The truck starts at station 0, and collects all bikes at 0, 1, …, 𝑁 − 1. At
+this point, all bikes are on the truck. The truck then travels back and unloads bikes at stations 𝑁 −
+1, 𝑁 − 2, …, 0 to ensure each station 𝑖 has exactly 𝐵[𝑖] bikes.                                        □
+
+
+    Observation 1.2. If there exists a rebalancing strategy with station sequence 𝑋, then there
+    exists a rebalancing strategy (𝑋, 𝑌 ) where 𝑌 is constructed as described above.
+
+
+
+                                                     1
+Asia-Pacific Informatics Olympiad 2026 Editorial                                          APIO 2026 HSC
+
+
+Proof. Let 𝑌 be the sequence constructed as described above. We aim to show that 𝑌 is valid. Suppose
+(𝑋, 𝑌 ′ ) is any arbitrary valid strategy.
+
+For each step 𝑡, we want to show that ∑𝑡′ ≤𝑡 𝑌 [𝑡′ ] ≤ ∑𝑡′ ≤𝑡 𝑌 ′ [𝑡′ ] ≤ 0. We consider the contribution
+to the sum from each station 𝑗:
+• If station 𝑗 is not visited again after step 𝑡, then
+
+                                   ∑ 𝑌 [𝑡′ ] = ∑ 𝑌 ′ [𝑡′ ] = 𝐴[𝑗] − 𝐵[𝑗].
+                                  𝑡′ ≤𝑡              𝑡′ ≤𝑡
+                                 𝑋[𝑡′ ]=𝑗           𝑋[𝑡′ ]=𝑗
+
+• If station 𝑗 has not been visited at all by step 𝑗, then
+
+                                            ∑ 𝑌 [𝑡′ ] = ∑ 𝑌 ′ [𝑡′ ] = 0.
+                                          𝑡′ ≤𝑡            𝑡′ ≤𝑡
+                                         𝑋[𝑡′ ]=𝑗         𝑋[𝑡′ ]=𝑗
+
+• If station 𝑗 has been visited at least once and will be visited again later, then
+
+                                        ∑ 𝑌 [𝑡′ ] = −𝐴[𝑗] ≤ ∑ 𝑌 ′ [𝑡′ ]
+                                        𝑡′ ≤𝑡                         𝑡′ ≤𝑡
+                                       𝑋[𝑡′ ]=𝑗                      𝑋[𝑡′ ]=𝑗
+
+
+   because the bike count at the station 𝐴[𝑗] + ∑𝑡′ ≤𝑡 𝑌 ′ [𝑡′ ] must be ≥ 0.
+
+Summing over all stations 𝑗:
+
+                                𝑁−1                     𝑁−1
+                    ∑ 𝑌 [𝑡′ ] = ∑ ∑ 𝑌 [𝑡′ ] ≤ ∑ ∑ 𝑌 ′ [𝑡′ ] = ∑ 𝑌 ′ [𝑡′ ] ≤ 0.
+                    𝑡′ ≤𝑡        𝑗=0    𝑡′ ≤𝑡           𝑗=0     𝑡′ ≤𝑡           𝑡′ ≤𝑡
+                                       𝑋[𝑡′ ]=𝑗                𝑋[𝑡′ ]=𝑗
+
+
+                                                                                                          □
+
+Thus, to check if a station sequence 𝑋 can be valid, it suffices to verify the specific construction of 𝑌 .
+
+1.3    Subtask 4
+Unlike previous subtasks, the road network is no longer a path but a general tree. However, there is
+still only one station 𝑠 with 𝐴[𝑠] > 0. Similar to subtask 1, we must find the shortest walk starting
+at 𝑠 that visits all required stations.
+
+In this subtask, there may be stations where 𝐴[𝑖] = 𝐵[𝑖]. If a leaf station 𝑖 satisfies 𝐴[𝑖] = 𝐵[𝑖], it does
+not need to be visited. We can repeatedly remove such leaves until all remaining leaves have 𝐴[𝑖] ≠
+𝐵[𝑖]. After this pruning process, all remaining stations in the tree must be visited at least once.
+
+Suppose 𝑡 is the final station in the walk.
+• Each edge on the simple path from 𝑠 to 𝑡 must be traversed at least once.
+• All other edges in the tree must be traversed at least twice.
+
+Thus, a walk from 𝑠 to 𝑡 that visits all stations has a length of at least 2(𝑁 − 1) − dist(𝑠, 𝑡). (𝑁 is
+the number of required stations here.) This walk can be generated via DFS:
+• Perform a DFS starting from 𝑠.
+• For each station, treverse subtrees that do not contain the final station 𝑡 first.
+• Traverse the subtree containing 𝑡 last.
+
+                                                         2
+Asia-Pacific Informatics Olympiad 2026 Editorial                                         APIO 2026 HSC
+
+
+The walk concludes immediately upon reaching 𝑡 for the last time, achieving the lower bound distance.
+To minimize the total distance, we simply choose 𝑡 as the station farthest from 𝑠 in the pruned tree.
+
+The time complexity is 𝑂(𝑁 ).
+
+1.4    Subtask 3
+1.4.1 Incorrect Approach
+Following the ideas from subtask 1 and subtask 4, an intuitive approach is to find a starting station
+𝑠 and a final station 𝑡 such that the strategy traverses edges on the 𝑠-𝑡 simple path exactly once and
+all other edges exactly twice. This would result in a travelling distance 2(𝑁 − 1) − dist(𝑠, 𝑡). (Note:
+This is incorrect, but we will explain this idea first.)
+
+The question is which (𝑠, 𝑡) pairs can support such a strategy. To identify these, we orient every edge
+according to the required flow of bikes across the edge. For every edge (𝑢, 𝑣), let 𝑆𝑢 and 𝑆𝑣 be the
+net balance (the sum of 𝐴[𝑖] − 𝐵[𝑖]) of the two components separated by the edge, respectively. Since
+the total number of bikes is conserved, 𝑆𝑢 = −𝑆𝑣 . We can orient the edge based on this balance:
+• 𝑆𝑢 > 0: Bikes must move from 𝑢’s side to 𝑣’s side, so the orientation is 𝑢 → 𝑣.
+• 𝑆𝑢 < 0: Bikes must move from 𝑣’s side to 𝑢’s side, so the orientation is 𝑢 ← 𝑣.
+• 𝑆𝑢 = 0: There is no net transfer required across the edge. The orientation can be in either direction;
+   we assume it is oriented away from 𝑠.
+
+Obviously, if an edge 𝑢 ← 𝑣 has an orientation toward 𝑠, a valid strategy cannot traverse it only once;
+otherwise, we would be unable to move bikes from 𝑣’s side to 𝑢’s side. Therefore, to traverse edges
+on the 𝑠-𝑡 simple path only once, all edges on that path must be oriented toward 𝑡. We would then
+seek the longest directed path and let its endpoints be the starting station 𝑠 and the final station 𝑡.
+Since this is the longest directed path, 𝑠 has no incoming edges and 𝑡 has no outgoing edges among
+all incident edges.
+
+We can then construct a strategy. Without loss of generality, assume that 𝑠 < 𝑡.
+• The strategy starts at 𝑠. First, it collects all bikes from stations 𝑠, 𝑠 − 1, …, 0, and unloads bikes
+  at 0, 1, …, 𝑠 − 1 to reach their target 𝐵[𝑖]. This is valid because ∑𝑠𝑖=0 (𝐴[𝑖] − 𝐵[𝑖]) ≥ 0 due to the
+  orientation 𝑠 → 𝑠 + 1.
+• Then, for each 𝑖 = 𝑠, 𝑠 + 1, …, 𝑡 − 1, it loads or unloads bikes to achieve 𝐵[𝑖]. This is valid because
+  ∑𝑖𝑗=0 (𝐴[𝑗] − 𝐵[𝑗]) ≥ 0 due to the orientation 𝑖 → 𝑖 + 1.
+• Finally, it collects all bikes at stations 𝑡, 𝑡 + 1, …, 𝑁 − 1 and unloads bikes at 𝑁 − 1, 𝑁 − 2, …, 𝑡.
+  This is valid because ∑𝑁−1 𝑖=0
+                                 (𝐴[𝑖] − 𝐵[𝑖]) = 0.
+
+Although this strategy is valid, it is not the optimal solution. Consider the following counterex­
+ample:
+
+
+                       0           1            2           3           4            5
+
+                𝐴[𝑖]   1           1            0           3           0            0
+               𝐵[𝑖]    0           0            3           0           1            1
+
+
+
+
+                                                    3
+Asia-Pacific Informatics Olympiad 2026 Editorial                                              APIO 2026 HSC
+
+
+The approach above might identify (𝑠, 𝑡) = (0, 2) or (𝑠, 𝑡) = (3, 5), both of which have a travelling
+distance of 8. However, there is a better solution:
+
+                          𝑋 = [0, 1, 2, 3, 2, 3, 4, 5], 𝑌 = [−1, −1, 0, −3, 3, 0, 1, 1].
+
+This strategy has a travelling distance of 7.
+
+1.4.2 Correct Approach
+The key insight is that edges on the 𝑠-𝑡 simple path can be oriented toward 𝑠, but such edges must be
+traversed three times. We assign weights to the edges: if an edge is oriented away from 𝑠, its weight
+is 1; if it is oriented toward 𝑠, its weight is −1. Let 𝑤(𝑠, 𝑡) be the total weight of edges on the 𝑠-𝑡
+simple path.
+• Every edge not on the 𝑠-𝑡 simple path must be traversed at least twice.
+• Every edge on the 𝑠-𝑡 simple path oriented away from 𝑠 must be traversed at least once.
+• Every edge on the 𝑠-𝑡 simple path oriented toward 𝑠 must be traversed at least three times.
+
+Thus, a strategy from 𝑠 to 𝑡 has a travelling distance of at least 2(𝑁 − 1) − 𝑤(𝑠, 𝑡). Our goal is to
+find the (𝑠, 𝑡) pair that maximizes 𝑤(𝑠, 𝑡). By the maximality, 𝑠 will have no incoming edges and 𝑡
+will have no outgoing edges among all incident edges. We can then construct a walk that achieves
+the lower bound. Without loss of generality, assume 𝑠 < 𝑡.
+
+We partition the stations on the 𝑠-𝑡 simple path (including 𝑠 and 𝑡) into groups 𝑃1 , 𝑃2 , …, 𝑃𝑘 in order
+from 𝑠 to 𝑡. Each group 𝑃𝑖 contains 𝑠𝑖 , 𝑠𝑖 + 1, …, 𝑡𝑖 (where 𝑠𝑖 ≤ 𝑡𝑖 ), defined such that:
+• Within every 𝑃𝑖 , all edges are oriented toward 𝑠.
+• For every 1 ≤ 𝑖 < 𝑘, the edge (𝑡𝑖 , 𝑠𝑖+1 ) is oriented away from 𝑠.
+
+That is, continuous segments of stations connected by edges oriented toward 𝑠 form groups. We
+complete the rebalancing for each group sequentially from 𝑖 = 1 to 𝑘. First, the truck collects all bikes
+at stations 𝑠, 𝑠 − 1, …, 0 and unloads them at 0, 1, …, 𝑠 − 1. This is valid because ∑𝑠𝑖=0 (𝐴[𝑖] − 𝐵[𝑖]) ≥
+0 due to the orientation 𝑠 → 𝑠 + 1. The truck then enters the first group.
+
+For the 𝑖-th group, the truck first moves forward to collect all bikes at stations 𝑠𝑖 , 𝑠𝑖 + 1, …, 𝑡𝑖 , then
+moves back to 𝑠𝑖 without loading or unloading bikes, and finally moves to 𝑡𝑖 and unloads bikes to
+stations 𝑠𝑖 , 𝑠𝑖 + 1, …, 𝑡𝑖 . This is valid because after collecting bikes at 𝑡𝑖 , the truck carries ∑𝑡𝑗=0
+                                                                                                        𝑖
+                                                                                                           𝐴[𝑗] −
+∑𝑠𝑗=0
+   𝑖 −1
+        𝐵[𝑗] bikes. By our grouping method, ∑𝑡𝑗=0
+                                               𝑖
+                                                  (𝐴[𝑗] − 𝐵[𝑗]) ≥ 0 ensures the truck bike count never
+drops below zero.
+
+After the last group is processed, the truck collects all bikes at 𝑡 + 1, 𝑡 + 2, …, 𝑁 − 1 and unloads
+bikes at 𝑁 − 1, 𝑁 − 2, …, 𝑡 + 1.
+
+In conclusion, (𝑋, 𝑌 ) is a valid strategy with a travelling distance of 2(𝑁 − 1) − max 𝑤(𝑠, 𝑡). For this
+subtask, max 𝑤(𝑠, 𝑡) can be found by assigning weights to edges (there are two cases: orienting flexible
+edges either right (if 𝑠 < 𝑡) or left (if 𝑡 < 𝑠)) and computing the longest weighted path. This can be
+implemented in 𝑂(𝑁 ) time.
+
+1.5    Subtask 5, 6
+The main idea is similar to subtask 3. First, we remove all leaves where 𝐴[𝑖] = 𝐵[𝑖] as described
+in subtask 4, and assume 𝑁 represents the number of remaining stations. We then enumerate the
+
+
+                                                        4
+Asia-Pacific Informatics Olympiad 2026 Editorial                                       APIO 2026 HSC
+
+
+starting station 𝑠 and assign edge weights based on the directions of edges. (Recall that the directions
+of edges with flexible orientations are determined by 𝑠.) We choose the station 𝑡 that maximizes
+the weighted path sum 𝑤(𝑠, 𝑡) as the final station. The minimum travelling distance is thus 2(𝑁 −
+1) − 𝑤(𝑠, 𝑡).
+
+We construct a strategy to achieve the distance bound. Similar to subtask 3, we partition the stations
+on the 𝑠-𝑡 simple path into groups 𝑃1 , 𝑃2 , …, 𝑃𝑘 using the same logic. However, because the road
+network is now a general tree, we must handle subtrees branching off from the 𝑠-𝑡 path.
+
+Consider the tree rooted at 𝑠. For each station 𝑖, let 𝑆𝑖 be the sum of 𝐴[𝑗] − 𝐵[𝑗] over stations 𝑗 in
+the subtree rooted at 𝑖. The edge connecting station 𝑖 and its parent is oriented upward if 𝑆𝑖 > 0 and
+downward otherwise.
+
+
+  Observation 1.3. If the truck enters a subtree rooted at 𝑣 carrying at least max(−𝑆𝑣 , 0) bikes,
+  there exists a strategy to complete the rebalancing of all stations in that subtree with a travelling
+  distance of 2(𝑁𝑣 − 1), starting and ending at 𝑣, where 𝑁𝑣 is the size of the subtree.
+
+
+Proof. We prove this by induction. Suppose the truck is at station 𝑣 and carries exactly max(−𝑆𝑣 , 0)
+bikes. First, the truck collects 𝐴[𝑣] bikes at station 𝑣. For every child 𝑐 of 𝑣 such that 𝑆𝑐 ≥ 0, since
+the truck carries at least 0 ≥ −𝑆𝑐 bikes, we can complete rebalancing of the subtree rooted at 𝑐 in
+2(𝑁𝑐 − 1) + 2 = 2𝑁𝑐 steps and return to 𝑣. After rebalancing these subtrees in arbitrary order, the
+truck carries
+
+       max(−𝑆𝑣 , 0) + 𝐴[𝑣] + ∑ 𝑆𝑐 = max(−𝑆𝑣 , 0) + 𝑆𝑣 + 𝐵[𝑣] − ∑ 𝑆𝑐 ≥ 𝐵[𝑣] + ∑ |𝑆𝑐 |
+                              child 𝑐                                 child 𝑐           child 𝑐
+                              𝑆𝑐 ≥0                                   𝑆𝑐 <0             𝑆𝑐 <0
+
+
+bikes. For every child 𝑐 with 𝑆𝑐 < 0, the truck now carries at least −𝑆𝑐 bikes, allowing us to complete
+the rebalancing of those subtrees and return to 𝑣. Finally, we unload 𝐵[𝑣] bikes at station 𝑣. The
+total distance is ∑child 𝑐 2𝑁𝑐 = 2(𝑁𝑣 − 1).                                                          □
+
+In short, we rebalance subtrees rooted at children 𝑐 with non-negative 𝑆𝑐 first, followed by those with
+negative 𝑆𝑐 .
+
+The truck first enters the first group 𝑃1 . For each group 𝑃𝑖 with members 𝑣1 , 𝑣2 , …, 𝑣ℓ (where 𝑣1 = 𝑠𝑖
+and 𝑣ℓ = 𝑡𝑖 ), 𝑠𝑖 is an ancestor of 𝑡𝑖 . Before entering 𝑃𝑖 , the truck has completed rebalancing for all
+stations outside the subtree of 𝑠𝑖 and carries exactly −𝑆𝑠𝑖 bikes. (−𝑆𝑠𝑖 ≥ 0 by the orientation 𝑡𝑖−1 →
+𝑠𝑖 for all 𝑠𝑖 ≠ 𝑠, and 𝑆𝑠1 = 0.)
+• The truck moves from 𝑠𝑖 to 𝑡𝑖 . For simplicity, we do not load bikes at intermediate stations
+   𝑣1 , …, 𝑣ℓ yet.
+• The truck moves from 𝑡𝑖 back to 𝑠𝑖 . At each station 𝑣𝑗 along the way:
+   ‣ The truck now carries −𝑆𝑠𝑖 + 𝑆𝑣𝑗+1 − 𝑆𝑠𝑖+1 bikes. 𝑆𝑢 = 0 if 𝑢 does not exist. There are −𝑆𝑠𝑖 bikes
+      from the previous groups, and 𝑆𝑣𝑗+1 − 𝑆𝑠𝑖+1 from previously processed stations in this group.
+   ‣ Load 𝐴[𝑣𝑗 ] bikes.
+   ‣ Rebalance all branching subtrees rooted at children 𝑐 such that 𝑐 is not on the 𝑠-𝑡 simple path
+      and 𝑆𝑐 ≥ 0. After this, the truck carries
+
+
+                                                   5
+Asia-Pacific Informatics Olympiad 2026 Editorial                                                      APIO 2026 HSC
+
+
+ −𝑆𝑠𝑖 + 𝑆𝑣𝑗+1 − 𝑆𝑠𝑖+1 + 𝐴[𝑣𝑗 ] +              ∑         𝑆𝑐 ≥ −𝑆𝑣𝑗 + 𝑆𝑣𝑗 + 𝐵[𝑣𝑗 ] −     ∑         𝑆𝑐 ≥ 𝐵[𝑣𝑗 ] +     ∑         −𝑆𝑐
+ ⏟              ⏟                           child 𝑐∉𝑃                                child 𝑐∉𝑃                   child 𝑐∉𝑃
+  ≥−𝑆𝑣𝑗                ≤0                     𝑆𝑐 ≥0                                    𝑆𝑐 <0                       𝑆𝑐 <0
+
+
+    bikes, where 𝑃 is the 𝑠-𝑡 simple path, and 𝑆𝑣𝑗+1 = 𝑆𝑠𝑖+1 if 𝑣𝑗+1 does not exist; 𝑆𝑠𝑖+1 = 0 if 𝑠𝑖+1
+    does not exist.
+  ‣ Rebalance all branching subtrees rooted at children 𝑐 such that 𝑐 is not on the 𝑠-𝑡 simple path
+    and 𝑆𝑐 < 0.
+  ‣ Finally, unload the required 𝐵[𝑣𝑗 ] bikes at station 𝑣𝑗 .
+• Move to station 𝑡𝑖 .
+
+The travelling distance is
+
+                                                           𝑘
+                        2(𝑁 − 1) − dist(𝑠, 𝑡) + ∑(|𝑃𝑖 | − 1) = 2(𝑁 − 1) − 𝑤(𝑠, 𝑡).
+                                                          𝑖=1
+
+
+We can find the maximum 𝑤(𝑠, 𝑡) by enumerating each possible 𝑠 and computing the weighted path
+sums for every 𝑡. This results in an 𝑂(𝑁 2 ) implementation, which is sufficient for Subtask 6. Subtask
+5 allows for a less efficient 𝑂(𝑁 3 ) approach.
+
+1.6    Subtask 7
+We can improve the time complexity to 𝑂(𝑁 ) using dynamic programming. First, root the tree at
+an arbitrary station 𝑟. For every station 𝑣 ≠ 𝑟, we compute 𝑑𝑝↑ [𝑣] and 𝑑𝑝↓ [𝑣]. Here, 𝑑𝑝↑ [𝑣] represents
+the maximum path weight from 𝑣’s parent to a descendant of 𝑣, assuming all edges with flexible
+directions are oriented upward. 𝑑𝑝↓ [𝑣] is defined similarly, but edges with flexible directions are
+oriented downward.
+
+These values can be computed efficiently using bottom-up transitions. The maximum weighted path
+𝑤(𝑠, 𝑡) can be found by considering each station 𝑣 as the lowest common ancestor of 𝑠 and 𝑡. 𝑤(𝑠, 𝑡)
+is the maximum value among
+
+                 max         max         {𝑑𝑝↑ [𝑐1 ] + 𝑑𝑝↓ [𝑐2 ]}, max{𝑑𝑝↑ [𝑣]},      max{𝑑𝑝↓ [𝑣]}.
+                   𝑣    child 𝑐1 ,𝑐2 of 𝑣                           𝑣≠𝑟              𝑣≠𝑟
+                             𝑐1 ≠𝑐2
+
+
+By backtracking through the DP states or storing the endpoints during the transitions, we can identify
+the specific stations 𝑠 and 𝑡 that yield the maximum weight. Finally, we construct the rebalancing
+strategy using the method described in the previous subtask. The total time complexity is 𝑂(𝑁 ).
+
+
+
+
+                                                                6
+Asia-Pacific Informatics Olympiad 2026 Editorial                                        APIO 2026 HSC
+
+
+2     Navigation
+2.1    Solution
+In the task analysis, we refer to the network as a graph (which is a tree), each node being a vertex,
+and each cable being an edge. We call the power stations special nodes and others plain nodes, and
+the cable types as colors of the edges.
+
+From now on, we only consider deterministic strategy, which means the robot should be able to
+correctly determine the answer for every plain nodes and for any permutation.
+
+For each node 𝑢, we refer to the subtree of each edge as the connected component not containing 𝑢
+when the edge is removed.
+
+2.2    Basic Observations
+From the problem, there are several properties and simple observations we can make:
+
+• The number of special nodes with distance decreased after following an edge, is equivalent to the
+  number of special nodes in that subtree.
+• If two edges adjacent to a node have the same color, the answer of the edge must be the same,
+  because we cannot distinguish the edges.
+• We don’t need to find the answer for special nodes. This property is actually not a derived one,
+  but stated in the statement twice (three times if you count the one in the examples), but it remains
+  relevant for developing many of the ideas.
+
+2.3    Subtask 1: 𝑁 = 7
+With the observation above, it should be very clear that this subtask is a “sanity check” subtask.
+
+When 𝐾 = 6 and 𝑁 = 7, it is certain that the only possible query is the remaining node. Thus, it is
+possible to directly encode the answer; the naive method uses type 0, 1, …, 6, giving 𝑆 = 7.
+
+Since at most one number is greater than 3, we can decrease the largest number to 3. For any query
+such that the color indices does not sum to 𝐾 = 6, we increase the largest entry until it satisfies the
+condition, and report that as the answer. This method gives 𝑆 = 4.
+
+2.4    Subtask 2: the network forms a chain
+No queries is made at the endpoints and the special nodes, so we can partition the chain into disjoint
+paths by the special nodes. For each path, the answer multiset is either {0, 6}, {1, 5}, {2, 4}, or {3, 3}.
+
+When the answer is {3, 3}, we can always assign any same color to both edges. This is because all
+other paths should never have two same color edges incident to a node, as that makes the two edges
+indistinguishable.
+
+For the remaining paths, for any node that is adjacent to edges with color 𝑐1 and 𝑐2 , respectively, we
+add a directed edge from 𝑐1 → 𝑐2 if the answer to edge with color 𝑐1 is bigger, and 𝑐1 ← 𝑐2 otherwise.
+
+The resulting graph must have these properties:
+• No self loop exists.
+• For any pair of distinct vertices 𝑢, 𝑣, at most one of 𝑢 → 𝑣 and 𝑣 → 𝑢 exists.
+
+
+
+                                                    7
+Asia-Pacific Informatics Olympiad 2026 Editorial                                        APIO 2026 HSC
+
+
+Suppose that path is colored by 𝑐1 , 𝑐2 , …, 𝑐𝑘 , because 𝑘 can be made almost arbitrarily large, it
+follows that the edges added must form a cycle. Combining the observation above, in order to answer
+{0, 6}, {1, 5}, and {2, 4}, it remains to solve the following problem: what is the minimum 𝑆 such that
+the complete graph 𝐾𝑆 can be partitioned into 3 edge-disjoint simple cycles?
+
+The answer is 𝑆 = 5, as follows:
+
+                                                    0
+
+
+                                        4                       1
+
+
+
+
+                                             3             2
+
+Surprisingly, this construction is unique up to permuting the colors, and it is rather straightforward
+when the required observation are known.
+
+2.5    Partial Approaches to Subtask 3, 4, and 5
+Subtask 3, 4, and 5 only differs by the constraint on the degree of the internal nodes. From now on,
+we will instead describe different coloring schemes and their related observations or idea.
+
+These solutions are all partial solutions, but their various observations will hint and even give some
+intuition of how an optimal encoding might look like.
+
+2.5.1 𝑆 = 64 for subtask 3 and 4
+If the coloring is separate for two directions of each edge, the task becomes very easy since we basically
+can encode the answer. However, the main challenge is we don’t know the direction. Thus, one natural
+way to solve it is by first rooting the tree, encode the rooted information, then encode something for
+the node to find its parent.
+
+When the minimum degree is at least 3, it is possible to encode the parent information with two
+colors. Specifically, we color each edge by their distance to the root modulo 2. Thus, the parent edge
+will always be different from other edges, and it is unambiguous when each internal node has degree
+of at least 3.
+
+Based on this, we can recover the answer with 𝑆 = 26 = 64: we simply root at every special node and
+use a bit to encode the parent information. To recover, we find each parent and add 1 to the edge for
+each of the 6 bits.
+
+2.5.2 𝑆 = 12 for subtask 3 and 4
+For subtask 3 and 4, we can extend the rooting idea to root for just one special node and encode
+the remaining 5 special nodes separately. Since the root information gives us orientation, we can
+encode the number of special nodes in each subtree on the edge. Thus, when recovering each node,
+we first identify the parent edge, and invert the number of nodes in the parent edge by 𝑥 ↦ 6 − 𝑥.
+This solution works because a special node is never queried, so we won’t have the off-by-one issue.
+
+
+
+                                                    8
+Asia-Pacific Informatics Olympiad 2026 Editorial                                            APIO 2026 HSC
+
+
+This approach may yield 𝑆 = 14 if the participant did not realize we only need 0 to 5 instead of 0
+to 6.
+
+2.5.3 𝑆 = 18 for the general case
+Extending the idea above, the issue for the previous approach is because we cannot identify which is
+the parent edge for internal node with degree 2. However, inspired from subtask 2, it is possible to
+use 3 colors to find the parent edge.
+
+We root at one special node similarly, and instead of modulo 2, we color each edge by their distance
+to the root modulo 3. When recovering, if we know the missing color is 𝑐, then the parent edge is the
+one with color +1(mod 3).
+
+Similarly, this approach may yield 𝑆 = 21 if the participant did not realize we only need 0 to 5 instead
+of 0 to 6.
+
+2.5.4 𝑆 = 8 for subtask 3 and 4
+We root at a special node in the previous approach, but we actually did not benefit from any of those
+since identify the root is still possible.
+
+Thus, we can instead root at a weighted centroid of the tree. That is, we pick some node such that
+every subtree has at most 3 special nodes in each subtree. Finding one such node is similar to finding a
+ordinary centroid of the tree, and the proof of such node always existing is similar to the original one.
+
+Combining with the previous approach, we achieves 𝑆 = 8 because the number of special nodes in
+each subtree can only have 0, 1, 2, and 3.
+
+2.5.5 𝑆 = 7 for subtask 3 and 4
+It follows that we don’t need to identify the parent if the answer is 3, because 3 = 6 − 3. Thus, we
+don’t perform the two-coloring for this case, saving one color.
+
+2.5.6 𝑆 = 10 for the general case
+The previous solution naturally generalizes to the general case by replacing the two-coloring with
+three-coloring. Similarly, naively this approach takes 𝑆 = 12, but the case for answer equal to 3 is
+similar, saving two colors.
+
+2.6    Full Solution to Subtask 3 and 4
+After these partial attempts, we have some good tricks to perform and we should have a sense of why
+are we using so many colors. In this subsection, we will introduce two approaches.
+
+2.6.1 Approach 1
+The first approach is by trying to relax the rooting condition. For each edge, we encode the smaller
+number of special nodes in each subtree. When recovering, if the neighboring edge sums to 6, then we
+know that each edge is at the correct orientation; however, if it is not, the answer multiset must be
+one of {4, 1, 0, …}, {5, 2, 0, …}, and {6, 0, …}. In addition, there is one more related case: {4, 1, 1, 0, …}.
+We will refer to the cases by 4-2, 4-1-1, 5-1, and 6-0.
+
+These cases do form a really good structure because of the tree property: the 4-2 and the 5-1 cases
+forms a chain, connected by 4-1-1, and all other branches are the case 6-0. Naturally, we would want
+to apply the solution for subtask 2.
+
+
+                                                      9
+Asia-Pacific Informatics Olympiad 2026 Editorial                                       APIO 2026 HSC
+
+
+But how can we try to obtain one such encoding? There are two major constraints that give us a
+really good idea:
+1. These special encoding should never produce a case where the edge colors sum to 6.
+2. Because finding two 3-cycles in a graph requires 5 nodes, with 𝑆 = 4, we must use the two extra
+   degree of each internal node to also represent some information.
+
+It is natural to write a bruteforce program to find a set that satisfies the constraints, but because the
+restrictions are tight, it is actually feasible to found a solution by hand.
+
+The following section describes one such scheme. We use 𝑘-subtree to refer to all edges whose subtree
+has answer equal to 𝑘.
+
+• Case 4-2: Always color the 0-subtree with color 3.
+  ‣ If the parent edge has color 2, color the 2-subtree with 1.
+  ‣ If the parent edge has color 1, color the 2-subtree with 0.
+  ‣ If the parent edge has color 0, color the 2-subtree with 2.
+• Case 4-1-1: Always color the 0-subtree with color 3.
+  ‣ If the parent edge has color 2, color the 1-subtrees with 0.
+  ‣ If the parent edge has color 1, color the 1-subtrees with 0.
+  ‣ If the parent edge has color 0, color the 1-subtrees with 1.
+• Case 5-2: Always color the 0-subtree with color 2.
+  ‣ If the parent edge has color 1, color the 1-subtree with 0.
+  ‣ If the parent edge has color 0, color the 1-subtree with 3.
+  ‣ If the parent edge has color 3, color the 1-subtree with 1.
+• Case 6-0:
+  ‣ If the parent edge has color 3, color the remaining edges with color 2.
+  ‣ Otherwise, color the remaining edges with color 3.
+
+One extra note of handling these cases: since it is possible to encounter special nodes in these
+constructions, one way to avoid the cases is to treat the special node belonging to the subtree of the
+parent edge. By giving default values for each case (for example, deliberately write else instead of
+else if for the final case as default fallback), this case would be easily circumvented.
+
+For partial scores, for example 𝑆 = 5 or 6, it is possible to use some extra color to mark these cases,
+and thus it is very constructible once the relevant observations have been made.
+
+2.6.2 Approach 2
+The second approach is very different from the previous approaches. The idea is to use a similar idea
+to the orienting idea. Since there are at most 4 different answers (0, 1, 2, 3), we try to use 𝑆 = 5 and
+use the missing color to find the correct cyclic shift.
+
+The encoding scheme is as follows. For each possible integer partition, we assign a canonical encoding,
+which will be a prefix of the colors. Thus, we can always recover the canonical encoding with the
+missing colors.
+• If the answer is {6, 0, …, 0}, the canonical encoding is {1, 0, …, 0}.
+• If the answer is {5, 1, 0, …, 0}, the canonical encoding is {2, 1, 0, …, 0}.
+• If the answer is {4, 2, 0, …, 0}, the canonical encoding is {2, 0, 1, …, 1}.
+
+
+                                                   10
+Asia-Pacific Informatics Olympiad 2026 Editorial                                              APIO 2026 HSC
+
+
+• If the answer is {4, 1, 1, 0, …, 0}, the canonical encoding is {2, 1, 1, 0, …, 0}.
+• If the answer is {3, 3, 0, …, 0}, the canonical encoding is {1, 1, 0, …, 0}.
+• If the answer is {3, 2, 1, 0, …, 0}, the canonical encoding is {3, 2, 1, …, 0}.
+• If the answer is {3, 1, 1, 1, 0, …, 0}, the canonical encoding is {2, 1, 1, 1, 0, …, 0}.
+• If the answer is {2, 2, 2, 0, …, 0}, the canonical encoding is {1, 1, 1, 0, …, 0}.
+• If the answer is {2, 2, 1, 1, 0, …, 0}, the canonical encoding is {2, 2, 1, 1, 0, …, 0}.
+• If the answer is {2, 1, 1, 1, 1, 0, …, 0}, the canonical encoding is {2, 1, 1, 1, 1, 0, …, 0}.
+• If the answer is {1, 1, 1, 1, 1, 1, 0, …, 0}, the canonical encoding is {1, 1, 1, 1, 1, 1, 0, …, 0}.
+
+Note that the second case and the third case requires 4 edges to distinguish, which fits within this
+constraint.
+
+This gives uses 𝑆 = 5. To reduce one color, observe that the only case requiring all 4 colors and 1
+extra is this specific case of canonical encoding of {3, 2, 1, 0, …, 0} being {3, 2, 1, …, 0}. If only one
+such node exists, we can take it as the root. Otherwise, there must be at most two. Since the path
+connecting them will all have the {3, 3, 0, …, 0} case, it is always possible to encode them with the
+exact canonical encoding.
+
+2.7    Full Solution to Subtask 5
+The complete solution is very similar to that of the Approach 1 of the previous subtask. Because of
+subtask 2, it is clear that the scheme should exactly follow the unique cycle partition of 𝐾5 .
+
+If the participant realizes this for both solutions, writing a bruteforce program is very beneficial and
+should run sufficiently fast due to the known constraints.
+
+Nevertheless, we show one possible scheme. This scheme is constructed by hand and thus, practically,
+participants are not required to write a solver for this.
+
+• Case 4-2:
+  ‣ If the parent edge has color 2, color the 2-subtree with 1 and the 0-subtrees with color 0.
+  ‣ If the parent edge has color 1, color the 2-subtree with 0 and the 0-subtrees with color 4.
+  ‣ If the parent edge has color 0, color the 2-subtree with 2 and the 0-subtrees with color 4.
+• Case 4-1-1: Always color the 0-subtree with color 4.
+  ‣ If the parent edge has color 2, color the 1-subtrees with 1.
+  ‣ If the parent edge has color 1, color the 1-subtrees with 3.
+  ‣ If the parent edge has color 0, color the 1-subtrees with 1.
+• Case 5-2:
+  ‣ If the parent edge has color 1, color the 1-subtree with 3 and the 0-subtrees with color 0.
+  ‣ If the parent edge has color 3, color the 1-subtree with 4 and the 0-subtrees with color 2.
+  ‣ If the parent edge has color 4, color the 1-subtree with 1 and the 0-subtrees with color 2.
+• Case 6-0:
+  ‣ If the parent edge has color 0, color the remaining edges with color 4.
+  ‣ If the parent edge has color 4, color the remaining edges with color 2.
+  ‣ If the parent edge has color 2, color the remaining edges with color 3.
+  ‣ If the parent edge has color 3, color the remaining edges with color 0.
+
+   This solves the general case with 𝑆 = 5.
+
+
+                                                       11
+Asia-Pacific Informatics Olympiad 2026 Editorial                                           APIO 2026 HSC
+
+
+3     Scallion Pancake Party
+We describe two different solutions to this task.
+
+3.1    Solution 1
+For convenience, we will call the guest in room 𝑖 “guest 𝑖”.
+
+The core idea is to partition the bags into 𝑁 distinct sets, with each set assigned to a specific
+guest according to their room number. This assignment allows each guest to relay information to the
+guest outside through their respective sets. However, implementing this approach effectively requires
+addressing several technical challenges, which we explore in the following subsections.
+
+3.1.1 Subtask 2
+Starting with Subtask 2, let’s explore how the guest outside can correctly recover the permutation 𝑃 .
+
+Since every guest knows their room number, we can naturally partition the bags into 𝑁 sets, assigning
+one set to each guest based on their room number. This allows each guest to communicate information
+to the outside guest by selectively eating bags only from their assigned set.
+
+One partitioning strategy is to assign the (𝑖 + 1)-th occurrence of every flavor to guest 𝑖. By counting
+the occurrences of each flavor, all guests can easily reach a consensus on which bags belong to them.
+
+Furthermore, as each guest now has exactly one bag of each flavor in their assigned set, guest 𝑖 can
+simply eat all bags except the one with flavor 𝑃 [𝑖].
+
+Consequently, the guest outside can identify which set each remaining bag belongs to and determine
+𝑃 based on the remaining flavor.
+
+3.1.2 Subtask 3
+In this subtask, we no longer have access to the room numbers. If we wish to apply the “partition
+and eat all but one” strategy from subtask 2, each guest must first determine their own room number
+by observing what previous guests have eaten.
+
+In subtask 3, the bags follow a convenient structure: their flavors are a concatenation of 𝑁 permuta­
+tions. Thus, we can partition the bags by their indices such that the 𝑖-th bag is assigned to the ⌊ 𝑁𝑖 ⌋
+-th set.
+
+But how can a guest identify their room number? Recall the strategy: the guest in room 𝑖 eats all
+bags in their set except for the one with flavor 𝑃 [𝑖]. In an optimistic scenario, guest 𝑖 sees that bags
+with indices in the range [(𝑖 − 1) ⋅ 𝑁 , 𝑖 ⋅ 𝑁 ) have already been eaten, allowing them to infer that their
+room number is at least 𝑖.
+
+Specifically, if the flavor of bag 𝑖 ⋅ 𝑁 is not 𝑃 [𝑖], guest 𝑖 can eat it. Subsequent guests will then observe
+this and realize their room number must be greater than 𝑖. A problem arises only when the flavor of
+bag 𝑖 ⋅ 𝑁 is exactly 𝑃 [𝑖].
+
+Let’s simulate this case. Assume this first occurs for room 𝑖. Guest 𝑖 + 1 will find that bag 𝑖 ⋅ 𝑁
+remains uneaten and mistakenly conclude that their room number is 𝑖. Consequently, bag 𝑖 ⋅ 𝑁 will
+be eaten unexpectedly by guest 𝑖 + 1. However, once guest 𝑖 eats bag 𝑖 ⋅ 𝑁 + 1, guest 𝑖 + 1 will notice
+this and realize their mistake. Furthermore, since bag 𝑖 ⋅ 𝑁 was already eaten by guest 𝑖 + 1, all
+
+
+                                                     12
+Asia-Pacific Informatics Olympiad 2026 Editorial                                         APIO 2026 HSC
+
+
+subsequent guests can correctly recognize that their room number is at least 𝑖 + 1. By induction, it
+can be proven that this process succeeds, with one exception: all bags belonging to the 𝑖-th set are
+eaten if and only if the flavor of bag 𝑖 ⋅ 𝑁 is exactly 𝑃 [𝑖].
+
+Finally, we recover the permutation 𝑃 as the outside guest. If any bag remains uneaten in the 𝑖-
+th set, 𝑃 [𝑖] is determined by its flavor. For sets where all bags were eaten, we use the “if and only
+if” condition: the flavor of bag 𝑖 ⋅ 𝑁 must have been 𝑃 [𝑖]. Thus, all values of 𝑃 can be successfully
+recovered.
+
+3.1.3 Subtask 4
+We continue applying the “partition and eat all but one” strategy from subtask 2. With 𝐾 = 𝑁 , we
+have almost sufficient capacity to notify all guests of their room numbers using only the first bag.
+Specifically, each guest eats one slice from the first bag; thus, guest 𝑖 will observe that exactly 𝑖 − 1
+slices have already been eaten, identifying their room number as 𝑖.
+
+A problem arises if a guest’s assigned flavor 𝑃 [𝑖] matches the flavor of this first bag. Since each flavor
+appears exactly once per permutation, this collision occurs exactly once. Suppose this happens for
+the guest 𝑗. All guests after them will observe one fewer eaten slice than expected, leading them to
+underestimate their room number by one (mistaking it for 𝑗, 𝑗 + 1, … instead of 𝑗 + 1, 𝑗 + 2, …), while
+guests 1 through 𝑗 will identify their numbers correctly.
+
+For convenience, we ignore any subsequent bags that share the same flavor as the first bag. These
+bags are reserved solely for transmitting room number information; no further action is required when
+a guest encounters them (though they are welcome to eat from them if they are particularly hungry).
+
+We then partition the remaining bags into 𝑁 sets based on flavor occurrences, as in subtask 2.
+For guests in rooms 𝑖 < 𝑗, the strategy works perfectly. However, the guest in room 𝑗 must notify
+subsequent guests of the offset error. Since 𝐾 ≥ 2, the guest in room 𝑗 can eat exactly one slice from
+the first bag of their assigned set. Subsequent guests will detect this “missing slice” signal and, upon
+receiving it, increment their inferred room number by one to correct the mistake.
+
+Finally, the outside guest can recover all values of 𝑃 except for 𝑃 [𝑗]. Since 𝑃 is a permutation, 𝑃 [𝑗]
+can then be uniquely determined by the process of elimination.
+
+3.1.4 Subtask 6
+We skip subtask 5 as it is intentionally left for some suboptimal solutions.
+
+We now generalize the strategy from subtask 3. Once again, we partition the bags into 𝑁 sets based
+on their occurrences, where set 𝑖 consists of the (𝑖 + 1)-th occurrence of every flavor. Each guest
+continues to follow the established strategy: eat all bags belonging to their assigned set, except for one.
+
+We can generalize the observation made in subtask 3 as follows:
+
+
+  Observation 3.1. If a guest observes that the 𝑖-th occurrence of any flavor has been completely
+  eaten, they can infer that their room number is at least 𝑖.
+
+
+However, relying solely on this observation leads to problems, e.g., when the very first bag of set 𝑖
+happens to have the flavor 𝑃 [𝑖].
+
+                                                    13
+Asia-Pacific Informatics Olympiad 2026 Editorial                                            APIO 2026 HSC
+
+
+The primary issue is that guest 𝑖 + 1 will see this uneaten bag and mistake their room number for
+𝑖, leading them to unexpectedly eat the bag in set 𝑖 with flavor 𝑃 [𝑖]. While guest 𝑖 can detect this
+mistake the moment they encounter the bag, unlike in subtask 3, they cannot always notify guest 𝑖 +
+1 simply by eating the entirety of the next bag. Nevertheless, we claim that a robust strategy for the
+guest outside can resolve this ambiguity by examining the next incoming uneaten bag according to
+these three cases:
+
+1. If the bag belongs to set 𝑖 (i.e., it is another flavor’s (𝑖 + 1)-th occurrence): Guest 𝑖 can directly
+   eat the entire bag. Guest 𝑖 + 1 will see this and immediately realize their mistake.
+2. If the bag is the next occurrence of the same flavor: This bag will be eaten by guest 𝑖 + 2. This
+   cascading effect is generally acceptable, though it may result in the final occurrence of this flavor
+   remaining uneaten. We will explain how the outside guest resolves this ambiguity later.
+3. If the bag belongs to a previous set (i.e., it is an occurrence < 𝑖 + 1): This bag was intentionally
+   left uneaten to notify the outside guest of a previous 𝑃 value, just simply ignore it.
+   • If you do not realize that simply ignoring Case 3 is sufficient for the guest outside, you might
+       be tempted to implement a more complex signaling system. For instance, one could utilize the
+       𝐾 ≥ 3 condition to notify guest 𝑖 + 1 of their mistake by eating a single slice from the bag, and
+       guest 𝑖 + 1 will need to eat an additional slice to cancel the signal.
+
+Under this strategy, we can establish the following:
+
+
+  Observation 3.2. Let 𝐵𝑖 be the bag of flavor 𝐹 belonging to set 𝑖, where 𝐹 is a flavor not
+  equal to any of 𝑃 [0], 𝑃 [1], …, 𝑃 [𝑖 − 1]. Guest 𝑖 will always successfully deduce their correct room
+  number by the time they encounter bag 𝐵𝑖 .
+
+
+Proof. We prove this by contradiction and induction. Assume the statement holds for guests 0
+through 𝑖 − 1. Suppose guest 𝑖 still does not know their room number when they reach bag 𝐵𝑖 .
+This implies that the previous occurrence of flavor 𝐹 was not eaten by guest 𝑖 − 1; otherwise, by
+Observation 3.1, guest 𝑖 would have known their room number.
+
+  However, this is a contradiction to the induction hypothesis, as flavor 𝐹 is not equal to any of
+𝑃 [0], 𝑃 [1], …, 𝑃 [𝑖 − 2], and guest 𝑖 − 1 should eat it according to our strategy.            □
+
+Finally, we describe the strategy for the outside guest to recover the permutation 𝑃 . Assume we have
+successfully recovered 𝑃 [0] through 𝑃 [𝑖 − 1], and we now aim to deduce 𝑃 [𝑖]:
+• If some bags in set 𝑖 remain uneaten: By Observation 3.2, guest 𝑖 eventually knew their room
+   number and ate the remaining bags in set 𝑖. Thus, the flavor of the last uneaten bag in set 𝑖 must
+   be exactly 𝑃 [𝑖].
+• If all bags in set 𝑖 are eaten: The flavor of the first bag in set 𝑖 that does not belong to {𝑃 [0], …, 𝑃 [𝑖 −
+   1]} must be 𝑃 [𝑖].
+   ‣ If this first available flavor were not 𝑃 [𝑖], guest 𝑖 would have recognized their room number
+     upon seeing it (since it avoids all previous 𝑃 values) and would have eaten it, leaving the actual
+     𝑃 [𝑖] bag uneaten. Furthermore, all subsequent guests would correctly deduce that their room
+     numbers are strictly greater than 𝑖, ensuring none of them would mistakenly eat this remaining
+     𝑃 [𝑖] bag in set 𝑖. Thus, the 𝑃 [𝑖] bag would definitely remain uneaten, resulting in a contradiction.
+
+
+                                                      14
+Asia-Pacific Informatics Olympiad 2026 Editorial                                           APIO 2026 HSC
+
+
+3.2    Solution 2
+Let 𝐴𝑓,𝑖 denote the index of the (𝑖 + 1)-th bag that contains flavor 𝑓.
+
+The core idea is to force a guest with forbidden flavor 𝑃𝑖 to only eat pancakes from bags with flavor
+(𝑃𝑖 + 1) mod 𝑁 .
+
+Unless specified, eating a bag means eating all remaining slices from the bag.
+
+3.2.1 Subtask 1
+Guest 𝑖 always eats bag 𝐴(𝑃𝑖 +1) mod 𝑁,0 . They only eat bag 𝐴(𝑃𝑖 +1) mod 𝑁,1 if 𝐴𝑃𝑖 ,0 < 𝐴(𝑃𝑖 +1) mod 𝑁,0 and
+bag 𝐴𝑃𝑖 ,0 has not been eaten.
+
+For each guest 𝑖, the condition 𝐴𝑃𝑖 ,0 < 𝐴(𝑃𝑖 +1) mod 𝑁,0 can be easily checked the moment they receive
+bag 𝐴(𝑃𝑖 +1) mod 𝑁,0 . They simply check whether a bag with flavor 𝑃𝑖 has appeared before. Since
+𝐴(𝑃𝑖 +1) mod 𝑁,0 < 𝐴(𝑃𝑖 +1) mod 𝑁,1 , they will know whether they should eat 𝐴(𝑃𝑖 +1) mod 𝑁,1 by the time
+they receive it.
+
+For example, suppose 𝐹 = [1, 0, 0, 1].
+• If 𝑃 = [0, 1], then guest 0 only eats bag 0 and guest 1 only eats bag 1.
+• If 𝑃 = [1, 0], then guest 0 eats bags 1, 2 and guest 1 only eats bag 0.
+
+For the guests outside, they can clearly tell which of 𝐴0,0 , 𝐴1,0 comes first. Suppose 𝐴𝑓,0 < 𝐴1−𝑓,0
+for some 𝑓 = 0 or 1.
+
+Observe that bag 𝐴𝑓,1 will never be eaten. The guests will guess 𝑃 based on whether bag 𝐴1−𝑓,1 is
+empty. If bag 𝐴1−𝑓,1 is empty, then 𝑃 = [1 − 𝑓, 𝑓]. Otherwise, 𝑃 = [𝑓, 1 − 𝑓].
+
+3.2.2 Subtask 2
+In this subtask, each guest 𝑖 knows the value of 𝑖.
+
+Guest 𝑖 simply eats bag 𝐴(𝑃𝑖 +1) mod 𝑁,𝑖 .
+
+For the guests outside, they will see exactly 𝑁 empty bags. Each empty bag 𝐴𝑓,𝑖 tells them the value
+of 𝑃 [𝑖], which is just (𝑓 + 𝑁 − 1) mod 𝑁 .
+
+3.2.3 Subtask 3
+In this subtask, 𝐴0,0 , 𝐴1,0 , …, 𝐴(𝑁 − 1, 0) are the first 𝑁 bags.
+
+For the first 𝑁 bags, guest 𝑖 only eats 𝐴(𝑖+1) mod 𝑁,0 .
+
+After the first 𝑁 bags, guest 𝑖 will see exactly 𝑖 + 1 empty bags. So each guest can learn their room
+index once they reach this point.
+
+So the strategy for the remaining 𝑁 (𝑁 − 1) bags are:
+• For each 0 ≤ 𝑖 ≤ 𝑁 − 2, guest 𝑖 eats bag 𝐴(𝑃𝑖 +1) mod 𝑁,𝑖+1 .
+• Guest 𝑁 − 1 does nothing.
+
+For the guests outside, they can determine 𝑃 based on empty bags from the last 𝑁 (𝑁 − 1) bags.
+
+Each empty bag 𝐴𝑓,𝑖 , 𝑖 ≥ 1 tells them the value of 𝑃 [𝑖 − 1], which is just (𝑓 + 𝑁 − 1) mod 𝑁 .
+
+
+
+
+                                                     15
+Asia-Pacific Informatics Olympiad 2026 Editorial                                             APIO 2026 HSC
+
+
+There will be exactly one flavor 𝑓 without empty bags. Which gives 𝑃 [𝑁 − 1] = (𝑓 + 𝑁 − 1) mod 𝑁 .
+Alternatively, since there will be exactly one value, 𝑃 [𝑁 − 1], missing in 𝑃 , it can also be determined
+using the filled values.
+
+3.2.4 Subtask 6
+We skip subtasks 4 and 5 and jump straight into the full solution.
+
+Without extra info or specific bag sequence patterns, it seems quite hard for guests to first learn their
+room index and encode that information with later bags. To solve this issue, perhaps we can extend
+the idea for subtask 1.
+
+First of all, each guest 𝑖 will always eat bag 𝐴(𝑃𝑖 +1) mod 𝑁,0 .
+
+For each guest 𝑖, Let 𝑒𝑃𝑖 be the number of flavors 𝑓 such that 𝐴𝑓,0 < 𝐴(𝑃𝑖 +1) mod 𝑁,0 and bag 𝐴𝑓,0 is
+empty. They can determine 𝑒𝑃𝑖 once they receive bag 𝐴(𝑃𝑖 +1) mod 𝑁,0 .
+
+Then, each guest 𝑖 encodes 𝑒𝑃𝑖 using 𝐴(𝑃𝑖 +1) mod 𝑁,1 , 𝐴(𝑃𝑖 +1) mod 𝑁,2 , …, 𝐴(𝑃𝑖 +1) mod 𝑁,𝑁−1 . More specifi­
+cally, they eat bag 𝐴(𝑃𝑖 +1) mod 𝑁,𝑗 if and only if the 𝑗-th bit of 𝑒𝑃𝑖 is 1. Since 𝑒𝑃𝑖 ≤ 𝑁 − 1, the number
+of bags is enough to encode the bit representation of 𝑒𝑃𝑖 .
+
+For the guests outside, they can easily obtain 𝑒𝑖 by the binary representation
+of 𝐴(𝑖+1) mod 𝑁,1 , 𝐴(𝑖+1) mod 𝑁,2 , …, 𝐴(𝑖+1) mod 𝑁,𝑁−1 . We describe how to reconstruct 𝑃 using
+𝑒0 , 𝑒1 , …, 𝑒𝑁−1 .
+
+Let 𝑓0 , 𝑓1 , …, 𝑓𝑁−1 be the order of flavors such that 𝐴𝑓0 ,0 < 𝐴𝑓1 ,0 < … < 𝐴𝑓𝑁−1 ,0 . In other words, 𝑓𝑖
+is the (𝑖 + 1)-th flavor that appeared for the first time in the sequence of bags.
+
+Observe that for each 1 ≤ 𝑖 ≤ 𝑁 − 1, 𝑒𝑓𝑖 is precisely the number of flavors 𝑓 among 𝑓0 , 𝑓1 , …, 𝑓𝑖−1
+such that 𝑓 appears earlier than 𝑓𝑖 in 𝑃 . This means we can do something like insertion sort to
+determine 𝑃 .
+
+More specifically, we start with 𝑃 = [𝑓0 ]. Then, for each 𝑖 from 1 to 𝑁 − 1, we insert 𝑓𝑖 to 𝑃 such
+that it becomes the (𝑒𝑓𝑖 + 1)-th element in 𝑃 . In the end, we will have the correct 𝑃 .
+
+3.3    Remarks
+• The score of the last subtask originally had partial scoring: Higher score is awarded if the total
+  number of slices remaining is lower. We decided to remove the partial scoring since it was not an
+  important part of the solution, and it barely changes the difficulty of the problem.
+
+• There was a “harder” version of the task: Reduce the number of bags of each flavor to 6 instead
+  of 𝑁 . This cuts out solution 1 while solution 2 still passes since it requires just ⌈log2 𝑁 ⌉ + 1 ≤ 6
+  bits of information for each flavor. We ultimately decided to keep the current version so that the
+  entire problem set wouldn’t be too hard. (The problem set is already hard enough.)
+
+
+
+
+                                                      16
+

@@ -1,0 +1,40 @@
+% Reference: https://math.mit.edu/~goemans/18453S17/matroid-intersect-notes.pdf
+\subsection{Matroid: nhận diện và các loại}
+Ví dụ: chọn cạnh không tạo cycle là \textbf{graphic matroid}; thêm quota mỗi màu là giao với \textbf{partition matroid}. Một matroid dùng greedy; hai matroid cần trao đổi cả chuỗi phần tử.
+
+\textbf{Định nghĩa}: $M=(E,\mathcal I)$, $\mathcal I$ là các tập independent:
+\begin{itemize}
+    \item $\varnothing\in\mathcal I$; $A\in\mathcal I, B\subseteq A\Rightarrow B\in\mathcal I$.
+    \item \textbf{Exchange}: $A,B\in\mathcal I, |A|<|B|\Rightarrow\exists x\in B\setminus A: A+x\in\mathcal I$.
+\end{itemize}
+\textbf{Rank} $r(X)=\max_{S\subseteq X,S\in\mathcal I}|S|$; \textbf{basis}: independent tối đại, luôn có $r(E)$ phần tử. \textbf{Circuit}: tập dependent tối tiểu. Greedy xét trọng số giảm dần, thêm nếu còn independent, cho maximum-weight basis; nếu không buộc đủ rank thì bỏ trọng số âm.
+
+\begin{itemize}
+    \item \textbf{Uniform}: $|S|\le k$.
+    \item \textbf{Partition}: $E$ chia nhóm rời nhau $E_i$, $|S\cap E_i|\le c_i$. Oracle: đếm quota.
+    \item \textbf{Graphic}: $E$ là cạnh, $S$ là forest. Oracle: DSU; circuit là cycle.
+    \item \textbf{Linear}: $E$ là vector trên cùng field, $S$ độc lập tuyến tính. Oracle: Gauss / XOR basis trên $\mathbb F_2$.
+    \item \textbf{Laminar}: quota $|S\cap A|\le c_A$, các $A$ đôi một lồng nhau hoặc rời nhau. Ví dụ quota trên mọi prefix.
+    \item \textbf{Transversal}: $E$ là phía trái của bipartite graph; $S$ ghép được vào các đỉnh phải khác nhau. Oracle: matching phủ $S$.
+\end{itemize}
+\textbf{Cue}: xóa phần tử vẫn hợp lệ chưa đủ; phải có exchange. Các \emph{tập cạnh matching} không là matroid: trên path ba cạnh, matching gồm cạnh giữa không thêm được cạnh nào từ matching gồm hai cạnh ngoài.
+
+\subsection{Matroid intersection (maximum cardinality)}
+Hai matroid trên \textbf{cùng $E$}; cần oracle $I_j(S)$ kiểm tra independent. Bắt đầu $S=\varnothing$. Mỗi vòng dựng exchange graph với $x\notin S$, $y\in S$:
+\[
+\begin{array}{c|l}
+\text{Cạnh} & \text{Điều kiện} \\
+s\to x & I_1(S+x) \\
+y\to x & I_1(S-y+x) \\
+x\to y & I_2(S-y+x) \\
+x\to t & I_2(S+x)
+\end{array}
+\]
+\textbf{BFS} lấy shortest path $s\leadsto t$: đảo trạng thái chọn của mọi phần tử trên path (bỏ $s,t$). Khi đó $|S|$ tăng $1$ và vẫn independent ở cả hai matroid. Dựng lại graph rồi lặp; không còn path $\Rightarrow$ tối ưu.
+
+\textbf{Principle khi code}: giữ nguyên $S$ khi gọi oracle/dựng graph; chỉ cập nhật sau khi tìm \emph{shortest} path. Không dùng một path tùy ý. Với $N=|E|$, $r=\min(r_1(E),r_2(E))$, oracle tốn $T$: cách dựng trực tiếp dùng $O(Nr^2)$ oracle calls, thời gian $O(Nr^2(T+1))$. Weighted intersection cần thuật toán riêng; thay BFS bằng heap chưa đủ.
+
+\textbf{Mô hình}: rainbow forest = graphic + quota màu; bipartite matching = hai partition theo hai đầu cạnh. Giao hai matroid thường không còn là matroid nên greedy trực tiếp không đúng.
+
+\textbf{Interface}: \texttt{MatroidIntersection(n, oracle1, oracle2).solve()} trả về các ID được chọn. Oracle nhận \texttt{const vector<int>\&} gồm ID của tập cần kiểm tra, trả về \texttt{bool}; không giữ tham chiếu vào tập này.
+\inputminted{compactcpp}{source/cpp/graph/matroid_intersection.cpp}

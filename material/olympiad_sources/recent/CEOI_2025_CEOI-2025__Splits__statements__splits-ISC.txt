@@ -1,0 +1,92 @@
+                                                                                                         splits
+                                                                                               CEOI_day_2 Tasks
+                                                                                                    English (ISC)
+
+
+
+
+Splits
+For a permutation p = p[0] p[1] p[2] … p[n − 1] of the numbers 1, 2, 3, … , n we deﬁne a split as a
+permutation q which can be obtained by the following process:
+
+   1. Select two sets of numbers A = { i 1 , i 2 , ..., i k } and B = { j1 , j2 , ..., jl } such that A ∩ B = ∅,
+      A ∪ B = { 0, 1, 2, ..., n − 1 }, i1 < i2 < ... < ik and j1 < j2 < ... < jl
+   2. The permutation q will be q = p[i 1 ]p[i 2 ] … p[i k ]p[j1 ]p[j2 ] … p[jl ]
+
+Moreover, we deﬁne S(p) to be the set of all splits of a permutation p.
+
+You are given a number n and a set T of m permutations of length n. Count how many
+permutations p of length n exist such that T ⊆ S(p). Since this number can be large, ﬁnd it
+modulo 998 244 353.
+
+
+Implementation Details
+
+You should implement the following procedure:
+
+
+   int solve(int n, int m, std::vector<std::vector<int>>& splits);
+
+
+      n: the size of the permutation
+      m: the number of splits
+      splits: array containing m pairwise distinct permutations, the elements of the set T , which
+      is a subset of S(p)
+      This procedure should return the number of possible permutations modulo 998 244 353.
+      This procedure is called exactly once for each test case.
+
+
+Constraints
+      1 ≤ n ≤ 300
+      1 ≤ m ≤ 300
+
+Subtasks
+   1. (6 points) m = 1
+   2. (7 points) 1 ≤ n, m ≤ 10
+   3. (17 points) 1 ≤ n, m ≤ 18
+   4. (17 points) 1 ≤ n ≤ 30, 1 ≤ m ≤ 15
+
+
+                                                                                                   splits (1 of 2)
+    5. (16 points) 1 ≤ n, m ≤ 90
+    6. (16 points) 1 ≤ n ≤ 300, 1 ≤ m ≤ 15
+    7. (21 points) No additional constraints.
+
+
+Examples
+
+Example 1
+
+Consider the following call:
+
+
+   solve(3, 2, {{1, 2, 3}, {2, 1, 3}})
+
+
+In this sample, the size of the permutation p is 3 and we are given 2 splits:
+
+      123
+      213
+
+The function call will return 4 as there are only four permutations p that can generate both of
+those splits:
+
+      123
+      132
+      213
+      231
+
+Sample grader
+
+The sample grader reads the input in the following format:
+
+      line 1: n m
+      line 2 + i : s[i][0] s[i][1] … s[i][n − 1] for all 0 ≤ i < m
+
+and outputs the result of the call to solve with the corresponding parameters.
+
+
+
+
+                                                                                    splits (2 of 2)
+

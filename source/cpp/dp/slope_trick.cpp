@@ -3,6 +3,7 @@
 namespace notebook::dp {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: SlopeTrick f; f.add_abs(3); auto ans = f.minimum();
   // f starts at 0. Represents convex piecewise-linear f, slopes integral.
   struct SlopeTrick {
     priority_queue<long long> left;

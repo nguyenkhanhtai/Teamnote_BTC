@@ -4,8 +4,15 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto polygon = halfplane_intersection(lines,1000000.L);
+  //      lines: vector<Line>; keeps left side, clips to bounding square.
   // Left side of each directed line, clipped to [-bound,bound]^2.
   // Empty or lower-dimensional intersections return empty. Choose bound explicitly.
+  long double halfplane_angle(Line l) {
+    long double a=atan2l(l.d.y,l.d.x); return a<0?a+2*acosl(-1.L):a;
+  }
+  bool halfplane_angle_less(Line a,Line b) { return halfplane_angle(a)<halfplane_angle(b); }
+  bool outside(Line l,Point p) { return cross(l.d,p-l.p)<-EPS; }
   vector<Point>halfplane_intersection(vector<Line>lines,long double bound){
     assert(bound > 0);
     lines.insert(lines.end(), {
@@ -13,10 +20,8 @@ namespace notebook::geometry {
         {-bound, -bound}, {1, 0}
       },{ {bound,-bound},{0,1} },{ {bound,bound},{-1,0} },{ {-bound,bound},{0,-1} }
     });
-    auto angle = [](Line l) {
-      long double a=atan2l(l.d.y,l.d.x); return a<0?a+2*acosl(-1.L):a;
-    }; sort(lines.begin(),lines.end(),[&](Line a,Line b){ return angle(a)<angle(b); });
-    deque<Line>q; auto outside=[](Line l,Point p){ return cross(l.d,p-l.p)<-EPS; };
+    sort(lines.begin(),lines.end(),halfplane_angle_less);
+    deque<Line> q;
     for (Line l : lines) {
       assert(norm2(l.d) > 0);
       while (q.size() > 1) {

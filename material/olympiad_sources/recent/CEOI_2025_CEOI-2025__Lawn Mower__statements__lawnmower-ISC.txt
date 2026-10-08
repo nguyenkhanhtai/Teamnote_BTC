@@ -1,0 +1,134 @@
+                                                                                           lawnmower
+                                                                                           CEOI_day_1 Tasks
+                                                                                                English (ISC)
+
+
+
+
+Lawnmower
+After his adventures in Poenari Fortress, Vlad returns home and, as a true Romanian, his ﬁrst thought
+is that he should feed his horse. The horse is not very picky when it comes to food, so Vlad uses his
+lawn as a primary source of food for it.
+
+For this task, Vlad has a lawn mower of capacity c. He decided to split his lawn into n lanes, numbered
+from 0 to n − 1, which he has to mow in this order. Each lane i contains a quantity of uncut grass v[i]
+and, due to some unknown reasons, it takes a[i] seconds for Vlad to push the mower over that lane.
+
+After going over a few lanes, the mower may reach full capacity, in which case it stops cutting grass,
+leaving some on that lane. Every time that happens, its collector tank needs to be emptied, which
+takes b seconds and can be done only at the end of a lane. If the collector tank ﬁlls up while Vlad is
+going over lane i , he needs to keep pushing the mower until the end of the lane, empty the tank and
+then go over the lane one more time (or as many times as needed) in order to cut the left-over grass.
+For example if for a lane i we have to pass through it 3 times to get rid of all the grass, that will take
+a[i] + b + a[i] + b + a[i] seconds. After mowing the entire lawn, the mower must be emptied.
+
+After a lot of thinking and complaining that it will take him way too much to ﬁnish mowing, Vlad
+arrived at the conclusion that sometimes it might be more time-eﬃcient to empty the collector tank
+even before it reaches full capacity, but he is not sure what is the best strategy he can use. Therefore,
+he asks for your help.
+
+Given the quantity of grass on each lane and the number of seconds it takes to push the mower over
+each lane, the capacity of the tank and the time it takes to empty it, ﬁnd the best way for Vlad to
+ﬁnish mowing his lawn in minimum time.
+
+
+Implementation Details
+
+You should implement the following procedure.
+
+
+   long long mow(int n, int c, int b, std::vector<int> &a, std::vector<int> &v);
+
+
+      n: the number of lanes of the lawn
+      c: the total capacity of the collector tank
+      b: the number of seconds to empty the tank
+      a: vector of length n describing the time it takes to go over each lane
+      v : vector of length n giving the quantity of grass on each lane
+      This procedure should return a single integer, the minimum time to mow the lawn.
+
+
+                                                                                        lawnmower (1 of 3)
+        This procedure is called exactly once for each test case.
+
+
+Constraints
+        1 ≤ n ≤ 200 000
+        1 ≤ a[i] ≤ 109 (for each i such that 0 ≤ i < n)
+        1 ≤ v[i] ≤ 109 (for each i such that 0 ≤ i < n)
+        1 ≤ b ≤ 109
+        1 ≤ c ≤ 109
+        It is guaranteed that the correct result will be at most 1018
+
+
+Subtasks
+
+      1. (9 points) All the given values (n, b, c, a[i] and v[i]) will be at most 200
+      2. (16 points) n, c ≤ 5000 and v[i] ≤ 5000 for all 0 ≤ i < n
+      3. (36 points) c ≤ 200 000
+      4. (17 points) a[0] = a[1] = … = a[n − 1]
+      5. (22 points) No additional constraints
+
+
+Examples
+
+Example 1
+
+Consider the following call:
+
+
+      mow(3, 5, 2, {2, 10, 3}, {2, 4, 6})
+
+
+In this sample, there are 3 lanes, the collector tank has a capacity of 5 and it takes 2 seconds to empty
+it.
+
+For this sample, Vlad will mow the ﬁrst lane in 2 seconds. The amount of grass in the mower will be 2.
+Then he will empty the mower in 2 seconds. On the ﬁrst strip, he spends 4 seconds.
+
+He will then pass through the second lane. He will mow 4 units of grass. He will choose not to empty
+the tank after ﬁnishing the second strip. The time spent on the second strip is 10 seconds.
+
+For the third strip, he starts mowing. After one unit of grass, his mower ﬁlls up, thus he has to go
+until the end of the strip, empty the mower, then start mowing through third strip again. Keep in
+mind that after the entire yard is mowed, the mower has to be emptied. The time spent on the third
+strip is 3 + 2 + 3 + 2 = 10 seconds.
+
+In total, he spends 4 + 10 + 10 = 24 seconds. It can be proven that this is the optimal strategy that
+Vlad uses to mow the lawn.
+
+Example 2
+
+
+                                                                                        lawnmower (2 of 3)
+Consider the following call:
+
+
+   mow(4, 10, 4, {1, 2, 1, 4}, {3, 2, 6, 7})
+
+
+In this sample, there are 4 lanes, the collector tank has a capacity of 10 and it takes 4 seconds to
+empty it.
+
+The optimal strategy is just to go over the ﬁrst 3 lanes and afterwards the tank will be ﬁlled and the
+vector of grass quantities will be [0, 0, 1, 7]. After that, the tank should be emptied and the last 2
+lanes will be mowed and the tank will be emptied again at the end.
+
+The total number of seconds will be a[0] + a[1] + a[2] + b + a[2] + a[3] + b = 17.
+
+
+Sample grader
+
+The sample grader reads the input in the following format:
+
+      line 1: n c b
+      line 2: a[0] a[1] … a[n − 1]
+      line 3: v[0] v[1] … v[n − 1]
+
+and outputs the result of the call to mow with the corresponding parameters.
+
+
+
+
+                                                                                     lawnmower (3 of 3)
+

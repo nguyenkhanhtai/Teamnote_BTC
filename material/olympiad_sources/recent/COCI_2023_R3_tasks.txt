@@ -1,0 +1,380 @@
+Croatian Open Competition in Informatics
+                 Round 3, January 14th 2023
+
+
+
+
+                         Tasks
+      Task           Time limit   Memory limit   Score
+
+      Estimathon      1 second      512 MiB        50
+      Dirigent        1 second      512 MiB        70
+      Baltazar        4 seconds     512 MiB       110
+      Bomboni         2 seconds     512 MiB       110
+      Skrivača        2 seconds     512 MiB       110
+
+      Total                                       450
+          Croatian Open Competition in Informatics                                         Task Estimathon
+          Round 3, January 14th 2023                                          1 second / 512 MiB / 50 points
+
+
+Task Estimathon
+Paula and Domagoj are organizing an exciting team competition called Estimathon.
+They have already prepared the questions, and now they are arranging the room
+for the quiz.
+Before you could blink, Domagoj had already placed n tables in the room. Now
+they need to add chairs. They have very colourful chairs. They come in m colours
+and there are ai chairs of the i-th colour. Every team consists of four people.
+Therefore, for each table, Paula and Domagoj need to add four chairs. They want
+to make the room look as nice as possible. To make that happen, they agreed on these conditions:
+
+  • Each table has all chairs of the same colour
+
+  • Every chair colour is used, that is, for every colour there exists at least one table that has chairs of
+    that colour
+
+Caring too much about how nice the room will look, they suddenly realized that the quiz starts very soon!
+Help them find out if a chair arrangement with these conditions is even possible.
+
+Input
+The first line contains integers n and m (1 ≤ n, m ≤ 100), the number of tables and the number of chair
+colours.
+The second line contains m integers ai (1 ≤ ai ≤ 100), where the i-th number is the number of chairs of
+the i-th colour.
+
+Output
+In the first and only line output DA if it is possible to arrange the chairs so that both conditions hold,
+otherwise output NE.
+
+Scoring
+
+ Subtask       Points   Constraints
+
+      1          11     a1 = . . . = am = 4
+      2          39     No additional constraints.
+
+Examples
+ input                                  input                            input
+
+ 7 3                                    5 4                              6 5
+ 5 21 9                                 8 5 10 3                         5 5 5 5 5
+
+ output                                 output                           output
+ DA                                     NE                               NE
+
+
+Clarification of the second example:
+We can have 5 tables with chairs of the same colour, but we cannot have a table with colour 4, so the
+second condition can’t be satisfied.
+
+
+                                                     1 of 8
+         Croatian Open Competition in Informatics                                               Task Dirigent
+         Round 3, January 14th 2023                                             1 second / 512 MiB / 70 points
+
+
+Task Dirigent
+Winter school of informatics ends with a traditional dance. There are n students
+who participate. Each of them has a unique label between 1 and n.
+First, conductor Krešo orders the students to form a circle such that each student
+holds hands with two other students.
+Alenka is wondering if it is possible to break the circle by making exactly one pair
+of neighbouring students stop holding hands and that the newly formed sequence
+of students is sorted by their labels. For example, if their order is 3 4 1 2, than
+the circle can be broken between students with labels 4 and 1, but if their order is 2 1 4 3, than there is
+no way to break the circle in such way.
+During the night Krešo is going to give q instructions. In each of them, he is going to order two students
+to swap places. After each swap you need to help Alenka answer her question.
+
+Input
+The first line contains two integers n and q (1 ≤ n, q ≤ 300 000), the number of students and the number
+of swaps.
+The second line contains n integers ai (1 ≤ ai ≤ n), describing the initial placement of students in the
+circle.
+In each of the next q lines there are two integers xi , yi (1 ≤ xi , yi ≤ n, xi ̸= yi ), that describe Krešo’s i-th
+instruction in which students with labels xi and yi swap places.
+
+Output
+In the i-th of the q lines outs put the answer to Alenka’s question after i swaps have been carried out. If
+the answer is affirmative output DA, otherwise NE.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n, q ≤ 500
+     2          20     n, q ≤ 5 000
+     3          35     No additional constraints.
+
+
+
+
+                                                      2 of 8
+      Croatian Open Competition in Informatics                                               Task Dirigent
+      Round 3, January 14th 2023                                             1 second / 512 MiB / 70 points
+
+
+Examples
+ input                              input                               input
+ 5 2                                4 2                                 6 5
+ 2 3 4 5 1                          2 3 1 4                             2 1 5 6 3 4
+ 1 3                                4 2                                 3 1
+ 3 1                                3 4                                 3 4
+                                                                        3 2
+ output                             output                              4 5
+ NE                                 NE                                  5 4
+ DA                                 DA                                  output
+                                                                        NE
+                                                                        NE
+                                                                        DA
+                                                                        NE
+                                                                        DA
+
+
+Clarification of the second example:
+Students in the beginning, after the first and after the second swap.
+
+
+
+
+                                                 3 of 8
+         Croatian Open Competition in Informatics                                             Task Baltazar
+         Round 3, January 14th 2023                                         4 seconds / 512 MiB / 110 points
+
+
+Task Baltazar
+Baltazar decided to go on a vacation. Currently, he is in Baltazargrad, and wants
+to travel to Primošten. To get there, he has to go through many cities. There are
+n citites, and they are connected with m two-way roads. Baltazargrad is labeled
+as city no. 1, and Primošten as city no. n.
+Baltazar isn’t sure about the route from Baltazargrad to Primošten, so he will use
+GPS. It will lead him to his destination using the shortest route.
+But Baltazar really likes to travel, and he can pour his magic potion on any road
+(even the ones he won’t pass by), and increase its length by 2 kilometers. He can pour it on only one
+road.
+Soon he realized that he has to check-in in the hotel Zora in Primošten before noon, so he can’t increase
+the length of the shortest route too much. Now, he wants to know how many roads can he pour his magic
+potion on, so that the shortest distance between Baltazargrad and Primošten increases by exactly 1
+kilometer.
+Help him determine the roads he can pour his magic potion on.
+
+Input
+Each test contains multiple test cases. The first line contains the number of test cases t (1 ≤ t ≤ 10 000).
+The description of the test cases follows.
+The first line of each test case contains integers n and m (2 ≤ n ≤ 300 000, 1 ≤ m ≤ min(300 000, n·(n−1)
+                                                                                                     2    ),
+the number of cities, and the number of roads between cities.
+                                                                         ̸ bi , 1 ≤ wi ≤ 109 ), meaning there is
+The following m lines contain integers ai , bi i wi (1 ≤ ai , bi ≤ n, ai =
+a road between cities ai and bi , and its length is wi . Between each pair of cities, there is at most one road
+connecting them.
+All the cities are connected, i.e., for each pair of cities, there is a path from one to another, but not
+necessary direct.
+It is guaranteed that the sum of n over all test cases does not exceed 300 000, and that the sum of m over
+all test cases does not exceed 300 000.
+
+Output
+In the first line, print the integer c, the number of roads on which Baltazar can pour his magic potion. In
+the second line, print c integers, the indices of the roads in increasing order.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n, m ≤ 1 000
+                       There is a road between Baltazargrad and Primošten, and its length
+     2          30
+                       is 1 kilometer longer than the shortest distance between these cities.
+     3          65     No additional constraints.
+
+
+
+
+                                                    4 of 8
+       Croatian Open Competition in Informatics                                          Task Baltazar
+       Round 3, January 14th 2023                                      4 seconds / 512 MiB / 110 points
+
+
+Examples
+ input
+ 3
+ 6 6
+ 1 2 2
+ 1 3 2
+ 2 4 2
+ 3 5 2
+ 4 5 1
+ 5 6 2
+ 6 6
+ 1 2 2
+ 1 3 2
+ 2 4 2
+ 3 5 2
+ 4 5 3
+ 5 6 2
+ 6 7
+ 1 2 2
+ 1 3 2
+ 2 4 2
+ 3 5 2
+ 4 5 1
+ 5 6 2
+ 1 6 7
+
+ output
+ 2
+ 2 4
+ 0
+
+ 3
+ 2 4 6
+
+
+Clarification of the example:
+The cities and the roads are shown in the image. If Baltazar pours his magic potion on road 2 (between
+cities 1 and 3), or on road 4 (between cities 3 and 5), then the shortest distance between cities 1 and n
+will increase by 1.
+
+
+
+
+                                                  5 of 8
+         Croatian Open Competition in Informatics                                                       Task Bomboni
+         Round 3, January 14th 2023                                                    2 seconds / 512 MiB / 110 points
+
+
+Task Bomboni
+Iva is a big fan of candy! In front of her is an n times n field filled with candy and
+obstacles. Iva is currently in the upper left cell of the field and by moving only
+down and right she will travel to the lower right cell. The cell Iva is currently in
+does not contain an obstacle.
+In every cell, there is either an obstacle or a piece of candy with a number written
+on it. Iva will eat all the candy she gets her hands on during her trip (including
+the candy in the first and last cell) and then multiply all the numbers on them.
+Iva knows her favourite number is k and she wants the product of the numbers on the candy she has eaten
+to be divisible by k. She wants to know how many such paths there are. Because that number can be
+huge, she is interested in it modulo 998 244 353.
+
+Input
+The first line contains two integers n and k (1 ≤ n ≤ 500, 1 ≤ k ≤ 106 ), which denote the size of the field
+and Iva’s favourite number.
+In each of the next n lines, there are n numbers describing the i-th row of the field (−1 ≤ ai,j ≤ 106 ). If
+ai,j = −1, then that cell contains an obstacle, otherwise 1 ≤ ai,j ≤ 106 and that cell contains a piece of
+candy with that number.
+
+Output
+Print a single line with the required number from the task.
+
+Scoring
+
+ Subtask      Points     Constraints
+
+     1           13      n, k, ai,j ≤ 20
+     2           17      n, k ≤ 20
+     3           33      k ≤ 20
+     4           47      No additional constraints
+
+Examples
+ input                                                           input
+
+ 2 2                                                            3 6
+ 3 2                                                            5 2 -1
+ 1 4                                                            7 3 6
+                                                                -1 3 1
+ output
+                                                                 output
+ 2
+                                                                 3
+
+
+Clarification of the second example:
+There are three possible paths such that the product is divisible by 6: 5 · 2 · 3 · 3 · 1, 5 · 2 · 3 · 6 · 1, 5 · 7 · 3 · 6 · 1.
+
+
+
+
+                                                            6 of 8
+         Croatian Open Competition in Informatics                                             Task Skrivača
+         Round 3, January 14th 2023                                         2 seconds / 512 MiB / 110 points
+
+
+Task Skrivača
+Marin and Luka are playing a popular kids game called Hide and Seek (Skrivača).
+They are playing in their house which has n rooms, and m pairs of rooms are
+connected by a door. Rooms are labeled from 1 to n and for each pair of rooms
+there exists a path from one room to another.
+Luka has thought of a hiding strategy: when Marin enters room v, Luka will hide
+in room av . At the start of the game Marin chooses his starting room v0 and Luka
+hides in the room av 0 . In each step of the game, firstly Marin chooses a room u
+adjecent to his current room and enters it. After that, Luka knows Marin is in room u so by his hiding
+strategy he hides in room au . Notice that Luka can choose any path to reach room au and that in one
+step of the game he can pass through an arbitrary number of rooms.
+Marin will find Luka when both of them are located in the same room, at that momement the game ends.
+Marin found out about Luka’s hiding strategy so he wants you to determine for each starting room if
+Marin can find Luka in a finite amount of steps, and if he can, determine the least amount of steps
+necessary if both of them play optimally. (Marin plays such that he finds Luka in the least amount of
+steps and Luka plays such that Marin finds him in the most amount of steps).
+
+Input
+
+In the first line there are integers n, m (1 ≤ n ≤ 2 · 105 , n − 1 ≤ m ≤ min(5 · 105 , n·(n−1)
+                                                                                          2    ), the number of
+rooms and the number of pairs of connected rooms.
+In the second line there are n integers ai (1 ≤ ai ≤ n), describing Luka’s hiding strategy.
+In i-th of the next m lines there are integers xi , yi (1 ≤ xi , yi ≤ n, xi =
+                                                                            ̸ yi ), denoting that room xi and
+room yi are connected. Between each pair of rooms there will be at most one connection.
+
+Output
+In the first and only line print n numbers, where the i-th number represents the least amount of steps
+necessary for Marin to find Luka if Marin starts in room i, or -1 if Marin can’t find Luka.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n ≤ 1 000, m ≤ 2 000
+     2          25     m=n−1
+                       Luka’s hiding strategy will be such that he will never attempt to hide
+                       in the same or adjecent room to where Marin is currently located, and the structure
+     3          30
+                       of the house will be such that the game can end in at most 5 different rooms
+                       independent of Luka’s hiding strategy
+     4          40     No additional constraints.
+
+
+
+
+                                                    7 of 8
+      Croatian Open Competition in Informatics                                          Task Skrivača
+      Round 3, January 14th 2023                                      2 seconds / 512 MiB / 110 points
+
+
+Examples
+ input                              input                             input
+ 4 4                                8 9                              9 8
+ 3 4 1 2                            2 3 2 1 6 5 6 7                  1 9 1 1 1 9 9 9 1
+ 1 2                                1 2                              1 2
+ 2 3                                1 3                              2 3
+ 3 4                                2 4                              3 4
+ 4 1                                3 4                              4 5
+                                    4 5                              5 6
+ output                             4 6                              6 7
+ -1 -1 -1 -1                        6 7                              7 8
+                                    5 7                              8 9
+                                    4 8
+                                                                      output
+                                    output
+                                                                      0 1 1 2 1 1 2 1 1
+                                    1 2 2 2 1 1 1 1
+
+
+Clarification of the second example:
+Marin enters room 8 from room 4 in the first step, and in the secend he goes back to room 4. Luka needs
+to pass through room 4 to get from room 7 to room 1 so Marin can find Luka in 2 steps.
+
+
+
+
+                                                 8 of 8
+

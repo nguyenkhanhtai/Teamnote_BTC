@@ -4,6 +4,7 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: int where = point_in_convex({{0,0},{2,0},{0,2}},{1,0});
   // -1 outside, 0 boundary, 1 inside; strict CCW polygon.
   int point_in_convex(const vector<Point>& p, Point q) {
     int n = p.size();

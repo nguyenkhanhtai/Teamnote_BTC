@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto path = stern_encode(3,5); auto fraction = stern_decode(path);
   using SternPath = vector<pair<char, uint64_t>>;
   SternPath stern_encode(uint64_t p, uint64_t q) {
     assert(p && q && gcd(p, q) == 1); SternPath out;

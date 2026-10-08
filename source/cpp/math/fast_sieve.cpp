@@ -3,9 +3,10 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: LinearSieve sieve(1000000); // sieve.primes, spf, phi, mu
   struct LinearSieve {
     vector<int> primes, spf, phi, mu;
-    explicit LinearSieve(int n) : spf(n + 1), phi(n + 1), mu(n + 1) {
+    LinearSieve(int n) : spf(n + 1), phi(n + 1), mu(n + 1) {
       assert(n >= 0);
       if (n) phi[1] = mu[1] = 1;
       for (int i = 2; i <= n; ++i) {

@@ -1,0 +1,329 @@
+          Hrvatska informatička olimpijada
+                          28. travnja 2024.
+
+
+
+
+                             Zadaci
+Zadatak        Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+CERN                4 sekunde                 512 MiB              100
+Koreografija         8 sekundi                1024 MiB             100
+Ministarstvo        1 sekunda                 1024 MiB             100
+Sirologija          1 sekunda                 1024 MiB             100
+
+Ukupno                                                             400
+       Hrvatska informatička olimpijada                                                          Zadatak CERN
+       28. travnja 2023.                                                       4 sekunde / 512 MiB / 100 bodova
+
+
+Zadatak CERN
+CERN je međunarodna institucija fokusirana na nuklearna istraživanja i fiziku elementarnih čestica.
+Sustav akceleratora čestica u CERN-u koristi se za provođenje eksperimenata koji uključuju sudaranje
+čestica pri velikim brzinama.
+Promatramo N čestica poredanih u niz. Svaka čestica određena je svojom vrstom vi , što predstavljamo
+prirodnim brojem između 1 i N .
+U najnovijem istraživanju potrebno je provesti Q eksperimenata. U i-tom eksperimentu promatramo
+sve čestice od li -te do ri -te u nizu (li < ri ). Među promatranim česticama možemo odabrati bilo koje
+dvije čestice različite vrste te ih sudariti u akceleratoru, čime obje čestice bivaju uništene. Navedeni
+postupak sudaranja ponavljamo dok god među promatranim česticama postoje dvije čestice različite vrste.
+Eksperiment završava ili time što su sve promatrane čestice uništene, ili je preostao neki broj čestica iste
+vrste. Naravno, ovisno o tome kojim redoslijedom i koje čestice sudaramo, moguće je na kraju završiti s
+raznim vrstama čestica.
+Budući da sudaranje čestica nije jeftino, odlučili ste da ćete eksperimente provoditi samo u teoriji. Sada
+vas za svaki eksperiment zanima koliko postoji vrsta čestica tako da je moguće eksperiment završiti s
+nekim brojem preostalih čestica te vrste.
+
+Ulazni podaci
+U prvom su retku prirodni brojevi N i Q, redom broj čestica i broj eksperimenata.
+U sljedećem je retku niz od N brojeva v1 , . . . , vN , redom vrste čestica.
+U i-tom od sljedećih Q redaka je par od dva prirodna broja li i ri (1 ≤ li < ri ≤ N ) koji predstavljaju
+promatrani interval čestica u i-tom eksperimentu.
+
+Izlazni podaci
+Za svaki od Q eksperimenata u zasebni redak ispišite traženi broj vrsta čestica s kojima je moguće završiti
+eksperiment.
+
+Bodovanje
+U svim podzadacima vrijedi 2 ≤ N ≤ 500 000 i 1 ≤ Q ≤ 500 000.
+
+ Podzadatak      Broj bodova     Ograničenja
+
+       1              13         Vrijedi vi ≤ 10 za svaki i = 1, . . . , N .
+       2              19         Postoje najviše dvije čestice svake vrste.
+       3              17         N, Q ≤ 2000
+       4              19         N, Q ≤ 100 000
+       5              32         Nema dodatnih ograničenja.
+
+
+
+
+                                                     1 od 8
+         Hrvatska informatička olimpijada                                                Zadatak CERN
+         28. travnja 2023.                                             4 sekunde / 512 MiB / 100 bodova
+
+
+Probni primjeri
+ ulaz
+ 11 5
+ 2 4 2 3 4 4 3 1 4 4 4
+ 1 4
+ 2 8
+ 6 9
+ 8 10
+ 8 11
+
+ izlaz
+ 1
+ 4
+ 1
+ 1
+ 1
+
+
+Pojašnjenje probnog primjera:
+U prvom eksperimentu možemo sudariti čestice vrsta 3 i 4, čime preostaju dvije čestice vrste 2. Ne postoji
+način da na kraju preostane neka druga vrsta čestica.
+U drugom eksperimentu moguće je za svaku vrstu čestica postići da na kraju preostani neki broj čestica
+te vrste.
+U četvrtom i petom eksperimentu će neovisno o odabiru sudara na kraju preostati neki broj čestica vrste
+4.
+
+
+
+
+                                                 2 od 8
+      Hrvatska informatička olimpijada                                               Zadatak Koreografija
+      28. travnja 2023.                                                8 sekundi / 1024 MiB / 100 bodova
+
+
+Zadatak Koreografija
+Jura: I Tvrtko, kakva je jučer bila predstava?
+Tvrtko: Bilo je super. Najbolji je dio bio kada se 1000 plesača poredalo redom s lijeva na desno i krenulo
+izvoditi koreografiju. Svaki od njih je na kostimu imao zapisan broj između 1 i 1000, te su svi ti brojevi
+bili različiti. No moram priznati, kada sam ih promatrao tamo u redu, njihov poredak mi se nije dopao.
+Jura: Kako to misliš?
+Tvrtko: Promatrao sam neki uzastopni interval plesača u redu te prebrojao koliko postoji parova plesača
+takvih da je plesač na manjoj poziciji imao veći broj od plesača na većoj poziciji. Sviđa mi se kad je broj
+takvih parova neparan broj.
+Jura: Joj Tvrtko, moraš sagledati cijelu sliku. Budem ja procijenio. Nego, reci mi, kako su išli njihovi
+brojevi redom?
+Tvrtko: Hm... To sam već zaboravio. No mogu ti reći za svaki uzastopni interval plesača je li mi se sviđao
+ili ne.
+Jura: Tako dakle. Ne preostaje nam drugo nego da na temelju toga pokušamo odrediti njihove brojeve.
+
+Interakcija
+Ovo je interaktivni zadatak. Vaš program treba uspostaviti dijalog s programom izrađenim od strane
+organizatora koji odgovara na postavljene upite.
+Vaš program može slati upite pisanjem na standardni izlaz. Svaki upit treba biti ispisan u zaseban redak
+te poprimati oblik “? a b”, gdje su a i b prirodni brojevi za koje vrijedi 1 ≤ a ≤ b ≤ 1000. Brojevi a i b
+predstavljaju pozicije plesača koje određuju promatrani interval.
+Nakon svakog ispisanog upita, vaš program treba napraviti flush izlaza te sa standardnog ulaza pročitati
+odgovor na upit – broj iz skupa {0, 1} koji predstavlja Tvrtkovo mišljenje o navedenom intervalu. Broj 1
+označava da se Tvrtku taj interval sviđao, a 0 da nije.
+Vaš program smije poslati najviše 500 000 ovakvih upita.
+Kada je vaš program rekonstruirao brojeve na kostimima plesača, treba na standardni izlaz u zaseban
+redak ispisati znak ! te zatim ispisati traženi niz brojeva kako se pojavljuju redom s lijeva na desno.
+Nakon toga, vaš program ponovno treba napraviti flush izlaza i završiti izvođenje.
+
+Bodovanje
+Neka je Q najveći broj upita koje je postavio vaš program u svim test primjerima.
+Ukoliko je Q > 500 000, vaš program će osvojiti 0 bodova.
+Inače, broj bodova koji će vaš program ostvariti računa se na temelju sljedeće tablice:
+
+         Raspon           Broj bodova
+                                      1/Q−1/500 000
+ 40 000 ≤ Q ≤ 500 000     30 + 70 · 1/40 000−1/500 000
+
+       Q ≤ 40 000         100
+
+
+
+
+                                                   3 od 8
+         Hrvatska informatička olimpijada                                           Zadatak Koreografija
+         28. travnja 2023.                                            8 sekundi / 1024 MiB / 100 bodova
+
+
+Primjer interakcije
+Iako će u zadatku broj plesača uvijek iznositi 1000, radi ilustracije navodimo primjer interakcije kada bi
+broj plesača iznosio 4.
+Pretpostavimo da brojevi na kostimima plesača idu redom 2 1 4 3.
+
+ Izlaz        Ulaz    Napomena
+
+ ? 1 2          1     Tvrtko je prebrojao jedan par.
+ ? 1 3          1     Tvrtko je prebrojao jedan par.
+ ? 1 4          0     Tvrtko je prebrojao dva para.
+ ? 2 3          0     Tvrtko je prebrojao nula parova.
+ ? 2 4          1     Tvrtko je prebrojao jedan par.
+ ? 3 4          1     Tvrtko je prebrojao jedan par.
+ !                    Brojevi su otkriveni, ispisuju se redom.
+ 2 1 4 3
+
+
+
+
+                                                   4 od 8
+      Hrvatska informatička olimpijada                                              Zadatak Ministarstvo
+      28. travnja 2023.                                               1 sekunda / 1024 MiB / 100 bodova
+
+
+Zadatak Ministarstvo
+Pero se nakon uspješne karijere u stranci koju nećemo imenovati, zaposlio u Ministarstvu turizma. Pero
+nadgleda mrežu od N gradova, označenih brojevima od 1 do N , gdje između svaka dva grada postoji
+točno jedna jednosmjerna cesta. Kako bi povećao prihode, odlučio je uvesti dozvole za prometovanje. Pero
+bi najradije uveo posebnu dozvolu za svaku cestu, no to bi alarmiralo njegove nadređene. Stoga, uvest će
+K različitih dozvola, označenih od 1 do K, te će za prolazak svakom cestom biti potrebno posjedovanje
+točno određene dozvole.
+Kako bi ipak osigurao pozamašne prihode, Pero će se zadovoljiti sa sljedećim svojstvom.
+
+  • Za svaki grad v postoji neki grad u, tako da iz grada v nije moguće doći do grada u posjedovanjem
+    samo jedne dozvole.
+
+Pero vas moli da mu pomognete, te da odredite najmanji K takav da postoji pridruživanje dozvola s
+traženim svojstvom te neko takvo pridruživanje! Ako ne postoji takvo pridruživanje, ispišite -1.
+
+Ulazni podaci
+U prvom je retku prirodan broj N .
+U i-tom od sljedećih N redaka nalazi se N brojeva ai,j gdje je ai,j = 1 ako postoji cesta iz grada i u grad
+j. Primijetite da je ai,i = 0 te da je za i ̸= j točno jedan od brojeva ai,j te aj,i različit od nula.
+
+Izlazni podaci
+Ako ne postoji pridruživanje s traženim svojstvom u prvi i jedini redak ispište -1.
+Inače, u prvi redak ispišite minimalan prirodan broj K.
+U sljedećih N redaka ispište opis pridruživanja.
+U i-tom retku ispišite N brojeva bi,j gdje ako je ai,j = 0 tada je i bi,j = 0, a u suprotnom 1 ≤ bi,j ≤ K
+označava koja je dozvola potrebna za prometovanje tom cestom.
+
+Bodovanje
+U svim podzadacima vrijedi 2 ≤ N ≤ 1000. U svakom podzadatku, 15% bodova donosi samo odlučivanje
+je li takvo pridruživanje postoji ili ne. Za te bodove potrebno je, ako niste ispisali -1, ispisati nekakvo
+pridruživanje, ali ono ne mora zadovoljavati Perino traženo svojstvo.
+
+ Podzadatak     Broj bodova    Ograničenja
+
+      1              20        N ≤5
+      2              80        Nema dodatnih ograničenja.
+
+
+
+
+                                                   5 od 8
+         Hrvatska informatička olimpijada                                        Zadatak Ministarstvo
+         28. travnja 2023.                                         1 sekunda / 1024 MiB / 100 bodova
+
+
+Probni primjeri
+ ulaz                                 ulaz                             ulaz
+ 3                                    3                                4
+ 0 1 0                                0 1 1                            0 1 0 1
+ 0 0 1                                0 0 1                            0 0 1 1
+ 1 0 0                                0 0 0                            1 0 0 0
+                                                                       0 0 1 0
+ izlaz                                izlaz
+                                                                       izlaz
+ 3                                    -1
+ 0 1 0                                                                 3
+ 0 0 2                                                                 0 1 0 1
+ 3 0 0                                                                 0 0 2 3
+                                                                       3 0 0 0
+                                                                       0 0 2 0
+
+
+Pojašnjenje trećeg probnog primjera:
+
+
+Ceste za koje je potrebna prva dozvola su označene crvenom bojom, druga dozvola plavom i treća dozvola
+zelenom.
+Iz grada 1 nije moguće doći do grada 3 koristeći samo jednu dozvolu.
+Iz grada 2 nije moguće doći do grada 1 koristeći samo jednu dozvolu.
+Iz grada 3 nije moguće doći do grada 2 koristeći samo jednu dozvolu.
+Iz grada 4 nije moguće doći do grada 1 koristeći samo jednu dozvolu.
+
+
+
+
+                                               6 od 8
+      Hrvatska informatička olimpijada                                                  Zadatak Sirologija
+      28. travnja 2023.                                                1 sekunda / 1024 MiB / 100 bodova
+
+
+Zadatak Sirologija
+Vi ste mrav, i to ne običan mrav već mrav opsjednut sirologijom!
+Otkrili ste novu krišku sira u kuhinji, te želite poslati što više svojih podanika kako bi istražili sir. Sir
+možemo zamisliti kao tablicu s N redaka i M stupaca gdje su redci označeni brojevima od 1 do N odozgo
+prema dolje i stupci označeni brojevima od 1 do M s lijeva prema desno. Neka polja sadrže rupe, dok
+su ostala sir. Polje u r-tom retku i s-tom stupcu označavat ćemo kao (r, s). U gornjem lijevom polju i
+donjem desnom polju će se sigurno nalaziti sir.
+Označimo broj podanika s K. Vaši podanici započet će svoju istragu u gornjem lijevom polju te ga završiti
+u donjem desnom polju. Mogu se kretati samo u smjerovima dolje i desno. Dodatno, njihovi putevi se ne
+smiju "sjeći" tj. možemo im dodijeliti oznake od 1 do K tako da ne postoji polje iz kojega je podanik s
+manjom oznakom izašao prema desno, a podanik s većom oznakom prema dolje.
+Također, htjeli biste da su ti putevi ipak u nekom smislu "različiti", tj. da za svaka dva podanika postoji
+polje (r, s) u kojem se nalazi rupa, tako da se jedan od njih u nekom trenutku nalazio u stupcu s te retku s
+oznakom manjom od r, a drugi u nekom trenutku (ne nužno istom) nalazio u stupcu s te retku s oznakom
+većom od r. Neformalno, svaka dva podanika su neku rupu obišli s različitih strana.
+Ispišite najveći K takav da postoji odabir putanja podanika koje zadovoljavaju tražene uvjete.
+Neki primjeri puteva koji ne zadovoljavaju uvjete:
+
+
+
+
+           (a) Loš odabir puteva - sijeku se             (b) Loš odabir puteva - obilaze rupu s iste strane
+
+
+Ulazni podaci
+U prvom su retku prirodni brojevi N , M .
+U sljedećih N redaka nalaze se opisi redaka tablice. U i-tom se retku nalazi M znakova gdje . označava
+sir dok # označava polje koje sadrži rupu.
+
+Izlazni podaci
+U jedini redak ispišite najveću moguću vrijednost broja K.
+
+
+
+
+                                                   7 od 8
+         Hrvatska informatička olimpijada                                                Zadatak Sirologija
+         28. travnja 2023.                                              1 sekunda / 1024 MiB / 100 bodova
+
+
+Bodovanje
+U svim podzadacima vrijedi 2 ≤ N, M ≤ 2000.
+
+ Podzadatak       Broj bodova    Ograničenja
+
+         1             15        Sve rupe nalaze se u istom retku.
+         2             18        N, M ≤ 10
+         3             16        N, M ≤ 50, ne postoji rupa u prvom ili zadnjem retku te prvom ili zadnjem stupcu.
+         4             18        N, M ≤ 50
+         5             16        N, M ≤ 2000, ne postoji rupa u prvom ili zadnjem retku te prvom ili zadnjem stupcu.
+         6             17        Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                 ulaz                                ulaz
+ 5 5                                  5 5                                 3 2
+ .....                                ....#                               .#
+ .#...                                ....#                               #.
+ .....                                .....                               ..
+ ...#.                                .....
+ .....                                #....                               izlaz
+
+ izlaz                                izlaz                               0
+
+ 3                                    1
+
+
+Pojašnjenje probnih primjera:
+
+
+
+
+        (a) Primjer odabira puteva prvog primjera            (b) Primjer odabira puteva drugog primjera
+
+
+
+
+                                                    8 od 8
+

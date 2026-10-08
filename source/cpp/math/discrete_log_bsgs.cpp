@@ -4,6 +4,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto exponent = discrete_log(2,8,13);
   // Smallest exponent, including non-coprime a,m. Practical m limited by sqrt(m) memory.
   optional<U64> discrete_log(U64 a, U64 b, U64 m) {
     assert(m); a %= m; b %= m;

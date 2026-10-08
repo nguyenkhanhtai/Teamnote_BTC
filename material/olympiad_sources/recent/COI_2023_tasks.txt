@@ -1,0 +1,322 @@
+          Hrvatska informatička olimpijada
+                          21. svibnja 2023.
+
+
+
+
+                             Zadaci
+Zadatak         Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+Bliskost             1 sekunda                 512 MiB              100
+Nestabilnost         1.5 sekunda               512 MiB              100
+Netrpeljivost        1.5 sekunda               512 MiB              100
+Sličnost             3 sekunde                1024 MiB              100
+
+Ukupno                                                              400
+       Hrvatska informatička olimpijada                                                 Zadatak Bliskost
+       21. svibnja 2023.                                               1 sekunda / 512 MiB / 100 bodova
+
+
+Zadatak Bliskost
+Jednom u proljeće, u vrijeme neobično topla sutona, pojavila su se na Patrijaršijskim ribnjacima u M*skvi
+dvojica građana. Prvi nije bio nitko drugi nego urednik Mihali Aleksandrovič Berlioz, dok je drugi bio
+mladi pjesnik zvan Bezdomni. Svaki je sa sobom imao svoj niz slova duljine N ...
+Ubrzo im se priključio tajnoviti specijalist za crnu magiju, profesor Woland, te rekao.
+- Gospodo, imate vrlo zanimljijve nizove slova, te ja odmah naoko mogu odrediti jesu li oni bliski ili ne!
+Jednim potezom smatra se odabiranja dvaju uzastopnih slova jednog niza, te pomicanjem obaju slova
+ciklički prema naprijed u abecedi, primjerice pretvarajući par slova “ab“ u par slova “bc“ tj. par slova
+“qz“ u par slova “ra“. Dva niza znakova smatraju se bliskima ako primjenjivanjem poteza na oba niza
+moguće je postići da su oni jednaki.
+- Dakako, profesore, pričate gluposti. Problem određivanja bliskosti dvaju nizova notorno je težak.
+- A ne, varate se Mihaile Aleksandroviču, i ja ću vam to upravo dokazati! Evo ovako, sada ću vam reći
+jesu li vaši nizovi bliski ili ne, te vi potom učinite Q promjena na svojem nizu. Ja ću vam nakon svake
+promjene odrediti istinitost bliskosti vaših nizova.
+- Veoma hrabro profesore, uistinu, veoma hrabro... pa započnimo!
+
+Ulazni podaci
+U prvom su retku prirodni brojevi N i Q, redom duljina nizova i broj promjena.
+U drugom retku nalazi se niz znakova duljine N , niz koji pripada Berliozu.
+U trećem retku nalazi se niz znakova duljine N , niz koji pripada Bezdomnom.
+U i-tom od sljedećih Q redaka nalazi se broj pi te znak ci , koji označava da je u i-toj promjeni Berlioz
+promijenio pi -to slovo u ci .
+
+Izlazni podaci
+U prvi redak potrebno je ispisati “da“ ako su početni nizovi bliski, odnosno “ne“ ako nisu.
+U i-tom od sljedećih Q redaka potrebno je ispisati jesu li nizovi bliski nakon i-te promjene Berlioza.
+
+Bodovanje
+U svim podzadacima vrijedi 1 ≤ N ≤ 1 000 000 i 0 ≤ Q ≤ 1 000 000.
+
+ Podzadatak     Broj bodova    Ograničenja
+
+       1              7        Q = 0, N ≤ 5
+       2              8        Q = 0, N ≤ 1 000
+       3             13        Q=0
+       4             12        Q ≤ 100 000, N ≤ 5
+       5             17        Q ≤ 100 000, N ≤ 1 000
+       6             43        Nema dodatnih ograničenja.
+
+
+
+
+                                                  1 od 8
+         Hrvatska informatička olimpijada                                            Zadatak Bliskost
+         21. svibnja 2023.                                          1 sekunda / 512 MiB / 100 bodova
+
+
+Probni primjeri
+ ulaz                                               ulaz
+ 3 1                                                6 0
+ bbc                                                berlio
+ ced                                                pjesni
+ 1 a
+                                                    izlaz
+ izlaz
+                                                    da
+ ne
+ da
+
+
+Pojašnjenje probnih primjera:
+U prvom primjeru, nakon promjene, riječi su bliske sljedećim potezima:
+abc → bcc → cdc → dec → dfd
+ced → dfd
+
+
+
+
+                                               2 od 8
+       Hrvatska informatička olimpijada                                             Zadatak Nestabilnost
+       21. svibnja 2023.                                              1.5 sekunda / 512 MiB / 100 bodova
+
+
+Zadatak Nestabilnost
+Borova šuma na suprotnoj obali rijeke, još prije jednog sata osvijetljena svibanjskim suncem, zamutila se,
+razmazala i rasplinula. Ostalo je samo jedno divovsko stablo, stablo s N čvorova...
+Ivan je iz sobe br. 119, promatrao to stablo, čvrsto ukorijenjeno u čvoru označenom brojem 1. Nakon što
+je još pobliže promatrao stablo, primijetio je da se u svakom čvoru nalazi broj ai . Odjednom mu je u
+glavu sinula definicija k-dobrog podstabla. Neko podstablo je k-dobro, ako za svaki brid koji spaja čvorove
+(u, v) gdje je u roditelj od v, vrijedi av = (au + 1) mod k te dodatno za svaki čvor v unutar podstabla
+vrijedi av < k. Za svaki broj k postoji prirodna nestabilnost k-dobrih stabala, označenu kao f (k).
+Kada se ponovno osvrnuo, primijetio je da pluta pred stablom s magičnom pilom u desnoj ruci. Ivan je
+odlučio prerezati neke grane, te za svako podstablo, dobiveno micanjem prepiljenih bridova, odabrati
+neki broj ki tako da je ono ki -dobro. Par biranja skupa bridova koje će prerezati te brojeva ki za svako
+tako dobiveno podstablo koji zadovoljavaju da je pripadajuće podstablo ki -dobro, Ivan je odlučio nazvati
+rezanjem. Nestabilnost rezanja nazivamo zbroj f (ki ) po svim dobivenim podstablima. Pomozite Ivanu
+odrediti najmanju moguću nestabilnost rezanja!
+
+Ulazni podaci
+U prvom je retku prirodan broj N , broj čvorova stabla.
+U drugom se retku nalazi N brojeva gdje i-ti označava ai (0 ≤ ai ≤ N − 1).
+U trećem se retku nalazi N brojeva gdje k-ti označava f (k) (1 ≤ f (k) ≤ 109 ).
+U sljedećih N − 1 redaka nalazi se opis stabla, u i-tom retku nalaze se brojevi ui te vi (1 ≤ ui , vi ≤
+N, ui ̸= vi ) koji označavaju da postoji brid među čvorovima ui te vi
+
+Izlazni podaci
+U jedini redak potrebno je ispisati najmanju moguću nestabilnost rezanja.
+
+Bodovanje
+U svim podzadacima vrijedi 1 ≤ N ≤ 300 000.
+
+ Podzadatak     Broj bodova    Ograničenja
+
+       1             12        N ≤ 5 000, stablo čini lanac i čvor 1 je jedan rub
+       2             20        N ≤ 300 000, stablo čini lanac i čvor 1 je jedan rub
+       3              7        N ≤ 20
+       4             22        N ≤ 5 000
+       5             39        Nema dodatnih ograničenja.
+
+
+
+
+                                                  3 od 8
+         Hrvatska informatička olimpijada                                       Zadatak Nestabilnost
+         21. svibnja 2023.                                        1.5 sekunda / 512 MiB / 100 bodova
+
+
+Probni primjeri
+ ulaz                                               ulaz
+ 7                                                  7
+ 2 3 0 3 2 0 0                                      2 3 0 3 2 0 0
+ 6 8 2 9 9 9 9                                      6 8 2 9 9 9 1
+ 1 2                                                1 2
+ 2 3                                                2 3
+ 1 4                                                1 4
+ 4 5                                                4 5
+ 5 6                                                5 6
+ 5 7                                                5 7
+
+ izlaz                                              izlaz
+ 11                                                 4
+
+
+Pojašnjenje probnih primjera:
+
+
+
+
+             (a) Skica rezanja prvog primjera               (b) Skica rezanja drugog primjera
+
+
+
+
+                                                4 od 8
+      Hrvatska informatička olimpijada                                               Zadatak Netrpeljivost
+      21. svibnja 2023.                                                1.5 sekunda / 512 MiB / 100 bodova
+
+
+Zadatak Netrpeljivost
+Ponoć se približavala, valjalo se požuriti. Nakon što je Margarita uspješno pozdravila sve goste, oni su
+nesmetano zasjeli za dugačak stol. Goste možemo označiti brojevima od 1 do N , točno onim redom kojim
+su zasjeli na stol. Iz nepoznatih razloga, broj gostiju na velikom balu kod Sotone uvijek je potencija broja
+2.
+No, Margarita se sada nalazi u problemu, jer između svakog para gostiju vlada određena netrpeljivost
+koju možemo označiti nenegativnim brojem. Netrpeljivost između gostiju i te j možemo označiti kao
+netrp(i, j). Uvijek vrijedi netrp(i, j) = netrp(j, i) te netrp(i, i) = 0.
+Kako su se gosti već (ne)ugodno smjestili, Margarita ne smije drastično mijenjati njihov poredak. Gosti
+zapravo ni ne znaju da se nalaze u listovima velikog Sotoninog potpunog binarnog stabla, popularno
+zvanom VSPBS, koje je prikazano na slici u slučaju N = 4.
+
+
+
+
+                 (a) Slika 1: stablo na početku             (b) Slika 2: stablo nakon operacije
+
+Margarita može odabrati neki čvor, i u jednom potezu zamijeniti lijevo i desno dijete toga čvora, time
+promijenivši poredak gostiju koji se nalaze u pripadajućim listovima. Prikazano je stanje stabla, a time i
+stola, nakon što Margarita napravi jedan potez nad korijenom stabla. Margarita može napraviti prozivoljan
+broj poteza nad proizvoljnim čvorovima.
+Ukupna netrpeljivost stola definira se kao zbroj netrpeljivosti susjeda za stolom. Pomozite Margariti
+odrediti najmanju moguću netrpeljivost stola koju može postići!
+
+Ulazni podaci
+U prvom je retku prirodan broj N , broj gostiju.
+U i-tom od sljedećih N redaka nalaze se redom brojevi netrp(i, j) koji zadovoljavaju gornja svojstva.
+
+Izlazni podaci
+Potrebno je ispisati traženi broj iz zadatka.
+
+Bodovanje
+U svim podzadacima vrijedi 1 ≤ N ≤ 2048 te N je potencija broja 2, 0 ≤ netrp(i, j) ≤ 109 .
+
+
+
+
+                                                   5 od 8
+         Hrvatska informatička olimpijada                                       Zadatak Netrpeljivost
+         21. svibnja 2023.                                        1.5 sekunda / 512 MiB / 100 bodova
+
+
+ Podzadatak       Broj bodova    Ograničenja
+
+         1             10        N ≤ 16
+         2             17        N ≤ 128
+         3             32        N ≤ 512
+         4             41        Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                 ulaz                           ulaz
+
+ 2                                    4                              8
+ 0 2                                  0 2 3 1                        0 2 5 8 5 9 2 6
+ 2 0                                  2 0 4 5                        2 0 8 4 3 7 5 3
+                                      3 4 0 3                        5 8 0 3 8 4 3 3
+ izlaz                                1 5 3 0                        8 4 3 0 2 2 7 7
+ 2                                                                   5 3 8 2 0 7 3 3
+                                      izlaz                          9 7 4 2 7 0 6 7
+                                      6                              2 5 3 7 3 6 0 4
+                                                                     6 3 3 7 3 7 4 0
+
+                                                                     izlaz
+                                                                     25
+
+
+Pojašnjenje probnih primjera:
+U drugom primjeru, jedan od mogućih rasporeda koji postiže najmanju netrpeljivost je 2 1 4 3.
+
+
+
+
+                                                 6 od 8
+      Hrvatska informatička olimpijada                                                  Zadatak Sličnost
+      21. svibnja 2023.                                               3 sekunde / 1024 MiB / 100 bodova
+
+
+Zadatak Sličnost
+Ona je nosila u rukama odvratno, uznemiravajuće žuto cvijeće. Ipak, svidjela mu se.
+Prema poznatom teoremu, osobnost svake osobe može se prikazati permutacijom duljine N . Tako se i
+osobnost našeg junaka, Majstora, može prikazati permutacijom p. A osobnost Margarite, dame koja mu
+je zapala za oko, može se prikazati permutacijom q.
+Mjerilo za sličnost permutacija, a time i sreću u bračnom životu, može se prikazati kao najveća veličina
+presjeka nekog podintervala duljine K permutacije p te podintervala duljine K permutacije q. Pri tome,
+presjek se promatra u skupovnom smislu, tj. nije bitan poredak brojeva u podintervalima. Primjerice, u
+slučaju N = 4, K = 3, sličnost permutacija (2 4 1 3) te (1 2 3 4) je 2 i ona se postiže za bilo koji izbor
+podintervala.
+Otkada je vidio Margaritu, Majstor je opsjednut sličnošću svoje i njezine permutacije, te je njegova
+osobnost postala veoma promjenjiva. Tako svakog dana, u njegovoj će se permutaciji zamijeniti dva
+susjedna elementa. Napomenimo da je ta promjena stalna tj. ta dva elementa ostaju zamijenjena tijekom
+sljedećih dana. Sada ga zanima sličnost njegove i njezine permutacije kad ju je tek ugledao, te sličnost
+nakon promjene tijekom sljedećih Q dana. Dodatno, zanima ga i za koliko se parova podintervala postiže
+tolika sličnost. U svojim ljubavnim jadima, zamolio Vas je za pomoć!
+
+Ulazni podaci
+U prvom su retku brojevi N , K i Q.
+U drugom se retku nalazi N brojeva gdje i-ti označava pi .
+U trećem se retku nalazi N brojeva gdje j-ti označava qj .
+U sljedećih Q redaka nalaze se opisi promjena. U i-tom se retku nalazi broj ti (1 ≤ ti < N ) koji označava
+da su se u Majstorovoj permutaciji p zamijenili brojevi na pozicijama ti i ti + 1.
+
+Izlazni podaci
+U prvi redak potrebno je ispisati početnu sličnost permutacija i broj parova podintervala za koje se ta
+sličnost postiže.
+U sljedećih Q redaka potrebno je ispisati isto, nakon promjene toga dana.
+
+Bodovanje
+U svim podzadacima vrijedi 2 ≤ N ≤ 100 000, 1 ≤ K ≤ N i 0 ≤ Q ≤ 100 000.
+
+ Podzadatak     Broj bodova    Ograničenja
+
+      1              7         Q = 0, N ≤ 100
+      2              10        Q = 0, N ≤ 5000
+      3              33        Q=0
+      4              7         N, Q ≤ 100
+      5              10        N, Q ≤ 5000
+      6              33        Nema dodatnih ograničenja.
+
+
+
+
+                                                 7 od 8
+         Hrvatska informatička olimpijada                                                      Zadatak Sličnost
+         21. svibnja 2023.                                                   3 sekunde / 1024 MiB / 100 bodova
+
+
+Probni primjeri
+ ulaz                                   ulaz                                   ulaz
+ 2 1 1                                  4 3 0                                  5 3 3
+ 1 2                                    2 4 1 3                                1 4 3 2 5
+ 1 2                                    1 2 3 4                                4 5 1 2 3
+ 1                                                                             3
+                                        izlaz                                  1
+ izlaz                                                                         4
+                                        2 4
+ 1 2                                                                           izlaz
+ 1 2
+                                                                               2 5
+                                                                               2 6
+                                                                               3 1
+                                                                               3 1
+
+
+Pojašnjenje drugog probnog primjera:
+Podintervali duljine tri u prvoj permutaciji su (2 4 1) i (4 1 3), a u drugoj (1 2 3) i (2 3 4). Za presjeke
+imamo:
+                         {2, 4, 1} ∩ {1, 2, 3} = {1, 2}, {2, 4, 1} ∩ {2, 3, 4} = {2, 4},
+                          {4, 1, 3} ∩ {1, 2, 3} = {1, 3},   {4, 1, 3} ∩ {2, 3, 4} = {3, 4},
+pa vidimo da sličnost iznosi 2 te da se postiže za četiri para podintervala.
+
+
+
+
+                                                      8 od 8
+

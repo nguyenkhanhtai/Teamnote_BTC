@@ -3,11 +3,13 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: RollbackDSU dsu(3); auto snap = dsu.snapshot();
+  //      dsu.unite(0,1); dsu.rollback(snap);
   // No path compression; O(log n) find. Roll back to a snapshot, including no-op unions.
   struct RollbackDSU {
     vector<int>parent,size; struct Change { int child,root,old_size; };
     vector<Change> history; int components;
-    explicit RollbackDSU(int n) : parent(n), size(n, 1), components(n) {
+    RollbackDSU(int n) : parent(n), size(n, 1), components(n) {
       iota(parent.begin(), parent.end(), 0);
     }
     int find(int u) const {

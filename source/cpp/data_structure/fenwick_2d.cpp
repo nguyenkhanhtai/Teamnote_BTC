@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: Fenwick2D fw(3,4); fw.add(0,1,5); auto s = fw.sum(0,0,3,4);
   struct Fenwick2D {
     int n, m; vector<vector<long long>> t;
     Fenwick2D(int n,int m):n(n),m(m),t(n+1,vector<long long>(m+1)){

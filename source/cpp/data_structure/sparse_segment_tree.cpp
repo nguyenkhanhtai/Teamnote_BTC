@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: SparseRangeSum st(0,1000000000LL); st.add(42,5);
   // Sparse point-add / range-sum on integer domain [lo,hi); O(log(domain)) operations.
   struct SparseRangeSum {
     struct Node { int left=-1,right=-1; long long sum=0; }; vector<Node>t {1};

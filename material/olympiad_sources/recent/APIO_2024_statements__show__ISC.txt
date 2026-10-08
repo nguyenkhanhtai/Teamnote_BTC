@@ -1,0 +1,128 @@
+                                                                                              show
+                                                                                       APIO2024 Tasks
+                                                                                          English (ISC)
+
+
+
+
+Magic Show
+Alice and Bob are famous magicians. Catherine, a wealthy woman who showed interest in their
+amazing deeds, declared that she would give them huge wealth if they could perform the
+following magic trick. The contents of the magic are as follows:
+
+      Step 1: Bob enters a room and completely cuts oﬀ from the outside. Bob can only
+      communicate with Catherine. Then, Alice tells Catherine a number n between 2 and 5 000.
+      Step 2: Catherine tells a number X to Alice, which is between 1 and 1018 .
+      Step 3: Alice makes a tree with exactly n vertices, and gives it to Catherine.
+      Step 4: Catherine deletes at most ⌊ n−2
+                                           2 ⌋ edges from the tree, and gives the remaining edges
+      to Bob.
+      Step 5: Bob carefully observes the graph, and tell the number which Catherine told to Alice.
+
+However, Alice and Bob don't think they are smart enough to successfully perform this magic trick,
+so they are seeking your help. Please write a program which implements Alice’s strategy and Bob’s
+strategy so that they can beat Catherine’s challenge.
+
+
+Implementation Details
+
+You need to submit two ﬁles:
+
+The ﬁrst ﬁle is Alice.cpp, which implements Alice’s strategy. It should include Alice.h using the
+preprocessing directive #include. The function that needs to be implemented in the ﬁle is:
+
+
+   std::vector<std::pair<int, int>> Alice();
+
+
+      For each test case, this function is called exactly once in the beginning.
+      The function should return a vector of pairs, which represents the edges in the tree Alice
+      constructed in Step 3 of the magic.
+            Note that the nodes of the tree should be numbered starting from 1.
+            You need to ensure that the returned tree is compliant, which means there should be
+            exactly n − 1 edges and all nodes should be connected.
+
+The function Alice() should call the following function exactly once:
+
+
+   long long setN(int n);
+      Using this function, Alice chooses the parameter n which she gave to Catherine in Step 1 of
+      the magic.
+      The function then returns the value X , which Catherine gave to Alice in Step 2 of the magic.
+
+The second ﬁle is Bob.cpp, which implements Bob’s strategy. It should include Bob.h using the
+preprocessing directive #include. The function that needs to be implemented in the ﬁle is:
+
+
+   long long Bob(std::vector<std::pair<int, int>> V);
+
+
+      For each test case, this function is called exactly once after the call of function Alice().
+      The parameter V is the list of edges of the graph Catherine gave to Bob in Step 4 of the
+      magic.
+      The edges are given in sorted order, which means:
+            For the two endpoints of each edge, the smaller numbered endpoint comes ﬁrst;
+            All edges are sorted in ascending order based on the ﬁrst endpoint being the ﬁrst
+            keyword and the second endpoint being the second keyword.
+      The function should return a single integer, which represents the number X .
+
+
+Sample Interaction
+
+                                    Call                 Return Value
+
+                          Alice()
+
+                          setN(4)                    3
+                                                     {{1, 2}, {2, 3}, {2, 4}}
+                          Bob({{1,2},{2,4}})         3
+
+
+It represents the following scenario:
+
+      Step 1: At ﬁrst, Alice gives 4 to Catherine.
+      Step 2: Catherine gives 3 to Alice.
+      Step 3: Alice makes a tree with 4 nodes and edges {{1, 2}, {2, 3}, {2, 4}}, and tells it to
+      Catherine.
+      Step 4: Catherine cut the edge connecting nodes 2 and 3, and gives the remaining edges
+      {{1, 2}, {2, 4}} to Bob.
+      Step 5: Bob tells the number 3. Because his answer is correct, they can successfully perform
+      the magic show.
+
+
+Constraints
+      1 ≤ X ≤ 1018 .
+
+Subtasks
+   1. (5 points): X ≤ 5 000.
+   2. (30 points): X ≤ 25 000 000.
+   3. (65 points): No additional constraints.
+
+
+Sample Grader
+
+The sample grader reads the input in the following format:
+
+      Line 1: T (T ∈ {1, 2})
+
+if T = 1, then the sample grader reads as follows:
+
+      Line 2: X (1 ≤ X ≤ 1018 )
+
+The sample grader prints your answer of function Alice() in the following format:
+
+      Line 1: n
+
+      Line 2 + i (0 ≤ i ≤ n − 2): u[i] v[i], where there exists an edge connecting u[i], v[i].
+
+if T = 2, then The sample grader reads as follows:
+
+      Line 2: n m (2 ≤ n ≤ 5000, n − 1 − ⌊ n−2
+                                            2 ⌋ ≤ m ≤ n − 1), where n is number of vertices,
+      and m is number of remaining edges.
+      Line 3 + i (0 ≤ i ≤ m − 1): u[i] v[i], which means there exists an edge connecting u[i], v[i].
+
+The sample grader prints your answer of function Bob() in the following format:
+
+      Line 1: X
+

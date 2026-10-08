@@ -1,0 +1,118 @@
+                                                                                                  stations
+                                                                                                   Day 2 Tasks
+                                                                                                  English (ISC)
+
+
+
+
+Petrol stations
+The Czech highway network consists of N cities and N − 1 roads with known lengths in
+kilometers. We know that there exists exactly one path between each pair of cities. Furthermore,
+there exists exactly one petrol station in each of the cities and nowhere else.
+
+One day, several people decided to go on a car trip. There were a total of N 2​ cars traveling.
+Strangely, it holds that for each ordered pair of cities (a, b) there was exactly one car going from
+the city a to the city b, traveling alongside the only path between these cities. Since everyone in
+Czechia uses Škoda cars, every car has the same fuel tank capacity of K liters and they steadily
+consume one liter of petrol per kilometer traveled. Before departure, the fuel tank of each car is
+full. Furthermore, the Czechs are quite predictable. Due to their laziness, they refuel only when
+they don't have enough petrol to reach the next city (entering a city with an empty tank is still
+possible). Once they are forced to stop at a petrol station, they always fill their tank fully.
+
+The Czech tax authority would like to know how many cars stopped at each petrol station during
+the day. Given this predictable behavior, you should be able to compute it easily.
+
+
+Input
+
+The first line of the input contains two space-separated integers N and K — the number of cities
+and the capacity of the fuel tank of each car. The following N − 1 lines describe roads. Each of
+them contains three space-separated integers u​i , vi​ and li​ , where u​i and vi​ are indices of cities
+connected by the i -th road and li​ is the length of this road in kilometers. Cities are numbered from
+0 to N − 1. It is guaranteed that for every pair of cities, there exists exactly one path between
+them.
+
+
+Output
+
+You should output N lines, which should contain the number of cars stopping at the petrol station
+in each city, ordered from city 0 to city N − 1.
+
+
+
+
+                                                                                            stations (1 of 3)
+Examples
+
+Example 1
+
+Input:
+
+
+   3 1
+   0 1 1
+   1 2 1‎
+
+
+Output:
+
+
+   0
+   2
+   0‎
+
+
+There are three cites in a line connected by roads of length 1 and the fuel tank has a capacity of 1
+liter. Only the cars going between the two outer cities will stop in the middle city.
+
+Example 2
+
+Input:
+
+
+   6 2
+   0 1 1
+   1 2 1
+   2 3 1
+   3 4 2
+   4 5 1‎
+
+
+Output:
+
+
+   0
+   3
+   3
+   12
+   8
+   0‎
+
+
+This time there are 6 cities in a line and the fuel tank has a capacity of 2 liters. Many cars need to
+stop in cities 3 and 4. This makes sense because cities 3 and 4 are connected by a road with a
+length of 2 kilometers.
+
+
+                                                                                        stations (2 of 3)
+Constraints
+     2 ≤ N ≤ 70 000
+     1 ≤ K ≤ 109​
+     0 ≤ li​ ≤ K (for each i such that 0 ≤ i ≤ N − 2)
+
+Subtasks
+
+Let D denote the maximum number of roads connected to a single city.
+
+   1. (18 points) N ≤ 1 000, K ≤ 1 000
+   2. (8 points) D ≤ 2 and li​ = 1 (for each i such that 0 ≤ i ≤ N − 2)
+   3. (10 points) D ≤ 2
+   4. (12 points) K ≤ 10, D ≤ 10
+   5. (17 points) K ≤ 10
+   6. (35 points) no additional constraints
+
+
+
+
+                                                                          stations (3 of 3)
+

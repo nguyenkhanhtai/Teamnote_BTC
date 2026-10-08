@@ -1,5 +1,28 @@
 # Notebook C++ interfaces
 
+## Simple contest interfaces
+
+The printed notebook now uses concrete structs and named helper functions:
+no user-defined templates, lambda expressions, or `explicit` constructors.
+The previous typename tutorial has been replaced by a declaration/callback guide.
+
+- Declare `SegmentTree st(a, 0, mergeSum);`, where `mergeSum` is an ordinary
+  `long long mergeSum(long long a, long long b)` function.
+- Declare `IntervalSet`, `ErasablePriorityQueue`, `MonotoneMinQueue`, and
+  `HashMap` without template arguments; their values are `long long`.
+  The erasable queue is a max-heap; negate keys for minimum queries.
+- `KDTree` has a `D = 2` constant to edit for another dimension.
+- `RerootState`, `CycleState`, and `ExpandableIndex::Index` are concrete type
+  aliases to edit when adapting the algorithm to a problem.
+- Required callbacks accept named functions through `std::function`; the
+  examples do not require lambdas. This can add dispatch overhead compared
+  with the former templated callbacks.
+- `tests/notebook_usage.cpp` compiles the declarations/calls in the examples;
+  the runtime suite uses the new interfaces and checks the algorithms against
+  independent implementations. Old generic interfaces are no longer supported.
+
+The descriptions and page counts below record earlier versions of the notebook.
+
 Parts 1–7 use 94 self-contained C++17 listings: 74 pseudocode replacements and 20 repaired or wrapped legacy C++ listings. Each file is an includable snippet with `#pragma once`, standard-library includes, and a `notebook::<section>` namespace (`notebook::strings` for string algorithms). Files that reuse another snippet include it explicitly. GNU C++17 is required (`bits/stdc++.h`, 128-bit integers).
 
 ```cpp
@@ -15,7 +38,7 @@ int main() {
 
 ## Conventions
 
-- Stateful algorithms use plain `struct` with directly accessible fields and methods. Parts 1–7 have no `public`/`private` sections; template type parameters use `typename`.
+- Stateful algorithms use plain `struct` with directly accessible fields and methods.
 - Vertices, array positions, edge IDs, and ranks are zero-based. Array ranges are `[l,r)`. Wavelet-tree value ranges are inclusive; `kth` takes a zero-based rank.
 - Constructors own their state. Functions receive their graph/data explicitly. Missing solutions use `optional`; returned structs name outputs such as cost, flow, components, or edge IDs.
 - Tree routines require a connected tree. Graph adjacency lists use the direction stated by each routine; undirected adjacency must contain both directions.

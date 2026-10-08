@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: bool prime = is_prime(1000000007);
   using U64 = uint64_t; using U128 = __uint128_t;
   U64 mul_mod(U64 a, U64 b, U64 m) { return U128(a) * b % m; }
   U64 pow_mod(U64 a, U64 e, U64 m) {

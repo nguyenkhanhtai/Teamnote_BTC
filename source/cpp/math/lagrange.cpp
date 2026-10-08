@@ -4,6 +4,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto y = lagrange(vector<uint64_t>{0,1,4},5,998244353);
   // y[i]=f(i), degree < y.size() < prime modulus; input values reduced.
   U64 lagrange(const vector<U64>& y, U64 x, U64 p) {
     assert(is_prime(p)&&!y.empty()&&y.size()<p); int n=y.size(); x%=p;

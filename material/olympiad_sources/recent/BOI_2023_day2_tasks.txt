@@ -1,0 +1,192 @@
+                                                             Minequake
+                                                 Problem ID: minequake
+
+The fully autonomous microbreweries installed in the abandoned
+Dwarven mines of Moravia are truly a testament to the ingenuin-
+ity and craftsmanship of Dwarven engineering! Alas, sometimes
+earthquakes rattle the mines, leading to misaligned pipes and fun-
+nels spilling precious liquid on the floor. As the Exalted Warden of
+Brewery Safety it is your responsibility to turn off the machines in
+every hall in case of an earthquake.
+    Walking through tunnels takes time, so you will inevitably arrive
+late at many of the machines. This cannot be avoided, but you want
+to minimise the total amount of spilled liquid.
+    The Dwarven mines consist of n halls connected by n−1 tunnels.                    Goodluck Mine, Passage by Ashley Dace. License CC BY-SA 2.0.
+
+The entire system is connected, so it is possible to get from any hall
+to any of the others. It takes 1 unit of time to traverse a tunnel. Switching off a machines and traversing a hall takes
+no time. In each hall, turning off the machines at time t after the earthquake spills t liters of liquid. There is exactly
+one earthquake, the earthquake affects all halls at the same time, and you may not switch off any machines before the
+earthquake. You can start in any of the halls.
+
+Example
+In sample input 1, the mines look like this:
+     1            2            3
+
+    If you start in hall 2 and visit the rest of the halls in the order 2, 1, 2, 3, then you can switch off their machines at
+time 0 (in hall 2), time 1 (in hall 1), and time 3 (in hall 3). This wastes 0 + 1 + 3 = 4 liters of liquid in total. If instead
+you start in hall 1 and visit the halls in the order 1, 2, 3, the total amount of liquid wasted is 0 + 1 + 2 = 3 liters, which
+is better.
+       1                     2                     3
+                                   0
+         1                                               3
+                                       2
+
+
+
+
+         1                         2                     3
+
+         0                         1                     2
+
+
+
+
+Input
+The first line of input consists of the integer n, denoting the number of halls. We assume that the halls are numbered
+1, . . ., n. The next n − 1 lines each contain two space-separated integers u and v with 1 ≤ u < v ≤ n, meaning that
+there is a tunnel between hall u and hall v.
+
+Output
+Print a single integer: the minimum amount of spilled liquid, in liters.
+
+Constraints and Scoring
+We always have 1 ≤ n ≤ 105 .
+    Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains a set
+of test cases. To get the points for a test group you need to solve all test cases in the test group. Your final score will
+be the maximum score of a single submission.
+     Group     Points    Constraints
+     1         18        no hall has more than two tunnels
+     2         19        at most one hall has more than two tunnels
+     3         20        n ≤ 10
+     4         21        n ≤ 1000
+     5         22        No additional constraints
+
+ Sample Input 1                                               Sample Output 1
+ 3                                                            3
+ 1 2
+ 2 3
+
+ Sample Input 2                                               Sample Output 2
+ 4                                                            7
+ 1 2
+ 1 3
+ 1 4
+
+ Sample Input 3                                               Sample Output 3
+ 1                                                            0
+                                                    Mineral deposits
+                                            Problem ID: mineraldeposits
+
+You handle signal processing for an extra-terrestrial mining company, and your
+vessel is currently approaching an asteroid. Preliminary scans show the presence
+of k mineral deposits on the asteroid, but their precise locations are unknown.
+    The surface of the asteroid can be seen as a grid of integer coordinates. Each
+of the mineral deposits is located at unknown integer coordinates such that the
+ith deposit has coordinates (xi , yi ) with −b ≤ xi ≤ b and −b ≤ yi ≤ b for
+some integer b corresponding to the size of your initial scan.
+    To determine the precise locations of the mineral deposits, you may send
+probes to the surface of the asteroid. The probes are sent out in waves of several    Eroding mud face exposing new minerals. Photo: Michael D.
+                                                                                                                  Turnbull, licence: CC BY-SA.
+probes at once.
+    Say you sent a wave of d probes to the surface at coordinates (sj , tj ) for
+1 ≤ j ≤ d. When a probe arrives at its coordinates, it determines the Manhattan distances to each of the k mineral
+deposits and sends the distances back to the ship. All data packets arrive at the same time, and it is not possible to
+determine which probes returned which distances. Thus the wave returns the k · d integer distances
+
+                              |xi − sj | + |yi − tj |        for all i ∈ {1, . . . , k} and j ∈ {1, . . . , d} .
+
+    You need to minimise the number of waves of probes that is sent to the surface.
+
+Interaction
+This is an interactive problem. Interaction begins with you reading a single line containing three integers b, k, and w:
+the grid’s boundary b, the number k of mineral deposits, and the maximum number w of waves you may send.
+     You then ask at most w queries, each corresponding to a wave. A query consists of ? followed by 2d integers
+separated by space, such as “? s1 t1 · · · sd td ”, where the number d of probes in this wave must satisfy 1 ≤ d ≤ 2000.
+The values (si , ti ) are interpreted as the coordinates of the ith probe and must satisfy −108 ≤ si ≤ 108 and −108 ≤
+ti ≤ 108 . The response is a single line with k · d integers in non-decreasing order: all pairs of Manhattan distances
+between the mineral deposits and the probe coordinates. The total number of probes across all waves may not exceed
+2 · 104 .
+     Interaction ends with you printing a single line consisting of ! followed by k points x1 , y1 , x2 , y2 , . . . xk , yk ,
+separated by space. This must be your last line of output.
+     Your submission is considered correct if you print all locations of the mineral deposits. You may print them in any
+order.
+
+Constraints and Scoring
+We always have 1 ≤ b ≤ 108 , 1 ≤ k ≤ 20, and 2 ≤ w ≤ 104 .
+    Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains a set
+of test cases. To get the points for a test group you need to solve all test cases in the test group. Your final score will
+be the maximum score of a single submission.
+      Group      Points      Constraints
+      1          9           k = 1, w = 104
+      2          19          w ≥ 500
+      3          11          w ≥ 210
+      4          7           w ≥ 130
+      5          20          w ≥ 3, b ≤ 104
+      6          15          w ≥ 3, b ≤ 107
+      7          19          No further constraints
+Example
+
+
+
+ 0                       0                        0
+
+
+
+               0                       0                         0
+    In this example, there are k = 2 mineral deposits at positions (1, 2) and (−3, −2), shown as red stars. In the first
+wave, you might send d = 3 probes to (−4, −3), (−1, 0), and (2, −1), shown as black dots. This wave would return
+the 6 distances
+                                                  2, 4, 4, 4, 6, 10 .
+In the next wave, you might send d = 2 probes to (1, 2) and (0, −2). This wave would return the 4 distances
+
+                                                       0, 3, 5, 8 .
+
+
+ Read                                          Sample Interaction 1                                            Write
+     4 2 10
+                                                      ? -4 -3 -1 0 2 -1
+     2 4 4 4 6 10
+                                                      ? 1 2 0 -2
+     0 3 5 8
+                                                      ! 1 2 -3 -2
+                                                      Sequence
+                                              Problem ID: sequence
+A sequence of positive integers (x1 , . . . , xm ) is good if x1 = 1 and for each 1 < j ≤ m we have either xj = xj−1 + 1
+or xj = xk · xl for some k and l with 0 < k ≤ l < j. For instance, the sequences (1, 1) and (1, 2) are both good, but
+the sequence (1, 3) is not good. For n given integers w1 , . . . , wn define the weight of an integer sequence (x1 , . . . , xm )
+satisfying 1 ≤ xj ≤ n for each 1 ≤ j ≤ m as
+
+                                                      wx1 + · · · + wxm .
+
+For instance, given the weights w1 = 10, w2 = 42, w3 = 1, the weight of the sequence (1, 1) is 20 and the weight of
+the sequence (1, 3) is 11. For 1 ≤ v ≤ n, define sv as the smallest possible weight of a good sequence containing the
+value v.
+    Your task is to determine the values s1 , . . . , sn .
+
+Input
+The first line of input consists of the integer n, the number of weights. The next n lines contain the integer weights
+w1 , . . . , w n .
+
+Output
+Print n lines containing s1 , . . ., sn in order.
+
+Constraints and Scoring
+We always have 1 ≤ n ≤ 30 000 and 1 ≤ wi ≤ 106 for each 1 ≤ i ≤ n.
+    Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains a set
+of test cases. To get the points for a test group you need to solve all test cases in the test group. Your final score will
+be the maximum score of a single submission.
+      Group     Points     Constraints
+      1         11         n ≤ 10
+      2         10         n ≤ 300, w1 = · · · = wn = 1
+      3         10         n ≤ 300, w1 = · · · = wn
+      4         9          n ≤ 1400, w1 = · · · = wn = 1
+      5         45         n ≤ 5000
+      6         15         No additional constraints
+
+ Sample Input 1                                                  Sample Output 1
+ 3                                                               10
+ 10                                                              52
+ 42                                                              53
+ 1
+

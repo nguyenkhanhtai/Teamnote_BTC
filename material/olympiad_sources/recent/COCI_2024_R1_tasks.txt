@@ -1,0 +1,397 @@
+Croatian Open Competition in Informatics
+               Round 1, November 4th 2023
+
+
+
+
+                        Tasks
+       Task       Time limit   Memory limit   Score
+
+       Sudoku      1 second      512 MiB        50
+       Labirint    1 second      512 MiB        70
+       AN2DL       4 seconds     512 MiB       110
+       Kocke       2 seconds     512 MiB       110
+       Mostovi     3 seconds     512 MiB       110
+
+       Total                                   450
+         Croatian Open Competition in Informatics                                              Task Sudoku
+         Round 1, November 4th 2023                                           1 second / 512 MiB / 50 points
+
+
+Task Sudoku
+Sudoku is a logic-based, combinatorial number-placement puzzle.
+The objective is to fill a 9 × 9 grid with digits from 1 to 9 in such
+a way that the following statements hold:
+
+   • Each row contains exactly one occurrence of each digit
+     from 1 to 9.
+
+   • Each column contains exactly one occurrence of each digit
+     from 1 to 9.
+
+   • Each of the nine 3 × 3 subgrids contains exactly one occur-
+     rence of each digit from 1 to 9.
+
+For a given not yet finished sudoku grid, determine if there is
+a mistake in it.                                                         Daily sudoku, New York Times,
+                                                                        November 1, 2023, Difficulty: Hard
+Note: It is not necessary to check whether the sudoku grid is
+solvable.
+
+Input
+The input describes the sudoku grid.
+The characters ’|’, ’-’ and ’+’ frame the 3 × 3 subgrids.
+The character ’.’ represents an empty cell.
+All the other characters in the input will be digits from ’1’ to ’9’.
+See the examples for clarification.
+
+Output
+Output the word GRESKA if there is a mistake in the sudoku board. Otherwise, output the word OK.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          11     It’s possible to determine whether there is a mistake by only checking the first rule.
+     2          12     It’s possible to determine whether there is a mistake by only checking the second rule.
+     3          13     It’s possible to determine whether there is a mistake by only checking the third rule.
+     4          14     No additional constraints.
+
+
+
+
+                                                     1 of 9
+      Croatian Open Competition in Informatics                                              Task Sudoku
+      Round 1, November 4th 2023                                           1 second / 512 MiB / 50 points
+
+
+Examples
+ input                               input                              input
+ +---+---+---+                       +---+---+---+                      +---+---+---+
+ |52.|...|.81|                       |3..|6..|..4|                      |5..|98.|67.|
+ |.39|58.|...|                       |4.9|8.1|..7|                      |6..|...|.31|
+ |.8.|.9.|...|                       |..7|.49|6..|                      |.2.|613|.4.|
+ +---+---+---+                       +---+---+---+                      +---+---+---+
+ |24.|...|1.3|                       |946|157|8.2|                      |.96|8.2|1.7|
+ |1..|43.|86.|                       |.2.|3..|745|                      |.28|..5|.9.|
+ |.63|..7|.24|                       |.7.|28.|...|                      |7.3|19.|6..|
+ +---+---+---+                       +---+---+---+                      +---+---+---+
+ |...|1.9|35.|                       |...|4..|..5|                      |962|.7.|.1.|
+ |..8|.74|6..|                       |8.5|.6.|.2.|                      |1.5|...|76.|
+ |31.|86.|7.9|                       |734|..8|5..|                      |.7.|5..|9..|
+ +---+---+---+                       +---+---+---+                      +---+---+---+
+
+ output                              output                             output
+ OK                                  GRESKA                             GRESKA
+
+
+Clarification of the first example:
+There is no mistake, so the output is OK.
+Clarification of the second example:
+There is a mistake in the ninth column: the digit 5 appears twice; and there is also a mistake in the lower
+right 3 × 3 subgrid: the digit 5 appears twice.
+Clarification of the third example:
+There are two mistakes: the digit 2 appears twice in the second column, and the digit 6 appears twice in
+the seventh column.
+
+
+
+
+                                                  2 of 9
+       Croatian Open Competition in Informatics                                                  Task Labirint
+       Round 1, November 4th 2023                                               1 second / 512 MiB / 70 points
+
+
+Task Labirint
+What is an EJOI for you?
+Game room!
+Teo is searching for the Croatian EJOI team! She has already found Gabriel, but
+is still looking for Vito, Dino, and Ivo.
+Teo and the EJOI team are in a labyrinth consisting of n × m rooms, all of the
+same size. The rooms form a grid. The top-left room is labeled with (1, 1), and
+the bottom-right with (n, m). Between each pair of adjacent rooms, there is a door
+colored in one of four colors: blue (marked with ’P’), red (marked with ’C’), green (marked with ’Z’) and
+orange (marked with ’N’).
+
+
+
+
+ Illustration of the third example. The black circle marks the room in which Teo and Gabriel are located
+at in the fourth question, and the white circle marks the room in which Vito, Ivo and Dino are located at.
+         The gray path is one of the possible paths that passes through three different door colors.
+
+At some point, Gabriel says: I know where the rest of the team is, but I will only tell you if you can
+answer all of my questions.
+Gabriel’s questions are: If we are currently in room (ai , bi ) and the rest of the team is in room (ci , di ),
+what is the minimum number of door colors we have to go through to reach them?
+Teo is very good at answering Gabriel’s questions, but there are simply too many of them. She does not
+have much time (the bus is leaving soon), so she is asking you to help her answer q of Gabriel’s questions!
+
+Input
+The first line contains integers n and m (1 ≤ n, m ≤ 100, 1 < n × m), the number of rooms.
+The i-th of the following n lines contains m − 1 characters (’P’, ’C’, ’Z’ or ’N’), where the j-th character
+marks the colour of the door that connects rooms (i, j) and (i, j + 1).
+The i-th of the following n − 1 lines contains m characters (’P’, ’C’, ’Z’ or ’N’), where the j-th character
+marks the colour of the door that connects rooms (i, j) and (i + 1, j).
+The next line contains the integer q (1 ≤ q ≤ 100), the number of Gabriel’s questions.
+In the i-th of the following q lines, there are four integers ai , bi , ci , di (1 ≤ ai , ci ≤ n, 1 ≤ bi , di ≤ m,
+(ai , bi ) ̸= (ci , di )), the description of Gabriel’s i-th question.
+
+
+                                                     3 of 9
+         Croatian Open Competition in Informatics                                              Task Labirint
+         Round 1, November 4th 2023                                           1 second / 512 MiB / 70 points
+
+
+Output
+In the i-th of q lines, output the answer to Gabriel’s i-th question.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          11     n=1
+                       All doors that connect rooms (i, j) with (i, j + 1) are blue,
+     2          13
+                       and all doors that connect rooms (i, j) with (i + 1, j) are red.
+     3          24     Every door is either red or blue.
+     4          22     No additional constraints.
+
+Examples
+ input                                 input                              input
+ 1 8                                   3 3                                4 4
+ CPZNCCP                               PP                                 CCC
+ 4                                     PP                                 CPC
+ 1 1 1 8                               PP                                 PPP
+ 1 3 1 5                               CCC                                CNP
+ 1 8 1 4                               CCC                                ZZZZ
+ 1 2 1 3                               3                                  PPPP
+                                       1 1 3 3                            CPZC
+ output                                3 3 2 2                            4
+ 4                                     1 1 1 3                            3 1 2 3
+ 2                                                                        1 1 4 4
+                                       output                             2 2 3 3
+ 3
+ 1                                     2                                  1 4 4 1
+                                       2                                  output
+                                       1
+                                                                          1
+                                                                          2
+                                                                          1
+                                                                          3
+
+
+Clarification of the third example:
+The third example is illustrated in the text.
+For the first question, Teo and Gabriel can use just the blue doors to reach the rest of the team; for the
+second question, they can use blue and green doors; for the third again only blue is enough; and for the
+fourth, they can use blue, green, and red doors.
+
+
+
+
+                                                    4 of 9
+         Croatian Open Competition in Informatics                                             Task AN2DL
+         Round 1, November 4th 2023                                        4 seconds / 512 MiB / 110 points
+
+
+Task AN2DL
+While wandering around Building 21, you came across a wall completely covered
+with numbers, arranged in a table of n rows and m columns. Soon you noticed
+that there was a frame leaning against the wall large enough to frame r rows and
+s columns of the table on the wall. And next to the frame you found a pencil and
+a piece of paper containing an empty table.
+You are sad that the table on the piece of paper is empty, so you decided to play
+around with the frame to fill it.
+You leaned the frame against the wall so that the number in the i-th row and j-th column is in the upper
+left corner, and the borders of the frame are parallel to the edges of the wall. Considering the numbers
+inside the frame, and since you like large numbers, you have decided to write the largest among them in
+the i-th row and j-th column of the table on the piece of paper.
+You repeated the process for every possible position of the frame on the wall (such that the frame is
+entirely on the wall, and that there are exactly r × s numbers inside it), making sure that the edges of the
+frame are parallel to the edges of the wall.
+When you were done, the table on the piece of paper was even more beautiful than the one on the wall.
+What numbers are in the table on the piece of paper?
+
+Input
+The first line contains two integers n and m (1 ≤ n, m ≤ 4 000), the number of rows and columns of the
+table on the wall.
+Each of the following n lines contain m integers ai,j (|ai,j | ≤ 10 000), where ai,j is the number in the i-th
+row and j-th column of the table on the wall.
+The last line contains two integers r and s (1 ≤ r ≤ n, 1 ≤ s ≤ m), the size of the frame.
+
+Output
+Output the numbers written in the table on the piece of paper.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          12     n, m ≤ 40, r = n, s = m
+     2          17     n, m ≤ 40
+     3          25     n, m ≤ 1 000
+     4          56     No additional constraints.
+
+
+
+
+                                                    5 of 9
+      Croatian Open Competition in Informatics                                            Task AN2DL
+      Round 1, November 4th 2023                                       4 seconds / 512 MiB / 110 points
+
+
+Examples
+ input                              input                              input
+ 3 3                                3 3                                5 5
+ 1 1 2                              1 1 2                              -1 -3 -4 -2 4
+ 2 3 4                              2 3 4                              -8 -7 -9 -10 11
+ 4 3 2                              4 3 2                              5 2 -8 -2 1
+ 3 3                                2 1                                13 -3 -2 -6 -9
+                                                                       11 6 2 7 4
+ output                             output                             2 3
+ 4                                  2 3 4                              output
+                                    4 3 4
+                                                                       -1 -2 11
+                                                                       5 2 11
+                                                                       13 2 1
+                                                                       13 7 7
+
+
+Clarification of the first example:
+The frame is big enough to fit the entire table on the wall. The largest number inside the frame is 4, so
+that is the only number written on the table on the piece of paper.
+Clarification of the second example:
+All possible frame positions are shown in the picture below. The largest number for each of the positions
+is written in red.
+
+
+
+
+                                                 6 of 9
+          Croatian Open Competition in Informatics                                                  Task Kocke
+          Round 1, November 4th 2023                                            2 seconds / 512 MiB / 110 points
+
+
+Task Kocke
+For his thirteenth birthday, Donald’s parents bought him a brand-new set of Lego
+cubes. In the set, there are n cubes of equal size, where the i-th cube came in
+color i. Using these cubes he decided to build a wall.
+Donald will build his wall on a row-like Lego base that has k places where cubes
+can be put in. He puts the cubes in the following way:
+
+     • First, he puts the cube with color 1 on an arbitrary spot on the base.
+
+     • For each cube from 2 to n, he places it in a spot neighboring the previously
+       placed cube. If that spot isn’t empty, he puts the new cube on top of all the others.
+
+After he built the wall, Donald wrote on a piece of paper a sequence of length k: on the i-th position in
+the sequence he wrote the color of the top cube in the i-th place, or 0 if there isn’t a cube in that place.
+He immediately asked himself how many different sequences could he have written on the piece of paper.
+Two sequences are considered different if there exists a position in which they differ. After some time, he
+has managed to calculate the solution, but he is not sure whether it is correct, so he asks for your help.
+
+Input
+The only line has integers n and k (2 ≤ n, k ≤ 5 000), the number of cubes, and the length of the base.
+
+Output
+In the only line, print the answer to Donald’s question, modulo 109 + 7.
+
+Scoring
+
+ Subtask       Points   Constraints
+
+      1          20     n, k ≤ 18
+      2          30     n, k ≤ 50
+      3          30     n, k ≤ 500
+      4          30     No additional constraints.
+
+Examples
+ input                                  input                                   input
+
+ 4 3                                    3 5                                     100 200
+
+ output                                 output                                  output
+ 8                                      14                                      410783331
+
+
+Clarification of the first example:
+All possible sequences are: (0, 3, 4), (2, 3, 4), (0, 4, 3), (1, 4, 3), (4, 3, 0), (4, 3, 2), (3, 4, 0), (3, 4, 1).
+Clarification of the second example:
+One of the possible sequences is (0, 3, 2, 0, 0). Donald can achieve that by putting the first cube on the
+second place, second cube on the third place, and third cube on the second place (on top of the first cube).
+
+
+                                                       7 of 9
+        Croatian Open Competition in Informatics                                           Task Mostovi
+        Round 1, November 4th 2023                                       3 seconds / 512 MiB / 110 points
+
+
+Task Mostovi
+When Leonhard Euler resolved the famous Königsberg bridge problem,
+he had no clue he had discovered a whole new area of mathematics -
+graph theory!
+Unfortunately, the Königsberg bridge problem is far too easy for the
+programmers of this era, so Euler came up with another problem - the
+Zagreb bridge problem!
+The bridges of Zagreb form a graph with n nodes and m edges where the edges represent the bridges and
+the nodes represent the riverine islands. The graph is connected, in other words, it’s possible to get from
+any node to any other by traveling across the edges. Now Euler asked, how many edges are there such
+that after their removal the graph becomes disconnected?
+Again, Euler didn’t know that this problem is also famous today (those damn Codeforces blogs). So the
+author of this problem decided to give you an even harder one, how many edges are there such that after
+the removal of the nodes which it connects, the remaining n − 2 nodes become disconnected?
+
+Input
+The first line contains integers n and m (4 ≤ n ≤ 100 000, n − 1 ≤ m ≤ 300 000) - the number of nodes
+and edges respectively.
+Each of the next m lines contains integers ai and bi (1 ≤ ai , bi ≤ n) - this means nodes ai and bi are
+connected with an edge.
+There are no loops or multiple edges.
+
+Output
+In a single line output the number of edges with the given property.
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          13     n ≤ 100, m ≤ 300
+    2          17     n ≤ 1 000, m ≤ 3 000
+    3          25     n ≤ 1 000
+    4          12     m − n ≤ 20
+    5          43     No additional constraints.
+
+
+
+
+                                                   8 of 9
+       Croatian Open Competition in Informatics                                              Task Mostovi
+       Round 1, November 4th 2023                                          3 seconds / 512 MiB / 110 points
+
+
+Examples
+ input                                                  input
+ 4 5                                                    6 7
+ 1 2                                                    1 2
+ 2 3                                                    2 4
+ 3 4                                                    2 6
+ 4 1                                                    3 5
+ 1 3                                                    6 1
+                                                        4 3
+ output                                                 2 5
+ 1                                                      output
+                                                        4
+
+
+Clarification of the first example:
+By removing edge (1, 3) and corresponding nodes 1 and 1, the remaining graph has two connected
+components, node 2 and node 4. In other words, it is not connected. It is easy to check it is the only edge
+with this property.
+Clarification of the second example:
+The edges with the given property are (1, 2), (2, 4), (2, 6) abd (2, 5).
+
+
+
+
+                                                   9 of 9
+

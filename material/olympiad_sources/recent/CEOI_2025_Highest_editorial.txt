@@ -1,0 +1,244 @@
+                       Solution Description
+
+
+
+1     Problem Highest
+                                  Author: Matei-Octavian Stănescu, UNSTPB
+
+1.1    Subtask 1: N ≤ 300, M ≤ 500 000
+For this subtask, we can calculate the dp (dynamic programming) that holds
+the lowest cost from any floor to any floor: d[i][j] = the minimum travel cost
+from i to j. Initialize every d[i][i] to 0, and the recurrence relation is
+                                                                  
+
+           d[i][j] = min  min (d[i][k] + 1), min (d[i][k] + 2) .
+                              k                   k
+                           i+v[k]≥b            i+w[k]≥b
+
+Total time complexity: O(N 3 + M ). If using a bottom-up dp approach, the
+complexity becomes O(N 2 · vmax + M ).
+
+1.2    Subtask 2: N ≤ 3000, M ≤ 3000
+To prove that Dijkstra yields O(M · N · log(N )) complexity, we need to
+make the observation that, using last subtask’s notation, the sequence d[i]j
+is ascending (in other words, d[i][j] increases as j increases, meaning that the
+further you have to go from i, the higher the cost).
+At every query (A, B), we start from A, adding it to the priority queue. The
+priorities are sorted firstly after cost (lowest cost → highest priority), then
+after floor index (higher index → higher priority).
+From floor i, we add to the priority queue the floors descending next from
+index (i+v[i]) . . . (i+1), with cost = cost[i]+1, but if we find a floor that has
+
+                                        1
+cost[j] ≤ cost[i] + 1, then we break. This is possible precisely thanks to the
+monotony of the sequence d[A]i . We do the same thing for (i+w[i]) . . . (i+1),
+with cost = cost[i] + 2. As a consequence, we will not visit the same floor
+more than twice.
+Total time complexity: O(M · N · log(N ))
+
+1.3    Subtask 3: N ≤ 20 000, M ≤ 20 000
+The road to the full solution starts here. The only observation made so far is
+that starting from floor A, the further you have to go, the higher the cost will
+be. Firstly, we convert v and w from jump sizes to pointers to the highest
+reachable floor: v[i] += i; w[i] += i.
+Then, w needs to be updated for the case when two cost-1 jumps are made one
+after the other, which can sometimes be better than just making one cost-2
+jump. However, note that it is not enough to attribute w[i] = max(w[i], v[v[i]]),
+since on the road from i to v[i], we can encounter a node that can take you
+even further than v[i] could. For example:
+v : 4 8 1 1 1 1...
+Here, it is optimal to jump from the first floor to the second, then make an
+8-high jump.
+So we use a rmq, defined as rmq[0][i][j] = the floor from the interval [j, j +2i )
+that takes you the highest after making a cost-1 jump. The query looks like
+this:
+int query_rmq(a, b, 0) = the floor i, among [a, b], that has the highest
+v[i]. Similarly, we define:
+int query_rmq(a, b, 1) = the floor i, among [a, b], that has the highest
+w[i], which we will use later.
+Coming back, w[i] will be
+       v[whichever i from [i, v[i]] takes you the furthest in one jump]
+             ⇒ w[i] = v[query_rmq(i, v[i], 0)],     ∀i ∈ {1, . . . , n}
+
+To answer the query (A, B), it seems, at first glance, enough to greedily make
+2-long jumps until you reach B, since we accounted for 2 cost-1 jumps being
+
+                                        2
+better than 1 cost-2 jump. However, take the example:
+
+                                v:111111                                    (1)
+                                w:161111                                    (2)
+
+Starting from position 0, if we greedily jump cost-2, we will skip the 6. So
+it is better to calculate the dp d[i] = {the highest you can go if you pay i}.
+But we will only need the last two positions from it: curr and prev, since:
+
+
+        d[i + 1] = max(v[best up until d[i]], w[best up until d[i − 1]]),
+more precisely:
+
+
+      next = max(v[query_rmq(A, curr, 0)], w[query_rmq(A, prev, 1)]).
+
+Total time complexity: O(N · M )
+
+1.4     Subtask 4: N ≤ 200 000, M ≤ 200 000
+Define the binary lifting DP:
+
+highest[k][i] = The highest floor you can get to from floor i, for a cost of at most 2k
+
+Base cases:
+
+                              highest[0][i] = v[i]                          (3)
+                              highest[1][i] = w[i]                          (4)
+
+For understanding the formulas better, check out Subtask 5, as they are
+easier to visualize thanks to v and w being ascending.
+Precalculation: In order to calculate highest[k + 1][i], we need to merge
+two highest[k][i, j], for which there are 2 cases:
+Case 1:
+
+        |------------------|------------------|                  2k + 2k    (5)
+                            (---) (2)                                       (6)
+
+                                       3
+        highest[k + 1][i] = highest[k][query_rmq(i, highest[k][i], k)]
+
+where int query_rmq(a, b, k) = the floor i, among [a, b], that has the
+highest highest[k][i]. Note: (---) represents the cost-2 jump that must be
+considered, and cannot be split between the two 2k jumps.
+Case 2:
+
+  |--------------|---|--------------|           (2k − 1) + 2 + (2k − 1)    (7)
+                 (---) (2)                                                 (8)
+
+For this case, we need another DP:
+
+highest_m1[k][i] = the highest floor you can get to from floor i, for a cost of at most 2k −1
+
+We will return later for how to calculate this one.
+Precalculation: In order to calculate highest[k + 1][i], we need to merge
+two highest[k][i, j], for which there are 2 cases:
+Case 1:
+
+       |------------------|------------------|                 2k + 2k     (9)
+                           (---) (2)                                      (10)
+
+        highest[k + 1][i] = highest[k][query_rmq(i, highest[k][i], k)]
+
+where int query_rmq(a, b, k) = the floor i, among [a, b], that has the
+highest highest[k][i].
+Case 2:
+
+ |---------------|---|---------------| (2k − 1) + 2 + (2k − 1) (11)
+                 (---) (2)                                     (12)
+
+For this case, we need another DP:
+
+      highest_m1[k][i] = the highest floor you can reach from floor i
+
+
+                                      4
+                         for a cost of at most 2k − 1
+
+We will return later for how to calculate this one.
+So for the second case, highest[k + 1][i] will be:
+
+    highest_m1[k][best up to highest[1][best up to highest_m1[k][i]]]
+
+where:
+   1. best up to highest[1][I] = query_rmq(A, I, 1)
+   2. best up to highest_m1[k][I] = query_rmq_m1(A, I, k)
+This means that we have to hold log rmq_m1’s and log rmq’s.
+Now, to calculate highest_m1[k + 1][i], there are also two cases:
+Case 1: 2k+1 − 1 = 2k + (2k − 1)
+
+     |-------------------|---------------|              2k + (2k − 1)    (13)
+                     (---) (2)                                           (14)
+     |-----------------|-----------------|              (2k − 1) + 2k    (15)
+
+highest_m1[k + 1][i] = highest[k][query_rmq(i, highest_m1[k][i], k)]
+Case 2: 2k+1 − 1 = (2k − 1) + 2k
+
+     |-------------------|---------------|              2k + (2k − 1)    (16)
+                       (---) (2)                                         (17)
+     |-----------------|-----------------|              (2k − 1) + 2k    (18)
+
+highest_m1[k + 1][i] = highest_m1[k][query_rmq_m1(i, highest[k][i], k)]
+Now that we’ve calculated the dynamics, it’s time to handle the queries.
+We binary search the result by keeping the best positions curr and prev
+for num_jumps and num_jumps − 1 respectively. For every k, starting
+from position curr < B, we test if we overshoot by calculating the highest
+floor reachable for another jump of cost 2k . The calculation for next_curr
+is similar to the calculation of highest[k + 1][i], except we use curr instead
+of highest[k][i], prev instead of highest_m1[k][i], and A instead of i in the
+query_rmq. The formulas are:
+
+                                       5
+   1. next_curr = highest[k][query_rmq(A, curr, k)]
+   2. next_curr = highest_m1[k][query_rmq_m1(A, highest[1][query_rmq(A, prev, 1)], k)]
+For next_prev, it is similar to the calculation of highest_m1[k + 1][i]:
+   1. next_prev = highest_m1[k][query_rmq_m1(A, curr, k)];
+   2. next_prev = highest[k][query_rmq(A, prev, k)];
+Total time complexity: O(N · log 2 (N ) + M · log(N )), memory complexity:
+O(N · log 2 (N ))
+Optimization: there is a way to reduce the memory complexity to O(N log(N )),
+but the time complexity still remains the same.
+Firstly, notice that when calculating highest[k + 1][i] and highest_m1[k +
+1][i], ∀i, we only use query_rmq(..., k). That means that we can calculate the
+rmq for each k and forget the previous one. Note that we will need, however,
+to keep the rmq[1][i][j] separately, since we always use it for calculating the
+case where the cost-2 domino falls in the middle. Similarly, when answering
+the queries, instead of binary searching for every query separately, we do a
+parallel binary search, meaning that for every k, we try to add a jump of 2k
+to every query. This also works because we only utilize rmq[k][i][j] and then
+forget about it.
+Total time complexity: O(N · log 2 (N ) + M · log 2 (N )), memory complexity:
+O(N · log(N ))
+
+1.5    Subtask 5: N ≤ 500 000, M ≤ 500 000 and v and w
+       are ascending.
+Because v and w are both ascending, there is no need to check what node
+from interval a . . . b takes you the farthest, because it will always be b. So
+there is no need for all of these rmq 0 s, leaving us with just O(N log(N ))
+memory used by highest and highest_m1. The formulas become:
+For calculating highest[k + 1][i]:
+   • highest[k][highest[k][i]]
+   • highest_m1[k][highest[1][highest_m1[k][i]]]
+
+
+
+                                      6
+For calculating highest_m1[k + 1][i]:
+   • highest_m1[k][highest[k][i]];
+   • highest[k][highest_m1[k][i]];
+For queries, calculating next_curr:
+   • highest[k][curr]
+   • highest[1][highest_m1[prev]]
+For queries, calculating next_prev:
+   • highest[k][prev]
+   • highest_m1[k][curr]
+Total time and memory complexity: O((N + M ) · log(N ))
+
+1.6    Subtask 6: N ≤ 500 000, M ≤ 500 000
+Notice that in the N log 2 (N ) solution, the only thing keeping the complexity
+high is the rmq, since we have to calculate LOG of them. What if we didn’t
+need to? There needs to be done a greedy observation, which is:
+”The floor that takes you the highest in a jump of cost 2k , is either:
+   • the one that takes you the highest in a jump of cost 1, or
+   • the one that takes you the highest in a jump of cost 2.”.
+There can’t be another better one, since in a sequence of jumps that add to
+a cost of 2k , the first jump is the most significant, because the higher it takes
+you, the more floors you can reach, having an opening to floors that can take
+you even higher, and this propagates through every jump.
+This is why only 2 floors have to be taken into consideration when ma-
+king every jump, and these are the results of queries query_rmq(a, b, 0) and
+query_rmq(a, b, 1). Thus, we reduce the number of rmq’s that need to be
+calculated to 2.
+Total time and memory complexity: O((N + M ) · log(N ))
+
+
+
+
+                                        7
+

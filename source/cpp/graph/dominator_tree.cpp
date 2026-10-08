@@ -3,6 +3,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto idom = immediate_dominators({{1},{2},{}},0);
   // Immediate dominators from source; source dominates itself; unreachable=-1.
   // Lengauer-Tarjan; recursive eval compression, O((n+m) log n) bound.
   vector<int>immediate_dominators(const vector<vector<int>>&g,int source){
@@ -22,21 +23,24 @@ namespace notebook::graph {
     iota(semi.begin(),semi.end(),0); iota(label.begin(),label.end(),0);
     vector<vector<int>> pred(count + 1), bucket(count + 1);
     for(int u=0;u<n;++u)if(index[u])for(int v:g[u])if(index[v])pred[index[v]].push_back(index[u]);
-    auto compress = [&](auto&& self, int v)->void {
-      if (ancestor[ancestor[v]]) {
-        self(self, ancestor[v]);
-        if(semi[label[ancestor[v]]]<semi[label[v]])label[v]=label[ancestor[v]];
-        ancestor[v] = ancestor[ancestor[v]];
+    struct DominatorDSU {
+      vector<int>& ancestor; vector<int>& label; vector<int>& semi;
+      void compress(int v) {
+        if (ancestor[ancestor[v]]) {
+          compress(ancestor[v]);
+          if (semi[label[ancestor[v]]]<semi[label[v]]) label[v]=label[ancestor[v]];
+          ancestor[v]=ancestor[ancestor[v]];
+        }
       }
-    };
-    auto eval = [&](int v) {
-      if (!ancestor[v]) return label[v];
-      compress(compress, v); return label[v];
-    };
+      int eval(int v) {
+        if (ancestor[v]) compress(v);
+        return label[v];
+      }
+    } dsu{ancestor,label,semi};
     for (int w = count; w > 1; --w) {
-      for (int v : pred[w]) semi[w] = min(semi[w], semi[eval(v)]);
+      for (int v : pred[w]) semi[w] = min(semi[w], semi[dsu.eval(v)]);
       bucket[semi[w]].push_back(w); ancestor[w] = parent[w];
-      for(int v:bucket[parent[w]]){ int u=eval(v); idom[v]=semi[u]<semi[v]?u:parent[w]; }
+      for(int v:bucket[parent[w]]){ int u=dsu.eval(v); idom[v]=semi[u]<semi[v]?u:parent[w]; }
       bucket[parent[w]].clear();
     }
     for(int w=2; w<=count; ++w)if(idom[w]!=semi[w])idom[w]=idom[idom[w]];

@@ -1,0 +1,479 @@
+[
+  {
+    "file": "COCI_2022_R1_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest1_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R1_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest1_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R2_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest2_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R2_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest2_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R3_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest3_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R3_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest3_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R4_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest4_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R4_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest4_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R5_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest5_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R5_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest5_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R6_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest6_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2022_R6_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2021_2022/contest6_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COI_2022_tasks.pdf",
+    "url": "https://hsin.hr/hio2022/zadaci/zadaci.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2022_day1_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2022_day1.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2022_day2_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2022_day2.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2022_solutions.zip",
+    "url": "https://boi.cses.fi/files/boi2022_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R1_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest1_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R1_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest1_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R2_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest2_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R2_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest2_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R3_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest3_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R3_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest3_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R4_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest4_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R4_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest4_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R5_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest5_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R5_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest5_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2023_R6_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest6_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2023_R6_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2022_2023/contest6_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COI_2023_tasks.pdf",
+    "url": "https://hsin.hr/hio2023/zadaci/zadaci.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2023_day1_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2023_day1.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2023_day2_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2023_day2.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2023_solutions.zip",
+    "url": "https://boi.cses.fi/files/boi2023_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R1_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest1_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R1_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest1_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R2_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest2_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R2_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest2_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R3_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest3_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R3_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest3_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R4_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest4_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R4_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest4_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R5_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest5_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R5_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest5_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2024_R6_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest6_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2024_R6_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2023_2024/contest6_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COI_2024_tasks.pdf",
+    "url": "https://hsin.hr/hio2024/zadaci/zadaci.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2024_day1_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2024_day1.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2024_day2_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2024_day2.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2024_solutions.zip",
+    "url": "https://boi.cses.fi/files/boi2024_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2025_R1_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest1_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R1_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest1_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R2_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest2_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R2_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest2_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R3_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest3_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R3_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest3_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R4_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest4_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R4_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest4_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R5_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest5_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R5_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest5_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R6_tasks.pdf",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest6_tasks.pdf",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COCI_2025_R6_solutions.zip",
+    "url": "https://hsin.hr/coci/archive/2024_2025/contest6_solutions.zip",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 404"
+  },
+  {
+    "file": "COI_2025_tasks.pdf",
+    "url": "https://hsin.hr/hio2025/zadaci/zadaci.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2025_day1_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2025_day1.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2025_day2_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2025_day2.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2025_solutions.zip",
+    "url": "https://boi.cses.fi/files/boi2025_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R1_tasks.pdf",
+    "url": "https://hsin.hr/coci/contest1_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R1_solutions.zip",
+    "url": "https://hsin.hr/coci/contest1_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R2_tasks.pdf",
+    "url": "https://hsin.hr/coci/contest2_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R2_solutions.zip",
+    "url": "https://hsin.hr/coci/contest2_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R3_tasks.pdf",
+    "url": "https://hsin.hr/coci/contest3_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R3_solutions.zip",
+    "url": "https://hsin.hr/coci/contest3_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R4_tasks.pdf",
+    "url": "https://hsin.hr/coci/contest4_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R4_solutions.zip",
+    "url": "https://hsin.hr/coci/contest4_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R5_tasks.pdf",
+    "url": "https://hsin.hr/coci/contest5_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R5_solutions.zip",
+    "url": "https://hsin.hr/coci/contest5_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R6_tasks.pdf",
+    "url": "https://hsin.hr/coci/contest6_tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "COCI_2026_R6_solutions.zip",
+    "url": "https://hsin.hr/coci/contest6_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "COI_2026_tasks.pdf",
+    "url": "https://hsin.hr/hio2026/zadaci/zadaci.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2026_day1_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2026_day1.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2026_day2_tasks.pdf",
+    "url": "https://boi.cses.fi/files/boi2026_day2.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "BOI_2026_solutions.zip",
+    "url": "https://boi.cses.fi/files/boi2026_solutions.zip",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_2026_day1_tasks.pdf",
+    "url": "https://ceoi2026.fri.uni-lj.si/res/CEOI26-day1-tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_2026_day1_solutions.pdf",
+    "url": "https://ceoi2026.fri.uni-lj.si/res/CEOI26-day1-solutions.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_2026_day2_tasks.pdf",
+    "url": "https://ceoi2026.fri.uni-lj.si/res/CEOI26-day2-tasks.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_2026_day2_solutions.pdf",
+    "url": "https://ceoi2026.fri.uni-lj.si/res/CEOI26-day2-solutions.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_2022_solutions.pdf",
+    "url": "https://archive.uoi.ua/static/ceoi2022-tutorials.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_2024_index_tasks.html",
+    "url": "https://ceoi2024.fi.muni.cz/page/tasks/",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_2024_index_solutions.html",
+    "url": "https://ceoi2024.fi.muni.cz/page/tasks/",
+    "status": "downloaded"
+  },
+  {
+    "file": "APIO_2026_solutions.pdf",
+    "url": "https://qoj.ac/download.php?id=17643&type=solution",
+    "status": "unavailable",
+    "error": "curl: (22) The requested URL returned error: 403"
+  },
+  {
+    "file": "APIO_2026_bike_tasks.pdf",
+    "url": "https://raw.githubusercontent.com/apio2026/apio-2026/main/bike/statements/en.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "APIO_2026_navigation_tasks.pdf",
+    "url": "https://raw.githubusercontent.com/apio2026/apio-2026/main/navigation/statements/en.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "APIO_2026_party_tasks.pdf",
+    "url": "https://raw.githubusercontent.com/apio2026/apio-2026/main/party/statements/en.pdf",
+    "status": "downloaded"
+  },
+  {
+    "file": "CEOI_archive.html",
+    "url": "https://ceoi.elte.hu/tasks-archive.html",
+    "status": "downloaded"
+  }
+]

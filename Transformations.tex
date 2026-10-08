@@ -59,7 +59,9 @@
 
     \item \textbf{Range Add $\to$ mảng hiệu/Prefix Sum}: $A_i=\sum_{j=1}^iD_j$ ($D_i=A_i-A_{i-1}$); cộng đoạn $[l,r]\to$ hai cập nhật điểm trên $D$. Tổng tĩnh $\to S_r-S_{l-1}$.
 
-    \item \textbf{Đoạn/mọi cặp $\to$ điều kiện kề}: Sau sắp xếp, $\min_{i\ne j}|A_i-A_j|=\min_i(A_{i+1}-A_i)$; $A_j-A_i\ge(j-i)D\iff A'_{i+1}\ge A'_i$ ($A'_i=A_i-iD$). Đoạn dài $\ge2$ có majority ($>50\%$) luôn chứa witness dài 2 ($x,x$) hoặc 3 ($x,y,x$).
+    \item \textbf{Cửa sổ cố định $\to$ lớp modulo}: XOR hai phép flip cửa sổ dài $x$ bắt đầu tại $i,i+1$: phần giao triệt tiêu, chỉ đảo $i,i+x$ $\to$ cùng lớp modulo $x$. Mỗi cửa sổ chứa đúng một vị trí mỗi lớp; đặt $P_r=\bigoplus_{i\equiv r\pmod x}s_i$. Flip đảo mọi $P_r$, nên $P_r\oplus P_0$ ($1\le r<x$) bất biến và đủ phân loại trạng thái; từ toàn 0 đạt được $s$ iff mọi $P_r$ bằng nhau. Cue: triệt tiêu hai cửa sổ kề $\to$ hai đầu cách $x$ $\to$ modulo. Cần phép triệt tiêu hợp lệ (XOR, hoặc cộng với phép nghịch đảo); không suy rộng sang gán/max.
+
+    \item \textbf{Thu nhỏ điều kiện: toàn cục $\to$ cục bộ}: Tìm điều kiện trên các phần tử kề/cửa sổ nhỏ tương đương điều kiện cả dãy. Sau sắp xếp, $\min_{i\ne j}|A_i-A_j|=\min_i(A_{i+1}-A_i)$; $A_j-A_i\ge(j-i)D\iff A'_{i+1}\ge A'_i$ ($A'_i=A_i-iD$). Cấp số cộng $\iff$ mọi bộ ba liên tiếp thỏa $A_i+A_{i+2}=2A_{i+1}$; áp dụng ngang/dọc biến hình chữ nhật cấp số cộng thành vùng cửa sổ $3\times3$ hợp lệ (LFAC2 2011A). Đoạn dài $\ge2$ có majority ($>50\%$) luôn chứa witness dài 2 ($x,x$) hoặc 3 ($x,y,x$).
 
     \item \textbf{Tích $\to$ tổng}: $ab=\binom{a+b}{2}-\binom a2-\binom b2$; $\prod A_i\to\sum\log A_i$ (hoặc log xác suất).
 
@@ -69,50 +71,42 @@
 
     \item \textbf{Dirichlet/Pigeonhole (4-Sum $a_x+a_y=a_z+a_w$)}: Các giá trị nguyên dương phân biệt: Có tối đa $2\max A$ giá trị tổng. Nếu $\binom N2>2\max A$, pigeonhole bảo đảm hai cặp trùng tổng. Hash tổng $\to$ cặp chỉ số trong $O(N^2)$; tính phân biệt của các giá trị bảo đảm bốn chỉ số khác nhau.
 
-    \item \textbf{Boyer-Moore Majority Vote}: Tìm phần tử majority ($>n/2$ lần) trong $O(n)$ thời gian, $O(1)$ bộ nhớ bằng một bộ đếm. Antichain lớn nhất theo Sperner: $\binom n{\lfloor n/2\rfloor}$.
+    \item \textbf{Boyer-Moore Majority Vote}: Tìm phần tử majority ($>n/2$ lần) trong $O(n)$ thời gian, $O(1)$ bộ nhớ bằng một bộ đếm.
+
+    \item \textbf{Không bao nhau $\to$ Antichain (Sperner)}: Chọn các tập con/bitmask sao cho không tập nào chứa tập khác: tối đa $\binom n{\lfloor n/2\rfloor}$. \textbf{Construction}: lấy tất cả tập có đúng $\lfloor n/2\rfloor$ phần tử (cùng popcount nên không bao nhau). Đạt cận khi được chọn từ toàn bộ tập con; có ràng buộc thêm phải kiểm tra lại. Ví dụ: $N$ là tích $n$ prime khác nhau, chọn các ước không chia nhau $\to$ lấy tích của đúng $\lfloor n/2\rfloor$ prime.
 \end{itemize}
 
-\noindent\textbf{Bổ sung chọn lọc}
+\noindent\textbf{Invariant: nhận diện và kiểm tra}
 \begin{itemize}
     \setlength{\itemsep}{1pt}
     \setlength{\parsep}{0pt}
-    \item \textbf{Cấp số cộng $\to$ miền tâm (LFAC2 2011A)}: Tìm hình chữ nhật có từng hàng/cột là cấp số cộng. Đánh dấu cửa sổ $3\times3$ hợp lệ; hình chữ nhật tâm $h\times w$ ứng với diện tích gốc $(h+2)(w+2)$, \emph{không phải} $hw$. Histogram; cạnh dài 1 hoặc 2 xử lý riêng.
+    \item \textbf{Cách tìm}: Đổi biểu diễn để thao tác thành swap/triệt tiêu. Khác bất biến $\to$ không thể; giống nhau cần chứng minh đủ bằng construction/dạng chuẩn.
+    \item \textbf{Tổng / tô màu / modulo}: Chuyển lượng $\to\sum a_i$; đối xứng $\to$ tổng xen kẽ/theo màu. Tìm $w$ sao cho $w\cdot\Delta a=0$ (hoặc $0\pmod m$) với mọi thao tác. XOR cùng lượng hai lần triệt tiêu.
+    \item \textbf{Hiệu kề / prefix $\to$ swap}: $a_i'=a_{i-1}+a_{i+1}-a_i$ swap hai hiệu kề. XOR $a_i$ vào hai hàng xóm swap hai prefix XOR $P_{i-1},P_i$. Mọi swap kề được phép $\to$ so multiset; giữ biên $a_1$ (hiệu), $P_n$ (prefix XOR).
+    \item \textbf{Hoán đổi $\to$ nhóm vị trí / cặp đối xứng}: Swap từng cặp vị trí: cạnh là swap được phép, độc lập trạng thái $\to$ so multiset mỗi component. Swap cách $k\to$ modulo $k$; nhiều bước nhảy thử gcd, kiểm tra biên. Swap nguyên khối prefix/suffix cùng độ dài $l$, $2l\le n$, giữ thứ tự trong khối $\to$ các cặp đối xứng $(a_i,a_{n+1-i})$ chỉ đổi chỗ/đảo hướng: so multiset các cặp $(\min,\max)$, giữ phần tử giữa nếu $n$ lẻ. Điều kiện đủ khi mọi $1\le l\le\lfloor n/2\rfloor$ được phép (đảo thứ tự $l$ cặp đầu và đảo hướng từng cặp); chỉ cho vài $l$ thì chưa chắc đủ.
+    \item \textbf{Parity}: Tìm lượng có tính chẵn/lẻ không đổi: tổng, số bit 1, số vật theo màu, số nghịch thế. Kiểm tra mỗi thao tác làm lượng đó đổi một số chẵn. Với hoán vị phân biệt: parity $=(n-\#\text{cycles})\bmod2$; $k$-cycle tương đương $k-1$ swap, nên $k$ lẻ giữ parity. Mọi 3-cycle sinh đúng hoán vị chẵn; phần tử trùng cho phép đổi parity gán nhãn đích.
+    \item \textbf{Cùng lớp dư $\to$ GCD các hiệu}: Đặt $d_i=a_{i+1}-a_i$, $g=\gcd_{i<n}|d_i|$. Khi đó $g=\gcd_{i>1}|a_i-a_1|=\gcd_{i<j}|a_i-a_j|$ (hiệu cặp là tổng hiệu kề). Với $g>0$, mọi $a_i$ nằm trên lưới $a_1+g\mathbb Z$; $g$ là modulo lớn nhất để tất cả cùng dư. Tịnh tiến cả mảng hoặc đổi thứ tự không đổi $g$. Cue: khoảng cách giữa giá trị/cùng lớp dư $\to$ xét gcd hiệu, không phải gcd giá trị. Thêm $2u-v$ giữ lưới vì $u,v\equiv a_1\pmod g\implies2u-v\equiv a_1\pmod g$ (CF1477A). $g=0$: mọi giá trị bằng nhau, xét riêng.
+\end{itemize}
 
-    \item \textbf{Hợp đoạn $\to$ chỉ hai hàng xóm (LFAC2 2011E)}: Di chuyển đoạn $[x-l,x+l]$, đếm điểm nguyên trong hợp. Vì các đoạn \emph{cùng độ dài}, phần chỉ $x$ phủ là $[\max(x-l,p+l+1),\min(x+l,q-l-1)]$ với hai tâm kề $p<x<q$. Cập nhật đóng góp riêng, không dựng lại hợp.
+\noindent\textbf{Monovariant: mỗi bước tiến gần hơn đến đích}
+\begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \setlength{\parsep}{0pt}
+    \item \textbf{Cách dùng}: Chọn một số đo $\Phi$ (số lỗi, khoảng cách, độ lệch); chứng minh sau mỗi bước nó giảm. Nếu $\Phi$ là số nguyên không âm và giảm ít nhất 1, quá trình dừng sau tối đa $\Phi$ ban đầu bước. Dừng chưa chắc đạt đích: cần chứng minh chưa đạt đích thì vẫn chọn được bước làm giảm $\Phi$.
+    \item \textbf{Sửa thứ tự $\to$ số nghịch thế}: Swap hai phần tử kề $a_i>a_{i+1}$ làm số cặp sai thứ tự giảm đúng 1. Số vị trí sai không chắc giảm khi swap.
+    \item \textbf{Di chuyển $\to$ khoảng cách/vị trí}: Mỗi bước đưa vật gần đích hơn $\to$ tổng khoảng cách giảm. Vật chỉ dịch trái $\to$ tổng vị trí của các vật giảm, dù số vật giữ nguyên.
+    \item \textbf{San bằng $\to$ tổng bình phương}: Chuyển 1 từ số lớn $u$ sang số nhỏ $v$, $u\ge v+2$: $(u-1)^2+(v+1)^2-u^2-v^2=-2(u-v-1)<0$. Tổng không đổi, nhưng độ lệch giảm.
+    \item \textbf{Cố định dần $\to$ số chỗ còn phải sửa}: Mỗi bước kéo dài prefix đúng và không phá nó $\to$ số vị trí ngoài prefix giảm. Nếu số đo chính đôi khi không đổi, thêm số đo phụ: bước nào cũng giảm số chính, hoặc giữ số chính và giảm số phụ (cả hai nguyên không âm).
+    \item \textbf{Kiểm tra}: Chỉ ``không tăng'' có thể lặp; số thực giảm như $1,1/2,1/4,\ldots$ cũng có thể vô hạn. Nếu chỉ các bước mình chọn làm $\Phi$ giảm, kết luận chỉ áp dụng cho thuật toán đó.
+\end{itemize}
 
-    \item \textbf{Chia cây $\to$ đếm cạnh (LFAC2 2011J)}: Chia cây $n$ đỉnh thành nhóm liên thông cỡ $k$, $k\mid n$. Khả thi iff có đúng $n/k-1$ cây con không phải gốc có size chia hết $k$; cắt toàn bộ các cạnh ấy. Điều kiện chia toàn cục trở thành histogram subtree size.
 
-    \item \textbf{Thực hiện thuận, lập kế hoạch ngược (LFAC2 2012A)}: Mua loại $i$ được tặng mỗi loại $j<i$ còn hàng. Thực hiện mua tăng loại, nhưng DP giảm loại: mọi ảnh hưởng từ loại cao xuống loại thấp chỉ còn \emph{tổng số lần mua} $t$. Không cần giữ vector tồn kho.
+\begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \setlength{\parsep}{0pt}
+    \item \textbf{Chia miền $\to$ giảm một nửa số mũ (LFAC2 2014H, 4 sao)}: Tem RGB ngắn nhất phủ chuỗi có $k$ wildcard; chồng tại wildcard được khác màu. $L\ge n/2$: chỉ cần prefix/suffix tương thích. $L\le n/2$: hai đầu dài $L$ rời nhau, chọn đầu ít wildcard hơn, tối đa $\lfloor k/2\rfloor$; liệt kê $3^{k/2}$ thay vì $3^k$.
 
-    \item \textbf{Nhân phần dư $\to$ cộng số mũ (LFAC2 2012E)}: Đếm giá trị biểu thức modulo nguyên tố $p$, mỗi biến dùng một lần. Viết phần dư khác 0 thành $g^j$: phép nhân thành cyclic convolution modulo $p-1$ trên chỉ số. Xử lý 0 riêng; modulo đếm số cách khác modulo giá trị.
-
-    \item \textbf{Một lựa chọn cần nhiều con: AND-Dijkstra (LFAC2 2012H)}: Chặt đầu Hydra phí $u>0$ sinh multiset đầu con, hoặc trả phí diệt vĩnh viễn. Không relax cha từ \emph{một} con; chờ \emph{tất cả} con được chốt rồi cộng chi phí. Phí dương khiến chi phí cha lớn hơn từng con, cho phép thứ tự Dijkstra dù loại đầu có cycle.
-
-    \item \textbf{Bỏ thứ tự sau khi chứng minh dạng chuẩn (LFAC2 2012K)}: Bắn luống trên vòng đuổi thỏ tại đó, đẩy thỏ hai bên ra xa. Với $k<\lceil n/2\rceil$, có tối ưu bắn các luống không kề. Thỏ \emph{ban đầu} ở $i$ bị đuổi iff bắn $i$ hoặc cả hai hàng xóm; mô phỏng lịch thành điều kiện ba bit cục bộ.
-
-    \item \textbf{Xóa online $\to$ union dual (LFAC2 2013B)}: Xóa đường lưới, input tiếp phụ thuộc đáp án trước nên không đảo thời gian. Xóa cạnh primal tương ứng ghép hai mặt dual, kể cả mặt ngoài. Hai mặt đã cùng DSU trước xóa iff cạnh là cầu. Bài cần tách liên thông đổi thành bài chỉ union.
-
-    \item \textbf{Xóa hai đoạn $\to$ tương tác thưa (LFAC2 2013D)}: Hủy hai cuộc biểu tình để mở nhiều đường nhất. Chỉ vùng phủ 1 hoặc 2 lần có thể được mở: gain $=u_i+u_j+w_{ij}$, $u_i$ là phủ riêng, $w_{ij}$ là phủ riêng của cặp. Sweep chỉ tạo $O(n)$ cặp có $w_{ij}>0$, thay vì xét $n^2$ cặp.
-
-    \item \textbf{Ràng buộc mọi đường $\to$ bóc lá (LFAC2 2013F)}: Đặt nhiều camera nhất, mỗi đường trên cây gặp tối đa $k$ camera. Exchange về phía lá; mỗi lớp bóc lá tiêu tốn tối đa hai vị trí trên một đường. Chọn $\lfloor k/2\rfloor$ lớp, thêm một đỉnh còn lại nếu $k$ lẻ.
-
-    \item \textbf{Đến sớm chưa chắc trội (LFAC2 2013H)}: Đi qua đảo có thời gian bật bẫy, chỉ được chờ lúc an toàn. Hai lần đến cùng đảo khác khoảng an toàn \emph{không} thay thế nhau. Trạng thái phải là $(v,\text{khoảng an toàn})$; trong cùng khoảng mới chỉ cần giữ lần đến sớm nhất.
-
-    \item \textbf{Hamilton $\to$ ghép chu trình (LFAC2 2014F)}: Lưới chẵn có lỗ $2\times2$ đủ xa nhau/biên. Dựng chu trình từng mảnh, rồi ghép theo cây khung của các mảnh kề bằng thay hai cạnh đối diện. Cần cổng biên phân biệt; tính khả thi đến từ cấu trúc lỗ, không từ thuật toán Hamilton tổng quát.
-
-    \item \textbf{Tổng giao cặp $\to$ moment độ phủ (LFAC2 2013K)}: Kỳ vọng giao hai hình chữ nhật: tại điểm phủ $c$ lần có $\binom c2$ cặp. Vì vậy tổng giao $=\tfrac12\int(c^2-c)$; sweep chỉ cần giữ hai moment $\int c,\int c^2$, rồi chia số cặp, không liệt kê cặp hình.
-
-    \item \textbf{Tiếp xăng $\to$ đổi trọng số cạnh (LFAC2 2014B)}: Hai đầu là trạm, bình $b$, được đổ đầy ở trạm trung gian. Gọi $d_S(v)$ là khoảng cách tới trạm gần nhất; thay $w(u,v)$ bằng $d_S(u)+w+d_S(v)$. Đi được iff hai đầu liên thông qua cạnh mới $\le b$: trạng thái nhiên liệu biến thành truy vấn DSU.
-
-    \item \textbf{Không hereditary $\to$ cố định cực trị (LFAC2 2014G)}: Đoạn dài nhất có min/max duy nhất; đoạn con có thể không hợp lệ nên sliding window sai. Cố định minimum $i$, chặn bởi phần tử gần nhất $\le a_i$. Gọi $M$ là max trong miền đó: chỉ cần thử lần xuất hiện $M$ gần nhất bên trái/phải, mở rộng tới $M$ khác hoặc biên.
-
-    \item \textbf{Chia miền $\to$ giảm một nửa số mũ (LFAC2 2014H)}: Tem RGB ngắn nhất phủ chuỗi có $k$ wildcard; chồng tại wildcard được khác màu. $L\ge n/2$: chỉ cần prefix/suffix tương thích. $L\le n/2$: hai đầu dài $L$ rời nhau, chọn đầu ít wildcard hơn, tối đa $\lfloor k/2\rfloor$; liệt kê $3^{k/2}$ thay vì $3^k$.
-
-    \item \textbf{Sự kiện hoán vị $\to$ đoạn tăng trên vòng (LFAC2 2014I)}: Giờ $t_i$, người $i$ bắn $p_i$ nếu còn sống; $p$ là hoán vị. Trên mỗi cycle, thời gian giảm là điểm reset, đoạn tăng luân phiên chết/sống; đoạn dài $l$ góp $\lfloor l/2\rfloor$ người sống. Đổi một giờ chỉ đổi hai biên, không cần mô phỏng lại mọi sự kiện.
-
-    \item \textbf{Giao nhiều vùng $\to$ một witness (LFAC2 2014J)}: Trên cây có gốc, mỗi vùng liên thông có một đỉnh cao nhất. Nếu giao khác rỗng, \emph{đỉnh sâu nhất trong các đỉnh cao nhất} thuộc mọi vùng. Chỉ thử ứng viên ấy; vùng walk $a\to b$ ngân sách $d$ được kiểm tra bằng $dist(a,x)+dist(x,b)\le d$.
-
-    \item \textbf{Bước nhảy $\to$ lattice (CRRC I)}: Nhảy $(\pm m,\pm k)$, hoán vị trục, $m^2+k^2=n$; đếm ô tới được trong hình chữ nhật, được đi ra ngoài. Với $d=\gcd(m,k)$, tọa độ phải chia hết $d$; nếu $m/d,k/d$ cùng lẻ, hai thương tọa độ phải cùng parity. Các cặp cùng $n$ cùng loại parity, nên gộp bằng GCD; đếm bội/chẵn lẻ, không BFS theo diện tích. Không có bước khác 0 thì chỉ gốc.
+    \item \textbf{Bộ ba Pythagoras}: Nguyên thủy: $(a,b,c)=(u^2-v^2,2uv,u^2+v^2)$, $u>v\ge1$, $\gcd(u,v)=1$, khác parity. Sinh mọi bộ bằng lấy bội $k(a,b,c)$; nếu $c\le C$, duyệt $u^2+v^2\le C$, $k\le C/c$.
 
     \item \textbf{Factorial: nhánh nhỏ và nhánh khó (CRRC K)}: Tìm $a!/(b!c!)=N$, chọn $b\ge c$, đặt $d=a-b$. Nếu $d\ge c$, $N\ge\binom{2c}{c}$ chặn $c$; nhánh $d<c$ phải khai thác chia hết theo prime valuations. Với $N\le10^9$, editorial dùng $d\le20$; cutoff thực nghiệm, chưa chứng minh ở đây.
 \end{itemize}

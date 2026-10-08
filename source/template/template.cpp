@@ -22,8 +22,8 @@ bool VERBOSE = false;
 #define SET(x, i) ((x) |= (1LL << (i)))
 #define UNSET(x, i) ((x) &= ~(1LL << (i)))
 
-template<typename T> bool maximize(T &a, T b){    if (a < b){ a = b;  return true; }  return false; }
-template<typename T> bool minimize(T &a, T b){    if (a > b){ a = b;  return true; }  return false; }
+bool maximize(int &a,int b) { if (a<b) { a=b; return true; } return false; }
+bool minimize(int &a,int b) { if (a>b) { a=b; return true; } return false; }
 using namespace std;
 
 const int MOD = 1e9 + 7;

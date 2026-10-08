@@ -1,0 +1,126 @@
+                                                                                              sprinklers
+                                                                                                  Day 2 Tasks
+                                                                                                 English (ISC)
+
+
+
+
+Sprinklers
+Václav has a beautiful flower garden consisting of M flowers planted on a single line. On this line,
+Václav has also placed N sprinklers to water his flowers.
+
+The positions of the sprinklers are given by the numbers s ​1 , … , s ​N . The positions of the flowers
+are given by the numbers f1​ , … , fM
+                                    ​ . Both are provided in non-decreasing order, that is:
+
+      s1 ≤ s2​ ≤ … ≤ sN​
+      f1​ ≤ f2​ ≤ … ≤ fM
+                       ​
+
+Václav is leaving for CEOI soon. He would like to make sure that all of his flowers are properly
+watered while he is away. To do this, he turns each sprinkler individually to the left or to the right,
+and sets their spraying power — all sprinklers share the same water hose, and therefore spray the
+same distance.
+
+If the spraying power is K and the i -th sprinkler is turned to the left, it will water all flowers with
+positions between s ​i − K and s i (inclusive). Similarly, if the j -th sprinkler is turned to the right, it
+will water all flowers with positions between s j​ and s j​ + K (inclusive). A single sprinkler can water
+multiple flowers and a single flower can be watered by multiple sprinklers.
+
+Your task is to decide whether it's possible to water all the flowers. If so, you should find the
+minimum sufficient spraying power, along with a corresponding configuration of sprinklers. If
+there exist multiple valid configurations with minimal spraying power, output any of them.
+
+
+Input
+
+The first line of input contains two integers: N and M , separated by a space. The second line
+contains N space-separated integers s 1​ , … , s N
+                                                 ​ — the positions of the sprinklers. The third line
+contains M space-separated integers f1​ , … , fM
+                                               ​ — the positions of the flowers.
+
+Output
+
+If it is not possible to water all the flowers, print the number −1.
+
+If it is possible, the output should consist of two lines. On the first line, output the number K – the
+minimum spraying power required to water all the flowers. On the second line, print a string c of
+length N , such that c​i is ‎
+                            L‎if the i -th sprinkler should be turned to the left and ‎
+                                                                                      R‎otherwise.
+
+
+
+                                                                                           sprinklers (1 of 3)
+Examples
+
+Example 1
+
+Input:
+
+
+   3 3
+   10 10 10
+   5 11 16‎
+
+
+Output:
+
+
+   6
+   LLR‎
+
+
+The given solution is valid — each flower is watered by at least one sprinkler. A spraying power
+lower than 6 is not possible, because the flower at location 16 is 6 units away from the closest
+sprinkler.
+
+Example 2
+
+Input:
+
+
+   1 2
+   1000
+   1 2000‎
+
+
+Output:
+
+
+   -1‎
+
+
+At most one flower can be watered at one time regardless of the orientation of the only sprinkler.
+
+
+Constraints
+
+         1 ≤ N , M ≤ 105​
+         0 ≤ si​ ≤ 109​ (for each i such that 1 ≤ i ≤ N )
+         0 ≤ fi​ ≤ 109​ (for each i such that 1 ≤ i ≤ M )
+         si ≤ sj​ for all i ≤ j
+         fi​ ≤ fj​ for all i ≤ j
+
+
+
+
+                                                                                    sprinklers (2 of 3)
+Subtasks
+  1. (3 points) N = 1
+  2. (6 points) N = 3x for some integer x, s 3i+1
+                                             ​    = s3i+2
+                                                     ​    = s3i+3
+                                                             ​    for each i such that
+     0 ≤ i ≤ x − 1 (i.e. sprinklers are always placed in groups of three)
+  3. (17 points) N ≤ 10, M ≤ 1 000
+  4. (27 points) K ≤ 8 (i.e., in all testcases there exists a configuration of sprinklers such that a
+    spraying power of at most 8 is sufficient to water all of the flowers)
+  5. (47 points) no additional constraints
+
+
+
+
+                                                                                     sprinklers (3 of 3)
+

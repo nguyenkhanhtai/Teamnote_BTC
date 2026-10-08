@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: bignum a{42,1}; print(a); // 1000000042
   // Nonnegative integer: base 10^9, least-significant block first.
   // Zero = {0}; otherwise the last block must be nonzero.
   // Example: 1234567890000000042 -> {42, 234567890, 1}.

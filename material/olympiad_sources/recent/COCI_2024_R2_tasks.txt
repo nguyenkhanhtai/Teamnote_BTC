@@ -1,0 +1,464 @@
+Croatian Open Competition in Informatics
+                Round 2, December 2nd 2023
+
+
+
+
+                         Tasks
+      Task           Time limit    Memory limit   Score
+
+      Pahuljice       1 second       512 MiB        50
+      Pingvin         1 second       512 MiB        70
+      Dizalo         3 seconds       512 MiB       110
+      Kuglice        0.5 seconds     512 MiB       110
+      Zatopljenje    2 seconds       512 MiB       110
+
+      Total                                        450
+       Croatian Open Competition in Informatics                                           Task Pahuljice
+       Round 2, December 2nd 2023                                          1 second / 512 MiB / 50 points
+
+
+Task Pahuljice
+Lana likes to draw specific snowflakes. A snowflake of size x is defined as follows:
+
+  • The center of the snowflake is the character ’+’.
+
+  • Above and below the character ’+’ there is a sequence of x characters ’|’.
+
+  • To the left and right of the character ’+’ there is a sequence of x characters
+    ’-’.
+
+  • On the diagonal from the upper left corner to the center and from the center
+    to the lower right corner of the snowflake there is a sequence of x characters
+    ’\’.
+
+  • On the diagonal from the upper right corner to the center and from the center
+    to the lower left corner of the snowflake there is a sequence of x characters
+    ’/’.
+
+Sometimes Lana connects several snowflakes, but even then the size of each snowflake is determined
+separately, regardless of whether the snowflakes share some characters.
+                                                  \.|./..
+                                                  .\|/...               \.|./.
+                           \|/                    --+--..               .\|/..
+                           -+-                    ./|\...               --+---
+                           /|\                    /.|.\|/               ./|\..
+                                                  ....-+-               /...\.
+                                                  ..../|\
+
+                          On the left is an example of a snowflake of size 1.
+ In the middle is an example of connected snowflakes, the left one of size 2 and the right one of size 1.
+  On the right is an example of a snowflake of size 1. It is missing one character ’|’ to be of size 2.
+
+Lana is currently drawing snowflakes on a piece of paper of size n × m. However, she got a bit confused and
+did not draw all the snowflakes completely in accordance with her usual snowflake shapes. Namely, some
+snowflakes are missing some characters, so their size is equal to the smallest length of the corresponding
+character sequence from the center in one of the eight directions. Moreover, she drew some characters
+that are not part of any snowflake.
+Can you help Lana determine the size of the largest snowflake in the drawing?
+
+Input
+The first line contains two integers n and m (1 ≤ n, m ≤ 50), the size of the drawing.
+In each of the following n lines there are m characters describing the drawing.
+The characters that can appear in the drawing are ’+’, ’-’, ’\’, ’|’, ’/’ and ’.’.
+The ASCII values of these characters are 43, 45, 92, 124, 47 and 46 respectively.
+
+Output
+In the first and only line you should output the size of the largest snowflake in the drawing.
+
+
+
+
+                                                  1 of 10
+         Croatian Open Competition in Informatics                                           Task Pahuljice
+         Round 2, December 2nd 2023                                          1 second / 512 MiB / 50 points
+
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          11     There won’t be any snowlake, or the largest snowflake will be of size 1.
+     2          11     There will be at most one character ’+’ in the drawing.
+     3          28     No additional constraints.
+
+Examples
+ input                                input                              input
+ 5 6                                  7 7                                7 7
+ \.\|/.                               \.|./..                            \|/|\|/
+ ---+--                               .\|/...                            -+-|-+-
+ /./|\.                               --+--..                            /|\|/|\
+ ./.|.\                               ./|\...                            ---+---
+ /..|..                               /.|.\|/                            \|/|\|/
+                                      ....-+-                            -+-|-+-
+ output                               ..../|\                            /|\|/|\
+ 1                                    output                             output
+                                      2                                  1
+
+
+Clarification of the first example:
+Only one snowflake is drawn.
+In the directions up-left, up and up-right from the center of the snowflake there are sequences of length 1.
+In the directions right and down-right from the center of the snowflake there are sequences of length 2.
+In the directions left, down-left and down from the center of the snowflake there are sequences of length 3.
+Therefore, the size of the snowflake is 1.
+Clarification of the second example:
+Two connected snowflakes are drawn, the left one of size 2 and the right one of size 1.
+
+
+
+
+                                                    2 of 10
+         Croatian Open Competition in Informatics                                                    Task Pingvin
+         Round 2, December 2nd 2023                                                 1 second / 512 MiB / 70 points
+
+
+Task Pingvin
+Zrakoplović the penguin wants to learn how to fly!
+The space in which he will learn to fly can be imagined as a cube of dimensions
+n × n × n, divided into n3 unit cubes. Each unit cube can be described with
+three coordinates (x, y, z), where x, y and z are integers between 1 and n. The
+coordinate x denotes the distance from the left edge of the space, the coordinate y
+denotes the distance from the front edge of the space, and the coordinate z denotes
+the height.
+Some of these unit cubes contain clouds, and some do not.
+Zrakoplović is afraid of clouds, so he will learn to fly only where there are no clouds. He initially finds
+himself at a position (xs , ys , zs ), such that zs = 1 (i.e. at height 1), and wants to get to position (xe , ye , ze ).
+At the moment, he is perfecting the skill of flying in directions that are parallel to one of the axes of space
+(i.e. in the direction of the x-axis, y-axis or z-axis), and in one wing flap he can cross at most one unit
+cube.
+Before he decides to fly, Zrakoplović wants to know how many wing flaps he needs to get to the desired
+position. While he is preparing for the flight, help him answer that question.
+
+Input
+The first line contains an integer n (1 ≤ n ≤ 100), the dimension of the space in which Zrakoplović learns
+to fly.
+The second line contains three integers xs , ys and zs (1 ≤ xs , ys ≤ n, zs = 1), the start position of
+Zrakoplović.
+The third line contains three integers xe , ye and ze (1 ≤ xe , ye , ze ≤ n), the end position of Zrakoplović.
+This is followed by n binary matrices of dimensions n × n that describe the space, where the i-th matrix
+describes the space at height i. The upper-left corner has the coordinates (1, 1, i). The row and column of
+the matrix correspond to the x and y coordinates, respectively.
+’0’ denotes a unit cube in which there are no clouds, and ’1’ denotes a unit cube in which there are
+clouds.
+The start and end position of Zrakoplović will not be a cloud.
+
+Output
+In the first and only line, print the smallest number of wing flaps that Zrakoplović must make to reach
+the desired position. If Zrakoplović cannot reach the desired position, print ’-1’.
+
+Scoring
+
+ Subtask      Points    Constraints
+
+     1          7       n=2
+     2          16      There are no clouds.
+     3          22      All positions with z-coordinate greater than 1 will be clouds.
+     4          25      No additional constraints.
+
+
+
+
+                                                        3 of 10
+       Croatian Open Competition in Informatics                                                Task Pingvin
+       Round 2, December 2nd 2023                                             1 second / 512 MiB / 70 points
+
+
+Examples
+ input                               input                                input
+ 2                                   3                                    3
+ 1 1 1                               2 3 1                                2 1 1
+ 1 1 2                               1 1 1                                3 2 2
+ 00                                  000                                  000
+ 10                                  010                                  010
+ 01                                  000                                  110
+ 00                                  111                                  010
+                                     111                                  001
+ output                              111                                  001
+ 1                                   111                                  101
+                                     111                                  110
+                                     111                                  000
+
+                                     output                               output
+                                     3                                    3
+
+
+Clarification of the first example:
+Zrakoplović can reach the desired position in one wing flap by moving in the direction of the z-axis for
+one unit cube.
+
+
+Clarification of the third example:
+Zrakoplović can reach the desired position in three wing flaps by first moving to position (2, 1, 2), then to
+(2, 2, 2) and finally to (3, 2, 2).
+
+
+
+
+                                                  4 of 10
+       Croatian Open Competition in Informatics                                                Task Dizalo
+       Round 2, December 2nd 2023                                          3 seconds / 512 MiB / 110 points
+
+
+Task Dizalo
+In one city there is a tall skyscraper with n floors. There are n people waiting
+for an elevator on the ground floor. The i-th person wants to go to the floor ai .
+There is no pair of people who want to go to the same floor.
+The skyscraper has one elevator that is large enough for all people to fit in, but it
+is so narrow that two people cannot stand side by side; they must be one behind
+the other.
+Everybody got in the elevator, but they had not thought about the order in which
+they have to exit it! Initially, the i-th person is at position i, looking from the elevator door. If a person
+wants to exit the elevator, everybody in front of them (closer to the door) must temporarily exit the
+elevator too. When returning back in the elevator, they can reorder themselves as they wish. People
+who are behind (further to the door) the person who wants to exit will not exit the elevator.
+
+
+
+
+The illustration above shows the starting order of people in the elevator in the first example. The elevator
+is on floor 1, and the person in position 3 wants to exit. For them to exit, persons at positions 1 and 2
+                                               must exit too.
+
+Mirko is viewing the situation they are in and contemplating. He wants to know how many exits from the
+elevator would there be be if the people returning to the elevator always returned optimally. If a person
+exits the elevator multiple times, each time is counted separately.
+Mirko is an experienced coder, and he can solvee this problem quite easily. His happiness is short-lived,
+because next to him is his friend Slavko. Slavko came up with q questions: If the person at position xi
+were not in the elevator, how many exits would there be then?
+Mirko is interested in an answer before Slavko’s first question and after every question. Note that for each
+question, all the people from previous questions are also not considered to be in the elevator.
+Mirko started solving the problem but soon realized that even for him, this would not be quite easy. Help
+him solve this problem!
+Note: The elevator will always move from the first floor to the n-th floor and stop at every floor on which
+someone wants to exit.
+
+Input
+The first line contains two non-negative integers n and q (0 ≤ q < n ≤ 105 ), the number of people/floors
+and the number of questions.
+The second line contains n integers ai (1 ≤ ai ≤ n, ai ̸= aj for each i ̸= j), where ai is the floor on which
+the i-th person wants to exit the elevator. The sequence (ai ) is a permutation.
+The third line contains q integers xi (1 ≤ xi ≤ n, xi ̸= xj for each i ̸= j), Slavko’s questions.
+
+Output
+In one line, print q + 1 numbers, where the i-th is the number of exists after i − 1 questions.
+
+
+                                                   5 of 10
+        Croatian Open Competition in Informatics                                                  Task Dizalo
+        Round 2, December 2nd 2023                                            3 seconds / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          16     n, q ≤ 100
+    2          19     n, q ≤ 1 000
+    3          29     q=0
+    4          46     No additional constraints.
+
+Examples
+ input                                 input                                 input
+
+ 5 2                                   7 0                                   3 2
+ 3 4 1 2 5                             4 5 2 1 6 3 7                         3 1 2
+ 3 2                                                                         1 2
+
+ output                                output                                output
+
+ 9 6 4                                 13                                    5 2 1
+
+
+Clarification of the first example:
+
+                                     The illustration shows the exits from the elevator before the first query.
+                                     The elevator is on the first floor, and the person at position 3 wants to
+                                     exit. But, for them to exit, persons at positions 1 and 2 must exit first,
+                                     and they return to the elevator at the same positions.
+                                     After that, on the second floor, the person at position 4 wants to exit.
+                                     Again, persons at positions 1 and 2 must exit first, and they return to
+                                     the elevator at the same positions.
+                                     After that, on the third floor, the person at position 1 exits the elevator,
+                                     without anyone else having to exit the elevator.
+                                     After that, on the fourth floor, the person at position 2 exits the elevator,
+                                     without anyone else having to exit the elevator.
+                                     And finally, on the fifth floor, the person at position 5 exits the elevator.
+                                     In total, there were 3 + 3 + 1 + 1 + 1 = 9 exits from the elevator.
+
+
+
+
+                                                     6 of 10
+         Croatian Open Competition in Informatics                                          Task Kuglice
+         Round 2, December 2nd 2023                                   0.5 seconds / 512 MiB / 110 points
+
+
+Task Kuglice
+Christmas time is approaching, the most beautiful time of the year. Our protag-
+onists, Marin and Josip, have returned from Christmas shopping and have started
+decorating their Christmas tree.
+They bought n Christmas ornaments arranged next to each other in an elongated
+box, and the i-th ornament has the color ai . The box is open on both sides, so
+the ornaments can be taken out from both the left and the right side of the box.
+The box is transparent, so Marin and Josip can see the color of each ornament.
+
+
+
+
+ The illustration shows the initial state of the box in the second example. On his first move, Marin can
+draw either an ornament of color 1 from the left end of the box or an ornament of color 3 from the right
+                                               end of the box.
+
+Josip came up with a game that would make decorating the tree even more fun, although it’s already a
+lot of fun by itself. The game works as follows: Marin and Josip take turns, and Marin starts the game.
+The player in turn draws an ornament from the box (either from the left or the right end of the box) and
+places it on the tree. If they draw an ornament whose color has not been drawn yet, the player scores a
+point. The game ends when the last ornament is drawn from the box.
+The winner of the game is the player who has scored more points, so both Marin and Josip want to
+maximize their number of points. Since both of them are excellent players, they will play optimally. Your
+task is to print the result at the end of the game.
+
+Input
+The first line contains an integer n (1 ≤ n ≤ 3 000), the number of ornaments in the box.
+The second line contains n integers ai (1 ≤ ai ≤ n), the colors of the ornaments in the box.
+
+Output
+In the first and only line, print the result of the game, i.e., two numbers connected by the character ’:’
+(without quotes), Marin’s and Josip’s scores.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          17     ai ≤ 2 for all i = 1, . . . , n
+     2          10     n ≤ 20
+     3          26     ai ≤ 20 for all i = 1, . . . , n
+     4          15     n ≤ 300
+     5          42     No additional constraints.
+
+
+
+
+                                                          7 of 10
+       Croatian Open Competition in Informatics                                             Task Kuglice
+       Round 2, December 2nd 2023                                      0.5 seconds / 512 MiB / 110 points
+
+
+Examples
+ input                                                input
+ 5                                                    6
+ 1 1 2 1 1                                            1 2 3 1 2 3
+
+ output                                               output
+ 1:1                                                  2:1
+
+
+Clarification of the first example:
+
+                                  Marin is first, and he draws an ornament of color 1 from the left end
+                                  of the box. Marin scores a point.
+                                  Josip draws an ornament of color 1 from the right end of the box, but he
+                                  does not score a point because a ball of color 1 has already been drawn.
+                                  Marin draws an ornament of color 1 from the left end of the box. He
+                                  does not score a point either because a ball of color 1 has already been
+                                  drawn.
+                                  Josip draws an ornament of color 2 from the left end of the box. This
+                                  is the first ball of color 2 drawn, so Josip scores a point.
+                                  Marin draws the last ornament (color 1) from the left end of the box,
+                                  but it does not earn him a point, and the game ends.
+                                  Marin has a total of 1 point (he drew the ornament of color 1 first), and
+                                  Josip also has a total of 1 point (he drew the ornament of color 2 first).
+The final result is 1 : 1.
+
+
+
+
+                                                  8 of 10
+       Croatian Open Competition in Informatics                                               Task Zatopljenje
+       Round 2, December 2nd 2023                                             2 seconds / 512 MiB / 110 points
+
+
+Task Zatopljenje
+It’s winter, it has never been colder, and Mr. Malnar is looking at his photos from
+his last cruise on the Adriatic and recalls unforgettable moments. The TV is on in
+the background, broadcasting news about the latest proposals for measures to slow
+down sea level rise. Looking at his photos of the coast, Mr. Malnar asks himself
+what the photos would have looked like if sea level had risen a certain amount.
+There are so many pictures, and even more questions, so Mr. Malnar asks for your
+help.
+We imagine the coast as a sequence of n numbers h1 , h2 , . . . , hn , where the i-th number represents relief
+height at the i-th point. Mr. Malnar has q queries, where the i-th query is as following: How many islands
+would there be between the li -th and ri -th point if the sea level rose by xi meters?
+
+
+
+
+The left image shows the first query of the first sample test case, and the right image shows the second
+                                  query of the second sample test case.
+                        The left islands correspond to intervals [2, 2] and [4, 5].
+                The right islands correspond to intervals [1, 1], [4, 4], [8, 8] and [10, 10].
+
+An island is defined as the maximal interval where every hi is strictly greater than the sea level. A
+maximal interval is one that cannot be extended in either direction while keeping the mentioned condition
+true. Initially, the sea level is at 0 meters.
+
+Input
+The first line contains integers n and q (1 ≤ n, q ≤ 2 · 105 ), the length of the sequence and the number of
+queries.
+The second line contains n integers h1 , h2 , . . . , hn (0 ≤ hi ≤ 109 ) that describe the relief of the coast.
+In each of the next q lines there are three integers li , ri and xi (1 ≤ li ≤ ri ≤ n, 0 ≤ xi ≤ 109 ) that
+describe the i-th query.
+
+Output
+In the i-th of the q lines print the answer to the i-th query. Each of the queries is independent of the
+others.
+
+
+
+
+                                                     9 of 10
+         Croatian Open Competition in Informatics                                           Task Zatopljenje
+         Round 2, December 2nd 2023                                         2 seconds / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          10     n, q ≤ 2 · 103
+     2          20     li = 1, ri = n for all i = 1, 2, . . . , q
+                       There exists an integer p (1 ≤ p ≤ n) such that the following holds:
+     3          20
+                       h1 ≥ h2 ≥ · · · ≥ hp i hp ≤ hp+1 ≤ · · · ≤ hn
+     4          60     No additional constraints.
+
+Examples
+ input                                                   input
+
+ 6 3                                                     10 3
+ 2 4 2 3 4 1                                             5 0 3 4 2 0 1 6 3 5
+ 2 5 2                                                   3 9 1
+ 3 5 3                                                   1 10 3
+ 3 4 4                                                   1 10 2
+
+ output                                                  output
+ 2                                                       2
+ 1                                                       4
+ 0                                                       3
+
+
+Clarification of the first example:
+The first query is shown in the left image in the task description, islands correspond to intervals [2, 2] and
+[4, 5]. In the second query island corresponds to interval [5, 5]. In the third query there are no islands
+because everything is under water.
+Clarification of the second example:
+In the first query islands correspond to intervals [3, 5] and [8, 9]. In the second query (shown in the right
+image in the task description) islands correspond to intervals [1, 1], [4, 4], [8, 8] and [10, 10], while in the
+third query islands correspond to intervals [1, 1], [3, 4] and [8, 10].
+
+
+
+
+                                                    10 of 10
+

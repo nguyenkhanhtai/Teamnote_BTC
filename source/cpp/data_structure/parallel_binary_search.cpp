@@ -3,9 +3,12 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto ans = parallel_binary_search(3,2,reset,apply,test);
+  //      reset(): void; apply(eventID): void; test(queryID): bool.
   // Monotone test(query) after an event prefix. Returns first prefix length 0..M,
   // or M+1 if never true. reset() restores prefix 0; apply(i) applies event i.
-  template<typename Reset,typename Apply,typename Test>vector<int>parallel_binary_search(int M,int Q,Reset reset,Apply apply,Test test){
+  vector<int> parallel_binary_search(int M,int Q,function<void()> reset,
+      function<void(int)> apply,function<bool(int)> test){
     assert(M >= 0 && Q >= 0); vector<int> lo(Q, 0), hi(Q, M + 1);
     for (;;) {
       vector<vector<int>> bucket(M + 1); bool active = false;

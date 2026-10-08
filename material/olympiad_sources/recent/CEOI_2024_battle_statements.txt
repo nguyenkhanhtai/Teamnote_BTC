@@ -1,0 +1,146 @@
+                                                                                                   battle
+                                                                                                Day 1 Tasks
+                                                                                               English (ISC)
+
+
+
+
+Naval battle
+Ondra has recently been promoted to Grand admiral of the Czech Navy. However, when he finally
+started thinking he had a secure job, the government announced budget cuts including
+dissolution of the Navy.
+
+So Ondra decided to show the government how important the Czech Navy is. He knows from his
+spies about an upcoming naval battle of four great fleets. If he could win it, it would surely make
+enough of a demonstration.
+
+Unfortunately, the Czech Navy has neither warships nor sea ports. But if Ondra's spies took over
+some ships he might have a chance. If only he knew which ships will survive the battle…
+
+A naval battle goes as follows: Initially ship i starts on square (xi , yi​), where both xi​ and yi​ are
+even. Additionally, the ship belongs to one of the four fleets: Northern, Southern, Eastern or
+Western. Then the battle proceeds in steps. In each step:
+
+        First, each ship simultaneously moves one square in the direction corresponding to its fleet.
+        If two or more ships now occupy the same square, they sink and disappear from the map.
+
+The battle ends when no crashes are possible anymore. A surviving ship is a ship that remains on
+the map after the end of the battle.
+
+A ship moves according to the direction of its fleet. The movement in each direction changes its
+coordinates as follows:
+
+        Northern — decreases the y coordinate by 1
+        Southern — increases the y coordinate by 1
+        Eastern — increases the x coordinate by 1
+        Western — decreases the x coordinate by 1
+
+
+Input
+
+The first line of inputs contains an integer N . Then N lines follow, each containing xi​ , yi​, and di​ ,
+separated by spaces. The integers x​i and yi​ are the coordinates of the i -th ship. The character d​i is
+either ‎
+       N‎,‎
+          S‎,‎
+             E‎or ‎
+                  W‎, describing the direction of the i -th ship's fleet.
+
+No two ships initially have the same coordinates. That is, for ships i and j (i ≠ j ) either x​i ≠ x​j or
+yi​ ≠ yj​ .
+
+
+                                                                                             battle (1 of 4)
+Output
+
+For each surviving ship, output a single line containing the integer i (1 ≤ i ≤ N ) — the number of
+the ship. You can output the numbers of surviving ships in any order.
+
+If there are no surviving ships, the output should be empty.
+
+
+Examples
+
+Example 1
+
+Input:
+
+
+   7
+   0 6 E
+   0 8 E
+   2 4 E
+   4 2 S
+   6 0 S
+   6 2 S
+   6 4 S‎
+
+
+Output:
+
+
+   7‎
+
+
+
+
+                                                                                       battle (2 of 4)
+The battle will initially look like this:
+
+
+
+
+And then it proceeds as follows:
+
+         During step 2, ships 3 and 4 will collide at (4, 4).
+         During step 6, ships 1 and 5 will collide at (6, 6). At the same time 2 and 6 will collide at
+         (6, 8). The only surviving ship will be number 7.
+
+Example 2
+
+Input:
+
+
+   5
+   4 0 S
+   0 2 E
+   2 2 E
+   4 4 N
+   6 6 W‎
+
+
+Output:
+
+
+   5
+   2‎
+
+
+
+
+                                                                                          battle (3 of 4)
+During the second step, ships 1, 3 and 4 will collide at (2, 4). Ships 2 and 5 will survive.
+
+
+Constraints
+
+      2 ≤ N ≤ 2 ⋅ 105​
+      0 ≤ x​i , yi​ ≤ 109​ (for each i such that 1 ≤ i ≤ N ) and x​i , yi​ are even.
+
+Subtasks
+
+    1. (6 points) N = 2
+    2. (12 points) N ≤ 100, x​i , yi​ ≤ 100 (for each i such that 1 ≤ i ≤ N )
+    3. (8 points) N ≤ 100, xi​ , yi​ ≤ 105​ (for each i such that 1 ≤ i ≤ N )
+    4. (11 points) N ≤ 200
+    5. (9 points) N ≤ 5 000
+    6. (30 points) di​ is either ‎
+                                 S‎or ‎
+                                      E‎(for each i such that 1 ≤ i ≤ N )
+    7. (24 points) no additional constraints
+
+
+
+
+                                                                                               battle (4 of 4)
+

@@ -1,0 +1,279 @@
+BOI 2026 Day 1
+
+Language: en
+
+
+
+
+             task           type     time limit   memory limit
+  A Blocks              standard   1.00 s         512 MB
+  B Island              standard   1.00 s         512 MB
+  C Tourist's Journey   standard   1.00 s         512 MB
+A    Blocks
+You have n wooden blocks of k different colors arranged in a line. The colors of the
+blocks are c1 , c2 , … , cn , all between 1 and k .
+               ​       ​       ​
+
+
+
+
+A color is balanced if the average position of blocks with that color is (n + 1)/2. Note
+that this number is not necessarily an integer.
+
+
+
+
+For example, if 7 blocks are arranged in the above way, the average position of
+color 1 is (1 + 4 + 6)/3 = 11/3, the average position of color 2 is (2 + 3 + 7)/3 = 4
+and the average position of color 3 is 5. Since (7 + 1)/2 = 4, color 2 is balanced but
+colors 1 and 3 are not.
+
+Can you order the blocks in such a way that all colors are balanced?
+
+Input
+
+The first line contains a single integer t: the number of test cases.
+
+The following lines describe the test cases, each consisting of two lines as follows:
+
+The first line contains two integers n and k : the number of blocks and the number
+of different colors.
+
+The second line contains the colors of the blocks c1 , c2 , … , cn . There is at least one
+                                                       ​   ​      ​
+
+
+
+
+block of each color.
+
+Output
+
+For each test case, print "YES" if a solution exists, and "NO" otherwise. If a solution
+exists, describe one possible order by printing n integers on another line: the color
+of the block in each position.
+
+Constraints
+
+     1 ≤ t ≤ 100
+     1 ≤ k ≤ n ≤ 2 ⋅ 105
+     1 ≤ c1 , c2 , … , cn ≤ k
+           ​       ​       ​
+
+
+
+
+     The sum of all n is at most 2 ⋅ 105
+Example
+
+Input:
+3
+7 2
+1 1 1 1 2 2 2
+2 2
+1 2
+2 1
+1 1
+
+Output:
+YES
+1 2 2 1 1 1 2
+NO
+YES
+1 1
+
+Explanation: In the output of the first test case, color 1 is balanced because its
+average position is (1 + 4 + 5 + 6)/4 = 4, which equals (n + 1)/2. Similarly, the
+average position of color 2 is (2 + 3 + 7)/3 = 4. Both colors are therefore balanced.
+
+In the second test case, neither of the two possible orders make the colors
+balanced.
+
+In the output of the third test case, blocks with color 1 appear at positions 1 and 2.
+The average is 3/2, so color 1 is balanced.
+
+Scoring
+
+ Subtask                              Constraints                              Points
+
+     1      n≤3                                                                   4
+
+     2      n ≤ 15                                                               13
+
+            There is at most one color that appears an odd number of
+     3                                                                           18
+            times
+     4      All colors appear an equal number of times                           23
+
+     5      k ≤ 15                                                               15
+
+     6      No additional constraints                                            27
+B    Island
+You are given an n × n grid where each cell is either land or water. The rows and
+columns of the grid are numbered 1, 2, … , n. You can move in the grid by taking
+steps left, right, up or down. Two cells are connected if you can move between
+them in one or more steps, while staying on the same type of cell.
+
+The land cells form one connected island and the water cells form one connected
+ocean. The first and last rows and columns contain only water cells.
+
+Your task is to answer q queries: given two land cells (r1 , c1 ) and (r2 , c2 ), what is the
+                                                                  ​   ​    ​   ​
+
+
+
+
+minimum number of steps needed to move from the first cell to the second one
+while staying on land?
+
+Input
+
+The first line contains two integers n and q : the size of the grid and the number of
+queries.
+
+The next n lines each have n characters describing the grid. "." is a water cell and
+"#" is a land cell.
+
+The next q lines each have four integers r1 , c1 , r2 and c2 : the row and column of the
+                                                ​   ​   ​     ​
+
+
+
+
+first cell, followed by the row and column of the second cell.
+
+Output
+
+Print the answer to each query on separate lines.
+
+Constraints
+
+     3 ≤ n ≤ 1000
+     1 ≤ q ≤ 105
+     1 < r1 , c1 , r2 , c2 < n in all queries
+            ​   ​   ​
+
+
+
+
+Example
+
+Input:
+8 4
+........
+..####..
+.##.###.
+.##.###.
+.#......
+.#####..
+..#####.
+........
+2 3 3 7
+4 5 4 5
+4 7 7 7
+6 2 3 2
+Output:
+5
+0
+17
+3
+
+Scoring
+
+ Subtask                         Constraints                         Points
+
+     1     n ≤ 200, q ≤ 200                                           10
+     2     No row or column has any water cells between land cells     6
+
+     3     No 2 × 2-squares have only land cells                      16
+
+     4     No row has any water cells between land cells              28
+     5     No additional constraints                                  40
+C    Tourist's Journey
+A country with n cities numbered 1, 2, … , n is connected by m two-way roads.
+There are at most 10 more roads than the number of cities, but it is still possible to
+travel between any two cities using one or more roads.
+
+A tourist is planning a journey in the country. They have decided the following:
+
+     The journey will start in city 1 and end in city n.
+     The journey should consist of exactly k steps, each traveling one road.
+     It is not allowed to travel back and forth along the same road in two
+     consecutive steps. It is possible, however, to travel the same road multiple
+     times if there are other steps in between.
+
+How many possible journey plans are there, traveling from city 1 to city n in k
+steps? Two plans are different if they go to different cities at any step.
+
+Input
+
+The first line contains three integers n, m and k : the number of cities and roads in
+the country, as well as the number of steps in the tourist's journey.
+
+The following m lines describe the roads. Each line contains two distinct integers u
+and v , meaning that there is a road between city u and city v . There is at most one
+road between two cities.
+
+Output
+
+Print the number of different journey plans. Since the answer may be large, print it
+modulo 109 + 7.
+
+Constraints
+
+     2 ≤ n ≤ 2 ⋅ 105
+     n − 1 ≤ m ≤ n + 10
+     1 ≤ k ≤ 104
+
+Example 1
+
+Input:
+4 5 5
+1 2
+1 3
+2 3
+2 4
+3 4
+
+Output:
+4
+
+Explanation: The cities and roads of the country are shown in the figure below.
+The possible journey plans are:
+
+       1→2→3→1→2→4
+       1→3→2→1→3→4
+       1→2→4→3→2→4
+       1→3→4→2→3→4
+
+Example 2
+
+Input:
+4 3 4
+1 2
+2 3
+2 4
+
+Output:
+0
+
+Explanation: There is no valid journey plan with 4 steps. Note that the plan 1 →
+2 → 3 → 2 → 4 is invalid because it uses the road between cities 2 and 3 in two
+consecutive steps.
+
+Scoring
+
+    Subtask         Constraints           Points
+
+       1      n, k ≤ 10                     7
+
+       2      n, k ≤ 100                    8
+
+       3      m=n−1                        11
+
+       4      m = n − 1 or m = n           29
+
+       5      n ≤ 1000                     15
+
+       6      No additional constraints    30
+

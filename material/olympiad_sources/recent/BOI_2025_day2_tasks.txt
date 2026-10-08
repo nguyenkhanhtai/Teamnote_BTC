@@ -1,0 +1,198 @@
+Task: DEV
+Developer
+BOI 2025, Day 2. Available memory: 512 MB.                                                                    2025.04.27
+
+ You are in charge of developing new properties in the suburbs of Toruń. You have already decided that there
+will be one main street and n properties numbered from 1 to n along the street. The area is somewhat hilly,
+and the elevation of the i-th property is ai centimetres.
+     It turns out that no one wants to buy a property that is on a slope. Formally, for elevations a1 , a2 , . . . , an ,
+a slope is a contiguous subsequence ai−1 , ai , . . . , aj , aj+1 with 2 ≤ i ≤ j ≤ n − 1 such that either (i) ai−1 <
+ai = ai+1 = . . . = aj < aj+1 , or (ii) ai−1 > ai = ai+1 = . . . = aj > aj+1 . Intuitively, a slope is a contiguous
+range of properties at positions i − 1, i, i + 1, . . . , j, j + 1, where the elevations of all properties at positions
+i, i + 1, . . . , j are equal to some h, and h is strictly between ai−1 and aj+1 .
+     You are able to increase or decrease the elevation of any property by any integer, but of course you
+want to minimise the overall effort. Your task is to determine the minimal total change in elevation such
+that there are no slopes at all. That is, you want to find elevations b1 , b2 , . . . , bn without slopes such that
+|a1 − b1 | + |a2 − b2 | + . . . + |an − bn | is as small as possible. The elevations bi must be integers (in particular,
+they don’t have to be positive), and there are no other constraints on bi .
+
+
+Input
+The first line contains an integer n (1 ≤ n ≤ 2 · 105 ) denoting the number of properties along the street.
+    The second line contains n integers a1 , a2 , . . . , an (0 ≤ ai ≤ 109 ), where the i-th integer ai is the initial
+elevation of the i-th property.
+
+
+Output
+You should output the minimal total change in elevation to ensure that there are no slopes.
+
+
+Example
+For the input data:                                         the correct result is:
+11                                                          5
+7 2 1 2 5 7 8 8 10 8 8
+This is illustrated below. The dashed lines represent the changed elevations without slopes bi of their corre-
+sponding properties.
+
+
+Elevation (ai )
+   10
+    9
+    8
+    7
+    6
+    5
+    4
+    3
+    2
+    1
+                                                                                                                Properties (i)
+            1         2        3        4         5        6        7         8        9        10       11
+
+
+
+
+                                                          1/2                                                 Developer
+Scoring
+Subtask   Constraints                      Points
+   1      n ≤ 5 and ai ≤ 10                   4
+   2      n ≤ 2000                           13
+   3      ai ≤ 10                             8
+   4      ai < ai+1                          19
+   5      n ≤ 2 · 104                        29
+   6      No additional constraints.         27
+
+
+
+
+                                       2
+Task: EXP
+Exponents
+BOI 2025, Day 2. Available memory: 1024 MB.                                                                              2025.04.27
+
+The famous polymath Nicolaus Copernicus was born and grew up in Toruń in the 15th century. Archaeologists
+have recently discovered his notebook, and learned that he was fond of using powers of two to store large
+numbers. In particular, even when he added two powers of two:
+
+                                                              2a + 2b ,
+
+Copernicus evaluated the result and then rounded up the result to the nearest power of two. That is, he would
+evaluate 2a + 2b to 2max(a,b)+1 . To evaluate a longer expression of the form:
+
+                                                      2b1 + 2b2 + . . . + 2bk ,
+
+he first inserted the brackets to make it well-parenthesised∗ . For example, an expression 25 + 24 + 24 + 24 + 25
+can be made well-parenthesised to obtain ((25 + 24 ) + (24 + (24 + 25 ))). Finally, he evaluated the result of
+the obtained well-parenthesised expression, operating on powers of two as described above. Notice that the
+obtained result might vary depending on how he inserts the brackets. For example, here are two possible ways
+to evaluate 25 + 24 + 24 + 24 + 25 :
+
+                           (((25 + 24 ) + 24 ) + (24 + 25 )) = ((26 + 24 ) + 26 ) = (27 + 26 ) = 28
+                           ((25 + (24 + 24 )) + (24 + 25 )) = ((25 + 25 ) + 26 ) = (26 + 26 ) = 27
+
+    The first page of the Copernicus’ notebook contains only a single expression 2a1 + 2a2 + . . . + 2an called
+the main expression. Later pages of the notebook then reference fragments of the main expression, which are
+of the form 2aℓ + 2al+1 + . . . + 2ar , for some 1 ≤ ℓ ≤ r ≤ n.
+    You are not sure about their meaning, but suspect that you should calculate, for each such fragment, the
+smallest possible result that can be obtained when evaluating the result as described above for the fragment.
+Note that each fragment is evaluated independently of the other fragments.
+
+
+Input
+The first line contains two integers n and q (1 ≤ n, q ≤ 300 000) denoting the length of the main expression
+from the first page of the notebook and the number of queries, respectively.
+    The second line contains n integers a1 , a2 , . . . , an (0 ≤ ai ≤ 106 ), where the i-th integer ai denotes the
+exponent of the i-th power of two in the main expression.
+    The next q lines describe the queries. Each query consists of two integers ℓ and r (1 ≤ ℓ ≤ r ≤ n)
+representing a fragment of the main expression starting at the ℓ-th power of two and ending at the r-th power
+of two.
+
+
+Output
+You should output q lines. The i-th line should contain the smallest possible result that can be obtained when
+evaluating the fragment described in the i-th query. You should output only the exponent of the corresponding
+power of two.
+
+
+Example
+For the input data:                                                the correct result is:
+8 4                                                                7
+2 4 2 5 4 4 4 5                                                    7
+4 8                                                                7
+1 4                                                                8
+2 5
+1 7
+
+   ∗ The formal definition of a well-parenthesised expression is as follows: 2a is a well-parenthesised expression for any non-negative
+
+integer a; if E1 and E2 are well-parenthesised expressions then so is (E1 + E2 ). No other expressions are well-parenthesised.
+
+
+                                                                 1/2                                                      Exponents
+Scoring
+Subtask   Constraints                      Points
+   1      n ≤ 8, q ≤ 10                       6
+   2      n ≤ 200                             8
+   3      n, q ≤ 2000                        23
+   4      ai ≤ 20                            22
+   5      No additional constraints.         41
+
+
+
+
+                                       2
+Task: GCD
+Gingerbread
+BOI 2025, Day 2. Available memory: 256 MB.                                                                    2025.04.27
+
+    Toruń has been known for its traditional gingerbread since the Middle Ages. Young Nicolaus would like to
+buy a set of n boxes with gingerbread cookies in his favourite shop. The shop has very strict rules, though:
+Nicolaus initially obtains n boxes that are already filled with cookies: the i-th box initially contains ai of
+them. Then, Nicolaus can order some extra cookies. He adds extra cookies to some boxes so that the greatest
+common divisor∗ of the numbers of cookies in all of the boxes becomes equal to 1. It can be proven that this
+is always possible.
+    Help Nicolaus by calculating the smallest number of cookies that need to be added in order to make the
+greatest common divisor of all the numbers equal to 1.
+
+
+Input
+The first line contains an integer n (2 ≤ n ≤ 106 ), denoting the number of boxes.
+    The second line contains n integers a1 , a2 , . . . , an (1 ≤ ai ≤ 107 ), where the i-th integer ai denotes the
+initial number of cookies in the i-th box.
+
+
+Output
+Output one line with a single integer denoting the smallest number of cookies that Nicolaus should add to the
+boxes. If Nicolaus doesn’t have to add any cookies to make the greatest common divisor of the numbers equal
+to 1, output 0.
+
+
+Example
+For the input data:                                          the correct result is:
+3                                                            2
+90 84 140
+Explanation of the example: Indeed, the greatest common divisor (GCD) of 90, 84, and 140 is 2, so some
+cookies must be added. If we add only one cookie, we may obtain the quantities 91, 84, 140 with GCD of 7,
+or 90, 85, 140 with GCD of 5, or 90, 84, 141 with GCD of 3, so this is not enough. After adding two cookies,
+one to the first box, and one to the second box, we obtain the quantities 91, 85, 140 with GCD of 1; hence
+the answer is 2. Note that adding both cookies to the first box does not help: we obtain quantities 92, 84, 140
+with GCD of 4.
+
+
+Scoring
+ Subtask      Constraints                                                                                        Points
+    1         n=2                                                                                                  17
+    2         n ≤ 10                                                                                               34
+    3         n ≤ 1000                                                                                             11
+    4         No additional constraints.                                                                           38
+
+
+
+
+   ∗ The greatest common divisor (GCD) of multiple numbers is the largest positive integer that divides all of them without
+
+remainder.
+
+
+                                                            1
+

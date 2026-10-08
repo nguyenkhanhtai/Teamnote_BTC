@@ -4,6 +4,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto sol = diophantine(3,5,7);
   struct DiophantineSolution { bool all_pairs; __int128 x, y, dx, dy; };
   // Every solution is (x+t*dx,y+t*dy), except all_pairs for 0x+0y=0.
   optional<DiophantineSolution>diophantine(long long a,long long b,long long c){

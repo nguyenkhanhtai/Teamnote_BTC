@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto c = convolution_fft({1,2},{3,4});
   // Rounded integer convolution; coefficient magnitudes must allow reliable double precision.
   using cd = complex<double>; const double PI = acos(-1);
   void fft(vector<cd>& a, bool invert) {

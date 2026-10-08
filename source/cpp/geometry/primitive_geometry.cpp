@@ -3,6 +3,7 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: Point a{0,0}, b{2,1}; Line l{a,b-a}; // point + direction
   constexpr long double EPS = 1e-12L;
   struct Point {
     long double x = 0, y = 0;

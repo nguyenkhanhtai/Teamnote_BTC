@@ -1,0 +1,221 @@
+                                                                                                           Day 1
+                                                                                            Task: grading-server
+                                                                                                         Spoiler
+
+
+Bring Down the Sky Grading Server (grading-server)
+by Tobias Lenz and Lucas Schwebler
+
+We write 𝑁 for the maximum allowed value of 𝑐H , 𝑓H , 𝑐G , 𝑓G . Moreover, we say that a player sabotages
+the other player if they take down one of their firewalls.
+
+   Subtask 1. 𝑆, 𝑐H , 𝑓H , 𝑐G , 𝑓G ≤ 75
+We can represent every possible state of the game with a tuple of four integers (𝑐1 , 𝑓1 , 𝑐2 , 𝑓2 ), where
+(𝑐1 , 𝑓1 ) are the computing power and number of firewalls of the current player and (𝑐2 , 𝑓2 ) are the
+same for the other player. There are 𝑂(𝑁4 ) such states, and so we use dp to compute whether each
+state is a winning or losing state for the first player. This works using the standard observation that a
+state is winning if and only if it can reach a losing state.
+
+   Subtask 2. 𝑆, 𝑐H , 𝑓H , 𝑐G , 𝑓G ≤ 300
+
+Lemma 1. If (𝑐1 , 𝑓1 , 𝑐2 , 𝑓2 ) is winning for player 1, then the state is still winning if we increase 𝑐1 or 𝑓1 .
+In the same way, if the initial state is losing, it stays losing if we increase 𝑐2 or 𝑓2 .
+
+Thus, we can compute 𝐶(𝑓1 , 𝑐2 , 𝑓2 ) as the minimum 𝑐1 such that (𝑐1 , 𝑓1 , 𝑐2 , 𝑓2 ) is a winning state. This
+can be done with dp in 𝑂(𝑁3 log 𝑁) with binary search. It’s also possible to compute it in 𝑂(𝑁3 ) using
+𝐶(𝑓1 , 𝑐2 , 𝑓2 ) ≤ 𝐶(𝑓1 , 𝑐2 + 1, 𝑓2 ).
+
+
+Implementation detail. One has to be careful when implementing this. Otherwise, the dp might get
+cyclic dependencies when player 1 attacks. This can be solved by also trying both possible moves for
+player 2 after an attack by player 1.
+
+   Subtask 3. 𝑆 = 1
+Define 𝛼1 ≔ 𝑐1 − 𝑆 ⋅ 𝑓2 and 𝛼2 ≔ 𝑐2 − 𝑆 ⋅ 𝑓1 . Intuitively, those values represent the damage caused by a
+player if they attack the other. Obviously, if 𝛼1 ≤ 0, the only sensible choice for player 1 is to sabotage.
+In this interpretation, taking down a firewall just increases 𝛼1 by 𝑆 and this move can be preformed at
+most 𝑓2 times. Thus, increasing 𝑓2 , for a fixed 𝛼1 , makes a state better for player 1, i.e. if (𝛼1 , 𝑓1 , 𝛼2 , 𝑓2 )
+is a winning state, so is (𝛼1 , 𝑓1 , 𝛼2 , 𝑓2 + 1).
+
+Lemma 2. If 𝛼1 ≥ 𝑆 and 𝛼2 ≤ 𝑆, there is a winning strategy for player 1.
+
+Proof. Player 1 can maintain this invariant by attacking: Afterwards the new value of 𝛼2 is 𝛼2 − 𝛼1 ≤
+𝑆 − 𝑆 = 0. Thus, player 2 has to sabotage. Then, we still have 𝛼2 ≤ 𝑆, and 𝛼1 remains unchanged.
+
+Lemma 3. If 𝛼2 ≥ 𝑆, it is optimal for player 1 to attack.
+
+Proof. Assume for contradiction this were not the case and pick a (𝛼1 , 𝑓1 , 𝛼2 , 𝑓2 ) with 𝛼2 ≥ 𝑆 and 𝑓2
+minimal, such that sabotaging is a winning move, but attacking is not. In particular, 𝑓2 ≥ 1.
+Suppose that player 1 sabotages, increasing 𝛼1 by 𝑆. If player 2 attacks, this will decrease 𝛼1 back to a
+value 𝛼1′ ≤ 𝛼1 . As sabotaging was assumed to be a winning move, the new position (𝛼1′ , 𝑓1 , 𝛼2 , 𝑓2 − 1) is
+a winning position, hence so is (𝛼1 , 𝑓1 , 𝛼2 , 𝑓2 − 1). By minimality of our counterexample this means that
+attacking is a winning move in this position, i.e. (𝛼2 , 𝑓2 − 1, 𝛼1 , 𝑓1 ) is losing. But then also (𝛼2 , 𝑓2 , 𝛼1 , 𝑓1 )
+has to be losing by the above observation, i.e. attacking was a winning move in the original position.
+
+
+
+                                                         1/4
+                                                                                                                Day 1
+                                                                                                 Task: grading-server
+                                                                                                              Spoiler
+
+
+Combining those observations with 𝑆 = 1, we can obtain an optimal strategy for player 1. It turns out
+that whether a state is winning does not depend on 𝑓1 , 𝑓2 . Let 𝑤(𝛼1 , 𝛼2 ) be true if player 1 wins and
+false otherwise. Using the above observations, we can calculate 𝑤 recursively:
+
+                                                       ¬𝑤(𝛼2 − 𝛼1 , 𝛼1 ) if 𝛼1 , 𝛼2 > 0,
+                                        𝑤(𝛼1 , 𝛼2 ) = { true                 if 𝛼1 ≥ 𝛼2 ,
+                                                       false                 otherwise.
+
+Evaluating this formula recursively has running time 𝑂(log 𝑁) because we repeatedly subtract one
+value from the other, similar to the Euclidean Algorithm, until one of them becomes ≤ 0.
+
+   Subtask 4. 𝑆, 𝑐H , 𝑓H , 𝑐G , 𝑓G ≤ 2 000
+
+We can reuse Lemma 2 and 3. This way, we know the optimal strategy if 𝛼1 ≤ 0, 𝛼1 ≥ 𝑆 or 𝛼2 ≥ 𝑆. Notice
+that if 𝑓2 > 0 and 𝛼2 ≤ 0, player 1 can sabotage and win with Lemma 2. Thus, the only cases in which
+we don’t know the optimal strategy are those which satisfy
+
+                                                                                           𝑁
+                                        0 < 𝛼1 , 𝛼2 < 𝑆,    𝑓2 > 0,    and     𝑓1 , 𝑓2 ≤     .
+                                                                                           𝑆
+The last inequality must hold because otherwise at least one 𝛼𝑖 would be negative. We can compute a
+dp for these unknown states to determine which player wins. There are 𝑂(𝑁2 ) many such states and
+each reduction takes 𝑂(log 𝑁) by a similar analysis as above.
+
+   Subtask 5. 𝑆 ≤ 400
+
+Suppose that the game is an interesting state, so we don’t know the optimal move yet. If player 1
+sabotages, this increases 𝛼1 to a value > 𝑆. Thus, player 2 has to attack. In total, this increases 𝛼1 by
+𝛽2 ≔ 𝑆 − 𝛼2 . Define 𝛽1 ≔ 𝑆 − 𝛼1 similarly.
+
+Lemma 4 (Death by sabotage). Player 1 has a winning strategy if 𝛽2 ⋅ 𝑓2 ≥ 𝛽1 .
+
+Proof. Player 1 sabotages 𝑓2 times in a row. This increases 𝛼1 by 𝑓2 ⋅𝛽2 . If 𝛽2 ⋅𝑓2 ≥ 𝛽1 , then 𝛼1 +𝛽2 ⋅𝑓2 ≥ 𝑆
+and so player 1 wins by Lemma 2.
+
+Now all interesting states satisfy 𝛽2 ⋅ 𝑓2 < 𝛽1 < 𝑆. Before attacking, player 1 needs to make sure
+that player 2 cannot apply the same strategy to win. After the attack of player 1, 𝛼2 is at least −𝑆. If
+𝛽1 ⋅ 𝑓1 ≥ 2𝑆, player 2 can make 𝛼2 larger than 𝑆—and therefore win—by taking down all firewalls. So
+player 1 must not attack if 𝛽1 ⋅ 𝑓1 ≥ 2𝑆.
+
+Lemma 5. There are 𝑂(𝑆2 log 𝑆) interesting states.
+
+Proof. Using the standard approximation of the harmonic series we compute the number of interesting
+states as
+
+                                                                   2𝑆 𝛽1
+                 ∑            [𝛽1 𝑓1 ≤ 2𝑆][𝛽2 𝑓2 ≤ 𝛽1 ] ≤ ∑ ∑        ⋅   = 𝑂 (∑ 2𝑆 log 𝛽1 ) = 𝑂(𝑆 2 log 𝑆).
+             𝛽1 ,𝛽2 ,𝑓1 ,𝑓2                                𝛽1 𝛽2
+                                                                   𝛽1 𝛽2      𝛽    1
+
+
+
+   Subtask 6. 𝑓H , 𝑓G ≤ 125
+
+We now present a solution which is fast when 𝑓1 , 𝑓2 are small.
+
+
+
+                                                               2/4
+                                                                                                                   Day 1
+                                                                                                    Task: grading-server
+                                                                                                                 Spoiler
+
+
+Lemma 6. For fixed 𝑓1 , 𝑓2 there exists a critical attack value 𝛾 ≔ 𝛾(𝑓1 , 𝑓2 ) such that it is optimal for
+player 1 to attack if 𝛼2 ≥ 𝛾 and optimal to sabotage otherwise.
+
+Proof. Consider the states 𝑇1 = (𝛼1 , 𝑓1 , 𝛼2 , 𝑓2 ) and 𝑇2 = (𝛼1 + 1, 𝑓1 , 𝛼2 + 1, 𝑓2 ).
+       If attacking is a winning move in 𝑇1 , it is also a winning move in 𝑇2 : Indeed, after the attack we
+       get the states
+                            𝑇1′ = (𝛼2 − 𝛼1 , 𝑓2 , 𝛼1 , 𝑓1 ) and 𝑇2′ = (𝛼2 − 𝛼1 , 𝑓2 , 𝛼1 + 1, 𝑓1 ).
+       Those states are identical except for the value of 𝛼1 . Since it’s higher in 𝑇2′ , the latter state is
+       still winning for player 1.
+       If sabotaging is a losing move in 𝑇1 it is also in 𝑇2 : Indeed, after sabotaging and the necessary
+       following attack by player 2, we are in the states
+
+                       𝑇1′ = (𝛼1 + 𝑆 − 𝛼2 , 𝑓1 , 𝛼2 , 𝑓2 − 1)    and    𝑇2′ = (𝛼1 + 𝑆 − 𝛼2 , 𝑓1 , 𝛼2 + 1, 𝑓2 − 1).
+
+For fixed 𝑓1 , 𝑓2 let now ℎ𝐴 (𝛼2 ) denote the minimum 𝛼1 with which player 1 wins if he attacks in the
+state (𝛼1 , 𝑓1 , 𝛼2 , 𝑓2 ), and let ℎ𝐹 (𝛼2 ) be the same if he sabotages. From the above points it follows that
+
+                               ℎ𝐴 (𝛼2 + 1) ≤ ℎ𝐴 (𝛼2 ) + 1       and ℎ𝐹 (𝛼2 + 1) ≥ ℎ𝐹 (𝛼2 ) + 1,
+
+hence ℎ𝐹 (𝛼2 + 1) − ℎ𝐴 (𝛼2 + 1) ≥ ℎ𝐹 (𝛼2 ) − ℎ𝐴 (𝛼2 ). So the difference 𝛿(𝛼2 ) ≔ ℎ𝐹 (𝛼2 ) − ℎ𝐴 (𝛼2 ) is increasing in 𝛼2 .
+Noticing that attacking is an optimal move for every 𝛼1 if and only if 𝛿(𝛼2 ) ≥ 0 finishes the proof.
+
+Observe that once we know all the critical attack values, we can simply simulate the game completely
+to determine the winner, which in turn allows us to compute all the 𝛾(𝑓1 , 𝑓2 ) recursively. To compute
+𝛾(𝑓1 , 𝑓2 ), we use binary search to find minimum 𝛼2 with ℎ𝐴 (𝛼2 ) ≤ ℎ𝐹 (𝛼2 ). Computing ℎ𝐴 , ℎ𝐹 is also done
+with binary search.
+However, to make the simulation efficient enough, we will have to do several sabotages in one step,
+which requires us to find for a given state the largest 𝑓2′ ≤ 𝑓2 such that attacking is optimal. This can
+be done using binary search on a segment tree. A somewhat intricate analysis* then reveals that
+our simulation only takes 𝑂(log log 𝑆) rounds, leading to a runtime of 𝑂((𝑄 + 𝐹 2 log2 𝐹) log 𝑁 log log 𝑆)
+where 𝐹 denotes the maximum value of 𝑓1 , 𝑓2 .
+
+   Subtask 7. No further constraints
+The winning strategy from subtask 5 tries to take down all firewalls. Let’s try to take down 𝑥 firewalls,
+let player 2 do something, and take down the remaining 𝑓2 − 𝑥 firewalls in the next step. Suppose
+that the current state is interesting in the sense of subtask 5. If player 1 attacks, player 2 cannot
+increase the value of 𝛼2 to 𝑆 (otherwise the state would not be interesting). If player 1 takes down 𝑥
+firewalls before attacking, his new 𝛽1′ equals 𝛽1 − 𝛽2 𝑥. Thus, even if player 2 takes down all firewalls,
+he will have 𝛼2 ≤ 𝑆 − 𝛽2 𝑥𝑓1 because every sabotage will increase 𝛼2 by 𝛽2′ instead of 𝛽2 . This means
+𝛽2′ ≥ 𝛽2 𝑥𝑓1 . Now, player 1 takes down all remaining firewalls, increasing 𝛼1 by at least 𝛽2 𝑓1 𝑥(𝑓2 − 𝑥). If
+we now specialize to 𝑥 ≔ 12 𝑓2 , this leads to an increase of 14 𝛽2 𝑓1 𝑓22 . Since 𝛼1 > −𝑆 before player 1 takes
+down the remaining firewalls, we see that this gives player 1 a winning strategy if
+
+                                                        𝛽2 𝑓1 𝑓22 > 8𝑆.
+
+Note that in case of 𝑓1 = 0 player 1 can still apply the same strategy if 𝛽2 𝑓22 > 8𝑆, while the case with
+𝑓2 = 0 is not interesting because player 1 has to sabotage. So all interesting states satisfy 𝑓2 > 0 and
+𝛽2 max {𝑓1 , 1}𝑓22 ≤ 8𝑆.
+                                                                                                                 𝑓1
+* An important step in this analysis is to show that if player 1 attacks, player 2 has to sabotage until 𝑓 ′ ≤        .
+                                                                                                          1      𝑓2
+
+
+
+
+                                                                3/4
+                                                                                                    Day 1
+                                                                                     Task: grading-server
+                                                                                                  Spoiler
+
+
+Lemma 7. There are 𝑂(𝑆 log 𝑆) tuples (𝑓1 , 𝛽2 , 𝑓2 ) with 𝑓2 > 0 satisfying 𝛽2 max {𝑓1 , 1}𝑓22 ≤ 8𝑆.
+
+Proof. For any 𝑝 ≥ 0, there are
+                                           𝑝               ∞
+                                                2          −2
+                                          ∑ ⌊𝑝/𝑓2 ⌋ ≤ 𝑝 ∑ 𝑓2 < 2𝑝
+                                         𝑓2 =1          𝑓2 =1
+                                                                ∞                     2
+pairs (𝑓1 , 𝑓2 ) with 1 ≤ 𝑓1 , 𝑓2 and 𝑓1 ⋅ 𝑓22 ≤ 𝑝 because the sum ∑ 𝑖−2 converges to 𝜋6 < 2. Taking 𝑝 = 8𝑆/𝛽2
+                                                                   𝑖=1
+and summing over all 𝛽2 then gives the desired bound.
+
+For every such tuple, we compute the minimum 𝑐1 with which the state is winning with binary search;
+this gives us an 𝑂(𝑆 log2 𝑆) solution. Again, one needs to implement this carefully to prevent cyclic dp
+dependencies.
+
+   Final remarks.
+
+Combining the solutions for the last two subtasks with some additional ideas, it is also possible to
+solve this problem in time 𝑂(√𝑆 log 4 𝑆 + 𝑄√𝑆 log 𝑆 log log 𝑆). Suppose that we are in an interesting state
+and player 1 attacks. This implies that we had 𝑓2 < 𝛽1 (otherwise, use death by sabotage). After the
+attack, player 2 sabotages some rounds until he gets into an interesting state. Then, 𝑓12 𝑓22 < 𝑓12 𝑓2 𝛽1 < 8𝑆.
+Notice that there are only 𝑂(√𝑆 log 𝑆) such pairs (𝑓1 , 𝑓2 ). Use the idea of subtak 6 for them, leading
+to a precomputation time of 𝑂(√𝑆 log4 𝑆). To answer a query, we simply try all possible number of
+sabotages before player 1 attacks. For every of those number of sabotages, we can find the winner
+very efficiently using the idea from subtask 6. Since 𝑓2 ≤ √8𝑆, the number of sabotage rounds to try
+is quite small and we get the above time complexity. This is fast enough to solve the problem for
+constraints 𝑆 ≤ 106 , 𝑄 ≤ 25 000.
+
+
+
+
+                                                     4/4
+

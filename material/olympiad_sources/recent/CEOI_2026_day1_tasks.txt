@@ -1,0 +1,394 @@
+CEOI 2026
+
+
+
+
+   Day 1
+   (English)
+CEOI 2026                  Day 1
+
+
+
+
+            Page 2 of 11
+CEOI 2026                                                                                  Day 1
+
+
+
+                                     Birdwatchers
+                         Time limit: 10 s      Memory limit: 512 MiB
+
+The Birdwatchers’ Society of San Serriffe has a curiously bloated and ever-changing inter-
+nal structure. The Society consists of 𝑛 chapters, and each member of the Society belongs
+to exactly one chapter. The chapters are numbered from 1 to 𝑛 and the 𝑖’th chapter
+has 𝑚𝑖 members. Thus the Society has a total of 𝑀 = 𝑚1 + 𝑚2 + . . . + 𝑚𝑛 members.
+    Each chapter is led by one of its members, who in this role is called the officer of the
+chapter. The officers are numbered the same as the chapters, so that (for each 𝑖 = 1, . . . , 𝑛)
+officer 𝑖 is the one in charge of chapter 𝑖.
+    Moreover, the officers are organized hierarchically through a system of mentorship:
+each officer except one has a mentor, who is the officer of some other chapter. The only
+officer without a mentor is the President of the Society. If officer 𝑎 is the mentor of officer
+𝑏, we also say that officer 𝑏 is a disciple of officer 𝑎. No officer is, directly or indirectly,
+a mentor of themselves; thus, by following the sequence from an officer to their mentor,
+their mentor’s mentor, and so on, we eventually always reach the President.
+    We define the influence of an officer as the sum of the number of members in his
+chapter and of the influences of all his disciples (if he has any). It will be easily seen that
+the officer with the highest influence is the President, whose influence always equals 𝑀 .
+An officer is called a senior officer if his influence is ≥ 𝑀/2.
+    The Bylaws of the Society specify that the senior officer with the lowest influence
+(amongst all the senior officers) shall act as the Treasurer of the Society.
+    From time to time, an officer (other than the President) may change his allegiance,
+so that he is thenceforth the disciple of a different mentor than before (provided that his
+new mentor is not one of his disciples, or his disciples’ disciples, etc.). Because of this, it
+can happen that the influence of some officers changes and the role of Treasurer falls to a
+different officer than before.
+
+Task
+Write a program that reads the description of the initial state of the Society and a sequence
+of changes of allegiance. Your program must print who the Treasurer is in the initial state
+of the Society as well as after each change of allegiance.
+
+Input
+The first line contains two integers, 𝑛 and 𝑞, separated by a space; 𝑛 is the number of
+chapters, 𝑞 is the number of changes of allegiance.
+    The next 𝑛 lines describe the initial state of the Society. The 𝑖’th of these lines contains
+two integers, 𝑠𝑖 and 𝑚𝑖 , separated by a space; 𝑠𝑖 is the mentor of officer 𝑖 (i.e. of the officer
+in charge of chapter 𝑖), while 𝑚𝑖 is the number of members of chapter 𝑖. The value 𝑠𝑖 = 0
+indicates that officer 𝑖 is the President of the Society and thus has no mentor.
+    The remaining 𝑞 lines describe the changes of allegiance. The 𝑗’th of these lines
+contains two integers, 𝑥ˆ𝑗 and 𝑧ˆ𝑗 , separated by a space. The meaning of these integers is
+as follows. Let us denote by 𝑡𝑗 (for 𝑗 = 0, . . . , 𝑞) the Treasurer after the first 𝑗 changes
+of allegiance (thus 𝑡0 is the initial Treasurer before the first change of allegiance). Then
+the 𝑗’th change of allegiance consists of officer 𝑧𝑗 becoming the new mentor of officer 𝑥𝑗 ,
+
+                                          Page 3 of 11
+CEOI 2026                                Birdwatchers                                        Day 1
+
+
+where 𝑥𝑗 = 1 + ((𝑡𝑗−1 + 𝑥ˆ𝑗 ) mod 𝑛) and 𝑧𝑗 = 1 + ((𝑡𝑗−1 + 𝑧ˆ𝑗 ) mod 𝑛). The purpose of this
+representation of the values 𝑥𝑗 and 𝑧𝑗 is to force your program to process the changes of
+allegiance in the order in which they appear.
+    The changes of allegiance in the input data will always be valid, i.e. 𝑧𝑗 will not be
+equal to 𝑥𝑗 , nor will 𝑧𝑗 be a disciple of 𝑥𝑗 , a disciple of a disciple of 𝑥𝑗 , etc. It is, however,
+possible that 𝑧𝑗 was already the mentor of 𝑥𝑗 just before the 𝑗’th change (so that nothing
+actually changes at that point).
+    Note that if your program calculates the wrong result 𝑡𝑗 at some point, it will decode
+the subsequent inputs 𝑥ˆ𝑗+1 , 𝑧ˆ𝑗+1 , etc., incorrectly as well, and might crash with an RTE
+(runtime error) verdict instead of a WA (wrong answer) verdict because the incorrectly
+decoded inputs might be invalid (e.g. it might erroneously obtain a 𝑧𝑗+1 which is a disciple
+of 𝑥𝑗+1 ).
+
+Constraints
+
+   • 1 ≤ 𝑛 ≤ 1 000 000
+
+   • 1 ≤ 𝑞 ≤ 30 000
+
+   • 1 ≤ 𝑚𝑖 for each 𝑖 = 1, . . . , 𝑛
+
+   • 𝑚1 + 𝑚2 + . . . + 𝑚𝑛 ≤ 109
+
+   • 1 ≤ 𝑥ˆ𝑗 ≤ 𝑛 and 1 ≤ 𝑧ˆ𝑗 ≤ 𝑛 for each 𝑗 = 1, . . . , 𝑞.
+
+Subtasks
+
+   • Subtask 1 (15 points): 𝑛 ≤ 100
+
+   • Subtask 2 (10 points): 𝑛 ≤ 1000
+
+   • Subtask 3 (50 points): 𝑛 ≤ 300 000
+
+   • Subtask 4 (25 points): No additional constraints.
+
+Output
+Print the numbers 𝑡0 , 𝑡1 , . . . , 𝑡𝑞 , each on its own line, where 𝑡𝑗 is the Treasurer after
+the first 𝑗 changes of allegiance. Naturally, each 𝑡𝑗 must be an integer from the range
+1 ≤ 𝑡𝑗 ≤ 𝑛.
+
+
+
+
+                                           Page 4 of 11
+CEOI 2026                              Birdwatchers                                      Day 1
+
+
+Example
+
+Input                                             Output
+
+7 2                                               2
+0 1                                               2
+1 3                                               3
+1 3
+2 3
+2 1
+5 2
+5 1
+3 7
+2 7
+
+
+Comment
+
+Initially, officer 2 is the Treasurer (hence 𝑡0 = 2). In the first change of allegiance, we read
+𝑥ˆ1 = 3 and 𝑧ˆ1 = 7 and calculate 𝑥1 = 1+((2+3) mod 7) = 6 and 𝑧1 = 1+((2+7) mod 7) =
+3; thus, officer 3 becomes the new mentor of officer 6; officer 2 remains Treasurer (hence
+𝑡1 = 2). In the second change of allegiance, we read 𝑥ˆ2 = 2 and 𝑧ˆ2 = 7 and calculate
+𝑥2 = 1 + ((2 + 2) mod 7) = 5 and 𝑧2 = 1 + ((2 + 7) mod 7) = 3; thus, officer 3 becomes
+the new mentor of officer 5 and also becomes the new Treasurer (hence 𝑡2 = 3).
+
+
+
+
+                                         Page 5 of 11
+CEOI 2026   Birdwatchers    Day 1
+
+
+
+
+             Page 6 of 11
+CEOI 2026                                                                            Day 1
+
+
+
+                                            DFS
+                        Time limit: 1 s       Memory limit: 256 MiB
+
+You might already be familiar with the famous DFS (depth-first search) algorithm for
+traversing a graph. In this problem, we will only consider connected undirected simple
+graphs (without loops and parallel edges) with vertices numbered 0, 1, . . ., 𝑛 − 1, and the
+DFS algorithm will output depths and vertices as follows:
+
+DFS(d, v):
+    output d/v
+    mark vertex v as visited
+    W = the list of neighbors of v ordered by increasing numbers
+    for each w in W:
+        if vertex w has not yet been visited:
+            DFS(d + 1, w)
+
+   Write a program that outputs the number of different graphs for which the call
+DFS(0, n - 1) produces the same printout as the one given on the input. For example,
+the output
+
+0/2
+1/0
+2/1
+
+   is produced by calling DFS(0, 2) on either of the following two connected undirected
+simple 3-vertex graphs:
+
+
+
+
+                                          Page 7 of 11
+CEOI 2026                                  DFS                                         Day 1
+
+
+Input
+The input is the output of the call DFS(0, n - 1) on an unknown 𝑛-vertex connected
+undirected simple graph. The input thus consists of 𝑛 lines in the format d/v, with the
+first line being 0/n-1.
+
+Constraints
+
+   • 1 ≤ 𝑛 ≤ 2 · 105
+
+Subtasks
+
+   • Subtask 1 (10 points): 𝑛 ≤ 6.
+
+   • Subtask 2 (20 points): 𝑛 ≤ 500.
+
+   • Subtask 3 (20 points): 𝑛 ≤ 104 .
+
+   • Subtask 4 (10 points): For each 𝑖 ∈ {2, . . . , 𝑛}, the 𝑖-th input line is i-1/i-2.
+
+   • Subtask 5 (20 points): For each 𝑖 ∈ {2, . . . , 𝑛}, the 𝑖-th input line is i-1/v for some
+     𝑣 ∈ {0, . . . , 𝑛 − 2}.
+
+   • Subtask 6 (20 points): No additional constraints.
+
+Output
+Print the number of different graphs with the required property. Because this number
+can be very large, output the result modulo 1 000 000 007.
+
+Example
+
+Input                                            Output
+
+0/2                                              2
+1/0
+2/1
+
+
+
+
+                                        Page 8 of 11
+CEOI 2026                                                                               Day 1
+
+
+
+                                   Treasure Hunt
+                         Time limit: 8 s       Memory limit: 256 MiB
+
+You are searching for a long-lost treasure on a massive 𝑁 × 𝑁 field of cells with a magical
+compass. There are a total of 𝐾 ≤ 3 treasure chests hidden at various distinct cells in
+the field. Your goal is simple: to find them all!
+    When you place the compass on one of the cells, it will find the shortest paths to
+a treasure chest using only moves left, up, right, and down (i.e. a closest treasure chest
+according to Manhattan distance). It will then show the direction of the first move. If
+multiple valid first moves lead to a closest treasure chest (or several of them), the compass
+will return all of them. If the cell contains treasure, the compass will indicate that instead.
+    Whenever you find a treasure chest, you empty the contents, but you cannot remove
+the chest – it is too heavy. Your compass does not know whether a chest is full or empty.
+It will point the way to a closest chest, empty or full.
+    Try to find the location of all treasure chests in the fewest compass queries possible.
+
+Task
+This is an interactive task. In each test case (i.e. each execution of your program), your
+program will have to solve several treasure hunts. You should interact with the grader by
+using a library provided by the organisers. This library contains the following declarations:
+
+   • void NextHunt(int &N, int &K ) — call this function to start the next treasure
+     hunt. It will set the grid size in the variable N and the number of treasures in K. If
+     there are no more treasure hunts to be solved in the current run, the function will
+     set N and K to −1; in that case, you should then terminate your program with the
+     exit code 0. Note that you may call this function before finding all the treasures on
+     the current hunt, e.g. if you are trying to only solve for partial points.
+
+   • enum { TREASURE = 0, DIR_RIGHT = 1, DIR_UP = 2, DIR_LEFT = 4,
+     DIR_DOWN = 8 }; — these are constants used in the return values of the Query
+     function (see below).
+
+   • int Query(int x, int y) — if the cell at coordinates (𝑥, 𝑦) contains a treasure,
+     this function returns TREASURE. Otherwise it returns the sum of one or more of
+     the constants DIR_RIGHT, DIR_UP, DIR_LEFT, and DIR_DOWN, indicating
+     which moves the compass returns when placed on the cell (𝑥, 𝑦). The coordinates 𝑥
+     and 𝑦 must be integers from 0 to 𝑁 − 1. (Note: in this task, 𝑦-coordinates increase
+     from top to bottom.)
+
+    After NextHunt sets 𝑁 = 𝐾 = −1, your program must not call either NextHunt or
+Query again. It must also not call Query before the first call to NextHunt. If your program
+fails to observe these constraints, or if it makes more than 1000 queries within a single
+treasure hunt, or if it provides out-of-range values of 𝑥 and/or 𝑦 when calling Query, the
+library will terminate your program and return a run-time-error (RTE) verdict for the
+current test case.
+
+
+
+                                           Page 9 of 11
+CEOI 2026                            Treasure Hunt                                    Day 1
+
+
+    A treasure is considered to have been found if you queried the cell containing it at
+least once. If your program calls NextHunt before finding all the treasures of the current
+hunt, this is not treated as an error, but it will affect your score (more on scoring below).
+    To access the library, your program should include the header file treasurehuntlib.h:
+
+  #include "treasurehuntlib.h"
+
+   You can download this header file here: treasurehuntlib.h.
+   To help you in developing your solution, a simple implementation of the library is
+available here: treasurehuntlib-public.cpp. To compile it together with your pro-
+gram, simply add its name as a parameter to the compiler, e.g.:
+
+  g++ foo.cpp treasurehuntlib-public.cpp
+
+    if foo.cpp is the name of the file containing your solution.
+    The implementation in treasurehuntlib-public.cpp supports, in addition to the
+above declarations, another function called void InitFromFile(const char *fileName),
+which reads a list of treasure hunts from a file and lets you play the game with those
+instead of generating its own random treasure hunts. You will find more details inside
+treasurehuntlib-public.cpp itself.
+    On the evaluation server, a different implementation of the library will be used, so
+you should not make any assumptions about how exactly the implementation works. You
+may, however, assume that it does not pollute the global namespace with any declarations
+other than those listed above (NextHunt, Query, and the five constants).
+    Your code must not read from the standard input or write to the standard output,
+because those will be used by our implementation of the library on the evaluation server
+to communicate with the rest of the evaluation environment.
+
+Input
+Constraints
+
+   • 2 ≤ 𝑁 ≤ 106
+
+   • 1≤𝐾≤3
+
+   • Within any single execution of your program, there will be at most 100 000 treasure
+     hunts.
+
+   • Within any single treasure hunt, you may make at most 1000 queries.
+
+   • The grading system is not adaptive.
+
+Subtasks
+
+   • Subtask 1 (10 points) 𝐾 = 1
+
+   • Subtask 2 (30 points) 𝐾 = 2
+
+   • Subtask 3 (60 points) 𝐾 = 3.
+
+
+                                       Page 10 of 11
+CEOI 2026                              Treasure Hunt                                       Day 1
+
+
+Scoring
+A subtask may consist of several test cases (several executions of your program), and each
+test case may consist of several treasure hunts. For the purposes of scoring, all the treasure
+hunts of a given subtask are evaluated together, regardless of how they were originally
+split amongst the test cases. For the 𝑖-th treasure hunt, let us denote the grid size by
+𝑁𝑖 × 𝑁𝑖 , the number of treasures by 𝐾𝑖 , the number of queries made by your program by
+𝑄𝑖 and the number of treasures found by your program by 𝐹𝑖 . Let us furthermore denote
+by 𝑆 the total number of points available for this subtask. Then the number of points
+awarded to your program for this subtask is:
+
+   • If your program always found all the treasures (i.e. if 𝐹𝑖 = 𝐾𝑖 for all 𝑖), its score
+     depends on 𝑡𝑖 = ⌈log𝑄𝑖𝑁𝑖 ⌉ :
+                            2
+
+                                                     ⎧
+                                                     ⎨ 1,               𝑡𝑖 ≤ 11
+           𝑆 𝑆
+             + · min 𝑓 (𝑡𝑖 ) points, where 𝑓 (𝑡𝑖 ) =   1 − (𝑡𝑖 − 11)/9, 11 ≤ 𝑡𝑖 ≤ 20
+           2  2   𝑖
+                                                       0,               𝑡 ≥ 20.
+                                                     ⎩
+
+
+   • If your program did not always find all the treasures (i.e. there exists an 𝑖 such that
+     𝐹𝑖 < 𝐾𝑖 ), it receives
+                                      𝑆        𝐹𝑖
+                                        · min     points.
+                                      2    𝑖 𝐾𝑖
+
+
+    In other words, you get half of the points for finding all the treasures, and the other
+half for finding them in as few queries as possible. For a perfect score, your solution
+should find all the treasures in at most 11⌈log2 𝑁𝑖 ⌉ queries. Between 11⌈log2 𝑁𝑖 ⌉ and
+20⌈log2 𝑁𝑖 ⌉ queries, the score decreases linearly; and if your solution makes more than
+20⌈log2 𝑁𝑖 ⌉ queries, it will only get the first half of the points for finding all the treasures.
+(The symbols ⌈·⌉ mean that the value of log2 𝑁𝑖 is rounded up to the nearest integer.)
+    If the formulas above result in a non-integer number of points for the subtask, it will
+be rounded to the nearest integer.
+    If your program has a runtime error or doesn’t adhere to the aforementioned protocol
+in using the library, it will get 0 points for the whole subtask. To receive partial points
+for finding a subset of the trasures, your program therefore needs to finish the search
+gracefully by calling NextHunt.
+
+Example
+
+                Call                    Return value
+                NextHunt(N, K)          𝑁 = 4, 𝐾 = 1
+                Query(2, 0)             DIR_DOWN + DIR_RIGHT = 9
+                Query(3, 1)             DIR_DOWN
+                Query(3, 2)             TREASURE
+                NextHunt(N, K)          𝑁 = −1, 𝐾 = −1
+
+
+
+                                         Page 11 of 11
+

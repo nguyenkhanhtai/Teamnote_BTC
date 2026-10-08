@@ -3,6 +3,7 @@
 namespace notebook::dp {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: MonotoneMinHull cht; cht.add(3,1); auto y = cht.query(2);
   // Add nonincreasing slopes; query nondecreasing x. Products fit int128;
   // coefficients fit int64 and their products/differences fit signed int128.
   struct MonotoneMinHull {

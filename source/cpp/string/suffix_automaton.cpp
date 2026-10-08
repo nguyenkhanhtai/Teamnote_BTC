@@ -3,6 +3,7 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: SuffixAutomaton sam("banana");
   struct SuffixAutomaton {
     struct State {
       int length=0,link=-1; map<unsigned char,int>next; long long ends=0;
@@ -24,7 +25,7 @@ namespace notebook::strings {
       }
       last = cur;
     }
-    explicit SuffixAutomaton(string_view s = "") {
+    SuffixAutomaton(string_view s = "") {
       for (unsigned char c : s) extend(c);
     }
     bool contains(string_view s) const {
@@ -44,9 +45,11 @@ namespace notebook::strings {
     // Returned counts do not mutate the automaton; may be recomputed after extensions.
     vector<long long> occurrences() const {
       vector<int>order(states.size()); iota(order.begin(),order.end(),0);
-      sort(order.begin(), order.end(), [&](int a, int b) {
-        return states[a].length > states[b].length;
-      }); vector<long long> cnt;
+      vector<pair<int,int>> lengths;
+      for (int id:order) lengths.push_back({states[id].length,id});
+      sort(lengths.rbegin(),lengths.rend());
+      for (int i=0;i<(int)order.size();++i) { order[i]=lengths[i].second; }
+      vector<long long> cnt;
       for (auto& s : states) cnt.push_back(s.ends);
       for(int u:order)if(states[u].link>=0)cnt[states[u].link]+=cnt[u];
       return cnt;

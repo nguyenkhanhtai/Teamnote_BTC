@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+  // Use: auto survivor = josephus_fast(10,3); // zero-based
 
 // n,k >= 1; survivor is zero-indexed. O(n), O(1) space.
 uint64_t josephus_linear(uint64_t n, uint64_t k) {

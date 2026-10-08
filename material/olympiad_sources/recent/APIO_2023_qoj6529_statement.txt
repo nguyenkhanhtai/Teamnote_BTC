@@ -1,0 +1,352 @@
+                                                                                                        abc
+                                                                                             APIO2023 Tasks
+                                                                                                English (ISC)
+
+
+
+
+Alice, Bob, and Circuit
+The Cyberland Circuit Foundation consists of n members. Each member has his/her favorite
+number and a unique name (the favorite numbers may not be distinct).
+
+m letters have been sent between the members. Each letter has a sender and a recipient, and the
+content of the letter is the sender's favorite number.
+
+Each member calculates the sum of the contents (senders' favorite numbers) they received and
+takes the modulo of 65536 (i.e., 216 ) as his/her result number.
+
+Your task is to determine all result numbers.
+
+However, the situation is not as straightforward as it seems. Alice, Bob, and Circuit decide to solve
+this problem in a slightly more complicated way:
+
+      Alice knows all n members (name and favorite number), but knows no information about
+      letters. She needs to send a binary string to Circuit with a length of no more than 105 .
+      Bob knows all m letters (sender and recipient's name), but knows no information about
+      members. He needs to send a binary string to Circuit with a length of no more than 105 .
+      Circuit can receive binary strings sent by Alice and Bob, and subsequently generate a binary
+      string comprising 16n bits as output. However, due to its limited computational power,
+      Circuit is only capable of performing basic logical operations (e.g., AND, OR, NOT).
+
+In the following, we will introduce how the circuit works in detail.
+
+Circuit Details
+
+The gate is the basic element of a circuit. A gate consists of zero or two boolean inputs(depending
+on the type of gate), and one boolean output. There are two types of gates: input gates and
+computation gates.
+
+      Input gates have no input and represent the bits from binary strings sent by Alice and Bob.
+            There will be lA + lB input gates, labeled from 0 to (lA + lB − 1), where lA, lB are the
+            lengths of the strings from Alice and Bob, respectively.
+            For 0 ≤ i < lA, the output of i -th gate is the i -th bit of the string from Alice;
+            For 0 ≤ i < lB , the output of (i + lA)-th gate is the i -th bit of the string from Bob.
+      Computation gates have two inputs and represent the computation process.
+          The labels for computation gates start from (lA + lB ).
+
+
+
+
+                                                                                                  abc (1 of 7)
+               For each computation gate, you should provide labels of two dependent gates for
+               input, and the operation type p(0 ≤ p ≤ 15).
+                    To prevent circular dependencies, the labels of the two dependent gates must
+                    be smaller than the label of the computation gate.
+                    If outputs of its two dependent gates are x0 and x1 respectively (
+                    x0 , x1 ∈ {0, 1}), then the output of the computation gate is:
+                                                                        p
+                                                 f (p, x0 , x1 ) = ⌊ x0 +2x1 ⌋ mod 2
+                                                                    2
+Here are some examples that may be useful for you:
+
+
+                             x0 AND x1           x0 OR x1          x0 XOR x1             NOT x0
+            x0     x1
+                            f(8, x0 , x1 )     f(14, x0 , x1 )    f(6, x0 , x1 )       f(5, x0 , x1 )
+             0      0             0                  0                   0                   1
+
+             1      0             0                  1                   1                   0
+
+             0      1             0                  1                   1                   1
+
+             1      1             1                  1                   0                   0
+
+
+Implementation Details
+Please note:
+
+        All array indices start from 0. For example, if a is an array of length n, then a[0] to a[n-1]
+        are valid data, accessing indices beyond that range may cause an out-of-bounds error.
+        All strings are terminated by a null character \0.
+
+You should implement the following procedures:
+
+Alice
+
+   int alice(const int n, const char names[][5],
+             const unsigned short numbers[], bool outputs_alice[]);
+
+
+
+ Direction           Value            Length      Meaning                        Constraint
+    Input               n               1              n                        0 ≤ n ≤ 700
+                                                  The name          All names are distinct, consisting of
+                    names               n          of each        lowercase English letters only, and have
+                                                  member.           a maximum length of 4 characters.
+
+
+
+
+                                                                                                        abc (2 of 7)
+ Direction         Value        Length          Meaning                  Constraint
+
+                                           The favorite
+                                            number of       Each number is in the range from 0 to
+                 numbers           n
+                                                  each                      65535.
+                                                member.
+
+                                            The binary
+                                                string is
+               outputs_alice       lA
+                                                 sent to
+   Output                                        Circuit.
+
+                                                            You need to make sure that lA does
+                  (Return
+                                   1               lA        not exceed 105 and when n is the
+                   value)
+                                                                  same, lA must be ﬁxed.
+
+
+Bob
+
+   int bob(const int m, const char senders[][5],
+           const char recipients[][5], bool outputs_bob[]);
+
+
+
+ Direction        Value        Length       Meaning                      Constraint
+                    m              1               m                    0 ≤ m ≤ 1000
+                                           The sender's
+                 senders          m          name on
+                                            each letter.
+    Input
+                                               The             All names appear in Alice's input
+                                            recipient's
+                recipients        m
+                                             name on
+                                            each letter.
+
+                                            The binary
+               outputs_bob        lB       string is sent
+                                             to Circuit.
+   Output
+                                                            You need to make sure that lB does
+                  (Return
+                                   1               lB        not exceed 105 and when m is the
+                   value)
+                                                                  same, lB must be ﬁxed.
+
+
+Circuit
+
+To ensure that the computation process of the Circuit is like a general circuit, you cannot directly
+obtain the binary strings sent from Alice and Bob to Circuit. You only know the lengths of these
+two strings and output the circuit structure.
+
+
+                                                                                           abc (3 of 7)
+   int circuit(const int la, const int lb, int operations[],
+                   int operands[][2], int outputs_circuit[][16]);
+
+
+
+ Direction          Value        Length      Meaning                       Constraint
+                      la                1         lA
+    Input
+                      lb                1         lB
+                                            The type of
+                                             operation
+                 operations             l    performed               An integer from 0 to 15.
+                                            by each gate
+                                            in the circuit.
+
+                                            The operand
+                                            used by each       The number must be less than the
+                  operands              l
+                                             gate in the           label of the current gate.
+                                               circuit.
+
+                                                              outputs_circuit[i][j] denotes
+   Output                                     The gate
+                                                              the j -th bit (counting from the least
+                                            label of the
+               outputs_circuit          n                      signiﬁcant bit) of the ﬁnal result for
+                                               circuit
+                                                               the i -th member. The members are
+                                               output.
+                                                               ordered according to Alice's input.
+
+                                              l , which
+                                             represents
+                                              the total
+                (Return value)          1    number of        You need to ensure that l ≤ 2 × 107
+                                                gates
+                                             (including
+                                            input gates).
+
+
+Although you can modify the information of gates with indices less than lA + lB in the
+operations and operands arrays, the grader would ignore such modiﬁcation.
+
+
+Example
+
+Consider the following calls:
+
+
+   alice(3, {"alic", "bob", "circ"}, {10000, 20000, 30000}, outputs_alice);
+   bob(5, {"alic", "bob", "bob", "circ", "circ"},
+       {"circ", "circ", "alic", "circ", "circ"}, outputs_bob);
+
+
+It represents the following scenario:
+
+
+                                                                                             abc (4 of 7)
+      Alice knows there are 3 members, the member with the name alic has a favorite number
+      10000, etc. A possible output for alice() is that,
+           The return value of alice() is 2, representing lA = 2.
+              Inside alice() function, set outputs_alice[0] = 1, outputs_alice[1] = 0,
+           representing that the result binary string is 10.
+      Bob knows there are 5 letters, the ﬁrst letter is from alic to circ, etc. A possible output for
+      bob() is that,
+              The return value of bob() is 3, representing lB = 3.
+              Inside bob() function, set outputs_bob[0]          =   1,   outputs_bob[1]         =   1,
+              outputs_bob[2] = 0, representing that the result binary string is 110.
+
+Based on previous outputs for alice() and bob(), there will be the following call:
+
+circuit(2, 3, operations, operands, outputs_circuit);
+
+A correct output for this function would be
+
+      The return value of circuit() is 7, meaning that we add two computation gates, labeled 5
+      and 6.
+      Inside circuit(), set operations, operands, and outputs_circuit in the following way:
+              operations = {-1, -1, -1, -1, -1, 8, 14}, where we use -1 to represent
+              ignored information from input gates;
+              operands = {{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {0,
+              4}, {2, 5}};
+              outputs_circuit = {{5, 5, 5, 5, 5, 6, 5, 5, 5, 6, 6, 6, 5, 5, 6,
+              5}, ...}. The array is a bit long, you can check abc.cpp in the attachments for the
+              full array.
+
+According to the output, the computation procedure is that,
+
+      Add a type 8 computation gate, with input from gate 0 and gate 4. The output of gate 0 is
+      the 0-th bit of the string from Alice, which is 1; The output of gate 4 is the 2-nd bit of the
+      string from Bob, which is 0. So the output for gate 5 is f (8, 0, 1) = 0 AND 1 = 0.
+      Add a type 14 computation gate, with input from gate 2 and gate 5. The output of gate 2 is
+      the 0-th bit of the string from Bob, which is 1; The output of gate 5 is 0. So the output for
+      gate 6 is f (14, 1, 0) = 1 OR 0 = 1.
+      output_circuit[0]          represents     the    ﬁnal    result     of   alic,        which     is
+      (0100111000100000)2 = 20000. Since alic only receives a letter from bob, the ﬁnal result of
+      alic is 20000.
+      The ﬁnal result of bob should be 0, since he receives no letter; The ﬁnal result of circ should
+      be (10000 + 20000 + 30000 + 30000) mod 65536 = 24464 .
+
+abc.cpp in the attachments can pass this example, but we do not guarantee that it can pass other
+test cases.
+
+
+
+
+                                                                                             abc (5 of 7)
+Constraints
+
+For all test cases:
+
+      0 ≤ n ≤ 700, 0 ≤ m ≤ 1000.
+      All names are distinct, consisting of lowercase English letters only, and have a maximum
+      length of 4 characters.
+      The favorite number of each member is in the range of 0 to 65535.
+      The names of all senders and recipients appear in Alice's input array names.
+      alice() and bob() have a memory limit of 2048 MiB and a time limit of 0.02 seconds,
+      respectively.
+      circuit() has a memory limit of 2048 MiB and a time limit of 7 seconds.
+
+For the ﬁnal evaluation, alice() and bob() may be called multiple times in a single test
+case. The time limit of 0.02 second is for each call.
+
+
+Subtasks
+
+Subtask Type A (12 points)
+
+Subtask 1,2,3 are in subtask type A, where n = 1.
+
+Each subtask has the following additional constraints:
+
+      Subtask 1 (4 points): m = 0.
+      Subtask 2 (4 points): 0 ≤ m ≤ 1.
+      Subtask 3 (4 points): 0 ≤ m ≤ 1000.
+
+Subtask Type B (54 points)
+
+Subtask 4,5,6 are in subtask type B, where:
+
+      0 ≤ n ≤ 30, n2 ≤ m ≤ n2 .
+      There are no two letters with the same sender and recipient.
+      All member names appear in Bob's input (i.e., each member either sends at least one letter
+      or receives at least one letter).
+
+Each subtask has the following additional constraints:
+
+      Subtask 4 (24 points): n = 26, All members' names are single lowercase letters, and in Alice's
+      input, they appear in order from a to z.
+      Subtask 5 (24 points): n = 26.
+      Subtask 6 (6 points): No special restrictions.
+
+Subtask Type C (34 points)
+
+
+
+                                                                                         abc (6 of 7)
+Subtask 7,8,9 are in subtask type C, where 0 ≤ n ≤ 700, 0 ≤ m ≤ 1000.
+
+Each subtask has the following additional constraints:
+
+      Subtask 7 (18 points): n = 676, all members' names are two lowercase letters, and in Alice's
+      input, they appear in lexicographical order (e.g., aa, ab, ac, ..., az, ba, ..., bz, ca, ..., zz).
+      Subtask 8 (10 points): n = 676.
+      Subtask 9 (6 points): No additional constraints.
+
+
+Sample Grader
+
+The sample grader reads the input in the following format:
+
+      Line 1: n m
+      Line 2 + i(0 ≤ i ≤ n − 1): names i numbers i
+      Line 2 + n + i(0 ≤ i ≤ m − 1): senders i recipients i .
+
+The sample grader outputs in the following format:
+
+      If the program ﬁnishes successfully, the sample grader will output n lines, each containing
+      an integer, representing the ﬁnal result calculated by functions you implement for each
+      member.
+      Otherwise, the grader would output nothing to stdout and prints the error messages to the
+      ﬁle abc.log in the directory.
+      Additionally, the sample grader will output values of lA, lB , l and the running time of each
+      function to abc.log.
+
+The sample grader will not check the memory limit and the restriction that for the same n /
+m, lA / lB must be equal.
+
+
+
+
+                                                                                                   abc (7 of 7)
+

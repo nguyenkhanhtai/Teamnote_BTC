@@ -3,16 +3,19 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: PalindromeTree pt; for (char c : string("aba")) pt.append(c);
+  //      auto counts = pt.occurrences();
   struct PalindromeTree {
     struct Node {
       int length, link; map<unsigned char, int> next; long long ends = 0;
     }; vector<Node>nodes { {-1,0,{},0 },{ 0,0,{},0 } }; std::string text; int last=1;
+    bool fits(int v,int i,unsigned char c) const {
+      int j=i-1-nodes[v].length; return j>=0 && (unsigned char)text[j]==c;
+    }
     int append(unsigned char c) {
       text += char(c); int i = text.size() - 1, u = last;
-      auto fits = [&](int v) {
-        int j=i-1-nodes[v].length; return j>=0&&(unsigned char)text[j]==c;
-      };
-      while (!fits(u)) u = nodes[u].link;
+
+      while (!fits(u,i,c)) u = nodes[u].link;
       auto it = nodes[u].next.find(c);
       if (it != nodes[u].next.end()) last = it->second;
       else {
@@ -20,7 +23,7 @@ namespace notebook::strings {
         nodes[u].next[c] = v;
         if (length > 1) {
           int p = nodes[u].link;
-          while (!fits(p)) p = nodes[p].link;
+          while (!fits(p,i,c)) p = nodes[p].link;
           nodes[v].link = nodes[p].next.at(c);
         }
         last = v;

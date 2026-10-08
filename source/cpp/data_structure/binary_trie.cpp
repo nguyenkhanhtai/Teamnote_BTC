@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: BinaryTrie tr; tr.insert(7); auto best = tr.max_xor(3);
   // Multiset of unsigned 64-bit keys; duplicates and erasure supported.
   struct BinaryTrie {
     struct Node { int child[2] {-1,-1}; int count=0; }; vector<Node>t {1};

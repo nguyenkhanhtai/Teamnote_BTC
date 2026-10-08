@@ -1,0 +1,226 @@
+                                                                                                    Day 2
+                                                                                              Task: avoid
+                                                                                                  Spoiler
+
+
+How to Avoid Disqualification in 75 Easy Steps (avoid)
+by Tobias Lenz
+
+Throughout, we denote the positions of the chairmen by 1 ≤ 𝑎 ≤ 𝑏 ≤ 1 000, and 𝑁 = 1 000 is the number
+of positions.
+
+   Subtask 1. 𝑅 = 10, 𝐻 = 1, and both chairmen are located at the same position.
+
+This subtask is easiest to solve if we invert the problem: instead of determining for each robot which
+positions it scouts, we will determine for each position 𝑝 the set of robots 𝑅𝑝 ⊆ {1, … , 10} scouting it.
+If both chairmen are located at position 𝑎, a robot 𝑟 will detect at least one chairman if and only if
+𝑟 ∈ 𝑅𝑎 . Hence, the results of all 10 robots are equivalent to knowing the set 𝑅𝑎 . To determine 𝑎 from
+this, we therefore need to ensure that the sets 𝑅𝑝 are all different.
+Fortunately, 210 ≥ 1 000, and so we can assign a unique subset 𝑅𝑝 ⊆ {1, … , 10} of the robots to each
+position 𝑝. A simple way to do this is to use the binary representation of 𝑝—then, the results of the
+robots spell out the position of the chairmen in binary, solving this subtask.
+
+   Subtask 2. 𝑅 = 𝐻 = 20
+
+This subtask can be solved with two binary searches. With the first binary search, we want to determine
+the smallest position 𝑎 of one of the chairmen. For this, we will always keep an interval [ℓ, 𝑟] that
+contains 𝑎, starting with ℓ = 1 and 𝑟 = 1 000. Then, in each step, we pick 𝑚 = ⌊(ℓ + 𝑟)/2⌋, send a robot to
+the positions {ℓ, ℓ + 1, … , 𝑚}, and wait for its result. If this robot detects a chairman, we know that the
+interval [ℓ, 𝑚] must contain 𝑎, and so we set 𝑟 = 𝑚. Otherwise, 𝑎 must be contained in [𝑚 + 1, 𝑟], and
+so we assign ℓ = 𝑚 + 1. Once we have ℓ = 𝑟, which happens after at most ⌈log2 1 000⌉ = 10 steps (and
+10 robots), we have determined 𝑎 as required.
+With the second binary search, we can simply determine the largest position 𝑏 of one of the chairmen
+analogously, again with 10 robots. Therefore, we can determine the positions of both chairmen with
+20 robots in total.
+Note that we could also execute the above two binary searches simultaneously which would reduce
+the total time required from 20 hours to 10 hours. It is easy to prove by counting that at least 19
+robots are necessary, but the Scientific Committee does not know whether there exists a solution that
+uses at most 19 robots.
+
+   Subtask 3. 𝑅 = 30, 𝐻 = 2
+
+To find the positions of the two chairmen in 2 hours, recall our approach to Subtask 1. To all positions
+𝑝, we had assigned a distinct set 𝑅𝑝 ⊆ {1, … , 10} of robots, namely the binary representation of 𝑝. We
+will denote the 𝑖-th bit of 𝑝 by 𝑝𝑖 , and so 𝑖 ∈ 𝑅𝑝 if and only if 𝑝𝑖 = 1.
+Now, in this subtask, we will send 10 robots as described by the sets 𝑅𝑝 , and we send an additional
+10 robots for the complements 𝑅𝑝𝑐 , all during the first hour. Based on the results of these robots, we
+will know for all 𝑖 that either 𝑎𝑖 = 𝑏𝑖 , in which case we will also the value of 𝑎𝑖 and 𝑏𝑖 , or 𝑎𝑖 ≠ 𝑏𝑖 .
+Now, in the second hour, we need to reconstruct the remaining information. If 𝑖 and 𝑗 are bits such
+that both 𝑎𝑖 ≠ 𝑏𝑖 and 𝑎𝑗 ≠ 𝑏𝑗 , we need to determine whether 𝑎𝑖 = 𝑎𝑗 , and equivalently 𝑏𝑖 = 𝑏𝑗 , or whether
+𝑎𝑖 ≠ 𝑎𝑗 , and equivalently 𝑏𝑖 ≠ 𝑏𝑗 .
+To do this, let 𝑖 be a bit such that 𝑎𝑖 ≠ 𝑏𝑖 . Now, for every 𝑗 that is different between 𝑎 and 𝑏, we will
+simultaneously send a robot to all those positions 𝑝 where 𝑝𝑖 = 𝑝𝑗 . If this robot detects a chairman,
+
+
+
+                                                    1/4
+                                                                                                              Day 2
+                                                                                                        Task: avoid
+                                                                                                            Spoiler
+
+
+we know that 𝑎𝑖 = 𝑎𝑗 and also 𝑏𝑖 = 𝑏𝑗 , and otherwise we know that 𝑎𝑖 ≠ 𝑎𝑗 and also 𝑏𝑖 ≠ 𝑏𝑗 . This lets us
+reconstruct 𝑎 and 𝑏 based on the 𝑖-th bit. This strategy uses at most 29 robots in 2 hours.
+
+     Subtask 4. 𝑅 = 75, 𝐻 = 1
+
+This is the only output-only subtask of this ceoi.*
+
+Constructive solutions. We begin by describing some constructive solutions.
+         Firstly, we can adapt the solution to Subtask 3. Instead of using the second phase of that
+         strategy, we can, for each pair of bits 𝑖 and 𝑗, already send a robot in the first phase to all
+         positions 𝑝 with 𝑝𝑖 = 𝑝𝑗 . This uses a total of 20 + (10
+                                                                2
+                                                                  ) = 𝟔𝟓 robots. Then, we already know the
+         results for all robots that we would have sent out during the second phase, and so we can
+         immediately reconstruct 𝑎 and 𝑏 after just one hour.
+         To get a solution with fewer robots, we can use a base other than 2. We will describe a solution
+         with base 3, where we again denote the 𝑖-th digit of a position 𝑝 by 𝑝𝑖 . Then, for every digit 𝑖 and
+         every 𝑑 ∈ {0, 1, 2}, we send a robot to all positions 𝑝 with 𝑝𝑖 = 𝑑. Since there are ⌈log3 1 000⌉ = 7
+         digits, this uses 21 robots, and it will tell us for every digit 𝑖 whether 𝑎𝑖 = 𝑏𝑖 , in which case we
+         will also know the values of 𝑎𝑖 and 𝑏𝑖 , or whether 𝑎𝑖 ≠ 𝑏𝑖 . In this second case we know which
+                                                               1  2                                   1    2
+         two digits 𝑎𝑖 and 𝑏𝑖 are, so we know two digits 𝑑𝑖 , 𝑑𝑖 ∈ {0, 1, 2} such that {𝑎𝑖 , 𝑏𝑖 } = {𝑑𝑖 , 𝑑𝑖 }, but
+                                          1           2
+         we do not know whether 𝑎𝑖 = 𝑑𝑖 or 𝑎𝑖 = 𝑑𝑖 , and similarly for 𝑏𝑖 .
+                                                                                                             1    2
+         Thus, for every pair of digits 𝑖 and 𝑗 we also need to send robots to make sure that if 𝑑𝑖 ≠ 𝑑𝑖
+               1    2                       1       1
+         and 𝑑𝑗 ≠ 𝑑𝑗 , we know whether 𝑑𝑖 and 𝑑𝑗 are both digits of 𝑎 or both digits of 𝑏, or whether this
+         is not the case. It turns out that it is again sufficient for this to send a robot to all positions 𝑝
+                                                   1     2                                                   1
+         with 𝑝𝑖 = 𝑝𝑗 . Indeed, one of the digits 𝑑𝑖 or 𝑑𝑖 must have the same value as one of the digits 𝑑𝑗
+              2
+         or 𝑑𝑗 , and so the result of this robot tells us whether these two digits are both digits of 𝑎 or
+         both digits of 𝑏. This uses an additional (72) = 21 robots, for a total of 𝟒𝟐 robots.
+         There also exists a solution with base 4 that uses 𝟒𝟎 robots.
+         Finally, it is possible to come up with a scheme that takes a solution for 𝑁 positions and 𝑅
+         robots and produces a scheme for 𝑁2 positions and 3𝑅 robots. For this, let 𝑅𝑝 be the sets of
+         robots assigned to each position 𝑝 in the scheme for 𝑁 positions. We then represent the 𝑁2
+         positions as pairs (𝑝, 𝑞) with 1 ≤ 𝑝, 𝑞 ≤ 𝑁, and for (𝑝, 𝑞) we send 𝑅 robots each according to 𝑅𝑝 ,
+         𝑅𝑞 , and 𝑅𝑝+𝑞 (mod 𝑁) . It can be checked that this allows you to uniquely determine the positions
+         of the chairmen among all 𝑁2 positions. Starting with a solution with 𝑁 = 𝑅 = 6 and applying
+         this twice leads to a solution with 𝟓𝟒 robots.
+
+A general approach. Assuming that we have already determined where each robot is sent to, we can
+check efficiently whether this is a valid scheme that always determines the positions of the chairmen
+with certainty. To do so, consider again the sets 𝑅𝑝 of robots assigned to each position 𝑝. A robot 𝑟
+will detect a chairman if and only if 𝑟 ∈ 𝑅𝑎 or 𝑟 ∈ 𝑅𝑏 , or equivalently 𝑟 ∈ 𝑅𝑎 ∪ 𝑅𝑏 . This means that the
+results of the robots are equivalent to knowing 𝑅𝑎 ∪ 𝑅𝑏 , and so we can determine 𝑎 and 𝑏 uniquely if
+and only if 𝑅𝑎 ∪ 𝑅𝑏 is different from all other such unions. This can be checked by representing each
+𝑅𝑝 in binary as an __int𝟏𝟐𝟖_t so that 𝑅𝑝 ∪ 𝑅𝑞 is simply the bitwise or of the two numbers, running in
+time 𝑂(𝑁2 ) when using a hash map to check for collisions.†
+Reconstructing 𝑎 and 𝑏 from the answers then simply works in exactly the same way. We can iterate
+through all 𝑝 and 𝑞 and check whether the 𝑅𝑝 ∪ 𝑅𝑞 matches the results of all robots.
+
+* Wait, what? Keep on reading to understand why…
+†
+    You might have noticed that no heuristic managed to get more points than intended in the last subtask…
+
+
+
+                                                          2/4
+                                                                                                         Day 2
+                                                                                                   Task: avoid
+                                                                                                       Spoiler
+
+
+All of our full solutions are based on generating the sets 𝑅𝑝 locally on our own computer, potentially
+taking minutes or even hours, until we have a valid scheme. Such a scheme can then be encoded as
+a list of numbers in the submission, and we use the above strategy to determine 𝑎 and 𝑏 from the
+results of the robots.
+
+Generating robots. Let us first describe some strategies that try to generate the plan robot by robot.
+      Fix 0 < 𝑝 < 1 and send any robot 𝜚 to any position 𝑥 with probability 𝑝, independently of any
+      other choices. We claim that for sufficiently many robots this will yield a valid scouting plan with
+      positive probability. To prove this, let us say that an assignment for a single robot distinguishes
+      two sets 𝐿 ≔ {𝑥, 𝑦} and 𝐿′ ≔ {𝑥 ′ , 𝑦 ′ } of possible chairman positions if the robot returns 1 for
+      precisely one of these two sets. Note that this happens with a positive probability 𝑞 (maximized
+      for 𝑝 ≈ 13 ). Moreover, for any other robot 𝜚′ , the events that 𝜚 distinguishes the two given 𝐿, 𝐿′ or
+      that 𝜚′ distinguishes them are independent; in particular, for 𝑟 robots the probability that we do
+      not distinguish them is (1 − 𝑞)𝑟 . Summing over all 𝐿, 𝐿′ this yields an upper bound of 𝑁4 (1 − 𝑞)𝑟
+      for the probability that we do not find a correct scouting plan. For 𝑟 → ∞ robots, this failure
+      probability converges to 0. In practice, this approach suffices to find solutions with 𝟓𝟎 robots in
+      reasonable time.
+      The previous strategy tends to generate plans that almost work, i.e. there are few pairs (𝐿, 𝐿′ )
+      which we cannot separate. This allows us to get better results by ‘supersampling’: we first use
+      the above strategy for 𝑁 > 1 000 positions (𝑁 ≈ 2 000 seems to be the sweet spot); as long as
+      there are {𝑥, 𝑦} and {𝑥 ′ , 𝑦 ′ } which we can’t distinguish, we randomly throw away one of 𝑥, 𝑦, 𝑥 ′ , 𝑦 ′ .
+      This yields solutions with around 𝟑𝟓 to 𝟒𝟎 robots, depending on how much computing time you
+      are willing to invest or how clever you are in selecting the positions to discard.
+      Instead of all the fancy randomness, we can try to be more systematic in assigning positions to
+      the robots, somewhat akin to binary search.
+      For this, let us first consider the case of a single robot. Ideally, the two possible answers 0 and
+      1 should occur for around the same number of possible chairman positions. Doing the math,
+      we see that for this we should send the robot to a fraction of
+
+                                                       √2
+                                              𝛼 ≔1−       = 0.29289 …
+                                                       2
+
+      of the positions (note that this is not the optimal probability 𝑝 from the random approach!).
+      Similarly, for two robots, the outcomes 00, 01, 10, and 11 should occur for around the same
+      number of possible chairman positions. To achieve this, we can send the second robot to a
+      fraction of 𝛼 of the first robot’s positions and to a fraction of 𝛼 of the positions not visited by
+      the first robot.
+      If we iterate this idea to determine where to send 𝑘 robots, we run into the issue that 𝛼𝑘 → 0
+      rapidly; in particular, rounding errors take over around 𝑘 ≈ 7 and we do not separate the ‘blocks’
+      of possible positions for fixed return values evenly any more. We therefore switch to a greedy
+      approach that tries several random plans for each individual robot, and then takes the one that
+      minimizes the maximum size of any block. Possibly combining this with some local optimization,
+      we obtain solutions with around 𝟑𝟎 robots.
+
+Generating positions. Another way to generate a solution is to fix the number of robots and to
+generate positions one-by-one. We start without any positions. Then, we can iteratively add new
+positions to our solution, always choosing a new set 𝑅𝑝 for a new position 𝑝 in such a way that there
+are no collisions with any or the previous positions.
+
+
+
+                                                      3/4
+                                                                                                  Day 2
+                                                                                            Task: avoid
+                                                                                                Spoiler
+
+
+      If we simply pick each set 𝑅𝑝 randomly (with the above probabilities), this manages to generate
+      a solution with 𝟑𝟎 robots.
+      If we try fewer robots than this, the number of valid choices for the next set 𝑅𝑝 becomes very
+      small. This means that every iteration takes very long and we do not reach the 1 000 positions
+      that we need.
+      Instead, at some appropriate point during the computation we can simply start to keep all
+      possible compatible sets that would create no collision with the positions that we have gener-
+      ated to far. This makes it much faster to select the next set 𝑅𝑝 . Moreover, we can connect this
+      with other heuristics, such as selecting 𝑅𝑝 in a way that maximises the number of remaining
+      compatible sets. This can produce a solution with 𝟐𝟕 robots.
+      Right now, the Scientific Committee only knows a single way to obtain a solution with fewer
+      robots. For this, we again select the sets 𝑅𝑝 iteratively. However, we perform this in a very
+      specific way. Namely, we only add sets with exactly 8 elements to our solution, and we also
+      only add them if their symmetric difference with every set chosen so far contains at least 6
+      elements. Moreover, we try to add these sets in increasing order if we look at them in their
+      binary representation. This produces a solution with 992 positions, which is not sufficient yet.
+      If we then iterate through all remaining sets that we haven’t tried so far (e.g. because they do
+      not have the correct number of elements), and we try to add them greedily to our solution, it is
+      possible to improve this solution to 998 positions. Unfortunately, this is still not enough. At
+      this point we are stuck…
+      …is what we would have said if we had not tried to throw some simulated annealing on this
+      solution to generate additional positions. After a short time, this manages to add two more
+      positions to our solution. This is then a solution with 𝟐𝟔 robots and 1 000 positions, shown in
+      the picture below, where a black box (2 pixels wide and 10 pixels high) in row 𝜚 and column 𝑝
+      means that robot 𝜚 is sent to position 𝑝:
+
+
+
+
+      It turns out that our way of generating the initial solution with 992 positions is quite fragile.
+      Whenever we tried to change any part of this approach (say by going through the sets 𝑅𝑝 in a
+      random order when trying to add them), the solution got much worse.
+For 25 robots, the best we were able to do is a solution with slightly below 800 positions. The Scientific
+Committee also has no idea what the minimum number of robots is that a solution requires—we have
+not even been able to prove that more than 19 robots are necessary.
+
+
+
+
+                                                   4/4
+

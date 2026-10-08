@@ -1,19 +1,19 @@
 #include <bits/stdc++.h>
+  // Use: auto value = evaluate_expression("2*(3+4)");
 
 // + - * / ^, parentheses, unary signs; ^ is right-associative.
 // Throws invalid_argument on syntax errors, domain_error on undefined arithmetic.
-long double evaluate_expression(const std::string& text) {
-    std::vector<long double> values;
-    std::vector<char> ops;
-    auto precedence = [](char op) {
+struct ExpressionParser {
+    std::vector<long double> values; std::vector<char> ops;
+    int precedence(char op) {
         if (op == '^') return 4;
         if (op == 'n' || op == 'p') return 3;
         if (op == '*' || op == '/') return 2;
         if (op == '+' || op == '-') return 1;
         return 0;
-    };
-    auto syntax = [] { throw std::invalid_argument("expression syntax"); };
-    auto apply = [&] {
+    }
+    void syntax() { throw std::invalid_argument("expression syntax"); };
+    void apply() {
         char op = ops.back(); ops.pop_back();
         if (values.empty()) syntax();
         long double b = values.back(); values.pop_back();
@@ -27,7 +27,8 @@ long double evaluate_expression(const std::string& text) {
             op == '*' ? a * b : op == '/' ? a / b : std::pow(a, b);
         if (!std::isfinite(result)) throw std::domain_error("nonfinite result");
         values.push_back(result);
-    };
+    }
+    long double evaluate(const std::string& text) {
     bool operand = true;
     for (size_t i = 0; i < text.size();) {
         char c = text[i];
@@ -68,4 +69,8 @@ long double evaluate_expression(const std::string& text) {
     }
     if (values.size() != 1) syntax();
     return values.back();
+    }
+};
+long double evaluate_expression(const std::string& text) {
+    ExpressionParser parser; return parser.evaluate(text);
 }

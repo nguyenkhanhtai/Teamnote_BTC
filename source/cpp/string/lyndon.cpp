@@ -3,6 +3,7 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: int start = minimum_rotation("baca");
   vector<pair<int, int>> lyndon_factors(string_view s) {
     vector<pair<int, int>> out; int n = s.size();
     for (int i = 0; i < n;) {

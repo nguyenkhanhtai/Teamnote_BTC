@@ -1,14 +1,12 @@
-\section*{C++: template và typename}
-\addcontentsline{toc}{section}{C++: template và typename}
-\textbf{Kiểu dữ liệu thay đổi}: viết \texttt{template<typename T>} trước hàm hoặc \texttt{struct}; thay \texttt{T} bằng kiểu cụ thể khi dùng. \texttt{typename} và \texttt{class} tương đương trong khai báo tham số kiểu.
+\section*{C++: cách dùng code}
+\addcontentsline{toc}{section}{C++: cách dùng code}
+\textbf{Chuẩn bị}: GNU C++17, thêm \texttt{\#include <bits/stdc++.h>} và \texttt{using namespace std;}. Chép struct/hàm trước \texttt{main}; mỗi listing có dòng \texttt{// Use:} minh họa khai báo và gọi. ID bắt đầu từ $0$, đoạn mảng $[l,r)$.
 
-\textbf{Cách gọi}: hàm thường suy ra \texttt{T} từ đối số; ghi \texttt{<long long>} để chọn kiểu tính toán. Với \texttt{struct}, ghi rõ kiểu như \texttt{Sum<long long>}. Mỗi kiểu được biên dịch thành phiên bản riêng, không mất thêm chi phí gọi lúc chạy.
+\textbf{Khai báo}: \texttt{Dinic flow(n);} tạo flow graph có $n$ đỉnh; \texttt{SegmentTreeBeats st(a);} dựng từ \texttt{vector<long long> a}. Dùng kiểu cụ thể; nếu cần kiểu khác, sửa dòng \texttt{using} hoặc kiểu dữ liệu của module. KD-tree đổi hằng \texttt{D} cho số chiều.
 
-\inputminted[]{cpp}{source/cpp/utility/typename_guide.cpp}
+\textbf{Callback = hàm bạn viết}: truyền tên hàm, không cần lambda. \texttt{function<bool(const vector<int>\&)>} nghĩa là nhận tập ID và trả về đúng/sai. Dữ liệu riêng của bài có thể đặt ở biến toàn cục để hàm đọc.
+\inputminted{compactcpp}{source/cpp/utility/declaration_guide.cpp}
 
-\textbf{Phân biệt tham số}: \texttt{typename T} là kiểu; \texttt{int N} là giá trị hằng lúc biên dịch. \texttt{typename Merge} cũng là kiểu, dùng để nhận một phép gộp (\texttt{struct} có \texttt{operator()} hoặc lambda).
+\textbf{Khi include file nguồn}: dùng \texttt{notebook::graph::Dinic flow(n);} hoặc \texttt{using namespace notebook::graph;}. Nhóm khác: \texttt{data\_structure}, \texttt{tree}, \texttt{strings}, \texttt{dp}, \texttt{math}, \texttt{geometry}. PDF lược namespace/include; file nguồn giữ dependency.
 
-\textbf{Tên phụ thuộc}: trong C++17, thêm \texttt{typename} trước kiểu lồng phụ thuộc tham số, như \texttt{typename C::value\_type}; không thêm trước giá trị như \texttt{C::size}. Khi gọi hàm template thành viên qua đối tượng có kiểu phụ thuộc, viết \texttt{obj.template get<T>()}.
-
-\textbf{Lỗi hay gặp}: \texttt{bigger(1, 2LL)} không suy ra cùng một \texttt{T}; dùng \texttt{bigger<long long>(1, 2LL)}. Template chỉ dùng được khi kiểu đáp ứng các phép trong thân hàm (ví dụ \texttt{>} hoặc \texttt{+=}). Đặt cả định nghĩa trong file được include, trước chỗ sử dụng.
-
+\textbf{Kết quả}: kiểm tra \texttt{if (ans)} trước khi lấy \texttt{*ans} từ \texttt{optional}. Flow cập nhật residual graph; lần gọi sau trả phần flow tăng thêm. Wavelet dùng rank $k$ từ $0$, khoảng \emph{giá trị} khi đếm đóng hai đầu. Tên \texttt{g}, \texttt{cost}, \texttt{oracle} trong ví dụ là dữ liệu/hàm bạn cung cấp.

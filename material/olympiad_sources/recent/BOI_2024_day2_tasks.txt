@@ -1,0 +1,363 @@
+                                                BOI 2024                                              fire
+                                              Vilnius, Lithuania                                   d2 Tasks
+                                             May 3 - May 7, 2024                              English (HSC)
+
+
+
+
+Fire
+In the old Baltic religion, it is important to have a holy ﬁre burning. A priest called krivis is
+responsible for protecting it from extinguishing. He has many trustworthy helpers called vaidilutės,
+and wants to create a schedule for them to stoke and protect the ﬁre. He has to ensure that the
+ﬁre is always maintained by some vaidilutė.
+
+Krivis has his own time measurement system, where each day has M minutes. There are N
+vaidilutės in his village. The i -th vaidilutė's possible work time are described by two integers s i and
+ei . The number si is her own earliest time in the day when she may start working, and the number
+ei is the latest time of the day when she needs to ﬁnish working. Time is counted in minutes from
+the start of the day. Note that when s i > ei , the vaidilutė is willing to work overnight.
+
+Krivis asked you to choose some vaidilutės and arrange shifts for them. A chosen vaidilutė must
+start her shift not earlier than time s i , and end her shift not later than ei . A single shift is always
+shorter than the whole day. The chosen vaidilutės will repeat their shifts everyday.
+
+Handing things over from one vaidilutė to the next increases the risk of the ﬁre extinguishing.
+Because of this, you want to minimize the number of times this happens during the day and will
+arrange a schedule where the smallest possible number of vaidilutės is needed.
+
+
+Task
+
+Calculate the minimum number of vaidilutės that you need to choose, such that the holy ﬁre is
+maintained at all times.
+
+
+Input
+
+The ﬁrst line contains two integers N and M – the number of vaidilutės available and the length of
+the day in minutes.
+
+Then N lines follow. The i -th of them contains two integers s i and ei – the earliest starting time
+and the latest ﬁnishing time of the i -th vaidilutė.
+
+
+Output
+
+Output one integer – the minimum number of vaidilutės you need to choose. If it is impossible to
+choose the vaidilutės according to the requirements, output −1.
+
+
+                                                                                               fire (1 of 2)
+Examples
+
+     Input       Output                                    Explanation
+
+4 100            3         You can choose the 1-st, 2-nd and 4-th vaidilutės and arrange their
+10 30                      shifts as follows:
+30 70
+                                  1-st vaidilutė works from the 10-th minute until the 30-th minute.
+20 40
+                                  2-nd vaidilutė works from the 30-th minute until the 70-th
+60 20                             minute.
+                                  4-th vaidilutė works from the 70-th minute until the 10-th minute
+                                  on the following day.
+
+
+1 100            -1        It is impossible to make a schedule since there is only one vaidilutė and
+30 40                      she cannot work the whole day.
+
+
+
+Constraints
+      1 ≤ N ≤ 2 ⋅ 105
+      2 ≤ M ≤ 109
+      0 ≤ si , ei < M (for all 1 ≤ i ≤ N )
+      si ≠ ei (for all 1 ≤ i ≤ N )
+
+Subtasks
+
+No.     Points   Additional constraints
+
+ 1        14     N ≤ 20.
+ 2        17     N ≤ 300.
+ 3           9   N ≤ 5 000.
+ 4        13     For all vaidilutės, s i < ei or ei = 0.
+
+                 For each vaidilutė, the time interval from time s i until time ei has the same
+ 5        21
+                 length.
+
+ 6        26     No additional constraints.
+
+
+
+
+                                                                                            fire (2 of 2)
+                                                BOI 2024                                          tiles
+                                               Vilnius, Lithuania                              d2 Tasks
+                                              May 3 - May 7, 2024                         English (HSC)
+
+
+
+
+Tiles
+Soon after converting to Christianity, it is believed that the ﬁrst and the only Lithuanian King
+Mindaugas ordered the construction of the Vilnius Cathedral. The construction is almost
+completed, except that the ﬂoor has to be covered with ceramic ornamented glazed tiles.
+
+The ﬂoor of the Vilnius Cathedral is a polygon in a 2D plane with a Cartesian coordinate system.
+The polygon has N distinct vertices, numbered from 1 to N . For each i such that 1 ≤ i ≤ N ,
+vertex i is located at point (X[i], Y [i]), where X[i] and Y [i] are nonnegative integers. There is an
+edge connecting vertex i and vertex i + 1 (for each i such that 1 ≤ i ≤ N − 1), as well as an edge
+connecting vertex N and vertex 1. The vertices are listed in either clockwise or counterclockwise
+order.
+
+The cathedral is an axis-aligned polygon, which means that each of the edges is parallel to either
+the x-axis or the y -axis. Moreover, the cathedral is a simple polygon, that is:
+
+         exactly two edges meet at each vertex;
+         any pair of edges can only meet at a vertex.
+
+The builders of the cathedral have inﬁnitely many pieces of tiles. Each piece is a square with side
+length equal to 2. The builders would like to cover a big part of the cathedral with these pieces.
+Speciﬁcally, the builders want to pick some vertical line and cover the part of the cathedral to the
+left of the line. For any integer k, let Lk denote the vertical line consisting of points with x-
+coordinate equal to k. A covering of the part of the cathedral to the left of Lk is a placement of
+some number of pieces in the plane such that:
+
+         each point which lies in the interior of the polygon and has x-coordinate less than k is
+         covered by some piece;
+         no point which lies outside of the polygon or has x-coordinate greater than k is covered by
+         some piece;
+         the interiors of the pieces do not overlap.
+
+The minimum x-coordinate of any vertex in the cathedral is 0. Let M denote the maximum x-
+coordinate of any vertex in the cathedral.
+
+
+Task
+
+Help the builders of the Vilnius Cathedral by determining the largest integer k, such that k ≤ M ,
+and there exists a covering of the part of the cathedral to the left of Lk . Note that by deﬁnition,
+
+
+                                                                                           tiles (1 of 4)
+there exists a covering of the part of the cathedral to the left of L0 (which uses 0 pieces).
+
+
+Input
+
+The ﬁrst line of the input contains two integers N and M – the number of vertices and the
+maximum x-coordinate of any vertex.
+
+Then, N lines follow. The i -th of them contains two integer numbers xi and yi – the coordinates of
+i-th vertex. The vertices are listed in either clockwise or counterclockwise order.
+
+Output
+
+Your program should output the maximum k, such that k ≤ M and there exists a covering of the
+part of the cathedral to the left of Lk .
+
+
+Examples
+
+ Input     Output                                       Explanation
+
+ 14 6      2          The following picture shows the part of the cathedral to the left of line Lk for
+ 0 1                  k = 2:
+ 0 3
+ 2 3
+ 2 4
+ 0 4
+ 0 6
+ 3 6
+ 3 7
+ 4 7
+ 6 7
+ 6 5
+ 3 5
+ 3 2
+ 3 1
+
+
+
+
+                      There is a covering of the part of the cathedral to the left of L2 . The covering
+                      uses two pieces. For any k > 2, there is no covering of the part of the
+                      cathedral to the left of Lk .
+
+
+
+                                                                                                tiles (2 of 4)
+4 3       0          There is no positive value of k such that the part of the cathedral to the left
+0 0                  of Lk could be covered with tiles.
+0 3
+3 3
+3 0
+
+18 9      6          As illustrated below, it is possible to cover the part of the cathedral to the left
+0 2                  of line L6 :
+2 2
+2 1
+4 1
+4 0
+9 0
+9 2
+4 2
+4 4
+7 4
+7 3
+9 3
+9 6
+4 6
+4 5
+2 5
+2 4
+                     For each k > 6, there is no covering of the part of the cathedral to the left of
+0 4                  Lk .
+
+
+Constraints
+      4 ≤ N ≤ 2 ⋅ 105
+      1 ≤ M ≤ 109
+      0 ≤ yi ≤ 109 (for each 1 ≤ i ≤ N )
+      The cathedral forms an axis-aligned simple polygon.
+      The minimum of x1 , x2 , ..., xN is 0, and the maximum of x1 , x2 , ..., xN is M .
+
+
+
+
+                                                                                              tiles (3 of 4)
+Subtasks
+
+  No.   Points   Additional constraints
+
+   1       4     N = 4.
+   2       9     N ≤ 6.
+   3     11      xN = 0, yN = 0, xi ≤ xi+1 , yi ≥ yi+1 (for each i such that 1 ≤ i ≤ N − 2).
+   4     19      M ≤ 1000 and all yi ≤ 1000.
+   5     22      All values of yi are even.
+
+   6     25      All values of xi are even.
+
+   7     10      No additional constraints.
+
+
+
+
+                                                                                     tiles (4 of 4)
+                                               BOI 2024                                         wall
+                                              Vilnius, Lithuania                              d2 Tasks
+                                             May 3 - May 7, 2024                         English (HSC)
+
+
+
+
+Flooding Wall
+It's the 14th century and construction of the Trakai Island Castle is to begin soon. The ﬁrst task on
+the chief architect's list is to plan the construction of the main castle wall.
+
+Building a wall that can protect the castle from any possible attack is quite tricky. To ensure the
+safety of the castle garrison, the chief architect has already narrowed the design space somewhat.
+
+Since attacks from the middle of the lake aren't as likely as attacks from the nearby shore, the wall
+does not need to form a closed loop. Instead, it will be in the shape of a straight line, and consist
+of N segments arranged from one end to the other and numbered 1 to N . What still remains is
+picking the height of each segment.
+
+The chief architect has already picked two possible heights for each segment. He decided that the
+height of the i -th segment will be either ai or bi . Thus, 2N possibilities remain.
+
+Having the castle on a small island in a lake has its diﬃculties. During stormy weather, the castle
+can get ﬂooded. In such cases, water collects above wall segments if there are higher segments to
+each side of them, preventing the water from draining.
+
+For a particular choice of the segments’ heights, we are interested in the amount of water that will
+collect on the wall after a heavy storm. This is illustrated in the following ﬁgure, where the
+segments’ heights from left to right are 4, 2, 1, 8, 6, 2, 7, 1, 2, 3 and the level of water at each
+position is 4, 4, 4, 8, 7, 7, 7, 3, 3, 3.
+
+
+
+
+                                                                                          wall (1 of 3)
+Formally, for every i = 1, 2, ..., N , the level of water at position i is at least h if and only if there
+exist integers l and r such that l ≤ i and i ≤ r and the segment heights at positions l and r are at
+least h. In particular, the level of water at positions 1 and N is always equal to the heights of the
+corresponding segments, and the level of water at any position is always at least as large as the
+height of the corresponding segment. The amount of water that collects at position i is equal to
+the diﬀerence between the level of water and the height of the segment. The total amount of
+water collected is just the sum of collected water at positions 1, 2, ..., N .
+
+
+Task
+
+Your task is to compute the sum, over all 2N possible walls, of the total amount of collected water.
+You should output the answer modulo 109 + 7.
+
+
+Input
+
+The ﬁrst line of the input contains one integer number N .
+
+The second line of the input contains N integers a1 , a2 , ..., aN .
+
+The third line of the input contains N integers b1 , b2 , ..., bN .
+
+
+Output
+
+Your program should output a single integer, the sum of the total amount of water collected over
+all 2N possible walls modulo 109 + 7.
+
+
+Examples
+
+             Input                 Output                              Explanation
+
+ 4                                 6           There is a single possible wall where two units of water
+ 1 1 1 1                                       are collected:
+ 2 2 2 2
+                                                      2112
+
+                                               and four possible walls where one unit of water is
+                                               collected:
+
+                                                      1 2 1 2,
+                                                      2 1 2 1,
+                                                      2 1 2 2,
+                                                      2 2 1 2.
+
+
+
+
+                                                                                              wall (2 of 3)
+ 10                                21116
+ 1 2 3 4 5 6 7 8 9 10
+ 10 9 8 7 6 5 4 3 2 1
+
+
+
+Constraints
+
+1 ≤ N ≤ 5 ⋅ 105 .
+
+1 ≤ ai , bi ≤ 109 and ai ≠ bi (for all 1 ≤ i ≤ N ).
+
+Subtasks
+
+                    No.   Points    Additional constraints
+
+                     1      8       N ≤ 20.
+                     2      17      N ≤ 100 and for all segments, ai , bi ≤ 1 000.
+                     3      19      N ≤ 10 000 and for all segments, ai , bi ≤ 1 000.
+                     4      14      N ≤ 10 000.
+                     5      12      For all segments, ai , bi ≤ 2.
+
+                     6      30      No additional constraints.
+
+
+
+
+                                                                                        wall (3 of 3)
+

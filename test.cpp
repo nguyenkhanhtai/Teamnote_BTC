@@ -35,8 +35,24 @@ void sub(int &a, int b){
     a -= b;
     if (a < 0) a += MOD;
 }
+
+
 void solve(){
-    
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> a(n+1, 0), b(m+1, 0);
+    int dif_gcd = 0;
+    FOR(i, 1, n){
+        cin >> a[i];
+        if (i > 1) dif_gcd = __gcd(abs(a[i] - a[i - 1]), dif_gcd);
+    }
+    FOR(i, 1, m){
+        cin >> b[i];
+        cout << __gcd(abs(a[1] + b[i]), dif_gcd) << ' ';
+    }
+
+
 }
 main(){
     fastio;

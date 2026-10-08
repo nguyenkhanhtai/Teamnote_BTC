@@ -1,0 +1,371 @@
+          Hrvatska informatička olimpijada
+                          10. svibnja 2026.
+
+
+
+
+                                Zadaci
+Zadatak      Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+Izgubljen         3.5 sekundi               512 MiB              100
+Jedinstven        1 sekunda                 512 MiB              100
+Mrak               5 sekundi                512 MiB              100
+Ograda            1 sekunda                 512 MiB              100
+
+Ukupno                                                           400
+       Hrvatska informatička olimpijada                                                        Zadatak Izgubljen
+       10. svibnja 2026.                                                     3.5 sekundi / 512 MiB / 100 bodova
+
+
+Zadatak Izgubljen
+Nino se izgubio u gradu. Za potrebe ovog zadataka, grad možemo zamisliti kao povezan graf s N čvorova
+označenih od 1 do N te N − 1 bridova (drugim riječima, grad tvori stablo). Nino se nalazi negdje i
+njegova dva prijatelja pokušavaju shvatiti gdje.
+Znaju da je Nino danas imao K odredišta A1 . . . AK . Ako zamislimo da je Nino započeo dan u čvoru v,
+Nino će redom za svako odredište Ai :
+
+   • ako se nalazi na njemu, ništa neće napraviti,
+
+   • inače će napraviti točno jedan korak prema odredištu, t.j. pomaknut će se u susjeda najbližeg
+     trenutnom odredištu.
+
+Ako je Nino započeo dan u čvoru v, označimo završni čvor s f (v). Ako je T = 1, Ninine prijatelje zanima
+za svaki mogući početni čvor v, koji je čvor f (v). Ako je T = 2, Ninini prijatelji će se zadovoljiti s brojem
+različitih vrijednosti koje f (v) može postići za v od 1 do N .
+
+Ulazni podaci
+U prvom su retku prirodni brojevi N , K i T .
+U sljedećih N − 1 redaka nalaze se parovi brojeva a i b (1 ≤ a, b ≤ N, a ̸= b), redom bridovi grafa.
+U posljednjem je retku niz Ai (1 ≤ Ai ≤ N ) od K prirodnih brojeva, niz Nininih odredišta.
+
+Izlazni podaci
+Ako je T = 1, ispišite f (1), f (2), . . . , f (N ) u jednom retku, odvojene razmakom.
+Ako je T = 2, ispišite broj različitih vrijednosti u skupu {f (1), f (2), . . . , f (N )}.
+
+Bodovanje
+U svim podzadacima vrijedi 1 ≤ N, K ≤ 300 000.
+
+ Podzadatak       Broj bodova      Ograničenja
+
+       1               13          N, K ≤ 1000, T = 1
+       2               21          T = 1, stablo je lanac
+       3               33          T =2
+       4               33          T =1
+
+
+
+
+                                                       1 od 8
+         Hrvatska informatička olimpijada                                             Zadatak Izgubljen
+         10. svibnja 2026.                                          3.5 sekundi / 512 MiB / 100 bodova
+
+
+Probni primjeri
+ ulaz                                 ulaz                              ulaz
+ 4 2 1                                4 2 2                             6 3 1
+ 1 2                                  1 2                               1 2
+ 2 3                                  2 3                               1 3
+ 3 4                                  3 4                               2 4
+ 4 1                                  4 1                               2 5
+                                                                        3 6
+ izlaz                                izlaz                             4 6 5
+ 1 2 3 3                              3                                 izlaz
+                                                                        2 5 1 5 2 3
+
+
+Pojašnjenje probnih primjera:
+Stablo je lanac 1 − 2 − 3 − 4, a Ninova odredišta su A1 = 4 i A2 = 1.
+Ako je Nino započeo dan u čvoru 1: za A1 = 4 napravi korak prema 4 i dođe u čvor 2; za A2 = 1 napravi
+korak prema 1 i vrati se u čvor 1, dakle f (1) = 1. Analogno se dobiva f (2) = 2 i f (3) = 3.
+Ako je Nino započeo dan u čvoru 4: za A1 = 4 ne pomiče se jer je već na odredištu; za A2 = 1 napravi
+korak prema 1 i dođe u čvor 3, dakle f (4) = 3.
+U prvom probnom primjeru (T = 1) ispisujemo f (1), f (2), f (3), f (4). U drugom (T = 2) ispisujemo broj
+različitih vrijednosti koje f (v) poprima: skup {1, 2, 3} sadrži 3 elementa.
+
+
+
+
+                                                2 od 8
+         Hrvatska informatička olimpijada                                                  Zadatak Jedinstven
+         10. svibnja 2026.                                                   1 sekunda / 512 MiB / 100 bodova
+
+
+Zadatak Jedinstven
+Svaki niz nula i jedinica duljine N je poseban i jedinstven na svoj način. No to nije uvijek tako.
+Zadan je niz od N − 1 parova (Li , Ri ), gdje 1 ≤ Li ≤ Ri ≤ N za svaki i = 1, . . . , N − 1. Potrebno je
+ispisati dva različita niza nula i jedinica duljine N tako za svaki i vrijedi sljedeće: broj jedinica u prvom
+nizu između Li -te i Ri -te pozicije jednak je broju jedinica u drugom nizu između Li -te i Ri -te pozicije.
+Može se dokazati da će takva dva niza uvijek postojati.
+Dodatno, potrebno je ispisati tražene nizove za T različitih scenarija.
+
+Ulazni podaci
+U prvom je retku prirodan broj T , broj različitih scenarija.
+U sljedećim retcima slijede opisi scenarija. Svaki je opis zadan u sljedećem formatu.
+U prvom je retku prirodan broj N , duljina traženih nizova.
+U sljedećih N − 1 redaka nalaze se parovi (Li , Ri ), za i = 1, 2, . . . , N − 1.
+
+Izlazni podaci
+Za svaki od T scenarija ispišite dva niza znakova 0 ili 1 duljine N , svaki u svoj redak. Ispisani nizovi
+moraju zadovoljavati uvjete zadatka.
+
+Bodovanje
+U svim podzadacima vrijedi 1 ≤ T ≤ 10 000, 1 ≤ N ≤ 200 000 te da je zbroj svih vrijednosti N po svim
+scenarijima manji ili jednak od 200 000.
+
+ Podzadatak       Broj bodova     Ograničenja
+
+         1             13         Za svaki scenarij: za svaki i, interval [Li , Ri ] ima parno mnogo elemenata.
+         2             20         Zbroj vrijednosti N po svim scenarijima je ≤ 20.
+         3             33         Zbroj vrijednosti N po svim scenarijima je ≤ 2000.
+         4             34         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                  ulaz                                   ulaz
+ 1                                     1                                      1
+ 3                                     5                                      7
+ 1 1                                   1 3                                    1 7
+ 2 3                                   2 4                                    2 6
+                                       3 4                                    2 7
+ izlaz                                 3 5                                    3 4
+ 001                                                                          3 5
+                                       izlaz                                  4 5
+ 010
+                                       00100                                  izlaz
+                                       10010
+                                                                              0001010
+                                                                              0101000
+
+
+
+
+                                                     3 od 8
+      Hrvatska informatička olimpijada                                   Zadatak Jedinstven
+      10. svibnja 2026.                                    1 sekunda / 512 MiB / 100 bodova
+
+
+Pojašnjenje trećeg probnog primjera:
+Broj jedinica između pozicija 1 i 7 u oba niza iznosi 2.
+Broj jedinica između pozicija 2 i 6 u oba niza iznosi 2.
+Broj jedinica između pozicija 2 i 7 u oba niza iznosi 2.
+Broj jedinica između pozicija 3 i 4 u oba niza iznosi 1.
+Broj jedinica između pozicija 3 i 5 u oba niza iznosi 1.
+Broj jedinica između pozicija 4 i 5 u oba niza iznosi 1.
+
+
+
+
+                                                  4 od 8
+       Hrvatska informatička olimpijada                                                      Zadatak Mrak
+       10. svibnja 2026.                                                  5 sekundi / 512 MiB / 100 bodova
+
+
+Zadatak Mrak
+Mr. Malnar poznati je gurman i česti gost svojeg omiljenog restorana Kosta.
+Jedne je večeri, baš nakon što je naručio kilu janjetine, u restoranu iznenada nestalo svjetla. Mr. Malnar
+se našao na nekom slobodnom polju restorana, ali zbog mraka ne zna na kojem. Srećom, vlasnika poznaje
+dovoljno dobro pa je unaprijed taj dan odabrao raspored prostora u restoranu: slobodna polja i prepreke
+(stolovi). Sada, nakon što je nestalo svjetla, kretanjem po mraku želi što brže zaključiti na kojem je polju
+započeo.
+Restoran je predstavljen matricom dimenzija 500 × 500. Svako polje matrice je ili slobodno polje, označeno
+znakom ‘.’, ili prepreka, označena znakom ‘#’. Vaš program najprije treba odabrati i ispisati takvu matricu.
+Matrica smije sadržavati najviše 500·500
+                                     2   prepreka.
+Nakon što je matrica odabrana, interaktor će provesti T nezavisnih scenarija. U svakom scenariju
+interaktor odabire jedno slobodno polje matrice kao početno polje Mr. Malnara. To polje nije poznato
+vašem programu. Cilj je, koristeći upite za kretanje, odrediti početno polje tog scenarija.
+
+Interakcija
+Ovo je interaktivni zadatak. Vaš program treba uspostaviti dijalog s programom izrađenim od strane
+organizatora koji odgovara na postavljene upite.
+Na početku izvođenja vaš program treba na standardni izlaz ispisati matricu restorana. Matrica se ispisuje
+u 500 redaka, svaki duljine 500, pri čemu svaki znak mora biti ‘.’ ili ‘#’. Retke je potrebno ispisati bez
+razmaka između znakova. Broj znakova ‘#’ u cijeloj matrici smije biti najviše 125 000. Nakon ispisa
+matrice, vaš program treba napraviti flush izlaza.
+Zatim vaš program sa standardnog ulaza treba pročitati prirodan broj T , broj scenarija koje će interaktor
+provesti. U svim testnim primjerima dimenzija matrice iznosi 500 × 500.
+ Nakon toga počinje prvi scenarij. U svakom scenariju vaš se program nalazi na slobodnom polju koje je
+ interaktor odabrao kao početno polje tog scenarija. Vaš program može slati upite pisanjem na standardni
+ izlaz. Svaki upit treba biti ispisan u zaseban redak te poprimati oblik “? c”, gdje je c jedan od znakova
+‘U’, ‘L’, ‘R’ ili ‘D’. Ti znakovi redom označavaju pokušaj pomaka za jedno polje prema gore, lijevo, desno ili
+ dolje.
+Nakon svakog ispisanog upita, vaš program treba napraviti flush izlaza te sa standardnog ulaza pročitati
+odgovor na upit. Odgovor je broj iz skupa {0, 1}:
+
+   • odgovor 0 znači da se u zadanom smjeru nalazi prepreka ili rub matrice; Mr. Malnar ostaje na istom
+     polju,
+
+   • odgovor 1 znači da je susjedno polje u zadanom smjeru slobodno; Mr. Malnar se pomiče na to polje.
+
+Kada je vaš program odredio početno polje trenutnog scenarija, treba na standardni izlaz ispisati odgovor
+u obliku “! x y”, gdje su x i y redom redak i stupac početnog polja. Stupci se broje slijeva nadesno, a
+retci odozgo prema dolje, oba 1-indeksirano. Nakon ispisa odgovora, vaš program treba napraviti flush
+izlaza. Ako odgovor nije točan, interaktor će vratiti −1.
+Ako scenarij nije posljednji, nakon točnog odgovora odmah započinje sljedeći scenarij. Položaj Mr.
+Malnara tada se ponovno postavlja na novo početno polje koje odabire interaktor. Nakon što vaš program
+točno odgovori na svih T scenarija, treba završiti izvođenje.
+Ako vaš program u bilo kojem trenutku sa standardnog ulaza pročita broj −1, to znači da je napravio
+neispravan ispis, prekršio ograničenja ili dao netočan odgovor. U tom slučaju treba odmah završiti
+izvođenje.
+
+
+                                                   5 od 8
+         Hrvatska informatička olimpijada                                                      Zadatak Mrak
+         10. svibnja 2026.                                                  5 sekundi / 512 MiB / 100 bodova
+
+
+Bodovanje
+Neka je Q najveći broj upita oblika “? c” koje je vaš program postavio u jednom scenariju, gledano preko
+svih scenarija i svih testnih primjera odgovarajućeg podzadatka. Upiti korišteni za različite scenarije ne
+zbrajaju se; promatra se samo najgori pojedinačni scenarij.
+U prvom podzadatku vrijedi T = 500 za svaki testni primjer. Prvi podzadatak nosi najviše 22 boda, a
+broj bodova S1 (Q) računa se na sljedeći način:
+
+                                       0,             Q > 1000,
+                                       
+                                       
+                              S1 (Q) = 22 · 1000−106 , 106 ≤ Q ≤ 1000,
+                                              1000−Q
+
+                                          22,          Q < 106.
+                                       
+                                       
+
+
+U drugom podzadatku vrijedi T = 2500 za svaki testni primjer. Drugi podzadatak nosi najviše 78 bodova,
+a broj bodova S2 (Q) računa se na sljedeći način:
+                                       
+                                       
+                                       
+                                        0,                Q > 106,
+                                       28 · 106−Q ,
+                                       
+                                                           60 ≤ Q ≤ 106,
+                              S2 (Q) =        106−60
+                                       
+                                       
+                                        28 + 50 · 60−35 , 35 ≤ Q < 60,
+                                                   60−Q
+
+                                       78,
+                                       
+                                                           Q < 35.
+
+Ukupan broj bodova jednak je zbroju bodova ostvarenih na oba podzadatka.
+
+Primjer interakcije
+Iako će u svim testnim primjerima matrica biti dimenzija 500 × 500, radi ilustracije navodimo primjer
+interakcije za matricu dimenzija 6 × 6. U stvarnom zadatku vaš program mora ispisati matricu dimenzija
+500 × 500.
+Pretpostavimo da je T = 1 te da je vaš program ispisao sljedeću matricu:
+
+                                             .   .   #   .    .   .
+                                             .   #   #   .    #   .
+                                             .   .   .   .    #   .
+                                             #   #   .   #    .   .
+                                             .   .   .   #    .   #
+                                             .   #   .   .    .   .
+
+Neka je interaktor u jedinom scenariju odabrao početno polje (x, y) = (5, 3). Jedna moguća interakcija
+tada je:
+
+ Izlaz       Ulaz    Napomena
+
+ ?   U         1     Mr. Malnar se pomiče s polja (5, 3) na polje (4, 3).
+ ?   R         0     Desno od trenutnog polja nalazi se prepreka.
+ ?   D         1     Mr. Malnar se vraća na polje (5, 3).
+ ?   D         1     Mr. Malnar se pomiče na polje (6, 3).
+ !   5 3             Program je točno odredio početno polje scenarija.
+
+Primjer služi samo za ilustraciju interakcije.
+
+
+
+
+                                                     6 od 8
+      Hrvatska informatička olimpijada                                                   Zadatak Ograda
+      10. svibnja 2026.                                                 1 sekunda / 512 MiB / 100 bodova
+
+
+Zadatak Ograda
+Darko želi obojati svoju ogradu duljine N metara. Za svaki je metar ograde odredio treba li taj dio ograde
+biti obojan u crvenu ili plavu boju. Darko će se kretati uz ogradu te će u svakom trenutku pri ruci imati
+kantu punu boje (crvene ili plave) i kist.
+Darko kreće s lijevog kraja ograde te može birati hoće li krenuti s kantom plave boje ili kantom crvene
+boje. U svakom trenutku Darko može napraviti jedno od sljedećeg:
+
+   • Može se pomaknuti jedan metar prema lijevo ili prema desno. Pomak traje jednu minutu.
+
+   • Može se pomaknuti jedan metar prema lijevo ili prema desno te pritom obojati prođeni metar ograde
+     koristeći boju koju trenutno ima u kanti. Promatrani metar ograde poprima boju koja je trenutno u
+     kanti, bez obzira na to je li taj dio ograde bio obojan prije. Navedeni pomak također traje jednu
+     minutu.
+
+   • Može zamijeniti kantu boje iz crvene u plavu ili obratno. Postupak zamjene boje traje C minuta.
+
+Naravno, Darko se ne može pomaknuti prema lijevo ukoliko se već nalazi na lijevom kraju ograde te se ne
+može pomaknuti prema desno ukoliko se već nalazi na desnom kraju ograde. Darku je cilj u što kraćem
+vremenu obojati svaki metar ograde u željenu boju. Pri tome, ne mora nužno završiti na desnom
+kraju ograde.
+Odredite koliko je najmanje minuta potrebno da Darko oboja cijelu ogradu u željene boje. Dodatno,
+potrebno je odrediti traženi najmanji broj minuta za T scenarija.
+
+Ulazni podaci
+U prvom je retku prirodan broj T , broj različitih scenarija.
+U sljedećim retcima slijede opisi scenarija. Svaki je opis zadan u sljedećem formatu.
+U prvom su retku prirodni brojevi N i C, redom duljina ograde u metrima i vrijeme potrebno za promjenu
+boje.
+U drugom je retku niz od N znakova C ili P, pri čemu i-ti znak označava željenu boju i-tog metra ograde
+(crvena ili plava).
+
+Izlazni podaci
+Ispišite T redaka. U i-tom retku ispišite traženi najmanji mogući broj minuta za i-ti scenarij.
+
+Bodovanje
+U svim podzadacima vrijedi 1 ≤ C ≤ 200 000 te da je zbroj svih vrijednosti N po svim scenarijima manji
+ili jednak od 200 000.
+
+ Podzadatak     Broj bodova    Ograničenja
+
+      1               9        N ≤ 10 za svaki scenarij i zbroj vrijednosti N 4 je ≤ 106 .
+      2              27        N ≤ 1000 za svaki scenarij i zbroj vrijednosti N 2 je ≤ 106 .
+                               Za svaki scenarij postoji najviše pet različitih vrijednosti i (1 ≤ i < N )
+      3              25
+                               takvih da su i-ti te (i + 1)-vi metar ograde različite željene boje.
+      4              39        Nema dodatnih ograničenja.
+
+
+
+
+                                                  7 od 8
+         Hrvatska informatička olimpijada                                              Zadatak Ograda
+         10. svibnja 2026.                                            1 sekunda / 512 MiB / 100 bodova
+
+
+Probni primjeri
+ ulaz
+ 3
+ 3 1
+ CPC
+ 3 5
+ CPC
+ 14 4
+ CCPPPPCPCCCPPC
+
+ izlaz
+ 5
+ 10
+ 30
+
+
+Pojašnjenje probnog primjera:
+U prvom scenariju potrebno je 5 minuta. Darko kreće s crvenom bojom. Potrebna su tri pomicanja prema
+desno i između svaka dva potrebno je promijeniti boju.
+U drugom scenariju Darko kreće s crvenom bojom te se pomiče tri metra prema desno i oboja cijelu
+ogradu u crvenu boju. Zatim se vrati jedan metar prema lijevo, promijeni boju u plavu, te oboja preostali
+metar ograde.
+
+
+
+
+                                                 8 od 8
+

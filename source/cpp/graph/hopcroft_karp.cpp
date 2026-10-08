@@ -3,6 +3,8 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: HopcroftKarp hk(2,3); hk.add_edge(0,1); int k = hk.solve();
+  //      hk.left[u], hk.right[v]: matched ID; -1 if unmatched.
   // Left vertices [0,L), right [0,R). solve() returns maximum cardinality.
   struct HopcroftKarp {
     vector<vector<int>> g; vector<int> distance; int shortest;
@@ -19,7 +21,7 @@ namespace notebook::graph {
     HopcroftKarp(int L,int R):g(L),distance(L),left(L,-1),right(R,-1){}
     void add_edge(int u, int v) { g[u].push_back(v); }
     int solve() {
-      int count=count_if(left.begin(),left.end(),[](int x){ return x>=0; });
+      int count=0; for (int x:left) if (x>=0) ++count;
       for (;;) {
         fill(distance.begin(),distance.end(),-1); queue<int>q; shortest=INT_MAX;
         for (int u = 0; u < int(g.size()); ++u) if (left[u] < 0) {

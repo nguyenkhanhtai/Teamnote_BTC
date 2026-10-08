@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: XorBasis basis; basis.insert(7); auto best = basis.maximum();
   struct XorBasis {
     array<uint64_t, 64> b {}; int count = 0;
     bool insert(uint64_t x) {

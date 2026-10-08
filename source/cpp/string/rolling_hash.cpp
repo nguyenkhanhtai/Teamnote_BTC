@@ -3,13 +3,14 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: RollingHash h("abc"); auto hash = h.get(0,2);
   struct RollingHash {
     using U=uint64_t; static constexpr U MOD=(U(1)<<61)-1; vector<U>h,p;
     static U mul(U a, U b) {
       __uint128_t x=(__uint128_t)a*b; U v=(U)(x&MOD)+(U)(x>>61); return v>=MOD?v-MOD:v;
     }
     // Use the same base for hashes to be compared; equality is probabilistic. Randomize the shared base for adversarial inputs.
-    explicit RollingHash(string_view s,U base=911382323):h(s.size()+1),p(s.size()+1,1){
+    RollingHash(string_view s,U base=911382323):h(s.size()+1),p(s.size()+1,1){
       assert(base > 256 && base < MOD);
       for (size_t i = 0; i < s.size(); ++i) {
         h[i+1]=(mul(h[i],base)+(unsigned char)s[i]+1)%MOD; p[i+1]=mul(p[i],base);

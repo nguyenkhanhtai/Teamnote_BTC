@@ -1,0 +1,102 @@
+                                                                                                            Day 1
+                                                                                                    Task: balance
+                                                                                                    Language: en
+
+
+Brought Down the Grading Server? (balance)
+
+A hectic first competition day has passed… While the Scientific Committee narrowly fought off the
+hacking attack on the grading server, they fear that it affected the scoring of the submissions. There
+is only one option: all submissions have to be rejudged!
+The grading server has 𝑁 processor cores. The committee has already assigned a list of 𝑆 submissions
+to each core, where each submission is to one of the 𝑇 tasks of the competition (numbered 1, … , 𝑇).
+The committee made sure that 𝑆 is a power of two.* Now, in the next 𝑆 minutes, each core will evaluate
+exactly one submission from its list per minute.
+Unfortunately, the database containing the task data is quite fragile and could crash if the number of
+simultaneous requests for a single task’s data varies widely. Therefore, the committee wants to order
+the submissions of each core in such a way that, during the rejudging, the maximum and minimum
+number of simultaneously evaluated submissions for any single task differ by at most one.
+Write a program which computes such an ordered assignment of the submissions to the cores.
+
+
+Input
+
+The first line of input contains the three integers 𝑁, 𝑆, and 𝑇 described above.
+Then, 𝑁 lines follow describing the submissions assigned to the cores. The 𝑖-th of these lines contains
+𝑆 integers 𝑡1 , … , 𝑡𝑆 (1 ≤ 𝑡𝑗 ≤ 𝑇), meaning that the 𝑖-th core is assigned submissions to the tasks 𝑡1 , … , 𝑡𝑆
+respectively.
+
+
+Output
+
+Your program should output 𝑁 lines that describe an ordered assignment of the submissions to the
+cores such that the maximum and minimum number of simultaneously evaluated submissions for any
+single task differ by at most one: The 𝑖-th of these lines should contain 𝑆 integers 𝑟1 , … , 𝑟𝑆 , meaning
+that the 𝑖-th core evaluates a submission to task 𝑟𝑗 during the 𝑗-th minute. It is guaranteed that such
+an assignment exists for each testcase.
+
+
+Constraints and grading
+
+We always have that 𝑆 = 2𝑘 for some positive integer 𝑘, 1 ≤ 𝑁, 𝑆, 𝑇 ≤ 100 000 and 𝑁 ⋅ 𝑆 ≤ 500 000.
+Subtask 1 (10 points). 𝑆 = 2 and 𝑁, 𝑇 ≤ 20
+Subtask 2 (15 + 5 + 5 points). 𝑆 = 2
+Subtask 3 (15 + 5 + 5 points). 𝑁 ⋅ 𝑆 ≤ 10 000
+Subtask 4 (20 + 10 + 10 points). No further constraints.
+Partial scoring. In Subtasks 2, 3, and 4, you can obtain partial scores as indicated in the brackets:
+         The first number represents the number of points awarded if you solve all testcases in which
+         𝑇 ≤ 𝑁 and the total number of submissions to each task is divisible by 𝑆.
+
+* Due to a bug,† the judging system would crash otherwise, taking down all firewalls and potentially exposing sensitive
+    information!
+†
+    You had one job, Wolfgang!
+
+
+
+                                                         1/2
+                                                                                               Day 1
+                                                                                       Task: balance
+                                                                                       Language: en
+
+
+      The second number represents the number of additional points awarded if you more generally
+      solve all testcases in which 𝑇 ≤ 𝑁.
+      The third number represents the number of additional points awarded if you solve all testcases.
+In the web interface, this is shown as “Group 1,” “Group 2,” and “Group 3” of the corresponding subtask.
+
+
+Examples
+
+              Input                                Output
+
+ 3 2 3                                2 1
+ 1 2                                  3 2
+ 2 3                                  2 3
+ 2 3
+
+ 3 4 3                                2 2 2 3
+ 2 3 2 2                              3 2 3 2
+ 2 3 3 2                              2 3 2 2
+ 2 2 3 2
+
+
+In the output of the first example, the difference between the maximum and the minimum number
+of simultaneously evaluated submissions is one for tasks 1 and 2 and zero for task 3. On the other
+hand, ordering the submissions as in the input would not have constituted a valid output because
+the difference between the maximum and the minimum number of simultaneously evaluations
+submissions for task 3 is two.
+In the output of the second example, the difference between the maximum and the minimum number
+of simultaneously evaluated submissions is zero for all three tasks.
+
+
+Limits
+
+Time: 2 s
+Memory: 1024 MiB
+
+
+
+
+                                                 2/2
+

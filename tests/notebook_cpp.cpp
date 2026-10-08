@@ -1051,7 +1051,7 @@ void test_additional() {
     }
   }
   {
-    MonotoneMinQueue<int>q;
+    MonotoneMinQueue q;
     q.push(0,4);
     q.push(1,3);
     q.push(2,5);
@@ -1303,7 +1303,7 @@ void test_legacy() {
     auto merge=[](long long a,long long b) {
       return a+b;
     };
-    SegmentTree<long long,decltype(merge)>tree(a,0,merge);
+    SegmentTree tree(a,0,merge);
     SparseRangeSum sparse(0,n);
     PersistentRangeSum persistent(n);
     int root=0;
@@ -1345,7 +1345,7 @@ void test_legacy() {
     vector<long long>zeros(n);
     RangeAddPointQuery dual(n);
     BlockArray block(zeros);
-    IntervalSet<int>intervals(0,n,0);
+    IntervalSet intervals(0,n,0);
     vector<int>values(n);
     for(int step=0;step<100;++step) {
       int l=rng()%n,r=l+rng()%(n-l+1);
@@ -1396,7 +1396,7 @@ void test_legacy() {
     for(auto&p:points)p= {
       (double)(rng()%40),(double)(rng()%40)
     };
-    KDTree<2>kd(points);
+    KDTree kd(points);
     for(int step=0;step<20;++step) {
       array<double,2>q {
         (double)(rng()%40),(double)(rng()%40)
@@ -1443,7 +1443,7 @@ void test_legacy() {
   for(int rep=0;rep<80;++rep) {
     BinaryTrie trie;
     multiset<uint64_t>keys;
-    ErasablePriorityQueue<uint64_t>pq;
+    ErasablePriorityQueue pq;
     LiChao lc(-100,101);
     LineContainer hull;
     vector<pair<long long,long long>>lines;
@@ -1462,7 +1462,7 @@ void test_legacy() {
       }
       require(trie.size()==(int)keys.size()&&pq.size()==keys.size());
       if(!keys.empty()) {
-        require(pq.top()==*keys.rbegin());
+        require(pq.top()==(long long)*keys.rbegin());
         uint64_t want=0;
         for(auto x:keys)want=max(want,x^key);
         require(trie.max_xor(key)==want);
@@ -1550,24 +1550,24 @@ void test_legacy() {
     }
   }
   {
-    auto builder=[](const vector<int>&a) {
+    auto builder=[](const vector<long long>&a) {
       auto b=a;
       sort(b.begin(),b.end());
       return b;
     };
-    ExpandableIndex<int,decltype(builder)>index(builder);
+    ExpandableIndex index(builder);
     vector<int>all;
     for(int i=0;i<100;++i) {
       int x=rng()%20;
       all.push_back(x);
       index.insert(x);
       int count=0;
-      index.query([&](const vector<int>&bucket) {
+      index.query([&](const vector<long long>&bucket) {
         count+=upper_bound(bucket.begin(),bucket.end(),x)-lower_bound(bucket.begin(),bucket.end(),x);
       });
       require(count==std::count(all.begin(),all.end(),x));
     }
-    HashMap<int>hash;
+    HashMap hash;
     hash[3]=7;
     require(hash.at(3)==7);
   }
@@ -1619,15 +1619,12 @@ void test_interface_boundaries() {
     require(rebuilt==bytes);
   }
   using namespace notebook::data_structure;
-  auto concatenate=[](std::string a,std::string b) {
-    return a+b;
-  };
-  SegmentTree<std::string,decltype(concatenate)>ordered( {
-    "ab","cd","ef"
-  },"",concatenate);
-  require(ordered.fold(0,3)=="abcdef"&&ordered.fold(1,3)=="cdef");
-  ordered.set(1,"z");
-  require(ordered.fold(0,3)=="abzef");
+  // Associative noncommutative merge: first nonzero, identity 0.
+  auto first_nonzero=[](long long a,long long b) { return a ? a : b; };
+  SegmentTree ordered({1,2,3},0,first_nonzero);
+  require(ordered.fold(0,3)==1 && ordered.fold(1,3)==2);
+  ordered.set(1,7);
+  require(ordered.fold(1,3)==7);
   LiChao empty_lines(-1,2);
   LineContainer hull;
   require(!empty_lines.minimum(0)&&!hull.maximum(0));
@@ -1650,22 +1647,14 @@ void test_interface_boundaries() {
     for(auto[m,b]:lines)best=max(best,(__int128)m*x+b);
     require(hull.maximum(x)==best);
   }
-  KDTree<3>kd( {
-    array<double,3> {
-      1,2,3
-    }
-  });
-  require(!kd.nearest( {
-    0,0,0
-  },0));
-  require(kd.nearest( {
-    0,0,0
-  })->second==14);
+  KDTree kd({{1,2}});
+  require(!kd.nearest({0,0},0));
+  require(kd.nearest({0,0})->second==5);
   PersistentRangeSum persistent(0);
   require(persistent.sum(0,0,0)==0);
   Fenwick2D fenwick(0,0);
   require(fenwick.sum(0,0,0,0)==0);
-  ErasablePriorityQueue<int>q;
+  ErasablePriorityQueue q;
   require(!q.erase(1));
   q.insert(1);
   q.insert(1);

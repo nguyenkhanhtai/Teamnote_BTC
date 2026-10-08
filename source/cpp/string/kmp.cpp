@@ -3,6 +3,7 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto positions = kmp_matches("ababa","aba");
   vector<int> prefix_function(string_view s) {
     vector<int> p(s.size());
     for (int i = 1; i < (int) s.size(); ++i) {

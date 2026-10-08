@@ -1,0 +1,359 @@
+Croatian Open Competition in Informatics
+                Round 2, November 22nd 2025
+
+
+
+
+                         Tasks
+      Task            Time limit   Memory limit   Score
+
+      Minesweeper      5 seconds     512 MiB        50
+      Dodatna          1 second      512 MiB        70
+      Natjecanje       1 second      512 MiB       110
+      Rastući          1 second      512 MiB       110
+      Tornjevi         1 second      512 MiB       110
+
+      Total                                        450
+         Croatian Open Competition in Informatics                                         Task Minesweeper
+         Round 2, November 22nd 2025                                         5 seconds / 512 MiB / 50 points
+
+
+Task Minesweeper
+Marko is a regular university student who still shows up to every lecture, even
+though his stomach and head often ache from studying late into the night. Because
+he’s also a gifted student, he often finds the lectures boring, so instead of listening
+he plays his favorite game, Minesweeper. Eventually, even that got boring, so he
+decided to create his own version of the game.
+In Marko’s version of Minesweeper, he starts the game already knowing the positions
+of all k bombs on a board with n rows and m columns. Each cell can contain at
+most one bomb.
+His task is to fill every non-bomb cell with the number of bombs in the eight
+surrounding cells. Cells that contain bombs are marked with "B". Your task is to output the matrix
+generated according to Marko’s rules.
+
+Input
+In the first line are the natural numbers n, m and k (1 ≤ n, m ≤ 500, 1 ≤ k ≤ n · m), the numbers from
+the problem statement.
+In each of the following k lines are the numbers ri and si (1 ≤ ri ≤ n, 1 ≤ si ≤ m), the row and column
+in which one of the bombs is located.
+
+Izlazni podaci
+In n rows, output m characters separated by a space, the matrix produced according to the rules of
+Marko’s game.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n=1
+     2          18     k=1
+     3          17     No additional constraints.
+
+Examples
+ input                                                   input
+
+ 1 6 1                                                   3 3 3
+ 1 3                                                     1 1
+                                                         2 3
+ output                                                  1 3
+ 0 1 B 1 0 0                                             output
+                                                         B 3 B
+                                                         1 3 B
+                                                         0 1 1
+
+
+Clarification of the first example: In the cell in the 3rd column there is a bomb (the letter "B"). The
+cells of the matrix in the 2nd and 4th columns (marked with the number 1) are adjacent to it.
+
+
+
+                                                    1 of 9
+         Croatian Open Competition in Informatics                                             Task Dodatna
+         Round 2, November 22nd 2025                                          1 second / 512 MiB / 70 points
+
+
+Task Dodatna
+The famous mentor Jakov loves teaching and helping diligent students. This school
+year he decided to help some truly unusual students and teach additional computer
+science classes. Namely, each of the n students has very strange requirements that
+must be satisfied for them to even show up to the extra class, but more on that
+another time.
+Jakov’s conditions for holding the extra class are much simpler and are as follows:
+
+   • All students who will attend the extra class must be in the school from
+     the beginning to the end of the extra class.
+
+   • There must be at least k students in the extra class, otherwise it will not be
+     held at all.
+
+With the help of the principal, Jakov discovered the schedules of all n students, and for each student
+i (1 ≤ i ≤ n) he knows that they are in the school between the li -th and ri -th millisecond of the day
+(exclusively*).
+Help Jakov by answering the question: what is the maximum possible duration of the extra class he can
+hold? If Jakov cannot hold an extra class at all, output the number 0.
+*The first millisecond during which student i is in the school is li , and the last is ri − 1.
+
+Input
+The first line contains the natural numbers n and k (1 ≤ n, k ≤ 3 · 105 ) from the problem statement.
+Each of the following n lines contains 2 numbers li and ri (1 ≤ li < ri ≤ 86 400 000), from the problem
+statement.
+
+Output
+In the first and only line, output a single number — the maximum duration of the extra class that Jakov
+can organize, or 0 if it is impossible.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          13     K=1
+     2          27     1 ≤ N ≤ 1000, K = 2
+     3          11     ri ≤ 100
+     4          19     No additional constraints.
+
+
+
+
+                                                    2 of 9
+       Croatian Open Competition in Informatics                                       Task Dodatna
+       Round 2, November 22nd 2025                                    1 second / 512 MiB / 70 points
+
+
+Examples
+ input                                                input
+ 5 1                                                  5 2
+ 1 3                                                  6 10
+ 1 4                                                  8 14
+ 1 5                                                  5 9
+ 1 6                                                  5 6
+ 1 7                                                  4 6
+
+ output                                               output
+ 6                                                    3
+
+
+Clarification of the second example: The longest duration of the extra class that Jakov can organize
+is 3 seconds because the 1st and 3rd student will attend it in the 6th, 7th, and 8th second.
+
+
+
+
+                                                  3 of 9
+        Croatian Open Competition in Informatics                                        Task Natjecanje
+        Round 2, November 22nd 2025                                      1 second / 512 MiB / 110 points
+
+
+Task Natjecanje
+Dino has been practicing for a package delivery competition for weeks. In the
+competition, the winner is the contestant who delivers all the packages from the
+warehouse to the designated destinations the fastest. Unfortunately, Dino has only
+two hands, so he can carry at most two packages at a time.
+He can drop and pick up packages however he wants, as long as he carries at most
+two at a time. He can also carry and deliver them in any order, and each package
+can be delivered to any destination. After completing his delivery route, there
+must be a package at each of the k destinations.
+During the competition, Dino moves on a grid of n rows and m columns, where
+free cells are marked with ".", obstacles with "#", Dino’s starting cell and all packages with "S", and
+package destinations with "X". In one second, he can move to any adjacent cell in the four directions (up,
+down, left, or right) that is not an obstacle. Dropping and picking up packages takes negligible time.
+Help Dino determine the minimum number of seconds he needs to deliver all packages to their destinations
+and return to the starting cell, or print -1 if it is impossible.
+
+Input
+In the first line, there are three natural numbers n, m, and k (1 ≤ n, m ≤ 500, 1 ≤ k ≤ 67), the number of
+rows and columns of the matrix and the number of package destinations.
+In each of the next n lines, there are m characters cij describing the board. Each character of the matrix
+will be one of ".", "#", "S", or "X" (without quotes).
+The letter "X" will appear exactly k times in the matrix.
+
+Output
+In the first line, print a single number - the minimum number of seconds required for Dino to deliver all
+the packages to their destinations and return to the starting cell, or -1 if this is impossible.
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          17     k=2
+    2          26     k ≤ 16
+    3          29     k ≤ 22
+    4          38     No additional constraints.
+
+
+
+
+                                                   4 of 9
+      Croatian Open Competition in Informatics                                             Task Natjecanje
+      Round 2, November 22nd 2025                                           1 second / 512 MiB / 110 points
+
+
+Examples
+ input                                                  input
+ 5 5 3                                                  5 5 4
+ X...X                                                  ..X..
+ .....                                                  #X#..
+ .....                                                  #...X
+ .....                                                  .SX#.
+ S...X                                                  .....
+
+ output                                                 output
+ 24                                                     16
+
+
+Clarification of the first example: Dino will go with 1 package to the bottom-right destination, leave
+the package, and return to the cell with the letter S. Then he will take 2 packages and visit the top-right
+destination and the top-left destination. After that, he will return to the starting cell and finish his route
+in 24 seconds.
+
+
+
+
+                                                   5 of 9
+         Croatian Open Competition in Informatics                                                 Task Rastući
+         Round 2, November 22nd 2025                                            1 second / 512 MiB / 110 points
+
+
+Task Rastući
+The European Union recently passed a new law stating that all sequences must be
+increasing, and starting from January 1, 2026, anyone possessing a sequence that
+is not increasing will be strictly penalized. More precisely, a sequence a1 , a2 , ..., an
+is illegal if there exists i (1 ≤ i < n) such that ai > ai+1 , and otherwise the
+sequence is legal.
+Ivica recently received a sequence as a gift and is worried that he might get into
+trouble because of the new law. Fortunately, Ivica realized that he can take any
+two adjacent elements of his sequence and replace them with their sum. More
+precisely, if Ivica’s sequence is currently a1 , a2 , ..., am , he can choose some k such
+that 1 ≤ k < m and replace his sequence with a1 , a2 , ..., ak−1 , (ak + ak+1 ), ak+2 , ..., am . Ivica can perform
+this operation as many times as he wants, and his goal is to obtain a legal sequence using such operations.
+Of course, Ivica does not want to completely destroy his sequence, so he would like to obtain the longest
+possible legal sequence from his initial sequence. Help Ivica determine the length of the longest legal
+sequence he can get from the initial sequence and output any such legal sequence of maximum length.
+
+Input
+In the first line, there is a natural number n (1 ≤ n ≤ 5000), the length of Ivica’s sequence.
+In the second line, there are n natural numbers ai (1 ≤ ai ≤ 109 ), the sequence that Ivica received as a
+gift.
+
+Output
+In the first line, print a single number m - the length of the longest valid sequence that Ivica can obtain
+from the initial sequence.
+In the second line, print m numbers, the elements of one of the valid sequences of length m that Ivica can
+obtain from the initial sequence. If there are multiple such sequences, print any one of them.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          10     n ≤ 20
+     2          15     n ≤ 100, ai ≤ 100
+     3          20     n ≤ 500
+     4          25     n ≤ 1000
+     5          40     No additional constraints.
+
+60% of the points for a test case are earned by having a correct output of the 1st line.
+The remaining 40% of the points for the test case are earned by having a correct output of the 2nd line.
+
+
+
+
+                                                      6 of 9
+      Croatian Open Competition in Informatics                                               Task Rastući
+      Round 2, November 22nd 2025                                          1 second / 512 MiB / 110 points
+
+
+Examples
+ input                                                 input
+ 6                                                     7
+ 3 2 6 3 3 8                                           3 6 4 2 6 2 5
+
+ output                                                output
+ 4                                                     5
+ 5 6 6 8                                               3 6 6 6 7
+
+
+Clarification of the first example: In the first operation, Ivica will replace the first 2 elements of the
+array with their sum and obtain the illegal array [5, 6, 3, 3, 8]. Then, he will replace the third and fourth
+elements of the array with their sum and obtain the legal array [5, 6, 6, 8]. It can be shown that this is a
+legal array of maximal length that can be obtained from the initial array.
+
+
+
+
+                                                   7 of 9
+        Croatian Open Competition in Informatics                                           Task Tornjevi
+        Round 2, November 22nd 2025                                       1 second / 512 MiB / 110 points
+
+
+Task Tornjevi
+Dominik is truly a special student and he constantly enjoys playing with blue and
+red cubes of different sizes.
+He decided to build towers while following two peculiar rules:
+
+  • A cube directly above another cube can never be the same color as that cube.
+
+  • All cubes in the tower above some cube must be smaller in size than that
+    cube.
+
+Dominik opened his toy box which contains exactly n cubes. For each i (1 ≤ i ≤ n),
+Dominik has exactly one cube of size i, and it is either red or blue.
+Dominik got bored of stacking towers, so he came up with q difficult questions. In each question, Dominik
+thinks of two numbers l and r. He wants to know the minimum number of towers he must build so that
+they contain only cubes whose sizes are between l and r (inclusive), and such that every tower follows his
+peculiar rules. Every cube of a size between l and r must be used, i.e., placed in some tower.
+Dominik has to study a lot because it’s time for midterms at the university, so he asks you for help in
+answering his q questions.
+
+Input
+In the first line, there are two natural numbers n and q (1 ≤ n, q ≤ 1 · 105 ), the number of cubes and the
+number of questions.
+In the second line, there is a string s, where the character si represents the color of the cube of size i.
+Each character of the string will be either "P" or "C".
+In each of the following q lines, there are two numbers li and ri (1 ≤ li ≤ ri ≤ n), the left and right
+boundaries of Dominik’s query.
+
+Output
+In q lines, print the answers to Dominik’s questions from the problem statement.
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          23     1 ≤ n, q ≤ 10
+    2          38     1 ≤ n, q ≤ 1000
+    3          25     There will be at most 20 blue cubes.
+    4          24     No additional constraints.
+
+
+
+
+                                                   8 of 9
+      Croatian Open Competition in Informatics                                              Task Tornjevi
+      Round 2, November 22nd 2025                                          1 second / 512 MiB / 110 points
+
+
+Examples
+ input                              input                              input
+ 7 4                                6 2                                16 1
+ PPCPPCC                            CCCCCC                             PPPCPCCCCCCPPPPP
+ 1 7                                1 6                                1 16
+ 1 5                                2 5
+ 3 7                                                                   output
+ 4 5                                output
+                                                                       6
+ output                             6
+                                    4
+ 3
+ 3
+ 2
+ 2
+
+
+Clarification of the second example: All the cubes are red, so any tower that contains at least 2
+cubes does not follow Dominik’s rules. It follows that each tower contains exactly 1 cube, and the answer
+to each question is the number of cubes between l and r, i.e., r − l + 1.
+
+
+
+
+                                                 9 of 9
+

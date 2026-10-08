@@ -3,6 +3,8 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: Dinic flow(3); flow.add_edge(0,1,5); flow.add_edge(1,2,5);
+  //      auto f = flow.max_flow(0,2);
   // Directed residual network. add_edge returns forward edge ID; self-loops supported.
   struct Dinic {
     struct Edge { int from,to; long long capacity,flow; }; vector<Edge>edges;
@@ -17,7 +19,7 @@ namespace notebook::graph {
       }
       return 0;
     }
-    explicit Dinic(int n) : adj(n), level(n), next(n) {}
+    Dinic(int n) : adj(n), level(n), next(n) {}
     int add_edge(int u, int v, long long capacity) {
       assert(capacity >= 0); int id = edges.size(); adj[u].push_back(id);
       adj[v].push_back(id + 1); edges.push_back( {u, v, capacity, 0});

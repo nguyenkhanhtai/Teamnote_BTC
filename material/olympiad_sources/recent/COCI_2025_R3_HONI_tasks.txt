@@ -1,0 +1,480 @@
+Hrvatsko otvoreno natjecanje u informatici
+                    3. kolo, 7. prosinca 2024.
+
+
+
+
+                             Zadaci
+ Zadatak    Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+ Brojanje        1 sekunda                 512 MiB               20
+ Clarkson        1 sekunda                 512 MiB               30
+ Autobus         1 sekunda                 512 MiB               50
+ Karte           1 sekunda                 512 MiB               70
+ Bojanje         1 sekunda                 512 MiB               90
+ Stablo          2 sekunde                 512 MiB              120
+ Procesor        1 sekunda                 512 MiB              120
+
+ Ukupno                                                         500
+         Hrvatsko otvoreno natjecanje u informatici                                           Zadatak Brojanje
+         3. kolo, 7. prosinca 2024.                                            1 sekunda / 512 MiB / 20 bodova
+
+
+Zadatak Brojanje
+Fran je tek nedavno naučio brojati. Krenuvši od broja x, odlučio je nabrajati brojeve koji su za y veći od
+prethodnog:
+                                       x + y, x + 2 · y, x + 3 · y, ...
+
+Jakov već odavno zna brojati. Kako bi se pravio pametniji od Frana, krenuvši od broja x, odlučio je
+nabrajati unazad, odnosno one brojeve koji su za y manji od prethodnog:
+
+                                            x − y, x − 2 · y, x − 3 · y, ...
+
+Jakov, osim brojanja, zna i odgovor na sljedeće pitanje: koji je n-ti broj koji će izgovoriti Fran, a koji on?
+Odgovorite na Jakovljevo pitanje.
+
+Ulazni podaci
+U prvom je retku prirodan broj x (1 ≤ x ≤ 100), broj iz teksta zadatka.
+U drugom je retku prirodan broj y (1 ≤ y ≤ 100), broj iz teksta zadatka.
+U trećem je retku prirodan broj n (1 ≤ n ≤ 100), broj iz teksta zadatka.
+
+Izlazni podaci
+U prvi redak ispišite broj koji će Fran izgovoriti.
+U drugi redak ispišite broj koji će Jakov izgovoriti.
+
+Probni primjeri
+ ulaz                                   ulaz                                   ulaz
+ 7                                      5                                      3
+ 2                                      1                                      4
+ 3                                      1                                      5
+
+ izlaz                                  izlaz                                  izlaz
+ 13                                     6                                      23
+ 1                                      4                                      -17
+
+
+Pojašnjenje prvog probnog primjera:
+
+
+Fran će nabrajati redom brojeve 9, 11, 13, 15, 17, ...
+Jakov će nabrajati brojeve 5, 3, 1, −1, −3, ...
+Treći broj do kojeg je Fran došao je 13, dok je treći broj do kojeg je Jakov došao 1.
+
+
+
+
+                                                       1 od 11
+         Hrvatsko otvoreno natjecanje u informatici                                         Zadatak Clarkson
+         3. kolo, 7. prosinca 2024.                                          1 sekunda / 512 MiB / 30 bodova
+
+
+Zadatak Clarkson
+Clarkson je žito sa svoje farme spremio u tri skladišta. U skladište A spremio je
+X tona žita, u skladište B Y tona, a u skladište C Z tona.
+Sada mu hitno trebaju dva prazna skladišta za spremanje kukuruza. Odlučio je
+da će prvi dan svo žito iz skladišta gdje ga ima najmanje prebaciti u skladište
+gdje ga ima najviše. Onda će drugi dan, sada kada ima dva ispunjena skladišta,
+svo žito iz onog gdje ga ima manje prebaciti u onaj gdje ga ima više. Na ovaj je
+način Clarkson svo žito okupio u jednom skladištu.
+Napišite program koji će odgovoriti na sljedeća tri pitanja:
+     • Koliko je tona žita promijenilo svoje početno mjesto gdje je bilo spremljeno?
+     • Iz kojeg se skladišta i u koje skladište žito prebacivalo prvi dan?
+     • Iz kojeg se skladišta i u koje skladište žito prebacivalo drugi dan?
+
+Ulazni podaci
+U prvom je retku prirodan broj X (1 ≤ X ≤ 100), broj iz teksta zadatka.
+U drugom je retku prirodan broj Y (1 ≤ Y ≤ 100), broj iz teksta zadatka.
+U trećem je retku prirodan broj Z (1 ≤ Z ≤ 100), broj iz teksta zadatka.
+Brojevi X, Y i Z su međusobno različiti.
+
+Izlazni podaci
+U prvi redak ispišite prirodan broj, odgovor na prvo pitanje iz teksta zadatka.
+U drugi redak ispišite oznake skladišta, odgovor na drugo pitanje iz teksta zadatka.
+U treći redak ispišite oznake skladišta, odgovor na treće pitanje iz teksta zadatka.
+
+Bodovanje
+Točan ispis prvog retka vrijedi 1 bod, drugog retka 2 boda, a trećeg retka 2 boda za svaki testni primjer.
+
+Probni primjeri
+ ulaz                                   ulaz                                 ulaz
+
+ 7                                      2                                    2
+ 2                                      3                                    7
+ 1                                      4                                    1
+
+ izlaz                                  izlaz                                izlaz
+
+ 3                                      5                                    3
+ C A                                    A C                                  C B
+ B A                                    B C                                  A B
+
+
+Pojašnjenje prvog probnog primjera:
+Prvi smo dan Iz skladišta C gdje je bilo najmanje žita prebacili jednu tonu u skladište A gdje je bilo
+najviše žita. Drugi smo dan iz skladišta B gdje je bilo manje žita prebacili dvije tone u skladište A gdje je
+bilo više žita. Ukupno smo prebacili tri tone.
+
+
+                                                      2 od 11
+       Hrvatsko otvoreno natjecanje u informatici                                        Zadatak Autobus
+       3. kolo, 7. prosinca 2024.                                         1 sekunda / 512 MiB / 50 bodova
+
+
+Zadatak Autobus
+Gospodin Malnar je odlučio posjetiti jedan od rijetkih gradova koji do sada već
+nije posjetio, Vroclav (polj. Wrocław), smješten na jugozapadu Poljske. Kako već
+dugo vremena nije putovao autobusima, nedostajalo mu je to iskustvo, međutim,
+razočarao se kad je doznao da ne postoji direktna autobusna linija Zagreb-Vroclav.
+Najbolja alternativa tome je presjedanje u austrijskom gradu Grazu. Gospodin
+Malnar je pronašao vozni red tj. listu autobusnih linija koje voze na relacijama
+Zagreb-Graz i Graz-Wroclaw. Autobus na određenoj autobusnoj liniji vozi svaki
+dan, kreće točno početkom minute vremena polaska i dolazi na odredište točno na kraju zadnje minute
+vremena dolaska. Vrijeme potrebno za presjedanje je zanemarivo tj. moguće je ukrcati se na autobus ako
+ste stigli na odredište prije nego što kreće autobus na koji želite presjesti (vrijeme dolaska prvog autobusa
+mora biti strogo manja od vremena polaska drugog autobusa).
+Odredite najkraće vrijeme potrebno za doći iz Zagreba do Vroclava.
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj n (1 ≤ n ≤ 200), broj autobusnih linija.
+U idućih n redova nalaze se redom imena dva grada povezanih s znakom "-", prvi predstavlja polazište i
+drugi odredište, zatim redom vrijeme polaska i vrijeme dolaska u formatu h:mm--h:mm gdje h predstavlja
+sate, dok mm predstavlja minute tog vremena. Uočite da će uvijek biti prikazane dvije znamenke minuta.
+U slučaju da je broj minuta jednoznamenkast, bit će navedena i vodeća nula. Garantirano je da će svaka
+vožnja (bez presjedanja) trajati najviše 24 sata.
+
+Izlazni podaci
+Ako je moguće doći iz Zagreba do Vroclava, u prvom redu ispišite vrijeme putovanja u formatu h:mm
+(opisano iznad).
+Ako to nije moguće, i prvom redu ispišite "NEMOGUCE" (bez navodnika).
+
+Bodovanje
+
+ Podzadatak     Broj bodova     Ograničenja
+
+       1              9         n≤3
+       2             19         Postoji točno jedna linija na relaciji Zagreb-Graz.
+       3             22         Nema dodatnih ograničenja.
+
+
+
+
+                                                    3 od 11
+        Hrvatsko otvoreno natjecanje u informatici                                    Zadatak Autobus
+        3. kolo, 7. prosinca 2024.                                     1 sekunda / 512 MiB / 50 bodova
+
+
+Probni primjeri
+ulaz                                                     ulaz
+4                                                        3
+Zagreb-Graz 15:30--23:59                                 Zagreb-Graz 6:05--16:40
+Graz-Wroclaw 10:42--19:15                                Zagreb-Graz 20:00--21:40
+Zagreb-Graz 14:13--20:19                                 Zagreb-Graz 9:56--22:36
+Graz-Wroclaw 2:25--5:00
+                                                         izlaz
+izlaz
+                                                         NEMOGUCE
+13:31
+
+
+
+
+                                                     4 od 11
+         Hrvatsko otvoreno natjecanje u informatici                                         Zadatak Karte
+         3. kolo, 7. prosinca 2024.                                       1 sekunda / 512 MiB / 70 bodova
+
+
+Zadatak Karte
+Na Vitinom stolu nalazi se N crvenih karata označenih brojevima od 1 do N i M
+plavih karata označenih brojevima od 1 do M . Svaki par crvene i plave karte (c, p)
+(gdje c predstavlja crvenu kartu, a p plavu) može stvoriti COMBO potez.
+Jačinu špila karata definiramo kao:
+
+jačina = (broj COMBO poteza)−X·(broj crvenih karata)−Y ·(broj plavih karata)
+
+gdje je broj COMBO poteza broj parova (c, p) takvih da su crvena karta c i plava karta p u izabranom
+špilu. Vito u svoj špil može staviti bilo koju kartu sa stola. Pomozite Viti pronaći vrijednost najjačeg špila
+kojeg može sagraditi. Vito može izabrati i prazan špil karata.
+
+Ulazni podaci
+U prvom retku su 4 prirodna broja N, M, X, Y (1 ≤ N, M ≤ 21, 0 ≤ X, Y ≤ 30)
+U idućih N redaka nalazi se niz od M znakova(0 ili 1) od kojih j-ti označava stvaraju li i-ta crvena i j-ta
+plava karta COMBO potez.
+
+Izlazni podaci
+U prvi i jedini redak ispišite vrijednost najjačeg špila karata kojeg Vito može sagraditi.
+
+Bodovanje
+
+ Podzadatak       Broj bodova     Ograničenja
+
+         1             18         Y =0
+         2             11         1 ≤ N, M ≤ 9
+         3             24         1 ≤ N, M ≤ 15
+         4             17         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                              ulaz
+ 2 2 0 0                                3 3 1 0                           3 3 1 1
+ 11                                     111                               111
+ 10                                     111                               101
+                                        000                               011
+ izlaz
+                                        izlaz                             izlaz
+ 3
+                                        4                                 1
+
+
+Pojašnjenje prvog probnog primjera: Vito će izabrati sve karte sa stola te tako stvoriti 3 COMBO
+poteza.
+
+
+Pojašnjenje drugog probnog primjera: Vito će izabrati prve 2 crvene karte i sve 3 plave karte te
+tako stvoriti 6 COMBO poteza. Vrijednost jačine špila je 4 jer je Vito izabrao 2 crvene karte pa je broj
+COMBO poteza tj. 6 smanjen za 2.
+
+
+
+                                                      5 od 11
+       Hrvatsko otvoreno natjecanje u informatici                                          Zadatak Bojanje
+       3. kolo, 7. prosinca 2024.                                          1 sekunda / 512 MiB / 90 bodova
+
+
+Zadatak Bojanje
+Marin, kako je postao predobar u natjecateljskom programiranju, odlučio je pronaći novi hobi, da mu
+nije dosadno dok čeka da ga vi sustignete. Dok ste vi rješavali prethodne zadatke, Marin je otkrio veliku
+ljubav prema slikanju.
+Uzeo je prazno bijelo platno i dvije boje, crvenu i plavu. Počeo je na platnu povlačiti savršeno horizontalne
+i vertikalne poteze, od jednog do nasuprotnog ruba platna. Platno možemo zamisliti kao n x n tablicu,
+retci i stupci su redom označeni brojevima 1 do n koja je na početku ispunjeno bijelom bojom. Svaki
+Marinov potez možemo zamisliti kao da smo izabrali neku od dvije boje i neki redak ili stupac, zatim sve
+ćelije u tom retku/stupcu smo obojali u izabranu boju, bez obzira što se prije tog poteza nalazilo na polju.
+Marin će napraviti konačno mnogo poteza i završiti svoju sliku.
+Međutim, njegov prijatelj Stjepan je pronašao neku sliku koja izgleda kao Marinova, ali nije siguran je li
+zaista njegova. Slika koju je našao opet možemo zamisliti kao n x n tablicu gdje je svaka ćelija bijela,
+plava ili crvena. Slika je možda Marinova ako postoji neki niz poteza na praznom platnu, kao što su gore
+opisani koji, dati sliku koja je identična pronađenoj. Stjepan Vas je zamolio da mu pomognete odgonetnuti
+je li ta slika možda Marinova i ako je, pronađite neki niz poteza koji postiže nađenu sliku.
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj n (1 ≤ n ≤ 2000).
+U idućih N redova, nalazi se N cijelih brojeva ai,j (0 ≤ ai,j ≤ 2), gdje svaki predstavlja koji se boja nalazi
+u i-tom retku i j-tom stupcu (0 ako je bijela, 1 ako je crvena i 2 ako je plava).
+
+Izlazni podaci
+Ako je slika možda Marinova, onda u prvom redu ispišite broj poteza K (0 ≤ K ≤ 4000). U idućih K
+redova trebate ispisati tri cijela broja. Prvi će označavati je li i-ti potez bio po retku ili stupcu (1 ako je
+redak, 2 ako je stupac). Drugi broj će označavati oznaku retka ili stupca na kojem radimo potez i treći
+broj će označavati boju na isti način kao što je opisano u Ulaznim podacima.
+Ako slika sigurno nije Marinova, onda ispišite "-1" (bez navodnika) u prvom i jedinom redu.
+
+Bodovanje
+
+ Podzadatak      Broj bodova     Ograničenja
+
+       1              15         ai,j ≤ 1
+       2              35         n ≤ 100
+       3              40         Nema dodatnih ograničenja.
+
+
+
+
+                                                    6 od 11
+        Hrvatsko otvoreno natjecanje u informatici                             Zadatak Bojanje
+        3. kolo, 7. prosinca 2024.                             1 sekunda / 512 MiB / 90 bodova
+
+
+Probni primjeri
+ulaz                                   ulaz                    ulaz
+3                                      3                       4
+0 0 1                                  1 1 2                   0 1 2 1
+1 1 1                                  2 1 1                   2 2 2 1
+0 0 1                                  2 1 1                   0 1 2 1
+                                                               1 1 2 1
+izlaz                                  izlaz
+                                                               izlaz
+2                                      -1
+2 3 1                                                          5
+1 2 1                                                          2 2 1
+                                                               1 2 2
+                                                               2 4 1
+                                                               1 4 1
+                                                               2 3 2
+
+
+
+
+                                                     7 od 11
+       Hrvatsko otvoreno natjecanje u informatici                                           Zadatak Stablo
+       3. kolo, 7. prosinca 2024.                                         2 sekunde / 512 MiB / 120 bodova
+
+
+Zadatak Stablo
+Voditelj Toni odlučio je osmisliti zadatak za HONI, ali budući da ne voli djecu, odlučio ga je učiniti što
+težim. Osmislio je kompliciran problem sa stablom koje se stalno mijenja, a sve to samo kako bi natjerao
+natjecatelje da što više pate.
+Dano je beztežinsko stablo s N čvorova gdje je korijen stabla čvor 1. Svaki čvor ima pridruženu vrijednost
+v[i]. Struktura stabla definirana je pomoću niza p[i], gdje za svaki i od 1 do n − 1, p[i] označava roditelja
+od i + 1.
+Definirana je funkcija f (y), gdje je y čvor u stablu, kao:
+                                                   X
+                                          f (y) =      d(x, y) · v[x]
+                                                    x∈Sy
+
+
+gdje je d(x, y) označava udaljenost čvorova x i y, a Sy je podstablo od y tj. skup koji sadrži sve čvorove
+čiji je y predak (potomci od y).
+Zadano je Q upita po 2 čvora x i y te se za svaki upit treba simulirati sljedeća promjena u stablu i
+izračunati f (y):
+
+   1. Spojimo sve čvorove čiji je x roditelj na roditelja od x
+
+   2. Uklonimo x iz stabla
+
+   3. Ubacimo čvor x u stablo, ali između čvora y i potomka od y iz čijeg je podstabla x uklonjen
+
+U slučaju da je y roditelj od x, tada stablo ostaje nepromijenjeno. Uvijek će vrijediti da je x u podstablu
+od y. Za svaki upit treba izračunati f (y) nakon što je stablo privremeno izmijenjeno prema gore opisanom
+postupku. Promjene stabla nisu trajne, nakon svakog upita stablo se vraća na početno stanje.
+
+Ulazni podaci
+U prvom retku su 2 prirodna broja N, Q (1 ≤ N, Q ≤ 5 · 105 ), broj čvorova stabla i upita u zadatku.
+U drugom retku je N prirodnih brojeva v[i] (1 ≤ v[1] ≤ 106 ), gdje v[i] označava vrijednost čvora i.
+U trećem retku je N − 1 prirodnih brojeva p[i] (1 ≤ p[i] ≤ i), gdje p[i] označava roditelja od i + 1.
+U idućih Q redaka nalaze se dva prirodna broja x i y (1 ≤ x, y ≤ n), oznake čvorova koji opisuju operaciju
+iz teksta zadatka.
+
+Izlazni podaci
+U i-ti od sljedećih Q redaka ispišite vrijednost funkcije f (y) na promijenjenom stablu.
+
+Bodovanje
+
+ Podzadatak      Broj bodova     Ograničenja
+
+       1              21         1 ≤ N, Q ≤ 1000
+       2              37         Stablo je lanac tj. p[i] = i za svaki i od 1 do n − 1.
+       3              22         Svaki čvor biti će roditelj od najviše 20 čvorova.
+       4              40         Nema dodatnih ograničenja.
+
+
+
+
+                                                    8 od 11
+         Hrvatsko otvoreno natjecanje u informatici                               Zadatak Stablo
+         3. kolo, 7. prosinca 2024.                             2 sekunde / 512 MiB / 120 bodova
+
+
+Probni primjeri
+ ulaz                                   ulaz                     ulaz
+ 3 1                                    3 2                      5 3
+ 1 2 3                                  4 5 6                    2 5 2 2 2
+ 1 2                                    1 1                      1 2 3 2
+ 3 1                                    2 1                      4 3
+                                        3 1                      3 2
+ izlaz                                                           5 1
+                                        izlaz
+ 7                                                               izlaz
+                                        11
+                                        11                       2
+                                                                 8
+                                                                 26
+
+
+Pojašnjenje prvog probnog primjera: Nakon promjene opisane u tekstu zadatka čvor 3 udaljen je za
+1 od čvora 1 te je čvor 2 udaljen za 2 od čvora 1. Rješenje upita je 3 + 2 · 2 = 7
+
+
+
+
+                                                      9 od 11
+       Hrvatsko otvoreno natjecanje u informatici                                      Zadatak Procesor
+       3. kolo, 7. prosinca 2024.                                      1 sekunda / 512 MiB / 120 bodova
+
+
+Zadatak Procesor
+Ovaj zadatak je interaktivan.
+Na početku, Fran ima prazan niz a. Fran obrađuje n upita oblika x - on stavi x elemenata na kraj iza a.
+Nakon svakog upita, Frana zanima koji je najmanji element niza a, i nakon što ga odredi, on ga izbaci iz
+niza pritom ne mijenjajući indekse ostalih elemenata.
+Vaš je zadatak za svaki upit odrediti koji je najmanji element niza postavljajući pitanja.
+
+Interakcija
+Ovo je interaktivan zadatak. Vaš je zadatak napraviti program koji će odgovarati na upite.
+U ulazu se u prvoj liniji nalazi n - broj upita (1 ≤ n ≤ 40). Zatim se n puta nalazi xi - broj elemenata
+koji se nadodaje na niz (1 ≤ xi ≤ 2000).
+Nakon svakog upita vaš program smije postavljati pitanja oblika ? i j. Interaktor će odgovoriti 0 ako je
+ai < aj , odnosno 1 ako je ai > aj . Možete pretpostaviti da su svi elementi niza različiti.
+Nakon što odredite najmanji element, potrebno je ispisati ! x, što znači da je ax najmanji element niza a
+(ne računajući već izbačene elemente). x i y ne smiju biti indeksi već izbačenog elementa.
+Pitanja možete postaviti više puta, a nakon što ispišete najmanji element, slijedi novi upit.
+Nakon što odredite najmanji element, interakcija se nastavlja sa sljedećim upitima. Nakon posljednjeg
+upita, interakcija završava i vaše se rješenje boduje ovisno o broju postavljenih pitanja.
+Ukupna duljina niza bit će najviše 2000.
+
+Bodovanje
+Vaš program ostvarit će bodove ovisno o broju postavljenih pitanja. Neka je vaš program ostvario q
+pitanja.
+Ako je q ≤ 2700, vaš program će ostvariti 120 bodova.
+Ako je 2700 < q ≤ 7000, vaš program će ostvariti 75 bodova.
+Ako je 7000 < q ≤ 2 · 104 , vaš program će ostvariti 35 bodova.
+Ako je 2 · 104 < q ≤ 8 · 104 , vaš program će ostvariti 15 bodova.
+
+
+
+
+                                                    10 od 11
+         Hrvatsko otvoreno natjecanje u informatici                                Zadatak Procesor
+         3. kolo, 7. prosinca 2024.                                1 sekunda / 512 MiB / 120 bodova
+
+
+Probni primjeri
+ ulaz
+ 3
+ 3
+
+ 1
+
+ 0
+
+ 0
+
+ 1
+
+ 1
+
+ 1
+
+ 0
+
+ izlaz
+
+
+ ? 1 2
+
+ ? 1 3
+
+ ? 2 3
+
+ ! 2
+
+ ? 1 4
+
+ ! 4
+
+ ? 1 5
+
+ ! 1
+
+
+Pojašnjenje probnog primjera:
+Konačan niz je oblika 3, 2, 4, 1, 5.
+Prvi upit ispisuje 1 jer je a1 > a2 .
+Drugi upit ispisuje 0 jer je a1 < a3 .
+Treći upit ispisuje 0 jer je a2 < a3 .
+Nakon toga može se odrediti da je a2 najmanji trenutni element, stoga se ispisuje ! 2. Interakcija se
+nastavlja sa sljedećim upitima.
+
+
+
+
+                                                      11 od 11
+

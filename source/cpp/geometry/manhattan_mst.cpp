@@ -3,15 +3,20 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
-  struct ManhattanEdge { int u, v; long long weight; };
+  // Use: auto [cost,edges] = manhattan_mst({{0,0},{2,3}});
+  struct ManhattanEdge { int u, v; long long weight;
+    bool operator<(const ManhattanEdge& other) const { return weight<other.weight; }
+  };
   // Coordinates, sums/differences, distances and total weight must fit long long.
   vector<ManhattanEdge>manhattan_candidates(vector<pair<long long,long long>>p){
     auto original=p; int n=p.size(); vector<int>ids(n); iota(ids.begin(),ids.end(),0);
     vector<ManhattanEdge> edges;
     for (int direction = 0; direction < 4; ++direction) {
-      sort(ids.begin(), ids.end(), [&](int i, int j) {
-        return p[i].first + p[i].second < p[j].first + p[j].second;
-      }); map<long long, int> sweep;
+      vector<pair<long long,int>> order;
+      for (int id:ids) order.push_back({p[id].first+p[id].second,id});
+      sort(order.begin(),order.end());
+      for (int i=0;i<n;++i) ids[i]=order[i].second;
+      map<long long, int> sweep;
       for (int i : ids) {
         auto[x, y] = p[i];
         for (auto it = sweep.lower_bound(-y); it != sweep.end();) {
@@ -30,13 +35,14 @@ namespace notebook::geometry {
   }
   pair<long long,vector<ManhattanEdge>>manhattan_mst(const vector<pair<long long,long long>>&p){
     auto e = manhattan_candidates(p);
-    sort(e.begin(),e.end(),[](auto a,auto b){ return a.weight<b.weight; });
+    sort(e.begin(),e.end());
     vector<int>parent(p.size()),size(p.size(),1); iota(parent.begin(),parent.end(),0);
-    function<int(int)> find = [&](int u) {
-      return parent[u] == u ? u : parent[u] = find(parent[u]);
-    }; long long total = 0; vector<ManhattanEdge> tree;
+    struct DSUFind {
+      vector<int>& parent;
+      int find(int u) { return parent[u]==u?u:parent[u]=find(parent[u]); }
+    } dsu{parent}; long long total = 0; vector<ManhattanEdge> tree;
     for (auto edge : e) {
-      int a = find(edge.u), b = find(edge.v);
+      int a = dsu.find(edge.u), b = dsu.find(edge.v);
       if (a == b) continue;
       if (size[a] < size[b]) swap(a, b);
       parent[b]=a; size[a]+=size[b]; total+=edge.weight; tree.push_back(edge);

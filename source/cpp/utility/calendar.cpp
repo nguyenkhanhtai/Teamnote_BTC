@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+  // Use: int weekday = day_of_week(2026,10,8);
 
 // Valid Gregorian date, year >= 1. Returns Sunday=0, ..., Saturday=6.
 int day_of_week(int year, int month, int day) {

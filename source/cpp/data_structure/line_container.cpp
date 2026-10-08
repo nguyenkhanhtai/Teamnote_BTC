@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: LineContainer lc; lc.add(2,3); auto y = lc.maximum(5);
   // Arbitrary slopes and x, maximum queries. Integer intersections use int128.
   struct LineContainer {
     struct Line {

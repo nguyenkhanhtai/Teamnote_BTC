@@ -1,0 +1,434 @@
+Hrvatsko otvoreno natjecanje u informatici
+                    1. kolo, 5. listopada 2024.
+
+
+
+
+                            Zadaci
+Zadatak       Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+Program            1 sekunda                 512 MiB               20
+Slatkiši           1 sekunda                 512 MiB               30
+Osobna             1 sekunda                 512 MiB               50
+Skokovi             5 sekundi                512 MiB               70
+Hijerarhija        3 sekunde                 512 MiB               90
+Učiteljica          5 sekundi                512 MiB              120
+Zbunjenost          5 sekundi                512 MiB              120
+
+Ukupno                                                            500
+         Hrvatsko otvoreno natjecanje u informatici                                       Zadatak Program
+         1. kolo, 5. listopada 2024.                                       1 sekunda / 512 MiB / 20 bodova
+
+
+Zadatak Program
+Na početku emitiranja filma Ivica je začuo upozorenje: program koji slijedi
+nije primjeren za mlađe od X godina.
+Ako Ivica ima Y godina, smije li nastaviti gledati film?
+
+Ulazni podaci
+U prvom je retku prirodan broj X (12 ≤ X ≤ 120), broj iz teksta zadatka.
+U drugom je retku prirodan broj Y (1 ≤ Y ≤ 120), broj iz teksta zadatka.
+
+Izlazni podaci
+U prvi redak ispišite riječ ’DA’ ako Ivica smije nastaviti gledati ili riječ ’NE’
+ako ne smije nastaviti gledati film.
+
+Probni primjeri
+ ulaz                                   ulaz                               ulaz
+
+ 12                                     18                                 15
+ 8                                      25                                 15
+
+ izlaz                                  izlaz                              izlaz
+ NE                                     DA                                 DA
+Pojašnjenje prvog probnog primjera:
+Ivica ima 8 godina, a film mogu gledati oni koji su stari 12 i više godina. Znači, Ivica ovaj film ne smije
+gledati.
+
+
+
+
+                                                      1 od 11
+         Hrvatsko otvoreno natjecanje u informatici                                       Zadatak Slatkiši
+         1. kolo, 5. listopada 2024.                                      1 sekunda / 512 MiB / 30 bodova
+
+
+Zadatak Slatkiši
+Učiteljica Ana podijelila je slatkiše učenicima u razredu, ali primijetila je da neki
+učenici imaju manje slatkiša od drugih. Kako bi svi bili zadovoljni, Ana je odlučila
+nekim učenicima podijeliti dodatne slatkiše, tako da na kraju svi imaju jednak
+broj.
+Vaš zadatak je odrediti najmanji broj dodatnih slatkiša koje Ana mora podijeliti
+kako bi svi učenici imali jednak broj slatkiša.
+
+Ulazni podaci
+U prvom retku je prirodan broj n (1 ≤ n ≤ 100), broj učenika u razredu.
+U drugom retku nalazi se n cijelih brojeva, gdje i-ti broj si predstavlja broj slatkiša koje ima i-ti učenik
+(1 ≤ si ≤ 100).
+
+Izlazni podaci
+U jedinom retku ispišite najmanji mogući broj slatkiša koje Ana treba podijeliti kako bi svi učenici imali
+jednak broj slatkiša.
+
+Probni primjeri
+ ulaz                                   ulaz                              ulaz
+
+ 3                                      4                                 2
+ 5 2 7                                  10 10 10 10                       3 9
+
+ izlaz                                  izlaz                             izlaz
+
+ 7                                      0                                 6
+Pojašnjenje prvog probnog primjera:
+Učenik koji ima 2 slatkiša treba dobiti 5 slatkiša da bi imao 7, a učenik koji ima 5 slatkiša treba dobiti 2
+slatkiša da bi također imao 7. Učenik koji već ima 7 slatkiša ne mora dobiti više. Ukupno je potrebno
+dodati 7 slatkiša.
+Pojašnjenje drugog probnog primjera:
+Svi učenici već imaju jednak broj slatkiša, pa nije potrebno dodati niti jedan slatkiš.
+Pojašnjenje trećeg probnog primjera:
+Učenik koji ima 3 slatkiša mora dobiti 6 slatkiša da bi imao 9, koliko ima drugi učenik. Ukupno je potrebno
+dodati 6 slatkiša.
+
+
+
+
+                                                      2 od 11
+      Hrvatsko otvoreno natjecanje u informatici                                         Zadatak Osobna
+      1. kolo, 5. listopada 2024.                                        1 sekunda / 512 MiB / 50 bodova
+
+
+Zadatak Osobna
+Toni, novi voditelj HONI-ja, toliko voli HONI da želi da svi koji ga upoznaju to znaju. Dosjetio se odličnog
+načina za to - promijenit će svoje prezime u HONI! Brzo je ispunio zahtjev za promjenom prezimena
+i nestrpljivo čekao izradu svoje nove osobne iskaznice. A kad ju je konačno dobio, sreći nije bilo kraja.
+Samo je gledao svoju novu osobnu iskaznicu!
+Dok joj se divio, primijetio je da se na poleđini osobne iskaznice nalaze tri retka znakova. Nije mu puno
+trebalo da shvati da u njima može iščitati neke svoje osobne podatke: ime, prezime, datum rođenja i
+11-znamenkasti osobni identifikacijski broj (OIB). Prepisao je retke s osobne iskaznice na papir i označio
+što je sve uočio:
+
+
+
+
+Posebno zanimljiv mu je način na koji se datum rođenja zapisuje: prvo je napisana godina, pa mjesec
+i na kraju dan. Svaki je broj napisan s dvije znamenke. To ga je malo zbunilo jer je godina rođenja
+četveroznamenkasti broj, stoga se zapitao: Kako mogu znati koje su prve dvije znamenke godine rođenja?
+Nakon malo promišljanja, zaključio je da ako je napisani broj za godinu rođenja na osobnoj iskaznici
+manji ili jednak 24, tada su prve dvije znamenke godine rođenja 20, a inače su 19.
+Toniju su ovo bila jako zabavna otkrića pa želi da se i vi zabavite s ovime - za dana tri retka s poleđine
+osobne iskaznice, ispišite ime, prezime, datum rođenja i OIB osobe!
+
+Ulazni podaci
+Ulazni podaci sastoje se od tri retka znakova duljine 30. Znakovi koji se mogu pojavljivati su slova velike
+engleske abecede, brojevne znamenke te znak ’<’. Ime i prezime osobe sastojat će se od točno jedne riječi
+i sadržavat će isključivo velika slova engleske abecede.
+
+Izlazni podaci
+Ispišite četiri retka (čak iako ne rješavate sve dijelove zadatka):
+
+  • U prvom retku ispišite ’Ime: ’ i ime osobe s velikim samo početnim slovom.
+  • U drugom retku ispišite ’Prezime: ’ i prezime osobe s velikim samo početnim slovom.
+  • U trećem retku ispišite ’Datum rodjenja: ’ i datum rođenja u obliku DD-MM-GGGG.
+  • U četvrtom retku ispišite ’OIB:’ i osobni identifikacijski broj.
+
+Bodovanje
+
+ Podzadatak     Broj bodova     Ograničenja
+
+      1              25         Ime i prezime sastojat će se od točno jednog slova.
+      2              15         Godina rođenja bit će između 2000. i 2024.
+      3              10         Nema dodatnih ograničenja.
+
+Točan ispis prvog, drugog ili četvrtog retka na svim test primjerima u jednom podzadatku nosi petinu
+bodova predviđenih za taj podzadatak, a točan ispis trećeg retka nosi dvije petine bodova.
+
+
+                                                   3 od 11
+         Hrvatsko otvoreno natjecanje u informatici                                     Zadatak Osobna
+         1. kolo, 5. listopada 2024.                                    1 sekunda / 512 MiB / 50 bodova
+
+
+Primjeri
+ ulaz                                                     ulaz
+ IOHRV111111111233333333333<<<<                           IOHRV123456789012345678901<<<<
+ 0102032M2202022HRV<<<<<<<<<<<5                           9803049F2401059HRV<<<<<<<<<<<2
+ TONI<<HONI<<<<<<<<<<<<<<<<<<<<                           PAJO<<PATAK<<<<<<<<<<<<<<<<<<<
+
+ izlaz                                                    izlaz
+ Ime: Toni                                                Ime: Pajo
+ Prezime: Honi                                            Prezime: Patak
+ Datum rodjenja: 03-02-2001                               Datum rodjenja: 04-03-1998
+ OIB: 33333333333                                         OIB: 12345678901
+Pojašnjenje prvog primjera:
+Pogledajte ilustraciju u tekstu zadatka.
+
+
+
+
+                                                      4 od 11
+         Hrvatsko otvoreno natjecanje u informatici                                       Zadatak Skokovi
+         1. kolo, 5. listopada 2024.                                      5 sekundi / 512 MiB / 70 bodova
+
+
+Zadatak Skokovi
+U nekoj zemlji tko zna gdje, u nekom svijetu tko zna kad, živi pčela zvana Maja. Njezin život prožet
+avanturama nepresušan je izvor ideja za zadatke, pa smo odabrali jednu.
+Naime, Majin prijatelj skakavac Filip priprema se za olimpijadu u skokovima po cvijeću. Cvijeće na livadi
+možemo predstaviti kao niz prirodnih brojeva a duljine N . Visina pojedinog cvijeta zadana je brojem ai .
+Filip uvijek skače s lijeva na desno. Također, budući da mu je cijeli ovaj sport nov, ne može skočiti na neki
+cvijet čija se visina previše razlikuje od onoga na kojem se trenutačno nalazi. Preciznije, s cvijeta i može
+skočiti na cvijet j ako i samo ako vrijedi i < j te |ai − aj | ≤ K, gdje je K prirodan broj dan na ulazu.
+Pomozite Maji isplanirati Filipov trening tako da odredite do kojih cvjetova Filip može doći ako se na
+početku nalazi na najlijevijem cvijetu. Odnosno, za svaki cvijet odredite postoji li slijed skokova koji vodi
+do njega, a započinje na prvom cvijetu.
+
+Ulazni podaci
+Ulazni podaci sastoje se od dva retka.
+U prvom retku nalaze se prirodni brojevi N (1 ≤ N ≤ 2 · 105 ) i K (1 ≤ K ≤ 109 ).
+U drugom retku nalazi se niz prirodnih brojeva a, tj. N brojeva ai (1 ≤ ai ≤ 109 ), koji predstavlja visine
+cvjetova.
+
+Izlazni podaci
+U jedinom retku ispišite N brojeva 0 ili 1, koji za svaki cvijet osim prvog određuju može li se do njega
+doći. Broj 0 predstavlja da to nije moguće učiniti, a 1 da je cvijet dostižan. S prvog cvijeta krećemo pa je
+on uvijek dostižan.
+
+Bodovanje
+
+ Podzadatak        Broj bodova     Ograničenja
+
+         1              20         Visine cvjetova su strogo rastuće.
+         2              25         N ≤ 1 000
+         3              25         Nema dodatnih ograničenja.
+
+Primjeri
+ ulaz                                                     ulaz
+
+ 5 2                                                      5 3
+ 5 4 8 7 2                                                10 15 14 8 9
+
+ izlaz                                                    izlaz
+ 1 1 0 1 1                                                1 0 0 1 1
+Pojašnjenje prvog primjera:
+Na drugi cvijet moguće je skočiti direktno s prvog. Do trećeg cvijeta nije nikako moguće doći jer ni s
+prvog ni drugog cvijeta nije moguće skočiti na njega. Da posjeti četvrti cvijet, Filip je također mogao
+skočiti direktno s prvog cvijeta. Za zadnji cvijet moramo se malo više potruditi, ali ga možemo dostići
+tako da prvo skočimo na drugi cvijet pa zatim na zadnji.
+
+
+
+
+                                                      5 od 11
+       Hrvatsko otvoreno natjecanje u informatici                                        Zadatak Hijerarhija
+       1. kolo, 5. listopada 2024.                                          3 sekunde / 512 MiB / 90 bodova
+
+
+Zadatak Hijerarhija
+Krešimir se počeo baviti proučavanjem korporativnih struktura, među njima i
+hijerarhijama.
+Hijerarhija je struktura s N zaposlenika i N − 1 veza nadređeni–podređeni, tj.
+veza u kojima je jedan zaposlenik direktno nadređen nekom drugom zaposleniku.
+Također, u hijerarhiji mora postojati jedna osoba koja je direktno ili indirektno
+(nekim nizom direktnih nadređenosti) nadređena svim ostalim zaposlenicima.
+Krešo promatra tvrtku s N zaposlenika i N −1 takvih veza, ali nije sigurno je li to zaista validna hijerarhija
+ili ne. Krešimir vas je zamolio da mu pomognete odgovoriti na to pitanje. Sve podatke zabilježio je u svoju
+bilježnicu.
+Također, u svojoj bilježnici napravit će Q trajnih promjena kojima će obrnuti jednu nadređeni–podređeni
+vezu na način da će podređena osoba postati direktno nadređena svojoj bivšoj nadređenoj osobi iz te
+veze. Nakon svake takve promjene potrebno je odgovoriti na isto pitanje: je li trenutno stanje validna
+hijerarhija?
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj N (2 ≤ N ≤ 3 · 105 ).
+U idućih N − 1 redova, za svaki i = 1, 2, ..., N − 1 nalazi se par brojeva pi i ei (1 ≤ pi , ei ≤ N , pi ̸= ei ),
+označavajući da je pi direktno nadređen ei .
+U idućem redu nalazi se nenegativan broj Q (0 ≤ Q ≤ 3 · 105 ).
+U idućih Q redova nalaze se parovi ai , bi (1 ≤ ai , bi ≤ N , ai ̸= bi ). Zagarantirano je da će u tom trenutku
+ai biti direktno nadređen bi ili obratno.
+U test podacima garantiramo da će biti moguće postići barem jednu hijerarhiju nekim nizom preokreta.
+
+Izlazni podaci
+U idućih Q + 1 redova potrebno je ispisati za svaki od navedenih scenarija odgovor je li trenutno stanje
+struktura hijerarhija, tj. "DA" ako je ili "NE" ako nije (bez navodnika).
+
+Bodovanje
+
+ Podzadatak      Broj bodova     Ograničenja
+
+       1               7         N ≤ 300, Q = 0
+       2              12         N, Q ≤ 300
+       3              16         N, Q ≤ 1 000
+       4              15         Q=0
+       5              23         Za svaki i = 1, 2, . . . , N − 1 vrijedit će da je i direktno nadređen i + 1 ili obratno.
+       6              17         Nema dodatnih ograničenja.
+
+
+
+
+                                                    6 od 11
+        Hrvatsko otvoreno natjecanje u informatici                            Zadatak Hijerarhija
+        1. kolo, 5. listopada 2024.                              3 sekunde / 512 MiB / 90 bodova
+
+
+Probni primjeri
+ulaz                                                     ulaz
+3                                                        4
+1 2                                                      2 1
+1 3                                                      2 3
+3                                                        1 4
+1 2                                                      4
+1 2                                                      4 1
+1 3                                                      4 1
+                                                         3 2
+izlaz                                                    1 4
+DA                                                       izlaz
+DA
+DA                                                       DA
+DA                                                       NE
+                                                         DA
+                                                         DA
+                                                         NE
+
+
+
+
+                                                     7 od 11
+         Hrvatsko otvoreno natjecanje u informatici                                         Zadatak Učiteljica
+         1. kolo, 5. listopada 2024.                                         5 sekundi / 512 MiB / 120 bodova
+
+
+Zadatak Učiteljica
+U najboljoj varaždinskoj školi radila je odlična učiteljica iz informatike poznata po
+svojim zanimljivim i neobičnim idejama. Zvala se Lana i često je svojim učenicima
+zadavala nemoguće ili nerješive zadatke. Svakom učeniku bilo je dovoljno riješiti 1
+zadatak u školskoj godini da prođe razred s ocjenom odličan. Učenici koji do kraja
+godine ne bi riješili nijedan zadatak ponavljali bi razred. Zadnjeg dana škole, na
+ploču je zapisala izrazito težak zadatak koji je glasio:
+Zamislite da imate niz brojeva duljine N i možete mu izbrisati neke elemente s
+početka ili kraja. Na koliko načina možete napraviti takvo brisanje tako da nakon brisanja mora postojati
+barem 1 broj koji se pojavljuje točno jednom, barem 1 broj koji se pojavljuje točno dvaput, . . ., i barem 1
+broj koji se pojavljuje točno K puta.
+Učenik Fran, koji dosad nije riješio nijedan zadatak, ubrzo je rekao: “Znam riješiti ovaj zadatak”. Učiteljica
+Lana nije vjerovala Franu te mu je kazala: “Napiši kod u sljedećih 30 minuta pa ću ti vjerovati, ako ne
+napišeš morati ćeš ponavljati razred”. Fran ne zna kodirati pa je hitno zatražio pomoć od vas da napišete
+kod koji rješava ovaj zadatak. U velikoj žurbi zaboravio vam je ispričati ideju svog rješenja za ovaj zadatak.
+Napišite kod koji upisuje brojeve N i K, niz od N elemenata te riješite Lanino pitanje i pomozite Franu.
+
+Ulazni podaci
+U prvom redu su 2 prirodna broja N (1 ≤ N ≤ 105 ) i K (1 ≤ K ≤ 4) iz teksta zadatka.
+U drugom redu je N prirodnih brojeva ai (1 ≤ ai ≤ N ), brojevi iz teksta zadatka.
+
+Izlazni podaci
+U prvi redak ispišite cijeli broj, broj različitih brisanja tako da uvjeti iz zadatka vrijede. Dva brisanja su
+različita ako postoji indeks koji je neobrisan u jednom, a obrisan u drugom.
+
+Bodovanje
+
+ Podzadatak        Broj bodova     Ograničenja
+
+         1              20         N ≤ 1000
+         2              15         1 ≤ ai ≤ K za svaki i = 1, 2, . . . , N
+         3              35         K=1
+         4              50         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                                 ulaz
+ 3 1                                    6 3                                  6 2
+ 1 2 1                                  6 5 6 4 5 5                          5 4 5 2 6 5
+
+ izlaz                                  izlaz                                izlaz
+ 6                                      1                                    5
+Pojašnjenje prvog probnog primjera:
+Mogući nizovi nakon brisanja su: [1], [2], [1], [1, 2], [2, 1], [1, 2, 1] te u svakom od 6 nizova postoji broj
+koji se pojavljuje jednom.
+
+
+
+                                                      8 od 11
+      Hrvatsko otvoreno natjecanje u informatici                                     Zadatak Učiteljica
+      1. kolo, 5. listopada 2024.                                     5 sekundi / 512 MiB / 120 bodova
+
+
+Pojašnjenje drugog probnog primjera:
+Jedini niz nakon brisanja u kojem postoji barem 1 broj koji se pojavljuje točno jednom, barem 1 broj koji
+se pojavljuje točno dvaput i barem 1 broj koji se pojavljuje točno triput je zadani niz od N brojeva.
+
+
+
+
+                                                   9 od 11
+      Hrvatsko otvoreno natjecanje u informatici                                         Zadatak Zbunjenost
+      1. kolo, 5. listopada 2024.                                          5 sekundi / 512 MiB / 120 bodova
+
+
+Zadatak Zbunjenost
+Gospodin Malnar odlučio je provesti ljeto putujući po svijetu tako što bi sjeo na
+neki let i vidio kamo ga odvede.
+Došavši u nepoznatu zemlju, začudio se kako ga ulice glavnog grada podsjećaju
+na triangulaciju! Točnije, u gradu se nalazi N zanimljivih lokacija međusobno
+povezanih s 2N − 3 ulice. Lokacije 1, 2, . . ., N redom su povezane u konveksan
+mnogokut, dok preostalih N − 3 ulica spajaju lokacije tako da se bilo koje dvije
+ulice ne sijeku, osim možda u svojim krajevima.
+Šetajući se ulicama, gospodin Malnar vratio se na početnu lokaciju odakle je krenuo, iako nije posjetio
+niti jednu drugu lokaciju više od jednom. To ga je nakratko zbunilo, no nakon malo razmišljanja zaključio
+je kako je to posve normalno.
+Osmislio je mjeru zbunjenosti, koju je definirao kao broj različitih jednostavnih zatvorenih šetnji u gradu.
+Jednostavna zatvorena šetnja je niz međusobno različitih lokacija V1 , V2 , . . ., Vm takav da je Vi povezana
+ulicom s Vi+1 za svaki i = 1, 2, . . . , m − 1, te da je Vm povezana s V1 . Dvije šetnje su ekvivalentne te
+ih smatramo istima ako se cikličkom rotacijom jedne može dobiti druga. Na primjer, šetnja (1, 2, 3, 4)
+ekvivalentna je šetnji (2, 3, 4, 1).
+Zauzet razgledavanjem, gospodin Malnar vas moli da mu izračunate zbunjenost opisanog grada!
+
+Ulazni podaci
+U prvom retku nalazi se prirodan broj N (3 ≤ N ≤ 2 · 105 ), broj zanimljivih lokacija u gradu.
+U sljedećih N − 3 redaka nalaze se po dva prirodna broja Xi i Yi (1 ≤ Xi , Yi ≤ N ), oznake lokacija
+povezanih i-tom ulicom.
+
+Izlazni podaci
+U prvi i jedini redak ispišite ostatak pri djeljenju zbunjenosti grada s brojem 109 + 7.
+
+Bodovanje
+
+ Podzadatak     Broj bodova     Ograničenja
+
+       1             13         N ≤ 15
+       2             18         N ≤ 300
+       3             34         N ≤ 2 000
+       4             15         Povezane su lokacije 1 i k za svaki k = 3, 4, . . . , N − 1.
+       5             40         Nema dodatnih ograničenja.
+
+
+
+
+                                                   10 od 11
+          Hrvatsko otvoreno natjecanje u informatici                                                     Zadatak Zbunjenost
+          1. kolo, 5. listopada 2024.                                                      5 sekundi / 512 MiB / 120 bodova
+
+
+Primjeri
+  ulaz                                       ulaz                                          ulaz
+  4                                          5                                             6
+  1 3                                        1 3                                           2 4
+                                             3 5                                           4 6
+  izlaz                                                                                    6 2
+                                             izlaz
+  3                                                                                        izlaz
+                                             6
+                                                                                           11
+Objašnjenje prvog primjera:
+Na skici je svaka šetnja označena drugom bojom.
+
+
+
+
+Objašnjenje drugog primjera:
+Šetnje su: (1, 2, 3), (1, 3, 5), (3, 4, 5), (1, 2, 3, 5), (1, 3, 4, 5), (1, 2, 3, 4, 5).
+Objašnjenje trećeg primjera:
+Šetnje su: (1, 2, 6), (2, 3, 4), (4, 5, 6), (2, 4, 6), (1, 2, 4, 6), (2, 3, 4, 6), (2, 4, 5, 6), (1, 2, 3, 4, 6), (2, 3, 4, 5, 6),
+(1, 2, 4, 5, 6), (1, 2, 3, 4, 5, 6).
+
+
+
+
+                                                           11 od 11
+

@@ -1,0 +1,387 @@
+           Hrvatska informatička olimpijada
+                         27. travnja 2025.
+
+
+
+
+                            Zadaci
+Zadatak          Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+Automatizacija         6 sekundi                512 MiB              100
+Bolivija              2 sekunde                 512 MiB              100
+Korupcija             1 sekunda                 512 MiB              100
+Lirili Larila         2 sekunde                 512 MiB              100
+
+Ukupno                                                               400
+      Hrvatska informatička olimpijada                                            Zadatak Automatizacija
+      27. travnja 2025.                                                 6 sekundi / 512 MiB / 100 bodova
+
+
+Zadatak Automatizacija
+Životni je cilj uspješne poduzetnice Elene Mošus zamijeniti svu ljudsku radnu snagu umjetnom inteligenci-
+jom. Kako bi ubrzala taj proces, zaključila je da je potrebno uključiti se u hrvatsko zakonodavstvo. Njezin
+naum došao je do predsjednika države, koji ju je postavio na čelo novonastalog Ministarstva automatizacije
+logičkih načela i analitičkog razmišljanja (skraćeno MALNAR). Njihov je prvi zadatak automatizirati
+sljedeću igru.
+Igra se sastoji od dva igrača. Svakom je igraču dan skup od K (različitih) brojeva između 1 i N . Svaki
+igrač ima pristup jedino brojevima vlastitog skupa, a cilj igre pronaći je veličinu presjeka danih skupova.
+Igrači ne mogu komunicirati direktno, već samo koristeći zajedničku ploču na koju mogu postavljati žetone.
+Pravila igre su sljedeća:
+  • Ploča se sastoji od N praznih polja na kojima se mogu postavljati žetoni.
+  • Igrači naizmjenično postavljaju žetone na željeno slobodno polje. Jednom kada je žeton postavljen
+    na polje, ono se smatra zauzetim i na njega se više ne mogu postavljati drugi žetoni.
+  • Prvi igrač postavlja plave žetone, a drugi igrač crvene.
+  • Oba igrača u svakom trenutku imaju pregled nad cijelim stanjem ploče.
+  • Kada je igrač na potezu, umjesto postavljanja žetona, on može odlučiti završiti igru tako da proglasi
+    veličinu presjeka danih skupova. Ukoliko nema slobodnih polja, igrač mora završiti igru.
+Tijekom igre igrači mogu komunicirati isključivo preko ploče, no naravno, prije početka igre moraju se
+dogovoriti oko strategije.
+MALNAR je odlučio da igrače u ovoj igri treba zamijeniti automatiziranim sustavom umjetne inteligencije
+koji ima nepogrešivu strategiju te koji može odigrati potez odmah nakon učitavanja stanja ploče. Pomozite
+MALNAR-u te osmislite strategiju za oba igrača koja osigurava da barem jedan od igrača u nekom
+trenutku završi igru i proglasi točnu veličinu presjeka danih skupova.
+Da bi automatizirani sustav mogao brzo raditi poteze, strategija će se sastojati u tome da se za svako
+moguće stanje ploče odredi koji potez treba odigrati. To znači da automatizirani sustav neće imati pregled
+nad nizom poteza koji je doveo igru do trenutnog stanja, već mora moći napraviti potez isključivo na
+temelju danog trenutnog stanja ploče.
+
+Ulazni podaci
+U prvom je retku prirodan broj P (P = 1 ili P = 2) koji određuje radi li se o prvom ili drugom igraču.
+U drugom su retku prirodni brojevi N i K iz teksta zadatka.
+U trećem je retku niz od K različitih prirodnih brojeva između 1 i N , koji predstavlja zadani skup brojeva.
+U četvrtom je retku prirodan broj T koji određuje broj stanja ploče za koje je potrebno odigrati potez. U
+testnim podacima, T će uvijek biti jednak ukupnom broju mogućih stanja ploče, što znači da odabrana
+strategija mora odrediti potez za svako moguće stanje ploče. Pri tome, stanje ploče smatramo mogućim
+ukoliko se ono može pojaviti u tijeku igre. Međutim, samo za potrebe probnog primjera, T može poprimiti
+i manju vrijednost.
+U svakom od sljedećih T redaka je opis jednog od mogućih stanja ploče. Opis stanja ploče sastoji se od
+niza od N znakova “P”, “C” ili “.”, pri čemu znak “P” predstavlja plavi žeton, “C” predstavlja crveni
+žeton, a “.” predstavlja prazno polje.
+
+Izlazni podaci
+Za svaki od T zadanih stanja ploče ispišite po jedan redak oblika “+ m” ili “! m”, za neki cijeli broj m.
+Ispis oblika “+ m” predstavlja postavljanje žetona na m-tu poziciju na ploču. Da bi se ispis smatrao
+valjanim, mora vrijediti 1 ≤ m ≤ N , te odabrano polje ne smije biti zauzeto.
+
+
+                                                  1 od 8
+         Hrvatska informatička olimpijada                                              Zadatak Automatizacija
+         27. travnja 2025.                                                   6 sekundi / 512 MiB / 100 bodova
+
+
+Ispis oblika “! m” predstavlja proglašenje da veličina presjeka danih skupova iznosi m te završetak igre.
+Da bi se ispis smatrao valjanim, mora vrijediti 0 ≤ m ≤ N .
+
+Bodovanje
+Vaše će rješenje biti testirano u dva koraka. Prvo će biti pozvano na testnom podatku u kojem je P = 1,
+a nakon toga na testnom podatku u kojem je P = 2. Vrijednosti ulaznih podataka N i K bit će jednake
+prilikom oba pokretanja. Uz pretpostavku da je ispis vašeg programa valjan prilikom oba pokretanja,
+program izrađen od strane organizatora simulirat će tijek igre, prateći ispisani opis strategije. Ako navedena
+simulacija igre završi s ispravno određenom veličinom presjeka danih skupova, vaše rješenje smatrat će se
+točnim. Vrijeme izvršavanja vašeg rješenja je zbroj vremena izvršavanja oba koraka evaluacije.
+U svim podzadacima vrijedi 2 ≤ N ≤ 16 i 1 ≤ K ≤ N .
+
+ Podzadatak       Broj bodova       Ograničenja
+
+         1               11         Dani skupovi sastojat će se od K uzastopnih vrijednosti.
+         2               7          N je paran i vrijednosti brojeva u danim skupovima su između 1 i N2 .
+         3               16         N ≤4
+         4               13         N = 14 i K = 2
+         5               12         Vrijednosti brojeva u danim skupovima su između 1 i N − 1.
+         6               41         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                                      ulaz
+ 1                                                         2
+ 4 2                                                       4 2
+ 2 3                                                       1 3
+ 3                                                         2
+ ....                                                      P...
+ P.C.                                                      P.CP
+ PCCP
+                                                           izlaz
+ izlaz
+                                                           + 3
+ + 1                                                       + 2
+ + 4
+ ! 1
+
+
+Pojašnjenje probnih primjera:
+Navedeno predstavlja samo jedan primjer moguće strategije. Ispod je naveden odgovarajući tijek igre.
+
+ Stanje ploče     Potez       Napomena
+
+ ....              + 1        Prvi igrač postavlja žeton na prvo polje.
+ P...              + 3        Drugi igrač postavlja žeton na treće polje.
+ P.C.              + 4        Prvi igrač postavlja žeton na četvrto polje.
+ P.CP              + 2        Drugi igrač postavlja žeton na drugo polje.
+ PCCP              ! 1        Prvi igrač zaustavlja igru te proglašava da veličina presjeka iznosi 1. Točno!
+
+
+                                                      2 od 8
+      Hrvatska informatička olimpijada                                                  Zadatak Bolivija
+      27. travnja 2025.                                                2 sekunde / 512 MiB / 100 bodova
+
+
+Zadatak Bolivija
+Bolivija, predivna južnoamerička država s bogatom kulturom i povijesti, prepuna prirodnih ljepota,
+uključujući dio Amazonske prašume te planinski lanac Ande. Bitnije za naše natjecatelje, to je mjesto
+održavanja sljedeće Međunarodne informatičke olimpijade!
+U sklopu promocije natjecanja, organizatori su dobili zadatak fotografirati planinski lanac te sastaviti
+album od najzapanjujućih slika. Planinski lanac predstavljamo nizom v od N nenegativnih cijelih brojeva
+koji predstavljaju redom visine planina u planinskom lancu. Pri tome, N je neparan i središnja planina
+(na poziciji N2+1 ) je upravo ona najviša, na čijem je samom vrhu ugasli vulkan Nevado Sajama.
+Organizatori imaju vrlo specifične uvjete za prikupljanje fotografija. Prvo, biraju dva nenegativna cijela
+broja A i B tako da je A < B te da je B manji ili jednak visini najvišeg vrha, Nevado Sajame. Zatim,
+namještaju kadar fotografije tako da širinom obuhvaća svih N planina, no tako da fotografija obuhvaća
+samo raspon visina između A i B. Dodatno, organizatori su zadovoljni fotografijom samo ukoliko je ona
+simetrična s obzirom na os simetrije koja prolazi središnjom planinom.
+
+
+
+
+           Slika: Primjer valjanog izbora fotografije koji odgovara drugom probnom primjeru
+
+Organizatore sada zanima koliko različitih fotografija mogu prikupiti, odnosno koliko postoji parova
+brojeva A i B koji zadovoljavaju željene uvjete. Razmišljajući predugo o odgovoru, burna tektonska
+aktivnost dovela je do promjene visina nekih planina. Ukupno se dogodilo Q promjena visina, a vaš je
+zadatak pomoći organizatorima odrediti traženi broj fotografija nakon svake od promjena. Pri tome,
+nijedna od promjena nije utjecala na visinu središnje planine i ona je u svakom trenutku bila najviša
+planina.
+
+Ulazni podaci
+U prvom su retku prirodni brojevi N i Q, redom broj planina i broj promjena.
+U drugom je retku niz v od N nenegativnih cijelih brojeva, redom visine planina u planinskom lancu.
+Garantirano je da je N neparan te da je središnja planina upravo ona najviša.
+U i-tom od sljedećih Q redaka su prirodan i nenegativan cijeli broj xi i hi (1 ≤ xi ≤ N ), koji označavaju
+da je došlo do promjene visine planine na poziciji xi koja poprima novu visinu hi . Garantirano je da
+xi ̸= N2+1 te da je nova visina manja ili jednaka visini središnje planine.
+
+
+
+
+                                                 3 od 8
+         Hrvatska informatička olimpijada                                                     Zadatak Bolivija
+         27. travnja 2025.                                                   2 sekunde / 512 MiB / 100 bodova
+
+
+Izlazni podaci
+Ispišite Q + 1 redaka. U i-tom retku ispišite traženi mogući broj fotografija nakon i − 1 tektonskih
+promjena.
+
+Bodovanje
+U svim podzadacima vrijedi 3 ≤ N ≤ 200 000 i 0 ≤ Q ≤ 200 000.
+Za sve i = 1, . . . , N vrijedi da je vi ≤ 654 200 (visina vrha Nevado Sajama u centimetrima).
+
+ Podzadatak       Broj bodova     Ograničenja
+
+         1              9         Q = 0, N ≤ 300, te vi ≤ 300 za sve i = 1, . . . , N
+         2             23         Q=0
+         3             31         Svaka promjena mijenja visinu planine najviše za 1.
+         4             37         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                                  ulaz
+ 5 5                                    7 0                                   7 10
+ 1 5 8 7 3                              4 3 1 7 2 3 5                         1 6 7 10 5 4 3
+ 1 8                                                                          2 7
+ 4 1                                    izlaz                                 2 8
+ 2 0                                    7                                     2 9
+ 4 0                                                                          2 9
+ 5 8                                                                          2 10
+                                                                              6 5
+ izlaz                                                                        6 6
+ 5                                                                            6 7
+ 6                                                                            6 8
+ 1                                                                            6 9
+ 3                                                                            izlaz
+ 6
+ 36                                                                           8
+                                                                              8
+                                                                              5
+                                                                              3
+                                                                              3
+                                                                              2
+                                                                              4
+                                                                              4
+                                                                              4
+                                                                              5
+                                                                              7
+
+
+Pojašnjenje drugog probnog primjera:
+Mogući izbori za A i B su: (0, 1), (2, 3), (2, 4), (3, 4), (5, 6), (5, 7), (6, 7). Ukupno ih je sedam.
+Slika u tekstu odgovara odabiru A = 2 i B = 4.
+
+
+
+
+                                                      4 od 8
+       Hrvatska informatička olimpijada                                                 Zadatak Korupcija
+       27. travnja 2025.                                                 1 sekunda / 512 MiB / 100 bodova
+
+
+Zadatak Korupcija
+... Korupcija svima, a ne samo njima. Ja nudim korupciju, koruptivni red, rad i rast. Sve što vam ovi
+majstori ponude, ja nudim duplo. Predlažem i osmi padež: Kome? Koliko? ...
+Mali Mirko bio je očaran govorom stričeka s televizije. Bio je uvjeren kako je razumio poruku: morao je
+korumpirati bitove svojih binarnih brojeva.
+Mirko promatra brojeve 0, 1, . . . , 2N − 1 (kao binarne brojeve s N binarnih znamenki). Vođen željom za
+korupcijom, Mirko će izabrati dva broja X i Y (0 ≤ X, Y < 2N ) koja se razlikuju u točno jednom bitu.
+Mirko će tada prebrisati taj bit znakom “?” u oba broja X i Y , čime je postigao korupciju: brojevi X i
+Y više se ne mogu razlikovati. Mirko će ponavljati ovaj postupak s preostalim brojevima, dok na kraju
+ne dobije ukupno 2N −1 parova brojeva koji se ne mogu razlikovati. Dakle, svaki broj između 0 i 2N − 1
+član je točno jednog para i dva broja mogu biti u paru isključivo ako se razlikuju u točno jednom bitu
+(binarnoj znamenci).
+Radi većeg izazova, Mirko je odlučio da želi imati točno ai parova kojima znak “?” stoji na mjestu i-tog
+bita, za i = 0, 1, . . . , N − 1. Pri tome, bitove brojimo od manje značajnih do više značajnih, pa tako i-ti
+bit odgovara vrijednosti 2i . Pomozite Mirku te napravite odabir parova koji zadovoljava tražene uvjete, ili
+odredite kako takav odabir ne postoji.
+
+Ulazni podaci
+U prvom je retku prirodan broj N iz teksta zadatka.
+U drugom je retku niz od N nenegativnih cijelih brojeva ai , za i = 0, . . . , N − 1, pri čemu ai predstavlja
+traženi broj parova koji se razlikuju u i-tom bitu. Zbroj tih brojeva iznosi točno 2N −1 .
+
+Izlazni podaci
+Ukoliko nije moguće napraviti odabir parova koji zadovoljava uvjete zadatka, u jedini redak ispišite -1.
+Inače, ispišite 2N −1 redaka. U svaki redak ispišite dva razmakom odvojena broja X i Y koji predstavljaju
+odabrani par. Parove možete ispisati u bilo kojem redoslijedu.
+Ukoliko postoji više rješenja, ispišite bilo koje.
+
+Bodovanje
+U svim podzadacima vrijedi 1 ≤ N ≤ 20.
+U svakom podzadatku, 20% bodova donosi samo odlučivanje postoji li odabir parova koji zadovoljava
+uvjete zadatka ili ne. Za te bodove potrebno je, ako niste ispisali -1, ispisati nekakav odabir parova, ali
+on ne mora zadovoljavati traženi uvjet.
+
+ Podzadatak      Broj bodova     Ograničenja
+
+       1              15         N ≤4
+       2              15         Vrijedi N ≥ 2 te ai = 0 za sve i > 2.
+       3              20         N ≤6
+       4              50         Nema dodatnih ograničenja.
+
+
+
+
+                                                     5 od 8
+        Hrvatska informatička olimpijada                             Zadatak Korupcija
+        27. travnja 2025.                             1 sekunda / 512 MiB / 100 bodova
+
+
+Probni primjeri
+ulaz                                 ulaz             ulaz
+2                                    2                3
+2 0                                  1 1              2 0 2
+
+izlaz                                izlaz            izlaz
+0 1                                  -1               0 1
+2 3                                                   2 6
+                                                      3 7
+                                                      4 5
+
+
+
+
+                                             6 od 8
+       Hrvatska informatička olimpijada                                                 Zadatak Lirili Larila
+       27. travnja 2025.                                                  2 sekunde / 512 MiB / 100 bodova
+
+
+Zadatak Lirili Larila
+Sokrat: Reci Platone, slažeš li se sa mnom oko ovoga: najjači borci su oni leteći, poput Bombardira
+Crocodilla ili Bombombinija Gusinija.
+Platon: To naprosto nije tako. Kopneni borci, poput Brr Brr Patapima ili Tung Tung Tung Sahura postigli
+su svoje rezultate usprkos tome što nemaju mogućnost letenja.
+Sokrat: Smatram da je jedini način da dođemo do istine da pustimo borce da se bore te da odredimo ishod
+na temelju toga.
+Platon: Bravo Sokrate, slažem se da ćemo tako doći do istine.
+Odlučujuća borba odvijat će se na povezanom grafu s N čvorova i M bridova. Lirili Larila, polu slonica
+polu kaktus, vlasnica je grafa pa će osigurati da je riječ o njezinoj najdražoj vrsti grafa: kaktus grafu. Za
+potrebe ovog zadatka, kaktus graf definiramo kao jednostavan povezani graf u kojem svaki čvor pripada
+najviše jednom ciklusu.
+Borba se odvija na sljedeći način. Na početku, svi leteći borci smješteni su u određenom početnom čvoru,
+a svi kopneni borci smješteni su u nekom drugom početnom čvoru. Kako se borba odvija, borci šire svoj
+utjecaj na graf te nastoje pokoriti što više čvorova. U konačnici, čvor će biti pokoren od strane ili letećih
+ili kopnenih boraca, ovisno o tome je li udaljenost toga čvora bliža početnom čvoru letećih boraca ili
+početnom čvoru kopnenih boraca. Čvorovi koji se nalaze na jednakoj udaljenosti od početnih čvorova
+letećih i kopnenih boraca predstavljaju veliki izazov za obje skupine boraca pa oni ostaju nepokoreni.
+Lirili Larila želi namjestiti ishod borbe. Naime, ona je već unaprijed odredila prirodne brojeve A i B, koji
+predstavljaju broj pokorenih čvorova redom od strane letećih i kopnenih boraca. Pomozite ovoj umiljatoj
+kaktus-slonici da odabere početne čvorove za obje vrste boraca tako da na kraju borbe brojevi pokorenih
+čvorova odgovaraju brojevima A i B.
+Dodatno, potrebno je napraviti takav odabir za T različitih situacija.
+
+Ulazni podaci
+U prvom je retku prirodni broj T , broj različitih situacija.
+U sljedećim retcima slijede redom opisi situacija. Svaki opis zadan je u sljedećem formatu.
+U prvom su retku prirodni brojevi N, M, A i B, redom broj čvorova i broj bridova u danom kaktus grafu
+te brojevi pokorenih čvorova redom od strane letećih i kopnenih boraca.
+U sljedećih M redaka nalaze se parovi brojeva a i b (1 ≤ a, b ≤ N, a ̸= b), redom bridovi grafa.
+Dani graf bit će kaktus graf, to jest jednostavan povezani graf u kojem svaki čvor pripada najviše jednom
+ciklusu.
+Testni podaci će biti takvi da je uvijek moguće pronaći izbor početnih čvorova koji zadovoljava uvjete
+zadatka.
+
+Izlazni podaci
+Ispišite T redaka, po jedan za svaku situaciju.
+U i-tom retku ispišite dva prirodna broja odvojena razmakom, koji predstavljaju oznake početnih čvorova
+letećih i kopnenih boraca, željeni odabir za i-tu situaciju. Ukoliko postoji više rješenja, ispišite bilo koje.
+
+
+
+
+                                                   7 od 8
+         Hrvatska informatička olimpijada                                             Zadatak Lirili Larila
+         27. travnja 2025.                                              2 sekunde / 512 MiB / 100 bodova
+
+
+Bodovanje
+U svim podzadacima vrijedi 2 ≤ N ≤ 200 000 te 2 ≤ A + B ≤ N . Dodatno, suma vrijednosti N po svim
+situacijama je manja ili jednaka od 200 000.
+Ograničenja navedena ispod primjenjuju se na svaku od T danih situacija.
+
+ Podzadatak       Broj bodova    Ograničenja
+
+         1              6        Suma vrijednosti N je ≤ 300.
+         2              8        Dani graf je stablo te suma vrijednosti N je ≤ 5000.
+         3             25        Dani graf je stablo.
+         4             13        Dani graf ima točno jedan ciklus te suma vrijednosti N je ≤ 5000.
+                                 Dani graf ima točno jedan ciklus te je garantirano da postoji rješenje
+         5             17
+                                 u kojem se oba početna čvora nalaze unutar tog ciklusa.
+         6              8        Dani graf ima točno jedan ciklus.
+         7             11        Suma vrijednosti N je ≤ 5000.
+         8             12        Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                 ulaz                               ulaz
+ 1                                    1                                  1
+ 6 5 3 1                              6 6 3 2                            6 7 3 3
+ 1 2                                  1 2                                1 2
+ 2 3                                  2 3                                2 3
+ 2 4                                  3 4                                3 1
+ 4 5                                  4 1                                2 4
+ 5 6                                  3 5                                4 5
+                                      5 6                                5 6
+ izlaz                                                                   6 4
+                                      izlaz
+ 4 3                                                                     izlaz
+                                      1 6
+                                                                         4 2
+
+
+Pojašnjenje prvog probnog primjera:
+Leteći borci pokore čvorove 4, 5 i 6, a kopneni čvor 3. Čvorovi 1 i 2 ostaju nepokoreni.
+Pojašnjenje drugog probnog primjera:
+Leteći borci pokore čvorove 1, 2 i 4, a kopneni čvorove 5 i 6. Čvor 3 ostaje nepokoren.
+Pojašnjenje trećeg probnog primjera:
+Leteći borci pokore čvorove 4, 5 i 6, a kopneni čvorove 1, 2 i 3. Ne postoje nepokoreni čvorovi.
+
+
+
+
+                                                   8 od 8
+

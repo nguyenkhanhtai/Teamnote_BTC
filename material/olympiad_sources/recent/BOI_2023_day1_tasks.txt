@@ -1,0 +1,238 @@
+                                                        Astronomer
+                                              Problem ID: astronomer
+
+The astronomer has a passion for stargazing. In particular, he gets immense
+pleasure out of gazing at k stars simultaneously through his telescope. Building
+a telescope with radius r costs t · r kroner. A newly built telescope will point
+exactly at the origin (0, 0). Moving it to point somewhere else also takes effort;
+shifting the telescope a distance of d units incurs a cost of s · d kroner. The
+astronomer can observe all stars at distance at most r from where the telescope
+points.
+    How much does it cost to build and move a telescope that allows k stars to
+be observed at once?
+   All coordinates and distances are given in the Euclidean plane.
+
+Example
+Here is an example with n = 3 stars at positions (0, 0), (2, 0), and (3, 1). The
+shaded area shows a telescope of radius 1 pointing at (1, 0) covering two stars;
+this costs s + t kroner and is an optimal solution to sample input 3. The image
+also shows optimal solutions to sample inputs 1, 2, and 4.
+
+
+
+                                     ?
+
+                ?             ?
+
+
+
+
+Input
+The first line consists of four integers: the number k of stars the astronomer
+wants to observe, the number n of stars in tonight’s sky, the shifting cost s, and
+the telescope building cost t. Then follow n lines, where the ith line contains the integer coordinates xi and yi of the
+ith star.
+
+Output
+A single real number: the minimum number of kroner that the astronomer needs to spend.
+
+Constraints and Scoring
+You can assume
+   1. 1 ≤ k ≤ n ≤ 700.
+   2. xi , yi ∈ {−109 , . . . , 109 } for all i ∈ {1, . . . , n}.
+   3. s, t ∈ {0, . . . , 109 }.
+   4. Your output is accepted if it is within a relative or absolute tolerance of ϵ = 10−6 of the correct answer.
+    Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains a set
+of test cases. To get the points for a test group you need to solve all test cases in the test group. Your final score will
+be the maximum score of a single submission.
+Group   Points   Constraints
+1       8        t≤s
+2       9        n ≤ 50 and s = 0
+3       18       s=0
+4       13       n ≤ 50
+5       14       n ≤ 350
+6       15       ϵ = 1/10
+7       23       No further constraints
+
+Sample Input 1                            Sample Output 1
+2 3 1000 500                              1000.0
+0 0
+2 0
+3 1
+
+Sample Input 2                            Sample Output 2
+2 3 500 3000                              3387.277541898787
+0 0
+2 0
+3 1
+
+Sample Input 3                            Sample Output 3
+2 3 250 750                               1000.0
+0 0
+2 0
+3 1
+
+Sample Input 4                            Sample Output 4
+2 3 0 500                                 353.5533905932738
+0 0
+2 0
+3 1
+
+Sample Input 5                            Sample Output 5
+3 4 0 10                                  50.0
+0 0
+10 0
+5 10
+5 5
+                                               Staring Contest
+                                        Problem ID: staringcontest
+
+A staring contest is a classical battle of imperturbability in which
+two people stare into each other’s eyes while maintaining a facial ex-
+pression of assured serenity. The goal is to maintain eye contact for
+longer than your opponent. The contest ends when one participant
+breaks composure, typically by looking away, smiling, speaking, or
+giggling.
+    As a coach of the national staring contest you need to determine
+the imperturbability of each of your team’s n members for the up-
+coming world finals. The ith athlete can maintain eye contact for
+exactly ai seconds, but these values are unknown to you in the be-
+ginning. For instance, you could have a team of n = 3 members:
+     i    Name      ai
+     1    Anna      431
+     2    Esther    623
+     3    Tony      121
+    When athletes i and j compete, the confrontation lasts exactly min(ai , aj ) seconds, at which moment the weaker
+contestant breaks composure and both contestants start smiling and giggling within a fraction of a second. For instance,
+if Anna competes against Esther, the contest lasts for 431 seconds. Importantly, to an outside observer the actual winner
+of the confrontation (in this case, Esther) is impossible to determine, only the duration of the contest is measurable.
+    Your goal is to estimate the values a1 , . . . , an using as few staring contests as possible. Clearly, the strength of the
+strongest athlete can never be determined, so you are allowed to underestimate one of the ai .
+
+Interaction
+This is an interactive problem. The interaction begins with you reading a single line containing the integer n. You
+may then ask queries of the form “? i j” such that 1 ≤ i ≤ n and 1 ≤ j ≤ n and i ̸= j. The response to a query is a
+single integer: the value min(ai , aj ). The interaction ends with you printing a single line consisting of ! followed by
+n estimates in the form of integers b1 , . . ., bn , separated by spaces. This must be your final line of output.
+    Your submission is correct if bi = ai for every contestant i except one, which you may underestimate. To be
+precise, we require bi ≤ ai for all 1 ≤ i ≤ n and allow bk ̸= ak for at most one k.
+    The interactor is non-adaptive, meaning that the a1 , . . . , an are determined before the interaction begins.
+
+Constraints and Scoring
+The number n of athletes satisfies 2 ≤ n ≤ 1500. The imperturbability ai of each athlete satisfies 1 ≤ ai ≤ 86 400,
+they are all different. You can use at most 3000 queries; your final line of output, i.e., the line starting with !, is not
+counted as a query.
+    Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains a set
+of test cases. To get the points for a test group you need to solve all test cases in the test group. Your final score will
+be the maximum score of a single submission.
+    For group 3, your score is the minimum score among all test cases in the group. The score for each test case
+depends on the number of queries you use; fewer queries are better: Suppose you use q queries. If q ≤ n + 25, then
+you get the full 80 points. If q > 3000, then you get no points. Otherwise, you get 118.2 − 12 · ln(q − n) points,
+rounded to the nearest integer. For instance, for n = 1500 and q = 3000, you get 30 points.
+     Group     Points     Constraints
+     1         9          n ≤ 50
+     2         11         n ≤ 1000
+     3         0–80       1000 < n ≤ 1500
+Explanation of sample interactions
+Sample interaction 1 shows a possible interaction using the above example. Note that Anna’s and Tony’s strengths are
+correctly determined. (Esther’s can never be determined.)
+
+ Read                                        Sample Interaction 1                                          Write
+ 3
+                                                  ? 1 2
+ 431
+                                                  ? 1 3
+ 121
+                                                  ? 3 2
+ 121
+                                                  ! 431 431 121
+                                                        Tycho
+                                               Problem ID: tycho
+
+The planetary exploration vehicle Tycho VIII needs to get back to
+the home base after collecting mineral samples. Tycho travels in a
+straight line from position 0 to the home base at position b. While
+moving, it advances at a slow but steady pace of 1 unit per second.
+Every second, Tycho takes 1 unit of environmental damage from the
+harsh planetary conditions.
+    The situation is made even worse by radiation from a nearby
+pulsar, which adds d additional units of damage every p seconds.
+However, the radiation damage can be avoided by seeking shelter
+in one of n different hiding spots—caves, vegetation, large rocks,
+carcasses of the planet’s megafauna—along the way. Tycho can choose to stand still at any point for any integer
+number of seconds.
+    The starting position 0 and the home base at b are both sheltered, so Tycho takes no radiation damage there.
+   What is the minumum damage Tycho will take on its journey back to the home base?
+
+Example
+Consider the situation where the home base is at position 18 and there are shelters at positions 8 and 15.
+
+
+    0                 10               b
+     Assume that the pulsar’s period is 4, so unsheltered Tycho would take damage at times 4, 8, 12, etc. If Tycho
+leaves from the starting position (where it’s sheltered) at time 0, it can reach the first shelter after 8 seconds, incurring
+radiation damage d at time 4 (but none at time 8 because it’s sheltered then). Continuing without stopping, it reaches
+the home base at time 18, incurring d + d more units of radiation damage (at times 12 and 16, respectively). This way
+it incurs d + d + d = 3d units of radiation damage and 18 units of environmental damage. If instead Tycho waits at
+the 2nd shelter (at position 15) for 1 second, the pulse at time 16 causes it no damage, and it reaches the home base at
+time 19 with a total of 2d + 19 units of damage. This is better for most values of d. The two situations are shown here:
+
+
+     0
+
+
+    If the pulsar’s period is 10, Tycho can wait at the starting position for 2 seconds and then just go home without
+stopping at any shelter. Thus it passes the 1st shelter (at position 8) at just the right moment when the pulsar flares and
+arrives at the home base at time 20, for a total of 20 environmental damage and no radiation damage at all.
+
+
+
+
+Input
+The first line consists of four integers b, p, d, and n, separated by single spaces: the location b of the home base, the
+pulsar’s flare period p, the additional radiation damage d caused by each flare of the pulsar, the number n of the shelters.
+The following n lines each contain an integer giving the shelter locations a1 , . . ., an , with 0 < a1 < · · · < an < b.
+
+Output
+Print a single integer: the minimum amount of damage Tycho must take to reach b.
+Constraints and Scoring
+You can assume p < b and n < b. We always have 1 ≤ b ≤ 1012 , 0 ≤ d ≤ 106 , and 0 ≤ n ≤ 105 .
+    Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains a set
+of test cases. To get the points for a test group you need to solve all test cases in the test group. Your final score will
+be the maximum score of a single submission.
+      Group    Points    Constraints
+      1        8         p ≤ 106 and Tycho does not need to wait after leaving position 0.∗
+      2        5         b ≤ 1000, p ≤ 100, n ≤ 10
+      3        7         b ≤ 1000
+      4        15        p ≤ 106 , n ≤ 1000
+      5        20        p ≤ 100
+      6        35        p ≤ 106
+      7        10        No additional constraints
+∗
+  In test group 1, Tycho may still need to wait at position 0 before it starts moving. For example, sample inputs 2, 3,
+and 4 belong to test group 1.
+
+    Sample Input 1                                            Sample Output 1
+    18 4 5 2                                                  29
+    8
+    15
+
+    Sample Input 2                                            Sample Output 2
+    18 4 0 2                                                  18
+    8
+    15
+
+    Sample Input 3                                            Sample Output 3
+    18 10 100 2                                               20
+    8
+    15
+
+    Sample Input 4                                            Sample Output 4
+    18 4 100 0                                                418
+
+    Sample Input 5                                            Sample Output 5
+    65 20 100 3                                               172
+    14
+    25
+    33
+

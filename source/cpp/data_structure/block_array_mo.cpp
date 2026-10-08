@@ -3,9 +3,10 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: BlockArray a({1,2,3});
   struct BlockArray {
     int n, block; vector<long long> a, lazy;
-    explicit BlockArray(vector<long long>values):n(values.size()),block(max(1,(int)sqrt(n))),a(move(values)),lazy((n+block-1)/block){}
+    BlockArray(vector<long long>values):n(values.size()),block(max(1,(int)sqrt(n))),a(move(values)),lazy((n+block-1)/block){}
     void add(int l, int r, long long x) {
       assert(0 <= l && l <= r && r <= n);
       while (l < r && l % block) a[l++] += x;
@@ -24,7 +25,9 @@ namespace notebook::data_structure {
     return segment*size+((segment==1||segment==2)?sub:size-sub-1);
   }
   // Current range starts empty; add/remove receive array indices, answer receives query ID.
-  template<typename Add,typename Remove,typename Answer>auto mo_queries(int n,const vector<pair<int,int>>&ranges,Add add,Remove remove,Answer answer){
+  vector<long long> mo_queries(int n,const vector<pair<int,int>>& ranges,
+      function<void(int)> add,function<void(int)> remove,
+      function<long long(int)> answer){
     int power = 0;
     while ((uint64_t(1) << power) <= (uint64_t) n) ++power;
     assert(power <= 31); vector<pair<uint64_t, int>> order;
@@ -33,7 +36,7 @@ namespace notebook::data_structure {
       order.push_back( {hilbert_order(l, r, power), id});
     }
     sort(order.begin(), order.end());
-    vector<decay_t<invoke_result_t<Answer,int>>>result(ranges.size()); int l=0,r=0;
+    vector<long long> result(ranges.size()); int l=0,r=0;
     for (auto[key, id] : order) {
       (void) key; auto[a, b] = ranges[id];
       while (l > a) add(--l);

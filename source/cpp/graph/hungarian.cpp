@@ -3,6 +3,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto ans = hungarian({{3,1},{2,4}}); // ans.cost, ans.column
   struct Assignment { long long cost; vector<int> column; };
   // Minimum rectangular assignment, rows<=columns; costs may be negative.
   Assignment hungarian(const vector<vector<long long>>& a) {

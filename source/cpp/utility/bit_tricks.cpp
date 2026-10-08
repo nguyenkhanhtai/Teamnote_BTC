@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
+  // Use: for_each_submask(13,onMask); for_each_k_subset(5,2,onMask);
+  //      void onMask(uint64_t mask)
 
 // Calls visit(submask), including zero, in descending order.
-template<class Visit>
-void for_each_submask(uint64_t mask, Visit visit) {
+void for_each_submask(uint64_t mask,std::function<void(uint64_t)> visit) {
     uint64_t sub = mask;
     for (;;) {
         visit(sub);
@@ -12,8 +13,7 @@ void for_each_submask(uint64_t mask, Visit visit) {
 }
 
 // Gosper: n<=64, k<=n. Calls visit(mask) for every k-element subset.
-template<class Visit>
-void for_each_k_subset(unsigned n, unsigned k, Visit visit) {
+void for_each_k_subset(unsigned n,unsigned k,std::function<void(uint64_t)> visit) {
     assert(k <= n && n <= 64);
     if (k == 0) { visit(uint64_t(0)); return; }
     if (k == 64) { visit(UINT64_MAX); return; }

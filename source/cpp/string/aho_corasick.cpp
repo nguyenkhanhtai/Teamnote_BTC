@@ -3,6 +3,8 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: AhoCorasick ac; ac.add("aba",0); ac.build();
+  //      ac.scan("ababa",onMatch); // void onMatch(int end,int id)
   struct AhoCorasick {
     struct Node {
       array<int, 26> next; int link = 0, exit = -1; vector<int> ids;
@@ -36,7 +38,7 @@ namespace notebook::strings {
       built = true;
     }
     // emit(end_exclusive, pattern_id); includes overlaps and duplicate patterns.
-    template<typename Emit> void scan(string_view s, Emit emit) const {
+    void scan(string_view s,function<void(int,int)> emit) const {
       assert(built); int u = 0;
       for (int i = 0; i < (int) s.size(); ++i) {
         assert('a' <= s[i] && s[i] <= 'z'); u = t[u].next[s[i] - 'a'];

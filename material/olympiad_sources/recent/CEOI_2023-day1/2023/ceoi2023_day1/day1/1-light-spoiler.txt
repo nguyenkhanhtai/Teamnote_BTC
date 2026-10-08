@@ -1,0 +1,140 @@
+                                                                                                    Day 1
+                                                                                               Task: light
+                                                                                                  Spoiler
+
+
+A Light Inconvenience (light)
+by Fabian Gundlach
+
+   Subtask 1. Only one call to leave per testcase
+
+For this subtask, it will be convenient to reindex the performers, numbering them from right to left,
+starting at 1. (Any call to join or leave will then result in an index shift). Moreover, we will always only
+remember the sequence 1 = 𝑓1 < 𝑓2 < ⋯ of performers whose torches are on fire.
+Let’s think about this problem greedily: what condition do we need to put on the 𝑓𝑖 ’s to be able to
+survive the next act?
+      We can always handle the next call to join with 𝑡𝑎 = 𝑝𝑎 : we can simply shift everything to the
+      right by 𝑝𝑎 (i.e. keeping the previous 𝑓𝑖 ’s), adding further fires on the left if desired.
+      We can handle a single call to leave by announcing 𝑡𝑎 = 𝑝𝑎 if and only if 𝑓𝑖 ≤ 2𝑓𝑖−1 + 1 and the
+      leftmost torch is on fire: the first condition is necessary since having all performers starting at
+      𝑓𝑖 leave will have 𝑝𝑎 = 𝑓𝑖 , and we have to light the torch of performer 𝑓𝑖 + 1; the second condition
+      is necessary to handle all but the leftmost performer leaving.
+      On the other hand, it is not hard to check that this also sufficient to handle any call to leave: if
+      we just announce 𝑝𝑎 , this is enough to light the torch of the rightmost performer remaining on
+      stage.
+This suggests taking 𝑓𝑖 = 2𝑖−1 (plus the leftmost performer) before the first call to leave, and then
+e.g. extinguishing all torches except the rightmost one. For any call to join after that, we can simply
+shift everything to the right again without adding further flaming torches. This will never have more
+than log2 𝑁+1 torches on fire at the same time, which easily fits into the limit specified in the statement.
+
+   Subtask 2. 𝑁 ≤ 700
+
+Let us index the torches as in the task statement again. It suffices to announce 𝑓1 = 1, 𝑓2 = 6, 𝑓2 =
+11, … , 𝑓𝑘 = 𝑛 (where 𝑛 is the number of performers currently in line) at the end of any act; this will in
+fact only require 𝑡𝑎 = 4 for any leave or 𝑡𝑎 = 4𝑝𝑎 for join. The maximum number of flaming torches is
+1
+5
+  𝑁 + 1.
+
+   Subtask 3. 𝑁 ≤ 5 000
+
+The previous solution does not make use of the fact that we are allowed to announce large numbers
+whenever 𝑝𝑎 is sufficiently large, giving us much more freedom.
+Intuitively, we should exploit this by having much more fires near the right end of the line. Consider the
+following straegy: fix a number 𝐾 and split the performers into blocks of length 𝐾, starting on the left.
+We will always guarantee that the leftmost performer in each block (i.e. performers 1, 𝐾 + 1, 2𝐾 + 1, … )
+holds a flaming torch. Moreover, every torch in the last block should be on fire.
+Again any call to join would be trivial to handle. If we have a call to leave, however, we would run
+into a problem to uphold our invariant when all 0 < 𝑘 ≤ 𝐾 performers of the last block leave, as we
+will need 𝑡𝑎 = 𝐾 − 1 to fill up the last block. To avoid this issue, we will always hold some additional
+torches in the penultimate block: namely, we will have the leftmost ℓ torches on fire, where ℓ is the
+number of torches missing in the last block. As a result:
+      If 𝑗 < 𝑘 performers leave, we just announce 𝑡𝑎 = 𝑗 to add fires to the penultimate block.
+      If 𝑘 ≤ 𝑗 < 𝐾 performers leave, announcing 𝑡𝑎 = 𝑗 is now enough to fill up the new final block (and
+      it is never a problem to add the fires on the left of the new penultimate block).
+
+
+
+                                                   1/3
+                                                                                                             Day 1
+                                                                                                        Task: light
+                                                                                                           Spoiler
+
+
+       If at least 𝐾 performers leave, we are free to do whatever we want in any block anyhow.
+Again, the invariant is also trivial to uphold in join.
+The maximum number of torches on fires is 𝑁/𝐾 + 𝐾, so taking 𝐾 = 75 suffices to solve this subtask.
+
+   Subtask 4. 𝑁 ≤ 25 000
+
+This is exactly as in the previous subtask, except that we now exploit that we are allowed to announce
+up to 𝑡𝑎 = 5𝑝𝑎 , which allows us to increase the distance between the torches by a factor of 5.
+
+   Subtask 5. 𝑁 ≤ 100 000
+
+The solution to this subtask interpolates between the solution to Subtask 3 presented above and the
+                                                                       3
+first full solution discussed below to achieve 𝑡𝑎 = 𝑝𝑎 with at most 𝑂( √𝑁) fires.
+
+   Subtask 6. 𝑁 ≤ 500 000
+
+Again, this can be solved by spreading out the fires from the previous solution by a factor of 5.
+
+   Subtask 7. No further constraints.
+
+There are at least two different approaches that yield full score:
+First full solution. Having blocks of a fixed size will of course only ever get us that far, so let us
+combine this with the idea of having the distances between the fires grow exponentially as we walk
+from right to left. A first attempt to implement this strategy might be to always have for any 𝑘 a
+flaming torch at the largest multiple of 2𝑘 that is ≤ 𝑛. Unfortunately, this does not work for similar
+reasons as in the third subtask: when 𝑛 itself is a power of 2, then reducing 𝑛 by 1 will still incur a
+large cost. Fortunately, also the solution to this problem is similar (although the analysis is somewhat
+harder this time): we enforce flaming torches at the two largest multiples of 2𝑘 for each 𝑘, and up to
+one additional torch in the penultimate block of size 2𝑘 to light the third largest multiple of 2𝑘−1 if
+this becomes necessary during leave.
+Second full solution. Let us analyze the solution to the very first subtask more closely, for which we
+again flip our indexing. We have seen that we can handle a single call to leave if and only if 𝑓𝑖 ≤ 2𝑓𝑖−1 + 1
+for all 𝑖 and the leftmost torch is on fire. Moreover, we can trivially maintain this invariant for any call
+to join.
+The crucial observation now is that we can also uphold this invariant for any call to leave by announcing
+𝑝𝑎 and then selecting fires as follows: assume we have already selected new torches 1 = 𝑔1 < 𝑔2 < ⋯ < 𝑔𝑖
+satisfying the above; to select the next torch, we have to show that one of the torches 𝑔𝑖 + 1, … , 2𝑔𝑖 + 1
+is on fire. This is obviously true if one of these torches is the leftmost one or if 𝑔𝑖 < 𝑝𝑎 . In the remaining
+case, consider the smallest 𝑗 with 𝑓𝑗+1 − 2𝑝𝑎 > 2𝑔𝑖 + 1 (note that 𝑓𝑗+1 − 2𝑝𝑎 is the rightmost torch lit by
+the performer that was previously at position 𝑓𝑗+1 ). Then 𝑓𝑗 − 2𝑝𝑎 < 2𝑔𝑖 + 1 by minimality, but also
+
+                                                        𝑓𝑗+1 − 1
+                                            𝑓𝑗 − 𝑝𝑎 ≥              − 𝑝𝑎 > 𝑔 𝑖 .
+                                                           2
+
+Thus, at least one of the torches 𝑓𝑗 −2𝑝𝑎 , … , 𝑓𝑗 −𝑝𝑎 (all of which are currently on fire) lies in {𝑔𝑖 +1, … , 2𝑔𝑖 +1}
+as claimed.
+We now have to be slightly clever in selecting the 𝑔𝑖 ’s in order to ensure that our program runs in
+time and that there aren’t too many torches on fire.
+
+
+
+                                                          2/3
+                                                                                                Day 1
+                                                                                           Task: light
+                                                                                              Spoiler
+
+
+      One way to do so is to always pick the largest 𝑔𝑖+1 possible, which guarantees that 𝑔𝑖+2 > 2𝑔𝑖 + 1
+      and hence ensures that we only ever have at most 2 log2 𝑁 + 𝜖 torches on fire.
+      More generally, you can come up with any reasonably time-efficient way to construct the 𝑔𝑖 ’s and
+      then ‘sparsify’ your result using the previous observation. For example, one uniform way that
+      avoids the above case distinction is to start with the values 𝑓𝑗 − 𝑝𝑎 plus the rightmost performer
+      and then double each of them until you would run past one of the previously constructed
+      elements.
+Partial solutions. While we only described the full solutions above, there are various ways to obtain
+partial scores on the last subtask. One way to do so is to use larger bases in the above construction,
+i.e. only guaranteeing that 𝑓𝑖 ≤ 𝛼𝑓𝑖−1 + 1 for some 𝛼 > 1. This becomes relevant if one uses less clever
+ways to sparsify the fires, which would otherwise result in too many torches being on fire.
+In addition, there are several ad-hoc constructions.
+
+
+
+
+                                                  3/3
+

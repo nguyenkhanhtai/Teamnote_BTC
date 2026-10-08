@@ -1,0 +1,421 @@
+Hrvatsko otvoreno natjecanje u informatici
+                     5. kolo, 15. veljače 2025.
+
+
+
+
+                              Zadaci
+ Zadatak     Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+ Osijek           1 sekunda                 512 MiB               20
+ Svjetlo          1 sekunda                 512 MiB               30
+ Wow              1 sekunda                 512 MiB               50
+ Zid              1 sekunda                 512 MiB               70
+ Tornjevi         2 sekunde                 512 MiB               90
+ Crtež            2 sekunde                 512 MiB              120
+ Stablo II        3.5 sekunde               512 MiB              120
+
+ Ukupno                                                          500
+         Hrvatsko otvoreno natjecanje u informatici                                    Zadatak Osijek
+         5. kolo, 15. veljače 2025.                                   1 sekunda / 512 MiB / 20 bodova
+
+
+Zadatak Osijek
+Patrik, Dorijan i Toni trebaju napraviti 12 zadataka za studentsko natjecanje u
+Osijeku. Patrik je do sada napravio A zadataka, Dorijan B, a Toni C.
+Odredite koliko još zadataka moraju napraviti kako bi natjecanje bilo spremno.
+Ako već imaju barem 12 zadataka, ispišite "OCPC" (bez navodnika).
+
+Ulazni podaci
+U prvom retku ulaza nalazi se prirodan broj A (0 ≤ A ≤ 12), broj Patrikovih
+zadataka.
+U drugom retku ulaza nalazi se prirodan broj B (0 ≤ B ≤ 12), broj Dorijanovih zadataka.
+U trećem retku ulaza nalazi se prirodan broj C (0 ≤ C ≤ 12), broj Tonijevih zadataka.
+
+Izlazni podaci
+U jedini redak izlaza ispišite koliko moraju još zadataka napraviti kako bi ih imali ukupno 12. Ako već
+imaju barem 12 zadataka, ispišite "OCPC" (bez navodnika).
+
+Probni primjeri
+ ulaz                                   ulaz                          ulaz
+ 3                                      0                             2
+ 4                                      0                             12
+ 1                                      0                             7
+
+ izlaz                                  izlaz                         izlaz
+ 4                                      12                            OCPC
+
+
+Pojašnjenje prvog probnog primjera:
+Patrik je napravio 3 zadatka, Dorijan 4 i Toni 1. Ukupno su napravili 3 + 4 + 1 = 8 zadataka. Da bi ih
+imali 12, trebaju napraviti još 4 zadatka.
+Pojašnjenje trećeg probnog primjera:
+Napravili su ukupno 21 zadatak pa je natjecanje spremno.
+
+
+
+
+                                                      1 od 9
+         Hrvatsko otvoreno natjecanje u informatici                                     Zadatak Svjetlo
+         5. kolo, 15. veljače 2025.                                     1 sekunda / 512 MiB / 30 bodova
+
+
+Zadatak Svjetlo
+Markova majka, kada je vidjela koliko je iznosio mjesečni račun za električnu
+energiju u njihovom kućanstvu, bila je prestravljena i odlučila je uvesti mjere
+štednje. Te mjere su se odnosile i na Markovu sobu, odnosno svjetlo u njegovoj
+sobi, koje je Marko povremeno zaboravio isključiti nakon što je prestao boraviti
+u njoj.
+Da bi procijenila kolika je potrošnja električne energije u Markovoj sobi, ugradila
+je uređaj koji joj bilježi svaki put kada Marko okrene prekidač za svjetlo u svojoj
+sobi. Na početku dana, svjetlo je ugašeno. Svaki put kada Marko okrene prekidač, ako je svjetlo bilo
+upaljeno, ono se ugasi i obratno. Nakon jednog dana Markova majka je pregledala jučerašnja zapise i
+zamolila vas za pomoć da joj odredite koliko je vremena svjetlo bilo upaljeno prethodni dan ako je ono
+trenutno ugašeno ili da javite ako je ono i dalje upaljeno.
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj N (1 ≤ N ≤ 20), broj zapisa na uređaju.
+U idućih N redova nalaze se, redom kako su se događala, prirodni brojevi koji predstavljaju vrijeme svakog
+okretanja prekidača. Sva vremena u zapisima će biti međusobno različita i najviše 10000.
+
+Izlazni podaci
+U prvom i jedinom redu potrebno je ispisati ukupnu količina vremena gdje je svjetlo u Markovoj sobi
+bilo upaljeno, ako je ono trenutno ugašeno. Ako je svjetlo i dalje upaljeno, onda je potrebno ispisati
+"UPALJENO" (bez navodnika).
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              11         N =2
+         2              5          N =3
+         4              14         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                            ulaz
+ 2                                      6                               5
+ 10                                     1                               20
+ 25                                     15                              60
+                                        19                              62
+ izlaz                                  23                              102
+ 15                                     36                              401
+                                        79
+                                                                        izlaz
+                                        izlaz
+                                                                        UPALJENO
+                                        61
+
+
+Pojašnjenje prvog probnog primjera: Svjetlo u sobi se upalilo u trenutku 10 i ugasilo se u trenutku
+25. To znači da je vrijeme kad je svjetlo radilo 25 − 10 = 15.
+
+
+                                                      2 od 9
+       Hrvatsko otvoreno natjecanje u informatici                                           Zadatak Wow
+       5. kolo, 15. veljače 2025.                                         1 sekunda / 512 MiB / 50 bodova
+
+
+Zadatak Wow
+Dok je Mr. Malnar putovao autobusom u Graz, primijetio je da su mu ostali
+putnici gledali u mobitel i čitali njegove poruke koje je slao Patriku. Mr. Malnar
+je odlučio stati tome na kraj. Stoga, zajedno s Patrikom, razvio je novi način
+šifriranja njihovih poruka i zovu ga VolksWagen šifrom.
+Poruku koju je dobio možemo zamisliti kao tablicu znakova s 2 reda i n stupaca.
+Svako slovo se prostire kroz sva 2 retka i nekoliko stupaca i međusobno su razdvojena
+razmacima. Izgled slova u poruci možete vidjeti u probnim primjerima.
+Slovo ’v’ prikazuje se na sljedeći način:
+
+\../
+.\/.
+
+Slovo ’w’ prikazuje se na sljedeći način:
+
+\../\../
+.\/..\/.
+
+Patrik i Mr. Malnar će od sad pa nadalje komunicirati isključivo slovima ’v’ i ’w’ (bez navodnika).
+Međutim, Mr. Malnar ima poteškoća s čitanjem tih poruka. Zamolio je Vas da mu pomognete pročitati
+poruku koju je dobio. Naravno, nije Vam otkrio kako dešifrirati njihovu šifru.
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj N (1 ≤ N ≤ 1000), broj stupaca u poruci.
+U iduća 2 retka, nalazi se po N znakova, predstavljajući jedan redak poruke. Garantirano je da će prazni
+stupci biti točno između dva različita slova i između dva slova biti će točno jedan prazan stupac. (prazan
+stupac smatramo onim koji sadrži samo znakove ’.’)
+
+Izlazni podaci
+U jednom i jedinom retku ispišite redom slova koja se nalaze u poruci.
+
+Bodovanje
+
+ Podzadatak     Broj bodova      Ograničenja
+
+       1              21         Poruka se sastoji od jednog slova.
+       2              13         Sva slova u poruci će biti međusobno jednaka.
+       3              16         Nema dodatnih ograničenja.
+
+
+
+
+                                                    3 od 9
+        Hrvatsko otvoreno natjecanje u informatici                                       Zadatak Wow
+        5. kolo, 15. veljače 2025.                                     1 sekunda / 512 MiB / 50 bodova
+
+
+Probni primjeri
+ulaz                                                     ulaz
+32                                                       27
+\../.\../\../.\../.\../.\../\../                         \../\../.\../\../.\../.\../
+.\/...\/..\/...\/...\/...\/..\/.                         .\/..\/...\/..\/...\/...\/.
+
+izlaz                                                    izlaz
+vwvvw                                                    wwvv
+
+
+
+
+                                                     4 od 9
+         Hrvatsko otvoreno natjecanje u informatici                                          Zadatak Zid
+         5. kolo, 15. veljače 2025.                                      1 sekunda / 512 MiB / 70 bodova
+
+
+Zadatak Zid
+Mr. Malnar želi postaviti sliku sebe na zid. Zid možemo prikazati kao matricu s
+n redaka i m stupaca. Kako je već puno puta stavljao svoju sliku na zid, na nekim
+su pozicijama ostali zabijeni čavli. Takve pozicije označavamo znakom "#", dok
+mjesta koja su prazna označavamo znakom ".".
+Slika je pravokutnog oblika proizvoljnih dimenzija i na zid se stavlja tako da
+prekriva pozicije koje čine pravokutnik. Slika se može staviti na zid ako ona
+prekriva najviše jednu poziciju na kojoj se nalazi čavao.
+Pomozite Mr. Malnaru izračunati na koliko načina može postaviti sliku sebe na zid.
+
+Ulazni podaci
+U prvom retku ulaza nalaze se n i m (1 ≤ n, m ≤ 500), dimenzije zida.
+U svakom od sljedećih n redaka nalazi se po m znakova cij , opis zida. Svaki znak bit će "." ili "#" (bez
+navodnika).
+
+Izlazni podaci
+U jedini redak izlaza ispišite broj mogućih postavljanja slike na zid.
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              17         n, m ≤ 10
+         2              21         n, m ≤ 100
+         3              32         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                             ulaz
+ 3 3                                    4 4                              5 5
+ ...                                    ....                             .....
+ ...                                    .#..                             #..#.
+ ..#                                    #...                             ..#.#
+                                        #.#.                             .....
+ izlaz                                                                   ..#..
+                                        izlaz
+ 36                                                                      izlaz
+                                        76
+                                                                         154
+
+
+Pojašnjenje prvog probnog primjera:
+Svako postavljanje slike je validno jer prekriva najviše jedan čavao.
+Pojašnjenje drugoj probnog primjera:
+Sliku nije moguće postaviti tako da prekriva pozicije (3, 1) i (4, 1) istovremeno.
+
+
+
+
+                                                      5 od 9
+         Hrvatsko otvoreno natjecanje u informatici                                              Zadatak Tornjevi
+         5. kolo, 15. veljače 2025.                                              2 sekunde / 512 MiB / 90 bodova
+
+
+Zadatak Tornjevi
+Na jednoj ulici nalazi se n tornjeva, s kućnim brojevima redom od 1 do n. Svaki
+toranj ima svoju visinu hi izraženu u metrima.
+Za neki uzastopni podniz tornjeva s brojevima l, l + 1, . . ., r kažemo da je toranj s
+brojem i (l ≤ i ≤ r) dobar u tom podnizu ako vrijedi da je hi = gcd (hl , hl+1 , . . . , hr )
+gdje s gcd (a1 , a2 , . . . , ak ) označavamo najveći zajednički djelitelj skupa prirodnih
+brojeva a1 , a2 , . . . , ak .
+Vaš je zadatak odrediti za svaki i = 1, 2, . . . , n veličinu najvećeg uzastopnog podniza
+u kojem je toranj s brojem i dobar, gdje veličinu uzastopnog podniza definiramo kao broj tornjeva u tom
+podnizu.
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj n (1 ≤ n ≤ 106 ), broj tornjeva.
+U drugom redu nalazi se n prirodnih brojeva, redom, h1 , h2 , . . ., hn (1 ≤ hi ≤ 106 ).
+
+Izlazni podaci
+U jednom redu ispišite za svaki i = 1, 2, . . . , n, redom, odgovor na iznad navedeno pitanje.
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              7          n ≤ 100
+         2              11         n ≤ 5000
+         3              17         n ≤ 50000
+         4              29         hi ≤ 100
+         5              26         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                                        ulaz
+ 6                                                           5
+ 3 6 6 6 1 3                                                 10 2 10 15 5
+
+ izlaz                                                       izlaz
+ 4 3 3 3 6 1                                                 1 3 1 1 3
+
+
+Pojašnjenje prvog probnog primjera: U prva četiri tornja toranj broj 1 je dobar. Tornjevi s brojevima
+2, 3 i 4 su dobri u podnizu koji oni sami čine. Toranj 5 će biti dobar u proizvoljnom podnizu koji ga sadrži,
+stoga odgovor će biti 6 (cijeli niz).
+
+
+
+
+                                                       6 od 9
+      Hrvatsko otvoreno natjecanje u informatici                                          Zadatak Crtež
+      5. kolo, 15. veljače 2025.                                       2 sekunde / 512 MiB / 120 bodova
+
+
+Zadatak Crtež
+Dana je igra na nizu duljine N , inicijalno ispunjenim nulama. Tijekom igre bojimo
+pozicije u nizu koristeći slijed operacija te s bojanjem možemo stati nakon bilo
+koje operacije.
+X-ta po redu operacija bojanja je opisana navedenim postupkom:
+
+  • Odaberemo poziciju na kojoj se nalazi 0.
+
+  • Odlučimo hoćemo li:
+
+        – Obojiti odabranu poziciju u −1.
+        – Obojiti odabranu poziciju u boju X te nastaviti prema lijevo bojati
+          susjedne pozicije u boju X. S bojanjem prestajemo kad naiđemo na
+          poziciju s vrijednošću različitom od 0(koju ne bojamo) ili dok ne izađemo
+          iz granica niza.
+
+Dvije igre smatramo ekvivalentnima ako u njihovim završnim nizovima možemo preimenovati boje veće
+od 0 tj. da postoji bijektivno preslikavanje tako da:
+
+  • boje nakon preslikavanja budu veće od 0
+
+  • svaka boja dobije točno jednu novu oznaku
+
+  • nakon preslikavanja oba niza budu identična.
+
+Primjer ekvivalentnih igri je:
+
+  • [1, 1, −1, 2, −1, 3, 0]
+
+  • [3, 3, −1, 1, −1, 2, 0]
+
+jer postoji preslikavanje boja(boja 1 u boju 3, boja 2 u boju 1, boja 3 u boju 2) takvo da su svi navedeni
+uvjeti zadovoljeni.
+Dano je Q promjena gdje ćemo u nizu na intervalu [L, R] zamijeniti sve 0 s −1 te sve −1 s 0.
+Nakon svake promjene ispišite broj K, broj različitih igri koje je moguće odigrati uz proizvoljan broj
+operacija tako da među njima ne postoji par ekvivalentnih igri. Kako je K jako velik, ispišite ostatak pri
+dijeljenju s 109 + 7.
+
+Ulazni podaci
+U prvom retku su 2 prirodna broja N , Q (1 ≤ N ≤ 1018 , 1 ≤ Q ≤ 105 ), broj polja u nizu te broj promjena.
+U idućih Q redaka nalaze se dva prirodna broja, L i R (1 ≤ L, R ≤ N ), oznake pozicija koje opisuju
+promjenu iz teksta zadatka.
+
+Izlazni podaci
+U i-ti od sljedećih Q redaka ispišite ostatak dijeljenja broja K s 109 + 7 nakon svake promjene.
+
+
+
+
+                                                   7 od 9
+         Hrvatsko otvoreno natjecanje u informatici                                        Zadatak Crtež
+         5. kolo, 15. veljače 2025.                                     2 sekunde / 512 MiB / 120 bodova
+
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              20         N, Q ≤ 1000
+         2              55         N ≤ 106
+         3              45         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                             ulaz
+ 1 2                                    3 2                              57 2
+ 1 1                                    2 2                              13 39
+ 1 1                                    1 3                              6 42
+
+ izlaz                                  izlaz                            izlaz
+ 1                                      9                                130653412
+ 3                                      3                                804077942
+
+
+Pojašnjenje prvog probnog primjera: Nakon prve promjene, niz je jednak nizu [−1]. Ne možemo na
+njemu napraviti nijednu operaciju pa je najveći broj igri koje možemo odigrati jednak 1. Nakon druge
+promjene, niz je jednak nizu [0]. Od niza [0] koristeći operacije iz teksta zadatka možemo napraviti nizove
+[0], [1] i [−1]. Primjećujemo da niti jedan par nizova nije ekvivalentan pa je najveći broj igri koje možemo
+odigrati jednak 3.
+
+
+
+
+                                                      8 od 9
+         Hrvatsko otvoreno natjecanje u informatici                                        Zadatak Stablo II
+         5. kolo, 15. veljače 2025.                                      3.5 sekunde / 512 MiB / 120 bodova
+
+
+Zadatak Stablo II
+Patrik je dobio stablo s n vrhova. Bridove tog stabla odlučio je obojati s k različitih
+boja.
+Na početku su svi bridovi stabla obojani u boju 0. Boje će koristiti redom od
+prve do k-te, pri čemu će i-tu boju iskoristiti kako bi pobojao sve bridove stabla
+na najkraćem putu od xi -tog do yi -tog čvora. Ako je neki brid na tom putu već
+obojan, nova boja će prebrisati staru.
+Pomozite Patriku odrediti konačnu boju svakog brida.
+
+Ulazni podaci
+U prvom redu ulaza nalaze se brojevi n i k (2 ≤ n ≤ 106 , 1 ≤ k ≤ 106 ), broj vrhova stabla i broj boja.
+U sljedećih n − 1 redaka nalaze se brojevi ui i vi (1 ≤ ui , vi ≤ n) – brid i spaja čvorove ui i vi . Garantirano
+je da će bridovi činiti stablo.
+U sljedećih k redaka nalaze se brojevi xi i yi (1 ≤ xi , yi ≤ n), čvorovi između kojih Patrik boja bridove.
+
+Izlazni podaci
+U jedini redak za svaki brid ispišite njegovu konačnu boju, redom kojim su dani u ulazu.
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              15         ui = i, vi = i + 1 za svaki i
+         2              15         n, k ≤ 2000
+         3              45         n ≤ 105
+         4              45         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                                ulaz
+ 6 2                                    5 4                                 5 4
+ 1 2                                    1 2                                 3 5
+ 2 3                                    2 3                                 2 3
+ 2 4                                    3 4                                 4 3
+ 1 5                                    4 5                                 5 1
+ 4 6                                    5 5                                 4 1
+ 5 2                                    4 3                                 5 5
+ 6 1                                    2 1                                 4 2
+                                        2 4                                 1 5
+ izlaz
+                                        izlaz                               izlaz
+ 2 0 2 1 2
+                                        3 4 4 0                             1 3 3 4
+
+
+Pojašnjenje prvog probnog primjera:
+Prvom bojom obojao je bridove 1 i 4, a zatim je drugom bojom obojao bridove 1, 3 i 5.
+
+
+
+                                                      9 od 9
+

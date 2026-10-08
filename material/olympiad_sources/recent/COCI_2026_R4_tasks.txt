@@ -1,0 +1,419 @@
+Croatian Open Competition in Informatics
+               Round 4, January 24th 2026
+
+
+
+
+                        Tasks
+    Task                Time limit   Memory limit   Score
+
+    Zombie Apocalypse    3 second      512 MiB        50
+    Tomahawk             1 second      512 MiB        70
+    Magija               1 second      32 MiB        110
+    Sladoled             1 second      512 MiB       110
+    Tjelesni             1 second      512 MiB       110
+
+    Total                                            450
+        Croatian Open Competition in Informatics                               Task Zombie Apocalypse
+        Round 4, January 24th 2026                                        3 second / 512 MiB / 50 points
+
+
+Task Zombie Apocalypse
+Vito is obsessed with the new hit video game Zombie Apocalypse. He is currently
+facing the following challenge: m zombies are headed toward the city and will
+attack it if he doesn’t stop them.
+More specifically, the zombies are located in a secret cave n meters away from the
+city and leave the cave one by one. The zombies walk toward the city at a speed
+of 1 meter per second, and there is a one-second pause between two consecutive
+zombies leaving the cave.
+Thus, after the first second there is one zombie 1 meter away from the cave; after the second second there
+are zombies 1 and 2 meters away; after the third second there are zombies 1, 2, and 3 meters away, and so
+on. Whenever a zombie passes the n-th meter, it reaches the city.
+According to the rules of the game, Vito is allowed to drop k bombs on the path between the cave and
+the city in order to stop the attack. For each bomb, he has chosen:
+
+  • the position (distance from the cave) where the bomb is dropped,
+
+  • the radius of the bomb, and
+
+  • the time (in seconds) when the bomb is dropped.
+
+A bomb with radius r dropped at position x at time t will destroy a zombie if it is located at position y
+at time t such that the distance between x and y is at most r meters, i.e., |x − y| ≤ r. Zombies that have
+already reached the city are not affected by bombs. Once a zombie is destroyed, it can no longer continue
+its journey toward the city.
+Vito can choose for the bombs to be dropped with any position, radius, and time, and multiple bombs
+can occur at the same time, even at the same position.
+Given Vito’s choices for the k bombs, determine how many zombies will reach the city.
+
+Input
+In the first line there are three natural numbers n, m, and k (1 ≤ n, m, k ≤ 200), the length of the path
+between the cave and the city, the number of zombies, and the number of bombs.
+In each of the following k lines there are three natural numbers x, r, and t (1 ≤ x ≤ n, 0 ≤ r ≤ n, 1 ≤
+t ≤ 500), the distance in meters from the cave at which one of the bombs is dropped, the radius of that
+bomb in meters, and the time at which the bomb is dropped in seconds.
+
+Output
+In the first and only one line, write one number, the number of zombies that managed to reach the city.
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          13     m=1
+    2          27     k=1
+    4          30     No additional constraints.
+
+
+
+
+                                                   1 of 10
+      Croatian Open Competition in Informatics                          Task Zombie Apocalypse
+      Round 4, January 24th 2026                                   3 second / 512 MiB / 50 points
+
+
+Examples
+ input                              input                      input
+ 6 3 3                              7 7 1                      3 3 1
+ 3 1 2                              3 2 6                      3 3 3
+ 5 0 7
+ 4 4 8                              output                     output
+
+ output                             2                          0
+
+ 1
+
+
+Clarification of the first example:
+time: 0, cave: {z, z, z}, path: (0, 0, 0, 0, 0, 0), city: {}
+time: 1, cave: {z, z}, path: (z, 0, 0, 0, 0, 0), city: {}
+time: 2, cave: {z}, path: (z, z, 0, 0, 0, 0), city: {}
+time: 2, cave: {z}, path: (z, z, 0, 0, 0, 0), city: {}
+time: 2, cave: {z}, path: (z, 0, 0, 0, 0, 0), city: {}
+time: 3, cave: {}, path: (z, z, 0, 0, 0, 0), city: {}
+time: 4, cave: {}, path: (0, z, z, 0, 0, 0), city: {}
+time: 5, cave: {}, path: (0, 0, z, z, 0, 0), city: {}
+time: 6, cave: {}, path: (0, 0, 0, z, z, 0), city: {}
+time: 7, cave: {}, path: (0, 0, 0, 0, z, z), city: {}
+time: 7, cave: {}, path: (0, 0, 0, 0, z, z), city: {}
+time: 7, cave: {}, path: (0, 0, 0, 0, 0, z), city: {}
+time: 8, cave: {}, path: (0, 0, 0, 0, 0, 0), city: {z}
+time: 8, cave: {}, path: (0, 0, 0, 0, 0, 0), city: {z}
+time: 8, cave: {}, path: (0, 0, 0, 0, 0, 0), city: {z}
+
+
+
+
+                                                 2 of 10
+         Croatian Open Competition in Informatics                                          Task Tomahawk
+         Round 4, January 24th 2026                                          1 second / 512 MiB / 70 points
+
+
+Task Tomahawk
+The chef at the most famous restaurant in Poland is preparing tomahawk steaks
+for a group of young and cheerful (and very hungry) programmers!
+The steak can be represented as an n × n matrix. Initially, the temperature of the
+whole steak is 0 degrees. During the cooking process, the temperature in different
+parts of the steak (i.e., different cells in the matrix) will increase.
+In order to prepare the perfect tomahawk steak, the chef lifts the steak and puts
+it back on the grill q times. Each time, the chef can place the steak on one of three
+sides: left, right, or down. He will then let the steak cook on that side for x seconds.
+When the steak is being baked on its down side, it can be baked for at most n seconds. After this, the
+temperature of all the cells in the n-th row in the matrix will increase by x, the temperature of the cells
+in the n − 1-st row will increase by x − 1, the temperature of the n − 2-nd row will increase by x − 2, ...,
+the temperature of the cells in row number n − x + 1 will increase by 1.
+When the tomahawk steak is being baked on its right side, it can be baked for at most ⌊ n+1 2 ⌋ seconds.
+After this, the temperature of all the cells in the n-th column in the matrix will increase by x, the
+temperature of the cells in the n − 1-st column will increase by x − 1, the temperature of the n − 2-nd
+column will increase by x − 2, ..., the temperature of the cells in column number n − x + 1 will increase
+by 1.
+Similarly, when the tomahawk steak is being baked on its left side, it can be baked for at most ⌊ n+1  2 ⌋
+seconds. After this, the temperature of all the cells in the first column in the matrix will increase by x,
+the temperature of the cells in the second column will increase by x − 1, the temperature of the third
+column will increase by x − 2, ..., the temperature of the cells in column number x will increase by 1.
+We know that the tastiness of the tomahawk is closely related to the contrast of temperatures, that’s why
+the chef wants to find out the difference between the coldest and the hottest part of the steak!
+
+Input
+In the first line, there are two natural numbers n and q (1 ≤ n ≤ 109 , 1 ≤ q ≤ 105 ), the size of the steak
+and the number of times the chef lifts the steak.
+In each of the following q lines, there is a single letter s and a natural number x. The letter s indicates the
+side of the tomahawk steak: "L" – left, "R" – right, or "D" – down. If s = ”D”, then 1 ≤ x ≤ n. Otherwise,
+1 ≤ x ≤ ⌊ n+1
+            2 ⌋.
+
+
+Output
+In the first and only line, print a single number - the difference in degrees between the coldest and hottest
+cell on the steak.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1           7     n, q ≤ 20
+     2          22     n, q ≤ 1000
+     3          31     n ≤ 1000
+     4           6     n is even.
+     5           4     No additional constraints.
+
+
+                                                    3 of 10
+       Croatian Open Competition in Informatics                                Task Tomahawk
+       Round 4, January 24th 2026                                1 second / 512 MiB / 70 points
+
+
+Examples
+ input                                                  input
+ 4 2                                                    3 3
+ L 2                                                    R 2
+ R 1                                                    D 3
+                                                        R 2
+ output
+                                                        output
+ 2
+                                                        6
+
+
+Clarification of the first example:
+
+ 0 0 0 0          2 1 0 0         2       1   0   1
+                                               
+0 0 0 0        2 1 0 0       2       1   0   1
+0 0 0 0 → 2 1 0 0 → 2                1   0   1
+                                               
+
+ 0 0 0 0          2 1 0 0         2       1   0   1
+
+Clarification of the second example:
+
+ 0 0 0         0 1 2        1 2 3     1           3     5
+                                                  
+0 0 0 → 0 1 2 → 2 3 4 → 2                  4     6
+ 0 0 0         0 1 2        3 4 5     3           5     7
+
+
+
+
+                                                  4 of 10
+         Croatian Open Competition in Informatics                                           Task Magija
+         Round 4, January 24th 2026                                        1 second / 32 MiB / 110 points
+
+
+Task Magija
+"Welcome to the SHOW! You are about to witness a spectacular magic performance
+by Magic Ivor." This is how Ivor imagines the announcement of his first magic
+performance, but first he needs to prepare.
+Ivor will request n volunteers for his tricks and arrange them on the stage. At the
+left end of the line is person 1, to the right of person 1 is person 2, to the right
+of person 2 is person 3, and so on.
+The tricks that Ivor learns during his preparation can be described in the form
+l r len. In such a trick, Ivor learns to swap the positions of people, specifically
+to swap two disjoint intervals of equal length: the interval [l, l + len − 1] and the
+interval [r, r + len − 1]. Two intervals are disjoint if they do not have any common volunteers.
+Often, Ivor wonders, for a given person x, what are the minimum and maximum positions that this person
+can occupy if he can use his learned tricks in any order and any ammount of times. He also does not have
+to use all the tricks he has learned so far.
+There are Q events describing Ivor’s preparation, and we distinguish between two types of events.
+
+  • An event of the form 1 x asks you to answer Ivor’s question considering the tricks he has learned so
+    far. He may use the tricks in any order and does not have to use all of them.
+  • An event of the form 2 l r len indicates a trick that Ivor has just learned.
+
+Your task is to help Ivor and answer all events of the first type.
+
+Input
+The first line contains the natural numbers n and q (1 ≤ n, q ≤ 2 · 105 ), as described in the problem text.
+Each of the following Q lines describes one event of one of the following forms:
+
+  • 1 x – Ivor wants to know the minimum and maximum positions that person x can occupy (1 ≤ x ≤ n).
+  • 2 l r len – Ivor has learned to swap the intervals [l, l + len − 1] and [r, r + len − 1]. It holds that
+    1 ≤ len ≤ n, l + len − 1 < r, and r + len − 1 ≤ n.
+
+Output
+After each event of type 1, print two numbers: the minimum and maximum positions that the given
+person can occupy, separated by a space.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1           9     N, Q ≤ 5
+     2          14     N, Q ≤ 15
+     3          22     N, Q ≤ 1000
+     4          11     N ≤ 4000
+     5          17     N ≤ 10000
+     6          37     No additional constraints.
+
+
+                                                    5 of 10
+       Croatian Open Competition in Informatics                                      Task Magija
+       Round 4, January 24th 2026                                   1 second / 32 MiB / 110 points
+
+
+Sample Input / Output
+ input                                                input
+ 5 3                                                  9 2
+ 2 3 4 1                                              2 1 7 2
+ 1 5                                                  1 2
+ 1 3
+                                                      output
+ output
+                                                      2 8
+ 5 5
+ 3 4
+
+
+Explanation of the second sample: Ivor has learned to swap the intervals [1, 2] and [7, 8]. The
+minimum position that person 2 can occupy is 2. The maximum position that person 2 can occupy is 8
+because Ivor can swap the intervals [1, 2] and [7, 8].
+
+
+
+
+                                                  6 of 10
+         Croatian Open Competition in Informatics                                          Task Sladoled
+         Round 4, January 24th 2026                                       1 second / 512 MiB / 110 points
+
+
+Task Sladoled
+In the ice cream city, n ice cream stands have opened, but at the opening, none
+of the stands had any ice cream scoops for sale.
+In the next q days, shipments of ice cream scoops will arrive at some stands. On
+each of the q days, two integers a and b are given, meaning that stand a received
+a shipment of ice cream scoops of flavor b on that day.
+At each stand, it is also possible to make ice cream combinations. A combination
+can use the scoops that are available at that stand, where each scoop can be
+used an arbitrary number of times, and a combination consists of at least 1 ice
+cream scoop.
+The value of a combination is equal to the sum of the flavors of the scoops in that combination, and flavors
+can repeat. We are interested in combinations whose value is less than or equal to 50000 (combinations
+with higher values are too sweet).
+After each day, it is necessary to print how many different values of ice cream combinations can be made
+at the stand that received ice cream scoops on that day.
+
+Input
+The first line contains the natural numbers n and q (1 ≤ n ≤ 100, 1 ≤ q ≤ 105 ), as described in the
+problem statement.
+Each of the next q lines contains two numbers a and b (1 ≤ a ≤ n, 1 ≤ b ≤ 50000), as described in the
+problem statement.
+
+Output
+Print q lines with the answers to the queries described in the problem statement.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          16     n = 1, q ≤ 20
+     2          33     q ≤ 100
+     5          61     No additional constraints.
+
+
+
+
+                                                    7 of 10
+       Croatian Open Competition in Informatics                                          Task Sladoled
+       Round 4, January 24th 2026                                       1 second / 512 MiB / 110 points
+
+
+Sample Tests
+ input                                                input
+ 1 2                                                  2 4
+ 1 3                                                  2 35625
+ 1 5                                                  1 25139
+                                                      1 37795
+ output                                               2 17791
+ 16666                                                output
+ 49996
+                                                      1
+                                                      1
+                                                      2
+                                                      3
+
+
+Explanation of the first sample test: After the first day, the values of ice cream combinations at
+the first stand that can be made are all multiples of 3 less than or equal to 50000. There are 16666 such
+combinations. After the second day, the only combination values that cannot be made are: 1, 2, 4, 7. All
+other combination values can be made, totaling 49996.
+
+
+
+
+                                                  8 of 10
+         Croatian Open Competition in Informatics                                            Task Tjelesni
+         Round 4, January 24th 2026                                        1 second / 512 MiB / 110 points
+
+
+Task Tjelesni
+The first semester at the university is coming to an end. Marin decided to attend
+a PE class in order to collect his 12th attendance and thus pass the course. He
+was surprised by the number of students waiting in front of the gym.
+He counted n students (including himself) and noticed an interesting property:
+no two students have the same height, and for every integer from 1 to n there is
+exactly one student of that height.
+Before the class started, the students lined up in a row. The heights of the students
+in the row, observed from left to right, form a permutation p of size n. The
+professor has some unusual requirements for the order of students in the row, so
+he decided to issue q commands that must be executed in the given order.
+Each command is of the form li ri and means that the students at positions from li to ri (inclusive) need
+to step out of the row, and then fill the empty positions in the following way: position li is filled by the
+shortest student among those taken out. Position li + 1 is filled by the tallest of the remaining students.
+Position li + 2 is again filled by the shortest of the remaining students, position li + 3 by the tallest, and
+so on, alternating between the shortest and the tallest until position ri is filled.
+After executing all the commands, Marin is no longer sure whether he is standing in the correct position
+or if at some point he moved to the wrong place. However, he remembers the initial permutation p, all q
+commands in the order they were given, and he has told you his height m. He asks you to determine the
+position where he should be standing.
+
+Input
+The first line contains three natural numbers n, q i m (1 ≤ n, q ≤ 105 , 1 ≤ m ≤ n), the numbers from the
+problem statement.
+The second line contains a sequence of n numbers 1 ≤ pi ≤ n, the permutation p.
+Each of the next q lines contain two numbers 1 ≤ li ≤ ri ≤ n, the i-th command.
+
+Output
+In the first and only line output one number - the position Marin should occupy.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1           7     n, q ≤ 1000
+     2          11     li = 1, for each 1 ≤ i ≤ q
+     3          17     m = 1 or m = n
+     4          24     n, q ≤ 5000
+     5          51     No additional constraints.
+
+
+
+
+                                                    9 of 10
+      Croatian Open Competition in Informatics                                               Task Tjelesni
+      Round 4, January 24th 2026                                           1 second / 512 MiB / 110 points
+
+
+Sample tests
+ input                              input                              input
+ 7 3 3                              6 4 1                              8 2 5
+ 4 2 3 7 1 6 5                      5 3 6 2 1 4                        8 7 6 5 4 3 1 2
+ 4 7                                2 4                                2 8
+ 3 5                                3 5                                1 7
+ 1 4                                2 6
+                                    5 6                                output
+ output
+                                    output                             7
+ 5
+                                    2
+
+
+Explanation of the first sample test: After executing the first command, the heights of the students
+in the row are: 4 2 3 1 7 5 6. After executing the second command the heights are: 4 2 1 7 3 5 6. In the
+end, after executing the third command, the row should look like this: 1 7 2 4 3 5 6. Marin should occupy
+the 5th position from the left.
+
+
+
+
+                                                 10 of 10
+

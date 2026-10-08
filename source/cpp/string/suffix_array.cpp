@@ -3,9 +3,10 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: SuffixArray sa("banana"); // sa.sa, sa.lcp
   struct SuffixArray {
     vector<int> sa, rank, lcp;
-    explicit SuffixArray(string_view s) {
+    SuffixArray(string_view s) {
       int n=s.size(),N=n+1; vector<int>a(N),c(N),p(N),cnt(max(N,257));
       for (int i = 0; i < n; ++i) a[i] = (unsigned char) s[i] + 1;
       for (int x : a) ++cnt[x];

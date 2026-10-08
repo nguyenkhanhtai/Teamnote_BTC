@@ -1,0 +1,462 @@
+Croatian Open Competition in Informatics
+                 Round 3, January 13th 2024
+
+
+
+
+                         Tasks
+     Task              Time limit   Memory limit   Score
+
+     Eurokod            1 second      512 MiB        50
+     Vrsar              1 second      512 MiB        70
+     Milano C.le        1 second      512 MiB       110
+     Restorani          2 seconds     512 MiB       110
+     Slučajna Cesta     3 seconds     512 MiB       110
+
+     Total                                          450
+       Croatian Open Competition in Informatics                                              Task Eurokod
+       Round 3, January 13th 2024                                            1 second / 512 MiB / 50 points
+
+
+Task Eurokod
+This year, for the first time, the Eurokod is being held, an international competition
+in writing beautiful and readable code!
+There are n contestants participating in the competition, labeled with numbers
+from 1 to n, and each of them has written a code.
+Their codes are evaluated by an association of computer scientists. The association
+consists of a president and members of the association. The president awards
+points to codes in one way, and the members of the association award points in
+another way.
+President’s points:
+The president will rank the codes from the most beautiful to the least beautiful (in
+his opinion). The first code will be awarded n points, and each subsequent code
+will be awarded one point less than the previous one.
+Members of the association’s points:
+Each member of the association will vote for the code he considers the most beautiful. After each member
+of the association has voted, the codes will be ranked in descending order according to the number of
+votes they received from the members of the association. The first code (the one with the most votes) will
+be awarded n points, and each subsequent code will be awarded one point less than the previous one.
+Total points:
+The total number of points for each code is equal to the sum of the points awarded by the president and
+the number of points awarded by the members of the association.
+Your task is to print the order of codes in descending order according to the number of points.
+If more codes have the same number of points, then the better ranked one is the one that has won more
+points from the members of the association.
+
+Input
+The first line contains an integer n (1 ≤ n ≤ 50), the number of contestants.
+The second line contains n integers ai (1 ≤ ai ≤ n), where the i-th integer represents the label of the code
+that the president ranked i-th. The ranking of the president is given in the order from the most beautiful
+to the least beautiful, it contains all the labels from 1 to n exactly once.
+The third line contains n integers bi (0 ≤ bi ≤ 200), where the i-th integer represents the number of votes
+that the i-th code received from the members of the association. There won’t be two codes that received
+the same number of votes.
+
+Output
+In n lines, print the ranking of codes in descending order according to the number of points.
+Each line should be in the form "[rank]. Kod[label] ([number of points])", where [rank] is the
+rank of the code in the ranking, [label] is the label of the code written in two-digit form with leading
+zeros, and [number of points] is the number of points that the code won.
+For example, if the first place was won by the code with the label 3 with 12 points, then the first line is
+"1. Kod03 (12)".
+
+
+
+
+                                                   1 of 10
+        Croatian Open Competition in Informatics                                        Task Eurokod
+        Round 3, January 13th 2024                                      1 second / 512 MiB / 50 points
+
+
+Scoring
+
+ Subtask     Points   Constraints
+                      For each code, the number of obtained votes from the members of the association
+    1          17     is equal to the number of points awarded by the members of the association,
+                      and there won’t be two codes that scored the same number of total points.
+    2          19     There won’t be two codes that scored the same number of total points.
+    3          14     No additional constraints.
+
+Examples
+ input                                input                           input
+ 3                                    5                               7
+ 1 2 3                                5 2 4 1 3                       6 3 2 1 5 4 7
+ 50 10 20                             4 5 2 1 3                       200 56 11 0 13 105 12
+
+ output                               output                          output
+ 1. Kod01 (6)                         1. Kod02 (9)                    1. Kod06 (13)
+ 2. Kod03 (3)                         2. Kod05 (8)                    2. Kod01 (11)
+ 3. Kod02 (3)                         3. Kod01 (6)                    3. Kod02 (10)
+                                      4. Kod04 (4)                    4. Kod03 (8)
+                                      5. Kod03 (3)                    5. Kod05 (7)
+                                                                      6. Kod07 (4)
+                                                                      7. Kod04 (3)
+
+
+Clarification of the first example:
+Kod03 and Kod02 have the same number of points, but Kod03 has more votes from the members of the
+association, so it is better ranked.
+Clarification of the second example:
+The president ranked the Kod05 as the most beautiful, so it won n = 5 points.
+
+
+
+
+                                                   2 of 10
+       Croatian Open Competition in Informatics                                                   Task Vrsar
+       Round 3, January 13th 2024                                              1 second / 512 MiB / 70 points
+
+
+Task Vrsar
+Vrsar is a small coastal town consisting of n hills. Surprisingly, all the hills, when
+viewed from the sea, are arranged one behind the other so that the i-th hill is xi
+meters away from the sea. At the top of each hill, there is an ice rink. All ice rinks
+open simultaneously every day, but they do not close at the same time: the i-th
+ice rink is open for ti minutes.
+Iva and Mia have come to Vrsar and will be here for m days. Iva and Mia love ice
+skating and want to skate every day they spend in this town. At the beginning of
+the i-th day, they are ai meters away from the sea, and their ice-skating adventure starts at the same
+time as the ice rinks open. To reach an ice rink, they must walk to it, moving at a speed of one meter per
+minute. They can walk both to the left and to the right. If they are at a position where there is a hill,
+they can climb the hill and reach the ice rink on top of it, or they can bypass it without climbing.
+They are in very good shape, so they can climb the hill without spending extra time. Once they reach the
+top, they can skate as much as they want or until the ice rink closes. Going downhill is not as easy as
+going up. Recently, it rained, and the ground is slippery, so it takes si minutes for them to descend the
+i-th hill. After descending from a hill, they can continue walking towards the next ice rink.
+
+
+
+
+                                 The illustration shows the first example.
+Iva and Mia are at the starting point at position 1. They walk for 2 minutes to the ice rink on the hill at
+ position 3 and ice skate there for 5 minutes. Then they descend from the hill (in 0 minutes), continue
+walking for 3 minutes to the ice rink on the hill at position 6, and ice skate there for 1 minute. In total,
+                                they have ice skated for 5 + 1 = 6 minutes.
+
+Iva and Mia are interested in determining the maximum number of minutes they can ice skate each day.
+In one day, they can visit any number of ice rinks. Since they want to spend more time skating and less
+time calculating, they have turned to you for help. Help them solve this problem!
+Note: If Iva and Mia at the beginning of the day are at the same position as a hill, they are at the bottom
+of the hill, and so they have to climb it if they want to ice skate on the ice rink on top of it.
+
+Input
+The first line contains integers n and m (1 ≤ n, m ≤ 105 ), the number of hills and the number of days.
+The i-th of the following n lines contains integers xi , ti and si (0 ≤ xi , ti , si ≤ 109 ), the distance of the
+i-th hill from the shore, closing time of the ice rink and the time required for the descent from the hill.
+The third line contains m integers ai (0 ≤ ai ≤ 109 ), Iva’s and Mia’s starting distance from the shore at
+the beginning of the i-th day.
+
+Output
+In one line, print m integers, the i-th of which is the maximum time Iva and Mia can ice skate on i-th day.
+
+
+
+
+                                                    3 of 10
+         Croatian Open Competition in Informatics                                  Task Vrsar
+         Round 3, January 13th 2024                             1 second / 512 MiB / 70 points
+
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1           8     n, m ≤ 10
+     2          17     m = 1, a1 = 0
+     3          19     n, m ≤ 1 000
+     4          26     No additional constraints.
+
+Examples
+ input                                 input                  input
+
+ 3 1                                   3 2                    1 3
+ 3 7 0                                 5 10 3                 3 3 3
+ 6 11 3                                3 6 1                  0 1 2
+ 10 13 5                               1 5 0
+ 1                                     0 3                    output
+
+ output                                output                 0 1 2
+
+ 6                                     5 8
+
+
+Clarification of the first example:
+Take a look at the illustration in the statement.
+
+
+
+
+                                                    4 of 10
+       Croatian Open Competition in Informatics                                               Task Milano C.le
+       Round 3, January 13th 2024                                               1 second / 512 MiB / 110 points
+
+
+Task Milano C.le
+Silvia is at the Milano Centrale railway station and she noticed
+that the station has a lot of platforms. She thought that there
+are too many of them, so she decided to check how many of
+them are actually needed.
+Silvia also noticed an interesting fact that holds at this station:
+the schedule of arrivals and departures repeats every two days, and additionally, the schedule is such that
+all n trains arrive at the station on one day, and leave the station on the other day. Note that in this way
+no train will leave before all trains have arrived.
+The platforms at the station are long enough so that all n trains can be lined up one after another on the
+same platform. However, if train x enters the platform first, and then train y, then train x cannot leave
+the platform before train y.
+
+
+
+
+       The illustration shows a possible train schedule on the platforms in the second sample test.
+The labels on the train ’i : ai /bi ’ denote that the i-th train will arrive ai -th at the station on the first day,
+                                 and leave the station bi -th on the second day.
+                  The train (2 : 1/2) cannot leave the platform before the train (4 : 5/1).
+Silvia is interested in what is the minimum number of platforms needed so that all trains can be lined up
+on the platforms, without the possibility that a train cannot leave the platform because there is a train in
+front of it that has not yet left.
+
+Input
+The first line contains an integer n (1 ≤ n ≤ 2 · 105 ), the number of trains.
+The second line contains n integers ai , (1 ≤ ai ≤ n, ai ̸= aj for all i ̸= j), which denote that the i-th train
+arrives at the station as the ai -th train on the first day. The sequence (ai ) is a permutation.
+The third line contains n integers bi , (1 ≤ bi ≤ n, bi ̸= bj for all i ̸= j), which denote that the i-th train
+leaves the station as the bi -th train on the second day. The sequence (bi ) is a permutation.
+
+Output
+In the first and only line you should output the minimum number of platforms needed.
+
+
+
+
+                                                      5 of 10
+         Croatian Open Competition in Informatics                                       Task Milano C.le
+         Round 3, January 13th 2024                                       1 second / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          21     n ≤ 10
+     2          18     The minimum number of platforms needed will be either 1 or 2.
+     3          31     n ≤ 1 000
+     4          40     No additional constraints.
+
+Examples
+ input                                 input                          input
+
+ 5                                     5                              3
+ 3 5 2 4 1                             3 1 2 5 4                      3 2 1
+ 3 2 5 1 4                             4 2 3 1 5                      1 2 3
+
+ output                                output                         output
+
+ 2                                     4                              1
+
+
+Clarification of the second example:
+Take a look at the illustration in the statement.
+
+
+Clarification of the third example:
+All the trains can be lined up on the same platform without any problems.
+
+
+
+
+                                                    6 of 10
+       Croatian Open Competition in Informatics                                              Task Restorani
+       Round 3, January 13th 2024                                           2 seconds / 512 MiB / 110 points
+
+
+Task Restorani
+Coming to Szeged, Mr. Malnar is, as usual, obliged to get acquainted with the
+local culture, and thus try all traditional meals, culinary specialties, and local
+drinks.
+We can imagine Szeged as n interesting locations numbered from 1 to n connected
+by n − 1 bidirectional roads in such a way that there is a path using roads between
+every pair of interesting locations. Amazingly, Mr. Malnar needs exactly one
+minute to walk across each road. Time spent walking in an interesting location is
+negligible.
+Mr. Malnar has a list of m restaurants he would like to visit. It consists of m positive integers where the
+i-th number represents an interesting location near which there is the i-th restaurant.
+One problem is that Mr. Malnar must eat an ice cream in a pastry shop right after dining in a restaurant.
+Another problem is that he refuses to visit the same pastry shop twice.
+Luckily, he came prepared as he is familiar with m pastry shops whose locations he remembers as a list of
+m positive integers where the i-th number represents an interesting location near which is the i-th pastry
+shop.
+Mr. Malnar is tired from his travel and doesn’t want to walk more than he has to, so he asks you to
+calculate how much will he have to walk and offer the order of visiting restaurants and pastry shops, as
+he is capable of navigating between them without help.
+Mr. Malnar is currently at an interesting location number 1 and must return to it at the end of his walk.
+
+Input
+The first line contains integers n and m (1 ≤ m ≤ n ≤ 3 · 105 ), the number of interesting locations and
+the number of restaurants/pastry shops, respectively.
+The second line contains m integers ai (1 ≤ ai ≤ n, ai ̸= aj for all i ̸= j), the list of restaurants.
+The third line contains m integers bi (1 ≤ bi ≤ n, bi ̸= bj for all i ̸= j), the list of pastry shops.
+In each of the next n − 1 lines there are two integers xi and yi (1 ≤ xi , yi ≤ n) - this means that there is
+a road between interesting locations xi and yi .
+
+Output
+In the first line output t, the time in minutes that Mr. Malnar will have to walk to visit all restaurants
+and pastry shops, returning to location 1 at the end.
+In the second line output 2m integers vi , the order of visiting restaurants and pastry shops.
+The numbers in odd positions represent restaurants and should form a permutation of the first m positive
+integers. The numbers in even positions represent pastry shops and should also form a permutation of the
+first m positive integers.
+Visiting locations in given order and returning to the starting position by taking the shortest route between
+each should take exactly t minutes.
+If there are multiple optimal orders, output any.
+
+
+
+
+                                                    7 of 10
+        Croatian Open Competition in Informatics                                          Task Restorani
+        Round 3, January 13th 2024                                       2 seconds / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          20     n ≤ 5 000, m ≤ 10
+    2          20     xi = i, yi = i + 1 for all i = 1, . . . , n − 1
+    3          30     n ≤ 5 000
+    4          40     No additional constraints.
+
+If your program, on some test, outputs the first line correct, but doesn’t give the correct order in the
+second line, it will receive 30% of points for that test.
+The number of points in a subtask corresponds to the least number of points achieved by some test in
+that subtask.
+
+Examples
+ input                                 input                             input
+ 3 1                                   9 4                               10 5
+ 2                                     2 3 4 6                           3 5 6 7 8
+ 3                                     4 5 8 9                           1 2 4 9 10
+ 1 2                                   1 2                               1 2
+ 1 3                                   1 3                               2 3
+                                       3 4                               3 4
+ output                                3 5                               4 5
+ 4                                     5 6                               5 6
+ 1 1                                   1 7                               6 7
+                                       7 8                               7 8
+                                       7 9                               8 9
+                                                                         9 10
+                                       output
+                                                                         output
+                                       18
+                                       3 1 4 2 2 4 1 3                   24
+                                                                         4 4 5 5 3 3 2 2 1 1
+
+
+Clarification of the first example:
+Mr. Malnar first has to walk 1 minute to the only restaurant on location 2, then 2 minutes to the
+only pastry shop on location 3 and finally 1 minute back to location 1. Mr. Malnar will walk in total
+1 + 2 + 1 = 4 minutes.
+Clarification of the second example:
+Mr. Malnar visits restaurants and pastry shops in this order: restaurant at location 4 (2 min), pastry
+shop at location 4 (0 min), restaurant at location 6 (3 min), pastry shop at location 5 (1 min), restaurant
+at location 3 (1 min), pastry shop at location 9 (3 min), restaurant at location 2 (3 min), pastry shop at
+location 8 (3 min). After eating an ice cream at a pastry shop on location 8 he returns to location 1 (2
+min). Mr. Malnar walks in total 2 + 0 + 3 + 1 + 1 + 3 + 3 + 3 + 2 = 18 minutes
+Clarification of the third example:
+Mr. Malnar visits restaurants and pastry shops in this order: restaurant at location 7 (6 min), pastry
+shop at location 9 (2 min), restaurant at location 8 (1 min), pastry shop at location 10 (2 min), restaurant
+at location 6 (4 min), pastry shop at location 4 (2 min), restaurant at location 5 (1 min), pastry shop at
+location 2 (3 min), restaurant at location 3 (1 min), pastry shop at location 1 (2 min). After eating his
+last ice cream, he is already at location 1 so he doesn’t move. Mr. Malnar walks in total 24 minutes.
+
+
+                                                      8 of 10
+         Croatian Open Competition in Informatics                                       Task Slučajna Cesta
+         Round 3, January 13th 2024                                         3 seconds / 512 MiB / 110 points
+
+
+Task Slučajna Cesta
+Vito lives in a city with n parks labeled from 1 to n. The parks are connected
+with n − 1 roads such that there is a path between any two pairs of parks. Every
+park has some beauty value, beauty value of i-th park is vi .
+Last night Vito decided to wander around the city in such a way that after he
+visits a park he chooses a random road with equal probability and visits a park
+to which that road leads. But before he started his journey he looked through the
+window of his skyscraper and saw that on every road there is either a blue or a red
+snake. Blue snakes attack all people traveling from the park with a lower label to a park with a higher
+one, a red snakes attack everyone traveling from a park with higher label to lower. As Vito doesn’t want
+to get attacked by a snake he decided to change his plans by considering only roads on which he will not
+get attacked by a snake when choosing a random road. Since he likes long walks he will not stop on his
+journey until there is at least one road he can safely pass.
+And while Vito walks down the stairs of his skyscraper he completely forgot on which road is red or blue
+snake so he wonders: If on every road there is an equal probability of a blue or a red snake, what is the
+expected beauty of my journey which starts in the i-th park?
+Beauty of path is the sum of beauties of parks visited on that journey. Expected beauty of journey is
+defined as the sum of product of beauty of a path and probability Vito takes that path, for every possible
+path.
+
+Input
+In the first line there is an integer n (2 ≤ n ≤ 106 ), which denotes the number of parks.
+In the second line there are n − 1 integers pi (1 ≤ pi < i), which denote a road between the (i + 1)-th
+park and pi -th park.
+In the third line there are n integers vi (0 ≤ vi ≤ 106 ), where vi denotes the beauty of i-th park.
+
+Output
+If expected beauty of Vito’s journey which starts at i-th park is ab for integers a and b, then in i-th line of
+output print ab−1 (mod 109 + 7) where b−1 is modular inverse of b (mod 109 + 7).
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          10     n ≤ 10
+     2          30     n ≤ 1000
+     3          30     In sequence pi no value is present more than 2 times.
+     4          40     No additional constraints.
+
+If your program, on some test, outputs the first line correct, but outputs a wrong answer in the following
+lines, it will receive 50% of points for that test.
+The number of points in a subtask corresponds to the least number of points achieved by some test in
+that subtask.
+
+
+
+
+                                                    9 of 10
+       Croatian Open Competition in Informatics                                    Task Slučajna Cesta
+       Round 3, January 13th 2024                                      3 seconds / 512 MiB / 110 points
+
+
+Probni primjeri
+ input                               input                             input
+ 2                                   3                                 11
+ 1                                   1 1                               1 1 1 2 3 4 1 2 6 2
+ 2 1                                 8 8 8                             1 1000 5 3 18 200 8 9 0 2 2
+
+ output                              output                            output
+ 500000006                           14                                968750272
+ 2                                   14                                610352580
+                                     14                                450521029
+                                                                       536458466
+                                                                       199219275
+                                                                       662760680
+                                                                       190972315
+                                                                       90277951
+                                                                       824219264
+                                                                       941840425
+                                                                       532552597
+
+
+Clarification of the first example:
+The expected beauty of a journey starting at the first park is 2.5 (mod 109 +7) = 52 (mod 109 +7) = 5·2−1
+(mod 109 + 7) = 5 · 500000004 (mod 109 + 7) = 500000006 (mod 109 + 7) and starting from the second
+park it is 2.
+Clarification of the second example:
+Probability that both snakes are red is 14 and in that case if Vito starts at the first park he randomly
+chooses which road he will take.
+
+
+
+
+                                                  10 of 10
+

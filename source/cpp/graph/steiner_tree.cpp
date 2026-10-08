@@ -3,6 +3,8 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto cost = steiner_tree(g,{0,2});
+  //      g: vector<vector<pair<int,long long>>>, undirected.
   // Nonnegative undirected weights; at most 20 terminals (practically <=12).
   // Returns nullopt when disconnected, zero for no terminals.
   optional<long long>steiner_tree(const vector<vector<pair<int,long long>>>&g,const vector<int>&terminals){

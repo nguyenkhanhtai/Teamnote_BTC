@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: ImplicitTreap tr(123456); tr.insert(0,7); tr.reverse(0,1);
   // Implicit sequence with insert/erase/reverse/range-sum. RNG seed is explicit.
   // Erased nodes remain in the arena; storage O(total insertions), no dangling pointers.
   struct ImplicitTreap {
@@ -36,7 +37,7 @@ namespace notebook::data_structure {
       }
       push(b); t[b].left = merge(a, t[b].left); pull(b); return b;
     }
-    explicit ImplicitTreap(uint64_t seed) : rng(seed) {}
+    ImplicitTreap(uint64_t seed) : rng(seed) {}
     int size() const { return size(root); }
     void insert(int p, long long x) {
       assert(0<=p&&p<=size()); int u=t.size(); t.push_back( {x,x,rng()});

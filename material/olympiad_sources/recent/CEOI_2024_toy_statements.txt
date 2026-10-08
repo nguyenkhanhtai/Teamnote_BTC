@@ -1,0 +1,138 @@
+                                                                                                      toy
+                                                                                               Day 2 Tasks
+                                                                                              English (ISC)
+
+
+
+
+Toy
+For creating a task for CEOI 2024, Ben was given a toy as a present from the scientific committee.
+The toy is a puzzle which can be imagined as a H × W grid containing a metal object consisting of
+two parts: A horizontal 1 × K part and a vertical L × 1 part, which are loosely attached to each
+other. Neither of the parts can be rotated in any way, but each can be slid vertically or horizontally
+independently of the other one, as long as they always overlap on exactly one square.
+
+Furthermore, the grid contains several obstacles. No part of the metal object can move through an
+obstacle. Worse yet, the parts also cannot move outside the grid, not even partially. Ben's task is to
+move the metal object from a designated starting location to a (possibly) different location so that
+both parts overlap on a designated target square.
+
+However, Ben has been playing with the toy for a while and he has not yet been able to solve the
+task. In fact, he has gained a suspicion that the organizers have played a prank on him and have
+given him an unsolvable puzzle. He thus asks for your help by telling him whether the puzzle is
+solvable or not.
+
+
+Input
+
+The first line of the input contains four space-separated integers W , H , K and L — the width and
+the height of the puzzle, the width of the horizontal part and the height of the vertical part,
+respectively. The second line contains four integers x​h, yh​ , x​v and yv​ — the coordinates of the
+leftmost square occupied by the horizontal part and the coordinates of the topmost square
+occupied by the vertical part.
+
+The rows are numbered from 0 to H − 1 from top to bottom and columns are numbered 0 to
+W − 1 from left to right. The x coordinate denotes the column number and y coordinate denotes
+the row number.
+
+The next H lines contain W characters each, representing the grid. The character ‎
+                                                                                 .‎represents an
+empty square, the character ‎
+                            X‎represents an obstacle and the character ‎
+                                                                       *‎represents the target
+square.
+
+It is guaranteed that the initial position of the metal object is valid, i.e., that the two parts overlap
+on exactly one square and the two parts neither overlap with an obstacle nor stick out from the
+grid.
+
+
+
+                                                                                               toy (1 of 3)
+There is a single target square, i.e., a single occurrence of the ‎
+                                                                  *‎symbol in the toy, which might
+overlap with the initial position of the metal object.
+
+
+Output
+
+Print a single line containing ‎
+                               YES‎if it is possible to move the metal object to the target square, ‎
+                                                                                                    NO
+otherwise.
+
+
+Examples
+
+Example 1
+
+Input:
+
+
+   4 3 2 2
+   0 1 0 0
+   .X.*
+   ....
+   ...X‎
+
+
+Output:
+
+
+   YES‎
+
+
+The initial situation looks as follows:
+
+
+
+
+We can reach the target square by first moving the vertical part one square down, followed by
+alternating movement to the right of the vertical and horizontal parts as long as possible. Then we
+can move the vertical part up and to the right, reaching the target square, and finally move the
+horizontal part up, reaching the target as well.
+
+
+
+
+                                                                                            toy (2 of 3)
+Example 2
+
+Input:
+
+
+   2 3 2 3
+   0 1 0 0
+   .X
+   .*
+   .X‎
+
+
+Output:
+
+
+   NO‎
+
+
+There is no way how to move the vertical part without running into an obstacle. Therefore, it can
+never reach the target square.
+
+
+Constraints
+         2 ≤ W , H ≤ 1 500
+         2 ≤ K ≤ W, 2 ≤ L ≤ H
+         0 ≤ x​h ≤ W − K , 0 ≤ yh​ ≤ H − 1
+         0 ≤ xv​ ≤ W − 1, 0 ≤ yv​ ≤ H − L
+
+Subtasks
+   1. (14 points) W , H ≤ 50
+   2. (21 points) W , H ≤ 90
+   3. (9 points) W , H ≤ 300 and K, L ≤ 10
+   4. (29 points) W , H ≤ 360
+   5. (27 points) no additional constraints
+
+
+
+
+                                                                                       toy (3 of 3)
+

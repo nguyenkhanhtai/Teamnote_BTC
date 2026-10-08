@@ -424,54 +424,54 @@ Có cách O(n+m) không LCA: BFS từ root v lấy dist(v,·). Khoảng cách t�
 
 ## Bảng đánh giá và lựa chọn thực tế
 
-Điểm đánh giá transformation, không chấm độ khó của đề. Ưu tiên cue tái sử dụng được, có điều kiện nhận diện rõ và không cần mang cả một chứng minh riêng vào cuộc thi.
+Sách chấm độ khó từ 1 đến 4 sao (không có 5 sao). Điểm transformation /5 là đánh giá riêng, không phải độ khó. Notebook chỉ giữ các mục LFAC2 bổ sung đạt 4 sao và có cue đáng giữ: 2014H; các ghi chú gốc và ví dụ đã gộp vẫn giữ. Cột quyết định dưới đây ghi lịch sử khảo sát, không phải danh sách notebook hiện tại. Ưu tiên cue tái sử dụng được, có điều kiện nhận diện rõ và không cần mang cả một chứng minh riêng vào cuộc thi.
 
-| Bài | Điểm /5 | Bước đổi mô hình | Quyết định notebook |
-|---|---:|---|---|
-| 2011A — Arithmetic Rectangle | 5 | điều kiện đại số trên mọi hàng/cột → kiểm tra cửa sổ cục bộ → maximal rectangle → histogram → nearest smaller | Đã có; sửa citation rõ năm 2011 |
-| 2011B — Bytean Road Race | 5 | nhiều truy vấn reachability → hai đường biên cực trị → hai cây có thứ tự | Khảo sát: nhiều điều kiện embedding, cue riêng dài |
-| 2011C — Will It Stop? | 4 | mô phỏng không có cận dừng → tập trạng thái bất biến không chứa đích | Khảo sát: luyện invariant, bit test quen thuộc |
-| 2011D — Ants | 4 | động học trên cây → contour 1D + độ cao → phương trình affine theo từng cạnh | Khảo sát: động học contour riêng |
-| 2011E — Gophers | 5 | dynamic interval union coverage → phần đóng góp riêng phụ thuộc predecessor/successor | Đã thêm cue mới |
-| 2011F — Laundry | 3 | phân phối tài nguyên → xử lý yêu cầu khó trước + smallest adequate capacity + exchange giữa một gói/cặp gói | Không thêm: exchange greedy quen thuộc |
-| 2011G — Bits Generator | 5 | thử từng seed → so sánh các chuỗi xác định trên functional graph; hoặc đảo hướng pattern để đi từ gốc xuống cây | Khảo sát: functional-graph/string algorithm |
-| 2011H — Afternoon Tea | 5 | tính tổng quá trình → bảo toàn lượng (input−residue) → so sánh bằng cận phần dư; khi hòa thì dùng đóng góp lớn nhất | Khảo sát: conservation hay, luật game riêng |
-| 2011I — Intelligence Quotient | 5 | maximum weighted clique trong co-bipartite graph → complement **hai phía** → weighted vertex cover → min-cut | Gộp hướng conflict graph/min-cut đã có |
-| 2011J — Cave | 5 | bài phân hoạch cây global → đếm các cạnh có subtree residue bằng 0 → histogram/divisor sieve | Đã thêm cue mới |
-| 2011K — Cross Spider | 3 | kiểm tra cấu hình hình học toàn cục → dựng một cơ sở nhỏ + kiểm tra membership bằng determinant | Không thêm: cross/dot đã có |
-| 2012A — Vending Machine | 5 | lịch thực hiện thuận → kế hoạch ngược → ảnh hưởng của cả lịch chỉ còn **số lần mua** → DP nhỏ | Đã thêm cue mới |
-| 2012B — Bus Trip | 4 | longest path trên DAG dày + Manhattan → bốn extrema tuyến tính | Đã thêm cue mới |
-| 2012C — Sequence | 4 | nhiều ràng buộc overlapping windows → lấy hiệu/XOR → lớp đồng dư + một ràng buộc global | Đã thêm cue mới |
-| 2012D — DNA | 4 | tối ưu trên toàn bộ chuỗi → lower bound bằng pigeonhole + nghiệm đạt bound | Khảo sát: luyện lower-bound witness |
-| 2012E — Evaluation of an Expression | 5 | phân phối của biểu thức → convolution trên nhóm cộng; nhóm nhân hữu hạn → log cơ số primitive root → convolution trên nhóm cộng khác | Đã thêm cue mới |
-| 2012F — Formula One | 5 | tồn tại lịch swap rất dài → capacity inequalities → một constraint critical chi phối mọi constraint còn lại | Khảo sát: theorem hay, công thức riêng |
-| 2012G — Save the Dinosaurs | 5 | định lượng “mọi hướng / tồn tại lính” → separating hyperplane → convex hull → tangent update | Khảo sát: luyện hull/tangent |
-| 2012H — Hydra | 5 | sinh nhánh đệ quy có cycle → shortest derivation trên AND hypergraph → Dijkstra với counters | Đã thêm cue mới |
-| 2012I — Inversions | 4 | connected components trên permutation graph dày → ranh giới không có inversion → prefix certificates | Khảo sát: prefix certificate cho permutation |
-| 2012J — Do It Tomorrow | 3 | tối ưu lịch permutation → exchange để cố định thứ tự → min slack của prefixes | Không thêm: EDF + slack cơ bản |
-| 2012K — Rabbits | 5 | mô phỏng đẩy thỏ phụ thuộc thứ tự → chứng minh normal form → objective local radius 1 → cycle DP | Đã thêm cue mới |
-| 2013A — The Motorway | 5 | tồn tại offset và khoảng cách → khử một biến bằng giao interval → convex envelope → hai biên feasible | Khảo sát: envelopes, feasible có hai biên |
-| 2013B — Bytehattan | 5 | online deletions connectivity → planar dual additions connectivity | Đã thêm cue mới |
-| 2013C — The Carpenter | 5 | hai vùng cắt không giao nhau → separating axis → extrema của projections, tránh so sánh mọi cặp | Khảo sát: separating-axis/grid DP |
-| 2013D — Demonstrations | 5 | thử mọi cặp xóa → chỉ coverage multiplicity≤2 có ảnh hưởng → sparse pair interactions | Đã thêm cue mới |
-| 2013E — The Exam | 3 | tồn tại permutation với bound từng cạnh → obstruction tại phần tử trung tâm + interleave hai nửa đạt bound | Không thêm: construction riêng |
-| 2013F — Speed Cameras | 5 | ràng buộc trên mọi tree paths → exchange về biên → peel layers, giảm budget 2 mỗi lớp | Đã thêm cue mới |
-| 2013G — Marbles | 5 | tích khổng lồ → prime-exponent vector + cardinality → bounded imbalance kernel | Khảo sát: bound 6 cần theorem riêng |
-| 2013H — The Hero | 5 | time-dependent routes → interval states → split relaxation thành một partial interval và các globally final-at-start intervals | Đã thêm cue mới |
-| 2013I — Genetic Engineering | 4 | lexicographic greedy dễ mất longest → suffix-optimum feasibility certificates → greedy chỉ trên lựa chọn còn khả năng hoàn tất | Khảo sát: lex reconstruction có certificate |
-| 2013J — Jánošík | 4 | branching process → closed form theo highest power of two → gom đoạn quotient/log cố định | Gộp hướng grouping/closed-form |
-| 2013K — Blankets | 5 | tổng Θ(n²) pair intersections → đổi thứ tự sum/integral → polynomial moments của coverage | Đã thêm cue mới |
-| 2014A — The Lawyer | 2 | tìm cặp intervals trong mỗi bucket → hai extrema | Không thêm: hai extrema cơ bản |
-| 2014B — Petrol | 5 | resource-constrained path với refuel → nearest-source distance potentials → threshold connectivity | Đã thêm cue mới |
-| 2014C — The Prices | 5 | chọn cả bundle ở một kho → thêm cờ “đã mở kho” → thêm sản phẩm đơn lẻ | Đã thêm cue mới |
-| 2014D — Divisors | 2 | pairwise divisibility → value frequencies + multiples sieve | Không thêm: multiples sieve đã có |
-| 2014E — Euclidean Nim | 4 | infinite cyclic game → invariant residue → forced-move trap region → arithmetic progression modulo q−p | Khảo sát: chứng minh forced-region; bốn case riêng |
-| 2014F — Pillars | 5 | Hamilton cycle khó → cycle cover bằng finite local templates → spanning tree splicing | Đã thêm cue mới |
-| 2014G — Global Warming | 5 | subarray property không hereditary → fix unique extremum → forbidden boundaries → chỉ hai candidates quanh occurrences của extremum kia | Đã thêm cue mới |
-| 2014H — Hit of the Season | 5 | overlapping printing → partial-word cover + maximum occurrence gap → split short/long regimes → symmetry giảm exponent từ k xuống k/2 | Đã thêm cue mới |
-| 2014I — The Staging | 5 | mô phỏng event theo time → permutation cycles → reset/toggle automaton → dynamic run contributions | Đã thêm cue mới |
-| 2014J — The Cave | 5 | giao nhiều tree regions → tree convexity → deepest projection witness → kiểm đúng một điểm | Đã thêm cue mới |
-| 2014K — The Captain | 5 | complete metric-like graph → sorted-neighbor chains bảo toàn shortest paths | Đã thêm cue mới |
+| Bài | Độ khó sách /4 | Điểm transformation /5 | Bước đổi mô hình | Quyết định notebook |
+|---|---:|---:|---|---|
+| 2011A — Arithmetic Rectangle | 3 | 5 | điều kiện đại số trên mọi hàng/cột → kiểm tra cửa sổ cục bộ → maximal rectangle → histogram → nearest smaller | Đã có; sửa citation rõ năm 2011 |
+| 2011B — Bytean Road Race | 4 | 5 | nhiều truy vấn reachability → hai đường biên cực trị → hai cây có thứ tự | Khảo sát: nhiều điều kiện embedding, cue riêng dài |
+| 2011C — Will It Stop? | 1 | 4 | mô phỏng không có cận dừng → tập trạng thái bất biến không chứa đích | Khảo sát: luyện invariant, bit test quen thuộc |
+| 2011D — Ants | 4 | 4 | động học trên cây → contour 1D + độ cao → phương trình affine theo từng cạnh | Khảo sát: động học contour riêng |
+| 2011E — Gophers | 2 | 5 | dynamic interval union coverage → phần đóng góp riêng phụ thuộc predecessor/successor | Đã thêm cue mới |
+| 2011F — Laundry | 2 | 3 | phân phối tài nguyên → xử lý yêu cầu khó trước + smallest adequate capacity + exchange giữa một gói/cặp gói | Không thêm: exchange greedy quen thuộc |
+| 2011G — Bits Generator | 4 | 5 | thử từng seed → so sánh các chuỗi xác định trên functional graph; hoặc đảo hướng pattern để đi từ gốc xuống cây | Khảo sát: functional-graph/string algorithm |
+| 2011H — Afternoon Tea | 1 | 5 | tính tổng quá trình → bảo toàn lượng (input−residue) → so sánh bằng cận phần dư; khi hòa thì dùng đóng góp lớn nhất | Khảo sát: conservation hay, luật game riêng |
+| 2011I — Intelligence Quotient | 3 | 5 | maximum weighted clique trong co-bipartite graph → complement **hai phía** → weighted vertex cover → min-cut | Gộp hướng conflict graph/min-cut đã có |
+| 2011J — Cave | 3 | 5 | bài phân hoạch cây global → đếm các cạnh có subtree residue bằng 0 → histogram/divisor sieve | Đã thêm cue mới |
+| 2011K — Cross Spider | 2 | 3 | kiểm tra cấu hình hình học toàn cục → dựng một cơ sở nhỏ + kiểm tra membership bằng determinant | Không thêm: cross/dot đã có |
+| 2012A — Vending Machine | 3 | 5 | lịch thực hiện thuận → kế hoạch ngược → ảnh hưởng của cả lịch chỉ còn **số lần mua** → DP nhỏ | Đã thêm cue mới |
+| 2012B — Bus Trip | 3 | 4 | longest path trên DAG dày + Manhattan → bốn extrema tuyến tính | Đã thêm cue mới |
+| 2012C — Sequence | 2 | 4 | nhiều ràng buộc overlapping windows → lấy hiệu/XOR → lớp đồng dư + một ràng buộc global | Đã thêm cue mới |
+| 2012D — DNA | 2 | 4 | tối ưu trên toàn bộ chuỗi → lower bound bằng pigeonhole + nghiệm đạt bound | Khảo sát: luyện lower-bound witness |
+| 2012E — Evaluation of an Expression | 4 | 5 | phân phối của biểu thức → convolution trên nhóm cộng; nhóm nhân hữu hạn → log cơ số primitive root → convolution trên nhóm cộng khác | Đã bỏ khỏi notebook: người dùng thấy không quá khó, không cần giữ |
+| 2012F — Formula One | 4 | 5 | tồn tại lịch swap rất dài → capacity inequalities → một constraint critical chi phối mọi constraint còn lại | Khảo sát: theorem hay, công thức riêng |
+| 2012G — Save the Dinosaurs | 4 | 5 | định lượng “mọi hướng / tồn tại lính” → separating hyperplane → convex hull → tangent update | Khảo sát: luyện hull/tangent |
+| 2012H — Hydra | 2 | 5 | sinh nhánh đệ quy có cycle → shortest derivation trên AND hypergraph → Dijkstra với counters | Đã thêm cue mới |
+| 2012I — Inversions | 1 | 4 | connected components trên permutation graph dày → ranh giới không có inversion → prefix certificates | Khảo sát: prefix certificate cho permutation |
+| 2012J — Do It Tomorrow | 1 | 3 | tối ưu lịch permutation → exchange để cố định thứ tự → min slack của prefixes | Không thêm: EDF + slack cơ bản |
+| 2012K — Rabbits | 3 | 5 | mô phỏng đẩy thỏ phụ thuộc thứ tự → chứng minh normal form → objective local radius 1 → cycle DP | Đã thêm cue mới |
+| 2013A — The Motorway | 3 | 5 | tồn tại offset và khoảng cách → khử một biến bằng giao interval → convex envelope → hai biên feasible | Khảo sát: envelopes, feasible có hai biên |
+| 2013B — Bytehattan | 3 | 5 | online deletions connectivity → planar dual additions connectivity | Đã thêm cue mới |
+| 2013C — The Carpenter | 4 | 5 | hai vùng cắt không giao nhau → separating axis → extrema của projections, tránh so sánh mọi cặp | Khảo sát: separating-axis/grid DP |
+| 2013D — Demonstrations | 2 | 5 | thử mọi cặp xóa → chỉ coverage multiplicity≤2 có ảnh hưởng → sparse pair interactions | Đã thêm cue mới |
+| 2013E — The Exam | 1 | 3 | tồn tại permutation với bound từng cạnh → obstruction tại phần tử trung tâm + interleave hai nửa đạt bound | Không thêm: construction riêng |
+| 2013F — Speed Cameras | 2 | 5 | ràng buộc trên mọi tree paths → exchange về biên → peel layers, giảm budget 2 mỗi lớp | Đã thêm cue mới |
+| 2013G — Marbles | 4 | 5 | tích khổng lồ → prime-exponent vector + cardinality → bounded imbalance kernel | Khảo sát: bound 6 cần theorem riêng |
+| 2013H — The Hero | 3 | 5 | time-dependent routes → interval states → split relaxation thành một partial interval và các globally final-at-start intervals | Đã thêm cue mới |
+| 2013I — Genetic Engineering | 2 | 4 | lexicographic greedy dễ mất longest → suffix-optimum feasibility certificates → greedy chỉ trên lựa chọn còn khả năng hoàn tất | Khảo sát: lex reconstruction có certificate |
+| 2013J — Jánošík | 1 | 4 | branching process → closed form theo highest power of two → gom đoạn quotient/log cố định | Gộp hướng grouping/closed-form |
+| 2013K — Blankets | 3 | 5 | tổng Θ(n²) pair intersections → đổi thứ tự sum/integral → polynomial moments của coverage | Đã thêm cue mới |
+| 2014A — The Lawyer | 1 | 2 | tìm cặp intervals trong mỗi bucket → hai extrema | Không thêm: hai extrema cơ bản |
+| 2014B — Petrol | 3 | 5 | resource-constrained path với refuel → nearest-source distance potentials → threshold connectivity | Đã thêm cue mới |
+| 2014C — The Prices | 2 | 5 | chọn cả bundle ở một kho → thêm cờ “đã mở kho” → thêm sản phẩm đơn lẻ | Đã thêm cue mới |
+| 2014D — Divisors | 1 | 2 | pairwise divisibility → value frequencies + multiples sieve | Không thêm: multiples sieve đã có |
+| 2014E — Euclidean Nim | 2 | 4 | infinite cyclic game → invariant residue → forced-move trap region → arithmetic progression modulo q−p | Khảo sát: chứng minh forced-region; bốn case riêng |
+| 2014F — Pillars | 4 | 5 | Hamilton cycle khó → cycle cover bằng finite local templates → spanning tree splicing | Đã bỏ khỏi notebook: construction phụ thuộc cấu trúc riêng, khó tái sử dụng |
+| 2014G — Global Warming | 3 | 5 | subarray property không hereditary → fix unique extremum → forbidden boundaries → chỉ hai candidates quanh occurrences của extremum kia | Đã thêm cue mới |
+| 2014H — Hit of the Season | 4 | 5 | overlapping printing → partial-word cover + maximum occurrence gap → split short/long regimes → symmetry giảm exponent từ k xuống k/2 | Đã thêm cue mới |
+| 2014I — The Staging | 4 | 5 | mô phỏng event theo time → permutation cycles → reset/toggle automaton → dynamic run contributions | Đã bỏ khỏi notebook: người dùng thấy quen, không cần giữ |
+| 2014J — The Cave | 3 | 5 | giao nhiều tree regions → tree convexity → deepest projection witness → kiểm đúng một điểm | Đã thêm cue mới |
+| 2014K — The Captain | 2 | 5 | complete metric-like graph → sorted-neighbor chains bảo toàn shortest paths | Đã thêm cue mới |
 
 ## Bài luyện nên làm theo thứ tự
 

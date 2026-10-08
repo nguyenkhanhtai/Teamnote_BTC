@@ -3,6 +3,7 @@
 namespace notebook::strings {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto radii = manacher("ababa"); // radii.odd, radii.even
   struct PalindromeRadii { vector<int> odd, even; };
   PalindromeRadii manacher(string_view s) {
     int n=s.size(); PalindromeRadii out {vector<int>(n),vector<int>(n)};

@@ -1,0 +1,411 @@
+Croatian Open Competition in Informatics
+                 Round 1, November 5th 2022
+
+
+
+
+                          Tasks
+       Task           Time limit   Memory limit   Score
+
+       Desni klik      1 second      512 MiB        50
+       Čokolade        1 second      512 MiB        70
+       Berilij         1 second      512 MiB       110
+       Iksevi         3 seconds      512 MiB       110
+       Neboderi      2.5 seconds     512 MiB       110
+
+       Total                                       450
+        Croatian Open Competition in Informatics                                             Task Desni klik
+        Round 1, November 5th 2022                                            1 second / 512 MiB / 50 points
+
+
+Task Desni klik
+NFP is the future!, this is something all Noa’s friends can expect him to say when
+finance topics come up.
+NFP is one of the cryptocurrencies. The value of NFP over the course of s days
+can be represented with a matrix with r rows and s columns, consisting only
+of characters . and #. The character # in the i-th column represents the value
+of NFP on the i-th day, with the value being the number of the row, counted
+bottom-up.
+
+
+
+                                                   ....##.
+                                                   #..#...
+                                                   .##....
+                                                   ......#
+        The value of NFP from the second example over the course of 7 days was: 3, 2, 2, 3, 4, 4, 1.
+                                   The insecurity of this NFP is 3.
+
+The insecurity of NFP is defined as the difference between the maximum and minimum value it achieves
+over the course of s days.
+Noa wants to determine the insecurity for n NFPs, whose values are represented by matrices with r rows
+and s columns.
+Help him determine the insecurity of each of the n NFPs.
+
+Input
+The first line contains integers n, r and s (1 ≤ n ≤ 20, 2 ≤ r, s ≤ 50), the number of NFPs, and the
+number of rows and colums of the matrices.
+n matrices follows, one below another, each with r rows and s columns, representing NFP values. Each
+column consists only of characters ., except for exactly one character #.
+
+Output
+Print n lines. In the i-th of n lines print the insecurity od the i-th NFP.
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1           5     r=s=2
+    2          15     n=1
+    3          30     No additional constraints.
+
+
+
+
+                                                   1 of 9
+      Croatian Open Competition in Informatics                                             Task Desni klik
+      Round 1, November 5th 2022                                            1 second / 512 MiB / 50 points
+
+
+Examples
+ input                              input                               input
+ 4 2 2                              1 5 8                               2 3 3
+ ##                                 .....#.#                            ...
+ ..                                 ...#..#.                            ##.
+                                    ..#.#...                            ..#
+ ..                                 .#......
+ ##                                 #.......                            .#.
+                                                                        #..
+ #.                                 output                              ..#
+ .#                                 4                                   output
+ .#                                                                     1
+ #.                                                                     2
+ output
+ 0
+ 0
+ 1
+ 1
+
+
+Note: For clarity’s sake, in the examples there are blank lines between matrices. In the test cases there
+will not be blank lines between matrices.
+Clarification of the first example:
+The values of the first and the second NFP do not change over the days, so their insecurities are equal to
+0. The value of the third NFP decreases by 1 on the second day, so the insecurity is equal to 1. The value
+of the fourth NFP increases by 1 on the second day, so the insecurity is equal to 1.
+Clarification of the second example:
+The maximum value NFP has is 5 (on days 6 and 8), and the minimum value is 1 (on day 1). Therefore,
+the insecurity is equal to 5 − 1 = 4.
+
+
+
+
+                                                  2 of 9
+         Croatian Open Competition in Informatics                                                Task Čokolade
+         Round 1, November 5th 2022                                               1 second / 512 MiB / 70 points
+
+
+Task Čokolade
+Little Lana and little Fran are visiting a chocolate factory. They have seen how
+chocolate is made, tasted many chocolates, and now they want to buy some of the
+chocolates.
+In the shop, there are n different chocolates, and the i-th of them has the price
+ci . Lana and Fran want to buy m chocolates.
+Fran found a way to split the cost in the shop:
+
+   • If the chocolate is cheaper than k kunas, Lana will pay for it.
+
+   • Otherwise, Lana will pay k kunas, and Fran will pay the rest, that is ci − k
+     kunas.
+
+Let’s denote l as the amount Lana has to pay, and f as the amount Fran has to pay. Lana, dissatisfied
+with Fran’s deal, wants to spite Fran and choose the chocolates so the value of the expression l − f is as
+small as possible. Since Fran is hesitant and doesn’t know how many he wants to buy, Lana wants to
+know the minimal value of the expression l − f for q different numbers ki and mi .
+Help her choose the chocolates and determine the minimum value of the expression l − f for each of the q
+queries.
+
+Input
+The first line contains two integers n and q (1 ≤ n, q ≤ 105 ), the number of chocolates, and the number of
+queries.
+The second line contains n integers c1 , c2 , . . . , cq (1 ≤ ci ≤ 109 ), the prices of the individual chocolates, in
+order.
+The following q lines contain integers ki and mi (1 ≤ ki ≤ 109 , 1 ≤ mi ≤ n), Fran’s bound, and the
+number of chocolates they are going to buy.
+
+Output
+Print q lines. In the i-th line print the answer to Lana’s i-th query.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n, q ≤ 1000, ci , ki ≤ 106
+     2          20     k1 = . . . = kn
+     3          35     No additional constraints.
+
+
+
+
+                                                       3 of 9
+      Croatian Open Competition in Informatics                                              Task Čokolade
+      Round 1, November 5th 2022                                             1 second / 512 MiB / 70 points
+
+
+Examples
+ input                               input                              input
+ 5 2                                 7 4                                3 3
+ 1 9 22 10 19                        1 5 4 3 7 11 9                     5 6 7
+ 18 4                                5 4                                10 1
+ 5 2                                 5 7                                5 3
+                                     7 3                                3 3
+ output                              4 5
+                                                                        output
+34                                   output
+-21                                                                     5
+                                     4                                  12
+                                     16                                 0
+                                     7
+                                     1
+
+
+Clarification of the first example:
+In the first query, Lana can take chocolates with prices 1, 9, 22, and 10. Lana will pay 38 kunas, and Fran
+4 kunas. The answer is 38 − 4 = 34.
+In the second query, Lana will choose chocolates with prices 22 and 19. She will pay 10 kunas, and Fran
+will pay 31 kunas. The answer is 10 − 31 = −21.
+
+
+
+
+                                                  4 of 9
+       Croatian Open Competition in Informatics                                                 Task Berilij
+       Round 1, November 5th 2022                                           1 second / 512 MiB / 110 points
+
+
+Task Berilij
+Little sheep Be (short for Berilij) was kidnapped by the aliens, and they have a
+rather unusual request for her. They want to hire her.
+Precisely on Saturday, November 5th , the aliens plan to visit Earth with n spaceships
+and reward the best COCI contestants (and maybe hire them too). Their spaceships
+are perfect circles.
+Due to safety reasons, they chose m pairs of spaceships that have to touch exter-
+nally when they land. They have already determined the landing coordinates
+of the center point for each of the spaceships, and Be’s task is to determine the radius of each of the
+spaceships, so the conditions are satisfied.
+
+
+
+
+In the image, the left and the right pairs of spaceships do not satisfy the condition of touching externally.
+            The pair of spaceships in the middle fulfills the condition of touching externally.
+
+Spaceships are very expensive, and their cost is equal to their area, so the aliens are asking Be to determine
+the radii with the minimum cost of the spaceships.
+Their advanced technology allows spaceships to overlap, and, even more interestingly, they know how to
+make a spaceship with radius equal to 0.
+If there is no set of radii that satisfies the conditions, aliens expect Be to inform them about it. If Be
+doesn’t succeed in determining the radii, they will hire her as lunch.
+
+Input
+The first line contains two integers n and m (1 ≤ n, m ≤ 105 ), the number of spaceships, and the number
+of conditions.
+The following n lines contain real numbers xi and yi (−10 000 ≤ xi , yi ≤ 10 000), the coordinates of the
+center point of the i-th spaceship. Each of the numbers will be given with 10 decimal places.
+The following m lines contain two integers ai and bi (1 ≤ ai , bi ≤ n, ai =
+                                                                          6 bi ), representing the condition
+that the ai -th and bi -th spaceship must touch externally after landing. For each unordered pair (ai , bi )
+there will be at most one such condition.
+
+Output
+If there is no solution, in the first and only line print NE. Otherwise, in the first line print DA, and in the
+i-th of the following n lines print the radius of the i-th spaceship.
+
+
+
+
+                                                    5 of 9
+         Croatian Open Competition in Informatics                                               Task Berilij
+         Round 1, November 5th 2022                                         1 second / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n is odd, and each of the spaceships should touch exactly two other spaceships.
+     2          25     There exists at least one way to determine the radii so the conditions are satisfied.
+                       For each pair of spaceships (a, b), there’s at most one sequence of distinct
+     3          30     spaceships that starts in a, and finishes in b, and all adjacent spaceships
+                       in the sequence are necessarily touching.
+     4          40     No additional constraints.
+
+Your answer will be considered correct if, for each radius of the n spaceships, its absolute or relative error
+doesn’t exceed 10−4 . In other words, if your answer for the i-th spaceship is rsi , and the correct answer
+rci , then your answer wil be considered correct if |rsi − rci | ≤ 10−4 or | rsir−r
+                                                                                 ci
+                                                                                    ci
+                                                                                       | ≤ 10−4
+
+Examples
+ input                                 input                              input
+ 3 3                                  5 4                                 5 5
+ 0.0000000000 0.0000000000            -0.4585133080 0.2893567973          0.0000000000 0.0000000000
+ 0.0000000000 2.0000000000            9.9368007273 7.1806641913           1.0000000000 2.0000000000
+ 2.0000000000 0.0000000000            -8.4621834970 -2.8309311865         2.0000000000 4.0000000000
+ 1 2                                  0.0122121945 -2.8309311865          3.0000000000 6.0000000000
+ 2 3                                  2.3991780589 -8.8626906628          4.0000000000 8.0000000000
+ 3 1                                  2 1                                 1 2
+                                      3 2                                 2 3
+ output                               4 3                                 3 4
+ DA                                   5 1                                 4 5
+ 0.585786                                                                 5 1
+                                       output
+ 1.414214                                                                 output
+ 1.414214                              DA
+                                       0.000000                           NE
+                                       12.472076
+                                       8.474396
+                                       0.000000
+                                       9.587824
+
+
+Clarification of the first example:
+This is the only solution that satisfies all the touching conditions. Please note that solution (0.585700,
+1.414357, 1.414357) is also considered correct, even though spaceships 2 and 3 aren’t touching, because
+the absolute error doesn’t exceed 10−4 .
+Clarification of the third example:
+There is no arrangement of the radii that satisfies all conditions.
+
+
+
+
+                                                    6 of 9
+       Croatian Open Competition in Informatics                                                  Task Iksevi
+       Round 1, November 5th 2022                                           3 seconds / 512 MiB / 110 points
+
+
+Task Iksevi
+After ten years of programming, Vinko has decided to change his profession and
+become a ceramist. Already on the first day of his new job he got an extremely
+difficult task.
+He has to pave the concert hall’s floor with square ceramic tiles. However, he
+won’t pave the floor so that the tiles are parallel with the hall’s walls. Instead, he
+will rotate them so that the diagonals of the tiles are parallel to the walls.
+Vinko has not decided which size of tiles he will use, but he knows they all have to
+be the same size, and that the length of their diagonals in millimeters has to be a positive even integer.
+He will put the first tile so that it touches the bottom and left walls, and then he will pave the others so
+that they share a side with some of the previously set tiles. He will repeat the procedure until he paves
+the whole floor, whose dimensions are 107 × 107 square millimeters.
+Besides being a good programmer and ceramist, Vinko is also an excellent musician. Because of that,
+he knows that there are n points on the floor that are crucial for good acoustics in the hall. The hall’s
+acoustics would improve significantly if a tile’s corner is at one of the n points.
+
+
+
+
+The left image shows the paving whose tiles have a diagonal of length 4. The point (2, 4) at on the corner
+          of a tile, and for it the acoustics are good, but for the points (4, 3) and (5, 1) are not.
+The right image shows the paving whose tiles have a diagonal of length 2. The point (4, 3) is at the corner
+                             of a tile, while points (2, 4) and (5, 1) are not.
+
+Help Vinko determine for each of the n points in how many ways can he pave the floor (that is, how many
+different dimensions of the tiles can he choose) so that the i-th point is at a tile corner.
+
+Input
+The first line contains the integer n (1 ≤ n ≤ 106 ), the number of acoustic points.
+The following n lines contain two integers xi , yi (0 ≤ xi , yi ≤ 107 ), which indicates that the i-th point is
+xi millimeters away from the left wall, and yi millimeters away from the lower wall of the hall.
+
+Output
+In the i-th of n lines print the number from the task statement for the i-th point.
+
+
+
+
+                                                    7 of 9
+         Croatian Open Competition in Informatics                                        Task Iksevi
+         Round 1, November 5th 2022                                 3 seconds / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     1 ≤ n ≤ 10 000, 0 ≤ xi , yi ≤ 100
+     2          55     1 ≤ n ≤ 10 000
+     3          40     No additional constraints.
+
+Examples
+ input                                                     input
+ 3                                                         3
+ 1 4                                                       5 1
+ 0 0                                                       4 3
+ 0 9                                                       2 4
+
+ output                                                    output
+ 1                                                         0
+ 0                                                         1
+ 3                                                         1
+
+
+Clarification of the second example:
+Images from the task statement correspond to the second example.
+
+
+
+
+                                                    8 of 9
+          Croatian Open Competition in Informatics                                             Task Neboderi
+          Round 1, November 5th 2022                                        2.5 seconds / 512 MiB / 110 points
+
+
+Task Neboderi
+Domagoj is in the big city of London! Right now, there is a sequence of tall
+skyscrapers in front of him and he wants to take a photograph to remember the
+moment.
+The sequence of skyscrapers can be represented as a sequence of n numbers
+h1 , h2 , . . . , hn where the number hi represents the height of the i-th skyscraper.
+Domagoj will photograph a contiguous subsequence of skyscrapers. To capture
+more of the city’s beauty, he wants to photograph at least k skyscrapers.
+Domagoj has a strange sense of beauty of a photograph. He is very happy when there are tall skyscrapers
+in the photograph, but he is even happier when their heights have a large common divisor! If we label the
+heights of the contiguous skyscrapers on the photograph with hl , . . . , hr , and with g the greatest common
+divisor of the selected heights, then Domagoj defines the beauty of the photograph as g · (hl + . . . + hr ).
+Help Domagoj determine the beauty of the most beautiful photograph with at least k skyscrapers!
+
+Input
+The first line contains two integers n, k (1 ≤ k ≤ n ≤ 106 ), the number of skyscrapers, and the number k.
+The second line contains n integers h1 , h2 , . . . , hn (1 ≤ hi ≤ 106 ), the heights of the skyscrapers, in order.
+
+Output
+Print a single line with the required number from the task.
+
+Scoring
+
+ Subtask       Points   Constraints
+
+      1          11     n, k ≤ 100
+      2          22     n, k ≤ 5000
+      3          27     hi ≤ 100
+      4          18     n, k ≤ 5 · 104
+      5          32     No additional constraints.
+
+Examples
+ input                                                    input
+
+ 6 2                                                      4 1
+ 2 1 4 4 4 2                                              7 3 9 4
+
+ output                                                   output
+ 48                                                       81
+
+
+Clarification of the first example:
+Domagoj photographed skyscrapers ( 4, 4, 4 ), so the total beauty is 4 · (4 + 4 + 4) = 48
+Clarification of the second example:
+Domagoj photographed only the skyscraper ( 9 ), so the total beauty is 9 · 9 = 81.
+
+
+                                                      9 of 9
+

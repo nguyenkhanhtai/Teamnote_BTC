@@ -3,32 +3,36 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto colors = vizing_coloring(3,{{0,1},{1,2},{0,2}});
   // Simple undirected graph; returns edge colors 0..Delta. O(n^2) storage.
-  vector<int> vizing_coloring(int N, const vector<pair<int, int>>& edges){
-    vector<pair<int, int>> E;
-    for(auto [u,v]:edges){ assert(u!=v); E.push_back( {u+1,v+1}); }
-    vector<vector<int>>C(N+1,vector<int>(N+2)),G(N+1,vector<int>(N+1));
-    vector<int> X(N + 1); int a;
-    auto update = [&](int u) {
+  struct VizingColoring {
+    int N,a; vector<pair<int,int>> E;
+    vector<vector<int>> C,G; vector<int> X;
+    VizingColoring(int n,const vector<pair<int,int>>& edges):N(n),
+        C(n+1,vector<int>(n+2)),G(n+1,vector<int>(n+1)),X(n+1) {
+      for (auto [u,v]:edges) { assert(u!=v); E.push_back({u+1,v+1}); }
+    }
+    void update(int u) {
       for (X[u] = 1; C[u][X[u]]; X[u]++);
-    };
-    auto color = [&](int u, int v, int c) {
+    }
+    int color(int u, int v, int c) {
       int p = G[u][v];
       if (p == c) return p;
       G[u][v]=G[v][u]=c; C[u][c]=v; C[v][c]=u; C[u][p]=C[v][p]=0;
       if ( p ) X[u] = X[v] = p;
       else update(u), update(v);
       return p;
-    };
+    }
     // end of function : color
-    auto flip = [&](int u, int c1, int c2) {
+    int flip(int u, int c1, int c2) {
       int p = C[u][c1]; swap(C[u][c1], C[u][c2]);
       if ( p ) G[u][p] = G[p][u] = c2;
       if ( !C[u][c1] ) X[u] = c1;
       if ( !C[u][c2] ) X[u] = c2;
       return p;
-    };
+    }
     // end of function : flip
+    vector<int> solve() {
     for (int i = 1; i <= N; i++) X[i] = 1;
     for (int t = 0; t < (int) E.size(); t++) {
       int u=E[t].first,v0=E[t].second,v=v0,c0=X[u],c=c0,d; vector<pair<int,int>>L;
@@ -51,6 +55,10 @@ namespace notebook::graph {
     vector<int> result;
     for (auto [u, v] : E) result.push_back(G[u][v] - 1);
     return result;
+    }
+  };
+  vector<int> vizing_coloring(int n,const vector<pair<int,int>>& edges) {
+    VizingColoring solver(n,edges); return solver.solve();
   }
 //NOTEBOOK_END
 }

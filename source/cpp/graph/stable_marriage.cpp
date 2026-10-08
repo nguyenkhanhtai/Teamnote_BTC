@@ -3,6 +3,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto wives = stable_marriage({{0,1},{1,0}},{{0,1},{1,0}});
   // Complete strict preference permutations, equal side sizes; proposer-optimal.
   vector<int>stable_marriage(const vector<vector<int>>&men,const vector<vector<int>>&women){
     int n = men.size(); assert(women.size() == men.size());

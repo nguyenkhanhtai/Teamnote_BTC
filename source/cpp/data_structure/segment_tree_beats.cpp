@@ -3,6 +3,7 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: SegmentTreeBeats st({1,2,3}); st.chmin(0,3,2);
   // [l,r); values, shifts and sums must remain well inside +/- INF.
   // chmin/chmax/sum: amortized logarithmic; with add: log^2 bound.
   struct SegmentTreeBeats {
@@ -65,7 +66,7 @@ namespace notebook::data_structure {
       if (ql <= l && r <= qr) return t[p].sum;
       push(p); int m=(l+r)/2; return query(p*2,l,m,ql,qr)+query(p*2+1,m,r,ql,qr);
     }
-    explicit SegmentTreeBeats(const vector<long long>&a):n(a.size()),t(4*max(1,n)){
+    SegmentTreeBeats(const vector<long long>&a):n(a.size()),t(4*max(1,n)){
       if (n) build(1, 0, n, a);
     }
     void chmin(int l, int r, long long x) {

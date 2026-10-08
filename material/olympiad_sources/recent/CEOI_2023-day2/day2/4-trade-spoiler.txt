@@ -1,0 +1,168 @@
+                                                                                                        Day 2
+                                                                                                  Task: trade
+                                                                                                      Spoiler
+
+
+Tricks of the Trade (trade)
+by Lukas Michel and Tobias Lenz
+
+   Subtask 1. 𝑁 ≤ 200
+In this subtask we have enough time to check each possible segment by computing the sum of the 𝐾
+largest sale values and subtracting from this the sum of the costs of the segment. We can implement
+this check in 𝑂(𝑁) by using the nth_element function, but even computing it via sorting in 𝑂(𝑁 log 𝑁) is
+fine. Moreover, we can also compute the optimal indices by marking those elements that are at least
+as large as the 𝐾-th largest element of each such segment, where we reset all markings whenever we
+find a new segment with a higher profit.
+Overall the runtime of this solution is 𝑂(𝑁3 ) or 𝑂(𝑁3 log 𝑁).
+
+   Subtask 2. 𝑁 ≤ 6 000
+In this subtask we improve the above idea by handling each segment in 𝑂(log 𝑁) time. For this, we fix
+the left endpoint of the segment, and we iterate through every possible right endpoint. At the same
+time, we keep a priority queue with the 𝐾 largest elements of the segment, and we also keep track of
+the sum of these elements as well as the costs of the current segment. This allows us to compute the
+profit of the current segment in time 𝑂(log 𝑁).
+To compute the optimal indices, for each segment with the maximum profit that we encounter we
+can store the segment along with its 𝐾-th largest element. We will denote the 𝐾-th largest element of
+segment [ℓ, 𝑟] by 𝑡[ℓ,𝑟] . An index 𝑖 is then optimal if and only if there is a maximum profit segment [ℓ, 𝑟]
+with ℓ ≤ 𝑖 ≤ 𝑟 and 𝑠𝑖 ≥ 𝑡[ℓ,𝑟] . Computing all such indices can be done efficiently with a minimum segment
+tree or a sweep line approach, both in time 𝑂(𝑁 + 𝑆 log 𝑁) where 𝑆 is the number of segments with
+maximum profit.
+Overall this leads to a runtime of 𝑂(𝑁2 log 𝑁).
+
+   Subtask 3. 𝐾 = 2
+For 𝐾 = 2, we observe that in any maximum profit segment [ℓ, 𝑟] you have to sell the robots ℓ and 𝑟 to
+the other contestants.
+This allows us to iterate through all possible right endpoints 𝑟 while we maintain the maximum profit
+that we can gain from picking any left endpoint ℓ < 𝑟. This profit is 𝑠𝑟 + 𝑚𝑟 where 𝑚𝑟 ≔ max1≤ℓ<𝑟 𝑠ℓ − ∑𝑟𝑖=ℓ 𝑐𝑖 .
+We can update 𝑚𝑟 in 𝑂(1) whenever we move one step to the right by noting that
+
+                                      𝑚𝑟 = max{𝑚𝑟−1 − 𝑐𝑟 , 𝑠𝑟−1 − 𝑐𝑟−1 − 𝑐𝑟 }.
+
+This allows us to compute the maximum profit in 𝑂(𝑁).
+To compute the optimal indices, we can simply store all right endpoints that are part of a maximum
+profit segment and then repeat the procedure backwards to obtain all left endpoints of maximum
+profit segments. Together, these two sets form the set of optimal indices by our observation.
+
+   Subtask 4. 𝐾 ≤ 200
+Let 𝑝(𝑟, 𝑘) denote the maximum achievable profit if we buy some segment [ℓ, 𝑟] and sell 𝑘 robots of
+this segment. Then, the maximum profit is max1≤𝑟≤𝑁 𝑝(𝑟, 𝐾). As base cases, we have 𝑝(𝑟, 0) = 0 and
+𝑝(0, 𝑘) = −∞ for 𝑘 > 0. Then, we can calculate 𝑝 recursively for 𝑟, 𝑘 > 0 as
+
+                               𝑝(𝑟, 𝑘) = max{𝑝(𝑟 − 1, 𝑘), 𝑝(𝑟 − 1, 𝑘 − 1) + 𝑠𝑖 } − 𝑐𝑖 .
+
+
+
+                                                        1/3
+                                                                                                               Day 2
+                                                                                                         Task: trade
+                                                                                                             Spoiler
+
+
+This is because we can choose whether or not to sell the 𝑖-th robot. This formula can be evaluated in
+𝑂(𝑁𝐾) using dp.
+To find the optimal indices, we reconstruct all optimal dp transitions. If a transition (𝑖, 𝑘) → (𝑖 + 1, 𝑘 + 1)
+appears in an optimal solution, then the 𝑖-th robot is part of an optimal transaction.
+
+   Subtask 5. No further constraints.
+
+We can visualize the dp of the previous subtask as a directed acyclic graph with nodes (𝑟, 𝑘) and edges
+      (𝑖 − 1, 𝑘) → (𝑖, 𝑘) with weight −𝑐𝑖 and
+      (𝑖 − 1, 𝑘) → (𝑖, 𝑘 + 1) with weight 𝑠𝑖 − 𝑐𝑖 .
+The problem of finding the maximum profit is then equivalent to finding the longest path from some
+node of the form (ℓ, 0) to some node (𝑟, 𝐾) in this graph. For example, the graph for 𝑁 = 3 and 𝐾 = 2
+looks like this:
+
+                                  −𝑐1                     −𝑐2                     −𝑐3
+                     0, 2                    1, 2                         2, 2                    3, 2
+
+                                      − 𝑐1                    − 𝑐2                    − 𝑐3
+                                 𝑠1                      𝑠2                      𝑠3
+
+                                  −𝑐1                     −𝑐2                     −𝑐3
+                     0, 1                    1, 1                         2, 1                    3, 1
+
+                                      − 𝑐1                    − 𝑐2                    − 𝑐3
+                                 𝑠1                      𝑠2                      𝑠3
+
+                     0, 0                    1, 0                         2, 0                    3, 0
+
+
+
+For a left endpoint ℓ, we say that a right endpoint 𝑟 > ℓ is ℓ-optimal if buying the segment [ℓ, 𝑟] achieves
+the maximum profit possible for this fixed left endpoint ℓ.
+
+Lemma 1. Let ℓ1 < ℓ2 < 𝑟2 < 𝑟1 be such that 𝑟1 and 𝑟2 are ℓ1 - and ℓ2 -optimal respectively. Then, 𝑟2 is
+also ℓ1 -optimal, and 𝑟1 is also ℓ2 -optimal.
+
+Proof. Let 𝑝1 and 𝑝2 be longest paths corresponding to the intervals [ℓ1 , 𝑟1 ] and [ℓ2 , 𝑟2 ]. The paths 𝑝1
+and 𝑝2 must intersect at some vertex 𝑣 of the graph:
+
+                                                                     𝑟2                      𝑟1
+
+
+
+
+                                                              v
+
+
+
+
+                            ℓ1                      ℓ2
+
+
+
+
+                                                          2/3
+                                                                                                   Day 2
+                                                                                             Task: trade
+                                                                                                 Spoiler
+
+
+The paths from 𝑣 to 𝑟1 and from 𝑣 to 𝑟2 must have the same length as we could otherwise replace the
+part of 𝑝1 or 𝑝2 that comes after 𝑣 with a longer path. In particular, the path from ℓ1 to 𝑟2 via 𝑣 has the
+same length as 𝑝1 , and the same holds for the path from ℓ2 to 𝑟1 compared to 𝑝2 . Hence, buying the
+segment [ℓ1 , 𝑟2 ] or [ℓ2 , 𝑟1 ] also achieves the maximum profit.
+
+Let opt(ℓ) be the smallest ℓ-optimal right endpoint. If we can compute opt(ℓ) for every possible left
+endpoint ℓ, then the maximum overall profit is the maximum profit of the segments [ℓ, opt(ℓ)]. From
+the lemma above we get that opt(ℓ) ≤ opt(ℓ + 1).
+This means that we can apply the divide and conquer optimization: First, we compute opt(𝑚) for
+𝑚 = 𝑁/2 by iteratively testing every possible value 𝑟. Then, to compute opt(ℓ) for ℓ ∈ [1, 𝑚 − 1], we
+only need to consider 𝑟 ≤ opt(𝑚) as possible right endpoints, and for ℓ ∈ [𝑚 + 1, 𝑁] we only check
+𝑟 ≥ opt(𝑚). For these intervals, we can apply the idea recursively. In total, this means that we have to
+check at most 𝑂(𝑁 log 𝑁) values of 𝑟.
+However, during this divide and conquer algorithm, we still need an efficient way to compute the
+maximum profit of a segment [ℓ, 𝑟]. Since we can compute the costs of such a segment with prefix sums
+(or one of many other ways), we focus on efficiently computing the sum of the 𝐾 largest elements of this
+segment. For this, recall our approach from Subtask 2. There, we kept a set of the 𝐾 largest elements
+of our current segment [ℓ, 𝑟] as well as their sum, and we were able to efficiently add elements to this
+segment.
+In our divide and conquer algorithm, we can now always move our current segment [ℓ, 𝑟] to the segment
+where we need to know the sum of the 𝐾 largest elements. However, for this we would also need to
+be able to remove elements from the segment. Fortunately, this is also possible: in addition to the
+set with the 𝐾 largest elements, we can also keep a set with all the other elements of the current
+segment. If we now delete an element, we can delete it from the appropriate set and rebalance the
+two sets so that afterwards the top set contains the 𝐾 largest elements once more.
+With the standard analysis of the divide and conquer optimization, we can prove that ℓ and 𝑟 move at
+most 𝑂(𝑁 log 𝑁) steps during this process, and so this algorithm runs in time 𝑂(𝑁 log2 𝑁). It would also
+have been possible to use persistent segment trees to compute the sum of the 𝐾 largest elements,
+which would have resulted in the same complexity.
+For a full solution, it remains to compute the optimal indices. In Subtask 2 we already noted that
+if there are 𝑆 segments with maximum profit, we could do it in time 𝑂(𝑁 + 𝑆 log 𝑁). However, in this
+subtask, it might hold that 𝑆 ∈ Θ(𝑁2 ) which makes this approach too slow. So, we have to reduce the
+number of segments that we need to consider.
+For this, assume that [ℓ1 , 𝑟1 ] and [ℓ2 , 𝑟2 ] are segments with maximum profit with ℓ1 < ℓ2 < 𝑟2 < 𝑟1 and
+that 𝑖 ∈ [ℓ1 , 𝑟1 ] is an optimal index. This means that 𝑖 is one of the 𝐾 largest elements in one of these
+two segments. In this case, we know from the lemma that [ℓ1 , 𝑟2 ] and [ℓ2 , 𝑟1 ] are also segments with
+maximum profit. Since these segments are shorter, it follows that 𝑖 must also be an optimal index of
+one of the segments [ℓ1 , 𝑟2 ], [ℓ2 , 𝑟2 ], or [ℓ2 , 𝑟1 ].
+In particular, if ℓ1 < ℓ2 are left endpoints of segments with maximum profit with no such endpoint in
+between, for ℓ1 we only need to consider right endpoints 𝑟 with opt(ℓ1 ) ≤ 𝑟 ≤ opt(ℓ2 ) when computing
+all optimal indices. This means that we will only consider at most 2𝑁 segments in total, allowing us to
+compute all optimal indices with a two pointer approach in 𝑂(𝑁 log 𝑁).
+
+
+
+
+                                                   3/3
+

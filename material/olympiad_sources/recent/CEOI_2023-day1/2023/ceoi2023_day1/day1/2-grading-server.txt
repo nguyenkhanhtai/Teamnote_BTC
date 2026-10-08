@@ -1,0 +1,102 @@
+                                                                                                             Day 1
+                                                                                              Task: grading-server
+                                                                                                     Language: en
+
+
+Bring Down the Sky Grading Server (grading-server)
+
+Despite running low on oil, the opening ceremony was a great success.* Now, the committee is looking
+forward to the first competition day. But what’s this? The chairman of the Technical Committee noticed
+some suspicious network activity—apparently someone is planning to hack the grading server!
+The grading server possesses a specific computing power 𝑐G which the mysterious hacker will try to
+reduce to (or below) 0. But the server is also protected by 𝑓G firewalls, each of which will reduce the
+impact of any attack by a fixed amount 𝑆. At each point in time, the hacker can now decide to either
+        take down one of these firewalls, permanently reducing 𝑓G by 1 (down to a minimum of 0), or
+        use all of their own computing power 𝑐H to attack the server, permanently reducing 𝑐G by
+        max {𝑐H − 𝑓G ⋅ 𝑆, 0}.
+However, the chairman can strike back by either taking down one of the hacker’s 𝑓H firewalls or by
+using the grading server’s computing power to attack the hacker, which will similarly reduce 𝑐H by
+max {𝑐G − 𝑓H ⋅ 𝑆, 0}. The chairman and the hacker take turns in their actions, with the hacker going first.
+The committee will not know how much computing power and how many firewalls the hacker possesses
+until the hack has started. At the same time, because the committee might still be able to upgrade
+the server, its computing power and the number of its firewalls are also still unknown. To plan
+their defense, the committee therefore needs a program that tells them for 𝑄 different scenarios
+(𝑐H , 𝑓H , 𝑐G , 𝑓G ) whether the hacker can bring down the grading server even if the chairman makes
+optimal decisions.
+
+
+Input
+
+The first line of the input contains the integers 𝑆 and 𝑄. Then 𝑄 lines follow, each of which describes
+a scenario as above and consists of four integers 𝑐H 𝑓H 𝑐G 𝑓G : the computing power and number of
+firewalls of the mysterious hacker and of the grading server, respectively.
+
+
+Output
+
+Your program should output 𝑄 lines, each of which should consist of a single string: YES if the
+hacker can reduce the grading server’s computing power to or below 0 in the corresponding scenario
+(regardless of the chairman’s actions), and NO otherwise.
+
+
+Constraints
+
+We always have 1 ≤ 𝑆 ≤ 30 000, 1 ≤ 𝑐H , 𝑐G ≤ 1012 , 0 ≤ 𝑓H , 𝑓G ≤ 1012 , and 1 ≤ 𝑄 ≤ 250 000.
+Subtask 1 (5 points).       𝑆, 𝑐H , 𝑓H , 𝑐G , 𝑓G ≤ 75
+Subtask 2 (5 points).       𝑆, 𝑐H , 𝑓H , 𝑐G , 𝑓G ≤ 300
+Subtask 3 (10 points). 𝑆 = 1
+Subtask 4 (25 points). 𝑆, 𝑐H , 𝑓H , 𝑐G , 𝑓G ≤ 2 000
+Subtask 5 (20 points). 𝑆 ≤ 400
+Subtask 6 (20 points). 𝑓G , 𝑓H ≤ 125
+Subtask 7 (15 points). No further constraints.
+* At least if one ignores the grand finale with the stage collapsing under the weight of 1017 performers.
+
+
+
+
+                                                           1/2
+                                                                                                Day 1
+                                                                                 Task: grading-server
+                                                                                        Language: en
+
+
+Examples
+
+                                 Input                                                Output
+
+ 17 2                                                                      YES
+ 42 1 33 1                                                                 NO
+ 42 1 33 7
+
+ 1 1                                                                       YES
+ 999999999999 999999999999 999999999999 999999999999
+
+ 2 1                                                                       NO
+ 1000000000000 0 1 1000000000000
+
+
+Consider the first scenario of the first example:
+      In the beginning, the hacker can attack the grading server, reducing 𝑐G by 42 − 1 ⋅ 17 = 25 to a
+      new value of 8.
+      Afterwards, the chairman cannot reduce the hacker’s computing power by attacking, so the only
+      sensible thing for him to do is to take down the hacker’s unique firewall.
+      However, the hacker can then reduce the computing power of the grading server to 8 − 25 =
+      −17 ≤ 0 by another attack, bringing down the server and ruining the first competition day.
+In the second scenario on the other hand:
+      Initially, the only thing the hacker can do is to take down one of the firewalls.
+      Afterwards, the chairman can attack the hacker, reducing their computing power 𝑐H to 26.
+      In the next two rounds, the hacker again can only take down one of the firewalls, while the
+      chairman can attack each time, thus reducing 𝑐H below 0 and successfully fighting off the
+      hacker’s attempt.
+
+
+Limits
+
+Time: 4 s
+Memory: 1024 MiB
+
+
+
+
+                                                    2/2
+

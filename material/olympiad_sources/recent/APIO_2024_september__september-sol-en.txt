@@ -1,0 +1,18 @@
+It's easy to find that it's optimal to greedily select the shortest possible prefix each time. Therefore,
+only checking whether a prefix is satisfied should be done.
+
+
+
+Firstly, to keep the sets of each person being the same, we can use an array of counter counting
+how many times each number appears, and another counter counting how many counters are
+neither   nor    .
+
+
+
+Secondly, to keep the set if a set of leaves, one method is to check whether the remaining set is
+connected, which can         checked by recording the result of number of nodes minus number of
+edges. Another method is to directly maintain the count of deleted non-leaf nodes and jump to
+the parent node when deleting to a leaf.
+
+The time complexity is              .
+

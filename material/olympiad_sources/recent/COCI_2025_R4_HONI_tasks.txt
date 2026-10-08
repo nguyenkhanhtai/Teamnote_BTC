@@ -1,0 +1,433 @@
+Hrvatsko otvoreno natjecanje u informatici
+                    4. kolo, 25. siječnja 2025.
+
+
+
+
+                            Zadaci
+Zadatak        Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+Vlak                1 sekunda                 512 MiB               20
+Kamen Škare         1 sekunda                 512 MiB               30
+Šah                 3 sekunde                 512 MiB               50
+Benzinska           1 sekunda                 512 MiB               70
+Xor                 1 sekunda                 512 MiB               90
+Cipele              2 sekunde                 512 MiB              120
+Tura Mačkica        0.5 sekundi               512 MiB              120
+
+Ukupno                                                             500
+         Hrvatsko otvoreno natjecanje u informatici                                       Zadatak Vlak
+         4. kolo, 25. siječnja 2025.                                   1 sekunda / 512 MiB / 20 bodova
+
+
+Zadatak Vlak
+Marko je vrlo iskusni turistički vodič. Već dugi niz godina vodi turiste iz raznih
+dijelova svijeta po svom rodnom gradu. Jedan od dijelova njegove ture je kratka
+vožnja gradom u turističkom vlaku.
+Marko je saznao da će sutra voditi grupu od N ljudi. Turistički vlak ima dva
+vagona. U prvi vagon može stati A ljudi, a u drugi B ljudi. Svaki turist u grupi
+mora barem jednom sudjelovati u turi gradom. Nažalost, Marko na raspolaganju
+ima samo jedan turistički vlak. Dok su neki turisti na turi, ostali moraju čekati.
+Zbog nestrpljivosti turista, Marko želi organizirati ture tako da ih bude što manje, ali da svaki turist
+prođe turu. Vaš je zadatak odrediti najmanji broj potrebnih tura kako bi svi turisti bili zadovoljni.
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj N (1 ≤ N ≤ 200).
+U drugom redu nalazi se prirodni broj A (0 ≤ A ≤ 200).
+U trećem redu nalazi se prirodni broj B (0 ≤ B ≤ 200).
+Zagarantirano je da će barem jedna osoba stati u turistički vlak.
+
+Izlazni podaci
+U prvom i jedinom redu potrebno je ispisati najmanji broj tura koji Marko mora provesti.
+
+Probni primjeri
+ ulaz                                   ulaz                           ulaz
+ 10                                     6                              127
+ 1                                      3                              24
+ 1                                      2                              12
+
+ izlaz                                  izlaz                          izlaz
+ 5                                      2                              4
+Pojašnjenje prvog probnog primjera: Marko prvo pošalje dvoje ljudi, u svakom vagonu jednu osobu,
+zatim u drugoj turi idućih dvoje ljudi itd.
+
+
+Pojašnjenje drugog probnog primjera: Marko će u prvoj turi poslati četvero ljudi, u prvom vagonu
+tri i u drugom vagonu jednu osobu, zatim će u preostaloj turi poslati dvije osobe, u svakom vagonu jedna.
+
+
+
+
+                                                      1 od 10
+         Hrvatsko otvoreno natjecanje u informatici                                  Zadatak Kamen Škare
+         4. kolo, 25. siječnja 2025.                                       1 sekunda / 512 MiB / 30 bodova
+
+
+Zadatak Kamen Škare
+Magda i Stjepan zakasnili su na rođendansku zabavu. Za stolom je ostao samo
+jedan komad torte koji oboje žele pojesti. Kako bi izabrali tko će ga dobiti, odlučili
+su zaigrati "kamen škare papir".
+Svaki od igrača u isto vrijeme će pokazati jedan od znakova kamen, škare ili papir.
+Pravila su sljedeća:
+
+   • Kamen (K) pobjeđuje škare (S).
+
+   • Škare (S) pobjeđuju papir (P).
+
+   • Papir (P) pobjeđuje kamen (K).
+
+   • Ako oboje odaberu isti znak, igra je neriješena.
+
+Magdi je ova igra jako zabavna pa ju želi odigrati n puta. Ukupni pobjednik je onaj koji je pobijedio u
+više igara. Ako su oboje pobijedili jednak broj igara, Stjepan će prepustiti tortu Magdi.
+Pomozite im odrediti tko će dobiti posljednji komad torte.
+
+Ulazni podaci
+U prvom retku nalazi se prirodni broj n (1 ≤ n ≤ 100), broj igri koje će Magda i Stjepan odigrati.
+U svakom od sljedećih n redaka nalaze se dva slova odvojena razmakom. Prvo slovo predstavlja znak koji
+je Magda pokazala, a drugo predstavlja znak koji je Stjepan pokazao. Znakovi su isključivo ’K’, ’P’ ili
+’S’ (bez navodnika).
+
+Izlazni podaci
+U jedini redak ispišite "Magda" ako će Magda pojesti tortu, odnosno "Stjepan" ako će ju pojesti Stjepan.
+
+Probni primjeri
+ ulaz                                   ulaz                               ulaz
+ 3                                      4                                  5
+ S K                                    K P                                K P
+ P P                                    P K                                S P
+ P S                                    S S                                S S
+                                        P P                                K K
+ izlaz                                                                     K S
+                                        izlaz
+ Stjepan                                                                   izlaz
+                                        Magda
+                                                                           Magda
+Pojašnjenje prvog probnog primjera:
+Stjepan je pobijedio prvu i treću igru, dok je druga bila neriješena. Budući da je Stjepan pobijedio u dvije
+igre, a Magda ni u jednoj, Stjepan je ukupni pobjednik.
+Pojašnjenje drugog probnog primjera:
+Magda je pobijedila prvu, a Stjepan drugu igru. Budući da su oboje pobijedili jednak broj igara, Stjepan
+će prepustiti tortu Magdi.
+
+
+
+
+                                                      2 od 10
+       Hrvatsko otvoreno natjecanje u informatici                                                Zadatak Šah
+       4. kolo, 25. siječnja 2025.                                            3 sekunde / 512 MiB / 50 bodova
+
+
+Zadatak Šah
+Dva šahovska velikana, Vito i Patrik, ove godine će odigrati partiju šaha ispred
+kultnog kazališta u ulici Jane i time napokon dokazati tko je najbolji igrač svih
+vremena. Međutim, kako im je standardni šah postao dosadan, odlučili su izmjeniti
+pravila igre da bi igra postala zanimljivija. Spomenut ćemo dio dio pravila koji
+je bitan za ovaj zadatak.
+Šahovska ploča će biti kvadratna matrica s N redova i N stupaca. Koristit će
+se samo šahovske figure konj, top i kraljica. Figure se ponašaju na isti način i
+u standarnom šahu. Top napada neko polje ako se nalazi u istom retku ili istom stupcu kao i taj top.
+Kraljica također napada sva polja u istom retku ili istom stupcu, ali uz ta, napada i sva polja koja su
+na istoj dijagonali. Konji napadaju polja koja su udaljena za dva retka i 1 stupac ili obratno. Ilustracije
+primjera možete vidjeti u objašnjenjima primjera.
+Napomena: Svaka figura napada i polje na kojem se nalazi. Također, figure napadaju i kroz druge figure
+tj. figura napada polje po pravilima kao što je navedeno iznad bez obzira postoji li neka druga figura
+između polja i figure koja napada to polje.
+Vito se priprema za dugo isčekivani okršaj i treba Vašu pomoć. Odlučio je vježbati svoje sposobnosti
+brzog uočavanja. To će raditi tako što postavi M šahovskih figura na ploču i potom odredi sva polja koja
+su napadnuta. Vaš je zadatak odrediti broj napadnutih polja na danoj ploči.
+
+Ulazni podaci
+U prvom redu nalaze se prirodni brojevi N i M (1 ≤ N ≤ 200, 1 ≤ M ≤ N 2 ).
+U idućih M redova nalaze se redom jedno veliko slovo engleske abecede, koje označava vrstu figure i može
+biti jedno od ’N’, ’R’ i ’Q’, predstavljajući redom konja, topa i kraljicu, i brojevi ri i ci (1 ≤ ri , ci , ≤ N )
+koji označavaju broj retka i stupca u kojem se ta figura nalazi.
+Na svakom polju ploče može se nalaziti najviše jedna figura.
+
+Izlazni podaci
+U prvom i jedinom redu, potrebno je ispisati broj napadnutih polja na ploči.
+
+Bodovanje
+
+ Podzadatak      Broj bodova     Ograničenja
+
+       1              13         Sve figure na ploči su topovi.
+       2              19         Svaka figura na ploči je top ili kraljica.
+       3              18         Nema dodatnih ograničenja.
+
+
+
+
+                                                    3 od 10
+         Hrvatsko otvoreno natjecanje u informatici                                      Zadatak Šah
+         4. kolo, 25. siječnja 2025.                                  3 sekunde / 512 MiB / 50 bodova
+
+
+Probni primjeri
+ ulaz                                    ulaz                        ulaz
+ 7 1                                     5 1                         6 3
+ Q 4 4                                   N 3 3                       R 1 4
+                                                                     Q 2 1
+ izlaz                                   izlaz                       N 5 2
+ 25                                      9                           izlaz
+
+                                                                     25
+Pojašnjenje prvog i drugog probnog primjera: Na skicama su prikazani primjeri. Sva napadnuta
+polja su označena točkom, osim onog na kojem se figura nalazi.
+
+
+
+
+                             (a) 1. primjer                     (b) 2. primjer
+
+
+
+
+                                                      4 od 10
+         Hrvatsko otvoreno natjecanje u informatici                                  Zadatak Benzinska
+         4. kolo, 25. siječnja 2025.                                   1 sekunda / 512 MiB / 70 bodova
+
+
+Zadatak Benzinska
+Kamp u Čakovcu već je počeo, a Mr. Malnar i dalje gostuje po zagrebačkim
+restoranima. Želeći potrošiti unesene kalorije, odlučio je biciklirati do Čakovca.
+Mr. Malnar kreće iz Zagreba (x = 0) s početnom energijom D i želi doći u Čakovec
+koji je X metara udaljen od Zagreba (x = X). Za svaki metar puta potrebna mu
+je jedna jedinica energije. Kako ne bi pao u nesvijest, njegova energija ne smije
+postati negativna ni u jednom trenutku puta.
+Na putu se nalazi n restorana, od kojih je i-ti na xi -tom metru od početka puta.
+Na istom mjestu može se nalaziti više restorana. Ako Mr. Malnar odluči objedovati u i-tom restoranu,
+njegova će se energija povećati za yi . Pomozite mu odrediti u koliko najmanje restorana mora objedovati
+kako bi prisebno došao u Čakovec.
+
+Ulazni podaci
+U prvom retku ulaza nalaze se tri broja n, D i X (1 ≤ n ≤ 2 · 105 , 1 ≤ D, X ≤ 109 ), broj restorana,
+početna energija i udaljenost gradova.
+U drugom retku ulaza nalazi se n brojeva xi (1 ≤ xi < X), pozicije restorana.
+U trećem retku ulaza nalazi se n brojeva yi (1 ≤ yi ≤ 109 ), energije koje Mr. Malnar dobije ako objeduje
+u pojedinom restoranu.
+
+Izlazni podaci
+U jedini redak izlaza ispišite najmanji mogući broj restorana u kojima Mr. Malnar mora objedovati kako
+bi došao do Čakovca. Ako nije moguće doći do Čakovca, ispišite ’-1’ (bez navodnika).
+
+Bodovanje
+
+ Podzadatak        Broj bodova     Ograničenja
+
+         1              15         yi = yj za svaki i, j
+         2              30         n ≤ 1 000
+         3              25         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                           ulaz
+ 5 5 12                                 5 10 40                        4 5 12
+ 3 4 7 8 11                             1 20 30 2 38                   3 6 9 10
+ 3 2 1 2 1                              7 7 7 7 7                      2 1 2 2
+
+ izlaz                                  izlaz                          izlaz
+ 3                                      5                              -1
+Pojašnjenje prvog probnog primjera:
+U x = 3 Mr. Malnar će imati još 2 jedinice energije. U prvom restoranu će objedovati pa će mu se energija
+povećati na 2 + 3 = 5. U x = 4 će imati još 4 jedinica energije. U drugom restoranu će objedovati pa će
+mu se energija povećati na 4 + 2 = 6. U x = 8 će imati još 2 jedinice energije. U četvrtom restoranu će
+objedovati pa će mu se energija povećati na 2 + 2 = 4. Ukupno je objedovao u tri restorana.
+
+
+
+                                                      5 od 10
+         Hrvatsko otvoreno natjecanje u informatici                                               Zadatak Xor
+         4. kolo, 25. siječnja 2025.                                           1 sekunda / 512 MiB / 90 bodova
+
+
+Zadatak Xor
+Fran je nedavno naučio operaciju xor, koja za dva cijela broja x i y vraća rezultat
+primjenom bitovnog isključivog ili (exclusive or). Operacija xor, označena kao ⊕,
+uspoređuje odgovarajuće bitove brojeva x i y te na svakoj poziciji postavlja rezultat
+prema sljedećem pravilu:
+
+   • Ako su bitovi na odgovarajućoj poziciji različiti (0 i 1, ili 1 i 0), tada je
+     rezultatni bit 1.
+
+   • Ako su bitovi isti (0 i 0, ili 1 i 1), tada je rezultatni bit 0.
+
+Primjerice, za x = 5 i y = 3, binarni prikazi su: x = 1012 , y = 0112 . Primjenom xor-a na odgovarajuće
+bitove x ⊕ y = 1012 ⊕ 0112 = 1102 = 6. Drugim riječima, 5 ⊕ 3 = 6.
+Fran je dobio niz od n cijelih brojeva a1 , a2 , . . . , an i odlučio napraviti sljedeće:
+
+   1. Za svaki par indeksa (i, j) gdje 1 ≤ i ≤ j ≤ n, izračunao je sumu ai + aj .
+
+   2. Sada želi izračunati rezultat xor-a svih dobivenih suma.
+
+Pomozite Franu izračunati traženi rezultat.
+
+Ulazni podaci
+U prvom retku ulaza nalazi se n (1 ≤ n ≤ 5 · 105 ), duljina niza.
+U drugom retku nalazi se n brojeva a1 , a2 , . . . , an (0 ≤ ai < 230 ) iz teksta zadatka.
+
+Izlazni podaci
+U jedini redak izlaza ispišite traženi rezultat.
+
+Bodovanje
+
+ Podzadatak        Broj bodova     Ograničenja
+
+         1               7         n ≤ 2000
+         2              17         ai < 210 za svaki i
+         3              45         n ≤ 105
+         4              21         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                                   ulaz
+ 3                                      4                                      7
+ 2 4 5                                  6 7 3 1                                2 3 5 7 9 11 13
+
+ izlaz                                  izlaz                                  izlaz
+ 14                                     3                                      6
+Pojašnjenje prvog probnog primjera:
+Sume su 2 + 2 = 4, 2 + 4 = 6, 2 + 5 = 7, 4 + 4 = 8, 4 + 5 = 9 i 5 + 5 = 10 te je 4 ⊕ 6 ⊕ 7 ⊕ 8 ⊕ 9 ⊕ 10 = 14.
+
+
+                                                      6 od 10
+      Hrvatsko otvoreno natjecanje u informatici                                            Zadatak Cipele
+      4. kolo, 25. siječnja 2025.                                         2 sekunde / 512 MiB / 120 bodova
+
+
+Zadatak Cipele
+Lana ima n para cipela, označene brojevima od 1 do n. Sve se cipele nalaze u
+jednom dugačkom ormaru. Cipele s oznakom 1 se na početku nalaze na vrhu
+ormara (blizu vrata), dok se cipele s oznakom n nalaze na dnu (daleko od vrata).
+Lana će u i-tom od idućih q dana imati želju obući cipele ai . Da bi uzela tražene
+cipele iz ormara, mora prvo izvući sve cipele koje su bliže vratima, a tek tada može
+uzeti željeni par. Nakon što izvuče tražene cipele, vratit će ostatak u ormar, pri
+čemu neće mijenjati njihov redoslijed. Za izvlačenje jednog para cipela iz ormara
+potrebna je 1 sekunda. Vraćanje cipela u ormar ne troši dodatno vrijeme.
+Na kraju dana Lana će izuti cipele i
+
+  • vratiti ih na vrh ormara ili
+
+  • ostaviti ih u hodniku, ako u hodniku ima mjesta.
+
+U hodniku ima mjesta za m para cipela. Dodatno, Lana može bilo koje cipele iz hodnika staviti na vrh
+ormara u bilo kojem trenutku. Ako se tražene cipele već nalaze u hodniku na početku dana, Lana ih
+odmah može obući, bez potrebe za traženjem, čime neće gubiti vrijeme.
+Lana ima puno posla i želi što manje vremena trošiti na vađenje cipela iz ormara. Pomozite joj odrediti
+koliko minimalno vremena može potrošiti na vađenje cipela u idućih q dana!
+
+Ulazni podaci
+U prvom su retku tri nenegativna broja n, m i q (1 ≤ n ≤ 2 · 105 , 0 ≤ m ≤ 2 · 105 , 1 ≤ q ≤ 106 ) broj cipela,
+broj mjesta u hodniku i broj dana.
+U drugom se retku nalazi q brojeva ai (1 ≤ ai ≤ n), oznake cipela koje Lana želi nositi u pojedinom danu.
+
+Izlazni podaci
+U prvom i jedinom retku ispišite minimalno potrebno vrijeme za uzimanje cipela u svih q dana.
+
+Bodovanje
+
+ Podzadatak     Broj bodova     Ograničenja
+
+       1              17        n, m, q ≤ 1 000
+       2              27        n=m
+       3              37        m=0
+       4              24        q ≤ 2 · 105
+       5              15        Nema dodatnih ograničenja.
+
+
+
+
+                                                   7 od 10
+         Hrvatsko otvoreno natjecanje u informatici                                    Zadatak Cipele
+         4. kolo, 25. siječnja 2025.                                 2 sekunde / 512 MiB / 120 bodova
+
+
+Probni primjeri
+ ulaz                                   ulaz                          ulaz
+ 5 1 6                                  6 0 4                         3 2 7
+ 2 1 2 1 2 1                            5 4 3 4                       1 2 3 2 3 1 3
+
+ izlaz                                  izlaz                         izlaz
+ 5                                      17                            4
+Pojašnjenje prvog probnog primjera:
+U prvom danu Lana će cipele s oznakom 2 izvaditi iz ormara. Za to su joj potrebne 2 sekunde. Na kraju
+dana, te će cipele ostaviti u hodniku i držati ih tamo cijelo vrijeme. Sljedeći put, za vađenje cipela s
+oznakom 1 trebat će joj 1 sekunda, dok će cipele s oznakom 2 moći obuti odmah. Ukupno će potrošiti
+2 + 1 + 0 + 1 + 0 + 1 = 5 sekundi.
+
+
+
+
+                                                      8 od 10
+      Hrvatsko otvoreno natjecanje u informatici                                    Zadatak Tura Mačkica
+      4. kolo, 25. siječnja 2025.                                      0.5 sekundi / 512 MiB / 120 bodova
+
+
+Zadatak Tura Mačkica
+Svima je poznato da u Zagrebu ima n parkova, m mačkica i n + m ulica koje
+povezuju parkove. Mačkice su jako teritorijalne životinje pa se u svakoj ulici nalazi
+najviše jedna mačkica. Ona tu ulicu patrolira tako da nemilosrdno napada sve
+ljude koji se kreću jednim smjerom te ulice, a od ljudi koji se kreću suprotnim
+smjerom zahtjeva da ju pomaze nakon čega im dopusti da nastave dalje. Grad
+Zagreb, svjestan ove situacije, osigurao je građanima da iz svakog parka mogu doći
+do bilo kojeg drugog parka koristeći samo n ulica u kojima nema mačkica.
+Turistički centar je odlučio otvoriti takozvanu Turu Mačkica u Zagrebu. Njeni
+posjetitelji pomazit će sve Zagrebačke mačkice i vratit se na početak kako bi to mogli napraviti ponovno.
+Da se turisti ne izgube, turistički centar će postaviti znakove u svakoj ulici koji pokazuju na sljedeću
+ulicu kojom prolazi Tura Mačkica tako da ona ne smije dva puta proći istom ulicom (čak niti suprotnim
+smjerovima). Naravno, turisti očekuju da će pomaziti svaku mačkicu i da ih niti jedna mačkica neće
+napasti te da će duljina ture biti što kraća moguća.
+Pomozite turističkom centru pronaći duljinu najkraće moguće Ture Mačkica ili ih obavijestite da to nije
+moguće.
+
+Ulazni podaci
+U prvom retku su dva nenegativna broja n i m (1 ≤ n ≤ 2 · 104 , 0 ≤ m ≤ 2 · 104 ), broj parkova i broj
+mačkica.
+U sljedećih n redaka nalaze se parovi a, b (1 ≤ a, b ≤ n) koji opisuju ulice koje ne patrolira niti jedna
+mačkica. Primjetite da je moguće da je a = b ili da dvije ili više ulica povezuju iste parkove.
+U sljedećih m redaka nalaze se parovi x, y (1 ≤ x, y ≤ n) koji opisuju ulice u kojima mačkica dopušta
+kretanje iz parka x u park y. Primjetite da je moguće da postoje više takvih ulica između istih parkova.
+
+Izlazni podaci
+U prvom i jedinom retku ispišite minimalnu moguću duljinu Ture Mačkica ili ’-1’ ako ona ne postoji.
+
+Bodovanje
+
+ Podzadatak     Broj bodova     Ograničenja
+
+       1             11         n, m ≤ 20
+       2             41         Postoji ulica koja povezuje park sa samim sobom, a ne patrolira ju mačkica.
+       3             68         Nema dodatnih ograničenja.
+
+
+
+
+                                                   9 od 10
+         Hrvatsko otvoreno natjecanje u informatici                           Zadatak Tura Mačkica
+         4. kolo, 25. siječnja 2025.                             0.5 sekundi / 512 MiB / 120 bodova
+
+
+Probni primjeri
+ ulaz                                   ulaz                       ulaz
+ 5 1                                    6 7                        7 3
+ 3 1                                    3 2                        4 1
+ 3 2                                    5 3                        4 3
+ 3 4                                    1 4                        6 4
+ 3 5                                    6 1                        2 6
+ 2 4                                    5 6                        5 2
+ 3 5                                    4 2                        5 7
+                                        4 5                        4 4
+ izlaz                                  1 2                        3 6
+ 2                                      4 2                        4 1
+                                        2 6                        7 5
+                                        3 1
+                                        1 6                        izlaz
+                                        6 4                        -1
+                                        izlaz
+                                        10
+Pojašnjenje prvog probnog primjera:
+Najkraća Tura Mačkica je 3 → 5 → 3.
+
+
+
+
+                                                      10 od 10
+

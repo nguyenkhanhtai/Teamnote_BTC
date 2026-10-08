@@ -1,0 +1,491 @@
+Hrvatsko otvoreno natjecanje u informatici
+                     2. kolo, 9. studenog 2024.
+
+
+
+
+                            Zadaci
+Zadatak       Vremensko ograničenje   Memorijsko ograničenje   Bodovi
+
+SAD                1 sekunda                 512 MiB               20
+Akcija             1 sekunda                 512 MiB               30
+Paradoks           1 sekunda                 512 MiB               50
+Igre               2 sekunde                 512 MiB               70
+Različitost        2 sekunde                 512 MiB               90
+Blistavost         4 sekunde                1024 MiB              120
+Trokuti            4 sekunde                 512 MiB              120
+
+Ukupno                                                            500
+         Hrvatsko otvoreno natjecanje u informatici                                       Zadatak SAD
+         2. kolo, 9. studenog 2024.                                     1 sekunda / 512 MiB / 20 bodova
+
+
+Zadatak SAD
+Inspirirani ovotjednim izborima za 47. predsjednika Sjedinjenih Američkih Država
+zamislimo sljedeću situaciju. SAD čine tri savezne države, A, B i C.
+U državi A pobijedio je Donald i osvojio AG glasova. U državi B je pobijedila
+je Kamala i osvojila BG glasova. U državi C je pobijedio zadani kandidat te je
+osvojio CG glasova. Ako znamo da je ukupni pobjednik izbora ona osoba koja je
+u zbroju osvojila više glasova, odgovorite na sljedeća dva pitanja:
+
+     1. Tko je pobijedio u državi C ?
+
+     2. Tko je ukupni pobjednik izbora?
+
+Napomena: Ukupan zbroj glasova nikad neće biti jednak.
+
+Ulazni podaci
+U prvom je retku prirodan broj AG (1 ≤ AG ≤ 100), broj iz teksta zadatka.
+U drugom je retku prirodan broj BG (1 ≤ BG ≤ 100), broj iz teksta zadatka.
+U trećem je retku broj 1 ako je u državi C pobijedio Donald ili broj 2 ako je pobijedila Kamala.
+U četvrtom je retku prirodan broj CG (1 ≤ CG ≤ 100), broj iz teksta zadatka.
+
+Izlazni podaci
+U prvi redak ispišite riječ "DONALD" ako je u državi C pobijedio Donald. Inače ispišite riječ “KAMALA”.
+U drugi redak ispišite ukupnog pobjednika izbora - riječ “DONALD” ako je to bio Donald ili riječ “KAMALA”
+ako je to bila Kamala.
+
+Bodovanje
+Točan ispis prvog retka vrijedi 2 boda, a točan ispis drugog retka 2 boda za svaki testni primjer.
+
+Probni primjeri
+ ulaz                                   ulaz                            ulaz
+
+ 5                                      6                               10
+ 7                                      4                               5
+ 1                                      2                               2
+ 4                                      5                               3
+
+ izlaz                                  izlaz                           izlaz
+
+ DONALD                                 KAMALA                          KAMALA
+ DONALD                                 KAMALA                          DONALD
+
+
+Pojašnjenje prvog probnog primjera:
+U državi A, Donald je osvojio 5 glasova. U državi B, Kamala je osvojila 7 glasova. U državi C pobijedio je
+Donald (oznaka 1), a ukupno je pobijedio DONALD jer je u zbroju osvojio 9 glasova (5+4), a Kamala 7.
+
+
+
+
+                                                      1 od 12
+         Hrvatsko otvoreno natjecanje u informatici                                      Zadatak Akcija
+         2. kolo, 9. studenog 2024.                                     1 sekunda / 512 MiB / 30 bodova
+
+
+Zadatak Akcija
+Vlatko je uzoran student. Svaki dan, prije nego što ode na fakultet, ode u obližnju
+pekaru i uzme što mu se u tom trenutku najviše sviđa od ponuđenih peciva.
+Srećom za njega, pekara je uvela posebnu akciju za studente. Svaki peti dan, svaki
+proizvod u ponudi može uzeti za besplatno. Točnije, Vlatko neće morati platiti
+izabrani proizvod petog dana, desetog dana, petnaestog dana itd. Nakon što je
+akcija bila najavljena, Vlatko je n dana za redom išao u tu pekaru i i-tog dana
+je uzeo pecivo vrijedno ai centi. Vlatka zanima koliko je novaca potrošio u tih n
+dana u pekari.
+
+Ulazni podaci
+U prvom redu nalazi se prirodni broj n (1 ≤ n ≤ 100), broj dana u kojima je Vlatko posjetio pekaru.
+U i-tom od idućih n redova, nalazi se broj ai (1 ≤ ai ≤ 100), cijena proizvoda koji je Vlatko uzeo u pekari
+u i-tom danu izražena u centima.
+
+Izlazni podaci
+U jednom redu potrebno je ispisati koliko je Vlatko potrošio novaca u pekari, izraženo u centima.
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              7          n=5
+         2              12         n je djeljiv s 5.
+         3              11         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                            ulaz
+
+ 5                                      6                               3
+ 4                                      10                              13
+ 5                                      2                               15
+ 6                                      13                              10
+ 1                                      11
+ 5                                      26                              izlaz
+                                        23                              38
+ izlaz
+                                        izlaz
+ 16
+                                        59
+
+
+Pojašnjenje prvog probnog primjera:
+Akcija će vrijediti jedino u 5. danu, gdje Vlatko neće platiti cijenu proizvoda, dok će preostalim danima
+platiti. Stoga, cijena koju će Vlatko platiti je.
+Pojašnjenje drugog probnog primjera:
+Slično kao i u prvom probnom primjeru, Vlatko neće platiti samo 5. dana, dok će u preostalim danima
+morati platiti punu cijenu proizvoda.
+
+
+
+                                                       2 od 12
+      Hrvatsko otvoreno natjecanje u informatici                                  Zadatak Akcija
+      2. kolo, 9. studenog 2024.                                 1 sekunda / 512 MiB / 30 bodova
+
+
+Pojašnjenje trećeg probnog primjera:
+U ovom probnom primjeru nema dana u kojima može uzeti proizvod za besplatno.
+
+
+
+
+                                                   3 od 12
+       Hrvatsko otvoreno natjecanje u informatici                                       Zadatak Paradoks
+       2. kolo, 9. studenog 2024.                                        1 sekunda / 512 MiB / 50 bodova
+
+
+Zadatak Paradoks
+Jedne večeri punog mjeseca, kada je sat otkucao ponoć, našlo se 5 prijatelja
+spremnih zaigrati igru, misterioznu poput te noći.
+Oni sjede u krugu, redom u smjeru kazaljke na satu: Igor, Lea, Marino, Sonja
+i Viktor. Igra se sastoji od N rundi. Prvu rundu započinje Sonja, a svaku iduću
+pobjednik prošle runde.
+Svaki od igrača ima po N karta u ruci, sve karte su bezbojne i imaju prirodan
+broj između 1 i 9 na sebi. Igrač pri bacanju neke karte izabire koje boje će ta karta biti. Dozvoljeno mu je
+izabrati jednu od 4 boje (crvena, plava, žuta, zelena) ukoliko se takva karta (kombinacija tog broja i
+boje) nije već pojavila u igri. U ostatku teksta će se izraz npr. „bacanje karte plave boje“ odnositi na
+upravo objašnjen postupak: bacanja karte i izjavljivanja da je to plava karta.
+U svakoj rundi igrači u smjeru kazaljke na satu bacaju po jednu kartu sve dok se ponovno ne dođe do
+igrača koji je započeo rundu, tj. dok svaki od igrača ne baci po jednu kartu. Prva karta koja je bačena u
+rundi određuje tzv. boju runde i svi ostali igrači su obavezani baciti karte te boje. Ukoliko neki od igrača
+ne baci kartu boje trenutne runde onda se smatra da taj igrač nema nijednu kartu te boje u ruci – pri
+čemu im je zabranjeno od tog trena pa do kraja igre baciti kartu te boje.
+Pobjednik svake runde je:
+
+   • Osoba koja je bacila crvenu kartu s najvećim brojem
+
+   • Ako nema bačenih crvenih karata, osoba koja je bacila kartu boje runde s najvećim brojem
+
+Ponekad igrači odigraju potez koji ne bi smjeli: ili bace već odigranu kartu ili bace kartu boje za koju su
+ranije u igri rekli da nemaju. To bacanje karte onda nazivamo paradoksom. Kad netko odigra paradoks, to
+bacanje se kompletno ignorira u izračunu pobjednika te runde i ostatku igre. Dakle npr. ako je karta prvi
+put bačena kao paradoks, u ostatku igre tretirat će se kao da ju još nitko nije odigrao. Zagarantirano je
+da prvi igrač u rundi neće nikad odigrati paradoks u toj rundi.
+Naši heroji se dugo nisu vidjeli i ne prate igru dovoljno pažljivo, pa vas mole za pomoć. Napišite program
+koji za redom nabrojane bačene karte po rundama ispisuje koliko se paradoksa pojavilo te ih ispisuje
+redom koji su se desili. Za svaki paradoks treba ispisati u kojoj rundi se desio i tko ga je napravio.
+
+Ulazni podaci
+U prvom redu ulaza je prirodni broj N (1 ≤ N ≤ 10), broj rundi.
+U idućih N redaka ulaza nalazi se po 5 riječi od po 2 znaka, karte koje su se odigrale, redom kojim su se
+odigrale. (Oprez: ne započinje nužno svaku rundu isti igrač)
+Prvi znak svake riječi označava boju karte koju je igrač bacio i bit će jedno od 4 slova: ’C’ –crvena, ’P’ –
+plava, ’Y’ – žuta, ’Z’ – zelena. Drugi znak svake riječi bit će prirodni broj između 1 i 9 (uključujući) i
+označava broj na karti.
+Npr. riječ ’Y5’ predstavljala bi žutu kartu na kojoj je broj 5.
+
+Izlazni podaci
+Ispišite cijeli broj a, broj paradoksa koji su se desili.
+U svaki od idućih a redaka ispisati broj i riječ velikim tiskanim slovima, broj runde u kojoj se paradoks
+desio i ime igrača koji ga je napravio.
+Paradokse treba ispisati redom kojim su se desili.
+
+
+                                                    4 od 12
+         Hrvatsko otvoreno natjecanje u informatici                                       Zadatak Paradoks
+         2. kolo, 9. studenog 2024.                                        1 sekunda / 512 MiB / 50 bodova
+
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              10         Sonja će biti pobjednica svih rundi i svi paradoksi
+                                   će nastati zbog ponavljanja karte koja je već odigrana.
+         2              10         Svi paradoksi koji se pojave nastati će ponavljanjem
+                                   karte koja je već odigrana.
+         3              30         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                               ulaz
+ 4                                      3                                  1
+ Y5 Z3 Y6 C2 Y1                         P1 Y9 Z5 Y1 Z5                     Y4 P9 Y8 Z5 Z3
+ Z4 Z7 Z2 Y2 P3                         P5 Y7 Z3 Y8 P1
+ Z6 Z7 Z1 Y2 C2                         C6 Y8 P5 Z1 Z8                     izlaz
+ P6 P8 P8 Z7 Y9                                                            0
+                                        izlaz
+ izlaz
+                                        4
+ 6                                      1 MARINO
+ 2 VIKTOR                               2 MARINO
+ 3 SONJA                                3 VIKTOR
+ 3 LEA                                  3 IGOR
+ 4 VIKTOR
+ 4 IGOR
+ 4 LEA
+
+
+Pojašnjenje prvog probnog primjera:
+
+
+
+
+Kako Viktor i Lea nisu bacili žute karte (boja runde) u 1. rundi, pretpostavlja se do kraja igre da nemaju
+žutih karata u ruci te im je zabranjeno za bilo koju kartu do kraja igre izjaviti da je žuta. Upravo ta
+činjenica razlog je Viktorovom paradoksu u 2. rundi i Leinom paradoksu u zadnjoj rundi.
+
+
+                                                      5 od 12
+       Hrvatsko otvoreno natjecanje u informatici                                          Zadatak Paradoks
+       2. kolo, 9. studenog 2024.                                           1 sekunda / 512 MiB / 50 bodova
+
+
+Primijetimo: u 2. rundi zbog učinjenog paradoksa, Viktorov krug se ignorira te ne izvodimo nikakve
+nove zaključke. Također, karta Y2 se ne smatra odigranom, što vidimo i iz činjenice da Igor u 3. rundi
+nije dobio paradoks radi igranja te karte.
+Svi paradoksi u 3. i 4. rundi osim zadnjeg, nastali su jer se odigrala karta koja se već ranije u igri odigrala.
+
+
+
+
+                                                    6 od 12
+         Hrvatsko otvoreno natjecanje u informatici                                         Zadatak Igre
+         2. kolo, 9. studenog 2024.                                      2 sekunde / 512 MiB / 70 bodova
+
+
+Zadatak Igre
+Kile se vratio sa sajma društvenih igara. Doma je donio n igra. Prije igranja igre
+potrebno je naučiti njena pravila. Učenje pravila i-te igre traje pi minuta. Nakon
+što se pravila nauče moguće je igrati igru. Igranje i-te igre traje ti minuta. Svaka
+igra ima i svoju ocjenu oi .
+Kile je u idućim danima isplanirao da će najviše d minuta odvojiti na društvene
+igre. Zanima ga kolika je maksimalna suma ocjena odigranih igrara. Svaku je igru
+moguće igrati proizvoljan broj puta.
+
+Ulazni podaci
+U prvom su retku dva prirodna broja n i d (1 ≤ n, d ≤ 5000), broj igara i planirano vrijeme uloženo na
+igre.
+U sljedećih n redaka nalaze se tri broja pi , ti i oi (0 ≤ pi ≤ 5000, 1 ≤ ti ≤ 5000, 1 ≤ oi ≤ 109 ) vrijeme
+učenja pravila, vrijeme igranja igre i ocjena društvene igre.
+
+Izlazni podaci
+U prvom i jedinom retku ispišite maksimalnu sumu ocjena odigranih igara.
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              6          n=1
+         2              13         n ≤ 10
+         3              23         pi = 0 za sve i = 1, ..., n
+         4              28         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                   ulaz                             ulaz
+ 3 10                                   4 13                             3 10
+ 2 3 5                                  0 6 5                            1 1 1
+ 5 1 5                                  0 3 4                            3 2 3
+ 3 2 5                                  0 2 3                            2 3 5
+                                        0 4 4
+ izlaz                                                                   izlaz
+                                        izlaz
+ 25                                                                      11
+                                        19
+
+
+Pojašnjenje trećeg probnog primjera:
+Jedan način za dobiti sumu ocjena 11 jest: prvu minutu uči igrati prvu igru, potom je jednom i odigra.
+Nakon toga dvije minute uči igrati treću igru i onda je u zadnjih 6 minuta odigra dva puta. Time je suma
+ocjena odigranih igara: 1 + 5 + 5 = 11
+
+
+
+
+                                                      7 od 12
+         Hrvatsko otvoreno natjecanje u informatici                                           Zadatak Različitost
+         2. kolo, 9. studenog 2024.                                              2 sekunde / 512 MiB / 90 bodova
+
+
+Zadatak Različitost
+Dana su dva beskonačna periodična niza cijelih brojeva, ai i bi , tako da su zadani njihovi periodi duljina
+n i m redom tj. dani su prirodni brojevi n i m, brojevi a1 , a2 , . . ., an i brojevi b1 , b2 , . . ., bm za koje još
+vrijedi ai = ai+n i bi = bi+m za svaki prirodni broj i.
+Dodatno, uz dani prirodni broj k, definiramo različitost ta dva niza kao zbroj ai ⊕ bi za svaki i = 1, 2, . . . , k.
+(⊕ označava operaciju bit-po-bit eksluzivni ili koja će staviti jedinice na mjesta znamenki u binarnom
+zapisu tamo gdje dva broja nemaju jednake znamenke, npr. 5 ⊕ 3 = (101)2 ⊕ (011)2 = (110)2 = 6). Vaš je
+zadatak izračunati različitost danih nizova.
+
+Ulazni podaci
+U prvom redu nalaze se n, m, k (1 ≤ n, m ≤ 2 · 105 , 1 ≤ k ≤ 1018 ), redom brojevi iz teksta zadatka.
+U drugom redu nalazi se n cijelih brojeva a1 , . . ., an (0 ≤ ai ≤ 1018 , i = 1, 2, . . . , n).
+U trećem redu nalazi se m cijelih brojeva b1 , . . ., bm (0 ≤ bi ≤ 1018 , i = 1, 2, . . . , n).
+
+Izlazni podaci
+Zato što odgovor može biti jako velik, u jednom i jedinom redu, ispišite ostatak pri djeljenju odgovora s
+109 + 7.
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              25         k ≤ 2 · 105
+         2              13         n=m
+         3              9          n=1
+         4              43         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                                        ulaz
+ 3 2 10                                                      10 5 30
+ 1 6 4                                                       5 16 2 10 7 2 4 20 5 12
+ 5 2                                                         4 11 14 23 5
+
+ izlaz                                                       izlaz
+ 33                                                          435
+
+
+
+
+                                                       8 od 12
+         Hrvatsko otvoreno natjecanje u informatici                                               Zadatak Blistavost
+         2. kolo, 9. studenog 2024.                                               4 sekunde / 1024 MiB / 120 bodova
+
+
+Zadatak Blistavost
+U srcu staklene doline nalazi se misteriozni zvjezdani hram, mjesto poznato po
+svojoj kolekciji čarobnih kristala koji blistaju poput zvijezda. Svaki kristal ima
+posebnu moć, sve dok ga se ne dotakne, zrači blistavim sjajem koji prosvjetljuje
+cijelu dolinu.
+Zadatak čuvara hrama svake je noći dotaknuti samo one kristale koji se nalaze u
+rasponima stanovnika, a da poštuje sve njihove zahtjeve. Svaki zahtjev stanovnika
+doline poručuje čuvaru koji raspon kristala NE smije prestati sijati PRIJE njegovog
+vremena spavanja zato što se stanovnici boje mraka.
+Čuvar svoj put počinje na mjestu ulaza u hram te mora pažljivo uskladiti svoje kretanje te zagasiti blistave
+kristale tako da kristali prestanu blistati u pravom trenutku. Kristali su poredani u red, jedan do drugog,
+s razmakom od 1 metra između njih(1. kristal udaljen je 1 metar od ulaza u hram). Čuvar se hramom
+može kretati brzinom 1 metra po sekundi te može stajati na mjestu. Vrijeme da čuvar dotakne i zagasi
+kristal je zanemarivo. Čuvara hrama zanima, s obzirom na zahtjeve stanovnika doline, koliko sekundi
+najmanje mora provesti u hramu do ispunjenja svih zahtjeva (Čuvar hrama ne mora izaći iz hrama tj.
+vratiti se na početnu poziciju na kraju puta).
+
+Ulazni podaci
+U prvom je retku prirodan broj N (1 ≤ N ≤ 5000), broj zahtjeva stanovnika doline.
+U sljedećih N redaka nalaze se prirodni brojevi li , ri , ti (1 ≤ li ≤ ri ≤ 1018 , 1 ≤ ti ≤ 1018 ), oznake lijevog
+i desnog kristala u rasponu te vrijeme spavanja i-tog stanovnika doline.
+
+Izlazni podaci
+U prvi i jedini redak ispišite najmanje vrijeme u sekundama potrebno da čuvar ispuni sve zahtjeve.
+
+Bodovanje
+
+ Podzadatak       Broj bodova      Ograničenja
+
+         1              20         n ≤ 18, li = ri za svaki i = 1, 2, . . . , n
+         2              25         li = 1 za svaki i = 1, 2, . . . , n
+         3              55         li = ri za svaki i = 1, 2, . . . , n
+         4              20         Nema dodatnih ograničenja.
+
+Probni primjeri
+ ulaz                                    ulaz                                      ulaz
+
+ 3                                       3                                         3
+ 1 1 1                                   1 2 1                                     6 6 6
+ 3 3 5                                   1 1 5                                     8 8 7
+ 5 5 3                                   1 3 4                                     9 9 9
+
+ izlaz                                   izlaz                                     izlaz
+ 7                                       6                                         9
+
+
+
+
+                                                        9 od 12
+       Hrvatsko otvoreno natjecanje u informatici                                        Zadatak Blistavost
+       2. kolo, 9. studenog 2024.                                        4 sekunde / 1024 MiB / 120 bodova
+
+
+Pojašnjenje drugog probnog primjera:
+Čuvar hrama će prvo u 3 sekunde doći do 3. kristala. Zatim će pričekati 1 sekundu i zagasiti 3. kristal.
+Zatim će u 1 sekundi otići do 2. kristala i zagasiti ga. Na kraju će u 1 sekundi doći do 1. kristala i zagasiti
+ga. Sveukupno će mu za ovaj put trebati 6 sekundi te je to najmanje vrijeme da se ispune svi zahtjevi.
+
+
+
+
+                                                    10 od 12
+       Hrvatsko otvoreno natjecanje u informatici                                          Zadatak Trokuti
+       2. kolo, 9. studenog 2024.                                         4 sekunde / 512 MiB / 120 bodova
+
+
+Zadatak Trokuti
+Dan je neusmjeren graf s 6 · N vrhova i M veza. Dodatno svojstvo koje vrijedi za graf je da se može
+particionirati na 2 · N disjunktnih trokuta.
+Pronađite N disjunktnih trokuta u grafu.
+
+Ulazni podaci
+U prvom retku nalazi se prirodni broj T (1 ≤ T ≤ 100), koji označava broj testnih primjera.
+Slijedi T blokova podataka.
+U prvom retku bloka nalaze se prirodni brojevi N i M (1 ≤ N ≤ 300, 0 ≤ M ≤ 106 ).
+U sljedećih M redaka nalaze se po dva prirodna broja x i y (1 ≤ x, y ≤ 6 · N ), koji označavaju da postoji
+brid između vrhova x i y.
+Suma N -ova kroz sve testne primjere neće biti veća od 300.
+
+Izlazni podaci
+Za svaki testni primjer ispišite N redaka, svaki redak sadrži tri prirodna broja a, b, c (1 ≤ a, b, c ≤ 6 · N ),
+koji označavaju da vrhovi a, b, c formiraju trokut.
+
+Bodovanje
+
+ Podzadatak      Broj bodova     Ograničenja
+
+       1              13         M =6·N
+       2              18         N = 3, T = 1
+       3              18         N = 6, T = 1
+       4              71         Nema dodatnih ograničenja.
+
+
+
+
+                                                    11 od 12
+        Hrvatsko otvoreno natjecanje u informatici                                  Zadatak Trokuti
+        2. kolo, 9. studenog 2024.                                 4 sekunde / 512 MiB / 120 bodova
+
+
+Primjeri
+ulaz                                                      ulaz
+1                                                         1
+1 6                                                       3 26
+1 2                                                       4 7
+2 3                                                       4 9
+1 3                                                       7 9
+4 5                                                       4 5
+4 6                                                       4 8
+5 6                                                       5 8
+                                                          4 12
+izlaz                                                     4 18
+1 2 3                                                     12 18
+                                                          3 7
+                                                          3 9
+                                                          15 5
+                                                          15 8
+                                                          6 13
+                                                          6 1
+                                                          13 1
+                                                          6 14
+                                                          6 17
+                                                          14 17
+                                                          6 2
+                                                          6 10
+                                                          2 10
+                                                          16 13
+                                                          16 1
+                                                          11 14
+                                                          11 17
+
+                                                          izlaz
+
+                                                          1 6 13
+                                                          3 7 9
+                                                          4 5 8
+
+
+
+
+                                                     12 od 12
+

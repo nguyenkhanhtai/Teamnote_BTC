@@ -3,6 +3,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto trail = euler_trail(3,{{0,1},{1,2}},false);
   struct EulerTrail { vector<int> vertices, edge_ids; };
   // Directed or undirected multigraph, self-loops allowed. nullopt if no complete trail.
   optional<EulerTrail>euler_trail(int n,const vector<pair<int,int>>&edges,bool directed=false,optional<int>requested_start=nullopt){

@@ -1,0 +1,104 @@
+                                                                                                Day 2
+                                                                                          Task: trade
+                                                                                        Language: en
+
+
+Tricks of the Trade (trade)
+
+Since your career as an art thief turned out to be decidedly less glamorous than you had hoped for,
+you have set your eyes on a new target: you want to steal a medal at this year’s ceoi!* So far your evil
+plan is working as intended: The Scientific Committee, still confused about the oil shortage you had
+arranged, immediately fell for your feigned hacking attempt. And when they let you into their secret
+headquarters to help plan the rejudging, you could easily steal the combination for the safe in which
+the medals are stored…
+However, the next phase of your plan will require an assistant, and right now you don’t have enough
+money to hire one. Fortunately, you just found an opportunity to fix this problem. A shop you stumbled
+upon in Berlin sells 𝑁 programmable vacuum cleaner robots, numbered from 1 to 𝑁. Robot 𝑖 costs 𝑐𝑖
+euros. Unfortunately, the vendor will only sell you a full, contiguous segment of robots: If you want to
+buy robots 𝑖 and 𝑗, then you must buy every robot 𝑘 with 𝑖 ≤ 𝑘 ≤ 𝑗.
+As your fellow contestants are quite fond of robots, you promised to sell them 𝐾 of these robots
+(1 ≤ 𝐾 ≤ 𝑁). They will pay you 𝑠𝑖 euros for robot 𝑖, and you hope to make a good profit in the process.
+Write a program that
+         computes the maximum profit you can make by buying a segment of at least 𝐾 robots and
+         selling exactly 𝐾 robots of this segment to the other contestants, and
+         determines which robots you might sell to the other contestants as part of such a transaction
+         with maximum profit.†
+
+
+Input
+
+The first line of input contains the numbers 𝑁 and 𝐾 as described above. The second line contains the
+𝑁 integers 𝑐1 , … , 𝑐𝑁 . Finally, the third line contains the 𝑁 integers 𝑠1 , … , 𝑠𝑁 .
+
+
+Output
+
+Your program should output two lines. The first line should contain a single integer, the maximum
+profit you can achieve. On the second line, you should output a binary string of length 𝑁: the 𝑖-th
+character should be 1 if you might sell the 𝑖-th robot in some transaction with maximum profit and 0
+otherwise.
+
+
+Constraints and grading
+
+We always have 1 ≤ 𝑁 ≤ 250 000 and 1 ≤ 𝑐𝑖 , 𝑠𝑖 ≤ 109 .
+Subtask 1 (5 + 5 points). 𝑁 ≤ 200
+Subtask 2 (5 + 5 points). 𝑁 ≤ 6 000
+Subtask 3 (5 + 5 points). 𝐾 = 2
+Subtask 4 (10 + 15 points). 𝐾 ≤ 200
+Subtask 5 (25 + 20 points). No further constraints
+
+* Obviously, the problem was with the art, not the thefts.
+†
+    After all, you might find some use for robots that you keep…
+
+
+
+                                                             1/2
+                                                                                                  Day 2
+                                                                                            Task: trade
+                                                                                          Language: en
+
+
+Partial scoring. In all subtasks, you can obtain partial scores as indicated in the brackets:
+      The first number represents the number of points awarded if your program computes the
+      maximum profit correctly.
+      The second number represents the number of additional points awarded if your program
+      computes the entire output correctly.
+
+
+Examples
+
+              Input                                  Output
+
+ 5 3                                   -1
+ 3 5 2 3 6                             00111
+ 2 1 5 2 3
+
+ 5 2                                   2
+ 1 6 1 5 2                             10111
+ 4 1 6 2 4
+
+
+In the first example, you can buy the third to fifth robot and sell all three of them to your fellow
+contestants. This costs you 2 + 3 + 6 = 11 euros, while the contestants will only pay you 5 + 2 + 3 = 10
+euros for these robots, so you lose 1 euro. If you buy any other segment of robots, you would lose
+even more money.
+In the second example, you can buy the first to third robot and sell the first and third robot to your
+fellow contestants. This costs you 8 euros, while the contestants will pay you 10 euros, so your profit
+is 2 euros. No other segment of robots would give you a higher profit. However, you could also buy
+the third and fourth robot, and sell both of them, or buy the third to fifth robot, and sell the third and
+fifth robot. In both cases, your profit would also be 2 euros, and so all robots except for the second
+robot can be part of a transaction with maximum profit.
+
+
+Limits
+
+Time: 7 s
+Memory: 2048 MiB
+
+
+
+
+                                                   2/2
+

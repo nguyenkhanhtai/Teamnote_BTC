@@ -30,6 +30,9 @@ with tempfile.TemporaryDirectory(prefix='notebook-cpp-') as directory:
         if failures:
             raise SystemExit(1)
     binary = scratch / 'checks'
+    # Compile the exact declarations and calls shown in the usage comments.
+    subprocess.run(['g++', '-std=c++17', '-fsyntax-only',
+                    str(ROOT / 'tests/notebook_usage.cpp')], check=True)
     command = ['g++', '-std=c++17', '-O1', '-Wall', '-Wextra', '-Werror']
     if args.sanitizers:
         command += ['-g1', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']

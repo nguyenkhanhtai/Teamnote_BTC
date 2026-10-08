@@ -4,6 +4,8 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto dual = planar_dual(points,edges);
+  //      points: vector<Point>; edges: vector<pair<int,int>>.
   struct PlanarDual {
     vector<vector<int>>face_darts; vector<int>face_of; vector<pair<int,int>>dual_edges;
     int outer_face = -1;
@@ -18,11 +20,17 @@ namespace notebook::geometry {
       auto[u,v]=edges[i]; assert(u!=v); from[2*i]=to[2*i+1]=u; to[2*i]=from[2*i+1]=v;
       adj[u].push_back(2 * i); adj[v].push_back(2 * i + 1);
     }
-    auto upper = [](Point a){ return a.y > 0 || (a.y == 0 && a.x >= 0); };
+    struct AngleOrder {
+      const vector<Point>& p; const vector<int>& to; int u;
+      static bool upper(Point a) { return a.y>0 || (a.y==0 && a.x>=0); }
+      bool operator()(int a,int b) const {
+        Point x=p[to[a]]-p[u],y=p[to[b]]-p[u];
+        if (upper(x)!=upper(y)) return upper(x)>upper(y);
+        return cross(x,y)>0;
+      }
+    };
     for (int u = 0; u < n; ++u) {
-      sort(adj[u].begin(), adj[u].end(), [&](int a, int b) {
-        Point x=p[to[a]]-p[u],y=p[to[b]]-p[u];if(upper(x)!=upper(y))return upper(x)>upper(y);return cross(x,y)>0;
-      });
+      sort(adj[u].begin(),adj[u].end(),AngleOrder{p,to,u});
       for (int j = 0; j < (int) adj[u].size(); ++j) pos[adj[u][j]] = j;
     }
     for (int d = 0; d < 2 * m; ++d) {

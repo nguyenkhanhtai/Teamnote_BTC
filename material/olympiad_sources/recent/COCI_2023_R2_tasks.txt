@@ -1,0 +1,424 @@
+Croatian Open Competition in Informatics
+                Round 2, December 3rd 2022
+
+
+
+
+                         Tasks
+      Task           Time limit   Memory limit   Score
+
+      Tramvaji        1 second      512 MiB        50
+      Ekspert         1 second      512 MiB        70
+      Lampice         3 seconds     512 MiB       110
+      Prijateljice    1 second      512 MiB       110
+      Kruhologija     2 seconds     512 MiB       110
+
+      Total                                       450
+      Croatian Open Competition in Informatics                                                Task Tramvaji
+      Round 2, December 3rd 2022                                              1 second / 512 MiB / 50 points
+
+
+Task Tramvaji
+One magical night Patrik and Josip were talking about the number 42 and the
+meaning of life. They were interrupted by the famous lady voice in the tram: The
+next stop is Jordanovac. Patrik and Josip were distracted by this common sentence
+and started discussing:
+Patrik: It is a very short ride between Joranovac and Maksimir, isn’t it?
+Josip: It is, but the ride between Mašićeva and Kvatrić is way shorter.
+Patrik: Really? I disagree.
+Josip: I wonder, which is the shortest ride between all stations?
+Paula, a big public traffic transport, was carefully listening to their conversation. The problem of finding
+the shortest ride interested her so much that she stayed in the tram longer than she intended just to listen
+to their conversation.
+At each station (except for the first one, when they entered the tram) one of the following two things
+happened:
+
+   • Patrik said: t minutes have passed since we entered the tram
+
+   • Josip said: From station y to this station t minutes have passed
+
+But before Paula could hear their conclusion about which ride was the shortest, they left the tram!
+Luckily, Paula remembers all their statements. Now she needs your help! Help her find the duration of
+the shortest ride and between which two stations the tram drove on that ride.
+
+Input
+The first line contains the integer n (2 ≤ n ≤ 1 000), the number of tram stations.
+The i-th of the following n − 1 lines contains the information about station i + 1 in one of the following
+formats:
+
+   • Patrik ti – Duration of the ride between station 1 and station i + 1 is ti (1 ≤ ti ≤ 109 )
+
+   • Josip yi ti – Duration of the ride between station y and station i + 1 is ti (yi < i + 1, 1 ≤ ti ≤ 109 )
+
+Every station will be in a distinct position.
+
+Output
+In one line output three numbers: t, x1 , x2 , the duration of the shortest ride and the indices of the starting
+and ending stations of that ride.
+If multiple solutions exist, print the one with the smallest indices of the stations.
+
+Scoring
+
+ Subtask    Points    Constraints
+
+     1         12     ti ≤ 1 000
+     2         13     Every sentence was said by Patrik.
+     3         25     No additional constraints.
+
+
+
+                                                    1 of 10
+     Croatian Open Competition in Informatics                                            Task Tramvaji
+     Round 2, December 3rd 2022                                          1 second / 512 MiB / 50 points
+
+
+Examples
+ input                              input                             input
+ 4                                  2                                 5
+ Patrik 3                           Josip 1 5                         Patrik 4
+ Patrik 5                                                             Josip 2 4
+ Josip 1 7                          output                            Josip 2 6
+                                    5 1 2                             Josip 4 2
+ output
+                                                                      output
+ 2 2 3
+                                                                      2 3 4
+
+
+Clarification of the first example:
+The tram drove for 3 minutes from the first to the second station, and 5 from the first to the third. We
+can conclude that from the second to the third station it took 2 minutes, which is the shortest ride.
+Clarification of the third example:
+The ride between the fourth and fifth station is also 2 minutes but, because they have greater indices,
+only the 2 3 4 solution is accepted.
+
+
+
+
+                                                2 of 10
+     Croatian Open Competition in Informatics                                              Task Ekspert
+     Round 2, December 3rd 2022                                           1 second / 512 MiB / 70 points
+
+
+Task Ekspert
+The group stage of the World Cup has ended, the teams are ready for the knockout
+stage, and many experts are trying to figure out the next world champion. One of
+them is Boris, the man who correctly determined the last four world champions.
+Lower the chances of this team because they have a player of Barcelona, raise the
+chances of that team beacuse they have the captain of Real Madrid... - Boris is
+calucating - Now I only need to multiply the integers x and y , and the I can
+announce the next world champion.
+The audience suddenly got very quiet. They are impatienly waiting to know if Croatia is going to win.
+Boris will multiply x and y using his famous method of four registers.
+He has four register: A, B, C and D. Initially they have the values: x, y, 0 and 1, respectively. The only
+operation he is allowed to do is summing up two registers (possibly the same) and storing the result in
+one of the registers. Each of the registers can have the value of at most 2 · 1018 .
+He doesn’t want the audience to wait too long, so he can make at most 100 of such operations.
+Help him determine the operations he needs to do, and in which of the registers will the final result be
+stored.
+
+Input
+The first and only line contains positive integers x and y (1 ≤ x · y ≤ 1018 ), the numbers Boris needs to
+multiply.
+
+Output
+In the first line output the integer n (0 ≤ n ≤ 100), the number of operations Boris needs to do.
+In the i-th of the following n lines output the operation in the format R1 R2 R3, where Rj is the label of
+the register (A, B, C or D), and the operation means the sum of R1 and R2 will be stored in R3.
+If there are multiple correct solutions, output any of them. The solution doesn’t need to have the minimal
+number of operations.
+
+Scoring
+
+ Subtask    Points   Constraints
+
+    1         14     x, y ≤ 50
+    2         14     x · y ≤ 104
+    3         42     No additional constraints.
+
+
+
+
+                                                  3 of 10
+       Croatian Open Competition in Informatics                                           Task Ekspert
+       Round 2, December 3rd 2022                                        1 second / 512 MiB / 70 points
+
+
+Examples
+ input                                                  input
+ 1 2                                                    3 2
+
+ output                                                 output
+ 1                                                      6
+ A A A                                                  D C C
+ A                                                      D C C
+                                                        D C C
+                                                        D C C
+                                                        D C C
+                                                        D C C
+                                                        C
+
+
+Clarification of the first example:
+The values of the registers (A, B, C, D) after the i-th operation are:
+0: (1, 2, 0, 1) - initial state
+1: (2, 2, 0, 1) - after the operation A A A
+The product of 1 and 2 is in the register with label A.
+Clarification of the second example:
+The values of the registers (A, B, C, D) after the i-th operation are:
+0: (3, 2, 0, 1) - initial state
+1: (3, 2, 1, 1) - after the operation D C C
+2: (3, 2, 2, 1) - after the operation D C C
+3: (3, 2, 3, 1) - after the operation D C C
+4: (3, 2, 4, 1) - after the operation D C C
+5: (3, 2, 5, 1) - after the operation D C C
+6: (3, 2, 6, 1) - after the operation D C C
+The product of 2 and 3 is in the register with label C.
+
+
+
+
+                                                   4 of 10
+      Croatian Open Competition in Informatics                                                  Task Lampice
+      Round 2, December 3rd 2022                                              3 seconds / 512 MiB / 110 points
+
+
+Task Lampice
+Christmas is coming! Teo has already decided to decorate his terrace.
+Teo has a big rectangular-shaped terrace. It is n meters long and m meters wide.
+Teo has decided to decorate his terrace in a very strange way. Instead of hanging
+Christmas lights on the edges of his terrace, he will put them on the floor!
+Teo has 2k lamps, two per each of k colours. He will put each in some position
+(xi , yi ), where xi represents the distance from the left side of the terrace and yi
+from the bottom side.
+Proud of how he decorated the terrace, he decided to take the rest of his day off. But soon he got bored,
+so he returned to the terrace. He started counting nice rectangles on the terrace. A rectangle is nice if for
+each colour both lamps are either inside or outside of the rectangle. If a lamp is located on the rectangle
+edge, it is considered to be inside of it.
+
+
+
+
+        The left rectangle is not nice. One blue lamp is inside the rectangle, and one is outside.
+         The right rectangle is nice. Red and blue lamps are inside. Yellow lamps are outside.
+
+Teo has realized that counting nice rectangles is not an easy job. He is interested in how many nice
+rectangles are there, whose corners have integer distances from the bottom and left sides of the terrace.
+All rectangles we consider are parallel with terrace sides. This is where you step in! Count the number
+of nice rectangles.
+
+Input
+The first line contains three integers n, m, k (1 ≤ n ≤ 150, 1 ≤ m ≤ 1 000, 0 ≤ k ≤ 200 000), the length
+and the width of the terrace, and the number of lamp colours.
+The next k lines contain four numbers x1 , y1 , x2 , y2 (0 ≤ x1 , x2 ≤ n, 0 ≤ y1 , y2 ≤ m), positions of the first
+and the second lamp of the i-th colour.
+
+Output
+In a single line output the number of nice rectangles.
+
+
+
+
+                                                     5 of 10
+     Croatian Open Competition in Informatics                                   Task Lampice
+     Round 2, December 3rd 2022                               3 seconds / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask    Points   Constraints
+
+     1        26     x1 = y1 = 0 for each lamp colour
+     2        12     n, m ≤ 10, k ≤ 1 000
+     3        35     m ≤ 150
+     4        37     No additional constraints.
+
+Examples
+ input                              input                     input
+
+ 2 2 1                              3 3 0                     3 3 5
+ 0 0 1 2                                                      0 0 0 0
+                                    output                    0 0 1 3
+ output                                                       0 0 3 1
+                                    36
+ 3                                                            1 3 3 1
+                                                              1 3 3 1
+
+                                                              output
+                                                              7
+
+
+Clarification of the first example:
+The image shows all nice rectangles from the first example.
+
+
+
+
+                                                  6 of 10
+      Croatian Open Competition in Informatics                                           Task Prijateljice
+      Round 2, December 3rd 2022                                          1 second / 512 MiB / 110 points
+
+
+Task Prijateljice
+One summer night in Krk, Leona and Zoe went for a walk. On their winding path,
+they found a pile of words! Excited by that, they quickly started collecting them:
+Leona collected n words, and Zoe m words. After admiring them for a while, they
+decided to play the following game:
+In one move a player says a word from her pile. The player chooses the word in
+such a way that the following conditions are met: the word is lexicographically
+greater than the previous word, and it begins with the same letter as the previous
+word or with the first letter of the English alphabet after it. If a player can’t make a move, she loses.
+They alternate turns, and Leona plays first by saying her lexicographically smallest word. If Leona and
+Zoe play optimally, determine who wins.
+Note: The word A is lexicographically smaller than the word B if the word A is a prefix of the word B or
+if in the first position in which the words A and B differ the letter in A at that position comes before the
+letter in B at that position.
+
+Input
+The first line contains integers n and m (1 ≤ n, m ≤ 105 ), the number of Leona’s words, and the number
+of Zoe’s words.
+The following n lines contain Leona’s words.
+The following m lines contain Zoe’s words.
+Words from the input contain only lowercase letters of the English alphabet, all words are mutually
+distinct, their total length is at most 106 , and Leona’s and Zoe’s words are lexicographically sorted.
+
+Output
+Output Leona or Zoe, the name of the winner.
+
+Scoring
+
+ Subtask    Points   Constraints
+
+     1        20     n, m ≤ 100, each word contains at most 10 letters
+     2        30     n, m ≤ 1 000
+     3        60     No additional constraints.
+
+
+
+
+                                                  7 of 10
+       Croatian Open Competition in Informatics                                   Task Prijateljice
+       Round 2, December 3rd 2022                                  1 second / 512 MiB / 110 points
+
+
+Examples
+ input                                input                       input
+ 2 1                                  3 3                         2 2
+ avokado                              ananas                      hrvatska
+ dabar                                atlas                       zastava
+ brazil                               banana                      bijeli
+                                      albatros                    galeb
+ output                               cikla
+                                      nogomet                     output
+ Zoe
+                                      output                      Leona
+
+                                      Leona
+
+
+Clarification of the first example:
+Leona starts with the word avokado, then Zoe continues with her only word brazil. Leona can’t make
+any move so she loses.
+
+
+
+
+                                                  8 of 10
+      Croatian Open Competition in Informatics                                          Task Kruhologija
+      Round 2, December 3rd 2022                                         2 seconds / 512 MiB / 110 points
+
+
+Task Kruhologija
+This is an interactive task.
+You’re an ant, and not just a regular ant, you’re an ant obsessed with kruhology!
+While most other ants are busy watching the Cup, you’re currently on a slice of
+bread magically floating in the air...
+The slice of bread can be imagined as a collection of unit cubes whose upper faces
+are all in the same plane. Let the total number of faces of the slice of bread be
+n. All unit cubes are connected, in other words, by moving along the faces of the
+cubes one can go from any face to any other face. For any two cubes sharing just one edge, there is
+another cube which shares a face with both of those cubes.
+
+
+
+
+                                     On the left is the first example.
+                                 On the right is a forbidden configuration.
+
+Currently, you are on some face of some cube and oriented in an unknown way. You don’t know anything
+about the global structure of the slice. You conveniently carry around a marker you stole from high school
+with which you can leave a tiny mark on each face. You can erase the mark as well! You can repeat any
+of the following operations q times:
+
+  • K - make a step in your current direction
+  • L - rotate 90◦ to the left
+  • D - rotate 90◦ to the right
+  • X - if the current face has no mark, make one, else remove it
+
+Notice that you can be directed to the edge of the slice and still make a step forwards. In that case, you
+will end up on a lateral face of a cube. If you make another step you will end up on the other side of the
+slice of bread! Because of this in each moment you can do any of the four operations.
+
+
+
+
+                                     Example of moving over an edge.
+
+A hole on a slice of bread is defined as a part of space fully surrounded by cubes. The drawn figure has
+exactly one hole in the middle. Notice that a hole can contain more than one connected "empty" cube
+and can be of any shape.
+
+
+                                                  9 of 10
+      Croatian Open Competition in Informatics                                          Task Kruhologija
+      Round 2, December 3rd 2022                                         2 seconds / 512 MiB / 110 points
+
+
+You like holes so you are really interested in the number of holes in the slice of bread you are on! Try and
+find out!
+
+Interaction
+This is an interactive task. Your task is to make a solution which will calculate the number of holes in a
+slice of bread. In every moment you can do one of the four given operations and the grader will output
+either the number 0 or 1. The number 1 means that the face you have just stepped on is already marked
+and 0 means the face is unmarked. After outputting an operation and before inputting the grader’s
+response you should flush the output.
+If you do more than q operations your solution will be considered incorrect. After at most q operations
+you should output the answer in the following format ‘! g‘ where g should be the number of holes in the
+slice of bread.
+
+Scoring
+
+ Subtask    Points   Constraints
+
+     1        49     n ≤ 40, q = 20000, there is at most one hole in the slice
+     2        61     n ≤ 200, q = 20000
+
+Examples
+ input                      output                     input                      output
+                            X                                                     X
+                            K                                                     K
+ 0                                                     0
+                            L                                                     K
+                            L                          0
+                            K                                                     K
+ 1                                                     0
+                            X                                                     K
+                            D                          1
+                            D                                                     !   0
+                            K
+ 0
+                            !   1
+
+
+Clarification of the first example:
+In the first example, you are somewhere on the slice of bread drawn in the statement. The slice has
+exactly one hole and the correct answer is 1.
+Clarification of the second example:
+In the second example, you are located on a single unit cube. It has no holes and therefore the answer is 0.
+
+
+
+
+                                                 10 of 10
+

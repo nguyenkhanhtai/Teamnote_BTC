@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto state = retrograde_analysis(3,{{1},{2},{}});
   const int DRAW = 0, WIN = 1, LOSE = -1;
   vector<int> retrograde_analysis(int n, const vector<vector<int>>& adj){
     vector<int>out_deg(n),res(n,DRAW); vector<vector<int>>radj(n); queue<int>q;

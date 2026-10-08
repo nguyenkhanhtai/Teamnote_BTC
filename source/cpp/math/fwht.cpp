@@ -3,6 +3,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: vector<long long> a(8,1); fwht(a,Walsh::Xor);
   enum class Walsh {Xor, And, Or};
   // Integer inverse XOR requires exact division; values/intermediates must fit.
   void fwht(vector<long long>& a, Walsh kind, bool inverse = false) {

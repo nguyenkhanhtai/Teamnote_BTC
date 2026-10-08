@@ -1,5 +1,9 @@
 \section{Đồ thị}
 
+\input{Matroid.tex}
+
+\subsection{Đếm thứ tự topo trên cây/rừng}
+Cạnh hướng cha $\to$ con: số thứ tự topo là $\displaystyle \frac{n!}{\prod_v sz(v)}$, với $sz(v)$ là kích thước subtree kể cả $v$. Ghép các thứ tự con bằng multinomial; đảo toàn bộ cạnh vẫn cùng số cách. Không áp dụng cho DAG tổng quát.
 
 
 \Algorithm{Minimum Cost Flow}

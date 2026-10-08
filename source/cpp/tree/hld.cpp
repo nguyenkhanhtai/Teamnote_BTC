@@ -3,6 +3,8 @@
 namespace notebook::tree {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: HeavyLight hld({{1},{0,2},{1}},0); auto seg = hld.subtree(1);
+  //      Store vertex values at hld.pos[u]; seg = [l,r).
   // Zero-based positions; segments [l,r). rev=true means traverse r-1 down to l.
   // path_segments returns segments in u-to-v order, supports noncommutative folds.
   struct HeavyLight {

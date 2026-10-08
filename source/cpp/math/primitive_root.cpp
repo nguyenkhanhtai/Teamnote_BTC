@@ -4,6 +4,7 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: mt19937_64 rng(123456); auto g = primitive_root(17,rng);
   U64 primitive_root(U64 p, mt19937_64 & rng) {
     assert(is_prime(p));
     if (p == 2) return 1;

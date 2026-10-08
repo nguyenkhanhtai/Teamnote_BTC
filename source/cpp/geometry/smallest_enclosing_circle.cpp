@@ -4,6 +4,8 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: mt19937_64 rng(123456);
+  //      auto c = smallest_enclosing_circle({{0,0},{2,0},{0,2}},rng);
   struct Circle { Point center; long double radius; };
   Circle diameter_circle(Point a, Point b) {
     Point c = (a + b) / 2; return {c, sqrtl(norm2(a - c))};

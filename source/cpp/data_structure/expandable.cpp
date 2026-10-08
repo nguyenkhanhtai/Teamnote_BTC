@@ -3,14 +3,18 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
-  // Binary-counter buckets. Builder(const vector<T>&) returns a static index by value.
+  // Use: ExpandableIndex idx(buildIndex); idx.insert(3);
+  //      buildIndex(const vector<long long>&): vector<long long>.
+  // Binary-counter buckets. Builder(const vector<Value>&) returns a static index by value.
   // visit(index) called once per occupied bucket; caller combines query results.
-  template<typename T, typename Builder> struct ExpandableIndex {
-    using Index=decay_t<invoke_result_t<Builder,const vector<T>&>>; Builder build;
-    vector<vector<T>> buckets; vector<optional<Index>> indices;
-    explicit ExpandableIndex(Builder builder) : build(move(builder)){}
-    void insert(T value) {
-      vector<T> carry; carry.push_back(move(value)); size_t level = 0;
+  struct ExpandableIndex {
+    using Value = long long;
+    using Index = vector<Value>; // Replace with your static index type.
+    function<Index(const vector<Value>&)> build;
+    vector<vector<Value>> buckets; vector<optional<Index>> indices;
+    ExpandableIndex(function<Index(const vector<Value>&)> builder) : build(move(builder)){}
+    void insert(Value value) {
+      vector<Value> carry; carry.push_back(move(value)); size_t level = 0;
       for (;; ++level) {
         if(level==buckets.size()){ buckets.emplace_back(); indices.emplace_back(); }
         if (buckets[level].empty()) {
@@ -21,7 +25,7 @@ namespace notebook::data_structure {
         buckets[level].clear(); indices[level].reset();
       }
     }
-    template<typename Visit> void query(Visit visit) const {
+    void query(function<void(const Index&)> visit) const {
       for (const auto& index : indices) if (index) visit(*index);
     }
   };

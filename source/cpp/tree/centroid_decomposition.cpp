@@ -3,11 +3,14 @@
 namespace notebook::tree {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: CentroidDecomposition cd(g,onCentroid);
+  //      void onCentroid(int c,int parent,const vector<bool>& blocked)
   // Builds centroid parent forest for a tree; original adjacency is unchanged.
   // on_centroid(c,parent,blocked) may process the current component.
   struct CentroidDecomposition {
     vector<int> parent;
-    template<typename Process>CentroidDecomposition(const vector<vector<int>>&g,Process on_centroid):parent(g.size(),-1){
+    CentroidDecomposition(const vector<vector<int>>& g,
+        function<void(int,int,const vector<bool>&)> on_centroid):parent(g.size(),-1){
       int n = g.size();
       if (!n) return;
       vector<bool> blocked(n); vector<int> p(n), size(n);

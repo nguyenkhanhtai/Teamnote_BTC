@@ -1,0 +1,388 @@
+Croatian Open Competition in Informatics
+               Round 3, December 13th 2025
+
+
+
+
+                         Tasks
+       Task         Time limit   Memory limit   Score
+
+       Kist          1 second      512 MiB        50
+       Festival      1 second      512 MiB        70
+       Domjenak      1 second      512 MiB       110
+       Drzava       2 seconds      512 MiB       110
+       Ravnalo       1 second      512 MiB       110
+
+       Total                                     450
+         Croatian Open Competition in Informatics                                                Task Kist
+         Round 3, December 13th 2025                                         1 second / 512 MiB / 50 points
+
+
+Task Kist
+Ivo is in a square matrix of n rows and n columns where n is an odd number and
+holds a magic brush of thickness k. All cells of the matrix are marked with the
+symbol ".", and Ivo is in the central cell of the matrix.
+Ivo has received a string of instructions, a word consisting of uppercase letters
+of the alphabet where each letter represents one instruction. He executes the
+instructions in order and does the following depending on the current instruction:
+
+   • L - Ivo moves one cell to the left
+
+   • R - Ivo moves one cell to the right
+
+   • U - Ivo moves one cell up
+
+   • D - Ivo moves one cell down
+
+   • If the current character is any other letter of the alphabet, Ivo does not
+     change his position. Instead, he paints all the cells of the matrix that are * less than k cells away
+     from his current position with the current color, regardless of whether they have already been
+     painted in another color.
+
+If Ivo moves outside the matrix, he will skip that step and continue executing the subsequent instructions.
+Your task is to print the appearance of the matrix after Ivo has executed all the instructions.
+*The distance between two cells of a matrix is the minimum number of moves needed to get from one cell
+to the other, with movement allowed in four directions (up, down, left, right).
+
+Input
+The first line contains the natural numbers n, k (1 ≤ n, k ≤ 50), from the text of the task.
+The second line contains a word consisting of uppercase letters of the English alphabet. The length of the
+word will be less than or equal to 50.
+
+Output
+In n lines, print n characters per line, the appearance of the matrix after Ivo executes all the instructions.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          2      n=1
+     2          10     k=1
+     3          15     k=2
+     4          23     No additional constraints.
+
+
+
+
+                                                    1 of 10
+       Croatian Open Competition in Informatics                                                Task Kist
+       Round 3, December 13th 2025                                         1 second / 512 MiB / 50 points
+
+
+Examples
+ input                                                input
+ 1 1                                                  3 2
+ ALURDF                                               LUUADDRCRB
+
+ output                                               output
+ F                                                    AA.
+                                                      ACB
+                                                      CBB
+
+
+Clarification of the first example:
+Ivo will never move from the only cell of the matrix and will only paint that cell. After executing all the
+instructions, that cell is colored in color F.
+
+
+
+
+                                                  2 of 10
+          Croatian Open Competition in Informatics                                              Task Festival
+          Round 3, December 13th 2025                                          1 second / 512 MiB / 70 points
+
+
+Task Festival
+While Ivan was working at this year’s chocolate festival, his boss gave him n
+different chocolate candies and asked him to prepare k chocolate boxes using those
+candies. Before he starts arranging the boxes, Ivan wants to find out in how many
+different ways he can arrange them, and then, after considering all the possibilities,
+he will choose the best arrangement.
+The chocolate festival is a very important and serious event, so the candies must be
+perfectly arranged. To achieve this, Ivan knows that he must follow the following
+rules:
+
+     • Each box must contain at least one candy.
+
+     • Each candy goes in exactly one box.
+
+     • The boxes he uses are identical to each other, so swapping the contents of
+       two boxes does not create a new arrangement. All that matters is which
+       candies are in which box and in what order they are arranged.
+
+     • The largest candy is always the first in the box. We can assume that in any
+       group of candies, the largest can always be uniquely determined.
+
+In how many different ways can Ivan arrange the boxes? Since the number of ways can be very large,
+print it modulo 109 + 7.
+
+Input
+The first and only line contains the natural numbers n and k (1 ≤ n ≤ 5000, 1 ≤ k ≤ n), the number of
+candies, and the number of boxes.
+
+Output
+In the first and only line, print a single number - the number of ways Ivan can arrange the boxes modulo
+109 + 7.
+
+Scoring
+
+ Subtask       Points   Constraints
+
+      1          8      k=1
+      2          19     k=2
+      3          14     n ≤ 10
+      4          29     No additional constraints.
+
+Examples
+ input                                 input                              input
+ 3 1                                   3 2                                4 2
+
+ output                                output                             output
+
+ 2                                     3                                  11
+
+
+
+                                                     3 of 10
+      Croatian Open Competition in Informatics                                          Task Festival
+      Round 3, December 13th 2025                                      1 second / 512 MiB / 70 points
+
+
+Clarification of the first example:
+Let’s label the candies from smallest to largest with 1, 2, and 3. We need to arrange them in one box,
+so all three candies must be in the same box. Candy 3 must be first because it is the largest. We can
+arrange the other two candies in two ways, so [3, 1, 2] and [3, 2, 1] are the only valid arrangements.
+Clarification of the second example:
+Let’s label the candies from smallest to largest with 1, 2, and 3. We can arrange the candies in three
+ways: {[1], [3, 2]}, {[2], [3, 1]}, and {[3], [2, 1]}.
+
+
+
+
+                                                 4 of 10
+        Croatian Open Competition in Informatics                                                    Task Domjenak
+        Round 3, December 13th 2025                                                 1 second / 512 MiB / 110 points
+
+
+Task Domjenak
+Mr. Malnar is organizing a banquet for 2N of his associates that are numbered
+with integers 1, 2, . . . , 2N . Associates came to the banquet in pairs. Looking at
+their behavior, Mr. Malnar noticed some strange rules that govern the spread of
+information within this group.
+First, person A is willing to share information with person B if and only if they
+are friends. A pair of associates that came to the banquet together are friends.
+Second, every person is willing to share information with at most one other person.
+At the same time, that person must not be aware of that information.
+Third, every person will try to share information where priority is given to the
+person that came with them to the banquet.
+In other words, if person A came with person B to the banquet and person A is
+aware of some information that person B is not, person A will share that information with person B.
+Because of the previous rules, person A will not share that information with anyone else and person B
+will try to share it with another person that they are friends with etc.
+Fourth, the group can be split into two subgroups such that if two people are friends they are not in the
+same subgroup.
+Mr. Malnar will tell his story to one of his associates and is interested in the maximum number of his
+associates that can hear his story. If that number is K, he is also interested in some sequence of associates
+a1 , a2 , . . . , aK such that if he is to tell his story to associate a1 then for every i = 1, 2, . . . , K − 1 associate
+ai can tell the story to associate ai+1 .
+In the process of discovering said rules Mr. Malnar determined all friendships but forgot the pairs of
+associates that came to the banquet together. Fortunately, it is possible to recover this information. In
+other words, there is a unique partition of associates into N pairs such that associates within the same
+pair are friends.
+Can you help Mr. Malnar answer his questions?
+
+Input
+The first line contains integers N and M (1 ≤ N ≤ 5 · 105 , N ≤ M ≤ 106 ), number of pairs of associates
+that came to the banquet and the number of friendships.
+In each of the next M lines there are two integers ui and vi (1 ≤ ui , vi ≤ 2 · N ), labels of associates that
+are friends.
+
+Output
+In the first line, print a single integer K - the maximum number of associates that can hear Mr. Malnar’s
+story.
+In the second line, print a sequence of K integers that satisfy the constraints.
+
+
+
+
+                                                        5 of 10
+        Croatian Open Competition in Informatics                                          Task Domjenak
+        Round 3, December 13th 2025                                       1 second / 512 MiB / 110 points
+
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          24     N ≤ 10
+    2          16     Every associate is friends with at most two other associates.
+    3          30     N ≤ 2000, M ≤ 5000
+    4          40     No additional constraints.
+
+Examples
+ input                               input                               input
+
+ 2 3                                 3 5                                 4 8
+ 1 2                                 1 2                                 1 2
+ 1 4                                 2 3                                 2 3
+ 3 4                                 1 4                                 3 4
+                                     4 5                                 4 1
+ output                              1 6                                 2 5
+ 4                                                                       3 6
+                                     output                              4 7
+ 2 1 4 3
+                                     4                                   7 8
+                                     6 1 2 3                             output
+
+                                                                         6
+                                                                         6 3 4 1 2 5
+
+
+Clarification of the first example:
+Associates that came together are: 1 and 2, 3 and 4.
+Clarification of the second example:
+Associates that came together are: 1 and 6, 2 and 3, 4 and 5. Longer sequences do not satisfy the
+constraints. For example, sequence (3,2,1,4,5) does not satisfy the constraints even though every two
+adjacent associates are friends because associate 1 can’t tell the story to person 4 after hearing it from
+associate 2. This is because the associate that came with them to the banquet, namely associate 6, is still
+unaware of the story (third rule).
+Clarification of the third example:
+Associates that came together are: 1 and 4, 2 and 5, 3 and 6, 7 and 8.
+
+
+
+
+                                                   6 of 10
+         Croatian Open Competition in Informatics                                            Task Drzava
+         Round 3, December 13th 2025                                      2 seconds / 512 MiB / 110 points
+
+
+Task Drzava
+In a distant land called Airlanvaosma-i there are n cities connected by n − 1 roads.
+It is possible to reach every city from any other city by passing through fewer than
+36 roads.
+The almighty Krešimir wants to found his own state. Krešimir’s state must have
+one capital city from which the state is governed, and several (possibly none)
+secondary cities that are under its administration. The size of a state is equal to
+the total number of cities that belong to that state (the capital city and all secondary cities).
+However, in order for the governance of the state to be efficient, Krešimir imposes the following rule:
+
+   • for every secondary city, on the path from the capital city to that secondary city there must be no
+     other secondary city. In other words, no secondary city may lie between the capital city and another
+     secondary city.
+
+For every state size k, where 1 ≤ k ≤ n, determine how many different states of size k the almighty
+Krešimir can found. Since these numbers can be very large, output them modulo 109 + 7.
+Two choices of states are considered different if they differ in at least one chosen secondary city or in the
+choice of the capital city.
+
+Input
+The first line contains a natural number n (1 ≤ n ≤ 3000), the number of cities in the land.
+In the next n − 1 lines there are two natural numbers u and v (1 ≤ u, v ≤ n, u ̸= v), which indicate that
+cities u and v are connected. It will be possible to reach every city from any other city.
+
+Output
+In the first and only line output n numbers, the numbers described in the problem statement.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          18     1 ≤ n ≤ 15
+     2          17     1 ≤ n ≤ 200
+     3          26     1 ≤ n ≤ 600
+     4          49     No additional constraints.
+
+
+
+
+                                                    7 of 10
+       Croatian Open Competition in Informatics                                             Task Drzava
+       Round 3, December 13th 2025                                       2 seconds / 512 MiB / 110 points
+
+
+Sample tests
+ input                                                input
+ 4                                                    4
+ 1 2                                                  1 2
+ 1 3                                                  2 3
+ 1 4                                                  1 4
+
+ output                                               output
+
+ 4 12 6 1                                             4 12 4 0
+
+
+Explanation of the second sample test: There are 4 states of size 1 because there are 4 choices for
+the capital city. There are 4 states of size 2 because after choosing the capital city (4 ways), we also
+choose 1 secondary city (3 ways). There are 4 states of size 3 because by choosing capital cities 1 or 2 we
+have 2 ways each to choose 2 additional secondary cities.
+
+
+
+
+                                                  8 of 10
+          Croatian Open Competition in Informatics                                          Task Ravnalo
+          Round 3, December 13th 2025                                      1 second / 512 MiB / 110 points
+
+
+Task Ravnalo
+Architect Hrvoje has been tasked with drawing a large irregular wall composed
+of vertical columns.
+The wall consists of n columns placed next to each other, where the i-th column
+has height ai and width 1. In order to make the drawing as complicated as possible,
+the i-th column is divided into bi parts of equal height.
+Hrvoje has only a ruler and a pencil at his disposal. With one stroke of the pencil
+he can draw one line segment (a straight line between two points) without lifting
+the pencil. His goal is to draw the entire wall, including all column edges and all
+boundaries between their divisions, using as few line segments as possible.
+For the given wall, output the minimum number of line segments that need to be drawn in order to draw
+the wall completely.
+
+Input
+The first line contains a natural number n (1 ≤ n ≤ 105 ), the number from the problem statement.
+The second line contains a sequence of n numbers 1 ≤ ai ≤ 109 , from the problem statement.
+The third line contains a sequence of n numbers 1 ≤ bi ≤ 109 , from the problem statement.
+
+Output
+In the first and only line output one number – the minimum number of line segments Hrvoje needs to
+draw to draw the wall.
+
+Scoring
+
+ Subtask       Points   Constraints
+
+      1          11     N =1
+      2          13     N = 2, 1 ≤ ai , bi ≤ 10
+      3          29     1 ≤ ai ≤ 106 , bi divides ai for every 1 ≤ i ≤ n
+      4          57     No additional constraints.
+
+Sample tests
+ input                                                   input
+ 3                                                       3
+ 4 6 4                                                   4 6 3
+ 2 3 4                                                   3 3 2
+
+ output                                                  output
+ 10                                                      12
+
+
+
+
+                                                     9 of 10
+       Croatian Open Competition in Informatics                                          Task Ravnalo
+       Round 3, December 13th 2025                                      1 second / 512 MiB / 110 points
+
+
+
+
+  Pojašnjenje drugog probnog primjera: Hrvoje will extend the topmost line segment in the first
+column into the second column and thus “merge” 2 line segments into one. He will do the same with the
+3 line segments at the bottom of the wall. This way, he will draw a total of 12 line segments, and it can
+         be shown that this is the minimum number of line segments that Hrvoje needs to draw.
+
+
+
+
+                                                  10 of 10
+

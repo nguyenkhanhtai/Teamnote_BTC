@@ -62,6 +62,17 @@ for (int l = 1, r; l <= n; l = r + 1) {
 {$O(\log^2 p)$}
 {compactcpp}{source/cpp/math/sqrt_mod.cpp}
 
+\noindent\textbf{Bézout (tổng quát)}: Với $a_1,\ldots,a_n\in\mathbb Z$ không đồng thời bằng 0, $g=\gcd(|a_1|,\ldots,|a_n|)$: tồn tại $c_i\in\mathbb Z$ sao cho $\sum_i c_i a_i=g$. Mọi tổ hợp nguyên tạo đúng các bội của $g$: $\sum_i c_i a_i=x$ có nghiệm iff $g\mid x$. \textbf{Cue}: cộng/trừ các bước tùy ý $\to$ gcd các bước chia hết độ dịch chuyển; nghịch đảo modulo $\to ax+my=1$ (cần $\gcd(a,m)=1$). Hệ số được âm; yêu cầu $c_i\ge0$ thì gcd chia hết chưa đủ. Extended GCD tìm hệ số cho hai số, ghép dần cho nhiều số.
+
+\noindent\textbf{GCD: cộng/trừ và đổi mốc}
+\begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \setlength{\parsep}{0pt}
+    \item $\gcd(u,v)=\gcd(u,v+ku)=\gcd(v,u\bmod v)$ ($k\in\mathbb Z$, $v\ne0$ cho modulo); $\gcd(cu,cv)=|c|\gcd(u,v)$. Cộng/trừ bội giữ các ước chung.
+    \item Đặt $d_i=a_{i+1}-a_i$, $g=\gcd|d_i|$: $\gcd(a_1,\ldots,a_n)=\gcd(a_1,g)$; tịnh tiến: $\gcd(a_1+b,\ldots,a_n+b)=\gcd(a_1+b,g)$ (Row GCD). Phải giữ mốc; $\gcd(z,0)=|z|$.
+    \item $\gcd(pu+qv,ru+sv)=\gcd(u,v)$ nếu $ps-qr=\pm1$ (phép ngược có hệ số nguyên). Tổ hợp tùy ý chưa chắc giữ gcd, vd. $(u+v,u-v)$.
+\end{itemize}
+
 \Algorithm{Extended GCD}
 {Tìm $x,y$ thỏa phương trình $ax + by = \gcd(a, b)$}
 {$\mathcal{O}(\log \min(a,b))$}
@@ -196,44 +207,16 @@ for (int l = 1, r; l <= n; l = r + 1) {
     \end{itemize}
 \end{itemize}
 
-\Algorithm{Chiến lược và suy luận trạng thái game}
-{Trạng thái thắng/thua, retrograde analysis, đối xứng, chẵn lẻ, Sprague-Grundy MEX, biến thể Nim}
-{$O(V + E)$}
-{compactcpp}{source/cpp/math/game_strategy.cpp}
-
+\subsection{Game: Nim và chiến lược}
+% References: MIT ES.268 Theory of Impartial Games; CMU Combinatorics F11/ex4a.pdf.
 \begin{itemize}
-    \item \textbf{Quy tắc trạng thái thắng ($\mathcal{W}$/N-pos) và thua ($\mathcal{L}$/P-pos)}:
-    \begin{itemize}
-        \item \textbf{Trạng thái kết thúc}: Normal play (hết nước đi $\implies \mathcal{L}$); Mis\`ere play (hết nước đi $\implies \mathcal{W}$).
-        \item \textbf{Trạng thái thắng $\mathcal{W}$}: $\exists v \in \text{next}(u)$ sao cho $v \in \mathcal{L}$ (có ít nhất một nước tới trạng thái $\mathcal{L}$).
-        \item \textbf{Trạng thái thua $\mathcal{L}$}: $\forall v \in \text{next}(u)$, $v \in \mathcal{W}$ (mọi nước tới $\mathcal{W}$, hoặc hết nước đi).
-        \item \textbf{Chơi tối ưu}: Từ $\mathcal{W}$, chọn nước tới $\mathcal{L}$. Đối thủ từ $\mathcal{L}$ buộc phải trở lại $\mathcal{W}$.
-    \end{itemize}
-    \item \textbf{Cách suy luận lời giải}:
-    \begin{itemize}
-        \item \textbf{Retrograde BFS ($O(V + E)$)}: Lan truyền kết quả ngược từ trạng thái kết thúc bằng bộ đếm bậc ra; trạng thái chu trình chưa xác định là \textbf{hòa}.
-        \item \textbf{Đối xứng/phản chiếu}: Nếu P2 phản chiếu được nước P1 qua tâm/trục, P2 thắng. Nếu P1 đi ở tâm để tạo hai nửa đối xứng, P1 thắng.
-        \item \textbf{Bất biến và chẵn lẻ}: Theo dõi $I(S)\bmod2$ (tổng, thành phần, nghịch thế). Điều khiển chẵn lẻ để đối thủ gặp trạng thái kết thúc.
-        \item \textbf{Chiến lược ghép cặp}: Chia bàn thành các cặp rời $(a_i,b_i)$. P1 lấy $a_i$ thì P2 lấy ngay $b_i$.
-        \item \textbf{Tìm quy luật từ trường hợp nhỏ}: Mô phỏng $N\le20$, tính SG $g(n)$, tìm chu kỳ $g(n)=g(n\bmod T)$ hoặc điều kiện bit.
-    \end{itemize}
-    \item \textbf{Định lý Sprague-Grundy (game con độc lập)}:
-    \begin{itemize}
-        \item $g(G) = \bigoplus g(G_i)$, với $g(u) = \text{mex}(\{g(v) \mid u \to v\})$. Thắng $\iff g(G) \ne 0$.
-        \item \textbf{Tree Hackenbush (Colon Principle)}: Node nhánh $g(u) = \bigoplus_{v \in \text{children}} (g(v) + 1)$.
-    \end{itemize}
-    \item \textbf{Các biến thể Nim quen thuộc}:
-    \begin{itemize}
-        \item \textbf{Standard Nim}: Tổng XOR $S = \bigoplus a_i$. Thắng $\iff S \ne 0$.
-        \item \textbf{Bounded Subtraction Nim} (lấy $1..k$): $g(a) = a \bmod (k + 1) \implies$ Thắng $\iff \bigoplus (a_i \bmod (k+1)) \ne 0$.
-        \item \textbf{Moore's $\text{Nim}_k$} (lấy từ $\le k$ đống): Thua $\iff \forall \text{ vị trí bit } b, \sum_i \text{bit}_b(a_i) \equiv 0 \pmod{k + 1}$.
-        \item \textbf{Staircase Nim}: Tương đương Nim thường trên bậc có chỉ số lẻ ($1, 3, 5, \dots$).
-        \item \textbf{Mis\`ere Nim} (người đi cuối thua):
-        \begin{itemize}
-            \item Mọi đống $\le1$: Thắng $\iff$ số đống có một viên là chẵn ($S = 0$).
-            \item Có đống $>1$: giống Nim thường (Thắng $\iff S \ne 0$).
-        \end{itemize}
-    \end{itemize}
+    \item \textbf{Nim}: mỗi lượt giảm một đống; người lấy cuối thắng. Thua $\iff X=\bigoplus_i a_i=0$. Nếu $X\ne0$, chọn đống có bit cao nhất của $X$, đổi $a_i\to a_i\oplus X<a_i$ để trả XOR về $0$.
+    \item \textbf{Mis\`ere Nim} (lấy cuối thua): mọi đống $\le1$ thì thua khi số đống $1$ lẻ; còn đống $>1$ thì thua $\iff X=0$. \emph{Cách đi}: còn ít nhất hai đống lớn thì chơi như Nim; chỉ còn một đống lớn thì giảm nó về $0$ hoặc $1$ để để lại số đống $1$ lẻ.
+    \item \textbf{Staircase Nim}: chuyển tùy số viên từ bậc $i$ xuống $i-1$; bậc $0$ không chơi tiếp. Chỉ XOR các bậc \emph{lẻ}. Đối thủ chuyển từ bậc chẵn xuống lẻ thì chuyển đúng số viên ấy xuống thêm một bậc, khôi phục XOR.
+    \item \textbf{Wythoff Nim}: hai đống, giảm một đống hoặc giảm cả hai cùng số lượng. Với $a\le b$, đặt $k=b-a$: thua $\iff a=\lfloor k\varphi\rfloor$, $\varphi=(1+\sqrt5)/2$. Ví dụ $(1,2),(3,5),(4,7)$; số lớn cần tính floor chính xác.
+    \item \textbf{Green Hackenbush trên cây}: chặt cạnh, phần mất nối với gốc biến mất. Gộp nhánh bằng XOR; thêm một cạnh dưới nhánh thì SG tăng $1$: $g(u)=\bigoplus_{v\text{ con}}(g(v)+1)$. Chỉ dùng cho normal play với mọi cạnh đều được cả hai người chặt.
+    \item \textbf{Pairing / mirror} (hết nước đi thì thua): ghép các nước thành cặp; đáp bằng nước còn lại để khôi phục đối xứng. Phải chứng minh nước đáp \emph{luôn còn hợp lệ}, không chỉ bàn ban đầu đối xứng. Nếu đi tâm tạo được cấu hình này thì người đầu có thể chiếm chiến lược phản chiếu.
+    \item \textbf{Strategy stealing}: game đặt quân hữu hạn, không hòa; nếu một nước thêm không bao giờ gây bất lợi, giả sử người sau có chiến lược thắng rồi người trước đi thêm và ``mượn'' chiến lược đó để tạo mâu thuẫn. Chứng minh người đầu thắng nhưng thường không chỉ ra nước thắng cụ thể.
 \end{itemize}
 
 \Algorithm{Xác suất và kỳ vọng}

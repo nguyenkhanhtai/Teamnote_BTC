@@ -3,6 +3,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto edges = prufer_decode({0,1}); // n = code.size()+2
   // Labels 0..n-1; tree n>=2. O(n log n); decode uses n=code.size()+2.
   vector<int> prufer_encode(const vector<vector<int>>& g) {
     int n = g.size(); assert(n >= 2); vector<int> degree(n);

@@ -1,0 +1,395 @@
+Croatian Open Competition in Informatics
+                 Round 1, October 25th 2025
+
+
+
+
+                          Tasks
+      Task           Time limit    Memory limit   Score
+
+      Rima            1 second       512 MiB        50
+      Krugomet        1 second       512 MiB        70
+      Harmonija      2.5 seconds    1024 MiB       110
+      Kraljica        5 seconds      512 MiB       110
+      Zagi            3 seconds      512 MiB       110
+
+      Total                                        450
+         Croatian Open Competition in Informatics                                              Task Rima
+         Round 1, October 15th 2025                                         1 second / 512 MiB / 50 points
+
+
+Task Rima
+In Croatian class, Jakov reads a poem consisting of n lines and n/4 stanzas. Lines
+1, 2, 3, and 4 make up the first stanza, lines 5, 6, 7, and 8 the second stanza, and
+so on. Each line in each stanza consists of exactly m words.
+We say that two lines rhyme if the last k letters of their last words match. If the
+last word in one of the lines consists of fewer than k letters, then the lines do not
+rhyme.
+At the stanza level, we distinguish three types of rhyme schemes:
+
+   • AABB – lines 1 and 2 rhyme, and lines 3 and 4 rhyme
+
+   • ABAB – lines 1 and 3 rhyme, and lines 2 and 4 rhyme
+
+   • ABBA – lines 1 and 4 rhyme, and lines 2 and 3 rhyme
+
+The teacher asked Jakov to determine in how many stanzas of the poem each of
+these three types of rhyme schemes appears. Help Jakov answer the teacher correctly and get an A in
+Croatian class!
+
+Input
+The first line contains the natural numbers n, m and k (1 ≤ n ≤ 500 and n is divisible by 4, 1 ≤ m, k ≤ 20)
+from the text of the task.
+The next n lines contain m words each, with each word being made up of at most 20 lowercase letters of
+the English alphabet.
+
+Output
+In the first and only line, write three numbers: the number of stanzas in which AABB rhyme appears, the
+number of stanzas in which ABAB rhyme appears, and the number of stanzas in which ABBA rhyme
+appears.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          15     n=4
+     2          15     Each word is made up of 1 character.
+     3          20     No additional constraints.
+
+
+
+
+                                                    1 of 10
+      Croatian Open Competition in Informatics                                            Task Rima
+      Round 1, October 15th 2025                                       1 second / 512 MiB / 50 points
+
+
+Examples
+ input                              input                            input
+ 8 2 3                              8 2 2                            4 4 2
+ aa bb                              ja programiram                   pas konj zec macka
+ cc bb                              mjesec listopad                  trokut teziste poluravnina tocka
+ dd ee                              ponekad chillam                  nogomet tenis ragbi odbojka
+ ff ee                              voda vodopad                     sir mlijeko kulen sunka
+ auu aaaaaahh                       banana jabuka
+ auu wer                            fiziku znam                      output
+ asdf power                         teska odluka                     1 1 1
+ lol kldahh                         njam njam
+
+ output                             output
+ 0 0 1                              0 2 0
+
+
+Clarification of the first example: In the first stanza, not a single pair of lines can rhyme, because
+each last word has only 2 letters, and k = 3. The second stanza follows an ABBA rhyme scheme because
+the 1st and 4th lines rhyme (aaaaaahh and kldahh), and the 2nd and 3rd lines also rhyme (wer and
+power). Thus, AABB and ABAB rhymes occur 0 times, while ABBA rhyme occurs once.
+Clarification of the third example: In the only stanza of this poem, the last two letters of the last
+word in each line are ka, so all lines rhyme with each other. It follows that all three types of rhyme
+schemes appear in this stanza: AABB, ABAB and ABBA.
+
+
+
+
+                                                 2 of 10
+         Croatian Open Competition in Informatics                                          Task Krugomet
+         Round 1, October 15th 2025                                         1 second / 512 MiB / 70 points
+
+
+Task Krugomet
+n students gathered in the schoolyard one sunny day and stood in a large circle.
+Each person had his own box of balls (person i has ai balls), as well as his crush
+(maybe even himself), denoted by si .
+They decided to play their favorite game, krugomet. Playing krugomet consists
+of k rounds. In each round, all participants in the game simultaneously throw
+all their balls towards their crush. The students are skilled and agile, so they will
+always catch all the balls thrown to them in a round. After the balls are caught,
+everyone gets ready for the next round, and the whole process is repeated.
+The teacher fell asleep on the bench and left the students to play alone. When he woke up, the students
+asked him to tell them who won, i.e. to answer 2 questions:
+
+   • How many balls does the student with the most balls have after k rounds of play?
+
+   • Who collected the most balls after k rounds of play?
+
+The teacher knows how many students played krugomet n, the sequence of crushes si , the initial number
+of balls for each student ai , and how many rounds of play k were played. Unfortunately, the teacher
+doesn’t have time to count how many balls each person has, so he leaves that up to you.
+Help him and determine the list of students who collected the most balls. In case there is more than one
+person with the most balls, print their indices in order from smaller to larger.
+
+Input
+In the first line are the two natural numbers n and k (1 ≤ n ≤ 105 , 1 ≤ k ≤ 109 ) from the text of the task.
+In the second line, there are n natural numbers ai (1 ≤ ai ≤ 1000), numbers from the text of the task
+In the third line are n natural numbers si (1 ≤ si ≤ n), numbers from the text of the task.
+
+Output
+In the first line, print a single number - the number of balls collected by the student with the most balls.
+In the second line, print the indices of the students who collected the most balls. The indices should be
+printed in ascending order.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          14     n, k ≤ 1000
+     2          26     The sequence s is a permutation, si ̸= sj (1 ≤ i < j ≤ n).
+     3          30     No additional constraints.
+
+Correctly printing the 1st line earns 50% points for the test example. The remaining 50% points for the
+test example are earned by correctly printing the 2nd line.
+
+
+
+
+                                                    3 of 10
+       Croatian Open Competition in Informatics                                       Task Krugomet
+       Round 1, October 15th 2025                                      1 second / 512 MiB / 70 points
+
+
+Examples
+ input                               input                         input
+ 2 1                                 4 2                           4 10000000
+ 5 6                                 5 5 5 5                       1 2 3 4
+ 2 1                                 1 2 1 1                       2 1 4 3
+
+ output                              output                        output
+ 6                                   15                            4
+ 1                                   1                             4
+
+
+Clarification of the first example: In the only round of krugomet, people labeled 1 and 2 threw all
+their balls towards each other and "swapped" how many balls each person had. After the first round,
+person labeled 1 had the most balls and was holding 6 balls.
+
+
+
+
+                                                  4 of 10
+        Croatian Open Competition in Informatics                                       Task Harmonija
+        Round 1, October 15th 2025                                  2.5 seconds / 1024 MiB / 110 points
+
+
+Task Harmonija
+In the city of Shumen, Bulgaria, there is a large magic tree of n connected nodes,
+where each node hides two magic values: red ci and blue pi . Each value represents
+the power that the node gives depending on its chosen color. Your goal is to
+explore the harmonious paths in the tree.
+Let’s consider the shortest path from the starting node A to the ending node B
+in the tree. We traverse the nodes in order and choose either blue or red color for
+the current node. After choosing the color of the current node, the state of the
+path must be harmonious, i.e. no color may "mogg" another. We say that one color "moggs" another if we
+have chosen it at least three more times than the other color. This rule must hold at every moment of
+the path for the path to be considered harmonious.
+We define the value of a path as the sum of the values of all nodes on that path, where each node’s value
+is its magic value of the color it is colored with.
+Your task is to determine the maximum value of q paths given with a starting and ending node if the
+paths must be harmonic.
+According to the given definition, it can be shown that there is always at least 1 harmonic path between
+any 2 nodes in the tree.
+
+Input
+The first line contains the natural numbers n and q (1 ≤ n, q ≤ 105 ), the number of nodes in the magic
+tree and the number of queries
+The second line contains the n natural numbers ci (−109 ≤ ci ≤ 109 ), the red values of the nodes.
+The third line contains the n natural numbers pi (−109 ≤ pi ≤ 109 ), the blue values of the nodes.
+In the next n − 1 lines, there are two natural numbers u and v (1 ≤ u, v ≤ n, u ̸= v), there is an edge
+between the cities u and v. There will be a path between any two nodes in the tree.
+In the next q lines, there are two natural numbers u and v (1 ≤ u, v ≤ n), the labels of the starting and
+ending nodes of the path.
+
+Output
+For each query, print one number on a separate line - the highest value of the harmonic path between the
+starting and ending nodes of the query.
+
+Scoring
+
+ Subtask     Points   Constraints
+
+    1          27     n, q ≤ 15
+    2          41     n, q ≤ 1000
+    3          19     q ≤ 10000
+    4          23     No additional constraints.
+
+
+
+
+                                                   5 of 10
+       Croatian Open Competition in Informatics                                            Task Harmonija
+       Round 1, October 15th 2025                                       2.5 seconds / 1024 MiB / 110 points
+
+
+Examples
+ input                                                  input
+4 1                                                     5 3
+10 10 10 10                                             -5 -4 0 -3 3
+-10 0 -10 0                                             3 1 -5 0 0
+1 2                                                     3 2
+2 3                                                     1 4
+3 4                                                     3 5
+1 4                                                     1 2
+                                                        2 5
+ output                                                 1 4
+ 30                                                     5 3
+
+                                                        output
+
+                                                        4
+                                                        3
+                                                        3
+
+
+Clarification of the first example: If we color node 1 red, node 2 blue, and nodes 3 and 4 red,
+we get a harmonic path with a value of 30. There is no harmonic path with a higher value because
+we have to color at least one of the 4 nodes blue, and the blue values do not increase the sum in this example.
+
+
+
+
+                                                   6 of 10
+         Croatian Open Competition in Informatics                                          Task Kraljica
+         Round 1, October 15th 2025                                     5 seconds / 512 MiB / 110 points
+
+
+Task Kraljica
+Queen Sofia is trapped on a mysterious chessboard of n rows and m columns. The
+board contains her starting square (labeled "S") and her exit square (labeled "E").
+Unfortunately, the path to the exit is not easy - some squares are blocked (labeled
+"#"), while others are free (labeled ".").
+But the board also hides magical portals! Some of the numbers between 1 and 9
+appear exactly twice on the board. If the queen lands on a square with a number,
+she can teleport to another square on the board with the same number without
+spending extra moves to move through the portal. The queen cannot continue moving in the same
+direction after passing through the portal without an additional cost of 1 move.
+The queen can move in a chess-like manner - in one move she can jump to any square that is on the same
+diagonal, row, or column as her, but only if there are no blocked squares between her and that
+square (including the starting and ending squares of the move).
+Find and print the smallest number of moves required for the queen to reach the exit square from the
+starting square, or print -1 if this is not possible.
+
+Input
+The first line contains the integers n and m (1 ≤ n, m ≤ 1000), the number of rows and the number of
+columns of the board.
+Each of the next n lines contains m characters cij , the description of the board. Each character of the
+board will be one of S, E, a number between 1 and 9, "." or "#" (without quotes).
+
+Output
+In the first and only line, print a single number - the smallest number of moves required for the queen to
+reach the exit square.
+
+Scoring
+
+ Subtask      Points   Constraints
+
+     1          24     n, m ≤ 5
+     2          32     There won’t be any portals on the board.
+     3          18     n, m ≤ 500
+     4          36     No additional constraints.
+
+
+
+
+                                                    7 of 10
+        Croatian Open Competition in Informatics                                          Task Kraljica
+        Round 1, October 15th 2025                                     5 seconds / 512 MiB / 110 points
+
+
+Examples
+ input                                input                           input
+ 4 4                                  3 3                             5 4
+ S..1                                 S..                             S.21
+ ####                                 .#.                             ####
+ 1.#E                                 ..E                             2##1
+ ....                                                                 ###.
+                                      output                          E..#
+ output
+                                      2                               output
+ 4
+                                                                      4
+
+
+Clarification of the third example: Queen Sofia will move to number 1 in the 1st row in her first
+move (note that there is no blocked square between S and 1, so this move is indeed possible). She will
+then teleport to the second number 1 in the matrix and will make 3 more moves to the exit square. With
+these moves, she has indeed made the fewest number of moves needed from the starting to the exit square.
+
+
+
+
+                                                   8 of 10
+         Croatian Open Competition in Informatics                                                       Task Zagi
+         Round 1, October 15th 2025                                               3 seconds / 512 MiB / 110 points
+
+
+Task Zagi
+Jakov and Toni, the two best players in the world, will face each other in the finals
+of the world championship in krastoboj.
+Krastoboj is a game played by two players on a sequence of positive integers. The
+players take turns making moves, and the player who cannot make a move loses
+the game. At the very beginning, there is only one sequence of positive integers
+on the board - the initial sequence.
+In one move, a player chooses one of the existing sequences and one number x
+that appears in that sequence. Then they delete all occurrences of x in the chosen
+sequence, thereby splitting the sequence into several new sequences separated at
+the positions where x appeared.
+A sequence of numbers - the template for the final match - has been found. It is known that the initial
+sequence in the final will be some contiguous subsequence of this template sequence. You are given q
+scenarios. For each scenario, can you determine who the winner will be, assuming that both Toni and
+Jakov play optimally and that Toni makes the first move?
+
+Input
+The first line contains two positive integers n and q (1 ≤ n, q ≤ 105 ).
+The second line contains a sequence of positive integers a1 , a2 , . . . , an (1 ≤ ai ≤ 32 for each i = 1, 2, . . . , n).
+The following q lines each contain two integers li and ri (1 ≤ li ≤ ri ≤ n), the boundaries of the contiguous
+subsequence considered in the i-th scenario.
+
+Output
+For each query, print on a separate line either Toni or Jakov, the name of the winner in the i-th scenario.
+
+Scoring
+
+ Subtask      Points    Constraints
+
+     1          15      n, q ≤ 10
+     2          11      n, q ≤ 1000, ai ≤ 2
+     3          18      n, q ≤ 1000
+     4          14      ai ≤ 2
+     5          23      ali = ari for every i = 1, . . . , q
+     6          29      No additional constraints.
+
+
+
+
+                                                        9 of 10
+      Croatian Open Competition in Informatics                                               Task Zagi
+      Round 1, October 15th 2025                                       3 seconds / 512 MiB / 110 points
+
+
+Examples
+ input                                               input
+ 6 4                                                 10 5
+ 1 3 2 3 1 2                                         3 3 3 1 2 2 1 2 2 1
+ 1 1                                                 2 3
+ 2 3                                                 9 10
+ 2 4                                                 5 6
+ 1 3                                                 5 8
+                                                     3 7
+ output
+                                                     output
+ Toni
+ Jakov                                               Toni
+ Toni                                                Jakov
+ Toni                                                Toni
+                                                     Toni
+                                                     Toni
+
+
+Clarification of the first example: In the third scenario, Toni chooses x = 2, which splits the sequence
+into two sequences of length 1. Whichever sequence Jakov chooses next, Toni will choose the remaining
+one, after which Jakov will have no possible moves left.
+
+
+
+
+                                                 10 of 10
+

@@ -3,6 +3,7 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: BipartiteDSU dsu(3); dsu.add_edge(0,1);
   // Append undirected edges; is_bipartite(u) tests the current component.
   struct BipartiteDSU {
     vector<int> parent, size, parity; vector<bool> good;
@@ -11,7 +12,7 @@ namespace notebook::graph {
       auto [root, p] = find(parent[u]); parity[u] ^= p; parent[u] = root;
       return {root, parity[u]};
     }
-    explicit BipartiteDSU(int n):parent(n),size(n,1),parity(n),good(n,true){
+    BipartiteDSU(int n):parent(n),size(n,1),parity(n),good(n,true){
       iota(parent.begin(), parent.end(), 0);
     }
     bool add_edge(int u, int v) {

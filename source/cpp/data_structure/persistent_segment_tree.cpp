@@ -3,6 +3,8 @@
 namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: PersistentRangeSum pst(3); int root = pst.add(0,1,5);
+  //      auto s = pst.sum(root,0,3); // root 0: all zeros
   // Immutable point-add versions; root 0 is the all-zero array. Ranges [l,r).
   struct PersistentRangeSum {
     struct Node { int left=0,right=0; long long sum=0; }; vector<Node>t {1}; int n;
@@ -21,7 +23,7 @@ namespace notebook::data_structure {
       if (a <= l && r <= b) return t[u].sum;
       int m=(l+r)/2; return query(t[u].left,l,m,a,b)+query(t[u].right,m,r,a,b);
     }
-    explicit PersistentRangeSum(int n) : n(n) { assert(n >= 0); }
+    PersistentRangeSum(int n) : n(n) { assert(n >= 0); }
     int add(int root, int p, long long x) {
       assert(0<=root&&root<(int)t.size()&&0<=p&&p<n); return update(root,0,n,p,x);
     }

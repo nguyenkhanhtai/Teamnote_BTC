@@ -4,6 +4,7 @@
 namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Use: auto tangents = circle_tangents({0,0},1,{4,0},1);
   // Tangency points on circles; nullopt means infinitely many (identical circles).
   optional<vector<pair<Point,Point>>>circle_tangents(Point a,long double ra,Point b,long double rb){
     assert(ra >= 0 && rb >= 0); Point d = b - a; long double z = norm2(d);

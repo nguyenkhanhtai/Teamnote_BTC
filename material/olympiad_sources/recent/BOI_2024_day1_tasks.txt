@@ -1,0 +1,361 @@
+                                             BOI 2024                                           jobs
+                                            Vilnius, Lithuania                                d1 Tasks
+                                           May 3 - May 7, 2024                           English (HSC)
+
+
+
+
+Jobs
+You have a successful business where you make money by completing jobs for your clients.
+Currently, you can choose from N one-time jobs, numbered from 1 to N .
+
+Completing job i will make you a proﬁt of xi euros. The proﬁt may also be negative (xi < 0).
+
+Some jobs depend on another job. That is, there may be a job numbered pi that must be
+completed before the i -th job can be started. Hence, a job with a large proﬁt may be less attractive
+than it seems if it depends on a job with a negative proﬁt. If pi = 0, the i -th job has no
+dependency.
+
+You currently have s euros and can decide which jobs to do and in which order to do them, as long
+as the dependencies are respected. Moreover, the amount of money you own may not become
+negative at any point.
+
+
+Task
+
+Calculate the maximum proﬁt you can make by choosing to complete some (possibly none) of the
+N jobs in a selected order.
+
+Input
+
+The ﬁrst line contains two integers N and s – the number of jobs and the amount of money you
+initially own respectively.
+
+Then, N lines follow. The i -th of them contains two integers xi and pi – the proﬁt and the number
+of the prerequisite job for the i -th job, respectively. If pi = 0, the i -th job does not have a job
+dependency.
+
+
+Output
+
+Your program should output a single integer – the maximum proﬁt that you can make.
+
+
+
+
+                                                                                          jobs (1 of 2)
+Examples
+
+ Input     Output                                      Explanation
+
+ 6 1       6          To maximize proﬁt, you should pick jobs 1, 4, 3 and 5 in the following order:
+ 3 0
+                            Job 1: money 1 → 4,
+ -3 1
+                            Job 4 (prerequisite 1 complete): money 4 → 6,
+ -5 0
+                            Job 3: money 6 → 1,
+ 2 1                        Job 5 (prerequisite 3 complete): money 1 → 7.
+ 6 3
+ -4 5                 Overall, the total proﬁt is 7 - 1 = 6 (current money minus starting money).
+
+
+
+Constraints
+
+       1 ≤ N ≤ 3 ⋅ 105
+       0 ≤ s ≤ 1018
+       −109 ≤ xi ≤ 109 (for all 1 ≤ i ≤ N )
+       0 ≤ pi < i (for all 1 ≤ i ≤ N )
+
+Subtasks
+
+               No.   Points    Additional constraints
+
+                1      11      s = 1018 .
+                2      14      N ≤ 2000 and for all jobs, either pi = 0, or pi = i − 1.
+                3      15      For all jobs, either pi = 0, or pi = i − 1.
+
+                4      29      N ≤ 2000.
+                5      31      No additional constraints.
+
+
+
+
+                                                                                           jobs (2 of 2)
+                                              BOI 2024                                          portal
+                                             Vilnius, Lithuania                                  d1 Tasks
+                                            May 3 - May 7, 2024                             English (HSC)
+
+
+
+
+Portal
+You think it would be funny to prank your best friend by placing them on cell (0, 0) of an inﬁnite
+grid of coloured cells. The friend then moves around the grid indeﬁnitely, one step at a time,
+always moving to one of the four adjacent cells.
+
+N of the cells on the grid contain a portal. Once your friend steps on a portal, they instantly
+teleport to a random portal (which might be the one they just stepped on, or might be a diﬀerent
+one). If there is a portal at the cell (0, 0), your friend is also teleported at the start when they get
+placed on the grid.
+
+As part of the prank, you want to trick your friend into not noticing that there are portals at all. The
+only thing your friend sees is the colour of the cell they are currently at, so you should make sure
+that from your friend's perspective the colours of the tiles never change. In particular, if your
+friend thinks they have entered a cell more than once (for example by moving left and then
+immediately right), they should see the same color as the ﬁrst time they think they entered the
+cell.
+
+Note: when your friend steps on a portal, they will see both the colour of the cell they step on, and
+the one they are teleported to. You will therefore need to colour all portal cells the same colour to
+avoid teleportations being immediately obvious.
+
+A simple solution would be to colour all cells the same colour. But colours are nice! So you would
+like to use as many colours as you can.
+
+Let's consider an example where the portals are placed at cells (1, 1), (1, 3) and (3, 2), and your
+friend makes the following sequence of moves: up, right, down, left.
+
+
+
+
+                                                                                           portal (1 of 4)
+            After 0 steps                                    After 1 step                                   After 2 steps
+ (-1,4) (0,4) (1,4) (2,4) (3,4) (4,4)            (-1,4) (0,4) (1,4) (2,4) (3,4) (4,4)           (-1,4) (0,4) (1,4) (2,4) (3,4) (4,4)
+
+ (-1,3) (0,3) (1,3) (2,3) (3,3) (4,3)            (-1,3) (0,3) (1,3) (2,3) (3,3) (4,3)           (-1,3) (0,3) (1,3) (2,3) (3,3) (4,3)
+
+ (-1,2) (0,2) (1,2) (2,2) (3,2) (4,2)            (-1,2) (0,2) (1,2) (2,2) (3,2) (4,2)           (-1,2) (0,2) (1,2) (2,2) (3,2) (4,2)
+
+ (-1,1) (0,1) (1,1) (2,1) (3,1) (4,1)            (-1,1) (0,1) (1,1) (2,1) (3,1) (4,1)           (-1,1) (0,1) (1,1) (2,1) (3,1) (4,1)
+
+ (-1,0) (0,0) (1,0) (2,0) (3,0) (4,0)            (-1,0) (0,0) (1,0) (2,0) (3,0) (4,0)           (-1,0) (0,0) (1,0) (2,0) (3,0) (4,0)
+
+(-1,-1) (0,-1) (1,-1) (2,-1) (3,-1) (4,-1)       (-1,-1) (0,-1) (1,-1) (2,-1) (3,-1) (4,-1)     (-1,-1) (0,-1) (1,-1) (2,-1) (3,-1) (4,-1)
+
+ Initial position. First time your friend sees                Go up to cell (0, 1)              Go right to cell (1, 1) and teleport to any of
+               colour of cell (0, 0)                                                                         the three portals
+
+
+
+            After 3 steps                                   After 4 steps
+ (-1,4) (0,4) (1,4) (2,4) (3,4) (4,4)            (-1,4) (0,4) (1,4) (2,4) (3,4) (4,4)
+
+ (-1,3) (0,3) (1,3) (2,3) (3,3) (4,3)            (-1,3) (0,3) (1,3) (2,3) (3,3) (4,3)
+
+ (-1,2) (0,2) (1,2) (2,2) (3,2) (4,2)            (-1,2) (0,2) (1,2) (2,2) (3,2) (4,2)                 Where your friend thinks they are
+
+
+                                                                                                      Where your friend might be
+ (-1,1) (0,1) (1,1) (2,1) (3,1) (4,1)            (-1,1) (0,1) (1,1) (2,1) (3,1) (4,1)
+                                                                                                      Cell contains portal
+ (-1,0) (0,0) (1,0) (2,0) (3,0) (4,0)            (-1,0) (0,0) (1,0) (2,0) (3,0) (4,0)
+
+(-1,-1) (0,-1) (1,-1) (2,-1) (3,-1) (4,-1)       (-1,-1) (0,-1) (1,-1) (2,-1) (3,-1) (4,-1)
+
+                  Go down                         Go left. Your friend thinks they're back to
+                                                  the start, but they might be at any of the
+                                                              coloured positions.
+
+
+After the sequence of moves the friend thinks that they're back at the starting cell (0, 0), but in
+reality they might also end up in (0, 2) or (2, 1). They already saw the colour of cell (0, 0) at the
+beginning, so if they see a diﬀerent colour now, they will realise there must be portals. We don't
+want that to happen, so we must choose the same colour for these 3 cells.
+
+There is no sequence of moves where your friend would think that they end up on cell (0, 0) when
+they actually end up on (1, 0), so these cells can be safely coloured with diﬀerent colours.
+
+Below you can see a colouring with 4 colours for the example above. It is not possible to use more
+than 4 colours for this example.
+
+
+
+
+                                                                                                                             portal (2 of 4)
+                                 (-1,4)      (0,4)   (1,4)   (2,4)   (3,4)   (4,4)
+
+
+                                 (-1,3)      (0,3)   (1,3)   (2,3)   (3,3)   (4,3)
+
+
+                                 (-1,2)      (0,2)   (1,2)   (2,2)   (3,2)   (4,2)
+
+
+                                 (-1,1)      (0,1)   (1,1)   (2,1)   (3,1)   (4,1)
+
+
+                                 (-1,0)      (0,0)   (1,0)   (2,0)   (3,0)   (4,0)
+
+
+                                 (-1,-1) (0,-1) (1,-1) (2,-1) (3,-1) (4,-1)
+
+
+Let's consider a diﬀerent example with portals at cells (0, 0), (0, 1), (1, 0), (0, −1) and (−1, 0). Say
+your friend tries to reach cell (1, 3) by going right once and then up 3 times. One possibility is that
+they end up at cell (0, 0) if they got teleported there at the start and after each step. If your friend
+now backtracks to what they think is cell (0, 0) by going down 3 times and left once, and doesn't
+get teleported away from their current cell while doing so, they will end up at (−1, −3). Your friend
+will think that they are at cell (0, 0) for the second time, and will expect to see the same colour. So
+you need to colour (−1, −3) and (0, 0) with the same colour.
+
+Note that there was nothing special about our initial choice of cell (1, 3). You can similarly show
+that other cells have to share a colour with (0, 0).
+
+
+Task
+
+Calculate the maximum number of colours you can use while making sure that your friend won't
+notice the existence of portals.
+
+
+Input
+
+The ﬁrst line contains the integer N – the number of portals.
+
+The next N lines contain two integers each. The i -th of these lines contains xi and yi , indicating
+that there is a portal at cell (xi , yi ).
+
+
+Output
+
+Print a single integer – the maximum number of colours that can be used without your friend
+noticing the portals, or −1 if you can use an inﬁnite number of colours.
+
+
+
+
+                                                                                           portal (3 of 4)
+Examples
+
+ Input     Output                                          Explanation
+
+3          4          First example discussed in the task description.
+1 1
+1 3
+3 2
+
+5          1          Second example discussed in the task description.
+0 0
+1 0
+-1 0
+0 1
+0 -1
+
+1          -1         Your friend can only be "teleported" to the same cell that the portal is
+1 -1                  located in, so there is no way for them to notice the existance of portals
+                      even if every cell is coloured diﬀerently.
+
+
+Constraints
+      1 ≤ N ≤ 105
+      −106 ≤ xi , yi ≤ 106 (for all 1 ≤ i ≤ N )
+      No two portals share the same coordinates.
+
+
+Subtasks
+
+No.      Points   Additional constraints
+
+ 1         1      N ≤ 2.
+ 2        10      N ≤ 3.
+                  For all integers x1 , x2 , y1 , y2 : if there are portals at the locations (x1 , y1 ) and
+ 3        10
+                  (x2 , y2 ), then there is also a portal at the location (x1 , y2 ).
+ 4        29      N ≤ 100 and −100 ≤ xi , yi ≤ 100 for all 1 ≤ i ≤ N .
+ 5        15      N ≤ 2000.
+ 6        35      No additional contraints.
+
+
+
+
+                                                                                                   portal (4 of 4)
+                                               BOI 2024                                          trains
+                                             Vilnius, Lithuania                                  d1 Tasks
+                                            May 3 - May 7, 2024                             English (HSC)
+
+
+
+
+Trains
+You have arrived in Vilnius and want to visit various cities in Lithuania.
+
+Cities in Lithuania are located on a straight line and numbered from 1 to N sequentially. Vilnius is
+assigned the number 1.
+
+Each city has a train station with a single train route that operates from that station. You can only
+get on a train at the start of its route, though you can get oﬀ at any of its stops. Trains starting
+their route at the i -th city make a stop every di cities, and their route consists of xi stops (not
+including the starting city). If di = 0, the trains operating from the i -th city are currently out of
+service, so you cannot get on them.
+
+To be more precise, if you get on a train in the i -th city, you can get oﬀ the train in any city
+numbered i + t ⋅ di , where 1 ≤ t ≤ xi . Note that since you only want to visit cities in Lithuania, you
+won't ride further than the N -th city, even if the train has more stops on its route.
+
+
+Task
+
+You are going to visit some cities, using trains to travel between them. As you plan your trip, you
+start to wonder how many diﬀerent options you have for your journey that starts at Vilnius. Two
+journeys are diﬀerent if they make stops at diﬀerent sequences of cities.
+
+Calculate this number and print the answer modulo 109 + 7.
+
+
+Input
+The ﬁrst line contains one integer N – the number of cities.
+
+Then N lines follow. The i -th of them contains two integers di and xi – the numbers describing the
+route starting in the i -th city.
+
+
+Output
+Output a single integer – the number of ways you can visit some of the N cities taken modulo
+109 + 7.
+
+
+
+
+                                                                                           trains (1 of 2)
+Examples
+
+             Input    Output                        Explanation
+
+             5        7         There are 7 possible journeys you could take:
+             1 3
+                                         1
+             2 1
+                                         1→2
+             1 3
+                                         1→2→4
+             0 10                        1→3
+             3 5                         1→3→4
+                                         1→3→5
+                                         1→4
+
+
+
+Constraints
+   1 ≤ N ≤ 105
+   0 ≤ di ≤ 109 (for each 1 ≤ i ≤ N )
+   0 ≤ xi ≤ 109 (for each 1 ≤ i ≤ N )
+
+Subtasks
+
+                          No.   Points    Additional constraints
+
+                           1      8       n ≤ 15.
+                           2      13      n ≤ 104 .
+                           3      16      For all trains, di = 1.
+
+                           4      34      For all trains, xi = 109 .
+
+                           5      29      No additional contraints.
+
+
+
+
+                                                                                trains (2 of 2)
+
