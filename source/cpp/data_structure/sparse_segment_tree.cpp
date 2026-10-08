@@ -6,8 +6,8 @@ namespace notebook::data_structure {
   // Use: SparseRangeSum st(0,1000000000LL); st.add(42,5);
   // Sparse point-add / range-sum on integer domain [lo,hi); O(log(domain)) operations.
   struct SparseRangeSum {
-    struct Node { int left=-1,right=-1; long long sum=0; }; vector<Node>t {1};
-    long long lo, hi;
+    struct Node { int left=-1,right=-1; int sum=0; }; vector<Node>t {1};
+    int lo, hi;
     int child(int u, bool right) {
       int v = right ? t[u].right : t[u].left;
       if (v < 0) {
@@ -17,23 +17,23 @@ namespace notebook::data_structure {
       }
       return v;
     }
-    void add(int u, long long l, long long r, long long p, long long x) {
+    void add(int u, int l, int r, int p, int x) {
       t[u].sum += x;
       if (r - l == 1) return;
-      long long m = l + (r - l) / 2;
+      int m = l + (r - l) / 2;
       if (p < m) add(child(u, false), l, m, p, x);
       else add(child(u, true), m, r, p, x);
     }
-    long long query(int u,long long l,long long r,long long a,long long b)const {
+    int query(int u,int l,int r,int a,int b)const {
       if (u < 0 || b <= l || r <= a) return 0;
       if (a <= l && r <= b) return t[u].sum;
-      long long m=l+(r-l)/2; return query(t[u].left,l,m,a,b)+query(t[u].right,m,r,a,b);
+      int m=l+(r-l)/2; return query(t[u].left,l,m,a,b)+query(t[u].right,m,r,a,b);
     }
-    SparseRangeSum(long long lo, long long hi) : lo(lo), hi(hi) {
+    SparseRangeSum(int lo, int hi) : lo(lo), hi(hi) {
       assert(lo < hi && (__int128) hi - lo <= LLONG_MAX);
     }
-    void add(long long p,long long x){ assert(lo<=p&&p<hi); add(0,lo,hi,p,x); }
-    long long sum(long long l, long long r) const {
+    void add(int p,int x){ assert(lo<=p&&p<hi); add(0,lo,hi,p,x); }
+    int sum(int l, int r) const {
       assert(lo <= l && l <= r && r <= hi); return query(0, lo, hi, l, r);
     }
     size_t node_count() const { return t.size(); }

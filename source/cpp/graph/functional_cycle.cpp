@@ -3,9 +3,9 @@
 namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
-  // Use: long long nextState(long long x) { return (x+1)%3; }
+  // Use: int nextState(int x) { return (x+1)%3; }
   //      auto cycle = find_cycle(0,nextState);
-  using CycleState = long long; // Change the state type if needed.
+  using CycleState = int; // Change the state type if needed.
   struct CycleInfo {
     CycleState entry; size_t prefix_length, cycle_length;
   };

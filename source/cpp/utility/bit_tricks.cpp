@@ -1,10 +1,11 @@
 #include <bits/stdc++.h>
   // Use: for_each_submask(13,onMask); for_each_k_subset(5,2,onMask);
-  //      void onMask(uint64_t mask)
+  //      void onMask(int mask)
 
-// Calls visit(submask), including zero, in descending order.
-void for_each_submask(uint64_t mask,std::function<void(uint64_t)> visit) {
-    uint64_t sub = mask;
+// Nonnegative masks. Calls visit(submask), including zero, in descending order.
+void for_each_submask(int mask,std::function<void(int)> visit) {
+    assert(mask >= 0);
+    int sub = mask;
     for (;;) {
         visit(sub);
         if (sub == 0) break;
@@ -12,23 +13,30 @@ void for_each_submask(uint64_t mask,std::function<void(uint64_t)> visit) {
     }
 }
 
-// Gosper: n<=64, k<=n. Calls visit(mask) for every k-element subset.
-void for_each_k_subset(unsigned n,unsigned k,std::function<void(uint64_t)> visit) {
-    assert(k <= n && n <= 64);
-    if (k == 0) { visit(uint64_t(0)); return; }
-    if (k == 64) { visit(UINT64_MAX); return; }
-    uint64_t mask = (uint64_t(1) << k) - 1;
-    while (n == 64 || mask < (uint64_t(1) << n)) {
+// Gosper: n<=63 with #define int long long; k<=n.
+void for_each_k_subset(int n,int k,std::function<void(int)> visit) {
+    const int BITS = std::numeric_limits<int>::digits;
+    assert(0 <= k && k <= n && n <= BITS);
+    if (k == 0) { visit(0); return; }
+    __int128 limit = (__int128)1 << n;
+    int mask = ((__int128)1 << k) - 1;
+    for (;;) {
         visit(mask);
-        uint64_t low = mask & (uint64_t(0) - mask), next = mask + low;
-        if (next == 0) break;
+        int low = mask & -mask;
+        __int128 next = (__int128)mask + low;
+        if (next >= limit) break;
         mask = next | (((next ^ mask) >> 2) / low);
     }
 }
 
-// Return 64 for zero; avoid undefined __builtin_ctzll(0).
-unsigned trailing_zeros(uint64_t x) { return x ? __builtin_ctzll(x) : 64; }
-unsigned leading_zeros(uint64_t x) { return x ? __builtin_clzll(x) : 64; }
-unsigned popcount(uint64_t x) { return __builtin_popcountll(x); }
-uint64_t lowest_bit(uint64_t x) { return x & (uint64_t(0) - x); }
+// Count bits in the full int storage width; zero has no set bit.
+int trailing_zeros(int x) {
+    return x ? __builtin_ctzll(x) : sizeof(int) * CHAR_BIT;
+}
+int leading_zeros(int x) {
+    return x ? __builtin_clzll(x) - (sizeof(long long)-sizeof(int))*CHAR_BIT
+             : sizeof(int) * CHAR_BIT;
+}
+int popcount(int x) { return __builtin_popcountll(x); }
+int lowest_bit(int x) { assert(x >= 0); return x & -x; }
 // Permutation/matching DP: next position = popcount(mask), no extra step state.

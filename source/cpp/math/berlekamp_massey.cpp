@@ -9,12 +9,12 @@ namespace notebook::math {
   // Prime modulus 998244353; s[i]=sum recurrence[j]*s[i-1-j].
   vector<int> berlekamp_massey(vector<int> s) {
     for (auto& x : s) x = (x % MOD + MOD) % MOD;
-    vector<int> C {1}, B {1}; int L = 0, gap = 1; long long previous = 1;
+    vector<int> C {1}, B {1}; int L = 0, gap = 1; int previous = 1;
     for (int i = 0; i < (int) s.size(); ++i) {
-      long long d = (s[i] % MOD + MOD) % MOD;
+      int d = (s[i] % MOD + MOD) % MOD;
       for (int j = 1; j <= L; ++j) d = (d + 1LL * C[j] * s[i - j]) % MOD;
       if (!d) { ++gap; continue; }
-      auto old = C; long long coef = d * power(previous, MOD - 2) % MOD;
+      auto old = C; int coef = d * power(previous, MOD - 2) % MOD;
       if (C.size() < B.size() + gap) C.resize(B.size() + gap);
       for(int j=0;j<(int)B.size();++j)C[j+gap]=(C[j+gap]-coef*B[j]%MOD+MOD)%MOD;
       if(2*L<=i){ L=i+1-L; B=move(old); previous=d; gap=1; } else ++gap;
@@ -32,16 +32,17 @@ namespace notebook::math {
       c.resize(n); return c;
     
   }
-  int recurrence_term(const vector<int>&initial,const vector<int>&recurrence,uint64_t k){
+  int recurrence_term(const vector<int>&initial,const vector<int>&recurrence,int k){
+    assert(k >= 0);
     int n = recurrence.size();
-    if (k < initial.size()) return(initial[k] % MOD + MOD) % MOD;
+    if (k < (int)initial.size()) return(initial[k] % MOD + MOD) % MOD;
     if (!n) return 0;
     assert(initial.size() >= (size_t) n);
  vector<int> a(n), x(n); a[0] = 1;
     if (n == 1) x[0] = recurrence[0];
     else x[1] = 1;
     for (; k; k >>= 1, x = recurrence_combine(x,x,recurrence)) if (k & 1) a = recurrence_combine(a,x,recurrence);
-    long long ans = 0;
+    int ans = 0;
     for(int i=0; i<n; ++i)ans=(ans+1LL*a[i]*initial[i])%MOD;
     return(ans + MOD) % MOD;
   }

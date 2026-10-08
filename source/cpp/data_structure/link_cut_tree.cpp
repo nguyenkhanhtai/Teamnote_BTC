@@ -7,12 +7,12 @@ namespace notebook::data_structure {
   // Dynamic forest, vertex values, path sum. 0-based IDs; -1 is no node.
   struct LinkCutTree {
     struct Node {
-      int child[2] {-1,-1},parent=-1; bool rev=false; long long value=0,sum=0;
+      int child[2] {-1,-1},parent=-1; bool rev=false; int value=0,sum=0;
     }; vector<Node> t;
     bool is_root(int u) const {
       int p=t[u].parent; return p<0||(t[p].child[0]!=u&&t[p].child[1]!=u);
     }
-    long long sum(int u) const { return u < 0 ? 0 : t[u].sum; }
+    int sum(int u) const { return u < 0 ? 0 : t[u].sum; }
     void pull(int u){ t[u].sum=t[u].value+sum(t[u].child[0])+sum(t[u].child[1]); }
     void flip(int u){ if(u>=0){ swap(t[u].child[0],t[u].child[1]); t[u].rev^=1; } }
     void push(int u) {
@@ -49,7 +49,7 @@ namespace notebook::data_structure {
       while (push(u), t[u].child[0] >= 0) u = t[u].child[0];
       splay(u); return u;
     }
-    LinkCutTree(const vector<long long>&values):t(values.size()){
+    LinkCutTree(const vector<int>&values):t(values.size()){
       for(int i=0; i<(int)t.size(); ++i)t[i].value=t[i].sum=values[i];
     }
     void make_root(int u) { access(u); flip(u); }
@@ -64,8 +64,8 @@ namespace notebook::data_structure {
       if (t[v].child[0] != u || t[u].child[1] >= 0) return false;
       t[v].child[0] = -1; t[u].parent = -1; pull(v); return true;
     }
-    void set(int u,long long value){ access(u); t[u].value=value; pull(u); }
-    optional<long long> path_sum(int u, int v) {
+    void set(int u,int value){ access(u); t[u].value=value; pull(u); }
+    optional<int> path_sum(int u, int v) {
       if (!connected(u, v)) return nullopt;
       make_root(u); access(v); return t[v].sum;
     }

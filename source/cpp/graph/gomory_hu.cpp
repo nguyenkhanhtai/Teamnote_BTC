@@ -5,16 +5,16 @@ namespace notebook::graph {
   using namespace std;
 //NOTEBOOK_BEGIN
   // Use: auto tree = gomory_hu(3,{{0,1,5},{1,2,7}});
-  struct CutTreeEdge { int u, v; long long capacity; };
+  struct CutTreeEdge { int u, v; int capacity; };
   // Undirected nonnegative capacities; min edge on tree path gives pairwise min-cut.
   vector<CutTreeEdge> gomory_hu(int n, const vector<CutTreeEdge>& edges){
-    vector<int> parent(n, 0); vector<long long> value(n);
+    vector<int> parent(n, 0); vector<int> value(n);
     for (int s = 1; s < n; ++s) {
       int t = parent[s]; Dinic flow(n);
       for (auto e : edges) {
         flow.add_edge(e.u,e.v,e.capacity); flow.add_edge(e.v,e.u,e.capacity);
       }
-      long long cut=flow.max_flow(s,t); auto side=flow.source_side(s);
+      int cut=flow.max_flow(s,t); auto side=flow.source_side(s);
       for(int i=s+1; i<n; ++i)if(parent[i]==t&&side[i])parent[i]=s;
       if (t != 0 && side[parent[t]]) {
         parent[s]=parent[t]; parent[t]=s; value[s]=value[t]; value[t]=cut;

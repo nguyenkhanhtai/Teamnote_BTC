@@ -12,7 +12,7 @@ namespace notebook::graph {
     vertex.push_back(source); parent.push_back(0);
     while (!stack.empty()) {
       auto& f = stack.back();
-      if (f.next == int(g[f.u].size())) { stack.pop_back(); continue; }
+      if (f.next == static_cast<int>(g[f.u].size())) { stack.pop_back(); continue; }
       int v = g[f.u][f.next++];
       if (index[v]) continue;
       int p=index[f.u]; index[v]=vertex.size(); vertex.push_back(v); parent.push_back(p);

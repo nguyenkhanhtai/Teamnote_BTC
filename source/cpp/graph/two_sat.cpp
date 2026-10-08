@@ -17,7 +17,7 @@ namespace notebook::graph {
     void force(int a) { add_or(a, a); }
     optional<vector<bool>> solve() const {
       auto s=strongly_connected_components(g); vector<bool>answer(g.size()/2);
-      for (int v = 0; v < int(answer.size()); ++v) {
+      for (int v = 0; v < static_cast<int>(answer.size()); ++v) {
         if (s.component[2 * v] == s.component[2 * v + 1]) return nullopt;
         answer[v] = s.component[2 * v] < s.component[2 * v + 1];
       }

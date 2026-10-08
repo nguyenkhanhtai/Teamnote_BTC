@@ -4,21 +4,21 @@ namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
   // Use: auto path = stern_encode(3,5); auto fraction = stern_decode(path);
-  using SternPath = vector<pair<char, uint64_t>>;
-  SternPath stern_encode(uint64_t p, uint64_t q) {
-    assert(p && q && gcd(p, q) == 1); SternPath out;
+  using SternPath = vector<pair<char, int>>;
+  SternPath stern_encode(int p, int q) {
+    assert(p > 0 && q > 0 && gcd(p, q) == 1); SternPath out;
     while (p != q) {
       if (p < q) {
-        uint64_t k = (q - 1) / p; out.push_back( {'L', k}); q -= k * p;
-      } else { uint64_t k=(p-1)/q; out.push_back( {'R',k}); p-=k*q; }
+        int k = (q - 1) / p; out.push_back( {'L', k}); q -= k * p;
+      } else { int k=(p-1)/q; out.push_back( {'R',k}); p-=k*q; }
     }
     return out;
   }
-  // Fractions and intermediate bounds must fit unsigned 128 bits.
-  pair<__uint128_t, __uint128_t> stern_decode(const SternPath& path) {
-    __uint128_t a = 0, b = 1, c = 1, d = 0;
+  // Fractions and intermediate bounds must fit signed 128 bits.
+  pair<__int128, __int128> stern_decode(const SternPath& path) {
+    __int128 a = 0, b = 1, c = 1, d = 0;
     for (auto[dir, k] : path) {
-      assert(k && (dir == 'L' || dir == 'R'));
+      assert(k > 0 && (dir == 'L' || dir == 'R'));
       if (dir == 'L') c += k * a, d += k * b;
       else a += k * c, b += k * d;
     }

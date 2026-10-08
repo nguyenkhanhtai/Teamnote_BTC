@@ -3,37 +3,43 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
+  // Nonnegative int values.
   // Use: XorBasis basis; basis.insert(7); auto best = basis.maximum();
   struct XorBasis {
-    array<uint64_t, 64> b {}; int count = 0;
-    bool insert(uint64_t x) {
-      for (int i = 63; i >= 0; --i) if (x >> i & 1) {
+    static constexpr int BITS = numeric_limits<int>::digits;
+    array<int, BITS> b {}; int count = 0;
+    bool insert(int x) {
+      assert(x >= 0);
+      for (int i = BITS - 1; i >= 0; --i) if (x >> i & 1) {
         if (b[i]) x ^= b[i];
         else { b[i] = x; ++count; return true; }
       }
       return false;
     }
     int rank() const { return count; }
-    bool contains(uint64_t x) const {
-      for (int i = 63; i >= 0; --i) if (x >> i & 1) x ^= b[i];
+    bool contains(int x) const {
+      assert(x >= 0);
+      for (int i = BITS - 1; i >= 0; --i) if (x >> i & 1) x ^= b[i];
       return x == 0;
     }
-    uint64_t maximum(uint64_t x = 0) const {
-      for (int i = 63; i >= 0; --i) x = max(x, x ^ b[i]);
+    int maximum(int x = 0) const {
+      assert(x >= 0);
+      for (int i = BITS - 1; i >= 0; --i) x = max(x, x ^ b[i]);
       return x;
     }
-    uint64_t minimum(uint64_t x = 0) const {
-      for (int i = 63; i >= 0; --i) x = min(x, x ^ b[i]);
+    int minimum(int x = 0) const {
+      assert(x >= 0);
+      for (int i = BITS - 1; i >= 0; --i) x = min(x, x ^ b[i]);
       return x;
     }
-    optional<uint64_t> kth(uint64_t k) const {
-      if (count < 64 && k >= (uint64_t(1) << count)) return nullopt;
-      auto a = b; vector<uint64_t> v;
-      for (int i = 0; i < 64; ++i) if (a[i]) {
+    optional<int> kth(int k) const {
+      if (k < 0 || (count < BITS && k >= (static_cast<int>(1) << count))) return nullopt;
+      auto a = b; vector<int> v;
+      for (int i = 0; i < BITS; ++i) if (a[i]) {
         for (int j = 0; j < i; ++j) if (a[i] >> j & 1) a[i] ^= a[j];
         v.push_back(a[i]);
       }
-      uint64_t x = 0;
+      int x = 0;
       for (int i = 0; i < (int) v.size(); ++i) if (k >> i & 1) x ^= v[i];
       return x;
     }

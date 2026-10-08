@@ -24,7 +24,7 @@ namespace notebook::graph {
       int count=0; for (int x:left) if (x>=0) ++count;
       for (;;) {
         fill(distance.begin(),distance.end(),-1); queue<int>q; shortest=INT_MAX;
-        for (int u = 0; u < int(g.size()); ++u) if (left[u] < 0) {
+        for (int u = 0; u < static_cast<int>(g.size()); ++u) if (left[u] < 0) {
           distance[u] = 0; q.push(u);
         }
         while (!q.empty()) {
@@ -36,14 +36,14 @@ namespace notebook::graph {
           }
         }
         if (shortest == INT_MAX) break;
-        for(int u=0; u<int(g.size()); ++u)if(left[u]<0&&augment(u))++count;
+        for(int u=0; u<static_cast<int>(g.size()); ++u)if(left[u]<0&&augment(u))++count;
       }
       return count;
     }
     // Call after solve(); returns {left IDs,right IDs} in a minimum vertex cover.
     pair<vector<int>, vector<int>> min_vertex_cover() const {
       vector<bool> l(left.size()), r(right.size()); queue<int> q;
-      for (int u = 0; u < int(left.size()); ++u) if (left[u] < 0) {
+      for (int u = 0; u < static_cast<int>(left.size()); ++u) if (left[u] < 0) {
         l[u] = true; q.push(u);
       }
       while (!q.empty()) {
@@ -54,8 +54,8 @@ namespace notebook::graph {
         }
       }
       pair<vector<int>, vector<int>> answer;
-      for(int u=0; u<int(l.size()); ++u)if(!l[u])answer.first.push_back(u);
-      for(int v=0; v<int(r.size()); ++v)if(r[v])answer.second.push_back(v);
+      for(int u=0; u<static_cast<int>(l.size()); ++u)if(!l[u])answer.first.push_back(u);
+      for(int v=0; v<static_cast<int>(r.size()); ++v)if(r[v])answer.second.push_back(v);
       return answer;
     }
   };

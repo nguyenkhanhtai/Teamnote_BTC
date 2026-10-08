@@ -5,7 +5,7 @@ namespace notebook::math {
 //NOTEBOOK_BEGIN
   // Use: auto b = extended_gcd(12,18); // b.gcd, b.x, b.y
   struct Bezout { __int128 gcd, x, y; };
-  Bezout extended_gcd(long long a, long long b) {
+  Bezout extended_gcd(int a, int b) {
     __int128 r = a, s = b, x = 1, u = 0, y = 0, v = 1;
     while (s) {
       __int128 q=r/s; tie(r,s)=pair {s,r-q*s}; tie(x,u)=pair {u,x-q*u};

@@ -26,14 +26,14 @@ namespace notebook::math {
     }
     if (invert) for (cd& x : a) x /= n;
   }
-  vector<long long>convolution_fft(const vector<int>&a,const vector<int>&b){
+  vector<int>convolution_fft(const vector<int>&a,const vector<int>&b){
     if (a.empty() || b.empty()) return {};
     vector<cd> fa(a.begin(), a.end()), fb(b.begin(), b.end());
     int sz = 1, need = a.size() + b.size() - 1;
     while (sz < need) sz <<= 1;
     fa.resize(sz); fb.resize(sz); fft(fa, false); fft(fb, false);
     for (int i = 0; i < sz; i++) fa[i] *= fb[i];
-    fft(fa, true); vector<long long> res(need);
+    fft(fa, true); vector<int> res(need);
     for (int i = 0; i < need; i++) res[i] = round(fa[i].real());
     return res;
   }

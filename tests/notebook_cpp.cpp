@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define int long long
 #include "../source/cpp/data_structure/arpa_trick.cpp"
 #include "../source/cpp/data_structure/farach_colton_bender.cpp"
 #include "../source/cpp/data_structure/segment_tree_beats.cpp"
@@ -95,7 +96,8 @@
 #include "../source/cpp/math/ntt.cpp"
 using namespace std;
 mt19937_64 rng(712367);
-long long checks=0;
+mt19937 factor_rng(712367);
+int checks=0;
 void check(bool ok,int line) {
   ++checks;
   if(!ok)throw runtime_error("check failed #"+to_string(checks)+" at line "+to_string(line));
@@ -103,7 +105,7 @@ void check(bool ok,int line) {
 #define require(...) check((__VA_ARGS__),__LINE__)
 int brute_matching(const vector<vector<int>>&g,int mask) {
   if(!mask)return 0;
-  int u=__builtin_ctz((unsigned)mask);
+  int u=__builtin_ctz((int)mask);
   int best=brute_matching(g,mask^(1<<u));
   for(int v:g[u])if(mask>>v&1)best=max(best,1+brute_matching(g,mask^(1<<u)^(1<<v)));
   return best;
@@ -113,18 +115,18 @@ void test_structures() {
   using namespace notebook::tree;
   for(int rep=0;rep<150;++rep) {
     int n=1+rng()%40;
-    vector<long long>a(n);
+    vector<int>a(n);
     for(auto&v:a)v=(int)(rng()%101)-50;
     WaveletTree w(a);
     SegmentTreeBeats beats(a);
     for(int step=0;step<150;++step) {
       int l=rng()%n,r=l+1+rng()%(n-l);
-      vector<long long>b(a.begin()+l,a.begin()+r);
+      vector<int>b(a.begin()+l,a.begin()+r);
       sort(b.begin(),b.end());
       if(step==0) {
         for(int k=0;k<r-l;++k)require(w.kth(l,r,k)==b[k]);
       }
-      long long x=(int)(rng()%101)-50;
+      int x=(int)(rng()%101)-50;
       switch(rng()%4) {
         case 0:beats.chmin(l,r,x);
         for(int i=l;i<r;++i)a[i]=min(a[i],x);
@@ -215,7 +217,7 @@ void test_strings() {
       while(i-even-1>=0&&i+even<n&&s[i-even-1]==s[i+even])++even;
       require(rad.odd[i]==odd&&rad.even[i]==even);
     }
-    require(sam.distinct_substrings()==(long long)sub.size());
+    require(sam.distinct_substrings()==(int)sub.size());
     require(pam.nodes.size()==pal.size()+2);
     string best=s;
     int idx=minimum_rotation(s);
@@ -267,42 +269,79 @@ void test_strings() {
 }
 void test_math() {
   using namespace notebook::math;
-  LinearSieve sieve(10000);
+  auto sieve_primes = segmented_sieve(0,10000);
   for(int n=0;n<=10000;++n) {
     bool prime=n>=2;
     for(int d=2;d*d<=n;++d)if(n%d==0)prime=false;
     require(is_prime(n)==prime);
+    require(binary_search(sieve_primes.begin(),sieve_primes.end(),n)==prime);
   }
-  for(int n=0;n<=2000;++n)require(prime_count(n)==(uint64_t)count_if(sieve.primes.begin(),sieve.primes.end(),[&](int p) {
+  for(int n=0;n<=2000;++n)require(prime_count(n)==(int)count_if(sieve_primes.begin(),sieve_primes.end(),[&](int p) {
     return p<=n;
   }));
+  for (int rep=0;rep<100;++rep) {
+    int L=rng()%10000, R=L+rng()%100;
+    vector<int> got,want;
+    got = segmented_sieve(L,R);
+    for (int n=L;n<=R;++n) {
+      bool prime=n>=2;
+      for (int d=2;d<=n/d;++d) if (n%d==0) { prime=false; break; }
+      if (prime) want.push_back(n);
+    }
+    require(got==want);
+  }
+  auto first = segmented_sieve(0,1000000000,10);
+  require(segmented_sieve(0,100,0).empty());
+  require(segmented_sieve(0,1).empty());
+  require(segmented_sieve(2,2)==vector<int>{2});
+  require(first==vector<int>({2,3,5,7,11,13,17,19,23,29}));
+  // Cross a block boundary, then verify a short interval near 10^9 independently.
+  for (int L : vector<int>{0,999999900}) {
+    int R=L==0 ? 2*SIEVE_BLOCK+100 : 1000000000;
+    vector<int> got,want;
+    got = segmented_sieve(L,R);
+    if (L==0) {
+      vector<bool> mark(R+1);
+      for (int d=2;d<=R/d;++d) if (!mark[d])
+        for (int j=d*d;j<=R;j+=d) mark[j]=true;
+      for (int n=2;n<=R;++n) if (!mark[n]) want.push_back(n);
+    } else {
+      for (int n=L;n<=R;++n) {
+        bool prime=true;
+        for (int d=2;d<=n/d;++d) if (n%d==0) { prime=false; break; }
+        if (prime) want.push_back(n);
+      }
+    }
+    require(got==want);
+    if (L==0) require(segmented_sieve(0,R,100000)==vector<int>(want.begin(),want.begin()+100000));
+  }
   for(int rep=0;rep<1000;++rep) {
     int n=rng()%50,m=1+rng()%50,a=rng()%100,b=rng()%100;
-    long long sum=0;
+    int sum=0;
     for(int i=0;i<n;++i)sum+=(a*i+b)/m;
     require(floor_sum(n,m,a,b)==sum);
-    long long x=(int)(rng()%101)-50,y=(int)(rng()%101)-50;
+    int x=(int)(rng()%101)-50,y=(int)(rng()%101)-50;
     auto z=extended_gcd(x,y);
     require(z.gcd==gcd(x,y)&&x*z.x+y*z.y==z.gcd);
-    uint64_t p=1+rng()%1000,q=1+rng()%1000,d=gcd(p,q);
+    int p=1+rng()%1000,q=1+rng()%1000,d=gcd(p,q);
     p/=d;
     q/=d;
     auto decoded=stern_decode(stern_encode(p,q));
     require(decoded.first==p&&decoded.second==q);
-    uint64_t value=1+rng()%1000000000;
-    auto factors=factorize(value,rng);
-    __uint128_t product=1;
+    int value=1+rng()%1000000000;
+    auto factors=factorize(value,factor_rng);
+    __int128 product=1;
     for(auto f:factors) {
       require(is_prime(f));
       product*=f;
     }
     require(product==value);
     XorBasis basis;
-    vector<uint64_t>span {
+    vector<int>span {
       0
     };
     for(int i=0;i<8;++i) {
-      uint64_t v=rng()%256;
+      int v=rng()%256;
       basis.insert(v);
       int sz=span.size();
       for(int j=0;j<sz;++j)span.push_back(span[j]^v);
@@ -313,11 +352,11 @@ void test_math() {
     for(int i=0;i<(int)span.size();++i)require(basis.kth(i)==span[i]);
   }
   for(int m=1;m<=60;++m)for(int a=0;a<m;++a)for(int b=0;b<m;++b) {
-    optional<uint64_t>want;
-    uint64_t v=1%m;
-    set<uint64_t>seen;
+    optional<int>want;
+    int v=1%m;
+    set<int>seen;
     for(int i=0;seen.insert(v).second;++i) {
-      if(v==(uint64_t)b) {
+      if(v==(int)b) {
         want=i;
         break;
       }
@@ -325,10 +364,10 @@ void test_math() {
     }
     require(discrete_log(a,b,m)==want);
   }
-  for(int p:sieve.primes) {
+  for(int p:sieve_primes) {
     if(p>150)break;
-    uint64_t root=primitive_root(p,rng);
-    set<uint64_t>powers;
+    int root=primitive_root(p,factor_rng);
+    set<int>powers;
     for(int i=0;i<p-1;++i)powers.insert(pow_mod(root,i,p));
     require((int)powers.size()==p-1);
     for(int a=0;a<p;++a) {
@@ -336,13 +375,13 @@ void test_math() {
       bool possible=false;
       for(int i=0;i<p;++i)if(i*i%p==a)possible=true;
       require(bool(x)==possible);
-      if(x)require(*x**x%p==(uint64_t)a);
+      if(x)require(*x**x%p==(int)a);
     }
   }
   for(auto kind: {
     Walsh::Xor,Walsh::And,Walsh::Or
   })for(int rep=0;rep<30;++rep) {
-    vector<long long>a(16),b(16),c(16);
+    vector<int>a(16),b(16),c(16);
     for(auto&x:a)x=rng()%10;
     for(auto&x:b)x=rng()%10;
     for(int i=0;i<16;++i)for(int j=0;j<16;++j)c[kind==Walsh::Xor?i^j:kind==Walsh::And?i&j:i|j]+=a[i]*b[j];
@@ -353,10 +392,10 @@ void test_math() {
     require(a==c);
   }
   for(int n=1;n<15;++n) {
-    vector<uint64_t>y(n);
+    vector<int>y(n);
     for(int i=0;i<n;++i)y[i]=(3*i*i+5*i+7)%101;
     if(n<3)continue;
-    for(int x=0;x<101;++x)require(lagrange(y,x,101)==(uint64_t)((3*x*x+5*x+7)%101));
+    for(int x=0;x<101;++x)require(lagrange(y,x,101)==(int)((3*x*x+5*x+7)%101));
   }
   auto sol=gauss( {
     {
@@ -395,7 +434,7 @@ void test_graphs() {
       edges.push_back( {
         u,v
       });
-      long long c=rng()%10;
+      int c=rng()%10;
       capacities.push_back( {
         u,v,c
       });
@@ -420,7 +459,7 @@ void test_graphs() {
       require(used[u].insert(colors[i]).second&&used[v].insert(colors[i]).second);
     }
     auto tree=gomory_hu(n,capacities);
-    vector<vector<pair<int,long long>>>t(n);
+    vector<vector<pair<int,int>>>t(n);
     for(auto e:tree) {
       t[e.u].push_back( {
         e.v,e.capacity
@@ -430,13 +469,13 @@ void test_graphs() {
       });
     }
     for(int a=0;a<n;++a)for(int b=a+1;b<n;++b) {
-      long long best=LLONG_MAX;
+      int best=LLONG_MAX;
       for(int mask=0;mask<(1<<n);++mask)if((mask>>a&1)&&!(mask>>b&1)) {
-        long long sum=0;
+        int sum=0;
         for(auto e:capacities)if((mask>>e.u&1)!=(mask>>e.v&1))sum+=e.capacity;
         best=min(best,sum);
       }
-      function<long long(int,int,long long)>dfs=[&](int u,int p,long long value) {
+      function<int(int,int,int)>dfs=[&](int u,int p,int value) {
         if(u==b)return value;
         for(auto[v,w]:t[u])if(v!=p) {
           auto x=dfs(v,u,min(value,w));
@@ -496,10 +535,10 @@ void test_graphs() {
   }
   for(int rep=0;rep<200;++rep) {
     int n=1+rng()%6,m=n+rng()%3;
-    vector<vector<long long>>a(n,vector<long long>(m));
+    vector<vector<int>>a(n,vector<int>(m));
     for(auto&row:a)for(auto&x:row)x=(int)(rng()%31)-15;
-    long long best=LLONG_MAX;
-    function<void(int,int,long long)>dfs=[&](int i,int mask,long long value) {
+    int best=LLONG_MAX;
+    function<void(int,int,int)>dfs=[&](int i,int mask,int value) {
       if(i==n) {
         best=min(best,value);
         return;
@@ -552,37 +591,37 @@ void test_dp() {
   using namespace notebook::dp;
   for(int rep=0;rep<200;++rep) {
     int n=1+rng()%40;
-    long long penalty=rng()%100;
+    int penalty=rng()%100;
     auto cost=[&](int j,int i) {
       return 1LL*(i-j)*(i-j)+penalty;
     };
-    vector<long long>brute(n+1,1LL<<60);
+    vector<int>brute(n+1,1LL<<60);
     brute[0]=0;
     for(int i=1;i<=n;++i)for(int j=0;j<i;++j)brute[i]=min(brute[i],brute[j]+cost(j,i));
     require(monotone_partition_dp(n,cost)==brute);
-    vector<long long>prev(n+1,1LL<<60);
+    vector<int>prev(n+1,1LL<<60);
     prev[0]=0;
-    for(int layer=1;layer<=min(n,5);++layer) {
-      vector<long long>want(n+1,1LL<<60);
+    for(int layer=1;layer<=min<int>(n,5);++layer) {
+      vector<int>want(n+1,1LL<<60);
       for(int i=1;i<=n;++i)for(int j=0;j<i;++j)if(prev[j]<(1LL<<60))want[i]=min(want[i],prev[j]+cost(j,i));
       require(divide_conquer_layer(prev,cost)==want);
       prev=want;
     }
     MonotoneMinHull hull;
-    vector<pair<long long,long long>>lines;
+    vector<pair<int,int>>lines;
     for(int i=50;i>=-50;--i) {
-      long long b=(int)(rng()%1000)-500;
+      int b=(int)(rng()%1000)-500;
       hull.add(i,b);
       lines.push_back( {
         i,b
       });
     }
     for(int x=-50;x<=50;++x) {
-      long long want=LLONG_MAX;
+      int want=LLONG_MAX;
       for(auto[m,b]:lines)want=min(want,m*x+b);
       require(hull.query(x)==want);
     }
-    vector<long long>a(n);
+    vector<int>a(n);
     for(auto&x:a)x=(int)(rng()%100)-50;
     int k=rng()%(n+1);
     auto answer=banded_pick_k(a,k,n,rng);
@@ -594,7 +633,7 @@ void test_dp() {
       g[i].push_back(p);
       g[p].push_back(i);
     }
-    using State=pair<long long,long long>;
+    using State=pair<int,int>;
     auto result=reroot(g,State {
       0,0
     },[](State a,State b) {
@@ -621,7 +660,7 @@ void test_dp() {
       });
     }
     SlopeTrick st;
-    vector<long long>f(401,0);
+    vector<int>f(401,0);
     for(int step=0;step<20;++step) {
       int a=(int)(rng()%41)-20;
       st.add_abs(a);
@@ -632,7 +671,7 @@ void test_dp() {
         auto old=f;
         for(int x=-200;x<=200;++x) {
           f[x+200]=LLONG_MAX;
-          for(int y=max(-200,x-r);y<=min(200,x+l);++y)f[x+200]=min(f[x+200],old[y+200]);
+          for(int y=max<int>(-200,x-r);y<=min<int>(200,x+l);++y)f[x+200]=min(f[x+200],old[y+200]);
         }
       }
       require(st.minimum()==*min_element(f.begin(),f.end()));
@@ -644,9 +683,9 @@ void test_geometry() {
   for(int rep=0;rep<300;++rep) {
     int n=1+rng()%25;
     vector<Point>p;
-    vector<pair<long long,long long>>ip;
+    vector<pair<int,int>>ip;
     for(int i=0;i<n;++i) {
-      long long x=(int)(rng()%41)-20,y=(int)(rng()%41)-20;
+      int x=(int)(rng()%41)-20,y=(int)(rng()%41)-20;
       p.push_back( {
         (long double)x,(long double)y
       });
@@ -665,10 +704,10 @@ void test_geometry() {
       require(point_in_convex(h,q)==point_in_polygon(h,q));
     }
     auto mst=manhattan_mst(ip);
-    vector<long long>d(n,LLONG_MAX);
+    vector<int>d(n,LLONG_MAX);
     vector<bool>used(n);
     d[0]=0;
-    long long total=0;
+    int total=0;
     for(int i=0;i<n;++i) {
       int u=-1;
       for(int v=0;v<n;++v)if(!used[v]&&(u<0||d[v]<d[u]))u=v;
@@ -782,7 +821,7 @@ void test_additional();
 void test_boundaries();
 void test_legacy();
 void test_interface_boundaries();
-int main() {
+signed main() {
   try {
     test_structures();
     cerr<<"structures OK\n";
@@ -920,7 +959,7 @@ void test_additional() {
       return x<3?x+1:1;
     });
     require(cycle.entry==1&&cycle.prefix_length==1&&cycle.cycle_length==3);
-    vector<vector<long long>>d {
+    vector<vector<int>>d {
       {
         0,3,1000
       }, {
@@ -934,29 +973,29 @@ void test_additional() {
   }
   for(int rep=0;rep<50;++rep) {
     int n=4,m=5;
-    vector<tuple<int,int,long long>>e {
+    vector<tuple<int,int,int>>e {
       {
-        0,1,1+(long long)(rng()%8)
+        0,1,1+(int)(rng()%8)
       }, {
-        1,2,1+(long long)(rng()%8)
+        1,2,1+(int)(rng()%8)
       }, {
-        2,3,1+(long long)(rng()%8)
+        2,3,1+(int)(rng()%8)
       }, {
-        0,2,1+(long long)(rng()%8)
+        0,2,1+(int)(rng()%8)
       }, {
-        1,3,1+(long long)(rng()%8)
+        1,3,1+(int)(rng()%8)
       }
     };
-    vector<vector<pair<int,long long>>>g(n);
+    vector<vector<pair<int,int>>>g(n);
     for(auto[u,v,w]:e)g[u].push_back( {
       v,w
     }),g[v].push_back( {
       u,w
     });
-    long long best=LLONG_MAX;
+    int best=LLONG_MAX;
     for(int mask=0;mask<(1<<m);++mask) {
       RollbackDSU d(n);
-      long long value=0;
+      int value=0;
       for(int i=0;i<m;++i)if(mask>>i&1) {
         auto[u,v,w]=e[i];
         d.unite(u,v);
@@ -991,7 +1030,7 @@ void test_additional() {
   using namespace notebook::data_structure;
   for(int rep=0;rep<60;++rep) {
     int n=1+rng()%25;
-    vector<long long>a(n);
+    vector<int>a(n);
     for(auto&x:a)x=(int)(rng()%21)-10;
     WaveletTree w(a);
     vector<pair<int,int>>queries;
@@ -1004,7 +1043,7 @@ void test_additional() {
       int want=l;
       for(int j=l;j<r;++j)if(a[j]>=a[want])want=j;
       require(indices[i]==want);
-      require(w.count(l,r,-3,4)==count_if(a.begin()+l,a.begin()+r,[](long long x) {
+      require(w.count(l,r,-3,4)==count_if(a.begin()+l,a.begin()+r,[](int x) {
         return -3<=x&&x<=4;
       }));
     }
@@ -1012,19 +1051,19 @@ void test_additional() {
   using namespace notebook::dp;
   for(int rep=0;rep<100;++rep) {
     int n=1+rng()%20;
-    vector<long long>a(n),prefix(n+1);
+    vector<int>a(n),prefix(n+1);
     for(int i=0;i<n;++i)a[i]=rng()%20,prefix[i+1]=prefix[i]+a[i];
     auto cost=[&](int l,int r) {
       return prefix[r]-prefix[l];
     };
-    vector<vector<long long>>b(n,vector<long long>(n));
+    vector<vector<int>>b(n,vector<int>(n));
     for(int len=2;len<=n;++len)for(int l=0;l+len<=n;++l) {
       int r=l+len-1;
       b[l][r]=LLONG_MAX;
       for(int k=l;k<r;++k)b[l][r]=min(b[l][r],b[l][k]+b[k+1][r]+cost(l,r+1));
     }
     require(knuth_partition(n,cost)==b[0][n-1]);
-    vector<long long>v(32);
+    vector<int>v(32);
     for(auto&x:v)x=(int)(rng()%100)-50;
     for(bool super: {
       false,true
@@ -1035,12 +1074,12 @@ void test_additional() {
       require(v==orig);
     }
     for(int k=0;k<=30;++k) {
-      auto oracle=[](long long lambda) {
+      auto oracle=[](int lambda) {
         PenalizedResult result {
           LLONG_MAX,0
         };
         for(int j=0;j<=30;++j) {
-          long long val=1LL*j*j-lambda*j;
+          int val=1LL*j*j-lambda*j;
           if(val<=result.value)result= {
             val,j
           };
@@ -1253,19 +1292,45 @@ void test_boundaries() {
     require(abs(area(actual)-area(poly))<1e-7);
   }
   using namespace notebook::math;
-  require(!is_prime(UINT64_MAX));
-  require(is_prime(18446744073709551557ULL));
-  require(pow_mod(UINT64_MAX-1,2,UINT64_MAX)==1);
+  require(!is_prime(LLONG_MAX));
+  require(is_prime(9223372036854775783LL));
+  require(pow_mod(LLONG_MAX-1,2,LLONG_MAX)==1);
+  require(!is_prime(-7));
+  require(mul_mod(LLONG_MAX-2,LLONG_MAX-2,LLONG_MAX)==4);
+  require(!is_prime(341550071728321LL));
+  require(!is_prime(1373653));
+  require(!is_prime(3215031751LL));
+  require(is_prime(4294967291LL));
+  require(!is_prime(4294967295LL));
+  require(!is_prime(4294967297LL));
+  require(is_prime(4294967311LL));
+  XorBasis full_basis;
+  for (int bit=0;bit<63;++bit) full_basis.insert(1LL<<bit);
+  require(full_basis.rank()==63 && full_basis.maximum()==LLONG_MAX);
+  require(full_basis.kth(LLONG_MAX)==LLONG_MAX);
+  require(!full_basis.kth(-1));
+  require(notebook::strings::RollingHash::mul(
+    notebook::strings::RollingHash::MOD-1,
+    notebook::strings::RollingHash::MOD-1)==1);
+
   auto bezout=extended_gcd(LLONG_MIN,LLONG_MAX);
   require(bezout.gcd==1&&(__int128)LLONG_MIN*bezout.x+(__int128)LLONG_MAX*bezout.y==1);
-  require(floor_sum(0,1,UINT64_MAX,UINT64_MAX)==0);
+  require(floor_sum(0,1,LLONG_MAX,LLONG_MAX)==0);
   require(prime_count(1000000)==78498);
-  vector<uint64_t>linear {
+  vector<int>linear {
     5,8,11
   };
-  uint64_t p=18446744073709551557ULL,x=p-2;
+  int p=9223372036854775783LL,x=p-2;
   require(lagrange(linear,x,p)==p-1);
   using namespace notebook::data_structure;
+  BinaryTrie high_bits;
+  high_bits.insert(0); high_bits.insert(1LL<<62); high_bits.insert(LLONG_MAX);
+  require(high_bits.max_xor(0)==LLONG_MAX);
+  require(high_bits.erase(LLONG_MAX) && high_bits.max_xor(0)==(1LL<<62));
+  HashMap signed_keys;
+  signed_keys[LLONG_MIN]=1; signed_keys[LLONG_MAX]=2;
+  signed_keys[-1]=3; signed_keys[0]=4; signed_keys[1]=5;
+  require(signed_keys.size()==5 && signed_keys.at(LLONG_MIN)==1 && signed_keys.at(-1)==3);
   WaveletTree empty( {
   });
   require(empty.count(0,0,LLONG_MIN,LLONG_MAX)==0);
@@ -1298,18 +1363,18 @@ void test_legacy() {
   using namespace notebook::data_structure;
   for(int rep=0;rep<80;++rep) {
     int n=1+rng()%30;
-    vector<long long>a(n);
+    vector<int>a(n);
     for(auto&x:a)x=rng()%10;
-    auto merge=[](long long a,long long b) {
+    auto merge=[](int a,int b) {
       return a+b;
     };
     SegmentTree tree(a,0,merge);
     SparseRangeSum sparse(0,n);
     PersistentRangeSum persistent(n);
     int root=0;
-    vector<pair<int,vector<long long>>>versions {
+    vector<pair<int,vector<int>>>versions {
       {
-        0,vector<long long>(n)
+        0,vector<int>(n)
       }
     };
     for(int i=0;i<n;++i) {
@@ -1321,7 +1386,7 @@ void test_legacy() {
     });
     for(int step=0;step<80;++step) {
       int p=rng()%n;
-      long long value=rng()%10,delta=value-a[p];
+      int value=rng()%10,delta=value-a[p];
       a[p]=value;
       tree.set(p,value);
       sparse.add(p,delta);
@@ -1330,26 +1395,26 @@ void test_legacy() {
         root,a
       });
       int l=rng()%n,r=l+rng()%(n-l+1);
-      long long expected=accumulate(a.begin()+l,a.begin()+r,0LL);
+      int expected=accumulate(a.begin()+l,a.begin()+r,0LL);
       require(tree.fold(l,r)==expected&&sparse.sum(l,r)==expected&&persistent.sum(root,l,r)==expected);
-      long long bound=rng()%30;
+      int bound=rng()%30;
       int end=l;
-      long long total=0;
+      int total=0;
       while(end<n&&total+a[end]<=bound)total+=a[end++];
-      require(tree.max_right(l,[&](long long sum) {
+      require(tree.max_right(l,[&](int sum) {
         return sum<=bound;
       })==end);
       auto[v,old]=versions[rng()%versions.size()];
       require(persistent.sum(v,l,r)==accumulate(old.begin()+l,old.begin()+r,0LL));
     }
-    vector<long long>zeros(n);
+    vector<int>zeros(n);
     RangeAddPointQuery dual(n);
     BlockArray block(zeros);
     IntervalSet intervals(0,n,0);
     vector<int>values(n);
     for(int step=0;step<100;++step) {
       int l=rng()%n,r=l+rng()%(n-l+1);
-      long long x=(int)(rng()%21)-10;
+      int x=(int)(rng()%21)-10;
       dual.add(l,r,x);
       block.add(l,r,x);
       intervals.assign(l,r,(int)x);
@@ -1361,7 +1426,7 @@ void test_legacy() {
     }
     vector<int>threshold(n);
     for(auto&x:threshold)x=(int)(rng()%(n+4))-1;
-    long long state=0;
+    int state=0;
     auto ans=parallel_binary_search(n,n,[&] {
       state=0;
     },[&](int) {
@@ -1369,9 +1434,9 @@ void test_legacy() {
     },[&](int q) {
       return state>=threshold[q];
     });
-    for(int i=0;i<n;++i)require(ans[i]==min(n+1,max(0,threshold[i])));
+    for(int i=0;i<n;++i)require(ans[i]==min(n+1,max<int>(0,threshold[i])));
     ImplicitTreap treap(rng());
-    vector<long long>sequence;
+    vector<int>sequence;
     for(int step=0;step<100;++step) {
       int size=sequence.size();
       if(!size||rng()%3==0) {
@@ -1430,7 +1495,7 @@ void test_legacy() {
         l,r
       });
     }
-    long long sum=0;
+    int sum=0;
     auto mo=mo_queries(n,ranges,[&](int i) {
       sum+=a[i];
     },[&](int i) {
@@ -1442,13 +1507,13 @@ void test_legacy() {
   }
   for(int rep=0;rep<80;++rep) {
     BinaryTrie trie;
-    multiset<uint64_t>keys;
+    multiset<int>keys;
     ErasablePriorityQueue pq;
     LiChao lc(-100,101);
     LineContainer hull;
-    vector<pair<long long,long long>>lines;
+    vector<pair<int,int>>lines;
     for(int step=0;step<100;++step) {
-      uint64_t key=rng()%256;
+      int key=rng()%256;
       if(rng()%3||keys.empty()) {
         keys.insert(key);
         trie.insert(key);
@@ -1462,18 +1527,18 @@ void test_legacy() {
       }
       require(trie.size()==(int)keys.size()&&pq.size()==keys.size());
       if(!keys.empty()) {
-        require(pq.top()==(long long)*keys.rbegin());
-        uint64_t want=0;
+        require(pq.top()==(int)*keys.rbegin());
+        int want=0;
         for(auto x:keys)want=max(want,x^key);
         require(trie.max_xor(key)==want);
       }
-      long long m=(int)(rng()%101)-50,b=(int)(rng()%201)-100;
+      int m=(int)(rng()%101)-50,b=(int)(rng()%201)-100;
       lines.push_back( {
         m,b
       });
       lc.add(m,b);
       hull.add(m,b);
-      long long x=(int)(rng()%201)-100,wantmin=LLONG_MAX,wantmax=LLONG_MIN;
+      int x=(int)(rng()%201)-100,wantmin=LLONG_MAX,wantmax=LLONG_MIN;
       for(auto[m,b]:lines) {
         wantmin=min(wantmin,m*x+b);
         wantmax=max(wantmax,m*x+b);
@@ -1483,7 +1548,7 @@ void test_legacy() {
   }
   for(int rep=0;rep<80;++rep) {
     int n=10;
-    vector<long long>values(n);
+    vector<int>values(n);
     for(auto&x:values)x=(int)(rng()%21)-10;
     LinkCutTree lct(values);
     vector<vector<bool>>edge(n,vector<bool>(n));
@@ -1523,7 +1588,7 @@ void test_legacy() {
         auto result=lct.path_sum(u,v);
         require(bool(result)==!p.empty());
         if(result) {
-          long long want=0;
+          int want=0;
           for(int x:p)want+=values[x];
           require(*result==want);
           int root=p[rng()%p.size()];
@@ -1538,19 +1603,19 @@ void test_legacy() {
   }
   {
     Fenwick2D f(8,9);
-    vector<vector<long long>>a(8,vector<long long>(9));
+    vector<vector<int>>a(8,vector<int>(9));
     for(int step=0;step<100;++step) {
       int x=rng()%8,y=rng()%9,value=(int)(rng()%31)-15;
       f.add(x,y,value);
       a[x][y]+=value;
       int x1=rng()%8,x2=x1+rng()%(9-x1),y1=rng()%9,y2=y1+rng()%(10-y1);
-      long long want=0;
+      int want=0;
       for(int x=x1;x<x2;++x)for(int y=y1;y<y2;++y)want+=a[x][y];
       require(f.sum(x1,y1,x2,y2)==want);
     }
   }
   {
-    auto builder=[](const vector<long long>&a) {
+    auto builder=[](const vector<int>&a) {
       auto b=a;
       sort(b.begin(),b.end());
       return b;
@@ -1562,7 +1627,7 @@ void test_legacy() {
       all.push_back(x);
       index.insert(x);
       int count=0;
-      index.query([&](const vector<long long>&bucket) {
+      index.query([&](const vector<int>&bucket) {
         count+=upper_bound(bucket.begin(),bucket.end(),x)-lower_bound(bucket.begin(),bucket.end(),x);
       });
       require(count==std::count(all.begin(),all.end(),x));
@@ -1577,7 +1642,7 @@ void test_legacy() {
     vector<int>a(n),b(m);
     for(auto&x:a)x=(int)(rng()%21)-10;
     for(auto&x:b)x=(int)(rng()%21)-10;
-    vector<long long>c(n&&m?n+m-1:0);
+    vector<int>c(n&&m?n+m-1:0);
     for(int i=0;i<n;++i)for(int j=0;j<m;++j)c[i+j]+=1LL*a[i]*b[j];
     require(convolution_fft(a,b)==c);
     auto got=convolution_ntt(a,b);
@@ -1620,7 +1685,7 @@ void test_interface_boundaries() {
   }
   using namespace notebook::data_structure;
   // Associative noncommutative merge: first nonzero, identity 0.
-  auto first_nonzero=[](long long a,long long b) { return a ? a : b; };
+  auto first_nonzero=[](int a,int b) { return a ? a : b; };
   SegmentTree ordered({1,2,3},0,first_nonzero);
   require(ordered.fold(0,3)==1 && ordered.fold(1,3)==2);
   ordered.set(1,7);
@@ -1628,7 +1693,7 @@ void test_interface_boundaries() {
   LiChao empty_lines(-1,2);
   LineContainer hull;
   require(!empty_lines.minimum(0)&&!hull.maximum(0));
-  vector<pair<long long,long long>>lines {
+  vector<pair<int,int>>lines {
     {
       LLONG_MIN,LLONG_MAX
     }, {
@@ -1640,7 +1705,7 @@ void test_interface_boundaries() {
     }
   };
   for(auto[m,b]:lines)hull.add(m,b);
-  for(long long x: {
+  for(int x: {
     LLONG_MIN,-1LL,0LL,1LL,LLONG_MAX
   }) {
     __int128 best=-((__int128)1<<126);

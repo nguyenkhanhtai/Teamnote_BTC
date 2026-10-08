@@ -15,7 +15,7 @@ namespace notebook::data_structure {
       first[root] = 0;
       while (!stack.empty()) {
         auto& f = stack.back();
-        if (f.next == int(adj[f.u].size())) {
+        if (f.next == static_cast<int>(adj[f.u].size())) {
           stack.pop_back();
           if (!stack.empty()) {
             euler.push_back(stack.back().u); depth.push_back(stack.back().d);
@@ -29,9 +29,9 @@ namespace notebook::data_structure {
       }
       int m = euler.size(), lg = 0;
       while ((1LL << (lg + 1)) <= m) ++lg;
-      block = max(1, lg / 2); int count = (m + block - 1) / block;
+      block = max<int>(1, lg / 2); int count = (m + block - 1) / block;
       micro.resize(1<<(block-1),vector<unsigned char>(block*block));
-      for (int mask = 0; mask < int(micro.size()); ++mask) {
+      for (int mask = 0; mask < static_cast<int>(micro.size()); ++mask) {
         vector<int> d(block);
         for(int i=1; i<block; ++i)d[i]=d[i-1]+((mask>>(i-1)&1)?1:-1);
         for (int l = 0; l < block; ++l) {
@@ -56,7 +56,7 @@ namespace notebook::data_structure {
       sparse.push_back(move(minima));
       for (int k = 1; (1 << k) <= count; ++k) {
         sparse.push_back(vector<int>(count - (1 << k) + 1));
-        for(int i=0;i<int(sparse[k].size());++i)sparse[k][i]=better(sparse[k-1][i],sparse[k-1][i+(1<<(k-1))]);
+        for(int i=0;i<static_cast<int>(sparse[k].size());++i)sparse[k][i]=better(sparse[k-1][i],sparse[k-1][i+(1<<(k-1))]);
       }
     }
     int lca(int u, int v) const {

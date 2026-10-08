@@ -5,9 +5,9 @@ namespace notebook::data_structure {
 //NOTEBOOK_BEGIN
   // Use: auto ids = range_max_indices({3,1},{{0,2}});
   // Offline maximum indices; queries [l,r) nonempty; ties choose rightmost.
-  vector<int>range_max_indices(const vector<long long>&a,const vector<pair<int,int>>&queries){
+  vector<int>range_max_indices(const vector<int>&a,const vector<pair<int,int>>&queries){
     int n = a.size(); vector<vector<pair<int, int>>> ending(n);
-    for (int i = 0; i < int(queries.size()); ++i) {
+    for (int i = 0; i < static_cast<int>(queries.size()); ++i) {
       auto [l,r]=queries[i]; assert(0<=l&&l<r&&r<=n); ending[r-1].push_back( {l,i});
     }
     vector<int> parent(n), stack, answer(queries.size());

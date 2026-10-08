@@ -22,8 +22,8 @@ typename C::value_type total(const C& a) {
 
 inline void typename_examples() {
     auto a = bigger(3, 5); // T = int
-    auto b = bigger<long long>(1, 2LL);
-    Sum<long long> s;
+    auto b = bigger<int>(1, 2LL);
+    Sum<int> s;
     s.add(a); s.add(b); // s.value = 7
     Buffer<int, 4> buf;
     buf.data[0] = a;

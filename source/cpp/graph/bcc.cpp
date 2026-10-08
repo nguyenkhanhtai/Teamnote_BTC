@@ -11,7 +11,7 @@ namespace notebook::graph {
   BiconnectedResult biconnected_components(int n,const vector<pair<int,int>>&edges){
     vector<vector<pair<int, int>>> g(n);
     BiconnectedResult result { {}, vector<bool>(n), {} };
-    for (int id = 0; id < int(edges.size()); ++id) {
+    for (int id = 0; id < static_cast<int>(edges.size()); ++id) {
       auto [u, v] = edges[id];
       if (u == v) { result.edge_blocks.push_back( {id}); continue; }
       g[u].push_back( {v, id}); g[v].push_back( {u, id});

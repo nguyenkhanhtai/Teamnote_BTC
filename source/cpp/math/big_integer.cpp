@@ -7,7 +7,7 @@ namespace notebook::math {
   // Nonnegative integer: base 10^9, least-significant block first.
   // Zero = {0}; otherwise the last block must be nonzero.
   // Example: 1234567890000000042 -> {42, 234567890, 1}.
-  using bignum = vector<uint32_t>; constexpr uint32_t BASE = 1000000000;
+  using bignum = vector<int>; constexpr int BASE = 1000000000;
   ostream & print(const bignum& a, ostream & out = cout) {
     // nonempty, normalized
     assert(!a.empty()); out << to_string(a.back());

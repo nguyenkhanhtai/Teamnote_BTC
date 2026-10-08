@@ -31,13 +31,13 @@ namespace notebook::geometry {
       // A supporting line may touch a vertex or coincide with one whole edge.
       if (abs(side(l,hi)) <= EPS || abs(side(l,lo)) <= EPS) {
         int u = abs(side(l,hi)) <= EPS ? hi : lo; vector<Point> hits {p[u]};
-        for(int v:{(u+n-1)%n,(u+1)%n})if(abs(side(l,v))<=EPS)hits.push_back(p[v]);
+        int neighbors[] = {(u+n-1)%n, (u+1)%n};
+        for(int v : neighbors)if(abs(side(l,v))<=EPS)hits.push_back(p[v]);
         return hits;
       }
       vector<Point> out;
-      for (auto ends : {
-        pair {lo, hi}, pair {hi, lo}
-      }) {
+      pair<int,int> arcs[] = {{lo, hi}, {hi, lo}};
+      for (auto ends : arcs) {
         int a=ends.first,b=ends.second,steps=(b-a+n)%n,L=0,R=steps;
         long double initial = side(l,a);
         if (abs(initial) <= EPS) { out.push_back(p[a]); continue; }

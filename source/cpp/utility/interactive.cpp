@@ -23,20 +23,20 @@ struct InteractiveSession {
 };
 
 // Monotone predicate: test(lo)=false, test(hi)=true; known endpoints not queried.
-long long first_true(long long lo,long long hi,std::function<bool(long long)> test) {
+int first_true(int lo,int hi,std::function<bool(int)> test) {
     assert(lo < hi);
     while (__int128(hi) - lo > 1) {
-        long long mid = static_cast<long long>(__int128(lo) + (__int128(hi) - lo) / 2);
+        int mid = static_cast<int>(__int128(lo) + (__int128(hi) - lo) / 2);
         if (test(mid)) hi = mid; else lo = mid;
     }
     return hi;
 }
 
 // Adjacent values differ by 1; read(lo)<=target<=read(hi), lo<hi.
-long long find_unit_step_value(long long lo,long long hi,long long target,
-                               std::function<long long(long long)> read) {
+int find_unit_step_value(int lo,int hi,int target,
+                               std::function<int(int)> read) {
     while (__int128(hi) - lo > 1) {
-        long long mid = static_cast<long long>(__int128(lo) + (__int128(hi) - lo) / 2);
+        int mid = static_cast<int>(__int128(lo) + (__int128(hi) - lo) / 2);
         auto value = read(mid);
         if (value == target) return mid;
         if (value < target) lo = mid; else hi = mid;

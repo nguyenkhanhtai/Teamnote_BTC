@@ -5,12 +5,12 @@ namespace notebook::math {
 //NOTEBOOK_BEGIN
   // Use: auto c = convolution_ntt({1,2},{3,4});
   const int MOD = 998244353, G = 3;
-  long long power(long long a, long long b) {
-    long long res = 1;
+  int power(int a, int b) {
+    int res = 1;
     for(a%=MOD; b; b>>=1,a=a*a%MOD)if(b&1)res=res*a%MOD;
     return res;
   }
-  long long modInverse(long long n) { return power(n, MOD - 2); }
+  int modInverse(int n) { return power(n, MOD - 2); }
   void ntt(vector<int>& a, bool invert) {
     int n = a.size(); assert(n > 0 && !(n & (n - 1)) && n <= (1 << 23));
     for (int i = 1, j = 0; i < n; i++) {
@@ -20,19 +20,19 @@ namespace notebook::math {
       if (i < j) swap(a[i], a[j]);
     }
     for (int len = 2; len <= n; len <<= 1) {
-      long long wlen = power(G, (MOD - 1) / len);
+      int wlen = power(G, (MOD - 1) / len);
       if (invert) wlen = modInverse(wlen);
       for (int i = 0; i < n; i += len) {
-        long long w = 1;
+        int w = 1;
         for (int j = 0; j < len / 2; j++) {
-          long long u = a[i + j], v = a[i + j + len / 2] * w % MOD;
+          int u = a[i + j], v = a[i + j + len / 2] * w % MOD;
           a[i + j] = (u + v >= MOD ? u + v - MOD : u + v);
           a[i+j+len/2]=(u-v<0?u-v+MOD:u-v); w=w*wlen%MOD;
         }
       }
     }
     if (invert) {
-      long long inv_n = modInverse(n);
+      int inv_n = modInverse(n);
       for (int& x : a) x = x * inv_n % MOD;
     }
   }

@@ -27,7 +27,7 @@ using namespace std;
                   if (independent1(trial)) graph[source].push_back(x);
                   if (independent2(trial)) graph[x].push_back(sink);
                   trial.pop_back();
-                  for (int i = 0; i < int(selected.size()); ++i) {
+                  for (int i = 0; i < static_cast<int>(selected.size()); ++i) {
                       int y = selected[i];
                       trial[i] = x;
                       if (independent1(trial)) graph[y].push_back(x);

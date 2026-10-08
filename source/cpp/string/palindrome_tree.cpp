@@ -7,7 +7,7 @@ namespace notebook::strings {
   //      auto counts = pt.occurrences();
   struct PalindromeTree {
     struct Node {
-      int length, link; map<unsigned char, int> next; long long ends = 0;
+      int length, link; map<unsigned char, int> next; int ends = 0;
     }; vector<Node>nodes { {-1,0,{},0 },{ 0,0,{},0 } }; std::string text; int last=1;
     bool fits(int v,int i,unsigned char c) const {
       int j=i-1-nodes[v].length; return j>=0 && (unsigned char)text[j]==c;
@@ -30,8 +30,8 @@ namespace notebook::strings {
       }
       ++nodes[last].ends; return last;
     }
-    vector<long long> occurrences() const {
-      vector<long long> cnt;
+    vector<int> occurrences() const {
+      vector<int> cnt;
       for (auto& v : nodes) cnt.push_back(v.ends);
       for(int i=(int)nodes.size()-1; i>=2; --i)cnt[nodes[i].link]+=cnt[i];
       return cnt;

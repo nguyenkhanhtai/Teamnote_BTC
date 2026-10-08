@@ -9,7 +9,7 @@ namespace notebook::graph {
   optional<EulerTrail>euler_trail(int n,const vector<pair<int,int>>&edges,bool directed=false,optional<int>requested_start=nullopt){
     if(n==0)return edges.empty()?optional<EulerTrail>(EulerTrail {}):nullopt;
     vector<vector<pair<int, int>>> g(n); vector<int> in(n), out(n);
-    for (int id = 0; id < int(edges.size()); ++id) {
+    for (int id = 0; id < static_cast<int>(edges.size()); ++id) {
       auto [u,v]=edges[id]; g[u].push_back( {v,id}); ++out[u]; ++in[v];
       if (!directed) { g[v].push_back( {u, id}); ++out[v]; ++in[u]; }
     }
@@ -38,8 +38,8 @@ namespace notebook::graph {
     vector<pair<int, int>> stack { {start, -1} }; EulerTrail answer;
     while (!stack.empty()) {
       int u = stack.back().first;
-      while(next[u]<int(g[u].size())&&used[g[u][next[u]].second])++next[u];
-      if (next[u] == int(g[u].size())) {
+      while(next[u]<static_cast<int>(g[u].size())&&used[g[u][next[u]].second])++next[u];
+      if (next[u] == static_cast<int>(g[u].size())) {
         auto [v,id]=stack.back(); stack.pop_back(); answer.vertices.push_back(v);
         if (id >= 0) answer.edge_ids.push_back(id);
       }else { auto [v,id]=g[u][next[u]++]; used[id]=true; stack.push_back( {v,id}); }

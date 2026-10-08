@@ -7,7 +7,7 @@ namespace notebook::math {
   // Use: auto sol = diophantine(3,5,7);
   struct DiophantineSolution { bool all_pairs; __int128 x, y, dx, dy; };
   // Every solution is (x+t*dx,y+t*dy), except all_pairs for 0x+0y=0.
-  optional<DiophantineSolution>diophantine(long long a,long long b,long long c){
+  optional<DiophantineSolution>diophantine(int a,int b,int c){
     auto z = extended_gcd(a, b);
     if (!z.gcd) {
       if (c) return nullopt;

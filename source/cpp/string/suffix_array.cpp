@@ -7,7 +7,7 @@ namespace notebook::strings {
   struct SuffixArray {
     vector<int> sa, rank, lcp;
     SuffixArray(string_view s) {
-      int n=s.size(),N=n+1; vector<int>a(N),c(N),p(N),cnt(max(N,257));
+      int n=s.size(),N=n+1; vector<int>a(N),c(N),p(N),cnt(max<int>(N,257));
       for (int i = 0; i < n; ++i) a[i] = (unsigned char) s[i] + 1;
       for (int x : a) ++cnt[x];
       for (int i = 1; i < (int) cnt.size(); ++i) cnt[i] += cnt[i - 1];

@@ -36,32 +36,23 @@ void sub(int &a, int b){
     if (a < 0) a += MOD;
 }
 
-
-void solve(){
-    int n, m;
-    cin >> n >> m;
-
-    vector<int> a(n+1, 0), b(m+1, 0);
-    int dif_gcd = 0;
-    FOR(i, 1, n){
-        cin >> a[i];
-        if (i > 1) dif_gcd = __gcd(abs(a[i] - a[i - 1]), dif_gcd);
-    }
-    FOR(i, 1, m){
-        cin >> b[i];
-        cout << __gcd(abs(a[1] + b[i]), dif_gcd) << ' ';
-    }
-
-
+optional<int> discrete_log(int a, int b, int m){
+    assert(a >= 0 && b >= 0 && m > 0);
 }
-main(){
+void solve(){
+    int n;
+    cin >> n;
+    int g = primitive_root(n, rho_rng);
+    cout << g << endl;
+}
+signed main(){
     fastio;
     if (fopen(TASKNAME".inp","r")){
         freopen(TASKNAME".inp","r",stdin);
         freopen(TASKNAME".out","w",stdout);
     }
     int t = 1;
-    //cin >> t;
+    cin >> t;
     while(t--){
         solve();
     }

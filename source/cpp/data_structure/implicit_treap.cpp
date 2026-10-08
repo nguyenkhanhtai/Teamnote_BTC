@@ -8,10 +8,10 @@ namespace notebook::data_structure {
   // Erased nodes remain in the arena; storage O(total insertions), no dangling pointers.
   struct ImplicitTreap {
     struct Node {
-      long long value,sum; uint64_t priority; int left=-1,right=-1,size=1; bool rev=false;
+      int value,sum; int priority; int left=-1,right=-1,size=1; bool rev=false;
     }; vector<Node> t; int root = -1; mt19937_64 rng;
     int size(int u) const { return u < 0 ? 0 : t[u].size; }
-    long long sum(int u) const { return u < 0 ? 0 : t[u].sum; }
+    int sum(int u) const { return u < 0 ? 0 : t[u].sum; }
     void flip(int u){ if(u>=0){ swap(t[u].left,t[u].right); t[u].rev^=1; } }
     void push(int u) {
       if(u>=0&&t[u].rev){ flip(t[u].left); flip(t[u].right); t[u].rev=false; }
@@ -37,10 +37,10 @@ namespace notebook::data_structure {
       }
       push(b); t[b].left = merge(a, t[b].left); pull(b); return b;
     }
-    ImplicitTreap(uint64_t seed) : rng(seed) {}
+    ImplicitTreap(int seed) : rng(seed) {}
     int size() const { return size(root); }
-    void insert(int p, long long x) {
-      assert(0<=p&&p<=size()); int u=t.size(); t.push_back( {x,x,rng()});
+    void insert(int p, int x) {
+      assert(0<=p&&p<=size()); int u=t.size(); t.push_back( {x,x,static_cast<int>(rng() >> 1)});
       auto[a, b] = split(root, p); root = merge(merge(a, u), b);
     }
     void erase(int l, int r) {
@@ -51,9 +51,9 @@ namespace notebook::data_structure {
       assert(0<=l&&l<=r&&r<=size()); auto[a,c]=split(root,r); auto[b,m]=split(a,l);
       flip(m); root = merge(merge(b, m), c);
     }
-    long long sum(int l, int r) {
+    int sum(int l, int r) {
       assert(0<=l&&l<=r&&r<=size()); auto[a,c]=split(root,r); auto[b,m]=split(a,l);
-      long long value=sum(m); root=merge(merge(b,m),c); return value;
+      int value=sum(m); root=merge(merge(b,m),c); return value;
     }
   };
 //NOTEBOOK_END

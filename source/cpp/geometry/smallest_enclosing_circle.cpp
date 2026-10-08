@@ -17,7 +17,8 @@ namespace notebook::geometry {
     Point u = b - a, v = c - a; long double d = 2 * cross(u, v);
     if (abs(d) <= EPS) {
       Circle ans = diameter_circle(a, b);
-      for(auto x:{diameter_circle(a,c),diameter_circle(b,c)})if(x.radius>ans.radius)ans=x;
+      Circle candidates[] = {diameter_circle(a,c), diameter_circle(b,c)};
+      for(auto x : candidates)if(x.radius>ans.radius)ans=x;
       return ans;
     }
     Point o=a+Point {v.y*norm2(u)-u.y*norm2(v),u.x*norm2(v)-v.x*norm2(u)}

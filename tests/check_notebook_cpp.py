@@ -14,10 +14,10 @@ args = parser.parse_args()
 with tempfile.TemporaryDirectory(prefix='notebook-cpp-') as directory:
     scratch = Path(directory)
     if args.standalone:
-        files = sorted(p for p in (ROOT / 'source/cpp').glob('*/*.cpp') if p.parent.name != 'utility')
+        files = sorted((ROOT / 'source/cpp').glob('*/*.cpp'))
         def compile_one(source):
             wrapper = scratch / (source.parent.name + '_' + source.stem + '.cpp')
-            wrapper.write_text(f'#include "{source}"\n')
+            wrapper.write_text(f'#include <bits/stdc++.h>\n#define int long long\n#include "{source}"\n')
             result = subprocess.run(['g++', '-std=c++17', '-Wall', '-Wextra', '-Werror',
                                      '-fsyntax-only', str(wrapper)], capture_output=True, text=True)
             return source, result
@@ -38,3 +38,7 @@ with tempfile.TemporaryDirectory(prefix='notebook-cpp-') as directory:
         command += ['-g1', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
     subprocess.run(command + [str(ROOT / 'tests/notebook_cpp.cpp'), '-o', str(binary)], check=True)
     subprocess.run([str(binary)], check=True)
+
+    utility_binary = scratch / 'utility-checks'
+    subprocess.run(command + [str(ROOT / 'tests/utility_cpp.cpp'), '-o', str(utility_binary)], check=True)
+    subprocess.run([str(utility_binary)], check=True)

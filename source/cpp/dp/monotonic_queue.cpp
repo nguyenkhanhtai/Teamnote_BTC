@@ -6,8 +6,8 @@ namespace notebook::dp {
   // Use: MonotoneMinQueue q; q.push(0,5); q.expire(0);
   // Push strictly increasing indices; expire indices < first_valid.
   struct MonotoneMinQueue {
-    deque<pair<int, long long>> q;
-    void push(int index, long long value) {
+    deque<pair<int, int>> q;
+    void push(int index, int value) {
       while (!q.empty() && q.back().second >= value) q.pop_back();
       q.push_back( {index, value});
     }
@@ -15,7 +15,7 @@ namespace notebook::dp {
       while (!q.empty() && q.front().first < first_valid) q.pop_front();
     }
     bool empty() const { return q.empty(); }
-    const long long&minimum()const { assert(!q.empty()); return q.front().second; }
+    const int&minimum()const { assert(!q.empty()); return q.front().second; }
   };
 //NOTEBOOK_END
 }

@@ -3,25 +3,41 @@
 namespace notebook::math {
   using namespace std;
 //NOTEBOOK_BEGIN
-  // Use: bool prime = is_prime(1000000007);
-  using U64 = uint64_t; using U128 = __uint128_t;
-  U64 mul_mod(U64 a, U64 b, U64 m) { return U128(a) * b % m; }
-  U64 pow_mod(U64 a, U64 e, U64 m) {
-    assert(m); U64 r = 1 % m;
-    for(a%=m; e; e>>=1,a=mul_mod(a,a,m))if(e&1)r=mul_mod(r,a,m);
+  // Dung int; them #define int long long neu can so 64-bit.
+  const int base_prime[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+  const int rb_seed32[] = {2, 7, 61};
+  const int rb_seed[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
+  int mul_mod(int a, int b, int m) {
+    return (__int128) a * b % m;
+  }
+  int pow_mod(int a, int e, int m) {
+    assert(a >= 0 && e >= 0 && m > 0);
+    int r = 1 % m;
+    a %= m;
+    while (e) {
+      if (e & 1) r = mul_mod(r, a, m);
+      a = mul_mod(a, a, m);
+      e >>= 1;
+    }
     return r;
   }
-  bool is_prime(U64 n) {
+  bool is_prime(int n) {
     if (n < 2) return false;
-    for(U64 p:{2,3,5,7,11,13,17,19,23,29,31,37})if(n%p==0)return n==p;
-    U64 d = n - 1; int s = 0;
-    while (!(d & 1)) d >>= 1, ++s;
-    for(U64 a:{2ULL,325ULL,9375ULL,28178ULL,450775ULL,9780504ULL,1795265022ULL}){
+    for (int p : base_prime) if (n % p == 0) return n == p;
+    int d = n - 1, s = 0;
+    while (d % 2 == 0) d >>= 1, ++s;
+    const int *bases = n < (1LL << 32) ? rb_seed32 : rb_seed;
+    int count = n < (1LL << 32) ? 3 : 7;
+    for (int i = 0; i < count; ++i) {
+      int a = bases[i];
       if (a % n == 0) continue;
-      U64 x = pow_mod(a, d, n);
+      int x = pow_mod(a, d, n);
       if (x == 1 || x == n - 1) continue;
       bool pass = false;
-      for(int r=1;r<s;++r){ x=mul_mod(x,x,n); if(x==n-1){ pass=true; break; } }
+      for (int r = 1; r < s; ++r) {
+        x = mul_mod(x, x, n);
+        if (x == n - 1) { pass = true; break; }
+      }
       if (!pass) return false;
     }
     return true;

@@ -6,7 +6,7 @@ namespace notebook::strings {
   // Use: SuffixAutomaton sam("banana");
   struct SuffixAutomaton {
     struct State {
-      int length=0,link=-1; map<unsigned char,int>next; long long ends=0;
+      int length=0,link=-1; map<unsigned char,int>next; int ends=0;
     }; vector<State> states {1}; int last = 0;
     void extend(unsigned char c) {
       int cur = states.size(); states.emplace_back();
@@ -37,19 +37,19 @@ namespace notebook::strings {
       }
       return true;
     }
-    long long distinct_substrings() const {
-      long long ans = 0;
+    int distinct_substrings() const {
+      int ans = 0;
       for(int i=1;i<(int)states.size();++i)ans+=states[i].length-states[states[i].link].length;
       return ans;
     }
     // Returned counts do not mutate the automaton; may be recomputed after extensions.
-    vector<long long> occurrences() const {
+    vector<int> occurrences() const {
       vector<int>order(states.size()); iota(order.begin(),order.end(),0);
       vector<pair<int,int>> lengths;
       for (int id:order) lengths.push_back({states[id].length,id});
       sort(lengths.rbegin(),lengths.rend());
       for (int i=0;i<(int)order.size();++i) { order[i]=lengths[i].second; }
-      vector<long long> cnt;
+      vector<int> cnt;
       for (auto& s : states) cnt.push_back(s.ends);
       for(int u:order)if(states[u].link>=0)cnt[states[u].link]+=cnt[u];
       return cnt;

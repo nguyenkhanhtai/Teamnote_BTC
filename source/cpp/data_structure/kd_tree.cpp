@@ -19,7 +19,8 @@ namespace notebook::data_structure {
       };
       nth_element(ids.begin()+l,ids.begin()+m,ids.begin()+r,AxisOrder{points,axis}); int u=t.size(); t.push_back( {ids[m],-1,-1,points[ids[m]],points[ids[m]]});
       int a=build(ids,l,m,depth+1),b=build(ids,m+1,r,depth+1); t[u].left=a; t[u].right=b;
-      for (int v : {a, b}) if (v >= 0) for (size_t d = 0; d < D; ++d) {
+      int children[] = {a, b};
+      for (int v : children) if (v >= 0) for (size_t d = 0; d < D; ++d) {
         t[u].low[d] = min(t[u].low[d], t[v].low[d]);
         t[u].high[d] = max(t[u].high[d], t[v].high[d]);
       }

@@ -322,6 +322,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm
 INPUT ./source/cpp/data_structure/sparse_segment_tree.cpp
 INPUT ./source/cpp/data_structure/sparse_segment_tree.cpp
 INPUT source/cpp/data_structure/sparse_segment_tree.cpp
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnr6.tfm
 INPUT ./source/cpp/data_structure/persistent_segment_tree.cpp
 INPUT ./source/cpp/data_structure/persistent_segment_tree.cpp
 INPUT source/cpp/data_structure/persistent_segment_tree.cpp

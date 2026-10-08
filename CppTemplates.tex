@@ -2,7 +2,7 @@
 \addcontentsline{toc}{section}{C++: cách dùng code}
 \textbf{Chuẩn bị}: GNU C++17, thêm \texttt{\#include <bits/stdc++.h>} và \texttt{using namespace std;}. Chép struct/hàm trước \texttt{main}; mỗi listing có dòng \texttt{// Use:} minh họa khai báo và gọi. ID bắt đầu từ $0$, đoạn mảng $[l,r)$.
 
-\textbf{Khai báo}: \texttt{Dinic flow(n);} tạo flow graph có $n$ đỉnh; \texttt{SegmentTreeBeats st(a);} dựng từ \texttt{vector<long long> a}. Dùng kiểu cụ thể; nếu cần kiểu khác, sửa dòng \texttt{using} hoặc kiểu dữ liệu của module. KD-tree đổi hằng \texttt{D} cho số chiều.
+\textbf{Khai báo}: \texttt{Dinic flow(n);} tạo flow graph có $n$ đỉnh; \texttt{SegmentTreeBeats st(a);} dựng từ \texttt{vector<int> a}. Dùng kiểu cụ thể; nếu cần kiểu khác, sửa dòng \texttt{using} hoặc kiểu dữ liệu của module. KD-tree đổi hằng \texttt{D} cho số chiều.
 
 \textbf{Callback = hàm bạn viết}: truyền tên hàm, không cần lambda. \texttt{function<bool(const vector<int>\&)>} nghĩa là nhận tập ID và trả về đúng/sai. Dữ liệu riêng của bài có thể đặt ở biến toàn cục để hàm đọc.
 \inputminted{compactcpp}{source/cpp/utility/declaration_guide.cpp}

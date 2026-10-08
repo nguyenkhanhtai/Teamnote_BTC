@@ -28,13 +28,13 @@ for (int l = 1, r; l <= n; l = r + 1) {
 {compactcpp}{source/cpp/math/floor_sum.cpp}
 
 \Algorithm{Rabin-Miller}
-{Miller-Rabin kiểm tra nguyên tố tất định với $n<2^{64}$}
+{Miller-Rabin tất định: 3 cơ sở khi $n<2^{32}$, 7 cơ sở khi $n<2^{63}$; dùng \texttt{int long long}}
 {${O}(k \log n)$}
 {compactcpp}{source/cpp/math/rabin_miller.cpp}
 
-\Algorithm{Sàng nhanh (Linear Sieve)}
-{Sàng Euler tuyến tính: nguyên tố và ước nguyên tố nhỏ nhất tới $N$}
-{$O(N)$}
+\Algorithm{Sàng phân đoạn (Segmented Sieve)}
+{Lấy tối đa $k$ nguyên tố trong $[L,R]$, $R\le10^9$; $W=R-L+1$, $B$ số/block; bộ nhớ $O(\sqrt R+B+k)$}
+{$O(\sqrt R\log\log R+W\log\log R+\lceil W/B\rceil\pi(\sqrt R))$}
 {compactcpp}{source/cpp/math/fast_sieve.cpp}
 
 \Algorithm{Đếm nguyên tố (Prime Counting)}

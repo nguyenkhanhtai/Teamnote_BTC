@@ -7,23 +7,23 @@ namespace notebook::data_structure {
   // Complete interval partition of [lo,hi), adjacent equal values merged.
   // Assign takes O((erased_intervals+1)*log(number_of_intervals)) worst case.
   struct IntervalSet {
-    struct Entry { long long end; long long value; }; map<long long,Entry>segments;
-    long long lo, hi;
-    auto split(long long x) {
+    struct Entry { int end; int value; }; map<int,Entry>segments;
+    int lo, hi;
+    auto split(int x) {
       if (x == hi) return segments.end();
       auto it = prev(segments.upper_bound(x));
       if (it->first == x) return it;
-      long long end=it->second.end; long long value=it->second.value; it->second.end=x;
+      int end=it->second.end; int value=it->second.value; it->second.end=x;
       return segments.emplace(x, Entry {end, move(value)}).first;
     }
-    struct Interval { long long l, r; long long value; };
-    IntervalSet(long long lo,long long hi,long long initial):lo(lo),hi(hi){
+    struct Interval { int l, r; int value; };
+    IntervalSet(int lo,int hi,int initial):lo(lo),hi(hi){
       assert(lo < hi); segments.emplace(lo, Entry {hi, move(initial)});
     }
-    const long long& get(long long x) const {
+    const int& get(int x) const {
       assert(lo<=x&&x<hi); return prev(segments.upper_bound(x))->second.value;
     }
-    void assign(long long l, long long r, long long value) {
+    void assign(int l, int r, int value) {
       assert(lo <= l && l <= r && r <= hi);
       if (l == r) return;
       auto right = split(r), left = split(l); segments.erase(left, right);

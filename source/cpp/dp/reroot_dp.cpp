@@ -7,7 +7,7 @@ namespace notebook::dp {
   //      RerootState: edit state type and write three named functions.
   // Associative merge, identity; finish(aggregate,u) adds vertex contribution.
   // lift(state,from,to) transforms a complete state across an edge. O(n) callbacks.
-  using RerootState = pair<long long,long long>; // Change state for your DP.
+  using RerootState = pair<int,int>; // Change state for your DP.
   vector<RerootState> reroot(const vector<vector<int>>& g,RerootState identity,
       function<RerootState(RerootState,RerootState)> merge,
       function<RerootState(RerootState,int)> finish,

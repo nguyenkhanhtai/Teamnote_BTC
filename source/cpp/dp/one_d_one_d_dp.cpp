@@ -3,12 +3,12 @@
 namespace notebook::dp {
   using namespace std;
 //NOTEBOOK_BEGIN
-  // Use: auto dp = monotone_partition_dp(n,cost); // cost(j,i): long long
+  // Use: auto dp = monotone_partition_dp(n,cost); // cost(j,i): int
   // dp[i]=min_{j<i}(dp[j]+cost(j,i)), dp[0]=initial.
   // Requires single crossing: a newer candidate wins a suffix of future indices.
-  vector<long long> monotone_partition_dp(int n,
-      function<long long(int,int)> cost,long long initial=0){
-    struct Candidate { int j,l,r; }; deque<Candidate>q; vector<long long>dp(n+1);
+  vector<int> monotone_partition_dp(int n,
+      function<int(int,int)> cost,int initial=0){
+    struct Candidate { int j,l,r; }; deque<Candidate>q; vector<int>dp(n+1);
     dp[0] = initial;
     if (n) q.push_back( {0, 1, n});
 

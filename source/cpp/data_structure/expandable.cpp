@@ -4,11 +4,11 @@ namespace notebook::data_structure {
   using namespace std;
 //NOTEBOOK_BEGIN
   // Use: ExpandableIndex idx(buildIndex); idx.insert(3);
-  //      buildIndex(const vector<long long>&): vector<long long>.
+  //      buildIndex(const vector<int>&): vector<int>.
   // Binary-counter buckets. Builder(const vector<Value>&) returns a static index by value.
   // visit(index) called once per occupied bucket; caller combines query results.
   struct ExpandableIndex {
-    using Value = long long;
+    using Value = int;
     using Index = vector<Value>; // Replace with your static index type.
     function<Index(const vector<Value>&)> build;
     vector<vector<Value>> buckets; vector<optional<Index>> indices;

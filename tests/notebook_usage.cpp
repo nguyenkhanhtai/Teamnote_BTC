@@ -1,3 +1,5 @@
+#include <bits/stdc++.h>
+#define int long long
 #include "../source/cpp/data_structure/arpa_trick.cpp"
 #include "../source/cpp/data_structure/binary_trie.cpp"
 #include "../source/cpp/data_structure/block_array_mo.cpp"
@@ -122,9 +124,9 @@ ErasablePriorityQueue q; q.insert(3); // max-heap
  }
  {
 using namespace notebook::data_structure;
-vector<long long> buildIndex(const vector<long long>&);
+vector<int> buildIndex(const vector<int>&);
 ExpandableIndex idx(buildIndex); idx.insert(3);
-// buildIndex(const vector<long long>&): vector<long long>.
+// buildIndex(const vector<int>&): vector<int>.
  }
  {
 using namespace notebook::data_structure;
@@ -148,8 +150,8 @@ IntervalSet seg(0,10,0); seg.assign(2,5,7);
  }
  {
 using namespace notebook::data_structure;
-long long mergeSum(long long,long long);
-// long long mergeSum(long long a,long long b) { return a+b; }
+int mergeSum(int,int);
+// int mergeSum(int a,int b) { return a+b; }
 SegmentTree st({1,2,3},0,mergeSum); auto s = st.fold(0,3);
 RangeAddPointQuery lazy(3); lazy.add(0,2,4);
  }
@@ -202,7 +204,7 @@ WaveletTree wt({3,1,2}); auto x = wt.kth(0,3,0);
  }
  {
 using namespace notebook::dp;
-int k=2; long long lo=0,hi=10; PenalizedResult oracle(long long);
+int k=2; int lo=0,hi=10; PenalizedResult oracle(int);
 auto ans = aliens_exact(k,lo,hi,oracle);
 // oracle(lambda): PenalizedResult{minCost, count}.
  }
@@ -213,15 +215,15 @@ MonotoneMinHull cht; cht.add(3,1); auto y = cht.query(2);
  }
  {
 using namespace notebook::dp;
-int n=3; vector<long long> previous(4); long long cost(int,int);
+int n=3; vector<int> previous(4); int cost(int,int);
 auto next = divide_conquer_layer(previous,cost);
-auto ans = knuth_partition(n,cost); // cost(l,r): long long
+auto ans = knuth_partition(n,cost); // cost(l,r): int
  }
  {
 using namespace notebook::dp;
 
 mt19937_64 rng(123456);
-auto ans = banded_pick_k(vector<long long>{1,2,3},2,3,rng);
+auto ans = banded_pick_k(vector<int>{1,2,3},2,3,rng);
  }
  {
 using namespace notebook::dp;
@@ -230,8 +232,8 @@ MonotoneMinQueue q; q.push(0,5); q.expire(0);
  }
  {
 using namespace notebook::dp;
-int n=3; long long cost(int,int);
-auto dp = monotone_partition_dp(n,cost); // cost(j,i): long long
+int n=3; int cost(int,int);
+auto dp = monotone_partition_dp(n,cost); // cost(j,i): int
  }
  {
 using namespace notebook::dp;
@@ -247,7 +249,7 @@ SlopeTrick f; f.add_abs(3); auto ans = f.minimum();
  {
 using namespace notebook::dp;
 
-vector<long long> f(1<<3,1); subset_transform(f);
+vector<int> f(1<<3,1); subset_transform(f);
  }
  {
 using namespace notebook::geometry;
@@ -341,13 +343,13 @@ auto trail = euler_trail(3,{{0,1},{1,2}},false);
  }
  {
 using namespace notebook::graph;
-vector<vector<long long>> dist{{0,1},{1,0}};
-bool ok = floyd_warshall(dist); // vector<vector<long long>>
+vector<vector<int>> dist{{0,1},{1,0}};
+bool ok = floyd_warshall(dist); // vector<vector<int>>
  }
  {
 using namespace notebook::graph;
-long long nextState(long long);
-// long long nextState(long long x) { return (x+1)%3; }
+int nextState(int);
+// int nextState(int x) { return (x+1)%3; }
 auto cycle = find_cycle(0,nextState);
  }
  {
@@ -411,9 +413,9 @@ auto wives = stable_marriage({{0,1},{1,0}},{{0,1},{1,0}});
  }
  {
 using namespace notebook::graph;
-vector<vector<pair<int,long long>>> g{{{1,1}},{{0,1},{2,1}},{{1,1}}};
+vector<vector<pair<int,int>>> g{{{1,1}},{{0,1},{2,1}},{{1,1}}};
 auto cost = steiner_tree(g,{0,2});
-// g: vector<vector<pair<int,long long>>>, undirected.
+// g: vector<vector<pair<int,int>>>, undirected.
  }
  {
 using namespace notebook::graph;
@@ -456,7 +458,7 @@ auto b = extended_gcd(12,18); // b.gcd, b.x, b.y
  {
 using namespace notebook::math;
 
-LinearSieve sieve(1000000); // sieve.primes, spf, phi, mu
+auto primes = segmented_sieve(2,1000000000,5000000);
  }
  {
 using namespace notebook::math;
@@ -471,7 +473,7 @@ auto s = floor_sum(10,7,3,2); // sum floor((3*i+2)/7)
  {
 using namespace notebook::math;
 
-vector<long long> a(8,1); fwht(a,Walsh::Xor);
+vector<int> a(8,1); fwht(a,Walsh::Xor);
  }
  {
 using namespace notebook::math;
@@ -481,7 +483,7 @@ auto state = retrograde_analysis(3,{{1},{2},{}});
  {
 using namespace notebook::math;
 
-auto y = lagrange(vector<uint64_t>{0,1,4},5,998244353);
+auto y = lagrange(vector<int>{0,1,4},5,998244353);
  }
  {
 using namespace notebook::math;
@@ -496,7 +498,7 @@ auto c = convolution_ntt({1,2},{3,4});
  {
 using namespace notebook::math;
 
-mt19937_64 rng(123456); auto factors = factorize(360,rng);
+mt19937 rng(123456); auto factors = factorize(360,rng);
  }
  {
 using namespace notebook::math;
@@ -506,7 +508,7 @@ auto count = prime_count(1000000);
  {
 using namespace notebook::math;
 
-mt19937_64 rng(123456); auto g = primitive_root(17,rng);
+mt19937 rng(123456); auto g = primitive_root(17,rng);
  }
  {
 using namespace notebook::math;
@@ -619,8 +621,8 @@ auto survivor = josephus_fast(10,3); // zero-based
 InteractiveSession judge(cin,cout,100);
  }
  {
-void onMask(uint64_t);
+void onMask(int);
 for_each_submask(13,onMask); for_each_k_subset(5,2,onMask);
-// void onMask(uint64_t mask)
+// void onMask(int mask)
  }
 }

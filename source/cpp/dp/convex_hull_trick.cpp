@@ -8,10 +8,10 @@ namespace notebook::dp {
   // coefficients fit int64 and their products/differences fit signed int128.
   struct MonotoneMinHull {
     struct Line {
-      long long m, b;
-      __int128 at(long long x) const { return __int128(m) * x + b; }
+      int m, b;
+      __int128 at(int x) const { return __int128(m) * x + b; }
     }; deque<Line> q;
-    void add(long long m, long long b) {
+    void add(int m, int b) {
       Line c {m, b};
       if (!q.empty() && q.back().m == m) {
         if (q.back().b <= b) return;
@@ -24,7 +24,7 @@ namespace notebook::dp {
       }
       q.push_back(c);
     }
-    __int128 query(long long x) {
+    __int128 query(int x) {
       assert(!q.empty());
       while (q.size() > 1 && q[0].at(x) >= q[1].at(x)) q.pop_front();
       return q.front().at(x);

@@ -13,11 +13,12 @@ namespace notebook::geometry {
       return vector<pair<Point, Point>> {};
     }
     vector<pair<Point, Point>> out;
-    for (int s : {-1, 1}) {
+    const int signs[] = {-1, 1};
+    for (int s : signs) {
       long double r = ra - s * rb, h = z - r * r;
       if (h < -EPS) continue;
       h = sqrtl(max(0.L, h));
-      for (int side : {-1, 1}) {
+      for (int side : signs) {
         if (side == 1 && h <= EPS) continue;
         Point n=(d*r+perp(d)*(h*side))/z; pair<Point,Point>t {a+n*ra,b+n*(s*rb)};
         bool dup = false;

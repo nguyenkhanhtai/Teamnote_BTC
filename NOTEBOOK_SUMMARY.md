@@ -137,7 +137,7 @@ LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](
 - **Legendre's Formula (de Polignac)**: $v_p(n!) = \sum \lfloor \frac{n}{p^k} \rfloor = \frac{n - S_p(n)}{p - 1}$.
 - **Wilson's Theorem**: $(p-1)! \equiv -1 \pmod p \iff p$ prime.
 - **Frobenius Coin Problem (Chicken McNugget)**: Max non-representable $ax + by$ ($x, y \ge 0$) is $ab - a - b$; total non-representable count is $\frac{(a-1)(b-1)}{2}$.
-- **Primality & Factorization**: Deterministic Miller-Rabin ($n < 2^{64}$), Linear Sieve, Prime Counting (Meissel-Lehmer $O(N^{2/3})$), Pollard's Rho with Brent cycle finding ($O(\sqrt[4]{n} \log n)$).
+- **Primality & Factorization**: Deterministic Miller-Rabin ($n < 2^{63}$, signed `int` with the notebook macro), Segmented Sieve (bitset blocks, returns up to k primes), Prime Counting (Meissel-Lehmer $O(N^{2/3})$), Pollard's Rho with Brent cycle finding ($O(\sqrt[4]{n} \log n)$).
 - **Modular Inverses & Equations**: Extended GCD, Diophantine equations, Primitive Root, Discrete Log (Baby-step Giant-step), Modular Square Root (Tonelli-Shanks), Stern-Brocot Tree.
 
 ### Multiplicative Functions & Möbius Inversion

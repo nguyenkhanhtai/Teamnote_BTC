@@ -4,19 +4,19 @@ namespace notebook::geometry {
   using namespace std;
 //NOTEBOOK_BEGIN
   // Use: auto [cost,edges] = manhattan_mst({{0,0},{2,3}});
-  struct ManhattanEdge { int u, v; long long weight;
+  struct ManhattanEdge { int u, v; int weight;
     bool operator<(const ManhattanEdge& other) const { return weight<other.weight; }
   };
-  // Coordinates, sums/differences, distances and total weight must fit long long.
-  vector<ManhattanEdge>manhattan_candidates(vector<pair<long long,long long>>p){
+  // Coordinates, sums/differences, distances and total weight must fit int.
+  vector<ManhattanEdge>manhattan_candidates(vector<pair<int,int>>p){
     auto original=p; int n=p.size(); vector<int>ids(n); iota(ids.begin(),ids.end(),0);
     vector<ManhattanEdge> edges;
     for (int direction = 0; direction < 4; ++direction) {
-      vector<pair<long long,int>> order;
+      vector<pair<int,int>> order;
       for (int id:ids) order.push_back({p[id].first+p[id].second,id});
       sort(order.begin(),order.end());
       for (int i=0;i<n;++i) ids[i]=order[i].second;
-      map<long long, int> sweep;
+      map<int, int> sweep;
       for (int i : ids) {
         auto[x, y] = p[i];
         for (auto it = sweep.lower_bound(-y); it != sweep.end();) {
@@ -33,14 +33,14 @@ namespace notebook::geometry {
     }
     return edges;
   }
-  pair<long long,vector<ManhattanEdge>>manhattan_mst(const vector<pair<long long,long long>>&p){
+  pair<int,vector<ManhattanEdge>>manhattan_mst(const vector<pair<int,int>>&p){
     auto e = manhattan_candidates(p);
     sort(e.begin(),e.end());
     vector<int>parent(p.size()),size(p.size(),1); iota(parent.begin(),parent.end(),0);
     struct DSUFind {
       vector<int>& parent;
       int find(int u) { return parent[u]==u?u:parent[u]=find(parent[u]); }
-    } dsu{parent}; long long total = 0; vector<ManhattanEdge> tree;
+    } dsu{parent}; int total = 0; vector<ManhattanEdge> tree;
     for (auto edge : e) {
       int a = dsu.find(edge.u), b = dsu.find(edge.v);
       if (a == b) continue;

@@ -7,7 +7,7 @@ namespace notebook::data_structure {
   // Immutable array; ranges [l,r), k is zero-based. O(log sigma) queries.
   struct WaveletTree {
     struct Node { int lo,hi,left=-1,right=-1; vector<int>pref; }; vector<Node>nodes;
-    vector<long long> values; int n;
+    vector<int> values; int n;
     int build(vector<int> a, int lo, int hi) {
       int id = nodes.size(); nodes.push_back( { lo, hi, -1, -1, {0} });
       if (hi - lo <= 1 || a.empty()) return id;
@@ -26,13 +26,13 @@ namespace notebook::data_structure {
       int a = t.pref[l], b = t.pref[r];
       return less(t.left, a, b, rank) + less(t.right, l - a, r - b, rank);
     }
-    WaveletTree(const vector<long long>&a):values(a),n(a.size()){
+    WaveletTree(const vector<int>&a):values(a),n(a.size()){
       sort(values.begin(), values.end());
       values.erase(unique(values.begin(),values.end()),values.end()); vector<int>ranks;
       for(auto x:a)ranks.push_back(lower_bound(values.begin(),values.end(),x)-values.begin());
-      build(move(ranks), 0, max(1, int(values.size())));
+      build(move(ranks), 0, max<int>(1, static_cast<int>(values.size())));
     }
-    long long kth(int l, int r, int k) const {
+    int kth(int l, int r, int k) const {
       assert(0<=l&&l<=r&&r<=n&&0<=k&&k<r-l); int id=0;
       while (nodes[id].hi - nodes[id].lo > 1) {
         const auto& t = nodes[id]; int a = t.pref[l], b = t.pref[r];
@@ -40,7 +40,7 @@ namespace notebook::data_structure {
       }
       return values[nodes[id].lo];
     }
-    int count(int l, int r, long long low, long long high) const {
+    int count(int l, int r, int low, int high) const {
       assert(0 <= l && l <= r && r <= n);
       if (low > high) return 0;
       int a=lower_bound(values.begin(),values.end(),low)-values.begin();
