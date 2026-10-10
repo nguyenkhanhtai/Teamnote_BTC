@@ -473,7 +473,7 @@ auto s = floor_sum(10,7,3,2); // sum floor((3*i+2)/7)
  {
 using namespace notebook::math;
 
-vector<int> a(8,1); fwht(a,Walsh::Xor);
+vector<int> a(8,1); fwht(a,Walsh::Xor,998244353);
  }
  {
 using namespace notebook::math;
@@ -488,7 +488,7 @@ auto y = lagrange(vector<int>{0,1,4},5,998244353);
  {
 using namespace notebook::math;
 
-auto sol = gauss({{1.,2.,3.},{2.,1.,3.}},2);
+auto sol = gauss({{1,2,3},{2,1,3}},2,1000000007);
  }
  {
 using namespace notebook::math;

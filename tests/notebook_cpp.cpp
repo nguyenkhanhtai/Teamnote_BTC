@@ -385,10 +385,11 @@ void test_math() {
     for(auto&x:a)x=rng()%10;
     for(auto&x:b)x=rng()%10;
     for(int i=0;i<16;++i)for(int j=0;j<16;++j)c[kind==Walsh::Xor?i^j:kind==Walsh::And?i&j:i|j]+=a[i]*b[j];
-    fwht(a,kind);
-    fwht(b,kind);
+    fwht(a,kind,101);
+    fwht(b,kind,101);
     for(int i=0;i<16;++i)a[i]*=b[i];
-    fwht(a,kind,true);
+    fwht(a,kind,101,true);
+    for (auto& x : c) x %= 101;
     require(a==c);
   }
   for(int n=1;n<15;++n) {
@@ -412,13 +413,13 @@ void test_math() {
       2,4,7
     }
   },2).consistent);
-  require(abs(determinant( {
+  require(determinant_mod( {
     {
       1,2
     }, {
       3,4
     }
-  })+2)<1e-9);
+  })==1000000005);
 }
 void test_graphs() {
   using namespace notebook::graph;

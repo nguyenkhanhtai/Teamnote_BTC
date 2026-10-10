@@ -42,6 +42,8 @@ Cạnh hướng cha $\to$ con: số thứ tự topo là $\displaystyle \frac{n!}
         \item \textit{Tổng quát (được chung đỉnh)}: Tính transitive closure (Floyd-Warshall/reachability), rồi giải path cover không chung đỉnh.
     \end{itemize}
     \item \textbf{Định lý Dilworth}: Trong poset hữu hạn (reachability trên DAG), kích thước \textbf{maximum antichain} (tập lớn nhất gồm các đỉnh không đến được nhau) bằng \textbf{minimum path cover}.
+    \item \textbf{Erd\H{o}s--Gallai}: Dãy số nguyên $n-1\ge d_1\ge\cdots\ge d_n\ge0$ là dãy bậc đồ thị đơn vô hướng iff $\sum d_i$ chẵn và $\sum_{i=1}^{k}d_i\le k(k-1)+\sum_{i=k+1}^{n}\min(d_i,k)$ với mọi $1\le k\le n$. Dùng khi chỉ biết bậc và cần kiểm tra tồn tại đồ thị.
+    \item \textbf{Gale--Ryser}: Hai dãy nguyên không âm $a_1\ge\cdots\ge a_n$, $b_1,\dots,b_m$ là bậc hai phía của đồ thị đơn iff $\sum a_i=\sum b_j$ và $\sum_{i=1}^{k}a_i\le\sum_{j=1}^{m}\min(b_j,k)$ với mọi $1\le k\le n$. Dùng cho ma trận $0/1$ có tổng hàng/cột cho trước.
     \item \textbf{Định lý Hall}: Đồ thị hai phía $(X,Y)$ có matching phủ hết $X \iff \forall S \subseteq X, |N(S)| \ge |S|$.
     \item \textbf{Kích thước maximum matching qua Hall}: $|X| - \max_{S \subseteq X} (|S| - |N(S)|)$.
 \end{itemize}

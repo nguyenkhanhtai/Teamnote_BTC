@@ -9,6 +9,7 @@
     \item \textbf{Rút gọn số mũ Euler mở rộng} ($\forall a, m$):
     $$ a^b \equiv a^{(b \bmod \phi(m)) + \phi(m)} \pmod m \quad (b \ge \phi(m)) $$
     \item \textbf{Công thức Legendre ($v_p(n!)$)}: $v_p(n!) = \sum_{k=1}^\infty \lfloor \frac{n}{p^k} \rfloor = \frac{n - S_p(n)}{p - 1}$.
+    \item \textbf{LTE}: $v_p(x)$ là số mũ của nguyên tố $p$ trong $x\ne0$. Với $a,b,n$ nguyên dương, $a\ne b$, $n\ge1$: nếu $p$ lẻ, $p\mid a-b$, $p\nmid ab$, thì $v_p(a^n-b^n)=v_p(a-b)+v_p(n)$. Nếu $p$ lẻ, $p\mid a+b$, $p\nmid ab$, $n$ lẻ: $v_p(a^n+b^n)=v_p(a+b)+v_p(n)$. Với $a,b$ lẻ và $p=2$: $n$ lẻ cho $v_2(a^n-b^n)=v_2(a-b)$; $n$ chẵn cho $v_2(a^n-b^n)=v_2(a-b)+v_2(a+b)+v_2(n)-1$. Dùng tính mức chia hết của hiệu/tổng lũy thừa mà không tính số lớn.
     \item \textbf{Định lý Wilson}: $(p - 1)! \equiv -1 \pmod p \iff p$ nguyên tố $\implies (p - 2)! \equiv 1 \pmod p$.
     \item \textbf{Frobenius Coin (Chicken McNugget)}: Với $\gcd(a,b)=1$, số lớn nhất không biểu diễn được dạng $ax+by$ ($x,y\ge0$) là $ab-a-b$; số lượng không biểu diễn được là $\frac{(a-1)(b-1)}{2}$.
     \item \textbf{Floor Trick ($O(\sqrt{n})$ nhóm)}:
@@ -122,9 +123,14 @@ for (int l = 1, r; l <= n; l = r + 1) {
     \item \textbf{Định lý Ballot}: A có $a$ phiếu, B có $b$ ($a>b$). Xác suất A luôn dẫn trước nghiêm ngặt: $\frac{a - b}{a + b}$.
     \item \textbf{Số Stirling loại 1 và 2}: $\left[ \begin{matrix} n \\ k \end{matrix} \right] = \left[ \begin{matrix} n-1 \\ k-1 \end{matrix} \right] + (n-1) \left[ \begin{matrix} n-1 \\ k \end{matrix} \right]$, $\left\{ \begin{matrix} n \\ k \end{matrix} \right\} = \left\{ \begin{matrix} n-1 \\ k-1 \end{matrix} \right\} + k \left\{ \begin{matrix} n-1 \\ k \end{matrix} \right\}$.
     $x^n = \sum_{k=0}^n \left\{ \begin{matrix} n \\ k \end{matrix} \right\} x^{\underline{k}} \implies \sum_{i=1}^n i^k = \sum_{j=0}^k \left\{ \begin{matrix} k \\ j \end{matrix} \right\} j! \binom{n + 1}{j + 1}$.
+    \item \textbf{Chu kỳ hoán vị}: Với hoán vị $\pi$ của $n$ phần tử có $c$ chu kỳ (tính cả điểm cố định), số phép đổi chỗ hai vị trí bất kỳ ít nhất để về identity là $n-c$. Mỗi chu kỳ dài $\ell$ cần $\ell-1$ lần. Biến hoán vị $A$ thành $B$: xét $\pi(i)=\operatorname{pos}_B(A_i)$. Không áp dụng cho chỉ đổi hai vị trí kề nhau.
+    \item \textbf{Eulerian numbers}: $E(n,k)$ đếm hoán vị $n$ phần tử có đúng $k$ vị trí giảm $a_i>a_{i+1}$. $E(0,0)=1$; với $n\ge1$, $E(n,k)=(n-k)E(n-1,k-1)+(k+1)E(n-1,k)$, chỉ tính $0\le k<n$, các chỉ số khác bằng $0$. Với $n\ge1$, cũng bằng số hoán vị có đúng $k$ vị trí $a_i>i$ (chỉ số từ $1$).
     \item \textbf{PIE}: $|\bigcup_{i=1}^n A_i| = \sum_{\emptyset \ne J} (-1)^{|J|-1} |\bigcap_{j \in J} A_j|$; Thuộc đúng $r$ tập: $\sum_{m=r}^n (-1)^{m-r} \binom{m}{r} \sum_{|X|=m} |\bigcap_{i \in X} A_i|$.
     \item \textbf{Định lý Lucas}: $\binom{n}{k} \equiv \prod_{i} \binom{n_i}{k_i} \pmod p$ (chữ số cơ số $p$).
-    \item \textbf{Đếm cây và Cayley}: $n^{n-2}$ cây có nhãn, rừng gồm $k$ cây có gốc: $k n^{n-k-1}$, Matrix Tree Theorem ($\det(L_i)$), bổ đề LGV ($\det(M)$).
+    \item \textbf{Đếm cây và Cayley}: $n^{n-2}$ cây có nhãn, rừng gồm $k$ cây có gốc: $k n^{n-k-1}$.
+    \item \textbf{LGV (Lindstr\"om--Gessel--Viennot)}: Trên DAG, đặt $M_{ij}$ là số đường đi $A_i\to B_j$. Khi đó $\det M=\sum_{\sigma\in S_k}\operatorname{sgn}(\sigma)N_\sigma$, với $N_\sigma$ đếm các bộ đường đi đôi một không chung đỉnh, nối $A_i\to B_{\sigma(i)}$. Nếu mọi phép ghép khác đồng nhất đều buộc giao nhau, $\det M$ chính là số bộ nối $A_i\to B_i$. Nhận biết: nhiều đường đi đơn điệu trên lưới, không chung đỉnh; mỗi $M_{ij}=\binom{\Delta x+\Delta y}{\Delta x}$ nếu $\Delta x,\Delta y\ge0$, ngược lại $0$. Các bộ giao nhau triệt tiêu bằng cách đổi đuôi sau điểm giao, làm đổi dấu hoán vị.
+    \item \textbf{Matrix--Tree (Kirchhoff)}: Đồ thị vô hướng có Laplacian $L_{ii}=\deg(i)$, $L_{ij}=-m_{ij}$ ($i\ne j$), với $m_{ij}$ là số cạnh nối $i,j$. Xóa hàng và cột cùng chỉ số $r$ được $L^{(r)}$; số cây khung $\tau(G)=\det L^{(r)}$, với mọi $r$. Đồ thị không liên thông cho $0$; một đỉnh cho $1$. Giữ cạnh song song, bỏ self-loop. Tính modulo nguyên tố bằng \texttt{determinant\_mod}.
+    \item \textbf{Đếm MST}: Kruskal theo nhóm cạnh cùng trọng số; co DSU từ các cạnh nhẹ hơn, bỏ cạnh nội bộ. Nhân $\tau(C)$ cho từng thành phần liên thông $C$ của đồ thị co (giữ cạnh song song), rồi mới union nhóm hiện tại. Đồ thị gốc không liên thông: không có MST.
 \end{itemize}
 
 \Algorithm{Hàm sinh (Generating Functions) và chuỗi Taylor}
@@ -153,6 +159,19 @@ for (int l = 1, r; l <= n; l = r + 1) {
 {Nội suy Lagrange tại $X$ từ $n+1$ điểm cách đều có giá trị $y_0,\dots,y_n$}
 {$O(n)$ tính giá trị}
 {compactcpp}{source/cpp/math/lagrange.cpp}
+\textbf{Công thức:} Với $d+1$ điểm phân biệt $(x_i,y_i)$ và $\deg f\le d$,
+\[
+f(X)=\sum_{i=0}^{d}y_i\prod_{\substack{0\le j\le d\\j\ne i}}\frac{X-x_j}{x_i-x_j}.
+\]
+Code dùng $x_i=i$, nên $\prod_{j\ne i}(i-j)=(-1)^{d-i}i!(d-i)!$:
+\[
+f(X)=\sum_{i=0}^{d}y_i\frac{(-1)^{d-i}}{i!(d-i)!}
+\prod_{\substack{0\le j\le d\\j\ne i}}(X-j).
+\]
+Trong modulo $p$, phép chia là nhân nghịch đảo; tích tiền tố/hậu tố tính các tích bỏ $i$ trong $O(d)$.\\
+\textbf{Khi dùng:} Cần $f(N)$ với $N$ rất lớn, biết $f$ là đa thức bậc tối đa $d$ và tính được $f(0),\dots,f(d)$ nhanh. Không suy ra tính đa thức chỉ từ vài giá trị đầu.\\
+\textbf{Ví dụ:} $S_k(N)=\sum_{i=1}^{N}i^k$ có bậc $k+1$: lập $y[0..k+1]$ bằng tổng tiền tố, gọi \texttt{lagrange(y,N,p)}. Tương tự, đếm cách chọn $k$ phần tử từ $N$ phần tử: $\binom{N}{k}$ là đa thức bậc $k$.\\
+\textbf{Điều kiện code:} $y[i]=f(i)$, modulo nguyên tố $p$, số điểm $d+1<p$; với tổng lũy thừa cần $k+2<p$. Mỗi lần tính tốn $O(d+\log p)$, gồm nghịch đảo modulo.
 
 \Algorithm{NTT (Number Theoretic Transform)}
 {NTT lặp với bit-reversal, MOD = $998244353$ ($G=3$)}
@@ -183,9 +202,10 @@ for (int l = 1, r; l <= n; l = r + 1) {
 \end{itemize}
 
 \Algorithm{Đại số tuyến tính (Gauss)}
-{Khử Gauss: định thức, hạng ma trận, hệ phương trình tuyến tính}
+{Khử Gauss modulo nguyên tố $p$: định thức, hạng, nghiệm riêng và cơ sở nghiệm thuần nhất}
 {$\mathcal{O}(n^3)$}
 {compactcpp}{source/cpp/math/linalg_gauss.cpp}
+Nghiệm tổng quát: $x=x_0+\sum_i t_i v_i\pmod p$, với $t_i$ tùy ý; 	exttt{consistent=false} nếu vô nghiệm.
 
 \Algorithm{XOR Linear Basis}
 {XOR basis: XOR max/min/thứ $k$ của tập con, sinh $2^{\text{size}}$ giá trị phân biệt}

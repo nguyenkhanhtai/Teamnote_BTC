@@ -26,16 +26,24 @@ namespace notebook::math {
     }
     if (invert) for (cd& x : a) x /= n;
   }
-  vector<int>convolution_fft(const vector<int>&a,const vector<int>&b){
+  vector<int> convolution_fft(const vector<int>& a, const vector<int>& b) {
     if (a.empty() || b.empty()) return {};
-    vector<cd> fa(a.begin(), a.end()), fb(b.begin(), b.end());
     int sz = 1, need = a.size() + b.size() - 1;
     while (sz < need) sz <<= 1;
-    fa.resize(sz); fb.resize(sz); fft(fa, false); fft(fb, false);
-    for (int i = 0; i < sz; i++) fa[i] *= fb[i];
-    fft(fa, true); vector<int> res(need);
-    for (int i = 0; i < need; i++) res[i] = round(fa[i].real());
+    vector<cd> packed(sz), product(sz);
+    for (int i = 0; i < (int)a.size(); ++i) packed[i].real(a[i]);
+    for (int i = 0; i < (int)b.size(); ++i) packed[i].imag(b[i]);
+    fft(packed, false);
+    for (int i = 0; i < sz; ++i) {
+        int j = (sz - i) % sz;
+        cd A = (packed[i] + conj(packed[j])) * 0.5;
+        cd B = (packed[i] - conj(packed[j])) * cd(0, -0.5);
+        product[i] = A * B;
+    }
+    fft(product, true);
+    vector<int> res(need);
+    for (int i = 0; i < need; ++i) res[i] = llround(product[i].real());
     return res;
-  }
+}
 //NOTEBOOK_END
 }
