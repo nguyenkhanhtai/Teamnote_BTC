@@ -113,11 +113,13 @@ Lập lịch trên hai máy.
 \inputminted[]{cpp}{source/cpp/utility/calendar.cpp}
 
 \subsection{Josephus}
-\inputminted[]{cpp}{source/cpp/utility/josephus.cpp}
+Đánh số từ 0, mỗi lần loại người thứ $k$: $f(1)=0$, $f(n)=(f(n-1)+k)\bmod n$. Duyệt kích thước $2,\ldots,n$: $O(n)$ thời gian, $O(1)$ bộ nhớ. Với $k=2$: $f(n)=2(n-2^{\lfloor\log_2 n\rfloor})$.
 
 \subsection{Kỹ thuật interactive}
 \inputminted[]{cpp}{source/cpp/utility/interactive.cpp}
 \begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
     \item \textbf{Kiểm tra ba phía}: So sánh hai nhóm $A,B$ cùng kích thước; khi có một mục tiêu và baseline bằng nhau đã biết, trả lời xác định mục tiêu ở $A$, $B$ hoặc nhóm còn lại $C$.
     \item \textbf{Gộp truy vấn}: Hỏi $\gcd(X,\prod p_i^{e_i})$ để khôi phục số mũ các nguyên tố đã chọn; tránh tràn tích. Suy ra nhóm cuối khi biết tổng.
     \item \textbf{Chuẩn hóa}: Với $1\le x\le10^d$, tổng chữ số $S(x(10^d-1))=9d$; đưa trạng thái về $9d$, rồi cộng mục tiêu$-9d$.
@@ -125,13 +127,43 @@ Lập lịch trên hai máy.
     \item \textbf{Đỉnh cực đại/lan truyền}: Cache giá trị đã hỏi, giữ witness cho đỉnh còn khả thi. Dò mìn: số mìn còn lại $=0$ thì các ô chưa biết an toàn; bằng số ô chưa biết thì tất cả là mìn. Tiếp tục trừ các phương trình chồng nhau.
 \end{itemize}
 
+\subsection{Giao tiếp hai lần chạy (Run-Twice)}
+\textbf{Nhận diện}: Pha 1 gửi thông điệp giới hạn; Pha 2 dùng nó cùng dữ liệu riêng để suy ra đáp án. Phân biệt $S$ khả năng cần ít nhất $\lceil\log_2 S\rceil$ bit. Kiểm tra kênh có giữ thứ tự, mất dữ liệu hay đổi nhãn không.
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \item \textbf{Đóng gói}: $0\le x_i<b_i$, gửi $X=\sum_i x_i\prod_{j<i}b_j$; giải mã lần lượt $x_i=X\bmod b_i$, $X\gets\lfloor X/b_i\rfloor$. Ví dụ $(2,1,3)$, cơ số $(3,2,4)$ cho $X=23$. Cần $\prod b_i-1$ vừa miền truyền; \texttt{long long} chứa tối đa 39 chữ số hệ 3.
+    \item \textbf{Mất thứ tự}: Gửi $v_i=iB+x_i$ với $0\le x_i<B$, $0\le i<k$; lấy lại $i=\lfloor v_i/B\rfloor$, $x_i=v_i\bmod B$. Ví dụ $7,12,24$ với $B=10$ mã hóa $(7,2,4)$. Cần miền truyền chứa $kB-1$.
+    \item \textbf{Mất số, checksum nguyên vẹn}: Mất một số: XOR toàn bộ trước khi gửi, XOR tiếp phần còn lại để khôi phục. Mất hai số: gửi $A=\sum x_i$, $B=\sum x_i^2$; trừ phần còn lại được $s=u+v$, $q=u^2+v^2$. Lấy $d=\sqrt{2q-s^2}=|u-v|$, suy ra $(s\pm d)/2$, chưa biết thứ tự. Dùng số nguyên chính xác, \texttt{\_\_int128} nếu cần; không thay tổng bằng tổng modulo.
+    \item \textbf{Hoán vị}: $k$ phần tử phân biệt truyền $k!$ trạng thái, $0\le t<k!$. Hai pha biết cùng tập phần tử, sort làm chuẩn. Còn $m$ phần tử: chọn hạng $\lfloor t/(m-1)!\rfloor$ từ 0, xóa nó, cập nhật $t\gets t\bmod(m-1)!$. Giải mã cộng $c_m(m-1)!$, $c_m$ là số phần tử còn lại nhỏ hơn phần tử đang đọc. Ví dụ $a<b<c$: $bca$ truyền $1\cdot2!+1\cdot1!=3$.
+    \item \textbf{Lật một ô báo đích}: Bàn $2^r$ bit, chỉ số $0,\ldots,2^r-1$. Đặt $P=\bigoplus_{b_i=1}i$, lật ô $P\oplus T$; Pha 2 XOR chỉ số bit 1 được $T$. Ví dụ $P=5,T=3$: lật ô 6. Nếu $P=T$, lật ô 0. Cần được tự chọn ô lật và giữ nguyên chỉ số ở hai pha.
+\end{itemize}
+
 \subsection{Random, Bit Tricks, Bitset}
 \inputminted[]{cpp}{source/cpp/utility/bit_tricks.cpp}
 
 \input{Transformations.tex}
 
+\subsection{Phím tắt VS Code (Linux)}
+\textbf{Mặc định}; dấu phẩy: bấm hai tổ hợp lần lượt. \texttt{Ctrl+K, Ctrl+S}: tra/gán phím nếu keymap khác hoặc hệ điều hành chặn.
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \item \textbf{Nhiều con trỏ}: \texttt{Ctrl+D} chọn lần xuất hiện kế; \texttt{Ctrl+K, Ctrl+D} bỏ qua lần vừa chọn; \texttt{Ctrl+U} hoàn tác con trỏ; \texttt{Ctrl+Shift+L} chọn mọi lần xuất hiện của vùng chọn; \texttt{Esc} thoát.
+    \item \textbf{Đổi tên}: \texttt{F2} đổi tên symbol theo scope (cần hỗ trợ ngôn ngữ); \texttt{Ctrl+H} thay chuỗi trong file.
+    \item \textbf{Nhiều dòng}: \texttt{Alt+Click} thêm con trỏ; \texttt{Shift+Alt+I} thêm con trỏ cuối các dòng được chọn (ví dụ thêm dấu phẩy hàng loạt).
+    \item \textbf{Dòng}: \texttt{Alt+}$\uparrow/\downarrow$ chuyển dòng/khối; \texttt{Ctrl+Shift+K} xóa dòng. Không chọn gì: \texttt{Ctrl+C/X} copy/cắt dòng.
+    \item \textbf{Chèn / format}: \texttt{Ctrl+Enter} dòng mới dưới; \texttt{Ctrl+Shift+Enter} dòng mới trên; \texttt{Ctrl+/} comment dòng; \texttt{Ctrl+Shift+I} format file (cần formatter).
+    \item \textbf{Nhảy}: \texttt{Ctrl+G} tới dòng; \texttt{Ctrl+Shift+O} tìm symbol; \texttt{F12} tới định nghĩa; \texttt{Ctrl+Shift+\textbackslash} tới ngoặc khớp; \texttt{F8} lỗi/cảnh báo kế.
+    \item \textbf{File / lệnh}: \texttt{Ctrl+P} tìm file; \texttt{Ctrl+Tab} đổi file; \texttt{Ctrl+Shift+T} mở lại tab đóng; \texttt{Ctrl+Shift+P} tìm lệnh.
+    \item \textbf{Terminal}: \texttt{Ctrl+\textasciigrave} hiện/ẩn; \texttt{Ctrl+Shift+\textasciigrave} tạo mới; \texttt{Ctrl+Shift+C/V} copy/paste trong terminal.
+\end{itemize}
+\textit{Nguồn: VS Code, Keyboard shortcuts for Linux. Alt+Click bị chặn: đổi Multi Cursor Modifier.}
+
 \subsection{Checklist trước khi nộp}
 \begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
     \item \textcolor{red}{\textbf{Đã đọc giới hạn và edge case ($N=0,1$, âm, mất liên thông)?}}
     \item Đã reset/xóa trạng thái toàn cục giữa các test case?
     \item Đúng giới hạn mảng, chỉ số từ 0 hay 1?

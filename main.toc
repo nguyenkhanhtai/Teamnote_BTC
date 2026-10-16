@@ -127,6 +127,8 @@
 \contentsline {subsection}{\numberline {8.8}Lịch (Calendar)}{22}{}%
 \contentsline {subsection}{\numberline {8.9}Josephus}{22}{}%
 \contentsline {subsection}{\numberline {8.10}Kỹ thuật interactive}{22}{}%
-\contentsline {subsection}{\numberline {8.11}Random, Bit Tricks, Bitset}{23}{}%
-\contentsline {subsection}{\numberline {8.12}Biến đổi bài toán (Transformations)}{23}{}%
-\contentsline {subsection}{\numberline {8.13}Checklist trước khi nộp}{24}{}%
+\contentsline {subsection}{\numberline {8.11}Giao tiếp hai lần chạy (Run-Twice)}{23}{}%
+\contentsline {subsection}{\numberline {8.12}Random, Bit Tricks, Bitset}{23}{}%
+\contentsline {subsection}{\numberline {8.13}Biến đổi bài toán (Transformations)}{23}{}%
+\contentsline {subsection}{\numberline {8.14}Phím tắt VS Code (Linux)}{24}{}%
+\contentsline {subsection}{\numberline {8.15}Checklist trước khi nộp}{24}{}%

@@ -225,6 +225,7 @@ LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](
 - `Johnson Scheduling`: Johnson's rule for optimal 2-machine scheduling.
 - `Monte Carlo & Las Vegas Frameworks`: Problem classifications into Monte Carlo (Freivalds, Schwartz-Zippel PIT, Fingerprinting, Color Coding) vs Las Vegas (Dense Witness Search, Majority, QuickSelect, Pollard's Rho, Treap).
 - `Calendar`, `Josephus Problem`, `Bit Tricks & Bitset`, `Enum & Bitmask Flags`.
+- `Run-Twice Communication`: Information bounds, mixed-radix packing, indexed packets under reordering, checksums for one or two missing values, permutation encoding/decoding, and the one-flip coin-board XOR construction; includes conditions and small examples.
 
 ### Transformations (Approaches as Problem-Solving Transforms)
 
@@ -261,6 +262,9 @@ LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](
 26. **Dirichlet / Pigeonhole (4-Sum $a_x + a_y = a_z + a_w$)**: When $N > \sqrt{2 \max A}$, 2 pairs with equal sums always exist since $\binom{N}{2} > 2\max A$. Find in $O(N^2)$ by hashing pairs.
 27. **Boyer-Moore Majority Vote**: Find majority element ($> n/2$ occurrences) in $O(n)$ time and $O(1)$ space with a single counter. Sperner's antichain max size: $\binom{n}{\lfloor n/2 \rfloor}$.
 
+### VS Code Keyboard Shortcuts (Linux)
+- Multi-cursor editing, symbol rename, line operations, formatting, navigation, file switching, and terminal shortcuts. Defaults checked against https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf; includes keymap lookup and OS-conflict notes.
+
 ### Checked (Pre-Submit Checklist)
 - 📌 **Read constraints and edge cases ($N=0, 1$, negative numbers, disconnected graphs)?**
 - Multiple test cases: clear/reset all global data structures properly?
@@ -270,7 +274,7 @@ LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](
 - Floating point precision / epsilon comparisons (`eps = 1e-9`)?
 - Fast I/O included (`cin.tie(NULL)`, `'\n'` instead of `endl`)?
 
-Utility listings before Transformations now use standalone C++17 in `source/cpp/utility/`: expression evaluation, Johnson scheduling, weekday calculation, Josephus, interactive callbacks, and bit enumeration. Interface/edge-case and differential tests: `tests/utility_cpp.cpp`. Task-specific interactive strategies remain concise notes.
+Utility listings before Transformations now use standalone C++17 in `source/cpp/utility/`: expression evaluation, Johnson scheduling, Josephus, interactive callbacks, and bit enumeration. Interface/edge-case and differential tests: `tests/utility_cpp.cpp`. Task-specific interactive strategies remain concise notes.
 
 Parts 1–7: all 74 former pseudocode listings and 20 legacy C++ listings now point to 94 self-contained C++17 implementations under `source/cpp/{data_structure,graph,tree,string,dp,math,geometry}/`. API conventions, dependencies, and preconditions are documented in `source/cpp/README.md`; combined compilation and differential checks are in `tests/notebook_cpp.cpp`.
 
@@ -295,3 +299,6 @@ CRRC selection: replaced the C/D notebook entries with I (Agronomist: reachabili
 Transformation curation: reduced 68 entries to 22 non-obvious observations. Removed generic contest techniques and repeated implementation details; each retained entry gives brief problem context and the decisive structural observation. CRRC remains I/K only. Code and font sizes are unchanged; rebuilt PDF: 24 pages.
 
 Transformation ownership correction: restored all 34 entries from the original repository transformation section, using their Vietnamese versions and retaining previous mathematical corrections. Only new additions are curated: 20 LFAC2/CRRC observations, with CRRC I/K only. Original notes and selected additions are labeled separately in `Transformations.tex`; the PDF has 25 pages at unchanged font sizes.
+
+Page budget: restored the Calendar listing in the PDF. Condensed Run-Twice without changing font sizes; replaced the C++ coding tips with VS Code Linux shortcuts.
+Josephus in the PDF now keeps the linear recurrence and the k=2 formula; the full fast implementation remains in source/cpp/utility/josephus.cpp.
