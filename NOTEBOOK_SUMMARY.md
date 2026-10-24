@@ -218,6 +218,9 @@ LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](
 ## 8. Misc & Strategy — `main.tex`
 
 ### Templates & Utilities
+- Page budget: the complete ICPC teamnote PDF must stay within 25 pages, including the title/contents page. Rebuild and check `pdfinfo main.pdf` after layout changes.
+- Constant-factor optimization: `CppTemplates.tex` provides concise general tips on measurement, pragmas, cache/traversal, integer widths, allocation, array versus vector (with the existing `Vec<D,T>` template from `source/template/multidimensional.cpp` and 2D/3D usage), containers, copies/calls, hot loops, arithmetic, bit parallelism, resets, and I/O.
+- Codeforces additions: hash-table choices and collision caveats (60737, 62393), concrete bitset operations and builtins (73558), and GNU bitset set-bit iteration (43718); original posts read through the official Codeforces API.
 - `Template`: Base competitive programming setup (`template.cpp` / `templates.cpp`) with fast I/O, modular addition/subtraction, bitmask utilities, `maximize`/`minimize`, and a `VERBOSE` flag that gates `cerr` and skips log expressions when disabled.
 - `Debugging Magic`: Macro printer for competitive debugging (`debug.cpp`).
 - `Compile & Run Scripts`: `.sh` and Windows `.bat` take a source filename, compile/run it, stop on compilation failure, and support file redirection.

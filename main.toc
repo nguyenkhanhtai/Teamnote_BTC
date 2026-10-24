@@ -1,26 +1,26 @@
 \babel@toc {english}{}\relax 
 \babel@toc {vietnamese}{}\relax 
-\contentsline {section}{C++: cách dùng code}{1}{}%
+\contentsline {section}{Tối ưu hằng số}{1}{}%
 \contentsline {section}{\numberline {1}Cấu trúc dữ liệu}{1}{}%
 \contentsline {subsection}{\numberline {1.1}Iterative Segment Tree}{1}{}%
 \contentsline {subsection}{\numberline {1.2}Lazy Segment Tree (lưu ý cài đặt)}{1}{}%
 \contentsline {subsection}{\numberline {1.3}Sparse Segment Tree}{1}{}%
-\contentsline {subsection}{\numberline {1.4}Cartesian Tree}{1}{}%
-\contentsline {subsection}{\numberline {1.5}Persistent Segment Tree}{1}{}%
+\contentsline {subsection}{\numberline {1.4}Cartesian Tree}{2}{}%
+\contentsline {subsection}{\numberline {1.5}Persistent Segment Tree}{2}{}%
 \contentsline {subsection}{\numberline {1.6}Parallel Binary Search}{2}{}%
 \contentsline {subsection}{\numberline {1.7}Wavelet Tree}{2}{}%
 \contentsline {subsection}{\numberline {1.8}Segment Tree Beat}{2}{}%
-\contentsline {subsection}{\numberline {1.9}Kd Tree}{2}{}%
+\contentsline {subsection}{\numberline {1.9}Kd Tree}{3}{}%
 \contentsline {subsection}{\numberline {1.10}BIT2D}{3}{}%
 \contentsline {subsection}{\numberline {1.11}Treap}{3}{}%
 \contentsline {subsection}{\numberline {1.12}Splay Tree / Link - cut Tree}{3}{}%
-\contentsline {subsection}{\numberline {1.13}Trie}{3}{}%
+\contentsline {subsection}{\numberline {1.13}Trie}{4}{}%
 \contentsline {subsection}{\numberline {1.14}Lichao Tree}{4}{}%
 \contentsline {subsection}{\numberline {1.15}Line Container}{4}{}%
 \contentsline {subsection}{\numberline {1.16}Arpa Trick}{4}{}%
 \contentsline {subsection}{\numberline {1.17}Chia căn (Square Root Decomposition)}{4}{}%
-\contentsline {subsection}{\numberline {1.18}Hash Map (SplitMix64)}{4}{}%
-\contentsline {subsection}{\numberline {1.19}Erasable Priority Queue}{4}{}%
+\contentsline {subsection}{\numberline {1.18}Hash Map (SplitMix64)}{5}{}%
+\contentsline {subsection}{\numberline {1.19}Erasable Priority Queue}{5}{}%
 \contentsline {subsection}{\numberline {1.20}Cấu trúc mở rộng (Binary Doubling)}{5}{}%
 \contentsline {subsection}{\numberline {1.21}Interval Set}{5}{}%
 \contentsline {section}{\numberline {2}Đồ thị}{5}{}%
@@ -44,7 +44,7 @@
 \contentsline {subsection}{\numberline {2.18}Gomory-Hu Tree}{9}{}%
 \contentsline {subsection}{\numberline {2.19}Critical (Dominator Tree)}{9}{}%
 \contentsline {subsection}{\numberline {2.20}Prufer}{9}{}%
-\contentsline {subsection}{\numberline {2.21}Steiner Tree}{9}{}%
+\contentsline {subsection}{\numberline {2.21}Steiner Tree}{10}{}%
 \contentsline {subsection}{\numberline {2.22}Stable Marriage}{10}{}%
 \contentsline {section}{\numberline {3}Cây}{10}{}%
 \contentsline {subsection}{\numberline {3.1}Tree Isomorphism}{10}{}%
@@ -69,7 +69,7 @@
 \contentsline {subsection}{\numberline {5.4}Alien DP}{13}{}%
 \contentsline {subsection}{\numberline {5.5}Convex Hull Trick}{13}{}%
 \contentsline {subsection}{\numberline {5.6}Slope Trick}{13}{}%
-\contentsline {subsection}{\numberline {5.7}Bitmask DP}{13}{}%
+\contentsline {subsection}{\numberline {5.7}Bitmask DP}{14}{}%
 \contentsline {subsection}{\numberline {5.8}SOS DP}{14}{}%
 \contentsline {subsection}{\numberline {5.9}Tối ưu bằng monotonic queue}{14}{}%
 \contentsline {subsection}{\numberline {5.10}Expected Value Trick}{14}{}%
@@ -85,7 +85,7 @@
 \contentsline {subsection}{\numberline {6.9}Căn modulo (Tonelli-Shanks)}{15}{}%
 \contentsline {subsection}{\numberline {6.10}Extended GCD}{15}{}%
 \contentsline {subsection}{\numberline {6.11}Diophantine}{15}{}%
-\contentsline {subsection}{\numberline {6.12}Stern-Brocot Tree}{15}{}%
+\contentsline {subsection}{\numberline {6.12}Stern-Brocot Tree}{16}{}%
 \contentsline {subsection}{\numberline {6.13}Hàm nhân tính và M\"obius Inversion}{16}{}%
 \contentsline {subsection}{\numberline {6.14}Công thức tổ hợp}{16}{}%
 \contentsline {subsection}{\numberline {6.15}Hàm sinh (Generating Functions) và chuỗi Taylor}{16}{}%
@@ -109,18 +109,18 @@
 \contentsline {subsection}{\numberline {7.5}Point in Convex Polygon}{19}{}%
 \contentsline {subsection}{\numberline {7.6}Line Hull Intersection}{19}{}%
 \contentsline {subsection}{\numberline {7.7}Polygon Raycast}{19}{}%
-\contentsline {subsection}{\numberline {7.8}Half-plane Intersection}{19}{}%
+\contentsline {subsection}{\numberline {7.8}Half-plane Intersection}{20}{}%
 \contentsline {subsection}{\numberline {7.9}Smallest Enclosing Circle}{20}{}%
 \contentsline {subsection}{\numberline {7.10}Circle Tangents}{20}{}%
 \contentsline {subsection}{\numberline {7.11}Công thức hình học}{20}{}%
-\contentsline {subsection}{\numberline {7.12}AREA}{20}{}%
+\contentsline {subsection}{\numberline {7.12}AREA}{21}{}%
 \contentsline {subsection}{\numberline {7.13}Manhattan MST}{21}{}%
 \contentsline {subsection}{\numberline {7.14}Planar Dual Graph}{21}{}%
 \contentsline {section}{\numberline {8}Tiện ích và kỹ thuật}{21}{}%
 \contentsline {subsection}{\numberline {8.1}Template}{21}{}%
 \contentsline {subsection}{\numberline {8.2}Debugging}{21}{}%
 \contentsline {subsection}{\numberline {8.3}Script biên dịch và chạy}{21}{}%
-\contentsline {subsection}{\numberline {8.4}Phân tích biểu thức (Expression Parsing)}{21}{}%
+\contentsline {subsection}{\numberline {8.4}Phân tích biểu thức (Expression Parsing)}{22}{}%
 \contentsline {subsection}{\numberline {8.5}Lập lịch Johnson}{22}{}%
 \contentsline {subsection}{\numberline {8.6}Fracturing Search ($k$-best)}{22}{}%
 \contentsline {subsection}{\numberline {8.7}Monte Carlo và Las Vegas}{22}{}%

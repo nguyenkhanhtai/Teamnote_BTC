@@ -1,4 +1,7 @@
 #include<bits/stdc++.h>
+#pragma GCC optimize("O3,unroll-loops")
+// Enable only when the judge CPU supports these instructions.
+// #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 bool VERBOSE = false;
 // Use cerr (not std::cerr); false skips log expressions too.
 #define cerr if (!VERBOSE) {} else std::cerr

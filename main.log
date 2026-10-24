@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  17 OCT 2026 00:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.8.27)  22 OCT 2026 23:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -964,17 +964,6 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo_uit.png>] (./CppTem
 plates.tex
-LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 3
-.
-
-(/usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
-File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-Underfull \hbox (badness 8151) in paragraph at lines 5--6
-[]\T5/cmr/bx/n/8 Khai b¡o\T5/cmr/m/n/8 : \T5/cmtt/m/n/8 Dinic flow(n); \T5/cmr/
-m/n/8 t¤o flow graph câ $\OML/cmm/m/it/8 n$ \T5/cmr/m/n/8 ^^_¿nh;
- []
-
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -984,43 +973,60 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
-(./source/cpp/utility/declaration_guide.cpp)
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
-[]\T5/cmr/bx/n/8 Khi include file nguçn\T5/cmr/m/n/8 : dòng \T5/cmtt/m/n/8 note
-book::graph::Dinic
+LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 3
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
+File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+(./source/template/multidimensional.cpp)
+Underfull \hbox (badness 5091) in paragraph at lines 41--42
+[]\T5/cmr/bx/n/8 Duy»t bit 1\T5/cmr/m/n/8 : dòng \T5/cmtt/m/n/8 __builtin_popco
+untll \T5/cmr/m/n/8 cho mask 64-
+ []
+
+
+Underfull \hbox (badness 6445) in paragraph at lines 41--42
+\T5/cmtt/m/n/8 mask&=mask-1; }\T5/cmr/m/n/8 ; khæng gåi \T5/cmtt/m/n/8 ctz/clz 
+\T5/cmr/m/n/8 vîi $\OT1/cmr/m/n/8 0$\T5/cmr/m/n/8 . GNU bitset câ
+ []
+
+
+Underfull \hbox (badness 5504) in paragraph at lines 45--46
+[]\T5/cmr/bx/n/8 I/O\T5/cmr/m/n/8 : \T5/cmtt/m/n/8 ios::sync_with_stdio(false);
+ cin.tie(nullptr);\T5/cmr/m/n/8 , dòng
  []
 
 ) (./DataStructure.tex (./source/cpp/data_structure/iterative_segment_tree.cpp)
-(./source/cpp/data_structure/sparse_segment_tree.cpp)
-(./source/cpp/data_structure/persistent_segment_tree.cpp [1{/usr/share/texmf/fo
-nts/enc/dvips/cm-super/cm-super-ts1.enc}])
+(./source/cpp/data_structure/sparse_segment_tree.cpp [1{/usr/share/texmf/fonts/
+enc/dvips/cm-super/cm-super-ts1.enc}])
+(./source/cpp/data_structure/persistent_segment_tree.cpp)
 (./source/cpp/data_structure/parallel_binary_search.cpp)
 (./source/cpp/data_structure/wavelet_tree.cpp)
-(./source/cpp/data_structure/segment_tree_beats.cpp)
-(./source/cpp/data_structure/kd_tree.cpp [2])
+(./source/cpp/data_structure/segment_tree_beats.cpp [2])
+(./source/cpp/data_structure/kd_tree.cpp)
 (./source/cpp/data_structure/fenwick_2d.cpp)
 (./source/cpp/data_structure/implicit_treap.cpp)
-(./source/cpp/data_structure/link_cut_tree.cpp)
-(./source/cpp/data_structure/binary_trie.cpp [3])
+(./source/cpp/data_structure/link_cut_tree.cpp [3])
+(./source/cpp/data_structure/binary_trie.cpp)
 (./source/cpp/data_structure/li_chao.cpp)
 (./source/cpp/data_structure/line_container.cpp)
 (./source/cpp/data_structure/arpa_trick.cpp)
-(./source/cpp/data_structure/block_array_mo.cpp)
+(./source/cpp/data_structure/block_array_mo.cpp [4])
 (./source/cpp/data_structure/hash_map.cpp)
-(./source/cpp/data_structure/erasable_priority_queue.cpp [4])
+(./source/cpp/data_structure/erasable_priority_queue.cpp)
 (./source/cpp/data_structure/expandable.cpp)
 (./source/cpp/data_structure/interval_set.cpp)) (./Graph.tex (./Matroid.tex
-(./source/cpp/graph/matroid_intersection.cpp)) [5]
+(./source/cpp/graph/matroid_intersection.cpp [5]))
 (./source/cpp/graph/min_cost_flow.cpp) (./source/cpp/graph/max_flow_dinic.cpp)
-(./source/cpp/graph/hopcroft_karp.cpp [6]) (./source/cpp/graph/hungarian.cpp)
-(./source/cpp/graph/general_matching.cpp) (./source/cpp/graph/bcc.cpp)
-(./source/cpp/graph/functional_cycle.cpp [7])
-(./source/cpp/graph/scc_tarjan.cpp) (./source/cpp/graph/dsu_rollback.cpp)
-(./source/cpp/graph/two_sat.cpp) (./source/cpp/graph/floyd_warshall.cpp)
-(./source/cpp/graph/euler_path.cpp) [8] (./source/cpp/graph/vizing.cpp)
-(./source/cpp/graph/online_bipartite.cpp) (./source/cpp/graph/gomory_hu.cpp)
-(./source/cpp/graph/dominator_tree.cpp) (./source/cpp/graph/prufer.cpp)
-(./source/cpp/graph/steiner_tree.cpp [9])
+[6] (./source/cpp/graph/hopcroft_karp.cpp) (./source/cpp/graph/hungarian.cpp)
+(./source/cpp/graph/general_matching.cpp) (./source/cpp/graph/bcc.cpp [7])
+(./source/cpp/graph/functional_cycle.cpp) (./source/cpp/graph/scc_tarjan.cpp)
+(./source/cpp/graph/dsu_rollback.cpp) (./source/cpp/graph/two_sat.cpp)
+(./source/cpp/graph/floyd_warshall.cpp) (./source/cpp/graph/euler_path.cpp
+[8]) (./source/cpp/graph/vizing.cpp) (./source/cpp/graph/online_bipartite.cpp)
+(./source/cpp/graph/gomory_hu.cpp) (./source/cpp/graph/dominator_tree.cpp)
+(./source/cpp/graph/prufer.cpp [9]) (./source/cpp/graph/steiner_tree.cpp)
 (./source/cpp/graph/stable_marriage.cpp)) (./Tree.tex
 (./source/cpp/tree/tree_isomorphism.cpp)
 (./source/cpp/tree/centroid_decomposition.cpp) (./source/cpp/tree/hld.cpp))
@@ -1039,12 +1045,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--67
 t/8 K$ \T5/cmr/bx/n/8 l¦n\T5/cmr/m/n/8 :
  []
 
-(./source/cpp/string/suffix_automaton.cpp [11]) (./source/cpp/string/lyndon.cpp
+[11] (./source/cpp/string/suffix_automaton.cpp) (./source/cpp/string/lyndon.cpp
 ) (./source/cpp/string/manacher.cpp) (./source/cpp/string/palindrome_tree.cpp)
-(./source/cpp/string/debruijn.cpp)) (./DP.tex (./source/cpp/dp/reroot_dp.cpp)
-[12] (./source/cpp/dp/dnc_dp.cpp) (./source/cpp/dp/one_d_one_d_dp.cpp)
+(./source/cpp/string/debruijn.cpp)) (./DP.tex (./source/cpp/dp/reroot_dp.cpp
+[12]) (./source/cpp/dp/dnc_dp.cpp) (./source/cpp/dp/one_d_one_d_dp.cpp)
 (./source/cpp/dp/alien_dp.cpp) (./source/cpp/dp/convex_hull_trick.cpp)
-(./source/cpp/dp/slope_trick.cpp) (./source/cpp/dp/sos_dp.cpp [13])
+(./source/cpp/dp/slope_trick.cpp) [13] (./source/cpp/dp/sos_dp.cpp)
 (./source/cpp/dp/monotonic_queue.cpp) (./source/cpp/dp/expected_value_dp.cpp))
 (./Math.tex
 Overfull \hbox (0.75891pt too wide) detected at line 22
@@ -1055,9 +1061,9 @@ Overfull \hbox (0.75891pt too wide) detected at line 22
  []
 
 (./source/cpp/math/floor_sum.cpp) (./source/cpp/math/rabin_miller.cpp)
-(./source/cpp/math/fast_sieve.cpp) (./source/cpp/math/prime_counter.cpp
-[14]) (./source/cpp/math/pollard_rho.cpp) (./source/cpp/math/primitive_root.cpp
-) (./source/cpp/math/discrete_log_bsgs.cpp) (./source/cpp/math/sqrt_mod.cpp)
+(./source/cpp/math/fast_sieve.cpp) [14] (./source/cpp/math/prime_counter.cpp)
+(./source/cpp/math/pollard_rho.cpp) (./source/cpp/math/primitive_root.cpp)
+(./source/cpp/math/discrete_log_bsgs.cpp) (./source/cpp/math/sqrt_mod.cpp)
 (./source/cpp/math/extended_gcd.cpp) (./source/cpp/math/diophantine.cpp)
 (./source/cpp/math/stern_brocot.cpp [15])
 Underfull \hbox (badness 10000) in paragraph at lines 117--118
@@ -1073,9 +1079,9 @@ n/8 ) = [][](\OMS/cmsy/m/n/8 ^^@\OT1/cmr/m/n/8 1)[][]\OML/cmm/m/it/8 f\OT1/cmr/
 m/n/8 (\OML/cmm/m/it/8 k\OT1/cmr/m/n/8 )$\T5/cmr/m/n/8 ;
  []
 
-(./source/cpp/math/berlekamp_massey.cpp) (./source/cpp/math/fwht.cpp [16])
+(./source/cpp/math/berlekamp_massey.cpp [16]) (./source/cpp/math/fwht.cpp)
 (./source/cpp/math/lagrange.cpp) (./source/cpp/math/ntt.cpp)
-(./source/cpp/math/fft.cpp) (./source/cpp/math/linalg_gauss.cpp [17])
+(./source/cpp/math/fft.cpp) [17] (./source/cpp/math/linalg_gauss.cpp)
 (./source/cpp/math/xor_basis.cpp) (./source/cpp/math/big_integer.cpp))
 (./Geometry.tex (./source/cpp/geometry/primitive_geometry.cpp [18])
 (./source/cpp/geometry/convex_hull.cpp)
@@ -1086,8 +1092,8 @@ m/n/8 (\OML/cmm/m/it/8 k\OT1/cmr/m/n/8 )$\T5/cmr/m/n/8 ;
 (./source/cpp/geometry/polygon_raycast.cpp)
 (./source/cpp/geometry/halfplane_intersection.cpp [19])
 (./source/cpp/geometry/smallest_enclosing_circle.cpp)
-(./source/cpp/geometry/circle_tangents.cpp)
-(./source/cpp/geometry/area_union_rectangles.cpp [20])
+(./source/cpp/geometry/circle_tangents.cpp) [20]
+(./source/cpp/geometry/area_union_rectangles.cpp)
 (./source/cpp/geometry/manhattan_mst.cpp)
 (./source/cpp/geometry/planar_dual.cpp)) (./source/template/template.cpp)
 (./source/template/debug.cpp) (./source/pseudocode/compile_scripts.txt)
@@ -1100,14 +1106,8 @@ LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-Overfull \vbox (4.158pt too high) has occurred while \output is active []
+) [24]
 
-
-Overfull \vbox (2.33757pt too high) has occurred while \output is active []
-
-
-[24] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./main.aux)
  ***********
@@ -1116,13 +1116,13 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 22239 strings out of 474222
- 419068 string characters out of 5748733
- 4183975 words of memory out of 5000000
- 43759 multiletter control sequences out of 15000+600000
+ 22259 strings out of 474222
+ 419173 string characters out of 5748733
+ 4072975 words of memory out of 5000000
+ 43779 multiletter control sequences out of 15000+600000
  577746 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,13n,95p,800b,2093s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,13n,95p,818b,2093s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/sha
@@ -1145,7 +1145,7 @@ ntex/vnr/vnbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnbx12
 st/fonts/type1/vntex/vnr/vnr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/vn
 tex/vnr/vnr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnti8.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
-Output written on main.pdf (25 pages, 869041 bytes).
+Output written on main.pdf (25 pages, 874773 bytes).
 PDF statistics:
  216 PDF objects out of 1000 (max. 8388607)
  136 compressed objects within 2 object streams

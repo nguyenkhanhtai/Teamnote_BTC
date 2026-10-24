@@ -1,0 +1,106 @@
+{
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "repeats": 3,
+  "cases": [
+    {
+      "dimensions": [
+        200,
+        200,
+        50
+      ],
+      "mode": "long",
+      "variants": {
+        "original_fastio": [
+          9.1523,
+          9.6539,
+          9.0957
+        ],
+        "original": [
+          10.7,
+          9.2009,
+          10.0853
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        50,
+        200,
+        200
+      ],
+      "mode": "long",
+      "variants": {
+        "original_fastio": [
+          5.1652,
+          4.88,
+          4.7393
+        ],
+        "original": [
+          5.8852,
+          5.3417,
+          5.5089
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        125,
+        125,
+        125
+      ],
+      "mode": "random",
+      "variants": {
+        "original_fastio": [
+          2.5469,
+          2.5849,
+          2.6012
+        ],
+        "original": [
+          3.1639,
+          3.1375,
+          3.4314
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        200,
+        200,
+        50
+      ],
+      "mode": "full",
+      "variants": {
+        "original_fastio": [
+          2.4768,
+          2.4275,
+          2.5009
+        ],
+        "original": [
+          3.4777,
+          3.3085,
+          3.1385
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        1,
+        200,
+        200
+      ],
+      "mode": "long",
+      "variants": {
+        "original_fastio": [
+          1.0504,
+          1.1212,
+          1.1986
+        ],
+        "original": [
+          1.8737,
+          1.8215,
+          1.8165
+        ]
+      }
+    }
+  ]
+}

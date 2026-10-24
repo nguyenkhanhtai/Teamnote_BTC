@@ -1,12 +1,45 @@
-\section*{C++: cách dùng code}
-\addcontentsline{toc}{section}{C++: cách dùng code}
-\textbf{Chuẩn bị}: GNU C++17, thêm \texttt{\#include <bits/stdc++.h>} và \texttt{using namespace std;}. Chép struct/hàm trước \texttt{main}; mỗi listing có dòng \texttt{// Use:} minh họa khai báo và gọi. ID bắt đầu từ $0$, đoạn mảng $[l,r)$.
+\section*{Tối ưu hằng số}
+\addcontentsline{toc}{section}{Tối ưu hằng số}
+\begin{lstlisting}[language=C++]
+#include <bits/stdc++.h>
+#pragma GCC optimize("O3,unroll-loops")
+// Chi bat target neu CPU judge ho tro.
+// #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+\end{lstlisting}
+Đặt sau include, trước các hàm. Chỉ bật \texttt{target} khi CPU judge hỗ trợ; đo lại vì \texttt{O3}/unroll có thể chậm hơn \texttt{O2}. \texttt{Ofast} nới quy tắc số thực.
 
-\textbf{Khai báo}: \texttt{Dinic flow(n);} tạo flow graph có $n$ đỉnh; \texttt{SegmentTreeBeats st(a);} dựng từ \texttt{vector<int> a}. Dùng kiểu cụ thể; nếu cần kiểu khác, sửa dòng \texttt{using} hoặc kiểu dữ liệu của module. KD-tree đổi hằng \texttt{D} cho số chiều.
+\textbf{Đo}: xác định nghẽn tính toán, bộ nhớ hay I/O; cùng input/compiler, thay một yếu tố mỗi lần, đo vài lượt. Test lại với brute force; máy local và judge có thể khác tốc độ.
 
-\textbf{Callback = hàm bạn viết}: truyền tên hàm, không cần lambda. \texttt{function<bool(const vector<int>\&)>} nghĩa là nhận tập ID và trả về đúng/sai. Dữ liệu riêng của bài có thể đặt ở biến toàn cục để hàm đọc.
-\inputminted{compactcpp}{source/cpp/utility/declaration_guide.cpp}
+\textbf{Cache/thứ tự duyệt}: ưu tiên mảng liên tiếp; chỉ số cuối ở vòng trong. Nếu đổi chiều lưu trữ, đổi đồng bộ mọi truy cập; chỉ đổi thứ tự xử lý khi không vi phạm phụ thuộc dữ liệu.
 
-\textbf{Khi include file nguồn}: dùng \texttt{notebook::graph::Dinic flow(n);} hoặc \texttt{using namespace notebook::graph;}. Nhóm khác: \texttt{data\_structure}, \texttt{tree}, \texttt{strings}, \texttt{dp}, \texttt{math}, \texttt{geometry}. PDF lược namespace/include; file nguồn giữ dependency.
+\textbf{Kiểu dữ liệu}: dùng \texttt{int32\_t} cho chỉ số/giá trị vừa 32-bit khi template có macro \texttt{int}; tổng/tích lớn dùng 64-bit hoặc \texttt{\_\_int128}, ép kiểu trước phép nhân. Không dựa vào tràn số có dấu.
 
-\textbf{Kết quả}: kiểm tra \texttt{if (ans)} trước khi lấy \texttt{*ans} từ \texttt{optional}. Flow cập nhật residual graph; lần gọi sau trả phần flow tăng thêm. Wavelet dùng rank $k$ từ $0$, khoảng \emph{giá trị} khi đếm đóng hai đầu. Tên \texttt{g}, \texttt{cost}, \texttt{oracle} trong ví dụ là dữ liệu/hàm bạn cung cấp.
+\textbf{Cấp phát}: tái sử dụng buffer; \texttt{reserve(n)} trước nhiều lần \texttt{push\_back}. Reserve chỉ đặt capacity; cần \texttt{resize} trước khi truy cập phần tử bằng chỉ số. Nhiều node nhỏ: cân nhắc pool/mảng node thay cấp phát từng node.
+
+\textbf{Array vs vector}: mảng C/\texttt{std::array<T,N>} có kích thước cố định lúc biên dịch; \texttt{vector<T>} có kích thước động. Cả ba lưu liên tiếp (trừ \texttt{vector<bool>}); truy cập \texttt{[]} đều $O(1)$, thường tương đương khi bật tối ưu. Vector tốn thêm cấp phát/quản lý capacity; \texttt{vector<int>(n)} khởi tạo $n$ số $0$, mảng số nguyên cục bộ không tự khởi tạo. Biết cận cố định, tái dùng nhiều: mảng; cần đúng kích thước input/thay đổi size: vector. Mảng lớn nên đặt global/static để tránh tràn stack; vector nhiều chiều lồng nhau không bảo đảm toàn khối liên tiếp, có thể dùng vector phẳng.
+
+\textbf{Template vector nhiều chiều}: \texttt{Vec<D,T>}, $D$ là số chiều, $T$ là kiểu phần tử. Constructor nhận kích thước từng chiều, cuối cùng là giá trị khởi tạo (có thể bỏ, mặc định \texttt{T()}). Đây vẫn là vector lồng nhau, không phải một khối phẳng.
+\inputminted[]{cpp}{source/template/multidimensional.cpp}
+\begin{lstlisting}[language=C++]
+Vec<2, int> mat(rows, cols, 0);
+Vec<3, int> cube(rows, cols, depth, -1);
+cube[xx][yy][zz] = 5;
+\end{lstlisting}
+
+\textbf{Container}: ID nhỏ/nén được thì dùng mảng/vector; cần thứ tự mới dùng map/set. Với \texttt{unordered\_map}, thử \texttt{reserve} và chỉnh load factor; không mặc định hash luôn nhanh hơn. Đồ thị lớn: cân nhắc mảng cạnh liên tiếp.
+
+\textbf{Hash table}: GNU \texttt{gp\_hash\_table} là lựa chọn đáng đo thử khi nghẽn hash; không suy rộng tốc độ từ benchmark của người khác. Collision có thể làm tổng thời gian thành $O(n^2)$; \texttt{reserve} không ngăn hack. Cân nhắc hash trộn tốt với seed ngẫu nhiên; chỉ XOR/cộng một hằng ngẫu nhiên chưa đủ.
+
+\textbf{Tránh sao chép/gọi gián tiếp}: truyền container bằng \texttt{const\&}; duyệt phần tử lớn bằng \texttt{const auto\&}. Hàm gọi rất nhiều lần: ưu tiên hàm thường/template/lambda cụ thể nếu không cần \texttt{std::function}.
+
+\textbf{Vòng lặp nóng}: tính biểu thức bất biến/base một lần, tái dùng kết quả, tiền xử lý đại lượng dùng nhiều lần. Bỏ cập nhật đóng góp $0$ nếu không có tác dụng phụ; dừng sớm khi đã đủ kết luận. Không tự unroll/branchless nếu chưa đo.
+
+\textbf{Số học}: tránh \texttt{pow} cho bình phương số nguyên; dùng nhân với kiểu đủ rộng. Với $0\le a,b<mod$, cộng modulo bằng cộng rồi trừ $mod$ nếu cần; tổng trung gian phải không tràn. Giảm số lần chia/modulo trong vòng nóng nếu có công thức tương đương đúng.
+
+\textbf{Bit song song}: giao hai tập bằng \texttt{(maskA \& maskB).count()}; subset sum boolean với trọng số không âm: \texttt{can[0]=1}, mỗi phần tử \texttt{can |= can << weight}. Cấp đủ số bit cho miền tổng cần xét; mỗi phép trên bitset vẫn quét nhiều word, không phải $O(1)$.
+
+\textbf{Duyệt bit 1}: dùng \texttt{\_\_builtin\_popcountll} cho mask 64-bit. Mask không âm: \texttt{while(mask)\{ bit=\_\_builtin\_ctzll(mask); mask\&=mask-1; \}}; không gọi \texttt{ctz/clz} với $0$. GNU bitset có \texttt{\_Find\_first()}, \texttt{\_Find\_next(pos)}; hết bit 1 trả \texttt{size()}. Đây là extension, vẫn có thể quét các word trống.
+
+\textbf{Reset}: chỉ xóa vị trí đã chạm hoặc dùng timestamp nếu mỗi test chỉ dùng ít phần tử trên miền lớn; xử lý giá trị mặc định và tràn timestamp. Có thể tái sử dụng vùng nhớ giữa các pha.
+
+\textbf{I/O}: \texttt{ios::sync\_with\_stdio(false); cin.tie(nullptr);}, dùng \texttt{'\textbackslash n'} thay \texttt{endl}. Dữ liệu lớn: thử \texttt{fread}/\texttt{fwrite}, xuất theo khối; tránh trộn C/C++ I/O sau khi tắt sync. Interactive vẫn phải flush khi gửi câu hỏi.

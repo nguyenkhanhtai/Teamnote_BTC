@@ -1,0 +1,131 @@
+{
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "repeats": 3,
+  "cases": [
+    {
+      "dimensions": [
+        200,
+        200,
+        50
+      ],
+      "mode": "long",
+      "variants": {
+        "transposed_pragma": [
+          1.4778,
+          1.5306,
+          1.4397
+        ],
+        "batched_pragma": [
+          1.1509,
+          1.1525,
+          1.1309
+        ],
+        "batched": [
+          1.5258,
+          1.5435,
+          1.4909
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        50,
+        200,
+        200
+      ],
+      "mode": "long",
+      "variants": {
+        "transposed_pragma": [
+          1.7359,
+          1.542,
+          1.5675
+        ],
+        "batched_pragma": [
+          1.4196,
+          1.2493,
+          1.1933
+        ],
+        "batched": [
+          1.5269,
+          1.6152,
+          1.5521
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        125,
+        125,
+        125
+      ],
+      "mode": "random",
+      "variants": {
+        "transposed_pragma": [
+          1.3515,
+          1.0661,
+          1.0683
+        ],
+        "batched_pragma": [
+          1.2005,
+          1.0285,
+          1.1229
+        ],
+        "batched": [
+          1.4472,
+          1.289,
+          1.1557
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        200,
+        200,
+        50
+      ],
+      "mode": "full",
+      "variants": {
+        "transposed_pragma": [
+          0.9175,
+          0.8561,
+          0.8481
+        ],
+        "batched_pragma": [
+          0.8774,
+          0.9146,
+          0.9345
+        ],
+        "batched": [
+          1.3849,
+          1.4383,
+          1.2907
+        ]
+      }
+    },
+    {
+      "dimensions": [
+        1,
+        200,
+        200
+      ],
+      "mode": "long",
+      "variants": {
+        "transposed_pragma": [
+          0.6095,
+          0.6805,
+          0.5988
+        ],
+        "batched_pragma": [
+          0.5795,
+          0.6378,
+          0.7279
+        ],
+        "batched": [
+          0.9073,
+          0.8914,
+          0.9108
+        ]
+      }
+    }
+  ]
+}
