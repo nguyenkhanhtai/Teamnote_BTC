@@ -227,29 +227,43 @@ Nghiệm tổng quát: $x=x_0+\sum_i t_i v_i\pmod p$, với $t_i$ tùy ý; 	extt
     \end{itemize}
 \end{itemize}
 
-\subsection{Game: Nim và chiến lược}
+\subsection{Game: Invariant, Symmetric, Nim, DP}
 % References: MIT ES.268 Theory of Impartial Games; CMU Combinatorics F11/ex4a.pdf.
 \begin{itemize}
-    \item \textbf{Nim}: mỗi lượt giảm một đống; người lấy cuối thắng. Thua $\iff X=\bigoplus_i a_i=0$. Nếu $X\ne0$, chọn đống có bit cao nhất của $X$, đổi $a_i\to a_i\oplus X<a_i$ để trả XOR về $0$.
-    \item \textbf{Mis\`ere Nim} (lấy cuối thua): mọi đống $\le1$ thì thua khi số đống $1$ lẻ; còn đống $>1$ thì thua $\iff X=0$. \emph{Cách đi}: còn ít nhất hai đống lớn thì chơi như Nim; chỉ còn một đống lớn thì giảm nó về $0$ hoặc $1$ để để lại số đống $1$ lẻ.
-    \item \textbf{Staircase Nim}: chuyển tùy số viên từ bậc $i$ xuống $i-1$; bậc $0$ không chơi tiếp. Chỉ XOR các bậc \emph{lẻ}. Đối thủ chuyển từ bậc chẵn xuống lẻ thì chuyển đúng số viên ấy xuống thêm một bậc, khôi phục XOR.
-    \item \textbf{Wythoff Nim}: hai đống, giảm một đống hoặc giảm cả hai cùng số lượng. Với $a\le b$, đặt $k=b-a$: thua $\iff a=\lfloor k\varphi\rfloor$, $\varphi=(1+\sqrt5)/2$. Ví dụ $(1,2),(3,5),(4,7)$; số lớn cần tính floor chính xác.
-    \item \textbf{Green Hackenbush trên cây}: chặt cạnh, phần mất nối với gốc biến mất. Gộp nhánh bằng XOR; thêm một cạnh dưới nhánh thì SG tăng $1$: $g(u)=\bigoplus_{v\text{ con}}(g(v)+1)$. Chỉ dùng cho normal play với mọi cạnh đều được cả hai người chặt.
-    \item \textbf{Pairing / mirror} (hết nước đi thì thua): ghép các nước thành cặp; đáp bằng nước còn lại để khôi phục đối xứng. Phải chứng minh nước đáp \emph{luôn còn hợp lệ}, không chỉ bàn ban đầu đối xứng. Nếu đi tâm tạo được cấu hình này thì người đầu có thể chiếm chiến lược phản chiếu.
-    \item \textbf{Strategy stealing}: game đặt quân hữu hạn, không hòa; nếu một nước thêm không bao giờ gây bất lợi, giả sử người sau có chiến lược thắng rồi người trước đi thêm và ``mượn'' chiến lược đó để tạo mâu thuẫn. Chứng minh người đầu thắng nhưng thường không chỉ ra nước thắng cụ thể.
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \item \textbf{1. Invariant (Bất biến)}: Tìm đại lượng bất biến (parity chẵn/lẻ, modulo $k+1$, số nghịch thế) mà mọi nước đi hợp lệ đều bảo toàn hoặc đổi luân phiên. Người thắng luôn đưa trạng thái về tập bất biến mà đối thủ không thể duy trì. \textit{Ví dụ}: Bốc $1\dots k$ sỏi từ $n$ viên (lấy cuối thắng): Bất biến $n\equiv 0\pmod{k+1}$ là thế thua (P-pos). Nếu $n\not\equiv 0$, bốc $n\bmod(k+1)$ về bội $k+1$; đối thủ bốc $x\in[1,k]$, ta bốc $k+1-x$ để giữ $0\pmod{k+1}$.
+    \item \textbf{2. Symmetric (Đối xứng / Bắt cặp)}: Ghép các trạng thái hoặc nước đi thành cặp đối xứng rời nhau (qua tâm, trục, hoặc perfect matching). Đối thủ đi vào một nửa thì ta đi vào nửa còn lại để khôi phục đối xứng. Người đầu thắng nếu chiếm tâm/nước lẻ đầu rồi phản chiếu; người sau thắng nếu bàn cờ ban đầu đã hoàn toàn đối xứng. \textit{Ví dụ}: Đặt xu lên bàn tròn: P1 đặt đúng tâm; P2 đặt tại $(x,y)$ thì P1 đặt tại $(-x,-y)\implies$ P1 thắng. Trên đồ thị có perfect matching: P2 luôn đi theo cạnh ghép của đỉnh P1 vừa chọn $\implies$ P2 thắng.
+    \item \textbf{3. Nim (XOR \& Sprague-Grundy)}: Impartial game dưới normal play (hết nước đi là thua). Mọi game trên DAG tương đương 1 đống Nim kích thước $G(u)=\text{mex}\{G(v)\mid u\to v\}$. Độc lập: $G_{\text{tổng}}=\bigoplus_i G_i$. Thua (P-pos) $\iff G=0$; Thắng (N-pos) $\iff G\ne 0$ (chọn đống có bit cao nhất của $G$, giảm $a_i\to a_i\oplus G$).
+    \emph{Mis\`ere Nim} (lấy cuối thua): mọi đống $\le1\implies$ thua $\iff$ số đống 1 lẻ; có đống $>1\implies$ chơi như Nim thường, còn đúng 1 đống $>1$ thì giảm nó về $0$ hoặc $1$ để lại số đống 1 lẻ.
+    \emph{Staircase Nim}: chuyển sỏi từ bậc $i\to i-1$ (bậc 0 loại bỏ); chỉ XOR các bậc \emph{lẻ} ($G=\bigoplus_{i\text{ lẻ}} a_i$), đối thủ dời chẵn $\to$ lẻ thì ta dời tiếp số đó lẻ $\to$ chẵn kề dưới.
+    \emph{Wythoff Nim}: bốc 1 đống tùy ý hoặc 2 đống cùng lượng; thua $\iff a=\lfloor k\varphi\rfloor, b=a+k$ với $k=b-a, \varphi=(1+\sqrt5)/2$.
+    \emph{Green Hackenbush (cây)}: chặt cạnh, nhánh rời gốc rơi: $g(u)=\bigoplus_{v\in\text{child}(u)}(g(v)+1)$.
+    \item \textbf{4. DP (Quy hoạch động \& Retrograde)}: Biểu diễn trạng thái trên đồ thị có hướng. Trạng thái lá (hết nước đi) là \textbf{LOSE}. Chuyển trạng thái: $\exists v\in\text{LOSE}\implies u\in\text{WIN}$; $\forall v\in\text{WIN}\implies u\in\text{LOSE}$.
+    \emph{Retrograde (chu trình/hòa)}: BFS ngược từ lá (LOSE), theo dõi bậc ra $\text{out\_deg}[u]$: kề LOSE $\implies$ WIN; kề WIN $\implies$ giảm $\text{out\_deg}[u]$, về $0\implies$ LOSE; còn lại $\implies$ \textbf{DRAW} ($O(V+E)$). \textit{Ví dụ}: Game chia kẹo/trừ số: $dp[i]=\text{LOSE}\iff\forall\text{step}, dp[i-\text{step}]=\text{WIN}$. Game di chuyển quân cờ lặp trạng thái: dùng Retrograde queue.
 \end{itemize}
 
 \Algorithm{Xác suất và kỳ vọng}
-{Tính tuyến tính của kỳ vọng, biến chỉ báo, Coupon Collector, bất đẳng thức}
+{Tính tuyến tính của kỳ vọng, phân tích biến chỉ báo, Coupon Collector, bất đẳng thức}
 {}
 {}{}
 
 \begin{itemize}
-    \item \textbf{Tính tuyến tính của kỳ vọng}: $E[X_1 + \dots + X_n] = E[X_1] + \dots + E[X_n]$ ($\forall X_i$).
-    \item \textbf{Biến chỉ báo}: $E[X] = \sum P(A_i)$.
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \item \textbf{Tuyến tính kỳ vọng}: $E[\sum c_i X_i] = \sum c_i E[X_i]$ (luôn đúng $\forall X_i$, \emph{kể cả khi các biến ngẫu nhiên phụ thuộc nhau}).
+    \item \textbf{Biến chỉ báo (Indicator Variable Analysis)}: Đặt $I_A = [A\text{ xảy ra}] \in \{0, 1\}$.
+    Khi đó $E[I_A] = 1\cdot P(A) + 0\cdot P(\overline{A}) = P(A)$.
+    \begin{itemize}
+        \setlength{\itemsep}{0pt}
+        \setlength{\parsep}{0pt}
+        \item \emph{Kỳ vọng đếm}: Muốn tính kỳ vọng số đối tượng thỏa mãn tính chất, viết $X = \sum_{i=1}^n I_{A_i} \implies E[X] = \sum_{i=1}^n P(A_i)$. Ta chuyển việc tính kỳ vọng toàn cục phức tạp thành tính xác suất xảy ra của từng biến cố thành phần riêng lẻ (nghiệm đúng cả khi các $A_i$ phụ thuộc nhau).
+        \item \emph{Ví dụ}: (1) Hoán vị ngẫu nhiên: số nghịch thế $E = \binom{n}{2} \cdot \frac{1}{2} = \frac{n(n-1)}{4}$; số điểm bất động $\pi(i)=i$ là $E = n \cdot \frac{1}{n} = 1$. (2) Đồ thị $G(n, p)$: số tam giác $K_3$ có $E = \binom{n}{3}p^3$; số đỉnh cô lập có $E = n(1-p)^{n-1}$.
+        \item \emph{Phương sai \& Tích}: $I_A^2 = I_A \implies E[I_A^2] = P(A)$; $I_A I_B = I_{A \cap B} \implies E[I_A I_B] = P(A \cap B)$. Khi đó $\text{Cov}(I_A, I_B) = P(A \cap B) - P(A)P(B)$; $\text{Var}(X) = \sum \text{Var}(I_i) + 2\sum_{i<j} \text{Cov}(I_i, I_j)$.
+    \end{itemize}
     \item \textbf{Phân phối hình học}: $E[X] = 1/p$, $\text{Var}(X) = (1-p)/p^2$.
     \item \textbf{Coupon Collector}: $E[T] = n \sum_{i=1}^n \frac{1}{i} = n H_n \approx n(\ln n + \gamma)$ ($\gamma \approx 0.5772$).
-    \item \textbf{Markov}: $P(X \ge a) \le \frac{E[X]}{a}$; \textbf{Chebyshev}: $P(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}$.
+    \item \textbf{Bất đẳng thức}: \textbf{Markov}: $P(X \ge a) \le \frac{E[X]}{a}$ ($X \ge 0$); \textbf{Chebyshev}: $P(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}$.
 \end{itemize}
 
 \Algorithm{Bignum}

@@ -1,7 +1,16 @@
 \subsection{Biến đổi bài toán (Transformations)}
-\noindent\textbf{Ghi chú gốc}
+\noindent\textbf{Khi tìm hướng tiếp cận}
 \begin{itemize}
-    \setlength{\itemsep}{1pt}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\topsep}{0pt}
+    \item Xuất phát từ các đại lượng trong đề.
+    \item Thay đổi mức độ cụ thể của suy nghĩ hiện tại (từ tổng quát đến chi tiết, từ trừu tượng đến cụ thể).
+    \item \textbf{Xuất phát từ đích, suy luận ngược}: Muốn tính/chứng minh kết quả thì cần biết gì trước? Truy ngược đến khi nối được với dữ kiện trong đề.
+    \item \textbf{Xuất phát từ vét cạn}: Viết lời giải hiển nhiên, tìm tính toán lặp lại hoặc dư thừa để tối ưu.
+    \item \textbf{Thay đổi cách biểu diễn}: Chuyển sang đồ thị, hình học, đại số hoặc xét phần bù để lộ cấu trúc dễ xử lý hơn.
+    \item \textbf{Khai thác ràng buộc đặc biệt}: Mỗi giả thiết có tác dụng gì, vì sao đề cần nó, bỏ đi thì điều gì thay đổi?
+    \item \textbf{Liên hệ bài toán đã biết}: Tìm cấu trúc quen thuộc và xác định điểm khác biệt cần xử lý.
     \setlength{\parsep}{0pt}
     \item \textcolor{red}{\textbf{Khi bí}}: Đọc lại đề! Xét trường hợp nhỏ ($N\le6$) để tìm quy luật/bất biến; suy ra độ phức tạp ($N\le20\to2^N,500\to N^3,5000\to N^2,2\cdot10^5\to N\log N$).
 
@@ -78,7 +87,7 @@
 
 \noindent\textbf{Invariant: nhận diện và kiểm tra}
 \begin{itemize}
-    \setlength{\itemsep}{1pt}
+    \setlength{\itemsep}{0pt}
     \setlength{\parsep}{0pt}
     \item \textbf{Cách tìm}: Đổi biểu diễn để thao tác thành swap/triệt tiêu. Khác bất biến $\to$ không thể; giống nhau cần chứng minh đủ bằng construction/dạng chuẩn.
     \item \textbf{Tổng / tô màu / modulo}: Chuyển lượng $\to\sum a_i$; đối xứng $\to$ tổng xen kẽ/theo màu. Tìm $w$ sao cho $w\cdot\Delta a=0$ (hoặc $0\pmod m$) với mọi thao tác. XOR cùng lượng hai lần triệt tiêu.
@@ -90,7 +99,7 @@
 
 \noindent\textbf{Monovariant: mỗi bước tiến gần hơn đến đích}
 \begin{itemize}
-    \setlength{\itemsep}{1pt}
+    \setlength{\itemsep}{0pt}
     \setlength{\parsep}{0pt}
     \item \textbf{Cách dùng}: Chọn một số đo $\Phi$ (số lỗi, khoảng cách, độ lệch); chứng minh sau mỗi bước nó giảm. Nếu $\Phi$ là số nguyên không âm và giảm ít nhất 1, quá trình dừng sau tối đa $\Phi$ ban đầu bước. Dừng chưa chắc đạt đích: cần chứng minh chưa đạt đích thì vẫn chọn được bước làm giảm $\Phi$.
     \item \textbf{Sửa thứ tự $\to$ số nghịch thế}: Swap hai phần tử kề $a_i>a_{i+1}$ làm số cặp sai thứ tự giảm đúng 1. Số vị trí sai không chắc giảm khi swap.
@@ -102,7 +111,7 @@
 
 
 \begin{itemize}
-    \setlength{\itemsep}{1pt}
+    \setlength{\itemsep}{0pt}
     \setlength{\parsep}{0pt}
     \item \textbf{Chia miền $\to$ giảm một nửa số mũ (LFAC2 2014H, 4 sao)}: Tem RGB ngắn nhất phủ chuỗi có $k$ wildcard; chồng tại wildcard được khác màu. $L\ge n/2$: chỉ cần prefix/suffix tương thích. $L\le n/2$: hai đầu dài $L$ rời nhau, chọn đầu ít wildcard hơn, tối đa $\lfloor k/2\rfloor$; liệt kê $3^{k/2}$ thay vì $3^k$.
 

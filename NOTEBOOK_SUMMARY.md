@@ -49,7 +49,7 @@ LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](
 ### Network Flows & Matching
 - **Min Cost Flow (Min-cost $k$-flow)** ($O(F m \log n)$): Minimum cost flow augmenting along shortest paths with potentials.
 - **MinCut - MaxFlow (Dinic)** ($O(EV^2)$ / $O(E\sqrt{V})$ on unit nets): Blocking flow construction with level graphs.
-- **Bipartite Matching (Hopcroft-Karp)** ($O(E\sqrt{V})$): Maximum matching, minimum vertex cover (König), maximum independent set, minimum path cover, maximum antichain (Dilworth).
+- **Bipartite Matching (Hopcroft-Karp)** ($O(E\sqrt{V})$): Maximum matching, minimum vertex cover (König), maximum independent set, minimum path cover, maximum antichain (Dilworth), **Erdős–Gallai** & **Havel–Hakimi** (degree sequences), **Gale–Ryser** (bipartite degrees), Hall's Marriage Theorem.
 - **Hungarian Algorithm** ($O(V^3)$): Minimum cost perfect matching on bipartite graphs.
 - **General Matching (Edmonds Blossom \& Tutte / Rabin-Vazirani)** ($O(V^3)$): Maximum matching via Blossom or randomized Tutte Matrix Rank ($\frac{1}{2}\text{rank}(T)$). **Rabin-Vazirani Reconstruction**: Invert $T \to A$, pick edge $(u,v)$ with $A_{u,v} \ne 0$, update $A$ in $O(V^2)$ via Schur complement. **Max $b$-Matching**: Split $i \to a_i$ slots, $e=(u,v) \to L_e - R_e$ + connections to slots (aux $|V'| \le 4M$).
 - **Gomory-Hu Tree** ($O(V \cdot \text{MaxFlow})$): Cut tree representing all-pairs max-flow and min-cut.
@@ -168,11 +168,12 @@ LFAC2 transformation study (2026-10-07): [44 problem solutions and assessments](
 ### Linear Algebra, Groups & Games
 - **Gaussian Elimination** ($O(n^3)$ det, rank, linear solver), **XOR Linear Basis** ($O(B)$).
 - **Burnside's Lemma & Pólya Enumeration Theorem** (Necklaces, Bracelets under symmetry).
-- **Game Strategy & State Reasoning** ($O(V + E)$):
-  - *Winning ($\mathcal{W}$ / N-pos) vs Losing ($\mathcal{L}$ / P-pos) State Axioms*: Terminal state rules (normal vs misère), $\exists \mathcal{L} \implies \mathcal{W}$, $\forall \mathcal{W} \implies \mathcal{L}$.
-  - *Problem Solving Tactics*: Retrograde Analysis BFS on general graph with cycles/draws ($O(V + E)$), Symmetry / Mirroring strategy, Invariants & Parity arguments, Pairing / Matching strategy, Small-case brute-force & pattern discovery.
-  - *Sprague-Grundy & Nim Variants*: SG-value $g(u) = \text{mex}(\{g(v)\})$ on independent subgames, Tree Hackenbush (Colon Principle), Standard Nim, Bounded Subtraction Nim, Moore's $\text{Nim}_k$, Staircase Nim, Misère Nim.
-- **Probability & Expected Value**: Linearity of Expectation, Indicator Variables, Coupon Collector ($nH_n \approx n(\ln n + \gamma)$), Markov & Chebyshev inequalities.
+- **Game Theory: 4 Core Techniques**:
+  - *1. Invariant*: Parity, modulo invariant ($n \equiv 0 \pmod{k+1}$ in bounded subtraction), state monovariants.
+  - *2. Symmetric / Pairing*: Mirroring across center/axis, perfect matching pairing strategy.
+  - *3. Nim & Sprague-Grundy*: Impartial games on DAGs, Nim sum $G = \bigoplus G_i$, mex function, Misère Nim, Staircase Nim, Wythoff Nim, Green Hackenbush.
+  - *4. DP & Retrograde Analysis*: Topological DP on DAGs ($\exists \text{LOSE} \implies \text{WIN}, \forall \text{WIN} \implies \text{LOSE}$), Retrograde BFS queue for directed graphs with cycles/draws in $O(V + E)$.
+- **Probability & Expected Value**: Linearity of Expectation ($\forall$ dependencies), Indicator Variable Analysis ($X = \sum I_{A_i} \implies E[X] = \sum P(A_i)$, covariance $\text{Cov}(I_i, I_j) = P(A_i \cap A_j) - P(A_i)P(A_j)$), Coupon Collector ($nH_n \approx n(\ln n + \gamma)$), Markov & Chebyshev inequalities.
 - **Bignum**: Nonnegative base-$10^9$ block representation and decimal printing with 9-digit padding.
 
 ---

@@ -69,8 +69,8 @@
 \contentsline {subsection}{\numberline {5.4}Alien DP}{13}{}%
 \contentsline {subsection}{\numberline {5.5}Convex Hull Trick}{13}{}%
 \contentsline {subsection}{\numberline {5.6}Slope Trick}{13}{}%
-\contentsline {subsection}{\numberline {5.7}Bitmask DP}{14}{}%
-\contentsline {subsection}{\numberline {5.8}SOS DP}{14}{}%
+\contentsline {subsection}{\numberline {5.7}Bitmask DP}{13}{}%
+\contentsline {subsection}{\numberline {5.8}SOS DP}{13}{}%
 \contentsline {subsection}{\numberline {5.9}Tối ưu bằng monotonic queue}{14}{}%
 \contentsline {subsection}{\numberline {5.10}Expected Value Trick}{14}{}%
 \contentsline {section}{\numberline {6}Toán học}{14}{}%
@@ -78,27 +78,27 @@
 \contentsline {subsection}{\numberline {6.2}Like-Euclid Floor Sum}{14}{}%
 \contentsline {subsection}{\numberline {6.3}Rabin-Miller}{14}{}%
 \contentsline {subsection}{\numberline {6.4}Sàng phân đoạn (Segmented Sieve)}{14}{}%
-\contentsline {subsection}{\numberline {6.5}Đếm nguyên tố (Prime Counting)}{15}{}%
+\contentsline {subsection}{\numberline {6.5}Đếm nguyên tố (Prime Counting)}{14}{}%
 \contentsline {subsection}{\numberline {6.6}Pollard Rho}{15}{}%
 \contentsline {subsection}{\numberline {6.7}Primitive Root}{15}{}%
 \contentsline {subsection}{\numberline {6.8}Baby-step Giant-Step}{15}{}%
 \contentsline {subsection}{\numberline {6.9}Căn modulo (Tonelli-Shanks)}{15}{}%
 \contentsline {subsection}{\numberline {6.10}Extended GCD}{15}{}%
 \contentsline {subsection}{\numberline {6.11}Diophantine}{15}{}%
-\contentsline {subsection}{\numberline {6.12}Stern-Brocot Tree}{16}{}%
+\contentsline {subsection}{\numberline {6.12}Stern-Brocot Tree}{15}{}%
 \contentsline {subsection}{\numberline {6.13}Hàm nhân tính và M\"obius Inversion}{16}{}%
 \contentsline {subsection}{\numberline {6.14}Công thức tổ hợp}{16}{}%
 \contentsline {subsection}{\numberline {6.15}Hàm sinh (Generating Functions) và chuỗi Taylor}{16}{}%
 \contentsline {subsection}{\numberline {6.16}Truy hồi tuyến tính (Berlekamp-Massey)}{16}{}%
-\contentsline {subsection}{\numberline {6.17}FWHT}{17}{}%
+\contentsline {subsection}{\numberline {6.17}FWHT}{16}{}%
 \contentsline {subsection}{\numberline {6.18}Lagrange}{17}{}%
 \contentsline {subsection}{\numberline {6.19}NTT (Number Theoretic Transform)}{17}{}%
 \contentsline {subsection}{\numberline {6.20}FFT (Fast Fourier Transform)}{17}{}%
 \contentsline {subsection}{\numberline {6.21}Công thức Formal Power Series (FPS)}{17}{}%
-\contentsline {subsection}{\numberline {6.22}Đại số tuyến tính (Gauss)}{18}{}%
+\contentsline {subsection}{\numberline {6.22}Đại số tuyến tính (Gauss)}{17}{}%
 \contentsline {subsection}{\numberline {6.23}XOR Linear Basis}{18}{}%
 \contentsline {subsection}{\numberline {6.24}Burnside Lemma \& P\'olya Theorem}{18}{}%
-\contentsline {subsection}{\numberline {6.25}Game: Nim và chiến lược}{18}{}%
+\contentsline {subsection}{\numberline {6.25}Game: Invariant, Symmetric, Nim, DP}{18}{}%
 \contentsline {subsection}{\numberline {6.26}Xác suất và kỳ vọng}{18}{}%
 \contentsline {subsection}{\numberline {6.27}Bignum}{18}{}%
 \contentsline {section}{\numberline {7}Hình học}{18}{}%
@@ -109,18 +109,18 @@
 \contentsline {subsection}{\numberline {7.5}Point in Convex Polygon}{19}{}%
 \contentsline {subsection}{\numberline {7.6}Line Hull Intersection}{19}{}%
 \contentsline {subsection}{\numberline {7.7}Polygon Raycast}{19}{}%
-\contentsline {subsection}{\numberline {7.8}Half-plane Intersection}{20}{}%
+\contentsline {subsection}{\numberline {7.8}Half-plane Intersection}{19}{}%
 \contentsline {subsection}{\numberline {7.9}Smallest Enclosing Circle}{20}{}%
 \contentsline {subsection}{\numberline {7.10}Circle Tangents}{20}{}%
 \contentsline {subsection}{\numberline {7.11}Công thức hình học}{20}{}%
-\contentsline {subsection}{\numberline {7.12}AREA}{21}{}%
+\contentsline {subsection}{\numberline {7.12}AREA}{20}{}%
 \contentsline {subsection}{\numberline {7.13}Manhattan MST}{21}{}%
 \contentsline {subsection}{\numberline {7.14}Planar Dual Graph}{21}{}%
 \contentsline {section}{\numberline {8}Tiện ích và kỹ thuật}{21}{}%
 \contentsline {subsection}{\numberline {8.1}Template}{21}{}%
 \contentsline {subsection}{\numberline {8.2}Debugging}{21}{}%
 \contentsline {subsection}{\numberline {8.3}Script biên dịch và chạy}{21}{}%
-\contentsline {subsection}{\numberline {8.4}Phân tích biểu thức (Expression Parsing)}{22}{}%
+\contentsline {subsection}{\numberline {8.4}Phân tích biểu thức (Expression Parsing)}{21}{}%
 \contentsline {subsection}{\numberline {8.5}Lập lịch Johnson}{22}{}%
 \contentsline {subsection}{\numberline {8.6}Fracturing Search ($k$-best)}{22}{}%
 \contentsline {subsection}{\numberline {8.7}Monte Carlo và Las Vegas}{22}{}%
